@@ -22,13 +22,13 @@ public class GhostlyNightmareRenderer extends MobRenderer<GhostlyNightmareEntity
 			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/fake_nightmare_remodel_glow.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, GhostlyNightmareEntity entity, float limbSwing, float limbSwingAmount, int color) {
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, GhostlyNightmareEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 				VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.eyes(LAYER_TEXTURE));
 				EntityModel model = new Modelnightmare_remodel(Minecraft.getInstance().getEntityModels().bakeLayer(Modelnightmare_remodel.LAYER_LOCATION));
 				this.getParentModel().copyPropertiesTo(model);
 				model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 				model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-				model.renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
+				model.renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), -1);
 			}
 		});
 	}

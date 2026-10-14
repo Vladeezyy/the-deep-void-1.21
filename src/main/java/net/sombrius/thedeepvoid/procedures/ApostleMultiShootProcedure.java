@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -61,7 +63,7 @@ public class ApostleMultiShootProcedure {
 						AbstractArrow entityToSpawn = new RotKnifeEntity(TheDeepVoidModEntities.ROT_KNIFE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}
@@ -76,7 +78,7 @@ public class ApostleMultiShootProcedure {
 						AbstractArrow entityToSpawn = new PoisonKnifeEntity(TheDeepVoidModEntities.POISON_KNIFE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}
@@ -91,7 +93,7 @@ public class ApostleMultiShootProcedure {
 						AbstractArrow entityToSpawn = new RotKnifeEntity(TheDeepVoidModEntities.ROT_KNIFE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}
@@ -119,7 +121,7 @@ public class ApostleMultiShootProcedure {
 						AbstractArrow entityToSpawn = new RotKnifeEntity(TheDeepVoidModEntities.ROT_KNIFE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}
@@ -134,7 +136,7 @@ public class ApostleMultiShootProcedure {
 						AbstractArrow entityToSpawn = new PoisonKnifeEntity(TheDeepVoidModEntities.POISON_KNIFE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}
@@ -149,7 +151,7 @@ public class ApostleMultiShootProcedure {
 						AbstractArrow entityToSpawn = new RotKnifeEntity(TheDeepVoidModEntities.ROT_KNIFE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}
@@ -197,7 +199,7 @@ public class ApostleMultiShootProcedure {
 						AbstractArrow entityToSpawn = new RotKnifeEntity(TheDeepVoidModEntities.ROT_KNIFE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}
@@ -212,7 +214,7 @@ public class ApostleMultiShootProcedure {
 						AbstractArrow entityToSpawn = new PoisonKnifeEntity(TheDeepVoidModEntities.POISON_KNIFE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}
@@ -227,7 +229,7 @@ public class ApostleMultiShootProcedure {
 						AbstractArrow entityToSpawn = new PoisonKnifeEntity(TheDeepVoidModEntities.POISON_KNIFE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}

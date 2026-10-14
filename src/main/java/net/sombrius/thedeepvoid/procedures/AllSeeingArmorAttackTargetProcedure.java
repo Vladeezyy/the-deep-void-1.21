@@ -20,7 +20,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 public class AllSeeingArmorAttackTargetProcedure {
 	@SubscribeEvent
 	public static void onEntitySetsAttackTarget(LivingChangeTargetEvent event) {
-		execute(event, event.getOriginalTarget(), event.getEntity());
+		execute(event, event.getOriginalAboutToBeSetTarget(), event.getEntity());
 	}
 
 	public static void execute(Entity entity, Entity sourceentity) {

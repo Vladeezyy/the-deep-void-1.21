@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import javax.annotation.Nullable;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -10,13 +12,13 @@ import net.minecraft.world.item.ShieldItem;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.sombrius.thedeepvoid.entity.WeaverOfSoulsBossEntity;
 
 @EventBusSubscriber
 public class WeaverOfSoulsAttacksPlayerProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity(), event.getSource().getEntity());
 		}
@@ -35,10 +37,7 @@ public class WeaverOfSoulsAttacksPlayerProcedure {
 					_player.getCooldowns().addCooldown((entity instanceof LivingEntity _entUseItem4 ? _entUseItem4.getUseItem() : ItemStack.EMPTY).getItem(), 160);
 				{
 					ItemStack _ist = (entity instanceof LivingEntity _entUseItem8 ? _entUseItem8.getUseItem() : ItemStack.EMPTY);
-					_ist.hurtAndBreak((int) Math.ceil(((entity instanceof LivingEntity _entUseItem6 ? _entUseItem6.getUseItem() : ItemStack.EMPTY).getMaxDamage() * 25) / 100), RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, (int) Math.ceil(((entity instanceof LivingEntity _entUseItem6 ? _entUseItem6.getUseItem() : ItemStack.EMPTY).getMaxDamage() * 25) / 100), null);
 				}
 			}
 		}

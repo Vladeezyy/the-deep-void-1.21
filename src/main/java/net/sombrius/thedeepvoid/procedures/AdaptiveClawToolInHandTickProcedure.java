@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -27,7 +29,7 @@ import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.sombrius.thedeepvoid.entity.BloodSpitEntity;
 import net.sombrius.thedeepvoid.entity.PoisonKnifeEntity;
@@ -39,7 +41,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 @EventBusSubscriber
 public class AdaptiveClawToolInHandTickProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getSource(), event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity(), event.getAmount());
 		}
@@ -135,7 +137,7 @@ public class AdaptiveClawToolInHandTickProcedure {
 									AbstractArrow entityToSpawn = new PoisonKnifeEntity(TheDeepVoidModEntities.POISON_KNIFE.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									return entityToSpawn;
 								}
@@ -154,7 +156,7 @@ public class AdaptiveClawToolInHandTickProcedure {
 									AbstractArrow entityToSpawn = new RotKnifeEntity(TheDeepVoidModEntities.ROT_KNIFE.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									return entityToSpawn;
 								}
@@ -176,7 +178,7 @@ public class AdaptiveClawToolInHandTickProcedure {
 									AbstractArrow entityToSpawn = new BloodSpitEntity(TheDeepVoidModEntities.BLOOD_SPIT.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									return entityToSpawn;
 								}

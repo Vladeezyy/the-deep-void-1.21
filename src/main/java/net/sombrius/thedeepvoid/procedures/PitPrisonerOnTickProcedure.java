@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -70,10 +72,7 @@ public class PitPrisonerOnTickProcedure {
 												_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem25 ? _entUseItem25.getUseItem() : ItemStack.EMPTY).getItem(), 10);
 											{
 												ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem27 ? _entUseItem27.getUseItem() : ItemStack.EMPTY);
-												if (_ist.hurt(8, RandomSource.create(), null)) {
-													_ist.shrink(1);
-													_ist.setDamageValue(0);
-												}
+												PortUtil.hurtAndBreak(_ist, 8, null);
 											}
 											if (world instanceof Level _level) {
 												if (!_level.isClientSide()) {
@@ -129,10 +128,7 @@ public class PitPrisonerOnTickProcedure {
 												_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem61 ? _entUseItem61.getUseItem() : ItemStack.EMPTY).getItem(), 10);
 											{
 												ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem63 ? _entUseItem63.getUseItem() : ItemStack.EMPTY);
-												if (_ist.hurt(10, RandomSource.create(), null)) {
-													_ist.shrink(1);
-													_ist.setDamageValue(0);
-												}
+												PortUtil.hurtAndBreak(_ist, 10, null);
 											}
 											if (world instanceof Level _level) {
 												if (!_level.isClientSide()) {
@@ -171,10 +167,7 @@ public class PitPrisonerOnTickProcedure {
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem83 ? _entUseItem83.getUseItem() : ItemStack.EMPTY).getItem(), 10);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem85 ? _entUseItem85.getUseItem() : ItemStack.EMPTY);
-								if (_ist.hurt(1, RandomSource.create(), null)) {
-									_ist.shrink(1);
-									_ist.setDamageValue(0);
-								}
+								PortUtil.hurtAndBreak(_ist, 1, null);
 							}
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {

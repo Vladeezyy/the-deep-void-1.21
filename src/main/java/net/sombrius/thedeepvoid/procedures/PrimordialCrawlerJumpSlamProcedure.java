@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
@@ -88,10 +90,7 @@ public class PrimordialCrawlerJumpSlamProcedure {
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem54 ? _entUseItem54.getUseItem() : ItemStack.EMPTY).getItem(), 140);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem56 ? _entUseItem56.getUseItem() : ItemStack.EMPTY);
-								_ist.hurtAndBreak(20, RandomSource.create(), null, () -> {
-									_ist.shrink(1);
-									_ist.setDamageValue(0);
-								});
+								PortUtil.hurtAndBreak(_ist, 20, null);
 							}
 							if (entityiterator instanceof LivingEntity _entity)
 								_entity.stopUsingItem();

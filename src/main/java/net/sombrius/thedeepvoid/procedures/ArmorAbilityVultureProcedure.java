@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -82,7 +84,7 @@ public class ArmorAbilityVultureProcedure {
 												AbstractArrow entityToSpawn = new Arrow(EntityType.ARROW, level);
 												entityToSpawn.setOwner(shooter);
 												entityToSpawn.setBaseDamage(damage);
-												entityToSpawn.setKnockback(knockback);
+												PortUtil.setKnockback(entityToSpawn, knockback);
 												entityToSpawn.setCritArrow(true);
 												entityToSpawn.pickup = AbstractArrow.Pickup.ALLOWED;
 												return entityToSpawn;

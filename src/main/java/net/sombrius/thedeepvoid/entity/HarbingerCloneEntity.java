@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -17,7 +19,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -52,9 +53,6 @@ public class HarbingerCloneEntity extends PathfinderMob implements GeoEntity {
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
-	public HarbingerCloneEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.HARBINGER_CLONE.get(), world);
-	}
 
 	public HarbingerCloneEntity(EntityType<HarbingerCloneEntity> type, Level world) {
 		super(type, world);
@@ -87,10 +85,6 @@ public class HarbingerCloneEntity extends PathfinderMob implements GeoEntity {
 
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public void playStepSound(BlockPos pos, BlockState blockIn) {
@@ -159,8 +153,8 @@ public class HarbingerCloneEntity extends PathfinderMob implements GeoEntity {
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose p_33597_) {
-		return super.getDimensions(p_33597_).scale((float) 1.2);
+	public EntityDimensions getDefaultDimensions(Pose p_33597_) {
+		return super.getDefaultDimensions(p_33597_).scale((float) 1.2);
 	}
 
 	@Override
@@ -182,7 +176,7 @@ public class HarbingerCloneEntity extends PathfinderMob implements GeoEntity {
 		this.updateSwingTime();
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -226,7 +220,7 @@ public class HarbingerCloneEntity extends PathfinderMob implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 1) {
 			this.remove(HarbingerCloneEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

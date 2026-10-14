@@ -29,7 +29,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.BoneBlockadeOnEntityTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.BoneBlockadeOnInitialEntitySpawnProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -179,7 +179,7 @@ public class BoneBlockadeEntity extends PathfinderMob implements GeoEntity {
 		this.updateSwingTime();
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -228,7 +228,7 @@ public class BoneBlockadeEntity extends PathfinderMob implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 10) {
 			this.remove(BoneBlockadeEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

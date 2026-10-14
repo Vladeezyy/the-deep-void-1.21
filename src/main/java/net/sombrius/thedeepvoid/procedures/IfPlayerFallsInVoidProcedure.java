@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.advancements.AdvancementHolder;
+
 import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 import net.sombrius.thedeepvoid.configuration.DeepVoidConfigConfiguration;
@@ -8,7 +10,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,10 +35,8 @@ import javax.annotation.Nullable;
 @EventBusSubscriber
 public class IfPlayerFallsInVoidProcedure {
 	@SubscribeEvent
-	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-		if (event.phase == TickEvent.Phase.END) {
-			execute(event, event.player.getX(), event.player.getZ(), event.player);
-		}
+	public static void onPlayerTick(PlayerTickEvent.Post event) {
+		execute(event, event.getEntity().getX(), event.getEntity().getZ(), event.getEntity());
 	}
 
 	public static void execute(double x, double z, Entity entity) {
@@ -119,7 +119,7 @@ public class IfPlayerFallsInVoidProcedure {
 				}
 			}
 			if (entity instanceof ServerPlayer _player) {
-				Advancement _adv = _player.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:at_least_im_not_dead"));
+				AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:at_least_im_not_dead"));
 				AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 				if (!_ap.isDone()) {
 					for (String criteria : _ap.getRemainingCriteria())

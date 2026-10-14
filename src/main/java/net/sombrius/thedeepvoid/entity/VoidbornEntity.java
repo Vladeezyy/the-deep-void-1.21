@@ -32,7 +32,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.VoidbornBoundingBoxScaleProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidbornEntityIsHurtProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidbornOnEntityTickUpdateProcedure;
@@ -241,7 +241,7 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 	protected void pushEntities() {
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -310,7 +310,7 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(VoidbornEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

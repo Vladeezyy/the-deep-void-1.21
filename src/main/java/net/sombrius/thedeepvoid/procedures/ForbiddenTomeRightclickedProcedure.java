@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -35,10 +37,7 @@ public class ForbiddenTomeRightclickedProcedure {
 			_player.getCooldowns().addCooldown(itemstack.getItem(), 100);
 		{
 			ItemStack _ist = itemstack;
-			_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-				_ist.shrink(1);
-				_ist.setDamageValue(0);
-			});
+			PortUtil.hurtAndBreak(_ist, 1, null);
 		}
 		{
 			final Vec3 _center = new Vec3(x, y, z);
@@ -52,7 +51,7 @@ public class ForbiddenTomeRightclickedProcedure {
 								AbstractArrow entityToSpawn = new TenebrisCultroEntity(TheDeepVoidModEntities.DARK_KNIFE.get(), level);
 								entityToSpawn.setOwner(shooter);
 								entityToSpawn.setBaseDamage(damage);
-								entityToSpawn.setKnockback(knockback);
+								PortUtil.setKnockback(entityToSpawn, knockback);
 								entityToSpawn.setSilent(true);
 								entityToSpawn.setPierceLevel(piercing);
 								return entityToSpawn;

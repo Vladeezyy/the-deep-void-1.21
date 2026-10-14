@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.advancements.AdvancementHolder;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.advancements.Advancement;
@@ -46,7 +48,7 @@ public class HarbingerOfCataclysmDiesProcedure {
 							if (!(entityiterator instanceof ServerPlayer _plr5 && _plr5.level() instanceof ServerLevel
 									&& _plr5.getAdvancements().getOrStartProgress(_plr5.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:unholy_psalmody"))).isDone())) {
 								if (entityiterator instanceof ServerPlayer _player) {
-									Advancement _adv = _player.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:unholy_psalmody"));
+									AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:unholy_psalmody"));
 									AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 									if (!_ap.isDone()) {
 										for (String criteria : _ap.getRemainingCriteria())

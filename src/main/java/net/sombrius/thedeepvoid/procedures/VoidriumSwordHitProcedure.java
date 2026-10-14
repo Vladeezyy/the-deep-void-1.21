@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
@@ -11,7 +13,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
@@ -44,7 +46,7 @@ import java.util.Comparator;
 @EventBusSubscriber
 public class VoidriumSwordHitProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event != null && event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getSource(), event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity(),
 					event.getAmount());
@@ -69,8 +71,8 @@ public class VoidriumSwordHitProcedure {
 					final double _tagValue = 0;
 					CustomData.update(DataComponents.CUSTOM_DATA, (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), tag -> tag.putDouble(_tagName, _tagValue));
 				}
-				if (event != null && event.isCancelable()) {
-					event.setCanceled(true);
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
 				}
 				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.PLAYER_ATTACK), sourceentity), (float) (amount * 1.4));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -96,8 +98,8 @@ public class VoidriumSwordHitProcedure {
 				_entity.setHealth((float) ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) + Math.floor(amount / 6.5)));
 		} else if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODTHIRSTY_CLAWS.get()
 				&& !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:rotten"))) && immediatesourceentity == sourceentity) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 			entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:rotten"))), sourceentity),
 					(float) (amount <= 2
@@ -142,8 +144,8 @@ public class VoidriumSwordHitProcedure {
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ROT_TONGUE.get()
 				&& (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("block") == 1
 				&& !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:absorbed_melee"))) && sourceentity instanceof LivingEntity) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
@@ -157,8 +159,8 @@ public class VoidriumSwordHitProcedure {
 		} else if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ICHOR_GREATSWORD.get()
 				&& (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("block") == 1
 				&& !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:absorbed_melee"))) && sourceentity instanceof LivingEntity) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
@@ -177,8 +179,8 @@ public class VoidriumSwordHitProcedure {
 		if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_GLOVE.get() && immediatesourceentity == sourceentity
 				&& !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:void_energy")))) {
 			if (entity instanceof LivingEntity _livEnt93 && _livEnt93.hasEffect(TheDeepVoidModMobEffects.PLAGUE)) {
-				if (event != null && event.isCancelable()) {
-					event.setCanceled(true);
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
 				}
 				if (entity instanceof LivingEntity _entity)
 					_entity.removeEffect(TheDeepVoidModMobEffects.PLAGUE);

@@ -39,7 +39,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.procedures.StalkerBoundingBoxScaleProcedure;
 import net.sombrius.thedeepvoid.procedures.StalkerEntityDiesProcedure;
@@ -234,7 +234,7 @@ public class StalkerEntity extends Monster implements GeoEntity {
 		return super.getDefaultDimensions(pose).scale((float) StalkerBoundingBoxScaleProcedure.execute(entity));
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -307,7 +307,7 @@ public class StalkerEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(StalkerEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

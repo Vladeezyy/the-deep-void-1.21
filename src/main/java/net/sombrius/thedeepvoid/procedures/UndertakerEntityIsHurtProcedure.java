@@ -11,7 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -22,7 +22,7 @@ import net.sombrius.thedeepvoid.entity.UndertakerEntity;
 @EventBusSubscriber
 public class UndertakerEntityIsHurtProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event != null && event.getEntity() != null) {
 			execute(event, event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity());
 		}

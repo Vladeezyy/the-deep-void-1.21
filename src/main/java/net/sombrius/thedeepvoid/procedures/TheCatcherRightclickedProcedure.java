@@ -104,11 +104,11 @@ public class TheCatcherRightclickedProcedure {
 					final double _tagValue = 1;
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 				}
-				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("681aea3b-26bb-484f-8f6a-fa1c1fac1fa7")) != null)) {
+				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "681aea3b-26bb-484f-8f6a-fa1c1fac1fa7")) != null)) {
 					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE)
-							.hasModifier((new AttributeModifier(UUID.fromString("681aea3b-26bb-484f-8f6a-fa1c1fac1fa7"), "catcher_attack", ((double) DeepVoidConfigConfiguration.THECATCHEREXTRADAMAGE.get()), AttributeModifier.Operation.ADD_VALUE)))))
+							.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "681aea3b-26bb-484f-8f6a-fa1c1fac1fa7"))))
 						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier(
-								(new AttributeModifier(UUID.fromString("681aea3b-26bb-484f-8f6a-fa1c1fac1fa7"), "catcher_attack", ((double) DeepVoidConfigConfiguration.THECATCHEREXTRADAMAGE.get()), AttributeModifier.Operation.ADD_VALUE)));
+								(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "681aea3b-26bb-484f-8f6a-fa1c1fac1fa7"), ((double) DeepVoidConfigConfiguration.THECATCHEREXTRADAMAGE.get()), AttributeModifier.Operation.ADD_VALUE)));
 				}
 				TheDeepVoidMod.queueServerWork(10, () -> {
 					{
@@ -116,8 +116,8 @@ public class TheCatcherRightclickedProcedure {
 						final double _tagValue = 0;
 						CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 					}
-					if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("681aea3b-26bb-484f-8f6a-fa1c1fac1fa7")) != null) {
-						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("681aea3b-26bb-484f-8f6a-fa1c1fac1fa7"));
+					if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "681aea3b-26bb-484f-8f6a-fa1c1fac1fa7")) != null) {
+						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "681aea3b-26bb-484f-8f6a-fa1c1fac1fa7"));
 					}
 				});
 			}

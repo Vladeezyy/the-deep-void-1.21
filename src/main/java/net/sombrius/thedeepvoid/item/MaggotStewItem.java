@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 public class MaggotStewItem extends Item {
 	public MaggotStewItem() {
-		super(new Item.Properties().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(5).saturationMod(0.3f).build()));
+		super(new Item.Properties().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(5).saturationModifier(0.3f).build()));
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.FallingCorpseEntityFallsProcedure;
 import net.sombrius.thedeepvoid.procedures.FallingCorpseOnEntityTickUpdateProcedure;
 
@@ -85,7 +85,7 @@ public class FallingCorpseEntity extends Monster {
 		FallingCorpseOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
@@ -57,8 +59,8 @@ public class PlayerFishesInLiquidVoidProcedure {
 		double itemY = 0;
 		double itemZ = 0;
 		if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"))) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 			{
 				final Vec3 _center = new Vec3(x, y, z);

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -22,10 +24,7 @@ public class BoneBoulderProjectileHitsLivingEntityProcedure {
 				_player.getCooldowns().addCooldown((entity instanceof LivingEntity _entUseItem2 ? _entUseItem2.getUseItem() : ItemStack.EMPTY).getItem(), 200);
 			{
 				ItemStack _ist = (entity instanceof LivingEntity _entUseItem4 ? _entUseItem4.getUseItem() : ItemStack.EMPTY);
-				_ist.hurtAndBreak(35, RandomSource.create(), null, () -> {
-					_ist.shrink(1);
-					_ist.setDamageValue(0);
-				});
+				PortUtil.hurtAndBreak(_ist, 35, null);
 			}
 			if (entity instanceof LivingEntity _entity)
 				_entity.stopUsingItem();

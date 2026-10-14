@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import software.bernie.geckolib.util.GeckoLibUtil;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
@@ -30,7 +32,6 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
@@ -63,9 +64,6 @@ public class PrisonGuardEntity extends Monster implements GeoEntity {
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
-	public PrisonGuardEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.PRISON_GUARD.get(), world);
-	}
 
 	public PrisonGuardEntity(EntityType<PrisonGuardEntity> type, Level world) {
 		super(type, world);
@@ -103,8 +101,8 @@ public class PrisonGuardEntity extends Monster implements GeoEntity {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true) {
 			@Override
-			protected double getAttackReachSqr(LivingEntity entity) {
-				return 9;
+			protected boolean canPerformAttack(LivingEntity entity) {
+				return this.isTimeToAttack() && this.mob.distanceToSqr(entity) < 9 && this.mob.getSensing().hasLineOfSight(entity);
 			}
 		});
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
@@ -112,10 +110,6 @@ public class PrisonGuardEntity extends Monster implements GeoEntity {
 		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, Player.class, true, false));
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public boolean removeWhenFarAway(double distanceToClosestPlayer) {
@@ -194,11 +188,11 @@ public class PrisonGuardEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose p_33597_) {
-		return super.getDimensions(p_33597_).scale((float) 1);
+	public EntityDimensions getDefaultDimensions(Pose p_33597_) {
+		return super.getDefaultDimensions(p_33597_).scale((float) 1);
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -255,7 +249,7 @@ public class PrisonGuardEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(PrisonGuardEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

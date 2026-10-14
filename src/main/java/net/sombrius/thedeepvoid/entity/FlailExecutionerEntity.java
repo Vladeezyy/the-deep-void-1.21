@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -15,7 +17,6 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -57,9 +58,6 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
-	public FlailExecutionerEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.FLAIL_EXECUTIONER.get(), world);
-	}
 
 	public FlailExecutionerEntity(EntityType<FlailExecutionerEntity> type, Level world) {
 		super(type, world);
@@ -97,8 +95,8 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, false) {
 			@Override
-			protected double getAttackReachSqr(LivingEntity entity) {
-				return this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth();
+			protected boolean canPerformAttack(LivingEntity entity) {
+				return this.isTimeToAttack() && this.mob.distanceToSqr(entity) < this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth() && this.mob.getSensing().hasLineOfSight(entity);
 			}
 		});
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
@@ -106,10 +104,6 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, Player.class, false, false));
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public boolean removeWhenFarAway(double distanceToClosestPlayer) {
@@ -188,11 +182,11 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose p_33597_) {
-		return super.getDimensions(p_33597_).scale((float) 1);
+	public EntityDimensions getDefaultDimensions(Pose p_33597_) {
+		return super.getDefaultDimensions(p_33597_).scale((float) 1);
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -242,7 +236,7 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(FlailExecutionerEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

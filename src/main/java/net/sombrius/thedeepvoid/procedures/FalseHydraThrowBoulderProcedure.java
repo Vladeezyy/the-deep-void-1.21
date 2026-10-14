@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -71,7 +73,7 @@ public class FalseHydraThrowBoulderProcedure {
 							AbstractArrow entityToSpawn = new BoneBoulderEntity(TheDeepVoidModEntities.BONE_BOULDER.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.resources.ResourceLocation;
+
 import java.util.UUID;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,11 +13,9 @@ public class RottenHeartEffectStartedappliedProcedure {
 		if (entity == null)
 			return;
 		if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
-				.hasModifier((new AttributeModifier(UUID.fromString("92b763d9-4eaf-423a-b147-1f7ea4ce6867"), "rottenHeartSpeed",
-						(0.2 * (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.ROTTEN_HEART) ? _livEnt.getEffect(TheDeepVoidModMobEffects.ROTTEN_HEART).getAmplifier() : 0)),
-						AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)))))
+				.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "92b763d9-4eaf-423a-b147-1f7ea4ce6867"))))
 			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
-					.addTransientModifier((new AttributeModifier(UUID.fromString("92b763d9-4eaf-423a-b147-1f7ea4ce6867"), "rottenHeartSpeed",
+					.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "92b763d9-4eaf-423a-b147-1f7ea4ce6867"),
 							(0.2 * (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.ROTTEN_HEART) ? _livEnt.getEffect(TheDeepVoidModMobEffects.ROTTEN_HEART).getAmplifier() : 0)),
 							AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
 	}

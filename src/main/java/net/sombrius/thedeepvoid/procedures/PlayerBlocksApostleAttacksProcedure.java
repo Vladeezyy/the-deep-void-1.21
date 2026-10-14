@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.sombrius.thedeepvoid.entity.ApostleBossEntity;
 import net.sombrius.thedeepvoid.entity.ExecutionerEntity;
 import net.sombrius.thedeepvoid.entity.FalseHydraArmEntity;
@@ -19,7 +19,7 @@ import net.sombrius.thedeepvoid.entity.MadCultistEntity;
 @EventBusSubscriber
 public class PlayerBlocksApostleAttacksProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity(), event.getSource().getEntity());
 		}

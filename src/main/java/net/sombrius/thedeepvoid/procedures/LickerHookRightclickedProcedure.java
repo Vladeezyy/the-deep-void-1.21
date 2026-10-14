@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.entity.HookEntity;
 import net.sombrius.thedeepvoid.entity.HookEndEntity;
@@ -38,7 +40,7 @@ public class LickerHookRightclickedProcedure {
 							AbstractArrow entityToSpawn = new HookEntity(TheDeepVoidModEntities.HOOK.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}

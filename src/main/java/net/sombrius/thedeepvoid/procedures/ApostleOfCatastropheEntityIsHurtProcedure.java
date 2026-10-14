@@ -13,7 +13,7 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.sombrius.thedeepvoid.entity.ApostleBossEntity;
 import net.sombrius.thedeepvoid.entity.HiveWatcherEntity;
 import net.sombrius.thedeepvoid.entity.SawThrowerEntity;
@@ -21,7 +21,7 @@ import net.sombrius.thedeepvoid.entity.SawThrowerEntity;
 @EventBusSubscriber
 public class ApostleOfCatastropheEntityIsHurtProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity());
 		}

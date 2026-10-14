@@ -24,13 +24,13 @@ public class AmalgamRenderer extends MobRenderer<AmalgamEntity, Modelamalgam_rew
 			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/amalgam_rework_glow.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, AmalgamEntity entity, float limbSwing, float limbSwingAmount, int color) {
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, AmalgamEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 				VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.eyes(LAYER_TEXTURE));
 				EntityModel model = new Modelamalgam_rework(Minecraft.getInstance().getEntityModels().bakeLayer(Modelamalgam_rework.LAYER_LOCATION));
 				this.getParentModel().copyPropertiesTo(model);
 				model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 				model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-				model.renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
+				model.renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), -1);
 			}
 		});
 		this.addLayer(new RenderLayer<AmalgamEntity, Modelamalgam_rework<AmalgamEntity>>(this) {
@@ -48,7 +48,7 @@ public class AmalgamRenderer extends MobRenderer<AmalgamEntity, Modelamalgam_rew
 					this.getParentModel().copyPropertiesTo(model);
 					model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					model.renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), 1, 1, 1, 1);
+					model.renderToBuffer(poseStack, vertexConsumer, light, LivingEntityRenderer.getOverlayCoords(entity, 0), -1);
 				}
 			}
 		});

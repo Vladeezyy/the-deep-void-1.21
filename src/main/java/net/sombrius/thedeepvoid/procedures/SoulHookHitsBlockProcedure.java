@@ -12,7 +12,7 @@ public class SoulHookHitsBlockProcedure {
 		if (entity == null)
 			return;
 		if (world instanceof ServerLevel _serverLevel) {
-			Entity entityinstance = TheDeepVoidModEntities.HOOK_END.get().create(_serverLevel, null, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
+			Entity entityinstance = TheDeepVoidModEntities.HOOK_END.get().create(_serverLevel, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
 			if (entityinstance != null) {
 				entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 				entityinstance.getPersistentData().putString("owner", (entity.getStringUUID()));

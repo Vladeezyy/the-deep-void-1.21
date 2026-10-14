@@ -15,7 +15,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.HitResult;
-import net.neoforged.neoforge.common.PlantType;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.procedures.RottenGrassPlantDestroyedByPlayerProcedure;
 
@@ -29,10 +28,6 @@ public class CanopyRottenGrassBlock extends DoublePlantBlock {
 		return new ItemStack(TheDeepVoidModBlocks.ROTTEN_GRASS.get());
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {

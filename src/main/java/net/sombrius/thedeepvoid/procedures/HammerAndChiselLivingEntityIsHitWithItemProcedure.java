@@ -17,7 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -29,7 +29,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 @EventBusSubscriber
 public class HammerAndChiselLivingEntityIsHitWithItemProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event != null && event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getSource(), event.getEntity(), event.getSource().getEntity(), event.getAmount());
 		}
@@ -60,11 +60,11 @@ public class HammerAndChiselLivingEntityIsHitWithItemProcedure {
 				}
 			}
 			entity.getPersistentData().putDouble("hammerMaxHealth", (entity.getPersistentData().getDouble("hammerMaxHealth") + Math.floor(amount / 2)));
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(UUID.fromString("4494e752-bd57-4276-b506-a958216b544b"));
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "4494e752-bd57-4276-b506-a958216b544b"));
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH)
-					.hasModifier((new AttributeModifier(UUID.fromString("4494e752-bd57-4276-b506-a958216b544b"), "hammerMaxHealth", (entity.getPersistentData().getDouble("hammerMaxHealth") * (-1)), AttributeModifier.Operation.ADD_VALUE)))))
+					.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "4494e752-bd57-4276-b506-a958216b544b"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier(
-						(new AttributeModifier(UUID.fromString("4494e752-bd57-4276-b506-a958216b544b"), "hammerMaxHealth", (entity.getPersistentData().getDouble("hammerMaxHealth") * (-1)), AttributeModifier.Operation.ADD_VALUE)));
+						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "4494e752-bd57-4276-b506-a958216b544b"), (entity.getPersistentData().getDouble("hammerMaxHealth") * (-1)), AttributeModifier.Operation.ADD_VALUE)));
 		}
 	}
 }

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -54,7 +56,7 @@ public class GreaterExperienceBottleRightclickedProcedure {
 						AbstractArrow entityToSpawn = new GreaterXpBottleEntity(TheDeepVoidModEntities.GREATER_XP_BOTTLE.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}

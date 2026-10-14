@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -74,10 +76,7 @@ public class BreakBedrockProcedure {
 			}
 			{
 				ItemStack _ist = (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY);
-				_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-					_ist.shrink(1);
-					_ist.setDamageValue(0);
-				});
+				PortUtil.hurtAndBreak(_ist, 1, null);
 			}
 		}
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(ItemTags.create(ResourceLocation.parse("the_deep_void:can_mine_bedrock")))
@@ -112,10 +111,7 @@ public class BreakBedrockProcedure {
 				}
 				{
 					ItemStack _ist = (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY);
-					_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, 1, null);
 				}
 			} else {
 				if ((entity instanceof Player _plrCldRem25 ? _plrCldRem25.getCooldowns().getCooldownPercent((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem(), 0f) * 100 : 0) <= 0) {

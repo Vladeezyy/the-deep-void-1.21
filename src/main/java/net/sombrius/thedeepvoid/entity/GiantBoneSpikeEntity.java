@@ -29,7 +29,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.GiantBoneSpikeOnEntityTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.GiantBoneSpikeOnInitialEntitySpawnProcedure;
 import net.sombrius.thedeepvoid.procedures.GiantBoneSpikePlayerCollidesWithThisEntityProcedure;
@@ -190,7 +190,7 @@ public class GiantBoneSpikeEntity extends PathfinderMob implements GeoEntity {
 		this.updateSwingTime();
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -239,7 +239,7 @@ public class GiantBoneSpikeEntity extends PathfinderMob implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 10) {
 			this.remove(GiantBoneSpikeEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

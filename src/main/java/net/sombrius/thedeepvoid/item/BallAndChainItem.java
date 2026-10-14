@@ -32,8 +32,8 @@ public class BallAndChainItem extends Item {
 		if (equipmentSlot == EquipmentSlot.MAINHAND) {
 			ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 			builder.putAll(super.getDefaultAttributeModifiers(equipmentSlot));
-			builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, "Item modifier", 11d, AttributeModifier.Operation.ADD_VALUE));
-			builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, "Item modifier", -2.4, AttributeModifier.Operation.ADD_VALUE));
+			builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 11d, AttributeModifier.Operation.ADD_VALUE));
+			builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.4, AttributeModifier.Operation.ADD_VALUE));
 			return builder.build();
 		}
 		return super.getDefaultAttributeModifiers(equipmentSlot);

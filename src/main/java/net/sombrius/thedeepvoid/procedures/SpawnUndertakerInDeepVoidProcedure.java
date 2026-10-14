@@ -17,7 +17,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -32,10 +32,8 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 @EventBusSubscriber
 public class SpawnUndertakerInDeepVoidProcedure {
 	@SubscribeEvent
-	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-		if (event.phase == TickEvent.Phase.END) {
-			execute(event, event.player.level(), event.player);
-		}
+	public static void onPlayerTick(PlayerTickEvent.Post event) {
+		execute(event, event.getEntity().level(), event.getEntity());
 	}
 
 	public static void execute(LevelAccessor world, Entity entity) {
@@ -69,7 +67,7 @@ public class SpawnUndertakerInDeepVoidProcedure {
 								&& !(!world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3(rndX, rndY, rndZ), 96, 96, 96), e -> true).isEmpty())
 								&& !world.getBiome(BlockPos.containing(rndX, rndY, rndZ)).is(TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:undertaker_cannot_spawn")))) {
 							if (world instanceof ServerLevel _serverLevel) {
-								Entity entityinstance = TheDeepVoidModEntities.UNDERTAKER.get().create(_serverLevel, null, null, BlockPos.containing(rndX, rndY, rndZ), MobSpawnType.MOB_SUMMONED, false, false);
+								Entity entityinstance = TheDeepVoidModEntities.UNDERTAKER.get().create(_serverLevel, null, BlockPos.containing(rndX, rndY, rndZ), MobSpawnType.MOB_SUMMONED, false, false);
 								if (entityinstance != null) {
 									entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 									if (entityinstance instanceof UndertakerEntity _datEntSetI)

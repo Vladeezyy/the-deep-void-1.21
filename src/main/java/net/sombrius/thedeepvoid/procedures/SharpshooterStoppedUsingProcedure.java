@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
@@ -18,10 +20,7 @@ public class SharpshooterStoppedUsingProcedure {
 		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("loading") == true && itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("pulling") > 3) {
 			{
 				ItemStack _ist = itemstack;
-				_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-					_ist.shrink(1);
-					_ist.setDamageValue(0);
-				});
+				PortUtil.hurtAndBreak(_ist, 1, null);
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {

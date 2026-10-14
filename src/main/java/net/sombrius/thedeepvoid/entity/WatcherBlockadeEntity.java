@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -16,7 +18,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -49,9 +50,6 @@ public class WatcherBlockadeEntity extends PathfinderMob implements GeoEntity {
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
-	public WatcherBlockadeEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.WATCHER_BLOCKADE.get(), world);
-	}
 
 	public WatcherBlockadeEntity(EntityType<WatcherBlockadeEntity> type, Level world) {
 		super(type, world);
@@ -92,10 +90,6 @@ public class WatcherBlockadeEntity extends PathfinderMob implements GeoEntity {
 	}
 
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
@@ -157,8 +151,8 @@ public class WatcherBlockadeEntity extends PathfinderMob implements GeoEntity {
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose p_33597_) {
-		return super.getDimensions(p_33597_).scale((float) 1);
+	public EntityDimensions getDefaultDimensions(Pose p_33597_) {
+		return super.getDefaultDimensions(p_33597_).scale((float) 1);
 	}
 
 	@Override
@@ -167,7 +161,7 @@ public class WatcherBlockadeEntity extends PathfinderMob implements GeoEntity {
 		this.updateSwingTime();
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -215,7 +209,7 @@ public class WatcherBlockadeEntity extends PathfinderMob implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 10) {
 			this.remove(WatcherBlockadeEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

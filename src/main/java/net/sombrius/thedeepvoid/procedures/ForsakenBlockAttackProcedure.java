@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
@@ -34,7 +36,7 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 import net.sombrius.thedeepvoid.entity.AcidSpitEntity;
 import net.sombrius.thedeepvoid.entity.BigShadeArrowEntity;
@@ -49,7 +51,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 @EventBusSubscriber
 public class ForsakenBlockAttackProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity());
 		}
@@ -108,7 +110,7 @@ public class ForsakenBlockAttackProcedure {
 											AbstractArrow entityToSpawn = new AcidSpitEntity(TheDeepVoidModEntities.ACID_SPIT.get(), level);
 											entityToSpawn.setOwner(shooter);
 											entityToSpawn.setBaseDamage(damage);
-											entityToSpawn.setKnockback(knockback);
+											PortUtil.setKnockback(entityToSpawn, knockback);
 											entityToSpawn.setSilent(true);
 											return entityToSpawn;
 										}

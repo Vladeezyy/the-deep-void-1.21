@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
@@ -62,7 +64,7 @@ public class BlackHoleRightClickProcedure {
 									AbstractArrow entityToSpawn = new Arrow(EntityType.ARROW, level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setPierceLevel(piercing);
 									entityToSpawn.setCritArrow(true);
 									entityToSpawn.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
@@ -104,7 +106,7 @@ public class BlackHoleRightClickProcedure {
 								AbstractArrow entityToSpawn = new Arrow(EntityType.ARROW, level);
 								entityToSpawn.setOwner(shooter);
 								entityToSpawn.setBaseDamage(damage);
-								entityToSpawn.setKnockback(knockback);
+								PortUtil.setKnockback(entityToSpawn, knockback);
 								entityToSpawn.setPierceLevel(piercing);
 								entityToSpawn.setCritArrow(true);
 								entityToSpawn.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
@@ -134,7 +136,7 @@ public class BlackHoleRightClickProcedure {
 										AbstractArrow entityToSpawn = new Arrow(EntityType.ARROW, level);
 										entityToSpawn.setOwner(shooter);
 										entityToSpawn.setBaseDamage(damage);
-										entityToSpawn.setKnockback(knockback);
+										PortUtil.setKnockback(entityToSpawn, knockback);
 										entityToSpawn.setCritArrow(true);
 										entityToSpawn.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 										return entityToSpawn;

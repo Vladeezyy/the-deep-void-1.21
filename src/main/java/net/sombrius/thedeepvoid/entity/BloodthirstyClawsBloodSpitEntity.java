@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.resources.ResourceLocation;
@@ -25,9 +27,6 @@ import net.sombrius.thedeepvoid.procedures.BloodSpitWhileProjectileFlyingTickPro
 public class BloodthirstyClawsBloodSpitEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Blocks.AIR);
 
-	public BloodthirstyClawsBloodSpitEntity(PlayMessages.SpawnEntity packet, Level world) {
-		super(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), world);
-	}
 
 	public BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity> type, Level world) {
 		super(type, world);
@@ -76,26 +75,26 @@ public class BloodthirstyClawsBloodSpitEntity extends AbstractArrow implements I
 	}
 
 	public static BloodthirstyClawsBloodSpitEntity shoot(Level world, LivingEntity entity, RandomSource random, float power, double damage, int knockback) {
-		BloodthirstyClawsBloodSpitEntity entityarrow = new BloodthirstyClawsBloodSpitEntity(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), entity, world);
+		BloodthirstyClawsBloodSpitEntity entityarrow = new BloodthirstyClawsBloodSpitEntity(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), entity, world, null);
 		entityarrow.shoot(entity.getViewVector(1).x, entity.getViewVector(1).y, entity.getViewVector(1).z, power * 2, 0);
 		entityarrow.setSilent(true);
 		entityarrow.setCritArrow(false);
 		entityarrow.setBaseDamage(damage);
-		entityarrow.setKnockback(knockback);
+		PortUtil.setKnockback(entityarrow, knockback);
 		world.addFreshEntity(entityarrow);
 		world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flesh_block_step")), SoundSource.PLAYERS, 1, 1f / (random.nextFloat() * 0.5f + 1) + (power / 2));
 		return entityarrow;
 	}
 
 	public static BloodthirstyClawsBloodSpitEntity shoot(LivingEntity entity, LivingEntity target) {
-		BloodthirstyClawsBloodSpitEntity entityarrow = new BloodthirstyClawsBloodSpitEntity(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), entity, entity.level());
+		BloodthirstyClawsBloodSpitEntity entityarrow = new BloodthirstyClawsBloodSpitEntity(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), entity, entity.level(), null);
 		double dx = target.getX() - entity.getX();
 		double dy = target.getY() + target.getEyeHeight() - 1.1;
 		double dz = target.getZ() - entity.getZ();
 		entityarrow.shoot(dx, dy - entityarrow.getY() + Math.hypot(dx, dz) * 0.2F, dz, 0.7f * 2, 12.0F);
 		entityarrow.setSilent(true);
 		entityarrow.setBaseDamage(2);
-		entityarrow.setKnockback(0);
+		PortUtil.setKnockback(entityarrow, 0);
 		entityarrow.setCritArrow(false);
 		entity.level().addFreshEntity(entityarrow);
 		entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flesh_block_step")), SoundSource.PLAYERS, 1,

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
@@ -67,7 +69,7 @@ public class ShadestormUsedProcedure {
 									AbstractArrow entityToSpawn = new ShadeArrowEntity(TheDeepVoidModEntities.SHADE_ARROW.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									entityToSpawn.setPierceLevel(piercing);
 									return entityToSpawn;

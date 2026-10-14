@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 import net.sombrius.thedeepvoid.entity.WeaverOfSoulsBossEntity;
@@ -27,7 +29,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
@@ -52,7 +54,7 @@ import javax.annotation.Nullable;
 @EventBusSubscriber
 public class PlayerAttackedByBossProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event != null && event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getSource(), event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity(),
 					event.getAmount());
@@ -67,8 +69,8 @@ public class PlayerAttackedByBossProcedure {
 		if (damagesource == null || entity == null || immediatesourceentity == null || sourceentity == null)
 			return;
 		if ((entity instanceof HiveBrainEntity || entity instanceof EyeOfTheWatcherEntity || entity instanceof GiantBoneCrawlerEggEntity) && !(sourceentity instanceof Player)) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 		}
 		if (amount > 1) {
@@ -97,8 +99,8 @@ public class PlayerAttackedByBossProcedure {
 			}
 		}
 		if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:boss"))) && sourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:boss")))) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 		}
 		if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:affected_by_cap")))
@@ -114,16 +116,16 @@ public class PlayerAttackedByBossProcedure {
 					}
 				}.checkGamemode(sourceentity)) && !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:capped_damage")))
 				&& !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:final_judgement")))) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 			entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:capped_damage"))), sourceentity),
 					(float) ((entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) * (double) DeepVoidConfigConfiguration.DAMAGECAPPERCENTAGE.get()));
 		}
 		if ((entity instanceof MisanthropicHivemindEntity || entity instanceof SawThrowerEntity || entity instanceof SkullSmasherEntity || entity instanceof FleshFangsEntity || entity instanceof HivemindTentaclesEntity)
 				&& immediatesourceentity instanceof BloodSpitEntity) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 			if (!immediatesourceentity.level().isClientSide())
 				immediatesourceentity.discard();

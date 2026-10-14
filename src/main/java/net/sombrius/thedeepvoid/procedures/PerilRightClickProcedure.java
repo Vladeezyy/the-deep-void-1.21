@@ -1,5 +1,9 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.advancements.AdvancementHolder;
+
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
@@ -170,7 +174,7 @@ public class PerilRightClickProcedure {
 								if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("adrenaline") >= 5 && !(entity instanceof ServerPlayer _plr92 && _plr92.level() instanceof ServerLevel
 										&& _plr92.getAdvancements().getOrStartProgress(_plr92.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:i_cant_stop_winning"))).isDone())) {
 									if (entity instanceof ServerPlayer _player) {
-										Advancement _adv = _player.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:i_cant_stop_winning"));
+										AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:i_cant_stop_winning"));
 										AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 										if (!_ap.isDone()) {
 											for (String criteria : _ap.getRemainingCriteria())
@@ -203,7 +207,7 @@ public class PerilRightClickProcedure {
 										AbstractArrow entityToSpawn = new PerilBulletEntity(TheDeepVoidModEntities.PERIL_BULLET.get(), level);
 										entityToSpawn.setOwner(shooter);
 										entityToSpawn.setBaseDamage(damage);
-										entityToSpawn.setKnockback(knockback);
+										PortUtil.setKnockback(entityToSpawn, knockback);
 										entityToSpawn.setSilent(true);
 										entityToSpawn.setPierceLevel(piercing);
 										return entityToSpawn;

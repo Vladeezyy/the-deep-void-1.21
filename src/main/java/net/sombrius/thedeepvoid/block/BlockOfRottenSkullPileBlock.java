@@ -35,7 +35,7 @@ public class BlockOfRottenSkullPileBlock extends Block implements BonemealableBl
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState blockstate, boolean clientSide) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState blockstate) {
 		return true;
 	}
 

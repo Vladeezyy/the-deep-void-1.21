@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.neoforge.common.PlantType;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.procedures.PeepingRootsTickUpdateProcedure;
 
@@ -38,10 +37,6 @@ public class PeepingRootsBlock extends FlowerBlock {
 		return this.mayPlaceOn(groundState, worldIn, blockpos);
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public void randomTick(BlockState blockstate, ServerLevel world, BlockPos pos, RandomSource random) {

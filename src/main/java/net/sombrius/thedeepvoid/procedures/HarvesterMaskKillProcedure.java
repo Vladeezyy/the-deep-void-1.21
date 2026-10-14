@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -109,31 +111,19 @@ public class HarvesterMaskKillProcedure {
 					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 1));
 				{
 					ItemStack _ist = (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY);
-					_ist.hurtAndBreak(50, RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, 50, null);
 				}
 				{
 					ItemStack _ist = (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY);
-					_ist.hurtAndBreak(50, RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, 50, null);
 				}
 				{
 					ItemStack _ist = (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY);
-					_ist.hurtAndBreak(50, RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, 50, null);
 				}
 				{
 					ItemStack _ist = (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY);
-					_ist.hurtAndBreak(50, RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, 50, null);
 				}
 			}
 		}

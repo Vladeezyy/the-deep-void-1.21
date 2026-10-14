@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.resources.ResourceLocation;
+
 import java.util.UUID;
 import javax.annotation.Nullable;
 import net.minecraft.world.entity.Entity;
@@ -26,8 +28,8 @@ public class ChainGauntletToolInInventoryTickProcedure {
 		if (entity == null)
 			return;
 		if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CHAIN_GAUNTLET.get())
-				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).getModifier(UUID.fromString("01387b5f-4dbd-4d94-b869-7f35d57d896e")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).removeModifier(UUID.fromString("01387b5f-4dbd-4d94-b869-7f35d57d896e"));
+				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "01387b5f-4dbd-4d94-b869-7f35d57d896e")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "01387b5f-4dbd-4d94-b869-7f35d57d896e"));
 		}
 	}
 }

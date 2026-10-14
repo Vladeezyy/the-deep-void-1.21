@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.core.component.DataComponents;
+
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -21,7 +23,7 @@ public class HarbingerOfCataclysmOnEntityTickUpdateProcedure {
 				&& (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) > 0 && (entity instanceof HarbingerOfCataclysmEntity _datEntL5 && _datEntL5.getEntityData().get(HarbingerOfCataclysmEntity.DATA_attacking)) == false) {
 			if (entity instanceof HarbingerOfCataclysmEntity _datEntSetI)
 				_datEntSetI.getEntityData().set(HarbingerOfCataclysmEntity.DATA_attackChance, (int) ((entity instanceof HarbingerOfCataclysmEntity _datEntI ? _datEntI.getEntityData().get(HarbingerOfCataclysmEntity.DATA_attackChance) : 0)
-						+ (((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) instanceof LivingEntity _entUseItem8 ? _entUseItem8.getUseItem() : ItemStack.EMPTY).getItem().isEdible() ? 2 : 1)));
+						+ (((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) instanceof LivingEntity _entUseItem8 ? _entUseItem8.getUseItem() : ItemStack.EMPTY).has(DataComponents.FOOD) ? 2 : 1)));
 		}
 		if ((entity instanceof HarbingerOfCataclysmEntity _datEntI ? _datEntI.getEntityData().get(HarbingerOfCataclysmEntity.DATA_attackChance) : 0) >= 60) {
 			if (entity instanceof HarbingerOfCataclysmEntity _datEntSetI)

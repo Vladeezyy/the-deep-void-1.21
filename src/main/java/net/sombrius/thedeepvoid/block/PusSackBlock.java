@@ -17,7 +17,6 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.PlantType;
 import net.sombrius.thedeepvoid.procedures.PusSackMobplayerCollidesWithPlantProcedure;
 
 public class PusSackBlock extends FlowerBlock {
@@ -36,10 +35,6 @@ public class PusSackBlock extends FlowerBlock {
 		return PathType.DANGER_OTHER;
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity) {

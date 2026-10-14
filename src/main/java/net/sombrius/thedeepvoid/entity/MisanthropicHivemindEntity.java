@@ -34,7 +34,7 @@ import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.HivemindDiesProcedure;
 import net.sombrius.thedeepvoid.procedures.HivemindPlayerCountProcedure;
 import net.sombrius.thedeepvoid.procedures.HivemindTickUpdateProcedure;
@@ -254,7 +254,7 @@ public class MisanthropicHivemindEntity extends Monster implements GeoEntity {
 		this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -322,7 +322,7 @@ public class MisanthropicHivemindEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 30) {
 			this.remove(MisanthropicHivemindEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -72,10 +74,7 @@ public class FalseHydraPokeProcedure {
 									_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem20 ? _entUseItem20.getUseItem() : ItemStack.EMPTY).getItem(), 100);
 								{
 									ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem22 ? _entUseItem22.getUseItem() : ItemStack.EMPTY);
-									_ist.hurtAndBreak(8, RandomSource.create(), null, () -> {
-										_ist.shrink(1);
-										_ist.setDamageValue(0);
-									});
+									PortUtil.hurtAndBreak(_ist, 8, null);
 								}
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
@@ -132,10 +131,7 @@ public class FalseHydraPokeProcedure {
 									_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem60 ? _entUseItem60.getUseItem() : ItemStack.EMPTY).getItem(), 100);
 								{
 									ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem62 ? _entUseItem62.getUseItem() : ItemStack.EMPTY);
-									_ist.hurtAndBreak(8, RandomSource.create(), null, () -> {
-										_ist.shrink(1);
-										_ist.setDamageValue(0);
-									});
+									PortUtil.hurtAndBreak(_ist, 8, null);
 								}
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
@@ -194,10 +190,7 @@ public class FalseHydraPokeProcedure {
 									_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem100 ? _entUseItem100.getUseItem() : ItemStack.EMPTY).getItem(), 100);
 								{
 									ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem102 ? _entUseItem102.getUseItem() : ItemStack.EMPTY);
-									_ist.hurtAndBreak(8, RandomSource.create(), null, () -> {
-										_ist.shrink(1);
-										_ist.setDamageValue(0);
-									});
+									PortUtil.hurtAndBreak(_ist, 8, null);
 								}
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
@@ -254,10 +247,7 @@ public class FalseHydraPokeProcedure {
 									_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem140 ? _entUseItem140.getUseItem() : ItemStack.EMPTY).getItem(), 100);
 								{
 									ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem142 ? _entUseItem142.getUseItem() : ItemStack.EMPTY);
-									_ist.hurtAndBreak(8, RandomSource.create(), null, () -> {
-										_ist.shrink(1);
-										_ist.setDamageValue(0);
-									});
+									PortUtil.hurtAndBreak(_ist, 8, null);
 								}
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {

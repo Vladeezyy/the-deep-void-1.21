@@ -14,7 +14,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.PlantType;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 import org.checkerframework.checker.units.qual.s;
 
@@ -34,8 +33,4 @@ public class PeepingStemBlock extends FlowerBlock {
 		return box(0, 0, 0, 16, 16, 16).move(offset.x, offset.y, offset.z);
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 }

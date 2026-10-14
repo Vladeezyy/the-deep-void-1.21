@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import net.sombrius.thedeepvoid.entity.MisanthropicHivemindEntity;
 import net.sombrius.thedeepvoid.entity.HivemindTentaclesEntity;
 
@@ -7,7 +9,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
@@ -25,7 +27,7 @@ import java.util.Comparator;
 @EventBusSubscriber
 public class HivemindIsHurtProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event != null && event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getSource(), event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity(),
 					event.getAmount());
@@ -55,12 +57,12 @@ public class HivemindIsHurtProcedure {
 			if (entity instanceof MisanthropicHivemindEntity _datEntSetL)
 				_datEntSetL.getEntityData().set(MisanthropicHivemindEntity.DATA_skipSummons, true);
 		} else if (entity instanceof MisanthropicHivemindEntity && !world.getEntitiesOfClass(HivemindTentaclesEntity.class, AABB.ofSize(new Vec3(x, y, z), 4, 4, 4), e -> true).isEmpty()) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 		} else if (entity instanceof HivemindTentaclesEntity && (!(immediatesourceentity == sourceentity) || damagesource.is(DamageTypes.MAGIC))) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 		}
 	}

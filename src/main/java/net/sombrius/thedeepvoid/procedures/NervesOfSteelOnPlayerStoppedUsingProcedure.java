@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
@@ -47,10 +49,7 @@ public class NervesOfSteelOnPlayerStoppedUsingProcedure {
 			}
 			{
 				ItemStack _ist = itemstack;
-				if (_ist.hurt(1, RandomSource.create(), null)) {
-					_ist.shrink(1);
-					_ist.setDamageValue(0);
-				}
+				PortUtil.hurtAndBreak(_ist, 1, null);
 			}
 		}
 		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("pulling") >= 35 && itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("pulling") <= 37) {

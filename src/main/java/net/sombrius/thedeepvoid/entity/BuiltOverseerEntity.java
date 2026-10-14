@@ -46,7 +46,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.EventHooks;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.procedures.BuiltOverseerDiesProcedure;
@@ -256,7 +256,7 @@ public class BuiltOverseerEntity extends TamableAnimal implements GeoEntity {
 		this.updateSwingTime();
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -328,7 +328,7 @@ public class BuiltOverseerEntity extends TamableAnimal implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(BuiltOverseerEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

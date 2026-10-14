@@ -31,7 +31,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.SeekerOnInitialEntitySpawnProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidTentacleOnEntityTickUpdateProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -143,7 +143,7 @@ public class SeekerEntity extends Monster implements GeoEntity {
 		return super.getDefaultDimensions(pose).scale(1f);
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -214,7 +214,7 @@ public class SeekerEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(SeekerEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

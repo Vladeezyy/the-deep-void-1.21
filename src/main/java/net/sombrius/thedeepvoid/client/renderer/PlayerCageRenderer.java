@@ -22,13 +22,13 @@ public class PlayerCageRenderer extends MobRenderer<PlayerCageEntity, Modelplaye
 			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/player_cage.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, PlayerCageEntity entity, float limbSwing, float limbSwingAmount, int color) {
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, PlayerCageEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 				VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 				EntityModel model = new Modelplayer_cage(Minecraft.getInstance().getEntityModels().bakeLayer(Modelplayer_cage.LAYER_LOCATION));
 				this.getParentModel().copyPropertiesTo(model);
 				model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 				model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-				model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+				model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, -1);
 			}
 		});
 	}

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -42,7 +44,7 @@ public class GoreExpectoratorOnEntityTickUpdateProcedure {
 									AbstractArrow entityToSpawn = new PusBallProjectileEntity(TheDeepVoidModEntities.PUS_BALL_PROJECTILE.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									return entityToSpawn;
 								}
@@ -62,7 +64,7 @@ public class GoreExpectoratorOnEntityTickUpdateProcedure {
 									AbstractArrow entityToSpawn = new BloodSpitEntity(TheDeepVoidModEntities.BLOOD_SPIT.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									return entityToSpawn;
 								}

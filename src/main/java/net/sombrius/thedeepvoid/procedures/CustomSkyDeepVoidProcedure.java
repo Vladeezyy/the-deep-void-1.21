@@ -71,15 +71,14 @@ public class CustomSkyDeepVoidProcedure {
 			if (abyssBuffer == null) {
 				RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 				RenderSystem.setShader(GameRenderer::getPositionShader);
-				BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-				bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION);
-				bufferBuilder.vertex(0.0F, -16.0F, 0.0F).endVertex();
+				BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION);
+				bufferBuilder.addVertex(0.0F, -16.0F, 0.0F);
 				for (int i = 0; i <= 8; ++i) {
-					bufferBuilder.vertex(-512.0F * Mth.cos(i * 45.0F * Mth.DEG_TO_RAD), -16.0F, 512.0F * Mth.sin(i * 45.0F * Mth.DEG_TO_RAD)).endVertex();
+					bufferBuilder.addVertex(-512.0F * Mth.cos(i * 45.0F * Mth.DEG_TO_RAD), -16.0F, 512.0F * Mth.sin(i * 45.0F * Mth.DEG_TO_RAD));
 				}
 				abyssBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
 				abyssBuffer.bind();
-				abyssBuffer.upload(bufferBuilder.end());
+				abyssBuffer.upload(bufferBuilder.buildOrThrow());
 			} else {
 				abyssBuffer.bind();
 			}
@@ -97,15 +96,14 @@ public class CustomSkyDeepVoidProcedure {
 		if (deepSkyBuffer == null) {
 			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 			RenderSystem.setShader(GameRenderer::getPositionShader);
-			BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-			bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION);
-			bufferBuilder.vertex(0.0F, 16.0F, 0.0F).endVertex();
+			BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION);
+			bufferBuilder.addVertex(0.0F, 16.0F, 0.0F);
 			for (int i = 0; i <= 8; ++i) {
-				bufferBuilder.vertex(512.0F * Mth.cos(45.0F * i * Mth.DEG_TO_RAD), 16.0F, 512.0F * Mth.sin(45.0F * i * Mth.DEG_TO_RAD)).endVertex();
+				bufferBuilder.addVertex(512.0F * Mth.cos(45.0F * i * Mth.DEG_TO_RAD), 16.0F, 512.0F * Mth.sin(45.0F * i * Mth.DEG_TO_RAD));
 			}
 			deepSkyBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
 			deepSkyBuffer.bind();
-			deepSkyBuffer.upload(bufferBuilder.end());
+			deepSkyBuffer.upload(bufferBuilder.buildOrThrow());
 		} else {
 			deepSkyBuffer.bind();
 		}
@@ -127,49 +125,48 @@ public class CustomSkyDeepVoidProcedure {
 			Matrix4f matrix4f = poseStack.last().pose();
 			RenderSystem.setShaderColor((color >> 16 & 255) / 255.0F, (color >> 8 & 255) / 255.0F, (color & 255) / 255.0F, (color >>> 24) / 255.0F);
 			RenderSystem.setShader(GameRenderer::getPositionTexShader);
-			BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-			bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+			BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
 			for (int i = 0; i < 6; ++i) {
 				switch (i) {
 					case 0 :
-						bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).uv(0.0F, 0.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).uv(0.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).uv(16.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).uv(16.0F, 0.0F).endVertex();
+						bufferBuilder.addVertex(matrix4f, -100.0F, -100.0F, -100.0F).setUv(0.0F, 0.0F);
+						bufferBuilder.addVertex(matrix4f, -100.0F, -100.0F, 100.0F).setUv(0.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, -100.0F, 100.0F).setUv(16.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, -100.0F, -100.0F).setUv(16.0F, 0.0F);
 						break;
 					case 1 :
-						bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).uv(0.0F, .0F).endVertex();
-						bufferBuilder.vertex(matrix4f, -100.0F, 100.0F, 100.0F).uv(0.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, 100.0F, 100.0F).uv(16.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).uv(16.0F, 0.0F).endVertex();
+						bufferBuilder.addVertex(matrix4f, -100.0F, -100.0F, 100.0F).setUv(0.0F, .0F);
+						bufferBuilder.addVertex(matrix4f, -100.0F, 100.0F, 100.0F).setUv(0.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, 100.0F, 100.0F).setUv(16.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, -100.0F, 100.0F).setUv(16.0F, 0.0F);
 						break;
 					case 2 :
-						bufferBuilder.vertex(matrix4f, -100.0F, 100.0F, -100.0F).uv(0.0F, 0.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).uv(0.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).uv(16.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, 100.0F, -100.0F).uv(16.0F, 0.0F).endVertex();
+						bufferBuilder.addVertex(matrix4f, -100.0F, 100.0F, -100.0F).setUv(0.0F, 0.0F);
+						bufferBuilder.addVertex(matrix4f, -100.0F, -100.0F, -100.0F).setUv(0.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, -100.0F, -100.0F).setUv(16.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, 100.0F, -100.0F).setUv(16.0F, 0.0F);
 						break;
 					case 3 :
-						bufferBuilder.vertex(matrix4f, -100.0F, 100.0F, 100.0F).uv(0.0F, 0.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, -100.0F, 100.0F, -100.0F).uv(0.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, 100.0F, -100.0F).uv(16.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, 100.0F, 100.0F).uv(16.0F, 0.0F).endVertex();
+						bufferBuilder.addVertex(matrix4f, -100.0F, 100.0F, 100.0F).setUv(0.0F, 0.0F);
+						bufferBuilder.addVertex(matrix4f, -100.0F, 100.0F, -100.0F).setUv(0.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, 100.0F, -100.0F).setUv(16.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, 100.0F, 100.0F).setUv(16.0F, 0.0F);
 						break;
 					case 4 :
-						bufferBuilder.vertex(matrix4f, -100.0F, 100.0F, -100.0F).uv(0.0F, 0.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, -100.0F, 100.0F, 100.0F).uv(0.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).uv(16.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).uv(16.0F, 0.0F).endVertex();
+						bufferBuilder.addVertex(matrix4f, -100.0F, 100.0F, -100.0F).setUv(0.0F, 0.0F);
+						bufferBuilder.addVertex(matrix4f, -100.0F, 100.0F, 100.0F).setUv(0.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, -100.0F, -100.0F, 100.0F).setUv(16.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, -100.0F, -100.0F, -100.0F).setUv(16.0F, 0.0F);
 						break;
 					case 5 :
-						bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).uv(0.0F, 0.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).uv(0.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, 100.0F, 100.0F).uv(16.0F, 16.0F).endVertex();
-						bufferBuilder.vertex(matrix4f, 100.0F, 100.0F, -100.0F).uv(16.0F, 0.0F).endVertex();
+						bufferBuilder.addVertex(matrix4f, 100.0F, -100.0F, -100.0F).setUv(0.0F, 0.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, -100.0F, 100.0F).setUv(0.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, 100.0F, 100.0F).setUv(16.0F, 16.0F);
+						bufferBuilder.addVertex(matrix4f, 100.0F, 100.0F, -100.0F).setUv(16.0F, 0.0F);
 						break;
 				}
 			}
-			BufferUploader.drawWithShader(bufferBuilder.end());
+			BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 			poseStack.popPose();
 		}
@@ -199,13 +196,12 @@ public class CustomSkyDeepVoidProcedure {
 		Matrix4f matrix4f = poseStack.last().pose();
 		RenderSystem.setShaderColor((color >> 16 & 255) / 255.0F, (color >> 8 & 255) / 255.0F, (color & 255) / 255.0F, alpha);
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-		bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-		bufferBuilder.vertex(matrix4f, -r, -100.0F, -r).uv(u1, v1).endVertex();
-		bufferBuilder.vertex(matrix4f, -r, -100.0F, r).uv(u0, v1).endVertex();
-		bufferBuilder.vertex(matrix4f, r, -100.0F, r).uv(u0, v0).endVertex();
-		bufferBuilder.vertex(matrix4f, r, -100.0F, -r).uv(u1, v0).endVertex();
-		BufferUploader.drawWithShader(bufferBuilder.end());
+		BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferBuilder.addVertex(matrix4f, -r, -100.0F, -r).setUv(u1, v1);
+		bufferBuilder.addVertex(matrix4f, -r, -100.0F, r).setUv(u0, v1);
+		bufferBuilder.addVertex(matrix4f, r, -100.0F, r).setUv(u0, v0);
+		bufferBuilder.addVertex(matrix4f, r, -100.0F, -r).setUv(u1, v0);
+		BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		poseStack.popPose();
 	}
@@ -254,51 +250,50 @@ public class CustomSkyDeepVoidProcedure {
 			if (skyboxBuffer == null) {
 				RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 				RenderSystem.setShader(GameRenderer::getPositionTexShader);
-				BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-				bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+				BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
 				for (int i = 0; i < 6; ++i) {
 					switch (i) {
 						case 0 :
-							bufferBuilder.vertex(-0.5F, -0.5F, -0.5F).uv(0.0F, 0.0F).endVertex();
-							bufferBuilder.vertex(-0.5F, -0.5F, 0.5F).uv(0.0F, 0.5F).endVertex();
-							bufferBuilder.vertex(0.5F, -0.5F, 0.5F).uv(1.0F / 3.0F, 0.5F).endVertex();
-							bufferBuilder.vertex(0.5F, -0.5F, -0.5F).uv(1.0F / 3.0F, 0.0F).endVertex();
+							bufferBuilder.addVertex(-0.5F, -0.5F, -0.5F).setUv(0.0F, 0.0F);
+							bufferBuilder.addVertex(-0.5F, -0.5F, 0.5F).setUv(0.0F, 0.5F);
+							bufferBuilder.addVertex(0.5F, -0.5F, 0.5F).setUv(1.0F / 3.0F, 0.5F);
+							bufferBuilder.addVertex(0.5F, -0.5F, -0.5F).setUv(1.0F / 3.0F, 0.0F);
 							break;
 						case 1 :
-							bufferBuilder.vertex(-0.5F, 0.5F, 0.5F).uv(1.0F / 3.0F, 0.0F).endVertex();
-							bufferBuilder.vertex(-0.5F, 0.5F, -0.5F).uv(1.0F / 3.0F, 0.5F).endVertex();
-							bufferBuilder.vertex(0.5F, 0.5F, -0.5F).uv(2.0F / 3.0F, 0.5F).endVertex();
-							bufferBuilder.vertex(0.5F, 0.5F, 0.5F).uv(2.0F / 3.0F, 0.0F).endVertex();
+							bufferBuilder.addVertex(-0.5F, 0.5F, 0.5F).setUv(1.0F / 3.0F, 0.0F);
+							bufferBuilder.addVertex(-0.5F, 0.5F, -0.5F).setUv(1.0F / 3.0F, 0.5F);
+							bufferBuilder.addVertex(0.5F, 0.5F, -0.5F).setUv(2.0F / 3.0F, 0.5F);
+							bufferBuilder.addVertex(0.5F, 0.5F, 0.5F).setUv(2.0F / 3.0F, 0.0F);
 							break;
 						case 2 :
-							bufferBuilder.vertex(0.5F, 0.5F, 0.5F).uv(2.0F / 3.0F, 0.0F).endVertex();
-							bufferBuilder.vertex(0.5F, -0.5F, 0.5F).uv(2.0F / 3.0F, 0.5F).endVertex();
-							bufferBuilder.vertex(-0.5F, -0.5F, 0.5F).uv(1.0F, 0.5F).endVertex();
-							bufferBuilder.vertex(-0.5F, 0.5F, 0.5F).uv(1.0F, 0.0F).endVertex();
+							bufferBuilder.addVertex(0.5F, 0.5F, 0.5F).setUv(2.0F / 3.0F, 0.0F);
+							bufferBuilder.addVertex(0.5F, -0.5F, 0.5F).setUv(2.0F / 3.0F, 0.5F);
+							bufferBuilder.addVertex(-0.5F, -0.5F, 0.5F).setUv(1.0F, 0.5F);
+							bufferBuilder.addVertex(-0.5F, 0.5F, 0.5F).setUv(1.0F, 0.0F);
 							break;
 						case 3 :
-							bufferBuilder.vertex(-0.5F, 0.5F, 0.5F).uv(0.0F, 0.5F).endVertex();
-							bufferBuilder.vertex(-0.5F, -0.5F, 0.5F).uv(0.0F, 1.0F).endVertex();
-							bufferBuilder.vertex(-0.5F, -0.5F, -0.5F).uv(1.0F / 3.0F, 1.0F).endVertex();
-							bufferBuilder.vertex(-0.5F, 0.5F, -0.5F).uv(1.0F / 3.0F, 0.5F).endVertex();
+							bufferBuilder.addVertex(-0.5F, 0.5F, 0.5F).setUv(0.0F, 0.5F);
+							bufferBuilder.addVertex(-0.5F, -0.5F, 0.5F).setUv(0.0F, 1.0F);
+							bufferBuilder.addVertex(-0.5F, -0.5F, -0.5F).setUv(1.0F / 3.0F, 1.0F);
+							bufferBuilder.addVertex(-0.5F, 0.5F, -0.5F).setUv(1.0F / 3.0F, 0.5F);
 							break;
 						case 4 :
-							bufferBuilder.vertex(-0.5F, 0.5F, -0.5F).uv(1.0F / 3.0F, 0.5F).endVertex();
-							bufferBuilder.vertex(-0.5F, -0.5F, -0.5F).uv(1.0F / 3.0F, 1.0F).endVertex();
-							bufferBuilder.vertex(0.5F, -0.5F, -0.5F).uv(2.0F / 3.0F, 1.0F).endVertex();
-							bufferBuilder.vertex(0.5F, 0.5F, -0.5F).uv(2.0F / 3.0F, 0.5F).endVertex();
+							bufferBuilder.addVertex(-0.5F, 0.5F, -0.5F).setUv(1.0F / 3.0F, 0.5F);
+							bufferBuilder.addVertex(-0.5F, -0.5F, -0.5F).setUv(1.0F / 3.0F, 1.0F);
+							bufferBuilder.addVertex(0.5F, -0.5F, -0.5F).setUv(2.0F / 3.0F, 1.0F);
+							bufferBuilder.addVertex(0.5F, 0.5F, -0.5F).setUv(2.0F / 3.0F, 0.5F);
 							break;
 						case 5 :
-							bufferBuilder.vertex(0.5F, 0.5F, -0.5F).uv(2.0F / 3.0F, 0.5F).endVertex();
-							bufferBuilder.vertex(0.5F, -0.5F, -0.5F).uv(2.0F / 3.0F, 1.0F).endVertex();
-							bufferBuilder.vertex(0.5F, -0.5F, 0.5F).uv(1.0F, 1.0F).endVertex();
-							bufferBuilder.vertex(0.5F, 0.5F, 0.5F).uv(1.0F, 0.5F).endVertex();
+							bufferBuilder.addVertex(0.5F, 0.5F, -0.5F).setUv(2.0F / 3.0F, 0.5F);
+							bufferBuilder.addVertex(0.5F, -0.5F, -0.5F).setUv(2.0F / 3.0F, 1.0F);
+							bufferBuilder.addVertex(0.5F, -0.5F, 0.5F).setUv(1.0F, 1.0F);
+							bufferBuilder.addVertex(0.5F, 0.5F, 0.5F).setUv(1.0F, 0.5F);
 							break;
 					}
 				}
 				skyboxBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
 				skyboxBuffer.bind();
-				skyboxBuffer.upload(bufferBuilder.end());
+				skyboxBuffer.upload(bufferBuilder.buildOrThrow());
 			} else {
 				skyboxBuffer.bind();
 			}
@@ -322,8 +317,7 @@ public class CustomSkyDeepVoidProcedure {
 			CustomSkyDeepVoidProcedure.seed = seed;
 			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 			RenderSystem.setShader(GameRenderer::getPositionShader);
-			BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-			bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+			BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
 			RandomSource randomsource = RandomSource.create((long) seed);
 			for (int i = 0; i < amount; ++i) {
 				float f0 = randomsource.nextFloat() * 2.0F - 1.0F;
@@ -357,7 +351,7 @@ public class CustomSkyDeepVoidProcedure {
 						float f23 = f22 * f9 - f21 * f10;
 						float f24 = f20 * f12;
 						float f25 = f21 * f9 + f22 * f10;
-						bufferBuilder.vertex(f5 + f23, f6 + f24, f7 + f25).endVertex();
+						bufferBuilder.addVertex(f5 + f23, f6 + f24, f7 + f25);
 					}
 				}
 			}
@@ -365,7 +359,7 @@ public class CustomSkyDeepVoidProcedure {
 				starBuffer.close();
 			starBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
 			starBuffer.bind();
-			starBuffer.upload(bufferBuilder.end());
+			starBuffer.upload(bufferBuilder.buildOrThrow());
 		} else {
 			starBuffer.bind();
 		}
@@ -396,13 +390,12 @@ public class CustomSkyDeepVoidProcedure {
 		Matrix4f matrix4f = poseStack.last().pose();
 		RenderSystem.setShaderColor((color >> 16 & 255) / 255.0F, (color >> 8 & 255) / 255.0F, (color & 255) / 255.0F, alpha);
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-		bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-		bufferBuilder.vertex(matrix4f, r, 100.0F, -r).uv(0.0F, 0.0F).endVertex();
-		bufferBuilder.vertex(matrix4f, r, 100.0F, r).uv(1.0F, 0.0F).endVertex();
-		bufferBuilder.vertex(matrix4f, -r, 100.0F, r).uv(1.0F, 1.0F).endVertex();
-		bufferBuilder.vertex(matrix4f, -r, 100.0F, -r).uv(0.0F, 1.0F).endVertex();
-		BufferUploader.drawWithShader(bufferBuilder.end());
+		BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferBuilder.addVertex(matrix4f, r, 100.0F, -r).setUv(0.0F, 0.0F);
+		bufferBuilder.addVertex(matrix4f, r, 100.0F, r).setUv(1.0F, 0.0F);
+		bufferBuilder.addVertex(matrix4f, -r, 100.0F, r).setUv(1.0F, 1.0F);
+		bufferBuilder.addVertex(matrix4f, -r, 100.0F, -r).setUv(0.0F, 1.0F);
+		BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		poseStack.popPose();
 	}
@@ -418,25 +411,24 @@ public class CustomSkyDeepVoidProcedure {
 			Matrix4f matrix4f = poseStack.last().pose();
 			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 			RenderSystem.setShader(GameRenderer::getPositionColorShader);
-			BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-			bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+			BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
 			boolean flag = Mth.sin(level.getSunAngle(partialTick)) < 0.0F;
 			if (flag) {
-				bufferBuilder.vertex(matrix4f, 100.0F, 0.0F, 0.0F).color(red, green, blue, alpha).endVertex();
+				bufferBuilder.addVertex(matrix4f, 100.0F, 0.0F, 0.0F).setColor(red, green, blue, alpha);
 			} else {
-				bufferBuilder.vertex(matrix4f, -100.0F, 0.0F, 0.0F).color(red, green, blue, alpha).endVertex();
+				bufferBuilder.addVertex(matrix4f, -100.0F, 0.0F, 0.0F).setColor(red, green, blue, alpha);
 			}
 			for (int i = 0; i <= 16; ++i) {
 				float deg = i * Mth.TWO_PI / 16.0F;
 				float sin = Mth.sin(deg);
 				float cos = Mth.cos(deg);
 				if (flag) {
-					bufferBuilder.vertex(matrix4f, cos * 120.0F, cos * 40.0F * rawColor[3], -sin * 120.0F).color(red, green, blue, 0).endVertex();
+					bufferBuilder.addVertex(matrix4f, cos * 120.0F, cos * 40.0F * rawColor[3], -sin * 120.0F).setColor(red, green, blue, 0);
 				} else {
-					bufferBuilder.vertex(matrix4f, -cos * 120.0F, cos * 40.0F * rawColor[3], sin * 120.0F).color(red, green, blue, 0).endVertex();
+					bufferBuilder.addVertex(matrix4f, -cos * 120.0F, cos * 40.0F * rawColor[3], sin * 120.0F).setColor(red, green, blue, 0);
 				}
 			}
-			BufferUploader.drawWithShader(bufferBuilder.end());
+			BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 		}
 	}
 
@@ -452,13 +444,12 @@ public class CustomSkyDeepVoidProcedure {
 		Matrix4f matrix4f = poseStack.last().pose();
 		RenderSystem.setShaderColor((color >> 16 & 255) / 255.0F, (color >> 8 & 255) / 255.0F, (color & 255) / 255.0F, alpha);
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-		bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-		bufferBuilder.vertex(matrix4f, r, r, 100.0F).uv(0.0F, 0.0F).endVertex();
-		bufferBuilder.vertex(matrix4f, r, -r, 100.0F).uv(0.0F, 1.0F).endVertex();
-		bufferBuilder.vertex(matrix4f, -r, -r, 100.0F).uv(1.0F, 1.0F).endVertex();
-		bufferBuilder.vertex(matrix4f, -r, r, 100.0F).uv(1.0F, 0.0F).endVertex();
-		BufferUploader.drawWithShader(bufferBuilder.end());
+		BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferBuilder.addVertex(matrix4f, r, r, 100.0F).setUv(0.0F, 0.0F);
+		bufferBuilder.addVertex(matrix4f, r, -r, 100.0F).setUv(0.0F, 1.0F);
+		bufferBuilder.addVertex(matrix4f, -r, -r, 100.0F).setUv(1.0F, 1.0F);
+		bufferBuilder.addVertex(matrix4f, -r, r, 100.0F).setUv(1.0F, 0.0F);
+		BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		poseStack.popPose();
 	}

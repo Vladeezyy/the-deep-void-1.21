@@ -22,13 +22,13 @@ public class SoulOrbRenderer extends MobRenderer<SoulOrbEntity, ModelsoulOrbHigh
 			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/soulorb.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, SoulOrbEntity entity, float limbSwing, float limbSwingAmount, int color) {
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, SoulOrbEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 				VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.eyes(LAYER_TEXTURE));
 				EntityModel model = new ModelsoulOrbHigher(Minecraft.getInstance().getEntityModels().bakeLayer(ModelsoulOrbHigher.LAYER_LOCATION));
 				this.getParentModel().copyPropertiesTo(model);
 				model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 				model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-				model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+				model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, -1);
 			}
 		});
 	}

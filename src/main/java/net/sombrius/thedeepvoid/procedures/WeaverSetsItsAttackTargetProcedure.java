@@ -19,7 +19,7 @@ import net.sombrius.thedeepvoid.entity.WeaverOfSoulsBossEntity;
 public class WeaverSetsItsAttackTargetProcedure {
 	@SubscribeEvent
 	public static void onEntitySetsAttackTarget(LivingChangeTargetEvent event) {
-		execute(event, event.getEntity().level(), event.getOriginalTarget(), event.getEntity());
+		execute(event, event.getEntity().level(), event.getOriginalAboutToBeSetTarget(), event.getEntity());
 	}
 
 	public static void execute(LevelAccessor world, Entity entity, Entity sourceentity) {

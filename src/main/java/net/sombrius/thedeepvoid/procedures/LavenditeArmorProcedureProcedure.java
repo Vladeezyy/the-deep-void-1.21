@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import net.sombrius.thedeepvoid.init.TheDeepVoidModParticleTypes;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.entity.PusBallProjectileEntity;
@@ -13,7 +15,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.LevelAccessor;
@@ -50,7 +52,7 @@ import javax.annotation.Nullable;
 @EventBusSubscriber
 public class LavenditeArmorProcedureProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event != null && event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getSource(), event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity(),
 					event.getAmount());
@@ -77,8 +79,8 @@ public class LavenditeArmorProcedureProcedure {
 					|| immediatesourceentity instanceof FireworkRocketEntity || immediatesourceentity instanceof SmallFireball || immediatesourceentity instanceof FlareEntity || immediatesourceentity instanceof PusBallProjectileEntity
 					|| immediatesourceentity instanceof ThrownEgg || immediatesourceentity instanceof Snowball || immediatesourceentity instanceof ShulkerBullet || immediatesourceentity instanceof ThrownEnderpearl
 					|| immediatesourceentity instanceof BoneBallProjectileEntity || immediatesourceentity instanceof LavenditeShardProjEntity) {
-				if (event != null && event.isCancelable()) {
-					event.setCanceled(true);
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
@@ -97,8 +99,8 @@ public class LavenditeArmorProcedureProcedure {
 					|| immediatesourceentity instanceof FireworkRocketEntity || immediatesourceentity instanceof SmallFireball || immediatesourceentity instanceof FlareEntity || immediatesourceentity instanceof PusBallProjectileEntity
 					|| immediatesourceentity instanceof ThrownEgg || immediatesourceentity instanceof Snowball || immediatesourceentity instanceof ShulkerBullet || immediatesourceentity instanceof ThrownEnderpearl
 					|| immediatesourceentity instanceof BoneBallProjectileEntity || immediatesourceentity instanceof LavenditeShardProjEntity) {
-				if (event != null && event.isCancelable()) {
-					event.setCanceled(true);
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
@@ -121,8 +123,8 @@ public class LavenditeArmorProcedureProcedure {
 						? _plrCldRem64.getCooldowns().getCooldownPercent((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem(), 0f) * 100
 						: 0) <= 0
 				&& !(entity instanceof MimicEntity)) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 			if (entity instanceof Player _player)
 				_player.getCooldowns().addCooldown((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem(), 5);

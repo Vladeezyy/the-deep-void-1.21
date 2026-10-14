@@ -58,7 +58,7 @@ public class PrisonGuardOnEntityTickUpdateProcedure {
 				TheDeepVoidMod.queueServerWork(54, () -> {
 					if (!(!world.getEntitiesOfClass(WardenOfThePitEntity.class, AABB.ofSize(new Vec3(x, y, z), 200, 200, 200), e -> true).isEmpty())) {
 						if (world instanceof ServerLevel _serverLevel) {
-							Entity entityinstance = TheDeepVoidModEntities.WARDEN_OF_THE_PIT.get().create(_serverLevel, null, null, new BlockPos(55, 5, 41), MobSpawnType.MOB_SUMMONED, false, false);
+							Entity entityinstance = TheDeepVoidModEntities.WARDEN_OF_THE_PIT.get().create(_serverLevel, null, new BlockPos(55, 5, 41), MobSpawnType.MOB_SUMMONED, false, false);
 							if (entityinstance != null) {
 								entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 								if (entityinstance instanceof Mob _entity && (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) instanceof LivingEntity _ent)

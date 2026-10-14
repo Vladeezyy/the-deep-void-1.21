@@ -12,17 +12,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.CommonHooks;
-import net.neoforged.neoforge.common.PlantType;
 
 public class ProtrudingMarrowBlock extends SugarCaneBlock {
 	public ProtrudingMarrowBlock() {
 		super(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).randomTicks().sound(SoundType.TWISTING_VINES).instabreak().noCollission().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public void randomTick(BlockState blockstate, ServerLevel world, BlockPos pos, RandomSource random) {

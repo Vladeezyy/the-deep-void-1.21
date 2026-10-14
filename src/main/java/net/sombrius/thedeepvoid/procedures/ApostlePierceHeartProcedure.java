@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
@@ -76,10 +78,7 @@ public class ApostlePierceHeartProcedure {
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem34 ? _entUseItem34.getUseItem() : ItemStack.EMPTY).getItem(), 100);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem36 ? _entUseItem36.getUseItem() : ItemStack.EMPTY);
-								_ist.hurtAndBreak(15, RandomSource.create(), null, () -> {
-									_ist.shrink(1);
-									_ist.setDamageValue(0);
-								});
+								PortUtil.hurtAndBreak(_ist, 15, null);
 							}
 							if (entityiterator instanceof LivingEntity _entity)
 								_entity.stopUsingItem();

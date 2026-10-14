@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.resources.ResourceLocation;
+
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,13 +14,13 @@ public class DebilitatedEffectStartedappliedProcedure {
 		if (entity == null)
 			return;
 		if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR)
-				.hasModifier((new AttributeModifier(UUID.fromString("b62dcadb-d9b4-46da-b37c-6378ea720d21"), "debilitatedArmor", (-0.6), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)))))
+				.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "b62dcadb-d9b4-46da-b37c-6378ea720d21"))))
 			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR)
-					.addTransientModifier((new AttributeModifier(UUID.fromString("b62dcadb-d9b4-46da-b37c-6378ea720d21"), "debilitatedArmor", (-0.6), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
+					.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "b62dcadb-d9b4-46da-b37c-6378ea720d21"), (-0.6), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
 		if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS)
-				.hasModifier((new AttributeModifier(UUID.fromString("d747b3a8-1b6a-48bb-a3fe-d9de22cb7fc8"), "debilitatedArmorTough", (-0.6), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)))))
+				.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "d747b3a8-1b6a-48bb-a3fe-d9de22cb7fc8"))))
 			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS)
-					.addTransientModifier((new AttributeModifier(UUID.fromString("d747b3a8-1b6a-48bb-a3fe-d9de22cb7fc8"), "debilitatedArmorTough", (-0.6), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
+					.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "d747b3a8-1b6a-48bb-a3fe-d9de22cb7fc8"), (-0.6), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
 		if ((entity instanceof Player _plr ? _plr.getFoodData().getFoodLevel() : 0) <= 6) {
 			if (entity instanceof Player _player)
 				_player.getFoodData().setFoodLevel(7);

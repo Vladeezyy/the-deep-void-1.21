@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -78,8 +80,8 @@ public class PlayerDiesInPitProcedure {
 				}
 			}
 			if (otherPlayer == false) {
-				if (event != null && event.isCancelable()) {
-					event.setCanceled(true);
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
 				}
 				if (!damagesource.is(DamageTypes.FALL)) {
 					{
@@ -127,7 +129,7 @@ public class PlayerDiesInPitProcedure {
 				}
 				world.setBlock(new BlockPos(0, 0, 0), Blocks.AIR.defaultBlockState(), 3);
 				if (world instanceof ServerLevel _serverLevel) {
-					Entity entityinstance = TheDeepVoidModEntities.PLAYER_CAGE.get().create(_serverLevel, null, null, new BlockPos(8, 101, 26), MobSpawnType.MOB_SUMMONED, false, false);
+					Entity entityinstance = TheDeepVoidModEntities.PLAYER_CAGE.get().create(_serverLevel, null, new BlockPos(8, 101, 26), MobSpawnType.MOB_SUMMONED, false, false);
 					if (entityinstance != null) {
 						entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 						{

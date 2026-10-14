@@ -33,7 +33,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.GiantShadowHandEntityIsHurtProcedure;
 import net.sombrius.thedeepvoid.procedures.GiantShadowHandOnEntityTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.GiantShadowHandOnInitialEntitySpawnProcedure;
@@ -209,7 +209,7 @@ public class GiantShadowHandEntity extends Monster implements GeoEntity {
 	protected void pushEntities() {
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -274,7 +274,7 @@ public class GiantShadowHandEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(GiantShadowHandEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

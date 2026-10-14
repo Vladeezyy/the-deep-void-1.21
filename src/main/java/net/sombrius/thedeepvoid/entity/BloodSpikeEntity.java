@@ -1,6 +1,9 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+import javax.annotation.Nullable;
+
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
@@ -24,15 +27,15 @@ public class BloodSpikeEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Items.ARROW);
 
 	public BloodSpikeEntity(EntityType<? extends BloodSpikeEntity> type, Level world) {
-		super(type, world, PROJECTILE_ITEM);
+		super(type, world);
 	}
 
-	public BloodSpikeEntity(EntityType<? extends BloodSpikeEntity> type, double x, double y, double z, Level world) {
-		super(type, x, y, z, world, PROJECTILE_ITEM);
+	public BloodSpikeEntity(EntityType<? extends BloodSpikeEntity> type, double x, double y, double z, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
-	public BloodSpikeEntity(EntityType<? extends BloodSpikeEntity> type, LivingEntity entity, Level world) {
-		super(type, entity, world, PROJECTILE_ITEM);
+	public BloodSpikeEntity(EntityType<? extends BloodSpikeEntity> type, LivingEntity entity, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
 	@Override
@@ -75,26 +78,26 @@ public class BloodSpikeEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	public static BloodSpikeEntity shoot(Level world, LivingEntity entity, RandomSource random, float power, double damage, int knockback) {
-		BloodSpikeEntity entityarrow = new BloodSpikeEntity(TheDeepVoidModEntities.BLOOD_SPIKE.get(), entity, world);
+		BloodSpikeEntity entityarrow = new BloodSpikeEntity(TheDeepVoidModEntities.BLOOD_SPIKE.get(), entity, world, null);
 		entityarrow.shoot(entity.getViewVector(1).x, entity.getViewVector(1).y, entity.getViewVector(1).z, power * 2, 0);
 		entityarrow.setSilent(true);
 		entityarrow.setCritArrow(false);
 		entityarrow.setBaseDamage(damage);
-		entityarrow.setKnockback(knockback);
+		PortUtil.setKnockback(entityarrow, knockback);
 		world.addFreshEntity(entityarrow);
 		world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.arrow.shoot")), SoundSource.PLAYERS, 1, 1f / (random.nextFloat() * 0.5f + 1) + (power / 2));
 		return entityarrow;
 	}
 
 	public static BloodSpikeEntity shoot(LivingEntity entity, LivingEntity target) {
-		BloodSpikeEntity entityarrow = new BloodSpikeEntity(TheDeepVoidModEntities.BLOOD_SPIKE.get(), entity, entity.level());
+		BloodSpikeEntity entityarrow = new BloodSpikeEntity(TheDeepVoidModEntities.BLOOD_SPIKE.get(), entity, entity.level(), null);
 		double dx = target.getX() - entity.getX();
 		double dy = target.getY() + target.getEyeHeight() - 1.1;
 		double dz = target.getZ() - entity.getZ();
 		entityarrow.shoot(dx, dy - entityarrow.getY() + Math.hypot(dx, dz) * 0.2F, dz, 4f * 2, 12.0F);
 		entityarrow.setSilent(true);
 		entityarrow.setBaseDamage(1.5);
-		entityarrow.setKnockback(0);
+		PortUtil.setKnockback(entityarrow, 0);
 		entityarrow.setCritArrow(false);
 		entity.level().addFreshEntity(entityarrow);
 		entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.arrow.shoot")), SoundSource.PLAYERS, 1, 1f / (RandomSource.create().nextFloat() * 0.5f + 1));

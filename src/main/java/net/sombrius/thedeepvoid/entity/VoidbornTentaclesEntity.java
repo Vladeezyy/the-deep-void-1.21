@@ -29,7 +29,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.VoidbornTentaclesOnEntityTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidbornTentaclesOnInitialEntitySpawnProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -177,7 +177,7 @@ public class VoidbornTentaclesEntity extends PathfinderMob implements GeoEntity 
 		this.updateSwingTime();
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -225,7 +225,7 @@ public class VoidbornTentaclesEntity extends PathfinderMob implements GeoEntity 
 		++this.deathTime;
 		if (this.deathTime == 5) {
 			this.remove(VoidbornTentaclesEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

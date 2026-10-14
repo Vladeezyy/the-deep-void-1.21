@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.entity.BloodthirstyClawsBloodSpitEntity;
 
@@ -35,7 +37,7 @@ public class BloodthirstyClawsEntitySwingsItemProcedure {
 								AbstractArrow entityToSpawn = new BloodthirstyClawsBloodSpitEntity(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), level);
 								entityToSpawn.setOwner(shooter);
 								entityToSpawn.setBaseDamage(damage);
-								entityToSpawn.setKnockback(knockback);
+								PortUtil.setKnockback(entityToSpawn, knockback);
 								entityToSpawn.setSilent(true);
 								return entityToSpawn;
 							}

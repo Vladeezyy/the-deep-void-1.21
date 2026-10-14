@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.sombrius.thedeepvoid.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AbstractArrowMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

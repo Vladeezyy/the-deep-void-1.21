@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.RandomSource;
@@ -25,10 +27,7 @@ public class GrimberryOnAStickItemInInventoryTickProcedure {
 			if (Math.random() < 0.0125) {
 				{
 					ItemStack _ist = itemstack;
-					_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, 1, null);
 				}
 			}
 		}

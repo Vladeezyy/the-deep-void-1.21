@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.advancements.AdvancementHolder;
+
 import net.sombrius.thedeepvoid.init.TheDeepVoidModParticleTypes;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
@@ -91,7 +93,7 @@ public class HiveWatcherDiesProcedure {
 							if (!(entityiterator instanceof ServerPlayer _plr31 && _plr31.level() instanceof ServerLevel
 									&& _plr31.getAdvancements().getOrStartProgress(_plr31.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:ommetaphobia"))).isDone())) {
 								if (entityiterator instanceof ServerPlayer _player) {
-									Advancement _adv = _player.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:ommetaphobia"));
+									AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:ommetaphobia"));
 									AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 									if (!_ap.isDone()) {
 										for (String criteria : _ap.getRemainingCriteria())

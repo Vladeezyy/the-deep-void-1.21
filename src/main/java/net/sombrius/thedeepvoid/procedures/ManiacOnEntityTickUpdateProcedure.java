@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -151,7 +153,7 @@ public class ManiacOnEntityTickUpdateProcedure {
 											AbstractArrow entityToSpawn = new ManiacShotgunPelletEntity(TheDeepVoidModEntities.MANIAC_SHOTGUN_PELLET.get(), level);
 											entityToSpawn.setOwner(shooter);
 											entityToSpawn.setBaseDamage(damage);
-											entityToSpawn.setKnockback(knockback);
+											PortUtil.setKnockback(entityToSpawn, knockback);
 											entityToSpawn.setSilent(true);
 											return entityToSpawn;
 										}
@@ -171,7 +173,7 @@ public class ManiacOnEntityTickUpdateProcedure {
 										AbstractArrow entityToSpawn = new ManiacShotgunPelletEntity(TheDeepVoidModEntities.MANIAC_SHOTGUN_PELLET.get(), level);
 										entityToSpawn.setOwner(shooter);
 										entityToSpawn.setBaseDamage(damage);
-										entityToSpawn.setKnockback(knockback);
+										PortUtil.setKnockback(entityToSpawn, knockback);
 										entityToSpawn.setSilent(true);
 										return entityToSpawn;
 									}

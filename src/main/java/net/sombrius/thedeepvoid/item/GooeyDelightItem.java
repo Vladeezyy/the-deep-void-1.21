@@ -13,7 +13,7 @@ import net.sombrius.thedeepvoid.procedures.GooeyDelightPlayerFinishesUsingItemPr
 
 public class GooeyDelightItem extends Item {
 	public GooeyDelightItem() {
-		super(new Item.Properties().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(12).saturationMod(0.5f).build()));
+		super(new Item.Properties().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(12).saturationModifier(0.5f).build()));
 	}
 
 	@Override

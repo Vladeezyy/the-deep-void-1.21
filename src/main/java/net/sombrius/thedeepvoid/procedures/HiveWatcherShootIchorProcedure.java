@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -41,7 +43,7 @@ public class HiveWatcherShootIchorProcedure {
 								AbstractArrow entityToSpawn = new AmbrosiaSpitEntity(TheDeepVoidModEntities.AMBROSIA_SPIT.get(), level);
 								entityToSpawn.setOwner(shooter);
 								entityToSpawn.setBaseDamage(damage);
-								entityToSpawn.setKnockback(knockback);
+								PortUtil.setKnockback(entityToSpawn, knockback);
 								entityToSpawn.setSilent(true);
 								return entityToSpawn;
 							}

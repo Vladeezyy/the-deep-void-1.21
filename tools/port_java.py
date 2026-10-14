@@ -100,6 +100,17 @@ IMPORTS = {
     'Explosion': 'net.minecraft.world.level.Explosion',
     'Level': 'net.minecraft.world.level.Level',
     'Item': 'net.minecraft.world.item.Item',
+    'ICancellableEvent': 'net.neoforged.bus.api.ICancellableEvent',
+    'AdvancementHolder': 'net.minecraft.advancements.AdvancementHolder',
+    'Holder': 'net.minecraft.core.Holder',
+    'TriState': 'net.neoforged.neoforge.common.util.TriState',
+    'PortUtil': 'net.sombrius.thedeepvoid.port.PortUtil',
+    'Nullable': 'javax.annotation.Nullable',
+    'ItemStack': 'net.minecraft.world.item.ItemStack',
+    'RegisterSpawnPlacementsEvent': 'net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent',
+    'SpawnPlacementTypes': 'net.minecraft.world.entity.SpawnPlacementTypes',
+    'EventHooks': 'net.neoforged.neoforge.event.EventHooks',
+    'FoodProperties': 'net.minecraft.world.food.FoodProperties',
 }
 
 
@@ -318,7 +329,7 @@ def fix_player_variables(s):
     return s
 
 
-RENDER_METHODS = r'(?:renderToBuffer|preRender|actuallyRender|renderRecursively|postRender|render)'
+RENDER_METHODS = r'(?:renderToBuffer|preRender|actuallyRender|renderRecursively|postRender)'
 
 
 def fix_render_color(s):
@@ -356,6 +367,135 @@ def fix_121(s):
     return s
 
 
+def fix_entities(s):
+    s = remove_method(s, r'public \w+\(PlayMessages\.SpawnEntity \w+, Level \w+\)')
+    s = re.sub(r'protected double getAttackReachSqr\(LivingEntity (\w+)\) \{\s*return ([^;]+);',
+               lambda m: 'protected boolean canPerformAttack(LivingEntity %s) {\n\t\t\t\treturn this.isTimeToAttack() && this.mob.distanceToSqr(%s) < %s && this.mob.getSensing().hasLineOfSight(%s);'
+               % (m.group(1), m.group(1), m.group(2), m.group(1)), s)
+    s = remove_method(s, r'public MobType getMobType\(\)')
+    s = re.sub(r'public EntityDimensions getDimensions\(Pose (\w+)\) \{\s*return super\.getDimensions\(\1\)',
+               r'public EntityDimensions getDefaultDimensions(Pose \1) {\n\t\treturn super.getDefaultDimensions(\1)', s)
+    # finalizeSpawn lost its CompoundTag parameter in 1.20.5
+    s = re.sub(r'(public SpawnGroupData finalizeSpawn\([^)]*?SpawnGroupData \w+),\s*@Nullable CompoundTag \w+\)', r'\1)', s)
+    s = re.sub(r'(public SpawnGroupData finalizeSpawn\([^)]*?SpawnGroupData \w+),\s*CompoundTag \w+\)', r'\1)', s)
+    s = re.sub(r'(\.finalizeSpawn\([^;]*?MobSpawnType\.\w+, [^,;()]+), (?:null|\w+)\)', r'\1)', s)
+    s = s.replace('net.minecraftforge.event.ForgeEventFactory.', 'EventHooks.').replace('ForgeEventFactory.', 'EventHooks.')
+    s = s.replace('net.neoforged.neoforge.event.ForgeEventFactory', 'net.neoforged.neoforge.event.EventHooks')
+    s = re.sub(r'\bSpawnPlacementRegisterEvent\b', 'RegisterSpawnPlacementsEvent', s)
+    s = s.replace('net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent', 'net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent')
+    s = re.sub(r'public static void init\(\) \{(\s*)SpawnPlacements\.register\(', r'public static void init(RegisterSpawnPlacementsEvent event) {\1event.register(', s)
+    s = re.sub(r'public static void init\(\) \{(\s*)\}', r'public static void init(RegisterSpawnPlacementsEvent event) {\1}', s)
+    s = re.sub(r'SpawnPlacements\.Type\.(\w+)', r'SpawnPlacementTypes.\1', s)
+    m = re.search(r'public static void init\(RegisterSpawnPlacementsEvent event\) \{', s)
+    if m:
+        e = match_paren(s, m.end() - 1)
+        body = s[m.end():e]
+        body = re.sub(r'\}\);(\s*)$', r'}, RegisterSpawnPlacementsEvent.Operation.REPLACE);\1', body) if 'Operation.REPLACE' not in body else body
+        s = s[:m.end()] + body + s[e:]
+    s = s.replace('item.isEdible() && this.isFood(itemstack)', 'this.isFood(itemstack)')
+    s = s.replace('this.heal((float) item.getFoodProperties().getNutrition());',
+                  'FoodProperties foodproperties = itemstack.getFoodProperties(this);\n\t\t\t\t\t\tfloat nutrition = foodproperties != null ? (float) foodproperties.nutrition() : 1;\n\t\t\t\t\t\tthis.heal(nutrition);')
+    return s
+
+
+def fix_attribute_modifiers(s):
+    s = re.sub(r'UUID\.fromString\(("[0-9a-fA-F-]{36}")\)(?=\)|,)', lambda m: 'ResourceLocation.fromNamespaceAndPath("the_deep_void", %s)' % m.group(1).lower(), s)
+    out = []; i = 0; key = 'new AttributeModifier('
+    while True:
+        j = s.find(key, i)
+        if j < 0: out.append(s[i:]); break
+        end, args = split_args(s, j + len(key) - 1)
+        if len(args) == 4 and args[1].strip().startswith('"'):
+            args = [args[0], args[2], args[3]]
+        out.append(s[i:j]); out.append(key + ','.join(args).strip() + ')'); i = end + 1
+    s = ''.join(out)
+    # hasModifier(new AttributeModifier(id, ...)) -> hasModifier(id)
+    while True:
+        m = re.search(r'hasModifier\(\(?new AttributeModifier\(', s)
+        if not m: break
+        end, args = split_args(s, m.end() - 1)
+        k = end + 1
+        if s[m.end() - len('new AttributeModifier(') - 1] == '(':
+            k += 1  # closing paren of the extra (...)
+        s = s[:m.start()] + 'hasModifier(' + args[0].strip() + s[k:]
+    return s
+
+
+def fix_projectiles(s):
+    if re.search(r'extends AbstractArrow\b', s):
+        s = re.sub(r'super\(type, world, PROJECTILE_ITEM\);', 'super(type, world);', s)
+        s = re.sub(r'(public \w+\(EntityType<[^>]+> type, double x, double y, double z, Level world)\) \{\s*super\(type, x, y, z, world, PROJECTILE_ITEM\);',
+                   r'\1, @Nullable ItemStack firedFromWeapon) {\n\t\tsuper(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);', s)
+        s = re.sub(r'(public \w+\(EntityType<[^>]+> type, LivingEntity entity, Level world)\) \{\s*super\(type, entity, world, PROJECTILE_ITEM\);',
+                   r'\1, @Nullable ItemStack firedFromWeapon) {\n\t\tsuper(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);', s)
+    # callers of the projectile constructors: (TYPE.get(), entity, level) -> + null weapon
+    s = re.sub(r'(new \w+Entity\(TheDeepVoidModEntities\.\w+\.get\(\), \w+, \w+(?:\.level\(\))?)\)', r'\1, null)', s)
+    s = re.sub(r'(new \w+Entity\(TheDeepVoidModEntities\.\w+\.get\(\), [^,;()]+, [^,;()]+, [^,;()]+, \w+(?:\.level\(\))?)\)', r'\1, null)', s)
+    s = re.sub(r'(?<![\w.])(?!PortUtil\b)(\w+)\.setKnockback\(([^;]+)\);', r'PortUtil.setKnockback(\1, \2);', s)
+    # 1.20 item damage calls
+    s = re.sub(r'if \((\w+)\.hurt\(([^,;]+), RandomSource\.create\(\), (\w+)\)\) \{\s*\1\.shrink\(1\);\s*\1\.setDamageValue\(0\);\s*\}',
+               r'PortUtil.hurtAndBreak(\1, \2, \3);', s)
+    s = re.sub(r'(\w+)\.hurtAndBreak\(([^,;]+), RandomSource\.create\(\), (\w+), \(\) -> \{\s*\1\.shrink\(1\);\s*\1\.setDamageValue\(0\);\s*\}\);',
+               r'PortUtil.hurtAndBreak(\1, \2, \3);', s)
+    s = re.sub(r'(?<![\w.])(this\.)?dropExperience\(\)', lambda m: (m.group(1) or '') + 'dropExperience(null)', s)
+    s = re.sub(r'(\.create\(\w+, )null, null, ', r'\1null, ', s)
+    s = re.sub(r'(\.renderToBuffer\([^;]*?),\s*1,\s*1,\s*1,\s*1\)', r'\1, -1)', s)
+    return s
+
+
+def fix_event_api(s):
+    s = s.replace('import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;', 'import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;')
+    s = re.sub(r'\bLivingAttackEvent\b', 'LivingIncomingDamageEvent', s)
+    s = s.replace('import net.neoforged.neoforge.event.entity.living.ShieldBlockEvent;', 'import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;')
+    s = re.sub(r'\bShieldBlockEvent\b', 'LivingShieldBlockEvent', s)
+    s = re.sub(r'if \(event != null && event\.isCancelable\(\)\) \{(\s*)event\.setCanceled\(true\);',
+               r'if (event instanceof ICancellableEvent _cancellable) {\1_cancellable.setCanceled(true);', s)
+    s = re.sub(r'else if \(event != null && event\.hasResult\(\)\) \{\s*event\.setResult\([^;]*\);\s*\}', '', s)
+    # TickEvent.PlayerTickEvent (END phase) -> PlayerTickEvent.Post
+    def tick(m):
+        body = m.group(2).replace('event.player', 'event.getEntity()')
+        body = re.sub(r'\n\t', '\n', body)
+        return m.group(1) + 'PlayerTickEvent.Post event) {' + body + '\n\t}'
+    s = re.sub(r'(public static void \w+\()TickEvent\.PlayerTickEvent event\) \{\s*if \(event\.phase == TickEvent\.Phase\.END\) \{([\s\S]*?)\n\t\t\}\n\t\}', tick, s)
+    s = s.replace('import net.neoforged.neoforge.event.TickEvent;', 'import net.neoforged.neoforge.event.tick.PlayerTickEvent;') if 'TickEvent.' not in s.replace('PlayerTickEvent.', '') else s
+    return s
+
+
+def fix_small_apis(s):
+    s = s.replace('.getSkinTextureLocation()', '.getSkin().texture()')
+    s = s.replace('.saturationMod(', '.saturationModifier(')
+    s = re.sub(r'\bAdvancement (\w+) = (\w+)\.server\.getAdvancements\(\)\.getAdvancement\(', r'AdvancementHolder \1 = \2.server.getAdvancements().get(', s)
+    s = re.sub(r'BuiltInRegistries\.(\w+)\.tags\(\)\.getTag\(([^;]*?)\)\.getRandomElement\(RandomSource\.create\(\)\)\.orElseGet\(\(\) -> ([\w.]+)\)',
+               r'BuiltInRegistries.\1.getTag(\2).flatMap(_t -> _t.getRandomElement(RandomSource.create())).map(Holder::value).orElseGet(() -> \3)', s)
+    s = s.replace('event.getOriginalTarget()', 'event.getOriginalAboutToBeSetTarget()')
+    s = re.sub(r'\.setCustomClientFactory\([\w.]+::new\)', '', s)
+    s = s.replace('.getItem().isEdible()', '.has(DataComponents.FOOD)')
+    return s
+
+
+def fix_plants(s):
+    s = remove_method(s, r'public PlantType getPlantType\(BlockGetter \w+, BlockPos \w+\)')
+    s = s.replace('import net.neoforged.neoforge.common.PlantType;\n', '').replace('import net.neoforged.neoforge.common.IPlantable;\n', '')
+    s = re.sub(r'public boolean canSustainPlant\(BlockState (\w+), BlockGetter (\w+), BlockPos (\w+), Direction (\w+), IPlantable \w+\) \{\s*return true;',
+               r'public TriState canSustainPlant(BlockState \1, BlockGetter \2, BlockPos \3, Direction \4, BlockState plant) {\n\t\treturn TriState.TRUE;', s)
+    s = re.sub(r'public boolean isValidBonemealTarget\(LevelReader (\w+), BlockPos (\w+), BlockState (\w+), boolean \w+\)',
+               r'public boolean isValidBonemealTarget(LevelReader \1, BlockPos \2, BlockState \3)', s)
+    return s
+
+
+def fix_vertex_api(s):
+    if 'endVertex()' not in s and 'getBuilder()' not in s: return s
+    s = re.sub(r'BufferBuilder (\w+) = Tesselator\.getInstance\(\)\.getBuilder\(\);\s*\1\.begin\(', r'BufferBuilder \1 = Tesselator.getInstance().begin(', s)
+    def stmt(m):
+        t = m.group(0)
+        t = re.sub(r'\.vertex\(', '.addVertex(', t); t = re.sub(r'\.uv\(', '.setUv(', t); t = re.sub(r'\.color\(', '.setColor(', t)
+        t = re.sub(r'\.uv2\(', '.setLight(', t); t = re.sub(r'\.overlayCoords\(', '.setOverlay(', t); t = re.sub(r'\.normal\(', '.setNormal(', t)
+        return t.replace('.endVertex()', '')
+    s = re.sub(r'[^;{}\n]*\.endVertex\(\);', stmt, s)
+    s = re.sub(r'\b(bufferBuilder|bufferbuilder|builder)\.end\(\)', r'\1.buildOrThrow()', s)
+    return s
+
+
 def convert(s):
     o = s
     for a, b in PKG: s = re.sub(a, b, s)
@@ -369,6 +509,13 @@ def convert(s):
     s = fix_synched_data(s)
     s = fix_misc(s)
     s = fix_121(s)
+    s = fix_entities(s)
+    s = fix_attribute_modifiers(s)
+    s = fix_projectiles(s)
+    s = fix_event_api(s)
+    s = fix_small_apis(s)
+    s = fix_plants(s)
+    s = fix_vertex_api(s)
     if s != o: s = add_imports(s)
     # drop duplicate imports
     seen = set(); lines = []

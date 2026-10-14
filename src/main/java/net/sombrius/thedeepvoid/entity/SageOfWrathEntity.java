@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +23,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -61,9 +62,6 @@ public class SageOfWrathEntity extends Monster implements GeoEntity {
 	public String animationprocedure = "empty";
 	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.WHITE, ServerBossEvent.BossBarOverlay.NOTCHED_6);
 
-	public SageOfWrathEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.SAGE_OF_WRATH.get(), world);
-	}
 
 	public SageOfWrathEntity(EntityType<SageOfWrathEntity> type, Level world) {
 		super(type, world);
@@ -95,8 +93,8 @@ public class SageOfWrathEntity extends Monster implements GeoEntity {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, false) {
 			@Override
-			protected double getAttackReachSqr(LivingEntity entity) {
-				return this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth();
+			protected boolean canPerformAttack(LivingEntity entity) {
+				return this.isTimeToAttack() && this.mob.distanceToSqr(entity) < this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth() && this.mob.getSensing().hasLineOfSight(entity);
 			}
 		});
 		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1));
@@ -105,10 +103,6 @@ public class SageOfWrathEntity extends Monster implements GeoEntity {
 		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal(this, Player.class, false, false));
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public boolean removeWhenFarAway(double distanceToClosestPlayer) {
@@ -140,7 +134,7 @@ public class SageOfWrathEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
 		SageOfWrathSpawnsProcedure.execute(world, this);
 		return retval;
@@ -166,8 +160,8 @@ public class SageOfWrathEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose p_33597_) {
-		return super.getDimensions(p_33597_).scale((float) 1.2);
+	public EntityDimensions getDefaultDimensions(Pose p_33597_) {
+		return super.getDefaultDimensions(p_33597_).scale((float) 1.2);
 	}
 
 	@Override
@@ -193,7 +187,7 @@ public class SageOfWrathEntity extends Monster implements GeoEntity {
 		this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -246,7 +240,7 @@ public class SageOfWrathEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(SageOfWrathEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

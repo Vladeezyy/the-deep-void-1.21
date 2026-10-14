@@ -31,7 +31,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.FleshWormDiesProcedure;
 import net.sombrius.thedeepvoid.procedures.FleshWormEntityIsHurtProcedure;
 import net.sombrius.thedeepvoid.procedures.FleshWormOnEntityTickUpdateProcedure;
@@ -200,7 +200,7 @@ public class FleshWormEntity extends Monster implements GeoEntity {
 	protected void pushEntities() {
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -253,7 +253,7 @@ public class FleshWormEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 60) {
 			this.remove(FleshWormEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

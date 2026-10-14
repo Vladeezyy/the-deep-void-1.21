@@ -17,7 +17,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.PlantType;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 
 public class PileOfBonesBlock extends FlowerBlock {
@@ -37,8 +36,4 @@ public class PileOfBonesBlock extends FlowerBlock {
 		return new ItemStack(TheDeepVoidModBlocks.PILE_OF_BONES_BLOCK.get());
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 }

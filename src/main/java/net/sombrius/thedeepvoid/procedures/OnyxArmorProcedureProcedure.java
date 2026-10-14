@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.sombrius.thedeepvoid.entity.MimicEntity;
 import net.sombrius.thedeepvoid.entity.SummonedShadowHandEntity;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
@@ -36,7 +36,7 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 @EventBusSubscriber
 public class OnyxArmorProcedureProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getSource(), event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity(),
 					event.getAmount());

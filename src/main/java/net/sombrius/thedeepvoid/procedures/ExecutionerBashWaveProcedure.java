@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -39,10 +41,7 @@ public class ExecutionerBashWaveProcedure {
 							_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem7 ? _entUseItem7.getUseItem() : ItemStack.EMPTY).getItem(), 100);
 						{
 							ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem9 ? _entUseItem9.getUseItem() : ItemStack.EMPTY);
-							_ist.hurtAndBreak(10, RandomSource.create(), null, () -> {
-								_ist.shrink(1);
-								_ist.setDamageValue(0);
-							});
+							PortUtil.hurtAndBreak(_ist, 10, null);
 						}
 						if (entityiterator instanceof LivingEntity _entity)
 							_entity.stopUsingItem();

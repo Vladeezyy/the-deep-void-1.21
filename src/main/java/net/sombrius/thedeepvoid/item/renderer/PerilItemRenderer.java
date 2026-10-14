@@ -83,7 +83,7 @@ public class PerilItemRenderer extends GeoItemRenderer<PerilItem> {
 			RenderUtil.rotateMatrixAroundBone(stack, bone);
 			RenderUtil.scaleMatrixForBone(stack, bone);
 			RenderUtil.translateAwayFromPivotPoint(stack, bone);
-			ResourceLocation loc = player.getSkinTextureLocation();
+			ResourceLocation loc = player.getSkin().texture();
 			VertexConsumer armBuilder = this.currentBuffer.getBuffer(RenderType.entitySolid(loc));
 			VertexConsumer sleeveBuilder = this.currentBuffer.getBuffer(RenderType.entityTranslucent(loc));
 			if (name.equals("RightArm")) {

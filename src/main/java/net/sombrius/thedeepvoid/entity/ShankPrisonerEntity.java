@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import software.bernie.geckolib.util.GeckoLibUtil;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
@@ -26,7 +28,6 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
@@ -51,9 +52,6 @@ public class ShankPrisonerEntity extends Monster implements GeoEntity {
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
-	public ShankPrisonerEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.SHANK_PRISONER.get(), world);
-	}
 
 	public ShankPrisonerEntity(EntityType<ShankPrisonerEntity> type, Level world) {
 		super(type, world);
@@ -85,8 +83,8 @@ public class ShankPrisonerEntity extends Monster implements GeoEntity {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.1, false) {
 			@Override
-			protected double getAttackReachSqr(LivingEntity entity) {
-				return 3.326976;
+			protected boolean canPerformAttack(LivingEntity entity) {
+				return this.isTimeToAttack() && this.mob.distanceToSqr(entity) < 3.326976 && this.mob.getSensing().hasLineOfSight(entity);
 			}
 		});
 		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.7));
@@ -94,10 +92,6 @@ public class ShankPrisonerEntity extends Monster implements GeoEntity {
 		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, Player.class, false, true));
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public boolean removeWhenFarAway(double distanceToClosestPlayer) {
@@ -134,11 +128,11 @@ public class ShankPrisonerEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose p_33597_) {
-		return super.getDimensions(p_33597_).scale((float) 1);
+	public EntityDimensions getDefaultDimensions(Pose p_33597_) {
+		return super.getDefaultDimensions(p_33597_).scale((float) 1);
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -208,7 +202,7 @@ public class ShankPrisonerEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(ShankPrisonerEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

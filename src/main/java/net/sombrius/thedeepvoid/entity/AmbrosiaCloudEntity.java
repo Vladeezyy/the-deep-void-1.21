@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import net.minecraft.world.level.Explosion;
 
 import net.minecraft.core.BlockPos;
@@ -14,7 +16,6 @@ import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -34,9 +35,6 @@ import net.sombrius.thedeepvoid.procedures.AmbrosiaCloudOnEntityTickUpdateProced
 import net.sombrius.thedeepvoid.procedures.AmbrosiaCloudPlayerCollidesWithThisEntityProcedure;
 
 public class AmbrosiaCloudEntity extends PathfinderMob {
-	public AmbrosiaCloudEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.AMBROSIA_CLOUD.get(), world);
-	}
 
 	public AmbrosiaCloudEntity(EntityType<AmbrosiaCloudEntity> type, Level world) {
 		super(type, world);
@@ -52,10 +50,6 @@ public class AmbrosiaCloudEntity extends PathfinderMob {
 		return new FlyingPathNavigation(this, world);
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public double getMyRidingOffset() {
@@ -162,7 +156,7 @@ public class AmbrosiaCloudEntity extends PathfinderMob {
 		this.setNoGravity(true);
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

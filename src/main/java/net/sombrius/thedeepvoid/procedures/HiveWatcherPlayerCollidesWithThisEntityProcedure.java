@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -27,10 +29,7 @@ public class HiveWatcherPlayerCollidesWithThisEntityProcedure {
 					_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem5 ? _entUseItem5.getUseItem() : ItemStack.EMPTY).getItem(), 60);
 				{
 					ItemStack _ist = (sourceentity instanceof LivingEntity _entUseItem7 ? _entUseItem7.getUseItem() : ItemStack.EMPTY);
-					if (_ist.hurt(1, RandomSource.create(), null)) {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					}
+					PortUtil.hurtAndBreak(_ist, 1, null);
 				}
 				if (sourceentity instanceof LivingEntity _entity)
 					_entity.stopUsingItem();

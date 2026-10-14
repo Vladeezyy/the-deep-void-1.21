@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.resources.ResourceLocation;
+
 import java.util.UUID;
 import javax.annotation.Nullable;
 import net.minecraft.world.entity.Entity;
@@ -34,7 +36,7 @@ public class PlayerTickUpdateMaskProcedure {
 					_vars.healthBoostLevel = 0;
 					_vars.syncPlayerVariables(entity);
 				}
-				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(UUID.fromString("a2a1826b-7829-42ed-986e-984ebf45427b"));
+				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"));
 			}
 		}
 		if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_HELMET.get())

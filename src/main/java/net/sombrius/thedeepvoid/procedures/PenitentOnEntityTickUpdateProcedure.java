@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -59,10 +61,7 @@ public class PenitentOnEntityTickUpdateProcedure {
 										_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem18 ? _entUseItem18.getUseItem() : ItemStack.EMPTY).getItem(), 200);
 									{
 										ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem20 ? _entUseItem20.getUseItem() : ItemStack.EMPTY);
-										_ist.hurtAndBreak(15, RandomSource.create(), null, () -> {
-											_ist.shrink(1);
-											_ist.setDamageValue(0);
-										});
+										PortUtil.hurtAndBreak(_ist, 15, null);
 									}
 									if (world instanceof Level _level) {
 										if (!_level.isClientSide()) {

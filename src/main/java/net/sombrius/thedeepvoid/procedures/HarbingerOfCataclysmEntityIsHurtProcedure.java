@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -74,10 +76,7 @@ public class HarbingerOfCataclysmEntityIsHurtProcedure {
 									_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem23 ? _entUseItem23.getUseItem() : ItemStack.EMPTY).getItem(), 100);
 								{
 									ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem25 ? _entUseItem25.getUseItem() : ItemStack.EMPTY);
-									if (_ist.hurt(6, RandomSource.create(), null)) {
-										_ist.shrink(1);
-										_ist.setDamageValue(0);
-									}
+									PortUtil.hurtAndBreak(_ist, 6, null);
 								}
 								if (entityiterator instanceof LivingEntity _entity)
 									_entity.stopUsingItem();

@@ -30,7 +30,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.MaggotRightClickedOnEntityProcedure;
 import net.sombrius.thedeepvoid.procedures.MaggotThisEntityKillsAnotherOneProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -163,7 +163,7 @@ public class MaggotEntity extends Monster implements GeoEntity {
 		return super.getDefaultDimensions(pose).scale(1f);
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -232,7 +232,7 @@ public class MaggotEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(MaggotEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

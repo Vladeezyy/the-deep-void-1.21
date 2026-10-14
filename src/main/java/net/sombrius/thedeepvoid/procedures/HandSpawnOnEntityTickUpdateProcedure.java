@@ -21,7 +21,7 @@ public class HandSpawnOnEntityTickUpdateProcedure {
 			if (entity.getPersistentData().getDouble("spawn") >= 60) {
 				entity.getPersistentData().putDouble("spawn", 0);
 				if (world instanceof ServerLevel _serverLevel) {
-					Entity entityinstance = TheDeepVoidModEntities.SHADOW_HAND.get().create(_serverLevel, null, null, BlockPos.containing(x, y + 0.5, z), MobSpawnType.MOB_SUMMONED, false, false);
+					Entity entityinstance = TheDeepVoidModEntities.SHADOW_HAND.get().create(_serverLevel, null, BlockPos.containing(x, y + 0.5, z), MobSpawnType.MOB_SUMMONED, false, false);
 					if (entityinstance != null) {
 						entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 						if (entityinstance instanceof ShadowHandEntity) {

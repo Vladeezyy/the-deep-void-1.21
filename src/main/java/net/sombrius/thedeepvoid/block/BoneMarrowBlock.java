@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.neoforge.common.PlantType;
 
 public class BoneMarrowBlock extends FlowerBlock {
 	public BoneMarrowBlock() {
@@ -17,8 +16,4 @@ public class BoneMarrowBlock extends FlowerBlock {
 				BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).sound(SoundType.BONE_BLOCK).strength(0.2f, 0.5f).noCollission().replaceable().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 }

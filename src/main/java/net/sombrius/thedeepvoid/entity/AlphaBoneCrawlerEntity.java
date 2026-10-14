@@ -45,7 +45,7 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.neoforge.event.EventHooks;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.procedures.BoneCrawlerAttackPlayerConditionProcedure;
 import net.sombrius.thedeepvoid.procedures.TamedAlphaBoneCrawlerRightClickProcedure;
@@ -253,10 +253,10 @@ public class AlphaBoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 		this.updateSwingTime();
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 		event.register(TheDeepVoidModEntities.ALPHA_BONE_CRAWLER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
 				(entityType, world, reason, pos, random) -> (world.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(world, pos, random) && Mob.checkMobSpawnRules(entityType, world, reason, pos, random)),
-				SpawnPlacementRegisterEvent.Operation.REPLACE);
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -325,7 +325,7 @@ public class AlphaBoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(AlphaBoneCrawlerEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

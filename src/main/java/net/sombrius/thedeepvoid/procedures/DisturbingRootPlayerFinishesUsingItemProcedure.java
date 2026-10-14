@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -29,10 +31,7 @@ public class DisturbingRootPlayerFinishesUsingItemProcedure {
 			_player.getCooldowns().addCooldown(itemstack.getItem(), 200);
 		{
 			ItemStack _ist = itemstack;
-			_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-				_ist.shrink(1);
-				_ist.setDamageValue(0);
-			});
+			PortUtil.hurtAndBreak(_ist, 1, null);
 		}
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {

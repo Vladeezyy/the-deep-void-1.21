@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
@@ -36,10 +38,7 @@ public class BloodBowOnPlayerStoppedUsingProcedure {
 			}
 			{
 				ItemStack _ist = itemstack;
-				_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-					_ist.shrink(1);
-					_ist.setDamageValue(0);
-				});
+				PortUtil.hurtAndBreak(_ist, 1, null);
 			}
 			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("pulling") / 22 >= 0.75 && itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("pulling") / 22 < 1) {
 				TheDeepVoidMod.queueServerWork(5, () -> {
@@ -52,7 +51,7 @@ public class BloodBowOnPlayerStoppedUsingProcedure {
 									AbstractArrow entityToSpawn = new BloodSpikeEntity(TheDeepVoidModEntities.BLOOD_SPIKE.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									entityToSpawn.setPierceLevel(piercing);
 									return entityToSpawn;
@@ -84,7 +83,7 @@ public class BloodBowOnPlayerStoppedUsingProcedure {
 									AbstractArrow entityToSpawn = new BloodSpikeEntity(TheDeepVoidModEntities.BLOOD_SPIKE.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									entityToSpawn.setPierceLevel(piercing);
 									return entityToSpawn;
@@ -115,7 +114,7 @@ public class BloodBowOnPlayerStoppedUsingProcedure {
 									AbstractArrow entityToSpawn = new BloodSpikeEntity(TheDeepVoidModEntities.BLOOD_SPIKE.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									entityToSpawn.setPierceLevel(piercing);
 									return entityToSpawn;

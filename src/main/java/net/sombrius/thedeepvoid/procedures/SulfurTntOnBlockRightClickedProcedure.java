@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -55,10 +57,7 @@ public class SulfurTntOnBlockRightClickedProcedure {
 				}.checkGamemode(entity))) {
 					{
 						ItemStack _ist = (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY);
-						_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-							_ist.shrink(1);
-							_ist.setDamageValue(0);
-						});
+						PortUtil.hurtAndBreak(_ist, 1, null);
 					}
 				}
 				if (entity instanceof LivingEntity _entity)
@@ -84,10 +83,7 @@ public class SulfurTntOnBlockRightClickedProcedure {
 				}.checkGamemode(entity))) {
 					{
 						ItemStack _ist = (entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY);
-						_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-							_ist.shrink(1);
-							_ist.setDamageValue(0);
-						});
+						PortUtil.hurtAndBreak(_ist, 1, null);
 					}
 				}
 				if (entity instanceof LivingEntity _entity)

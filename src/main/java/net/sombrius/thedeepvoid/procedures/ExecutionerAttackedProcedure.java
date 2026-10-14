@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import net.sombrius.thedeepvoid.entity.FlailExecutionerEntity;
 import net.sombrius.thedeepvoid.entity.ExecutionerEntity;
 import net.sombrius.thedeepvoid.entity.ExecutionerDarkSteelFlailEntity;
@@ -9,7 +11,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
@@ -32,7 +34,7 @@ import javax.annotation.Nullable;
 @EventBusSubscriber
 public class ExecutionerAttackedProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event != null && event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity(), event.getSource().getEntity());
 		}
@@ -96,8 +98,8 @@ public class ExecutionerAttackedProcedure {
 						}
 					}
 				}
-				if (event != null && event.isCancelable()) {
-					event.setCanceled(true);
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
 				}
 			}
 		} else if (entity instanceof FlailExecutionerEntity && !(sourceentity instanceof ExecutionerDarkSteelFlailEntity)) {
@@ -121,8 +123,8 @@ public class ExecutionerAttackedProcedure {
 								(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 					}
 				}
-				if (event != null && event.isCancelable()) {
-					event.setCanceled(true);
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
 				}
 			}
 		}

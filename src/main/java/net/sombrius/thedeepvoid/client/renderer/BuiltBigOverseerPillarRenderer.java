@@ -22,13 +22,13 @@ public class BuiltBigOverseerPillarRenderer extends MobRenderer<BuiltBigOverseer
 			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/overseer_pillar.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, BuiltBigOverseerPillarEntity entity, float limbSwing, float limbSwingAmount, int color) {
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, BuiltBigOverseerPillarEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 				VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
 				EntityModel model = new Modeloverseer_inactive_big(Minecraft.getInstance().getEntityModels().bakeLayer(Modeloverseer_inactive_big.LAYER_LOCATION));
 				this.getParentModel().copyPropertiesTo(model);
 				model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 				model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-				model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+				model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, -1);
 			}
 		});
 	}

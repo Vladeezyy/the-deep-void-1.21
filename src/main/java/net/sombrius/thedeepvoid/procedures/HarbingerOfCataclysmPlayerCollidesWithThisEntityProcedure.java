@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -28,10 +30,7 @@ public class HarbingerOfCataclysmPlayerCollidesWithThisEntityProcedure {
 					_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem4 ? _entUseItem4.getUseItem() : ItemStack.EMPTY).getItem(), 100);
 				{
 					ItemStack _ist = (sourceentity instanceof LivingEntity _entUseItem6 ? _entUseItem6.getUseItem() : ItemStack.EMPTY);
-					if (_ist.hurt(6, RandomSource.create(), null)) {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					}
+					PortUtil.hurtAndBreak(_ist, 6, null);
 				}
 				if (sourceentity instanceof LivingEntity _entity)
 					_entity.stopUsingItem();

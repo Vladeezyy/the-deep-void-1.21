@@ -18,7 +18,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.PlantType;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 
 public class BlossomingDesolateLichenBlock extends FlowerBlock {
@@ -37,8 +36,4 @@ public class BlossomingDesolateLichenBlock extends FlowerBlock {
 		return new ItemStack(TheDeepVoidModBlocks.DESOLATE_LICHEN.get());
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 }

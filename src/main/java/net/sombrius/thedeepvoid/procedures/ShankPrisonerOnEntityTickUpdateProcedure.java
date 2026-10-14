@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -100,10 +102,7 @@ public class ShankPrisonerOnEntityTickUpdateProcedure {
 									} else {
 										{
 											ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem26 ? _entUseItem26.getUseItem() : ItemStack.EMPTY);
-											_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-												_ist.shrink(1);
-												_ist.setDamageValue(0);
-											});
+											PortUtil.hurtAndBreak(_ist, 1, null);
 										}
 										if (world instanceof Level _level) {
 											if (!_level.isClientSide()) {
@@ -150,10 +149,7 @@ public class ShankPrisonerOnEntityTickUpdateProcedure {
 										} else {
 											{
 												ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem51 ? _entUseItem51.getUseItem() : ItemStack.EMPTY);
-												_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-													_ist.shrink(1);
-													_ist.setDamageValue(0);
-												});
+												PortUtil.hurtAndBreak(_ist, 1, null);
 											}
 											if (world instanceof Level _level) {
 												if (!_level.isClientSide()) {
@@ -201,10 +197,7 @@ public class ShankPrisonerOnEntityTickUpdateProcedure {
 										} else {
 											{
 												ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem77 ? _entUseItem77.getUseItem() : ItemStack.EMPTY);
-												_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-													_ist.shrink(1);
-													_ist.setDamageValue(0);
-												});
+												PortUtil.hurtAndBreak(_ist, 1, null);
 											}
 											if (world instanceof Level _level) {
 												if (!_level.isClientSide()) {
@@ -252,10 +245,7 @@ public class ShankPrisonerOnEntityTickUpdateProcedure {
 										} else {
 											{
 												ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem103 ? _entUseItem103.getUseItem() : ItemStack.EMPTY);
-												_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-													_ist.shrink(1);
-													_ist.setDamageValue(0);
-												});
+												PortUtil.hurtAndBreak(_ist, 1, null);
 											}
 											if (world instanceof Level _level) {
 												if (!_level.isClientSide()) {
@@ -303,10 +293,7 @@ public class ShankPrisonerOnEntityTickUpdateProcedure {
 										} else {
 											{
 												ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem129 ? _entUseItem129.getUseItem() : ItemStack.EMPTY);
-												_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-													_ist.shrink(1);
-													_ist.setDamageValue(0);
-												});
+												PortUtil.hurtAndBreak(_ist, 1, null);
 											}
 											if (world instanceof Level _level) {
 												if (!_level.isClientSide()) {

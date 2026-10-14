@@ -1,5 +1,9 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.core.component.DataComponents;
+
+import net.neoforged.bus.api.ICancellableEvent;
+
 import javax.annotation.Nullable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -26,9 +30,9 @@ public class PlayerTriesToUseItemAfterForbiddenFruitProcedure {
 	private static void execute(@Nullable Event event, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (itemstack.getItem().isEdible() && !(itemstack.getItem() == TheDeepVoidModItems.FORBIDDEN_FRUIT.get()) && entity.getPersistentData().getBoolean("tastedForbiddenFruit") == true) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+		if (itemstack.has(DataComponents.FOOD) && !(itemstack.getItem() == TheDeepVoidModItems.FORBIDDEN_FRUIT.get()) && entity.getPersistentData().getBoolean("tastedForbiddenFruit") == true) {
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 		}
 	}

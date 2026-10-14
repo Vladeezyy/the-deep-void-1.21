@@ -19,7 +19,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.PlantType;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.procedures.RottingCorpseSpawnOnTickUpdateProcedure;
 
@@ -53,10 +52,6 @@ public class RottingLayingCorpseSpawnBlock extends FlowerBlock {
 		return this.mayPlaceOn(groundState, worldIn, blockpos);
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public void randomTick(BlockState blockstate, ServerLevel world, BlockPos pos, RandomSource random) {

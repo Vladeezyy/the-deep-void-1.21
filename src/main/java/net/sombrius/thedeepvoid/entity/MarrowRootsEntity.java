@@ -22,7 +22,7 @@ import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.MarrowRootsOnEntityTickUpdateProcedure;
 
 public class MarrowRootsEntity extends Monster {
@@ -135,7 +135,7 @@ public class MarrowRootsEntity extends Monster {
 		return super.getDefaultDimensions(pose).scale(2f);
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

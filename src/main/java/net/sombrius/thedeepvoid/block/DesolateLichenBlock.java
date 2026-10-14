@@ -4,7 +4,6 @@ package net.sombrius.thedeepvoid.block;
 import net.sombrius.thedeepvoid.procedures.DesolateLichenOnTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.DesolateLichenOnBoneMealSuccessProcedure;
 
-import net.neoforged.neoforge.common.PlantType;
 
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -41,10 +40,6 @@ public class DesolateLichenBlock extends FlowerBlock implements BonemealableBloc
 		return 100;
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public void randomTick(BlockState blockstate, ServerLevel world, BlockPos pos, RandomSource random) {
@@ -52,7 +47,7 @@ public class DesolateLichenBlock extends FlowerBlock implements BonemealableBloc
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState blockstate, boolean clientSide) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState blockstate) {
 		return true;
 	}
 

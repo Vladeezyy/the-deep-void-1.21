@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -80,10 +82,7 @@ public class LickerPlayerCollidesWithThisEntityProcedure {
 						_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem22 ? _entUseItem22.getUseItem() : ItemStack.EMPTY).getItem(), 20);
 					{
 						ItemStack _ist = (sourceentity instanceof LivingEntity _entUseItem24 ? _entUseItem24.getUseItem() : ItemStack.EMPTY);
-						_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-							_ist.shrink(1);
-							_ist.setDamageValue(0);
-						});
+						PortUtil.hurtAndBreak(_ist, 1, null);
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {

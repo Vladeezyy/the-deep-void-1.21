@@ -20,13 +20,13 @@ import net.minecraft.world.level.LevelAccessor;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.ShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 @EventBusSubscriber
 public class VoidriumBulwarkBlockProcedure {
 	@SubscribeEvent
-	public static void whenEntityBlocksWithShield(ShieldBlockEvent event) {
+	public static void whenEntityBlocksWithShield(LivingShieldBlockEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity(), event.getDamageSource().getEntity(), event.getBlockedDamage());
 		}

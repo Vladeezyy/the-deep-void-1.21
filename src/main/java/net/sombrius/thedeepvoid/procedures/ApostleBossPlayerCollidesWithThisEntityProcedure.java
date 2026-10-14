@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -43,10 +45,7 @@ public class ApostleBossPlayerCollidesWithThisEntityProcedure {
 					_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem12 ? _entUseItem12.getUseItem() : ItemStack.EMPTY).getItem(), 100);
 				{
 					ItemStack _ist = (sourceentity instanceof LivingEntity _entUseItem14 ? _entUseItem14.getUseItem() : ItemStack.EMPTY);
-					_ist.hurtAndBreak(10, RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, 10, null);
 				}
 				if (sourceentity instanceof LivingEntity _entity)
 					_entity.stopUsingItem();

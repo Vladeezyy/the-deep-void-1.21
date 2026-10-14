@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.resources.ResourceLocation;
+
 import java.util.UUID;
 import javax.annotation.Nullable;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -45,10 +47,9 @@ public class PlayerKillsEntityWithMaskProcedure {
 					_vars.healthMask = sourceentity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1;
 					_vars.syncPlayerVariables(sourceentity);
 				}
-				((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(UUID.fromString("a2a1826b-7829-42ed-986e-984ebf45427b"));
-				if (!(((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).hasModifier((new AttributeModifier(UUID.fromString("a2a1826b-7829-42ed-986e-984ebf45427b"), "weaverMaskHealth",
-						(4 * sourceentity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).healthBoostLevel), AttributeModifier.Operation.ADD_VALUE)))))
-					((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier((new AttributeModifier(UUID.fromString("a2a1826b-7829-42ed-986e-984ebf45427b"), "weaverMaskHealth",
+				((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"));
+				if (!(((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"))))
+					((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"),
 							(4 * sourceentity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).healthBoostLevel), AttributeModifier.Operation.ADD_VALUE)));
 				if (sourceentity instanceof LivingEntity _entity)
 					_entity.setHealth((float) sourceentity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).healthMask);
@@ -62,7 +63,7 @@ public class PlayerKillsEntityWithMaskProcedure {
 			}
 		}
 		if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).healthBoostLevel > 0) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(UUID.fromString("a2a1826b-7829-42ed-986e-984ebf45427b"));
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"));
 			{
 				TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);
 				_vars.healthBoostLevel = 0;

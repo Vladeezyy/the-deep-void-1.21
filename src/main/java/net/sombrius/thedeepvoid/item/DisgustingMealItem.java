@@ -13,7 +13,7 @@ import net.sombrius.thedeepvoid.procedures.CookedFleshPlayerFinishesUsingItemPro
 
 public class DisgustingMealItem extends Item {
 	public DisgustingMealItem() {
-		super(new Item.Properties().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(4).saturationMod(1f).meat().build()));
+		super(new Item.Properties().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(4).saturationModifier(1f).meat().build()));
 	}
 
 	@Override

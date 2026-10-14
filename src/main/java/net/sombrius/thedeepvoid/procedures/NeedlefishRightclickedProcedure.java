@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -56,7 +58,7 @@ public class NeedlefishRightclickedProcedure {
 						AbstractArrow entityToSpawn = new NeedlefishProjEntity(TheDeepVoidModEntities.NEEDLEFISH_PROJ.get(), level);
 						entityToSpawn.setOwner(shooter);
 						entityToSpawn.setBaseDamage(damage);
-						entityToSpawn.setKnockback(knockback);
+						PortUtil.setKnockback(entityToSpawn, knockback);
 						entityToSpawn.setSilent(true);
 						return entityToSpawn;
 					}

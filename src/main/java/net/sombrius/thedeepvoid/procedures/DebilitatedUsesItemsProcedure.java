@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 
 import net.neoforged.fml.common.Mod;
@@ -41,8 +43,8 @@ public class DebilitatedUsesItemsProcedure {
 			if (entity instanceof Player _player)
 				_player.getCooldowns().addCooldown(itemstack.getItem(), 160);
 			if (itemstack.getItem() instanceof BowItem || itemstack.getItem() instanceof CrossbowItem) {
-				if (event != null && event.isCancelable()) {
-					event.setCanceled(true);
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
 				}
 			}
 		}

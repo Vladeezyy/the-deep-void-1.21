@@ -15,7 +15,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
-import net.neoforged.neoforge.common.PlantType;
 
 public class TwistingSpineBlock extends SugarCaneBlock {
 	public TwistingSpineBlock() {
@@ -28,10 +27,6 @@ public class TwistingSpineBlock extends SugarCaneBlock {
 		return box(6, 0, 6, 10, 16, 10).move(offset.x, offset.y, offset.z);
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public void randomTick(BlockState blockstate, ServerLevel world, BlockPos pos, RandomSource random) {

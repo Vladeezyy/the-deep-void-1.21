@@ -10,7 +10,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.SwordItem;
@@ -33,10 +33,8 @@ import java.util.UUID;
 @EventBusSubscriber
 public class PlayerHasModifiedItemInHandProcedure {
 	@SubscribeEvent
-	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-		if (event.phase == TickEvent.Phase.END) {
-			execute(event, event.player);
-		}
+	public static void onPlayerTick(PlayerTickEvent.Post event) {
+		execute(event, event.getEntity());
 	}
 
 	public static void execute(Entity entity) {
@@ -57,30 +55,25 @@ public class PlayerHasModifiedItemInHandProcedure {
 			} else {
 				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("lavenditeSpeed") > 0
 						&& (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("lavenditeDamage") > 0) {
-					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).hasModifier((new AttributeModifier(UUID.fromString("bd693a85-8070-460a-99c7-a3e4335c7106"), "lavenditeDamage",
-							((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("lavenditeDamageLoss") * (-1)), AttributeModifier.Operation.ADD_VALUE)))))
-						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier((new AttributeModifier(UUID.fromString("bd693a85-8070-460a-99c7-a3e4335c7106"), "lavenditeDamage",
+					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "bd693a85-8070-460a-99c7-a3e4335c7106"))))
+						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "bd693a85-8070-460a-99c7-a3e4335c7106"),
 								((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("lavenditeDamageLoss") * (-1)), AttributeModifier.Operation.ADD_VALUE)));
-					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).hasModifier((new AttributeModifier(UUID.fromString("fc2b6742-191e-4c45-9dfd-d3a22493c141"), "lavenditeSpeed",
-							((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("lavenditeSpeed")), AttributeModifier.Operation.ADD_VALUE)))))
-						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).addTransientModifier((new AttributeModifier(UUID.fromString("fc2b6742-191e-4c45-9dfd-d3a22493c141"), "lavenditeSpeed",
+					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "fc2b6742-191e-4c45-9dfd-d3a22493c141"))))
+						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "fc2b6742-191e-4c45-9dfd-d3a22493c141"),
 								((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("lavenditeSpeed")), AttributeModifier.Operation.ADD_VALUE)));
 				}
 				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("rotSpeed") > 0) {
-					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).hasModifier((new AttributeModifier(UUID.fromString("3b71bdcc-6ddf-4b2c-a521-b67097a89ee4"), "rotSpeed",
-							((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("rotSpeed") * (-1)), AttributeModifier.Operation.ADD_VALUE)))))
-						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).addTransientModifier((new AttributeModifier(UUID.fromString("3b71bdcc-6ddf-4b2c-a521-b67097a89ee4"), "rotSpeed",
+					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "3b71bdcc-6ddf-4b2c-a521-b67097a89ee4"))))
+						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "3b71bdcc-6ddf-4b2c-a521-b67097a89ee4"),
 								((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("rotSpeed") * (-1)), AttributeModifier.Operation.ADD_VALUE)));
 				}
 				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("darksteelSpeed") > 0
 						&& (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("darksteelDamage") > 0) {
-					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).hasModifier((new AttributeModifier(UUID.fromString("740510ec-164b-4253-b513-3367bc1740af"), "darksteelSpeed",
-							((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("darksteelSpeed") * (-1)), AttributeModifier.Operation.ADD_VALUE)))))
-						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).addTransientModifier((new AttributeModifier(UUID.fromString("740510ec-164b-4253-b513-3367bc1740af"), "darksteelSpeed",
+					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "740510ec-164b-4253-b513-3367bc1740af"))))
+						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "740510ec-164b-4253-b513-3367bc1740af"),
 								((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("darksteelSpeed") * (-1)), AttributeModifier.Operation.ADD_VALUE)));
-					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).hasModifier((new AttributeModifier(UUID.fromString("24ab05c9-3824-49f6-adf3-029fa9b4194b"), "darksteelDamage",
-							((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("darksteelDamage")), AttributeModifier.Operation.ADD_VALUE)))))
-						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier((new AttributeModifier(UUID.fromString("24ab05c9-3824-49f6-adf3-029fa9b4194b"), "darksteelDamage",
+					if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "24ab05c9-3824-49f6-adf3-029fa9b4194b"))))
+						((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "24ab05c9-3824-49f6-adf3-029fa9b4194b"),
 								((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("darksteelDamage")), AttributeModifier.Operation.ADD_VALUE)));
 				}
 			}
@@ -97,68 +90,68 @@ public class PlayerHasModifiedItemInHandProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_BOOTS.get()
-					&& !(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("0947265b-4005-4a6c-83e1-2c0f2b7390ac")) != null)) {
+					&& !(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0947265b-4005-4a6c-83e1-2c0f2b7390ac")) != null)) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE)
-						.hasModifier((new AttributeModifier(UUID.fromString("0947265b-4005-4a6c-83e1-2c0f2b7390ac"), "bloodstoneClawsAttack", ((double) DeepVoidConfigConfiguration.BLOODSTONEARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)))))
+						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0947265b-4005-4a6c-83e1-2c0f2b7390ac"))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier(
-							(new AttributeModifier(UUID.fromString("0947265b-4005-4a6c-83e1-2c0f2b7390ac"), "bloodstoneClawsAttack", ((double) DeepVoidConfigConfiguration.BLOODSTONEARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)));
-			} else if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("0947265b-4005-4a6c-83e1-2c0f2b7390ac")) != null) {
-				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("0947265b-4005-4a6c-83e1-2c0f2b7390ac"));
+							(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0947265b-4005-4a6c-83e1-2c0f2b7390ac"), ((double) DeepVoidConfigConfiguration.BLOODSTONEARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)));
+			} else if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0947265b-4005-4a6c-83e1-2c0f2b7390ac")) != null) {
+				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0947265b-4005-4a6c-83e1-2c0f2b7390ac"));
 			}
 		} else if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(ItemTags.create(ResourceLocation.parse("the_deep_void:claws"))))
-				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("0947265b-4005-4a6c-83e1-2c0f2b7390ac")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("0947265b-4005-4a6c-83e1-2c0f2b7390ac"));
+				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0947265b-4005-4a6c-83e1-2c0f2b7390ac")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0947265b-4005-4a6c-83e1-2c0f2b7390ac"));
 		}
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(ItemTags.create(ResourceLocation.parse("the_deep_void:claws")))) {
 			if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTERS_HELMET.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTERS_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTERS_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTERS_BOOTS.get()
-					&& !(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("7083dbd7-ae8b-4ba4-b931-f8ad37579ee7")) != null)) {
+					&& !(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7083dbd7-ae8b-4ba4-b931-f8ad37579ee7")) != null)) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE)
-						.hasModifier((new AttributeModifier(UUID.fromString("7083dbd7-ae8b-4ba4-b931-f8ad37579ee7"), "hunterClawsAttack", ((double) DeepVoidConfigConfiguration.HUNTERARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)))))
+						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7083dbd7-ae8b-4ba4-b931-f8ad37579ee7"))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier(
-							(new AttributeModifier(UUID.fromString("7083dbd7-ae8b-4ba4-b931-f8ad37579ee7"), "hunterClawsAttack", ((double) DeepVoidConfigConfiguration.HUNTERARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)));
-			} else if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("7083dbd7-ae8b-4ba4-b931-f8ad37579ee7")) != null) {
-				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("7083dbd7-ae8b-4ba4-b931-f8ad37579ee7"));
+							(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7083dbd7-ae8b-4ba4-b931-f8ad37579ee7"), ((double) DeepVoidConfigConfiguration.HUNTERARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)));
+			} else if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7083dbd7-ae8b-4ba4-b931-f8ad37579ee7")) != null) {
+				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7083dbd7-ae8b-4ba4-b931-f8ad37579ee7"));
 			}
 		} else if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(ItemTags.create(ResourceLocation.parse("the_deep_void:claws"))))
-				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("0947265b-4005-4a6c-83e1-2c0f2b7390ac")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("0947265b-4005-4a6c-83e1-2c0f2b7390ac"));
+				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0947265b-4005-4a6c-83e1-2c0f2b7390ac")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0947265b-4005-4a6c-83e1-2c0f2b7390ac"));
 		}
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(ItemTags.create(ResourceLocation.parse("the_deep_void:scythes")))) {
 			if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_HELMET.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_BOOTS.get()
-					&& !(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("8c4ddbf6-9dca-4e0f-824d-bfec53b34b53")) != null)) {
+					&& !(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "8c4ddbf6-9dca-4e0f-824d-bfec53b34b53")) != null)) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE)
-						.hasModifier((new AttributeModifier(UUID.fromString("8c4ddbf6-9dca-4e0f-824d-bfec53b34b53"), "plagueScythesAttack", ((double) DeepVoidConfigConfiguration.PLAGUEARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)))))
+						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "8c4ddbf6-9dca-4e0f-824d-bfec53b34b53"))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier(
-							(new AttributeModifier(UUID.fromString("8c4ddbf6-9dca-4e0f-824d-bfec53b34b53"), "plagueScythesAttack", ((double) DeepVoidConfigConfiguration.PLAGUEARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)));
-			} else if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("8c4ddbf6-9dca-4e0f-824d-bfec53b34b53")) != null) {
-				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("8c4ddbf6-9dca-4e0f-824d-bfec53b34b53"));
+							(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "8c4ddbf6-9dca-4e0f-824d-bfec53b34b53"), ((double) DeepVoidConfigConfiguration.PLAGUEARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)));
+			} else if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "8c4ddbf6-9dca-4e0f-824d-bfec53b34b53")) != null) {
+				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "8c4ddbf6-9dca-4e0f-824d-bfec53b34b53"));
 			}
 		} else if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(ItemTags.create(ResourceLocation.parse("the_deep_void:scythes"))))
-				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("8c4ddbf6-9dca-4e0f-824d-bfec53b34b53")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("8c4ddbf6-9dca-4e0f-824d-bfec53b34b53"));
+				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "8c4ddbf6-9dca-4e0f-824d-bfec53b34b53")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "8c4ddbf6-9dca-4e0f-824d-bfec53b34b53"));
 		}
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(ItemTags.create(ResourceLocation.parse("the_deep_void:scythes")))) {
 			if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_HELMET.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_BOOTS.get()
-					&& !(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("2580eb30-85a0-4616-88dc-f9a0c7e9d71e")) != null)) {
+					&& !(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e")) != null)) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).hasModifier(
-						(new AttributeModifier(UUID.fromString("2580eb30-85a0-4616-88dc-f9a0c7e9d71e"), "grimrottenScythesAttack", ((double) DeepVoidConfigConfiguration.GRIMROTTENARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)))))
+						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e"), ((double) DeepVoidConfigConfiguration.GRIMROTTENARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier(
-							(new AttributeModifier(UUID.fromString("2580eb30-85a0-4616-88dc-f9a0c7e9d71e"), "grimrottenScythesAttack", ((double) DeepVoidConfigConfiguration.GRIMROTTENARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)));
-			} else if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("2580eb30-85a0-4616-88dc-f9a0c7e9d71e")) != null) {
-				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("2580eb30-85a0-4616-88dc-f9a0c7e9d71e"));
+							(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e"), ((double) DeepVoidConfigConfiguration.GRIMROTTENARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)));
+			} else if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e")) != null) {
+				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e"));
 			}
 		} else if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(ItemTags.create(ResourceLocation.parse("the_deep_void:scythes"))))
-				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("2580eb30-85a0-4616-88dc-f9a0c7e9d71e")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("2580eb30-85a0-4616-88dc-f9a0c7e9d71e"));
+				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e"));
 		}
 	}
 }

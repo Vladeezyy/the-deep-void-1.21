@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -29,7 +31,7 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.sombrius.thedeepvoid.entity.GiantShadowHandEntity;
 import net.sombrius.thedeepvoid.entity.LastingShadowHandEntity;
 import net.sombrius.thedeepvoid.entity.ShadowHandEntity;
@@ -40,7 +42,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 @EventBusSubscriber
 public class LightAttackedProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity(), event.getSource().getEntity(), event.getAmount());
 		}
@@ -84,10 +86,7 @@ public class LightAttackedProcedure {
 						_player.getCooldowns().addCooldown((entity instanceof LivingEntity _entUseItem17 ? _entUseItem17.getUseItem() : ItemStack.EMPTY).getItem(), 180);
 					{
 						ItemStack _ist = (entity instanceof LivingEntity _entUseItem19 ? _entUseItem19.getUseItem() : ItemStack.EMPTY);
-						_ist.hurtAndBreak(4, RandomSource.create(), null, () -> {
-							_ist.shrink(1);
-							_ist.setDamageValue(0);
-						});
+						PortUtil.hurtAndBreak(_ist, 4, null);
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
@@ -108,10 +107,7 @@ public class LightAttackedProcedure {
 						_player.getCooldowns().addCooldown((entity instanceof LivingEntity _entUseItem27 ? _entUseItem27.getUseItem() : ItemStack.EMPTY).getItem(), 240);
 					{
 						ItemStack _ist = (entity instanceof LivingEntity _entUseItem29 ? _entUseItem29.getUseItem() : ItemStack.EMPTY);
-						_ist.hurtAndBreak(25, RandomSource.create(), null, () -> {
-							_ist.shrink(1);
-							_ist.setDamageValue(0);
-						});
+						PortUtil.hurtAndBreak(_ist, 25, null);
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {

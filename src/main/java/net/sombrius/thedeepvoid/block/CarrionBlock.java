@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import net.neoforged.neoforge.common.util.TriState;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -16,7 +18,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.neoforge.common.IPlantable;
 
 public class CarrionBlock extends Block {
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -50,7 +51,7 @@ public class CarrionBlock extends Block {
 	}
 
 	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction direction, IPlantable plantable) {
-		return true;
+	public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction direction, BlockState plant) {
+		return TriState.TRUE;
 	}
 }

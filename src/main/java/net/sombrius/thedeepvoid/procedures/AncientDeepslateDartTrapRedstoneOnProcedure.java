@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -61,7 +63,7 @@ public class AncientDeepslateDartTrapRedstoneOnProcedure {
 						public Projectile getArrow(Level level, float damage, int knockback) {
 							AbstractArrow entityToSpawn = new RottenDartProjectileEntity(TheDeepVoidModEntities.ROTTEN_DART_PROJECTILE.get(), level);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -88,7 +90,7 @@ public class AncientDeepslateDartTrapRedstoneOnProcedure {
 						public Projectile getArrow(Level level, float damage, int knockback) {
 							AbstractArrow entityToSpawn = new RottenDartProjectileEntity(TheDeepVoidModEntities.ROTTEN_DART_PROJECTILE.get(), level);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -115,7 +117,7 @@ public class AncientDeepslateDartTrapRedstoneOnProcedure {
 						public Projectile getArrow(Level level, float damage, int knockback) {
 							AbstractArrow entityToSpawn = new RottenDartProjectileEntity(TheDeepVoidModEntities.ROTTEN_DART_PROJECTILE.get(), level);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -142,7 +144,7 @@ public class AncientDeepslateDartTrapRedstoneOnProcedure {
 						public Projectile getArrow(Level level, float damage, int knockback) {
 							AbstractArrow entityToSpawn = new RottenDartProjectileEntity(TheDeepVoidModEntities.ROTTEN_DART_PROJECTILE.get(), level);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -169,7 +171,7 @@ public class AncientDeepslateDartTrapRedstoneOnProcedure {
 						public Projectile getArrow(Level level, float damage, int knockback) {
 							AbstractArrow entityToSpawn = new RottenDartProjectileEntity(TheDeepVoidModEntities.ROTTEN_DART_PROJECTILE.get(), level);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -196,7 +198,7 @@ public class AncientDeepslateDartTrapRedstoneOnProcedure {
 						public Projectile getArrow(Level level, float damage, int knockback) {
 							AbstractArrow entityToSpawn = new RottenDartProjectileEntity(TheDeepVoidModEntities.ROTTEN_DART_PROJECTILE.get(), level);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}

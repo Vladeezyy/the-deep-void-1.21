@@ -79,14 +79,13 @@ public class HuntersHelmetTickEventProcedure {
 					}
 				}
 			}
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(UUID.fromString("7b6cd0e5-5944-438f-8d85-b74e6b98f8d8")) != null)) {
-				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).hasModifier((new AttributeModifier(UUID.fromString("7b6cd0e5-5944-438f-8d85-b74e6b98f8d8"), "hunterSpeed",
-						(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue() * 0.2 * 2), AttributeModifier.Operation.ADD_VALUE)))))
-					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).addTransientModifier((new AttributeModifier(UUID.fromString("7b6cd0e5-5944-438f-8d85-b74e6b98f8d8"), "hunterSpeed",
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b6cd0e5-5944-438f-8d85-b74e6b98f8d8")) != null)) {
+				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b6cd0e5-5944-438f-8d85-b74e6b98f8d8"))))
+					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b6cd0e5-5944-438f-8d85-b74e6b98f8d8"),
 							(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getValue() * 0.2 * 2), AttributeModifier.Operation.ADD_VALUE)));
 			}
-		} else if (!entity.isSprinting() && ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(UUID.fromString("7b6cd0e5-5944-438f-8d85-b74e6b98f8d8")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).removeModifier(UUID.fromString("7b6cd0e5-5944-438f-8d85-b74e6b98f8d8"));
+		} else if (!entity.isSprinting() && ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b6cd0e5-5944-438f-8d85-b74e6b98f8d8")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b6cd0e5-5944-438f-8d85-b74e6b98f8d8"));
 		}
 		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("cooldownMask") > 0) {
 			{

@@ -18,7 +18,7 @@ import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.GiantBoneCrawlerEggEntityDiesProcedure;
 import net.sombrius.thedeepvoid.procedures.GiantBoneCrawlerEggOnEntityTickUpdateProcedure;
 
@@ -106,7 +106,7 @@ public class GiantBoneCrawlerEggEntity extends PathfinderMob {
 		return true;
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

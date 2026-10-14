@@ -25,7 +25,7 @@ import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.PenitentAttackConditionProcedure;
 import net.sombrius.thedeepvoid.procedures.ShadowHandOnEntityTickUpdateProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -180,7 +180,7 @@ public class ShadowHandEntity extends Monster implements GeoEntity {
 	protected void pushEntities() {
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -243,7 +243,7 @@ public class ShadowHandEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(ShadowHandEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

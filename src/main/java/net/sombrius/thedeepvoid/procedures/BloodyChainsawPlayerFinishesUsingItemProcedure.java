@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -45,10 +47,7 @@ public class BloodyChainsawPlayerFinishesUsingItemProcedure {
 				_level.sendParticles(ParticleTypes.LAVA, entity.getX() + entity.getLookAngle().x * 0.5, (entity.getY() + 1.4), entity.getZ() + entity.getLookAngle().z * 0.5, 5, 0.01, 0.2, 0.01, 0.1);
 			{
 				ItemStack _ist = itemstack;
-				_ist.hurtAndBreak(25, RandomSource.create(), null, () -> {
-					_ist.shrink(1);
-					_ist.setDamageValue(0);
-				});
+				PortUtil.hurtAndBreak(_ist, 25, null);
 			}
 		}
 	}

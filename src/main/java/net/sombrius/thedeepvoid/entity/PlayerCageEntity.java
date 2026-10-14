@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import net.minecraft.world.level.Explosion;
 
 import net.sombrius.thedeepvoid.procedures.PlayerCagePlayerCollidesWithThisEntityProcedure;
@@ -19,7 +21,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
@@ -32,9 +33,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
 public class PlayerCageEntity extends Monster {
-	public PlayerCageEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.PLAYER_CAGE.get(), world);
-	}
 
 	public PlayerCageEntity(EntityType<PlayerCageEntity> type, Level world) {
 		super(type, world);
@@ -44,10 +42,6 @@ public class PlayerCageEntity extends Monster {
 	}
 
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
@@ -129,7 +123,7 @@ public class PlayerCageEntity extends Monster {
 	protected void pushEntities() {
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

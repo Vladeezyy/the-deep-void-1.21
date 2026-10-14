@@ -21,7 +21,7 @@ public class ThePitPlayerEntersDimensionProcedure {
 			return;
 		TheDeepVoidMod.queueServerWork(1, () -> {
 			if (world instanceof ServerLevel _serverLevel) {
-				Entity entityinstance = TheDeepVoidModEntities.PLAYER_CAGE.get().create(_serverLevel, null, null, new BlockPos(8, 101, 26), MobSpawnType.MOB_SUMMONED, false, false);
+				Entity entityinstance = TheDeepVoidModEntities.PLAYER_CAGE.get().create(_serverLevel, null, new BlockPos(8, 101, 26), MobSpawnType.MOB_SUMMONED, false, false);
 				if (entityinstance != null) {
 					entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 					{

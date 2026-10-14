@@ -259,7 +259,7 @@ public class TamedBoneCrawlerRightClickedProcedure {
 						}
 					}
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.GOO_SPITTER.get().create(_serverLevel, null, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
+						Entity entityinstance = TheDeepVoidModEntities.GOO_SPITTER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 							if (entityinstance instanceof TamableAnimal _toTame && sourceentity instanceof Player _owner)

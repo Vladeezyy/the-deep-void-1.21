@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -29,7 +31,7 @@ public class IchorCloudOnEntityTickUpdateProcedure {
 						public Projectile getArrow(Level level, float damage, int knockback) {
 							AbstractArrow entityToSpawn = new IchorFlameShotEntity(TheDeepVoidModEntities.ICHOR_FLAME_SHOT.get(), level);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}

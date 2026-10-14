@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -15,10 +17,7 @@ public class GrimberryOnAStickRightclickedProcedure {
 		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("sprint") <= 0) {
 			{
 				ItemStack _ist = itemstack;
-				_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-					_ist.shrink(1);
-					_ist.setDamageValue(0);
-				});
+				PortUtil.hurtAndBreak(_ist, 1, null);
 			}
 			{
 				final String _tagName = "sprint";

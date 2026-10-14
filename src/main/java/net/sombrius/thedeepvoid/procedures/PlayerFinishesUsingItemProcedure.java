@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -73,7 +75,7 @@ public class PlayerFinishesUsingItemProcedure {
 								AbstractArrow entityToSpawn = new SpiteArrowEntity(TheDeepVoidModEntities.SPITE_ARROW.get(), level);
 								entityToSpawn.setOwner(shooter);
 								entityToSpawn.setBaseDamage(damage);
-								entityToSpawn.setKnockback(knockback);
+								PortUtil.setKnockback(entityToSpawn, knockback);
 								entityToSpawn.setSilent(true);
 								return entityToSpawn;
 							}
@@ -114,7 +116,7 @@ public class PlayerFinishesUsingItemProcedure {
 								AbstractArrow entityToSpawn = new IchorSpitEntity(TheDeepVoidModEntities.ICHOR_SPIT.get(), level);
 								entityToSpawn.setOwner(shooter);
 								entityToSpawn.setBaseDamage(damage);
-								entityToSpawn.setKnockback(knockback);
+								PortUtil.setKnockback(entityToSpawn, knockback);
 								entityToSpawn.setSilent(true);
 								return entityToSpawn;
 							}

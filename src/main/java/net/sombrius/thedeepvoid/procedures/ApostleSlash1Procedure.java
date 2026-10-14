@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
@@ -78,10 +80,7 @@ public class ApostleSlash1Procedure {
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem52 ? _entUseItem52.getUseItem() : ItemStack.EMPTY).getItem(), 40);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem54 ? _entUseItem54.getUseItem() : ItemStack.EMPTY);
-								_ist.hurtAndBreak(4, RandomSource.create(), null, () -> {
-									_ist.shrink(1);
-									_ist.setDamageValue(0);
-								});
+								PortUtil.hurtAndBreak(_ist, 4, null);
 							}
 							if (entityiterator instanceof LivingEntity _entity)
 								_entity.stopUsingItem();
@@ -124,10 +123,7 @@ public class ApostleSlash1Procedure {
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem86 ? _entUseItem86.getUseItem() : ItemStack.EMPTY).getItem(), 40);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem88 ? _entUseItem88.getUseItem() : ItemStack.EMPTY);
-								_ist.hurtAndBreak(4, RandomSource.create(), null, () -> {
-									_ist.shrink(1);
-									_ist.setDamageValue(0);
-								});
+								PortUtil.hurtAndBreak(_ist, 4, null);
 							}
 							if (entityiterator instanceof LivingEntity _entity)
 								_entity.stopUsingItem();

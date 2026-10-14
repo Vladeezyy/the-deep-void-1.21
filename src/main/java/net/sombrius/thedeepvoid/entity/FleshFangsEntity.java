@@ -24,7 +24,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.FleshFangsEntityDiesProcedure;
 import net.sombrius.thedeepvoid.procedures.FleshFangsOnEntityTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.FleshFangsOnInitialEntitySpawnProcedure;
@@ -156,7 +156,7 @@ public class FleshFangsEntity extends Monster implements GeoEntity {
 	protected void pushEntities() {
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -205,7 +205,7 @@ public class FleshFangsEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 5) {
 			this.remove(FleshFangsEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

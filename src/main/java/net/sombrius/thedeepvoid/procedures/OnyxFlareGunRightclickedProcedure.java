@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
@@ -59,7 +61,7 @@ public class OnyxFlareGunRightclickedProcedure {
 							AbstractArrow entityToSpawn = new RedFlareShotEntity(TheDeepVoidModEntities.RED_FLARE_SHOT.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -88,7 +90,7 @@ public class OnyxFlareGunRightclickedProcedure {
 							AbstractArrow entityToSpawn = new BrightFlareShotEntity(TheDeepVoidModEntities.BRIGHT_FLARE_SHOT.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -117,7 +119,7 @@ public class OnyxFlareGunRightclickedProcedure {
 							AbstractArrow entityToSpawn = new XpFlareShotEntity(TheDeepVoidModEntities.XP_FLARE_SHOT.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							entityToSpawn.setPierceLevel(piercing);
 							return entityToSpawn;
@@ -147,7 +149,7 @@ public class OnyxFlareGunRightclickedProcedure {
 							AbstractArrow entityToSpawn = new GoldenFlareShotEntity(TheDeepVoidModEntities.GOLDEN_FLARE_SHOT.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -176,7 +178,7 @@ public class OnyxFlareGunRightclickedProcedure {
 							AbstractArrow entityToSpawn = new SulfurFlareShotEntity(TheDeepVoidModEntities.SULFUR_FLARE_SHOT.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -205,7 +207,7 @@ public class OnyxFlareGunRightclickedProcedure {
 							AbstractArrow entityToSpawn = new VoidriumFlareShotEntity(TheDeepVoidModEntities.VOIDRIUM_FLARE_SHOT.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							entityToSpawn.setPierceLevel(piercing);
 							return entityToSpawn;
@@ -236,7 +238,7 @@ public class OnyxFlareGunRightclickedProcedure {
 							AbstractArrow entityToSpawn = new FleshFlareShotEntity(TheDeepVoidModEntities.FLESH_FLARE_SHOT.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -265,7 +267,7 @@ public class OnyxFlareGunRightclickedProcedure {
 							AbstractArrow entityToSpawn = new IchorFlareShotEntity(TheDeepVoidModEntities.ICHOR_FLARE_SHOT.get(), level);
 							entityToSpawn.setOwner(shooter);
 							entityToSpawn.setBaseDamage(damage);
-							entityToSpawn.setKnockback(knockback);
+							PortUtil.setKnockback(entityToSpawn, knockback);
 							entityToSpawn.setSilent(true);
 							return entityToSpawn;
 						}
@@ -297,10 +299,7 @@ public class OnyxFlareGunRightclickedProcedure {
 			}.checkGamemode(entity))) {
 				{
 					ItemStack _ist = itemstack;
-					if (_ist.hurt(1, RandomSource.create(), null)) {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					}
+					PortUtil.hurtAndBreak(_ist, 1, null);
 				}
 				if (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CONSERVATION.get(), itemstack) != 0) {
 					if (Math.random() < 0.85) {

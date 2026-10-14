@@ -23,7 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.SoulOrbBoundingBoxScaleProcedure;
 import net.sombrius.thedeepvoid.procedures.SoulOrbEntityDiesProcedure;
 import net.sombrius.thedeepvoid.procedures.SoulOrbRightClickedOnEntityProcedure;
@@ -132,7 +132,7 @@ public class SoulOrbEntity extends PathfinderMob {
 		this.setNoGravity(true);
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

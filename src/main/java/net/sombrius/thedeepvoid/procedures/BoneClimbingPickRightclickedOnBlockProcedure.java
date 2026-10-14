@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -38,10 +40,7 @@ public class BoneClimbingPickRightclickedOnBlockProcedure {
 			}.checkGamemode(entity))) {
 				{
 					ItemStack _ist = itemstack;
-					_ist.hurtAndBreak(1, RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, 1, null);
 				}
 			}
 			if (world instanceof Level _level) {

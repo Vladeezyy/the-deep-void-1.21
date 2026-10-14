@@ -33,7 +33,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.ChainedWeaverSolidBoundingBoxConditionProcedure;
 import net.sombrius.thedeepvoid.procedures.ExecutionerConditionsProcedure;
 import net.sombrius.thedeepvoid.procedures.ExecutionerEntityIsHurtProcedure;
@@ -263,7 +263,7 @@ public class ExecutionerEntity extends Monster implements GeoEntity {
 		return super.getDefaultDimensions(pose).scale(1f);
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -314,7 +314,7 @@ public class ExecutionerEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(ExecutionerEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

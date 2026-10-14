@@ -24,7 +24,7 @@ public class HiveWatcherWhileMovingProcedure {
 				&& (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) > (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 4) {
 			if (!(!world.getEntitiesOfClass(WatcherBlockadeEntity.class, AABB.ofSize(new Vec3(x, y, z), 1, 1, 1), e -> true).isEmpty())) {
 				if (world instanceof ServerLevel _serverLevel) {
-					Entity entityinstance = TheDeepVoidModEntities.WATCHER_BLOCKADE.get().create(_serverLevel, null, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
+					Entity entityinstance = TheDeepVoidModEntities.WATCHER_BLOCKADE.get().create(_serverLevel, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
 					if (entityinstance != null) {
 						entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 						if (entityinstance instanceof WatcherBlockadeEntity) {

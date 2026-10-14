@@ -1,6 +1,10 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.food.FoodProperties;
+
 import software.bernie.geckolib.util.GeckoLibUtil;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
@@ -41,7 +45,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
@@ -78,9 +81,6 @@ public class BoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
-	public BoneCrawlerEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.BONE_CRAWLER.get(), world);
-	}
 
 	public BoneCrawlerEntity(EntityType<BoneCrawlerEntity> type, Level world) {
 		super(type, world);
@@ -115,8 +115,8 @@ public class BoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, false) {
 			@Override
-			protected double getAttackReachSqr(LivingEntity entity) {
-				return 4;
+			protected boolean canPerformAttack(LivingEntity entity) {
+				return this.isTimeToAttack() && this.mob.distanceToSqr(entity) < 4 && this.mob.getSensing().hasLineOfSight(entity);
 			}
 		});
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
@@ -171,10 +171,6 @@ public class BoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 		});
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.ARTHROPOD;
-	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
@@ -223,9 +219,11 @@ public class BoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 		} else {
 			if (this.isTame()) {
 				if (this.isOwnedBy(sourceentity)) {
-					if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+					if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
 						this.usePlayerItem(sourceentity, hand, itemstack);
-						this.heal((float) item.getFoodProperties().getNutrition());
+						FoodProperties foodproperties = itemstack.getFoodProperties(this);
+						float nutrition = foodproperties != null ? (float) foodproperties.nutrition() : 1;
+						this.heal(nutrition);
 						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
 					} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
 						this.usePlayerItem(sourceentity, hand, itemstack);
@@ -237,7 +235,7 @@ public class BoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 				}
 			} else if (this.isFood(itemstack)) {
 				this.usePlayerItem(sourceentity, hand, itemstack);
-				if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+				if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 					this.tame(sourceentity);
 					this.level().broadcastEntityEvent(this, (byte) 7);
 				} else {
@@ -267,14 +265,14 @@ public class BoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose p_33597_) {
-		return super.getDimensions(p_33597_).scale((float) 1);
+	public EntityDimensions getDefaultDimensions(Pose p_33597_) {
+		return super.getDefaultDimensions(p_33597_).scale((float) 1);
 	}
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
 		BoneCrawlerEntity retval = TheDeepVoidModEntities.BONE_CRAWLER.get().create(serverWorld);
-		retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), MobSpawnType.BREEDING, null, null);
+		retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), MobSpawnType.BREEDING, null);
 		return retval;
 	}
 
@@ -289,13 +287,13 @@ public class BoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 		this.updateSwingTime();
 	}
 
-	public static void init() {
-		SpawnPlacements.register(TheDeepVoidModEntities.BONE_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, world, reason, pos, random) -> {
+	public static void init(RegisterSpawnPlacementsEvent event) {
+		event.register(TheDeepVoidModEntities.BONE_CRAWLER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entityType, world, reason, pos, random) -> {
 			int x = pos.getX();
 			int y = pos.getY();
 			int z = pos.getZ();
 			return BoneCrawlerNaturalEntitySpawningConditionProcedure.execute(y);
-		});
+		}, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -363,7 +361,7 @@ public class BoneCrawlerEntity extends TamableAnimal implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(BoneCrawlerEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

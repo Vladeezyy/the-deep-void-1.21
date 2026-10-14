@@ -30,7 +30,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.HivemindMinionPlayerCountProcedure;
 import net.sombrius.thedeepvoid.procedures.HivemindSummonEntityDiesProcedure;
 import net.sombrius.thedeepvoid.procedures.SkullSmasherTickUpdateProcedure;
@@ -165,7 +165,7 @@ public class SkullSmasherEntity extends Monster implements GeoEntity {
 		return super.getDefaultDimensions(pose).scale(1.4f);
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -217,7 +217,7 @@ public class SkullSmasherEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(SkullSmasherEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import net.neoforged.neoforge.common.util.TriState;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -16,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.neoforge.common.IPlantable;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.procedures.BlockOfBonePileOnBoneMealSuccessProcedure;
 
@@ -36,8 +37,8 @@ public class RottenMossActiveBlock extends Block implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction direction, IPlantable plantable) {
-		return true;
+	public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction direction, BlockState plant) {
+		return TriState.TRUE;
 	}
 
 	@Override

@@ -20,7 +20,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.PlantType;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.procedures.CorpseNeighbourBlockChangesProcedure;
 import net.sombrius.thedeepvoid.procedures.CorpseSpawnPlantDestroyedByPlayerProcedure;
@@ -53,10 +52,6 @@ public class CorpseSpawnBlock extends FlowerBlock {
 		return this.mayPlaceOn(groundState, worldIn, blockpos);
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean moving) {

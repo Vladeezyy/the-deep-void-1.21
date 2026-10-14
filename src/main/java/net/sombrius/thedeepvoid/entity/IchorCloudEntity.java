@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import net.minecraft.world.level.Explosion;
 
 import net.minecraft.network.protocol.Packet;
@@ -13,7 +15,6 @@ import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -28,9 +29,6 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.procedures.IchorCloudOnEntityTickUpdateProcedure;
 
 public class IchorCloudEntity extends PathfinderMob {
-	public IchorCloudEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.ICHOR_CLOUD.get(), world);
-	}
 
 	public IchorCloudEntity(EntityType<IchorCloudEntity> type, Level world) {
 		super(type, world);
@@ -40,10 +38,6 @@ public class IchorCloudEntity extends PathfinderMob {
 	}
 
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public double getMyRidingOffset() {
@@ -120,7 +114,7 @@ public class IchorCloudEntity extends PathfinderMob {
 	protected void pushEntities() {
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

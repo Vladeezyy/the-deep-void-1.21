@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import net.minecraft.world.level.Explosion;
 
 import net.sombrius.thedeepvoid.procedures.HookEndTickProcedure;
@@ -18,7 +20,6 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
@@ -32,9 +33,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
 public class HookEndEntity extends Monster {
-	public HookEndEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.HOOK_END.get(), world);
-	}
 
 	public HookEndEntity(EntityType<HookEndEntity> type, Level world) {
 		super(type, world);
@@ -49,16 +47,12 @@ public class HookEndEntity extends Monster {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, true) {
 			@Override
-			protected double getAttackReachSqr(LivingEntity entity) {
-				return this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth();
+			protected boolean canPerformAttack(LivingEntity entity) {
+				return this.isTimeToAttack() && this.mob.distanceToSqr(entity) < this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth() && this.mob.getSensing().hasLineOfSight(entity);
 			}
 		});
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public double getMyRidingOffset() {
@@ -135,7 +129,7 @@ public class HookEndEntity extends Monster {
 	protected void pushEntities() {
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

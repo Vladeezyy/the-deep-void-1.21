@@ -137,21 +137,21 @@ public class VanishEffectStartedappliedProcedure {
 				(entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).shrink(1);
 			}
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR)
-					.hasModifier((new AttributeModifier(UUID.fromString("0a6a7610-463a-4982-8c09-23fbbb6a4da7"), "vanishArmorPoints", entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorPoint, AttributeModifier.Operation.ADD_VALUE)))))
+					.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).addTransientModifier(
-						(new AttributeModifier(UUID.fromString("0a6a7610-463a-4982-8c09-23fbbb6a4da7"), "vanishArmorPoints", entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorPoint, AttributeModifier.Operation.ADD_VALUE)));
+						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorPoint, AttributeModifier.Operation.ADD_VALUE)));
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).hasModifier(
-					(new AttributeModifier(UUID.fromString("ce3747e9-226d-4519-840d-0a19834844da"), "vanishArmorToughness", entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)))))
+					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).addTransientModifier(
-						(new AttributeModifier(UUID.fromString("ce3747e9-226d-4519-840d-0a19834844da"), "vanishArmorToughness", entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)));
+						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)));
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).hasModifier(
-					(new AttributeModifier(UUID.fromString("dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), "vanishKnockback", entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)))))
+					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).addTransientModifier(
-						(new AttributeModifier(UUID.fromString("dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), "vanishKnockback", entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)));
+						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)));
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.STEP_HEIGHT)
-					.hasModifier((new AttributeModifier(UUID.fromString("13df1bf1-3b0d-4965-b15f-6403e84af6cf"), "vanishStep", entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveStepHeight, AttributeModifier.Operation.ADD_VALUE)))))
+					.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.STEP_HEIGHT).addTransientModifier(
-						(new AttributeModifier(UUID.fromString("13df1bf1-3b0d-4965-b15f-6403e84af6cf"), "vanishStep", entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveStepHeight, AttributeModifier.Operation.ADD_VALUE)));
+						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveStepHeight, AttributeModifier.Operation.ADD_VALUE)));
 		}
 		if (world instanceof ServerLevel _level)
 			_level.sendParticles(ParticleTypes.POOF, x, (y + 0.5), z, 40, 0.1, 0.1, 0.1, 0.1);

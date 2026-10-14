@@ -18,7 +18,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.PlantType;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 
@@ -43,8 +42,4 @@ public class GooCoverBlock extends FlowerBlock {
 		return new ItemStack(TheDeepVoidModBlocks.GOO_COVER_BLOCK.get());
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 }

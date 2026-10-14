@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.neoforge.common.PlantType;
 import net.sombrius.thedeepvoid.procedures.WatchingWillowSaplingOnTickUpdateProcedure;
 
 public class WatchingWillowSaplingBlock extends FlowerBlock implements BonemealableBlock {
@@ -23,10 +22,6 @@ public class WatchingWillowSaplingBlock extends FlowerBlock implements Bonemeala
 		super(MobEffects.MOVEMENT_SPEED, 100, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).randomTicks().sound(SoundType.SCULK).instabreak().noCollission().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public void randomTick(BlockState blockstate, ServerLevel world, BlockPos pos, RandomSource random) {

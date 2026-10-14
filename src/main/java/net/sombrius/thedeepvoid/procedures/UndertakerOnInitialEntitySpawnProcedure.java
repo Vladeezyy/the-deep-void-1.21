@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.core.Holder;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -25,7 +27,7 @@ public class UndertakerOnInitialEntitySpawnProcedure {
 				animatable.setTexture("undertakershotnew");
 		} //Roll the first trade
 		for (int index0 = 0; index0 < 16; index0++) {
-			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.tags().getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_void_misc"))).getRandomElement(RandomSource.create()).orElseGet(() -> Items.AIR))).toString();
+			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_void_misc"))).flatMap(_t -> _t.getRandomElement(RandomSource.create())).map(Holder::value).orElseGet(() -> Items.AIR))).toString();
 			if (!(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH))) == ItemStack.EMPTY.getItem())) {
 				entity.getPersistentData().putString("firstTrade", temp);
 				if (new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH)))).isStackable()) {
@@ -38,7 +40,7 @@ public class UndertakerOnInitialEntitySpawnProcedure {
 		}
 		entity.getPersistentData().putDouble("firstTradePrice", (TheDeepVoidModVariables.MapVariables.get(world).undertakerKilled == true ? Mth.nextInt(RandomSource.create(), 6, 10) : Mth.nextInt(RandomSource.create(), 2, 6)));//Roll the second and third trade
 		for (int index1 = 0; index1 < 16; index1++) {
-			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.tags().getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_void_goods"))).getRandomElement(RandomSource.create()).orElseGet(() -> Items.AIR))).toString();
+			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_void_goods"))).flatMap(_t -> _t.getRandomElement(RandomSource.create())).map(Holder::value).orElseGet(() -> Items.AIR))).toString();
 			if (!(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH))) == ItemStack.EMPTY.getItem())) {
 				entity.getPersistentData().putString("secondTrade", temp);
 				if (new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH)))).isStackable()) {
@@ -50,7 +52,7 @@ public class UndertakerOnInitialEntitySpawnProcedure {
 			}
 		}
 		for (int index2 = 0; index2 < 16; index2++) {
-			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.tags().getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_void_goods"))).getRandomElement(RandomSource.create()).orElseGet(() -> Items.AIR))).toString();
+			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_void_goods"))).flatMap(_t -> _t.getRandomElement(RandomSource.create())).map(Holder::value).orElseGet(() -> Items.AIR))).toString();
 			if (!(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH))) == ItemStack.EMPTY.getItem())
 					&& !(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH))) == BuiltInRegistries.ITEM
 							.getValue(ResourceLocation.parse(((entity.getPersistentData().getString("secondTrade"))).toLowerCase(java.util.Locale.ENGLISH))))) {
@@ -66,7 +68,7 @@ public class UndertakerOnInitialEntitySpawnProcedure {
 		entity.getPersistentData().putDouble("secondTradePrice", (TheDeepVoidModVariables.MapVariables.get(world).undertakerKilled == true ? Mth.nextInt(RandomSource.create(), 7, 12) : Mth.nextInt(RandomSource.create(), 3, 8)));
 		entity.getPersistentData().putDouble("thirdTradePrice", (TheDeepVoidModVariables.MapVariables.get(world).undertakerKilled == true ? Mth.nextInt(RandomSource.create(), 9, 17) : Mth.nextInt(RandomSource.create(), 5, 12)));//Roll the fourth trade
 		for (int index3 = 0; index3 < 16; index3++) {
-			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.tags().getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_valuables"))).getRandomElement(RandomSource.create()).orElseGet(() -> Items.AIR))).toString();
+			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_valuables"))).flatMap(_t -> _t.getRandomElement(RandomSource.create())).map(Holder::value).orElseGet(() -> Items.AIR))).toString();
 			if (!(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH))) == ItemStack.EMPTY.getItem())) {
 				entity.getPersistentData().putString("fourthTrade", temp);
 				if (new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH)))).isStackable()) {
@@ -79,7 +81,7 @@ public class UndertakerOnInitialEntitySpawnProcedure {
 		}
 		entity.getPersistentData().putDouble("fourthTradePrice", (TheDeepVoidModVariables.MapVariables.get(world).undertakerKilled == true ? Mth.nextInt(RandomSource.create(), 52, 64) : Mth.nextInt(RandomSource.create(), 24, 32)));//Roll the potion trade
 		for (int index4 = 0; index4 < 16; index4++) {
-			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.tags().getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_potions"))).getRandomElement(RandomSource.create()).orElseGet(() -> Items.AIR))).toString();
+			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_potions"))).flatMap(_t -> _t.getRandomElement(RandomSource.create())).map(Holder::value).orElseGet(() -> Items.AIR))).toString();
 			if (!(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH))) == ItemStack.EMPTY.getItem())) {
 				entity.getPersistentData().putString("potionTrade", temp);
 				if (new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH)))).isStackable()) {

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.entity.MadCultistEntity;
 import net.sombrius.thedeepvoid.entity.KunaiEntity;
@@ -98,10 +100,7 @@ public class MadCultistOnEntityTickUpdateProcedure {
 										_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem38 ? _entUseItem38.getUseItem() : ItemStack.EMPTY).getItem(), 60);
 									{
 										ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem40 ? _entUseItem40.getUseItem() : ItemStack.EMPTY);
-										if (_ist.hurt(1, RandomSource.create(), null)) {
-											_ist.shrink(1);
-											_ist.setDamageValue(0);
-										}
+										PortUtil.hurtAndBreak(_ist, 1, null);
 									}
 									if (entityiterator instanceof LivingEntity _entity)
 										_entity.stopUsingItem();
@@ -159,10 +158,7 @@ public class MadCultistOnEntityTickUpdateProcedure {
 										_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem73 ? _entUseItem73.getUseItem() : ItemStack.EMPTY).getItem(), 60);
 									{
 										ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem75 ? _entUseItem75.getUseItem() : ItemStack.EMPTY);
-										if (_ist.hurt(1, RandomSource.create(), null)) {
-											_ist.shrink(1);
-											_ist.setDamageValue(0);
-										}
+										PortUtil.hurtAndBreak(_ist, 1, null);
 									}
 									if (entityiterator instanceof LivingEntity _entity)
 										_entity.stopUsingItem();
@@ -232,7 +228,7 @@ public class MadCultistOnEntityTickUpdateProcedure {
 									AbstractArrow entityToSpawn = new KunaiEntity(TheDeepVoidModEntities.KUNAI.get(), level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
-									entityToSpawn.setKnockback(knockback);
+									PortUtil.setKnockback(entityToSpawn, knockback);
 									entityToSpawn.setSilent(true);
 									return entityToSpawn;
 								}

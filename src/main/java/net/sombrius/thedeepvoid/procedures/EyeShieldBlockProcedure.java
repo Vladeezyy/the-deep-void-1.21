@@ -20,14 +20,14 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.ShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.sombrius.thedeepvoid.entity.StalkerEntity;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 @EventBusSubscriber
 public class EyeShieldBlockProcedure {
 	@SubscribeEvent
-	public static void whenEntityBlocksWithShield(ShieldBlockEvent event) {
+	public static void whenEntityBlocksWithShield(LivingShieldBlockEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity());
 		}

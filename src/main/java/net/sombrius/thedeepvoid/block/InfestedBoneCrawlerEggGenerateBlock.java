@@ -21,7 +21,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.PlantType;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.procedures.InfestedCrawlerEggWalkOnBlockProcedure;
@@ -47,10 +46,6 @@ public class InfestedBoneCrawlerEggGenerateBlock extends FlowerBlock {
 		return new ItemStack(TheDeepVoidModBlocks.INFESTED_BONE_CRAWLER_EGG.get());
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.CAVE;
-	}
 
 	@Override
 	public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {

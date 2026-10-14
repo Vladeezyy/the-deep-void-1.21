@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import net.minecraft.world.level.Explosion;
 
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +19,6 @@ import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
@@ -39,9 +40,6 @@ public class ExecutionerDarkSteelFlailEntity extends Monster {
 	public static final EntityDataAccessor<Integer> DATA_despawn = SynchedEntityData.defineId(ExecutionerDarkSteelFlailEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> DATA_stun = SynchedEntityData.defineId(ExecutionerDarkSteelFlailEntity.class, EntityDataSerializers.BOOLEAN);
 
-	public ExecutionerDarkSteelFlailEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.EXECUTIONER_DARK_STEEL_FLAIL.get(), world);
-	}
 
 	public ExecutionerDarkSteelFlailEntity(EntityType<ExecutionerDarkSteelFlailEntity> type, Level world) {
 		super(type, world);
@@ -65,10 +63,6 @@ public class ExecutionerDarkSteelFlailEntity extends Monster {
 
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
@@ -176,7 +170,7 @@ public class ExecutionerDarkSteelFlailEntity extends Monster {
 		return ExecutionerDarkSteelFlailSolidBoundingBoxConditionProcedure.execute(world, x, y, z, entity);
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

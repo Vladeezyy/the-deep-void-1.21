@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.sombrius.thedeepvoid.procedures.ShotgunPelletWhileProjectileFlyingTickProcedure;
 import net.sombrius.thedeepvoid.procedures.ShotgunPelletProjectileHitsLivingEntityProcedure;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
@@ -29,9 +31,6 @@ import net.minecraft.network.protocol.Packet;
 public class ShotgunPelletEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Blocks.AIR);
 
-	public ShotgunPelletEntity(PlayMessages.SpawnEntity packet, Level world) {
-		super(TheDeepVoidModEntities.SHOTGUN_PELLET.get(), world);
-	}
 
 	public ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity> type, Level world) {
 		super(type, world);
@@ -86,26 +85,26 @@ public class ShotgunPelletEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	public static ShotgunPelletEntity shoot(Level world, LivingEntity entity, RandomSource random, float power, double damage, int knockback) {
-		ShotgunPelletEntity entityarrow = new ShotgunPelletEntity(TheDeepVoidModEntities.SHOTGUN_PELLET.get(), entity, world);
+		ShotgunPelletEntity entityarrow = new ShotgunPelletEntity(TheDeepVoidModEntities.SHOTGUN_PELLET.get(), entity, world, null);
 		entityarrow.shoot(entity.getViewVector(1).x, entity.getViewVector(1).y, entity.getViewVector(1).z, power * 2, 0);
 		entityarrow.setSilent(true);
 		entityarrow.setCritArrow(false);
 		entityarrow.setBaseDamage(damage);
-		entityarrow.setKnockback(knockback);
+		PortUtil.setKnockback(entityarrow, knockback);
 		world.addFreshEntity(entityarrow);
 		world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")), SoundSource.PLAYERS, 1, 1f / (random.nextFloat() * 0.5f + 1) + (power / 2));
 		return entityarrow;
 	}
 
 	public static ShotgunPelletEntity shoot(LivingEntity entity, LivingEntity target) {
-		ShotgunPelletEntity entityarrow = new ShotgunPelletEntity(TheDeepVoidModEntities.SHOTGUN_PELLET.get(), entity, entity.level());
+		ShotgunPelletEntity entityarrow = new ShotgunPelletEntity(TheDeepVoidModEntities.SHOTGUN_PELLET.get(), entity, entity.level(), null);
 		double dx = target.getX() - entity.getX();
 		double dy = target.getY() + target.getEyeHeight() - 1.1;
 		double dz = target.getZ() - entity.getZ();
 		entityarrow.shoot(dx, dy - entityarrow.getY() + Math.hypot(dx, dz) * 0.2F, dz, 1f * 2, 12.0F);
 		entityarrow.setSilent(true);
 		entityarrow.setBaseDamage(5);
-		entityarrow.setKnockback(5);
+		PortUtil.setKnockback(entityarrow, 5);
 		entityarrow.setCritArrow(false);
 		entity.level().addFreshEntity(entityarrow);
 		entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")), SoundSource.PLAYERS, 1, 1f / (RandomSource.create().nextFloat() * 0.5f + 1));

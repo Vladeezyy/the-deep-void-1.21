@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -7,7 +9,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
@@ -31,7 +33,7 @@ import java.util.UUID;
 @EventBusSubscriber
 public class EntityAttackedRottenHeartProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event != null && event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getSource(), event.getEntity(), event.getSource().getEntity(), event.getAmount());
 		}
@@ -46,8 +48,8 @@ public class EntityAttackedRottenHeartProcedure {
 			return;
 		double lvl = 0;
 		if (sourceentity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(TheDeepVoidModMobEffects.ROTTEN_HEART)) {
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 			if (sourceentity instanceof LivingEntity _entity)
 				_entity.removeEffect(TheDeepVoidModMobEffects.ROTTEN_HEART);
@@ -78,17 +80,15 @@ public class EntityAttackedRottenHeartProcedure {
 				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:void_sickness"))), sourceentity),
 						(float) (0.2 + amount * 0.01));
 			}
-			if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).getModifier(UUID.fromString("7b240ee9-8869-4278-818f-375fab73153e")) != null) {
-				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(UUID.fromString("7b240ee9-8869-4278-818f-375fab73153e"));
-				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).hasModifier((new AttributeModifier(UUID.fromString("7b240ee9-8869-4278-818f-375fab73153e"), "sunderHealth",
-						(entity.getPersistentData().getDouble("sunderMaxHealth") + Math.floor(lvl * 0.1) * (-1)), AttributeModifier.Operation.ADD_VALUE)))))
-					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier((new AttributeModifier(UUID.fromString("7b240ee9-8869-4278-818f-375fab73153e"), "sunderHealth",
+			if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b240ee9-8869-4278-818f-375fab73153e")) != null) {
+				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b240ee9-8869-4278-818f-375fab73153e"));
+				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b240ee9-8869-4278-818f-375fab73153e"))))
+					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b240ee9-8869-4278-818f-375fab73153e"),
 							(entity.getPersistentData().getDouble("sunderMaxHealth") + Math.floor(lvl * 0.1) * (-1)), AttributeModifier.Operation.ADD_VALUE)));
 				entity.getPersistentData().putDouble("sunderMaxHealth", (entity.getPersistentData().getDouble("sunderMaxHealth") + Math.floor(lvl * 0.1) * (-1)));
 			} else {
-				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).hasModifier((new AttributeModifier(UUID.fromString("7b240ee9-8869-4278-818f-375fab73153e"), "sunderHealth",
-						(entity.getPersistentData().getDouble("sunderMaxHealth") + Math.floor(lvl * 0.1) * (-1)), AttributeModifier.Operation.ADD_VALUE)))))
-					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier((new AttributeModifier(UUID.fromString("7b240ee9-8869-4278-818f-375fab73153e"), "sunderHealth",
+				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b240ee9-8869-4278-818f-375fab73153e"))))
+					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "7b240ee9-8869-4278-818f-375fab73153e"),
 							(entity.getPersistentData().getDouble("sunderMaxHealth") + Math.floor(lvl * 0.1) * (-1)), AttributeModifier.Operation.ADD_VALUE)));
 				entity.getPersistentData().putDouble("sunderMaxHealth", (entity.getPersistentData().getDouble("sunderMaxHealth") + Math.floor(lvl * 0.1) * (-1)));
 			}

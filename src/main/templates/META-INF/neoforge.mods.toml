@@ -41,3 +41,6 @@ The Deep Void adds a new creepy dimension for you to explore with tons of new co
     versionRange="[0,)"
     ordering="NONE"
     side="BOTH"
+
+[[mixins]]
+config="the_deep_void.mixins.json"

@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import net.minecraft.world.level.Explosion;
 
 import net.sombrius.thedeepvoid.procedures.HandSpawnOnEntityTickUpdateProcedure;
@@ -16,7 +18,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
@@ -27,9 +28,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
 public class HandSpawnEntity extends PathfinderMob {
-	public HandSpawnEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.HAND_SPAWN.get(), world);
-	}
 
 	public HandSpawnEntity(EntityType<HandSpawnEntity> type, Level world) {
 		super(type, world);
@@ -39,10 +37,6 @@ public class HandSpawnEntity extends PathfinderMob {
 	}
 
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public boolean hurt(DamageSource damagesource, float amount) {
@@ -104,7 +98,7 @@ public class HandSpawnEntity extends PathfinderMob {
 	protected void pushEntities() {
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

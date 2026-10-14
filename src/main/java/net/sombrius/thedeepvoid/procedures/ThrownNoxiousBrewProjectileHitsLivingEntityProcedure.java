@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.neoforged.bus.api.ICancellableEvent;
+
 import javax.annotation.Nullable;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
@@ -20,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -35,7 +37,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 @EventBusSubscriber
 public class ThrownNoxiousBrewProjectileHitsLivingEntityProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event != null && event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity(), event.getSource().getDirectEntity(), event.getSource().getEntity());
 		}
@@ -76,7 +78,7 @@ public class ThrownNoxiousBrewProjectileHitsLivingEntityProcedure {
 						}
 					} else {
 						if (world instanceof ServerLevel _serverLevel) {
-							Entity entityinstance = TheDeepVoidModEntities.UNDERTAKER.get().create(_serverLevel, null, null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), MobSpawnType.MOB_SUMMONED, false, false);
+							Entity entityinstance = TheDeepVoidModEntities.UNDERTAKER.get().create(_serverLevel, null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), MobSpawnType.MOB_SUMMONED, false, false);
 							if (entityinstance != null) {
 								entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 								if (entityinstance instanceof UndertakerEntity _datEntSetL)
@@ -103,8 +105,8 @@ public class ThrownNoxiousBrewProjectileHitsLivingEntityProcedure {
 			}
 			if (!immediatesourceentity.level().isClientSide())
 				immediatesourceentity.discard();
-			if (event != null && event.isCancelable()) {
-				event.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
 			}
 		}
 	}

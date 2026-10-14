@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -30,10 +32,7 @@ public class PrimordialBoneCrawlerPlayerCollidesProcedure {
 					_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem3 ? _entUseItem3.getUseItem() : ItemStack.EMPTY).getItem(), 140);
 				{
 					ItemStack _ist = (sourceentity instanceof LivingEntity _entUseItem5 ? _entUseItem5.getUseItem() : ItemStack.EMPTY);
-					_ist.hurtAndBreak(20, RandomSource.create(), null, () -> {
-						_ist.shrink(1);
-						_ist.setDamageValue(0);
-					});
+					PortUtil.hurtAndBreak(_ist, 20, null);
 				}
 				if (sourceentity instanceof LivingEntity _entity)
 					_entity.stopUsingItem();

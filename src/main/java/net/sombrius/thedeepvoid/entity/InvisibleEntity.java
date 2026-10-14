@@ -1,6 +1,9 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+import javax.annotation.Nullable;
+
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
@@ -21,15 +24,15 @@ public class InvisibleEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Items.ARROW);
 
 	public InvisibleEntity(EntityType<? extends InvisibleEntity> type, Level world) {
-		super(type, world, PROJECTILE_ITEM);
+		super(type, world);
 	}
 
-	public InvisibleEntity(EntityType<? extends InvisibleEntity> type, double x, double y, double z, Level world) {
-		super(type, x, y, z, world, PROJECTILE_ITEM);
+	public InvisibleEntity(EntityType<? extends InvisibleEntity> type, double x, double y, double z, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
-	public InvisibleEntity(EntityType<? extends InvisibleEntity> type, LivingEntity entity, Level world) {
-		super(type, entity, world, PROJECTILE_ITEM);
+	public InvisibleEntity(EntityType<? extends InvisibleEntity> type, LivingEntity entity, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
 	@Override
@@ -65,26 +68,26 @@ public class InvisibleEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	public static InvisibleEntity shoot(Level world, LivingEntity entity, RandomSource random, float power, double damage, int knockback) {
-		InvisibleEntity entityarrow = new InvisibleEntity(TheDeepVoidModEntities.INVISIBLE.get(), entity, world);
+		InvisibleEntity entityarrow = new InvisibleEntity(TheDeepVoidModEntities.INVISIBLE.get(), entity, world, null);
 		entityarrow.shoot(entity.getViewVector(1).x, entity.getViewVector(1).y, entity.getViewVector(1).z, power * 2, 0);
 		entityarrow.setSilent(true);
 		entityarrow.setCritArrow(false);
 		entityarrow.setBaseDamage(damage);
-		entityarrow.setKnockback(knockback);
+		PortUtil.setKnockback(entityarrow, knockback);
 		world.addFreshEntity(entityarrow);
 		world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")), SoundSource.PLAYERS, 1, 1f / (random.nextFloat() * 0.5f + 1) + (power / 2));
 		return entityarrow;
 	}
 
 	public static InvisibleEntity shoot(LivingEntity entity, LivingEntity target) {
-		InvisibleEntity entityarrow = new InvisibleEntity(TheDeepVoidModEntities.INVISIBLE.get(), entity, entity.level());
+		InvisibleEntity entityarrow = new InvisibleEntity(TheDeepVoidModEntities.INVISIBLE.get(), entity, entity.level(), null);
 		double dx = target.getX() - entity.getX();
 		double dy = target.getY() + target.getEyeHeight() - 1.1;
 		double dz = target.getZ() - entity.getZ();
 		entityarrow.shoot(dx, dy - entityarrow.getY() + Math.hypot(dx, dz) * 0.2F, dz, 0f * 2, 12.0F);
 		entityarrow.setSilent(true);
 		entityarrow.setBaseDamage(0);
-		entityarrow.setKnockback(0);
+		PortUtil.setKnockback(entityarrow, 0);
 		entityarrow.setCritArrow(false);
 		entity.level().addFreshEntity(entityarrow);
 		entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")), SoundSource.PLAYERS, 1, 1f / (RandomSource.create().nextFloat() * 0.5f + 1));

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -42,10 +44,7 @@ public class ApostleDoingSpinProcedure {
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem8 ? _entUseItem8.getUseItem() : ItemStack.EMPTY).getItem(), 40);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem10 ? _entUseItem10.getUseItem() : ItemStack.EMPTY);
-								_ist.hurtAndBreak(4, RandomSource.create(), null, () -> {
-									_ist.shrink(1);
-									_ist.setDamageValue(0);
-								});
+								PortUtil.hurtAndBreak(_ist, 4, null);
 							}
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {

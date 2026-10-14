@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import net.neoforged.neoforge.common.util.TriState;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -10,7 +12,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.IPlantable;
 import net.sombrius.thedeepvoid.procedures.DesolateSoilEntityWalksOnBlockProcedure;
 
 public class DesolateBrickWallBlock extends WallBlock {
@@ -19,8 +20,8 @@ public class DesolateBrickWallBlock extends WallBlock {
 	}
 
 	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction direction, IPlantable plantable) {
-		return true;
+	public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction direction, BlockState plant) {
+		return TriState.TRUE;
 	}
 
 	@Override

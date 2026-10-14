@@ -33,7 +33,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.procedures.FalseHydraEntityDiesProcedure;
 import net.sombrius.thedeepvoid.procedures.FalseHydraEntityIsHurtProcedure;
 import net.sombrius.thedeepvoid.procedures.FalseHydraOnEntityTickUpdateProcedure;
@@ -244,7 +244,7 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 		this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
 	}
 
-	public static void init(SpawnPlacementRegisterEvent event) {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -293,7 +293,7 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 60) {
 			this.remove(FalseHydraEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

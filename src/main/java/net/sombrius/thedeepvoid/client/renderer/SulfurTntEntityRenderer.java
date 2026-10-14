@@ -25,7 +25,7 @@ public class SulfurTntEntityRenderer extends MobRenderer<SulfurTntEntityEntity, 
 			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/pure_white.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, SulfurTntEntityEntity entity, float limbSwing, float limbSwingAmount, int color) {
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, SulfurTntEntityEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 				Level world = entity.level();
 				double x = entity.getX();
 				double y = entity.getY();
@@ -36,7 +36,7 @@ public class SulfurTntEntityRenderer extends MobRenderer<SulfurTntEntityEntity, 
 					this.getParentModel().copyPropertiesTo(model);
 					model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+					model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, -1);
 				}
 			}
 		});

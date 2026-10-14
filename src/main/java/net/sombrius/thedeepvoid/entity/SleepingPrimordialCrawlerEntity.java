@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import software.bernie.geckolib.util.GeckoLibUtil;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
@@ -28,7 +30,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityDimensions;
@@ -56,9 +57,6 @@ public class SleepingPrimordialCrawlerEntity extends PathfinderMob implements Ge
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
-	public SleepingPrimordialCrawlerEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.SLEEPING_PRIMORDIAL_CRAWLER.get(), world);
-	}
 
 	public SleepingPrimordialCrawlerEntity(EntityType<SleepingPrimordialCrawlerEntity> type, Level world) {
 		super(type, world);
@@ -106,10 +104,6 @@ public class SleepingPrimordialCrawlerEntity extends PathfinderMob implements Ge
 
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.ARTHROPOD;
-	}
 
 	@Override
 	public boolean removeWhenFarAway(double distanceToClosestPlayer) {
@@ -192,8 +186,8 @@ public class SleepingPrimordialCrawlerEntity extends PathfinderMob implements Ge
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose p_33597_) {
-		return super.getDimensions(p_33597_).scale((float) 1);
+	public EntityDimensions getDefaultDimensions(Pose p_33597_) {
+		return super.getDefaultDimensions(p_33597_).scale((float) 1);
 	}
 
 	@Override
@@ -202,7 +196,7 @@ public class SleepingPrimordialCrawlerEntity extends PathfinderMob implements Ge
 		this.updateSwingTime();
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -247,7 +241,7 @@ public class SleepingPrimordialCrawlerEntity extends PathfinderMob implements Ge
 		++this.deathTime;
 		if (this.deathTime == 133) {
 			this.remove(SleepingPrimordialCrawlerEntity.RemovalReason.KILLED);
-			this.dropExperience();
+			this.dropExperience(null);
 		}
 	}
 

@@ -1,6 +1,10 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
+import net.minecraft.world.food.FoodProperties;
+
 import net.minecraft.world.level.Explosion;
 
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +26,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -49,9 +52,6 @@ public class DarkSteelFlailEntity extends TamableAnimal {
 	public static final EntityDataAccessor<Integer> DATA_despawn = SynchedEntityData.defineId(DarkSteelFlailEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> DATA_secret = SynchedEntityData.defineId(DarkSteelFlailEntity.class, EntityDataSerializers.BOOLEAN);
 
-	public DarkSteelFlailEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(TheDeepVoidModEntities.DARK_STEEL_FLAIL.get(), world);
-	}
 
 	public DarkSteelFlailEntity(EntityType<DarkSteelFlailEntity> type, Level world) {
 		super(type, world);
@@ -76,10 +76,6 @@ public class DarkSteelFlailEntity extends TamableAnimal {
 
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
@@ -172,9 +168,11 @@ public class DarkSteelFlailEntity extends TamableAnimal {
 		} else {
 			if (this.isTame()) {
 				if (this.isOwnedBy(sourceentity)) {
-					if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+					if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
 						this.usePlayerItem(sourceentity, hand, itemstack);
-						this.heal((float) item.getFoodProperties().getNutrition());
+						FoodProperties foodproperties = itemstack.getFoodProperties(this);
+						float nutrition = foodproperties != null ? (float) foodproperties.nutrition() : 1;
+						this.heal(nutrition);
 						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
 					} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
 						this.usePlayerItem(sourceentity, hand, itemstack);
@@ -186,7 +184,7 @@ public class DarkSteelFlailEntity extends TamableAnimal {
 				}
 			} else if (this.isFood(itemstack)) {
 				this.usePlayerItem(sourceentity, hand, itemstack);
-				if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+				if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 					this.tame(sourceentity);
 					this.level().broadcastEntityEvent(this, (byte) 7);
 				} else {
@@ -217,7 +215,7 @@ public class DarkSteelFlailEntity extends TamableAnimal {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
 		DarkSteelFlailEntity retval = TheDeepVoidModEntities.DARK_STEEL_FLAIL.get().create(serverWorld);
-		retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), MobSpawnType.BREEDING, null, null);
+		retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), MobSpawnType.BREEDING, null);
 		return retval;
 	}
 
@@ -241,7 +239,7 @@ public class DarkSteelFlailEntity extends TamableAnimal {
 		return DarkSteelFlailSolidBoundingBoxConditionProcedure.execute(world, x, y, z, entity);
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

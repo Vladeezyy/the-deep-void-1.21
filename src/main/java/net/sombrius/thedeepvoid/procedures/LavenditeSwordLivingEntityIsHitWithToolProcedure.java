@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -16,7 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.sombrius.thedeepvoid.entity.LavenditeShardProjEntity;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
@@ -25,7 +27,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 @EventBusSubscriber
 public class LavenditeSwordLivingEntityIsHitWithToolProcedure {
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event) {
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event.getEntity() != null) {
 			execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity(), event.getSource().getEntity());
 		}
@@ -47,7 +49,7 @@ public class LavenditeSwordLivingEntityIsHitWithToolProcedure {
 								AbstractArrow entityToSpawn = new LavenditeShardProjEntity(TheDeepVoidModEntities.LAVENDITE_SHARD_PROJ.get(), level);
 								entityToSpawn.setOwner(shooter);
 								entityToSpawn.setBaseDamage(damage);
-								entityToSpawn.setKnockback(knockback);
+								PortUtil.setKnockback(entityToSpawn, knockback);
 								entityToSpawn.setSilent(true);
 								return entityToSpawn;
 							}

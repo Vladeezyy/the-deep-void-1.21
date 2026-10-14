@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.resources.ResourceLocation;
+
 import java.util.UUID;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.Entity;
@@ -17,8 +19,8 @@ public class TheCatcherLivingEntityIsHitWithItemProcedure {
 				final double _tagValue = 0;
 				CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 			}
-			if (((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(UUID.fromString("681aea3b-26bb-484f-8f6a-fa1c1fac1fa7")) != null) {
-				((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(UUID.fromString("681aea3b-26bb-484f-8f6a-fa1c1fac1fa7"));
+			if (((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "681aea3b-26bb-484f-8f6a-fa1c1fac1fa7")) != null) {
+				((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "681aea3b-26bb-484f-8f6a-fa1c1fac1fa7"));
 			}
 		}
 	}

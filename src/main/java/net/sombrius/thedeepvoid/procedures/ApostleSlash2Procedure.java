@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
@@ -72,10 +74,7 @@ public class ApostleSlash2Procedure {
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem42 ? _entUseItem42.getUseItem() : ItemStack.EMPTY).getItem(), 40);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem44 ? _entUseItem44.getUseItem() : ItemStack.EMPTY);
-								_ist.hurtAndBreak(4, RandomSource.create(), null, () -> {
-									_ist.shrink(1);
-									_ist.setDamageValue(0);
-								});
+								PortUtil.hurtAndBreak(_ist, 4, null);
 							}
 							if (entityiterator instanceof LivingEntity _entity)
 								_entity.stopUsingItem();
@@ -118,10 +117,7 @@ public class ApostleSlash2Procedure {
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem76 ? _entUseItem76.getUseItem() : ItemStack.EMPTY).getItem(), 40);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem78 ? _entUseItem78.getUseItem() : ItemStack.EMPTY);
-								_ist.hurtAndBreak(4, RandomSource.create(), null, () -> {
-									_ist.shrink(1);
-									_ist.setDamageValue(0);
-								});
+								PortUtil.hurtAndBreak(_ist, 4, null);
 							}
 							if (entityiterator instanceof LivingEntity _entity)
 								_entity.stopUsingItem();
@@ -168,10 +164,7 @@ public class ApostleSlash2Procedure {
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem119 ? _entUseItem119.getUseItem() : ItemStack.EMPTY).getItem(), 40);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem121 ? _entUseItem121.getUseItem() : ItemStack.EMPTY);
-								_ist.hurtAndBreak(4, RandomSource.create(), null, () -> {
-									_ist.shrink(1);
-									_ist.setDamageValue(0);
-								});
+								PortUtil.hurtAndBreak(_ist, 4, null);
 							}
 							if (entityiterator instanceof LivingEntity _entity)
 								_entity.stopUsingItem();

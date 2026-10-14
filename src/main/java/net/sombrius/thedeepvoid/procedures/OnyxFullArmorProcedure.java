@@ -39,7 +39,7 @@ public class OnyxFullArmorProcedure {
 			}
 		}
 		if (!(entity instanceof ServerPlayer _plr19 && _plr19.level() instanceof ServerLevel
-				&& _plr19.getAdvancements().getOrStartProgress(_plr19.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:cover_me_with_onyx"))).isDone())) {
+				&& _plr19.getAdvancements().getOrStartProgress(_plr19.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:cover_me_with_onyx"))).isDone())) {
 			if (entity instanceof ServerPlayer _player) {
 				AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:cover_me_with_onyx"));
 				AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);

@@ -478,7 +478,7 @@ public class UndertakerTradeGuiMenu extends AbstractContainerMenu implements Sup
 
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-		Player entity = event.player;
+		Player entity = event.getEntity();
 		if (event.phase == TickEvent.Phase.END && entity.containerMenu instanceof UndertakerTradeGuiMenu) {
 			Level world = entity.level();
 			double x = entity.getX();

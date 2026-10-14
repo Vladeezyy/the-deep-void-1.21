@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.sombrius.thedeepvoid.port.ArmPoses;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.function.Consumer;
 import net.minecraft.client.model.HumanoidModel;
@@ -37,10 +39,8 @@ public class HeresyItem extends Item implements GeoItem {
 		super(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.COMMON));
 	}
 
-	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		super.initializeClient(consumer);
-		consumer.accept(new IClientItemExtensions() {
+	public IClientItemExtensions clientExtensions() {
+		return new IClientItemExtensions() {
 			private final BlockEntityWithoutLevelRenderer renderer = new HeresyItemRenderer();
 
 			@Override
@@ -48,17 +48,7 @@ public class HeresyItem extends Item implements GeoItem {
 				return renderer;
 			}
 
-			private static final HumanoidModel.ArmPose HeresyPose = HumanoidModel.ArmPose.create("Heresy", false, (model, entity, arm) -> {
-				if (arm == HumanoidArm.LEFT) {
-					model.rightArm.xRot = -45F + model.head.xRot;
-					model.leftArm.xRot = -45F + model.head.xRot;
-					model.leftArm.yRot = 45F;
-				} else {
-					model.rightArm.xRot = -45F + model.head.xRot;
-					model.leftArm.xRot = -45F + model.head.xRot;
-					model.leftArm.yRot = 45F;
-				}
-			});
+			private static final HumanoidModel.ArmPose HeresyPose = ArmPoses.HERESY.getValue();
 
 			@Override
 			public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
@@ -78,7 +68,7 @@ public class HeresyItem extends Item implements GeoItem {
 				}
 				return true;
 			}
-		});
+		};
 	}
 
 	public void getTransformType(ItemDisplayContext type) {

@@ -1,14 +1,13 @@
-
 package net.sombrius.thedeepvoid.item;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.RecordItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
 
-public class PitchBlackItem extends RecordItem {
+public class PitchBlackItem extends Item {
 	public PitchBlackItem() {
-		super(8, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:pitch_black")), new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 1780);
+		super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.parse("the_deep_void:pitch_black"))));
 	}
 }

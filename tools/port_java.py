@@ -112,6 +112,8 @@ IMPORTS = {
     'BlockTags': 'net.minecraft.tags.BlockTags',
     'Block': 'net.minecraft.world.level.block.Block',
     'Tier': 'net.minecraft.world.item.Tier',
+    'FastColor': 'net.minecraft.util.FastColor',
+    'ItemAttributeModifiers': 'net.minecraft.world.item.component.ItemAttributeModifiers',
     'PortUtil': 'net.sombrius.thedeepvoid.port.PortUtil',
     'Nullable': 'javax.annotation.Nullable',
     'ItemStack': 'net.minecraft.world.item.ItemStack',
@@ -487,6 +489,8 @@ def fix_small_apis(s):
 
 
 def fix_plants(s):
+    s = re.sub(r'public float\[\] getBeaconColorMultiplier\((BlockState \w+, LevelReader \w+, BlockPos \w+, BlockPos \w+)\) \{\s*return new float\[\]\{([^,]+), ([^,]+), ([^}]+)\};',
+               r'public Integer getBeaconColorMultiplier(\1) {\n\t\treturn FastColor.ARGB32.colorFromFloat(1f, \2, \3, \4);', s)
     s = remove_method(s, r'public PlantType getPlantType\(BlockGetter \w+, BlockPos \w+\)')
     s = s.replace('import net.neoforged.neoforge.common.PlantType;\n', '').replace('import net.neoforged.neoforge.common.IPlantable;\n', '')
     s = re.sub(r'public boolean canSustainPlant\(BlockState (\w+), BlockGetter (\w+), BlockPos (\w+), Direction (\w+), IPlantable \w+\) \{\s*return true;',
@@ -527,6 +531,35 @@ def fix_item_attribute_event(s):
             end, args = split_args(body, j + len(k) - 1)
             out.append(body[i:j]); out.append(k + ','.join(args) + ', EquipmentSlotGroup.%s)' % slot); i = end + 1
         s = s[:m.start()] + 'if (event instanceof ItemAttributeModifierEvent %s) {' % var + ''.join(out) + s[e:]
+    return s
+
+
+def fix_misc2(s):
+    s = re.sub(r'(\.create\(\w+, )null,\s*null,', r'\1null,', s)
+    s = re.sub(r'\.getAdvancements\(\)\.getAdvancement\(', '.getAdvancements().get(', s)
+    s = re.sub(r'(\w+)\.hurtAndBreak\((\w+), (\w+), \w+ -> \w+\.broadcastBreakEvent\((EquipmentSlot\.\w+)\)\)', r'\1.hurtAndBreak(\2, \3, \4)', s)
+    s = re.sub(r'(\w+)\.hurtAndBreak\((\w+), (\w+), \w+ -> \w+\.broadcastBreakEvent\((\w+)\.getUsedItemHand\(\)\)\)', r'\1.hurtAndBreak(\2, \3, LivingEntity.getSlotForHand(\4.getUsedItemHand()))', s)
+    s = re.sub(r'(\w+)\.hurtAndBreak\(([^,;]+), [\w.]+\.getRandom\(\), (\w+), \(\) -> \{\s*\1\.shrink\(1\);\s*\1\.setDamageValue\(0\);\s*\}\);', r'PortUtil.hurtAndBreak(\1, \2, \3);', s)
+    s = re.sub(r'if \((\w+)\.hurt\(([^,;]+), [\w.]+\.getRandom\(\), (\w+)\)\) \{\s*\1\.shrink\(1\);\s*\1\.setDamageValue\(0\);\s*\}', r'PortUtil.hurtAndBreak(\1, \2, \3);', s)
+    s = re.sub(r'this\.getUseDuration\((\w+)\)', r'this.getUseDuration(\1, entity)', s)
+    s = re.sub(r'new ClientboundUpdateMobEffectPacket\(([^;]+?), (new MobEffectInstance\([^;]*?\))\)\)', r'new ClientboundUpdateMobEffectPacket(\1, \2, false))', s)
+    s = re.sub(r'new ClientboundUpdateMobEffectPacket\((\w+\.getId\(\)), (\w+)\)', r'new ClientboundUpdateMobEffectPacket(\1, \2, false)', s)
+    s = s.replace('.alwaysEat()', '.alwaysEdible()').replace('.meat()', '')
+    if 'PlayerEvent' in s or 'TickEvent' in s:
+        s = re.sub(r'\bevent\.player\b', 'event.getEntity()', s)
+    return s
+
+
+def fix_default_attributes(s):
+    m = re.search(r'\n\t@Override\n\tpublic Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers\(EquipmentSlot (\w+)\) \{', s)
+    if not m: return s
+    e = match_paren(s, m.end() - 1)
+    body = s[m.end():e]
+    slot = re.search(r'== EquipmentSlot\.(\w+)', body).group(1)
+    puts = re.findall(r'builder\.put\(([\w.]+), (new AttributeModifier\([^;]*\))\);', body)
+    chain = 'ItemAttributeModifiers.builder()' + ''.join('.add(%s, %s, EquipmentSlotGroup.%s)' % (a, mod, slot) for a, mod in puts) + '.build()'
+    s = s[:m.start()] + s[e + 1:]
+    s = re.sub(r'(super\(new Item\.Properties\(\)[^;]*?)\);', lambda mm: mm.group(1) + '.attributes(%s));' % chain, s, count=1)
     return s
 
 
@@ -638,6 +671,8 @@ def convert(s):
     s = fix_plants(s)
     s = fix_vertex_api(s)
     s = fix_item_attribute_event(s)
+    s = fix_misc2(s)
+    s = fix_default_attributes(s)
     s = fix_network(s)
     s = fix_enchantments(s)
     s = fix_tool_tiers(s)

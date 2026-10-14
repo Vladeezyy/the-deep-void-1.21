@@ -36,7 +36,7 @@ public class BallAndChainRightclickedProcedure {
 			}
 			entity.getPersistentData().putDouble("flailUsed", 1);
 			if (world instanceof ServerLevel _serverLevel) {
-				Entity entityinstance = TheDeepVoidModEntities.DARK_STEEL_FLAIL.get().create(_serverLevel, null, null,
+				Entity entityinstance = TheDeepVoidModEntities.DARK_STEEL_FLAIL.get().create(_serverLevel, null,
 						BlockPos.containing(entity.getX() + entity.getLookAngle().x * 1, entity.getY() + entity.getLookAngle().y + 1.5 * 1, entity.getZ() + entity.getLookAngle().z * 1), MobSpawnType.MOB_SUMMONED, false, false);
 				if (entityinstance != null) {
 					entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);

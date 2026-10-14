@@ -56,13 +56,13 @@ public class HunterBowItem extends Item {
 	public void releaseUsing(ItemStack itemstack, Level world, LivingEntity entity, int time) {
 		HunterBowStopUsingProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), itemstack);
 		if (!world.isClientSide() && entity instanceof ServerPlayer player) {
-			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
+			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack, entity) - time);
 			if (pullingPower < 0.1)
 				return;
 			ItemStack stack = findAmmo(player);
 			if (player.getAbilities().instabuild || stack != ItemStack.EMPTY) {
 				BarbedArrowEntity projectile = BarbedArrowEntity.shoot(world, entity, world.getRandom(), pullingPower);
-				itemstack.hurtAndBreak(1, entity, e -> e.broadcastBreakEvent(entity.getUsedItemHand()));
+				itemstack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
 				if (player.getAbilities().instabuild) {
 					projectile.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 				} else {

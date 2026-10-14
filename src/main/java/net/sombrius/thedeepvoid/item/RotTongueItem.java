@@ -1,6 +1,9 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+
 import net.sombrius.thedeepvoid.procedures.RottenTongueLivingEntityIsHitWithToolProcedure;
 import net.sombrius.thedeepvoid.procedures.RottenTongueDescriptionProcedure;
 import net.sombrius.thedeepvoid.procedures.RotTongueRightclickedProcedure;
@@ -30,7 +33,7 @@ import com.google.common.collect.ImmutableMultimap;
 
 public class RotTongueItem extends Item {
 	public RotTongueItem() {
-		super(new Item.Properties().durability(850).fireResistant().rarity(Rarity.UNCOMMON));
+		super(new Item.Properties().durability(850).fireResistant().rarity(Rarity.UNCOMMON).attributes(ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 7d, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.4, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
 	}
 
 	@Override
@@ -38,17 +41,6 @@ public class RotTongueItem extends Item {
 		return 72000;
 	}
 
-	@Override
-	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot equipmentSlot) {
-		if (equipmentSlot == EquipmentSlot.MAINHAND) {
-			ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-			builder.putAll(super.getDefaultAttributeModifiers(equipmentSlot));
-			builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 7d, AttributeModifier.Operation.ADD_VALUE));
-			builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.4, AttributeModifier.Operation.ADD_VALUE));
-			return builder.build();
-		}
-		return super.getDefaultAttributeModifiers(equipmentSlot);
-	}
 
 	@Override
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext level, List<Component> list, TooltipFlag flag) {
@@ -67,7 +59,7 @@ public class RotTongueItem extends Item {
 
 	@Override
 	public boolean hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-		itemstack.hurtAndBreak(1, entity, i -> i.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+		itemstack.hurtAndBreak(1, entity, EquipmentSlot.MAINHAND);
 		RotTongueLivingEntityIsHitWithItemProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity, sourceentity);
 		return true;
 	}

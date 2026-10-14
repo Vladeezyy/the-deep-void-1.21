@@ -1,14 +1,13 @@
-
 package net.sombrius.thedeepvoid.item;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.RecordItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
 
-public class ChasmsMusicDiscItem extends RecordItem {
+public class ChasmsMusicDiscItem extends Item {
 	public ChasmsMusicDiscItem() {
-		super(6, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:from_within_monst3r_music")), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 3840);
+		super(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.parse("the_deep_void:chasms_music_disc"))));
 	}
 }

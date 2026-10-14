@@ -23,7 +23,7 @@ public class HiveWatcherSpawnTeethProcedure {
 				if (world.getBlockFloorHeight(BlockPos.containing(x + entity.getPersistentData().getDouble("teethPos"), y - 1, z + entity.getPersistentData().getDouble("teethPos"))) > 0
 						&& !(world.getBlockFloorHeight(BlockPos.containing(x + entity.getPersistentData().getDouble("teethPos"), y, z + entity.getPersistentData().getDouble("teethPos"))) > 0)) {
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.WATCHER_TEETH.get().create(_serverLevel, null, null,
+						Entity entityinstance = TheDeepVoidModEntities.WATCHER_TEETH.get().create(_serverLevel, null,
 								BlockPos.containing(x + entity.getPersistentData().getDouble("teethPos"), y, z + entity.getPersistentData().getDouble("teethPos")), MobSpawnType.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
@@ -36,7 +36,7 @@ public class HiveWatcherSpawnTeethProcedure {
 				if (world.getBlockFloorHeight(BlockPos.containing(x - entity.getPersistentData().getDouble("teethPos"), y - 1, z + entity.getPersistentData().getDouble("teethPos"))) > 0
 						&& !(world.getBlockFloorHeight(BlockPos.containing(x - entity.getPersistentData().getDouble("teethPos"), y, z + entity.getPersistentData().getDouble("teethPos"))) > 0)) {
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.WATCHER_TEETH.get().create(_serverLevel, null, null,
+						Entity entityinstance = TheDeepVoidModEntities.WATCHER_TEETH.get().create(_serverLevel, null,
 								BlockPos.containing(x + entity.getPersistentData().getDouble("teethPos"), y, z + entity.getPersistentData().getDouble("teethPos")), MobSpawnType.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
@@ -49,7 +49,7 @@ public class HiveWatcherSpawnTeethProcedure {
 				if (world.getBlockFloorHeight(BlockPos.containing(x + entity.getPersistentData().getDouble("teethPos"), y - 1, z - entity.getPersistentData().getDouble("teethPos"))) > 0
 						&& !(world.getBlockFloorHeight(BlockPos.containing(x + entity.getPersistentData().getDouble("teethPos"), y, z - entity.getPersistentData().getDouble("teethPos"))) > 0)) {
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.WATCHER_TEETH.get().create(_serverLevel, null, null,
+						Entity entityinstance = TheDeepVoidModEntities.WATCHER_TEETH.get().create(_serverLevel, null,
 								BlockPos.containing(x + entity.getPersistentData().getDouble("teethPos"), y, z + entity.getPersistentData().getDouble("teethPos")), MobSpawnType.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
@@ -62,7 +62,7 @@ public class HiveWatcherSpawnTeethProcedure {
 				if (world.getBlockFloorHeight(BlockPos.containing(x - entity.getPersistentData().getDouble("teethPos"), y - 1, z - entity.getPersistentData().getDouble("teethPos"))) > 0
 						&& !(world.getBlockFloorHeight(BlockPos.containing(x - entity.getPersistentData().getDouble("teethPos"), y, z - entity.getPersistentData().getDouble("teethPos"))) > 0)) {
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.WATCHER_TEETH.get().create(_serverLevel, null, null,
+						Entity entityinstance = TheDeepVoidModEntities.WATCHER_TEETH.get().create(_serverLevel, null,
 								BlockPos.containing(x + entity.getPersistentData().getDouble("teethPos"), y, z + entity.getPersistentData().getDouble("teethPos")), MobSpawnType.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);

@@ -16,9 +16,8 @@ public class LiquidIchorFluidType extends FluidType {
 				.sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH));
 	}
 
-	@Override
-	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
-		consumer.accept(new IClientFluidTypeExtensions() {
+	public IClientFluidTypeExtensions clientExtensions() {
+		return new IClientFluidTypeExtensions() {
 			private static final ResourceLocation STILL_TEXTURE = ResourceLocation.parse("the_deep_void:block/liquid_ichor_still"), FLOWING_TEXTURE = ResourceLocation.parse("the_deep_void:block/liquid_ichor_flow");
 
 			@Override
@@ -30,6 +29,6 @@ public class LiquidIchorFluidType extends FluidType {
 			public ResourceLocation getFlowingTexture() {
 				return FLOWING_TEXTURE;
 			}
-		});
+		};
 	}
 }

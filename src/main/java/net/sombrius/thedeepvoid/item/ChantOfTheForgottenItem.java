@@ -1,14 +1,13 @@
-
 package net.sombrius.thedeepvoid.item;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.RecordItem;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
 
-public class ChantOfTheForgottenItem extends RecordItem {
+public class ChantOfTheForgottenItem extends Item {
 	public ChantOfTheForgottenItem() {
-		super(15, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_sing_mono")), new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 820);
+		super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.parse("the_deep_void:chant_of_the_forgotten"))));
 	}
 }

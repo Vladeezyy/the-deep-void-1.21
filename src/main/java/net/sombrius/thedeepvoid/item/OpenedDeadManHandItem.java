@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.OpenedDeadManHandPlayerFinishesUsingI
 
 public class OpenedDeadManHandItem extends Item {
 	public OpenedDeadManHandItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(6).saturationModifier(0.1f).meat().build()));
+		super(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(6).saturationModifier(0.1f).build()));
 	}
 
 	@Override

@@ -1,0 +1,8 @@
+{
+  "sound_event": "the_deep_void:slaughter",
+  "description": {
+    "translate": "item.the_deep_void.slaughter.desc"
+  },
+  "length_in_seconds": 160.0,
+  "comparator_output": 6
+}

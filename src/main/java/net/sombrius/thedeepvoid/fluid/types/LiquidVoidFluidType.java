@@ -14,9 +14,8 @@ public class LiquidVoidFluidType extends FluidType {
 				.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH));
 	}
 
-	@Override
-	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
-		consumer.accept(new IClientFluidTypeExtensions() {
+	public IClientFluidTypeExtensions clientExtensions() {
+		return new IClientFluidTypeExtensions() {
 			private static final ResourceLocation STILL_TEXTURE = ResourceLocation.parse("the_deep_void:block/liquid_void"), FLOWING_TEXTURE = ResourceLocation.parse("the_deep_void:block/liquid_void");
 
 			@Override
@@ -28,6 +27,6 @@ public class LiquidVoidFluidType extends FluidType {
 			public ResourceLocation getFlowingTexture() {
 				return FLOWING_TEXTURE;
 			}
-		});
+		};
 	}
 }

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.tags.EntityTypeTags;
+
 import net.minecraft.advancements.AdvancementHolder;
 
 import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
@@ -120,7 +122,7 @@ public class DoomEffectStartedappliedProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof Player && (entityiterator instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.TOMBSTONE.get()
 								&& !(entityiterator instanceof ServerPlayer _plr54 && _plr54.level() instanceof ServerLevel
-										&& _plr54.getAdvancements().getOrStartProgress(_plr54.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:desecrating_the_dead"))).isDone())) {
+										&& _plr54.getAdvancements().getOrStartProgress(_plr54.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:desecrating_the_dead"))).isDone())) {
 							if (entityiterator instanceof ServerPlayer _player) {
 								AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:desecrating_the_dead"));
 								AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);

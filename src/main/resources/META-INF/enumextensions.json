@@ -1,0 +1,67 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "THE_DEEP_VOID_APOSTASY",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/sombrius/thedeepvoid/port/ArmPoses",
+        "field": "APOSTASY"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "THE_DEEP_VOID_DOUBLE_BARREL_SHOTGUN",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/sombrius/thedeepvoid/port/ArmPoses",
+        "field": "DOUBLE_BARREL_SHOTGUN"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "THE_DEEP_VOID_ELDRITCH_MAW",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/sombrius/thedeepvoid/port/ArmPoses",
+        "field": "ELDRITCH_MAW"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "THE_DEEP_VOID_HERESY",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/sombrius/thedeepvoid/port/ArmPoses",
+        "field": "HERESY"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "THE_DEEP_VOID_MISANTHROPY",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/sombrius/thedeepvoid/port/ArmPoses",
+        "field": "MISANTHROPY"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "THE_DEEP_VOID_PERIL",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/sombrius/thedeepvoid/port/ArmPoses",
+        "field": "PERIL"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "THE_DEEP_VOID_PERIL_OFF_HAND",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "net/sombrius/thedeepvoid/port/ArmPoses",
+        "field": "PERIL_OFF_HAND"
+      }
+    }
+  ]
+}

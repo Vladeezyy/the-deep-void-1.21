@@ -49,7 +49,7 @@ public class FlailExecutionerThrowProcedure {
 					}
 				}
 				if (world instanceof ServerLevel _serverLevel) {
-					Entity entityinstance = TheDeepVoidModEntities.EXECUTIONER_DARK_STEEL_FLAIL.get().create(_serverLevel, null, null,
+					Entity entityinstance = TheDeepVoidModEntities.EXECUTIONER_DARK_STEEL_FLAIL.get().create(_serverLevel, null,
 							BlockPos.containing(entity.getX() + entity.getLookAngle().x * 1, entity.getY() + 1.5, entity.getZ() + entity.getLookAngle().z * 1), MobSpawnType.MOB_SUMMONED, false, false);
 					if (entityinstance != null) {
 						entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);

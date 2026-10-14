@@ -89,7 +89,7 @@ public class DungeonDarkSteelBarsActiveOnTickUpdateProcedure {
 					for (int index0 = 0; index0 < Mth.nextInt(RandomSource.create(), 2, 4); index0++) {
 						if (Math.random() < 0.33) {
 							if (world instanceof ServerLevel _serverLevel) {
-								Entity entityinstance = TheDeepVoidModEntities.SHANK_PRISONER.get().create(_serverLevel, null, null,
+								Entity entityinstance = TheDeepVoidModEntities.SHANK_PRISONER.get().create(_serverLevel, null,
 										BlockPos.containing(((Entity) world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 25, 25, 25), e -> true).stream().sorted(new Object() {
 											Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 												return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
@@ -115,7 +115,7 @@ public class DungeonDarkSteelBarsActiveOnTickUpdateProcedure {
 							}
 						} else {
 							if (world instanceof ServerLevel _serverLevel) {
-								Entity entityinstance = TheDeepVoidModEntities.PIT_PRISONER.get().create(_serverLevel, null, null,
+								Entity entityinstance = TheDeepVoidModEntities.PIT_PRISONER.get().create(_serverLevel, null,
 										BlockPos.containing(((Entity) world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 25, 25, 25), e -> true).stream().sorted(new Object() {
 											Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 												return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));

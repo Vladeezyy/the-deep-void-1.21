@@ -31,9 +31,8 @@ public class RootBlindMobEffect extends MobEffect implements PortUtil.EffectRemo
 		return super.applyEffectTick(entity, amplifier);
 	}
 
-	@Override
-	public void initializeClient(Consumer<IClientMobEffectExtensions> consumer) {
-		consumer.accept(new IClientMobEffectExtensions() {
+	public IClientMobEffectExtensions clientExtensions() {
+		return new IClientMobEffectExtensions() {
 			@Override
 			public boolean isVisibleInInventory(MobEffectInstance effect) {
 				return false;
@@ -48,7 +47,7 @@ public class RootBlindMobEffect extends MobEffect implements PortUtil.EffectRemo
 			public boolean isVisibleInGui(MobEffectInstance effect) {
 				return false;
 			}
-		});
+		};
 	}
 
 	@Override

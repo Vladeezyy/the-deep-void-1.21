@@ -26,9 +26,8 @@ public class PitShakeMobEffect extends MobEffect {
 		return true;
 	}
 
-	@Override
-	public void initializeClient(java.util.function.Consumer<IClientMobEffectExtensions> consumer) {
-		consumer.accept(new IClientMobEffectExtensions() {
+	public IClientMobEffectExtensions clientExtensions() {
+		return new IClientMobEffectExtensions() {
 			@Override
 			public boolean isVisibleInInventory(MobEffectInstance effect) {
 				return false;
@@ -43,6 +42,6 @@ public class PitShakeMobEffect extends MobEffect {
 			public boolean isVisibleInGui(MobEffectInstance effect) {
 				return false;
 			}
-		});
+		};
 	}
 }

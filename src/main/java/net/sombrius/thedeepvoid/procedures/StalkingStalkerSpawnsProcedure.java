@@ -119,7 +119,7 @@ public class StalkingStalkerSpawnsProcedure {
 													AABB.ofSize(new Vec3(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, (entity.getY()), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ), 60, 60, 60), e -> true)
 											.isEmpty()) && !(!world.getEntitiesOfClass(WatchingStalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 160, 160, 160), e -> true).isEmpty())) {
 										if (world instanceof ServerLevel _serverLevel) {
-											Entity entityinstance = TheDeepVoidModEntities.WATCHING_STALKER.get().create(_serverLevel, null, null,
+											Entity entityinstance = TheDeepVoidModEntities.WATCHING_STALKER.get().create(_serverLevel, null,
 													BlockPos.containing(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, entity.getY(), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ), MobSpawnType.MOB_SUMMONED, false,
 													false);
 											if (entityinstance != null) {

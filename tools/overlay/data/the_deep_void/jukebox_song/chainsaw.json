@@ -1,0 +1,8 @@
+{
+  "sound_event": "the_deep_void:chainsaw",
+  "description": {
+    "translate": "item.the_deep_void.chainsaw.desc"
+  },
+  "length_in_seconds": 126.0,
+  "comparator_output": 8
+}

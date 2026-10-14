@@ -153,10 +153,10 @@ public class ItemAnimationFactory {
 					{
 						final String _tagName = "geckoAnim";
 						final String _tagValue = "";
-						CustomData.update(DataComponents.CUSTOM_DATA, event.player.getMainHandItem(), tag -> tag.putString(_tagName, _tagValue));
+						CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getMainHandItem(), tag -> tag.putString(_tagName, _tagValue));
 					}
-					if (event.player.level().isClientSide()) {
-						((PerilOffHandItem) event.player.getMainHandItem().getItem()).animationprocedure = animation;
+					if (event.getEntity().level().isClientSide()) {
+						((PerilOffHandItem) event.getEntity().getMainHandItem().getItem()).animationprocedure = animation;
 					}
 				}
 			}
@@ -166,10 +166,10 @@ public class ItemAnimationFactory {
 					{
 						final String _tagName = "geckoAnim";
 						final String _tagValue = "";
-						CustomData.update(DataComponents.CUSTOM_DATA, event.player.getOffhandItem(), tag -> tag.putString(_tagName, _tagValue));
+						CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getOffhandItem(), tag -> tag.putString(_tagName, _tagValue));
 					}
-					if (event.player.level().isClientSide()) {
-						((PerilOffHandItem) event.player.getOffhandItem().getItem()).animationprocedure = animation;
+					if (event.getEntity().level().isClientSide()) {
+						((PerilOffHandItem) event.getEntity().getOffhandItem().getItem()).animationprocedure = animation;
 					}
 				}
 			}

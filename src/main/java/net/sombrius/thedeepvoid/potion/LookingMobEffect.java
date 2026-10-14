@@ -14,9 +14,8 @@ public class LookingMobEffect extends MobEffect {
 		super(MobEffectCategory.NEUTRAL, -1);
 	}
 
-	@Override
-	public void initializeClient(Consumer<IClientMobEffectExtensions> consumer) {
-		consumer.accept(new IClientMobEffectExtensions() {
+	public IClientMobEffectExtensions clientExtensions() {
+		return new IClientMobEffectExtensions() {
 			@Override
 			public boolean isVisibleInInventory(MobEffectInstance effect) {
 				return false;
@@ -31,6 +30,6 @@ public class LookingMobEffect extends MobEffect {
 			public boolean isVisibleInGui(MobEffectInstance effect) {
 				return false;
 			}
-		});
+		};
 	}
 }

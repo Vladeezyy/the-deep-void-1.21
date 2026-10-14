@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import net.minecraft.util.FastColor;
+
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -59,8 +61,8 @@ public class VoidriumGlassBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public float[] getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
-		return new float[]{0.8588235294f, 0.6235294118f, 0.9137254902f};
+	public Integer getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
+		return FastColor.ARGB32.colorFromFloat(1f, 0.8588235294f, 0.6235294118f, 0.9137254902f);
 	}
 
 	@Override

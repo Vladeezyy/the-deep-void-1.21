@@ -70,9 +70,8 @@ public class FlyWingsFlyItem extends ArmorItem implements GeoItem {
 		super(ARMOR_MATERIAL, type, properties);
 	}
 
-	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new IClientItemExtensions() {
+	public IClientItemExtensions clientExtensions() {
+		return new IClientItemExtensions() {
 			private GeoArmorRenderer<?> renderer;
 
 			@Override
@@ -82,7 +81,7 @@ public class FlyWingsFlyItem extends ArmorItem implements GeoItem {
 				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 				return this.renderer;
 			}
-		});
+		};
 	}
 
 	@Override

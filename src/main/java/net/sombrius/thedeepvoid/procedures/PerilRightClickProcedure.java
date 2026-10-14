@@ -172,7 +172,7 @@ public class PerilRightClickProcedure {
 									CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 								}
 								if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("adrenaline") >= 5 && !(entity instanceof ServerPlayer _plr92 && _plr92.level() instanceof ServerLevel
-										&& _plr92.getAdvancements().getOrStartProgress(_plr92.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:i_cant_stop_winning"))).isDone())) {
+										&& _plr92.getAdvancements().getOrStartProgress(_plr92.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:i_cant_stop_winning"))).isDone())) {
 									if (entity instanceof ServerPlayer _player) {
 										AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:i_cant_stop_winning"));
 										AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);

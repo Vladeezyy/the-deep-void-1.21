@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import net.minecraft.util.FastColor;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -20,8 +22,8 @@ public class BismuthGlassBlock extends Block {
 	}
 
 	@Override
-	public float[] getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
-		return new float[]{0.7960784314f, 0.3411764706f, 0.8588235294f};
+	public Integer getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
+		return FastColor.ARGB32.colorFromFloat(1f, 0.7960784314f, 0.3411764706f, 0.8588235294f);
 	}
 
 	@Override

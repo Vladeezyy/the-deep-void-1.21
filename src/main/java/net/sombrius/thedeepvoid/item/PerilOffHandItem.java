@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.sombrius.thedeepvoid.port.ArmPoses;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.function.Consumer;
 import net.minecraft.client.model.HumanoidModel;
@@ -39,10 +41,8 @@ public class PerilOffHandItem extends Item implements GeoItem {
 		super(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.COMMON));
 	}
 
-	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		super.initializeClient(consumer);
-		consumer.accept(new IClientItemExtensions() {
+	public IClientItemExtensions clientExtensions() {
+		return new IClientItemExtensions() {
 			private final BlockEntityWithoutLevelRenderer renderer = new PerilOffHandItemRenderer();
 
 			@Override
@@ -50,13 +50,7 @@ public class PerilOffHandItem extends Item implements GeoItem {
 				return renderer;
 			}
 
-			private static final HumanoidModel.ArmPose PerilOffHandPose = HumanoidModel.ArmPose.create("PerilOffHand", false, (model, entity, arm) -> {
-				if (arm == HumanoidArm.LEFT) {
-					model.leftArm.xRot = -45F + model.head.xRot;
-				} else {
-					model.rightArm.xRot = -45F + model.head.xRot;
-				}
-			});
+			private static final HumanoidModel.ArmPose PerilOffHandPose = ArmPoses.PERIL_OFF_HAND.getValue();
 
 			@Override
 			public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
@@ -76,7 +70,7 @@ public class PerilOffHandItem extends Item implements GeoItem {
 				}
 				return true;
 			}
-		});
+		};
 	}
 
 	public void getTransformType(ItemDisplayContext type) {

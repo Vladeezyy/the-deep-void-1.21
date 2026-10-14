@@ -62,9 +62,8 @@ public abstract class VultureItem extends ArmorItem {
 			super(ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(35)));
 		}
 
-		@Override
-		public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-			consumer.accept(new IClientItemExtensions() {
+		public IClientItemExtensions clientExtensions() {
+			return new IClientItemExtensions() {
 				@Override
 				public HumanoidModel getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
 					HumanoidModel armorModel = new HumanoidModel(new ModelPart(Collections.emptyList(),
@@ -77,7 +76,7 @@ public abstract class VultureItem extends ArmorItem {
 					armorModel.young = living.isBaby();
 					return armorModel;
 				}
-			});
+			};
 		}
 
 		@Override
@@ -91,9 +90,8 @@ public abstract class VultureItem extends ArmorItem {
 			super(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(35)));
 		}
 
-		@Override
-		public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-			consumer.accept(new IClientItemExtensions() {
+		public IClientItemExtensions clientExtensions() {
+			return new IClientItemExtensions() {
 				@Override
 				@OnlyIn(Dist.CLIENT)
 				public HumanoidModel getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
@@ -106,7 +104,7 @@ public abstract class VultureItem extends ArmorItem {
 					armorModel.young = living.isBaby();
 					return armorModel;
 				}
-			});
+			};
 		}
 
 		@Override

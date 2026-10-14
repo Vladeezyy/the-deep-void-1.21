@@ -63,9 +63,8 @@ public abstract class PlagueDoctorItem extends ArmorItem {
 			super(ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(33)).fireResistant());
 		}
 
-		@Override
-		public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-			consumer.accept(new IClientItemExtensions() {
+		public IClientItemExtensions clientExtensions() {
+			return new IClientItemExtensions() {
 				@Override
 				public HumanoidModel getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
 					HumanoidModel armorModel = new HumanoidModel(new ModelPart(Collections.emptyList(),
@@ -78,7 +77,7 @@ public abstract class PlagueDoctorItem extends ArmorItem {
 					armorModel.young = living.isBaby();
 					return armorModel;
 				}
-			});
+			};
 		}
 
 		@Override

@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -61,7 +63,7 @@ public class VoidBowItem extends Item {
 	public void releaseUsing(ItemStack itemstack, Level world, LivingEntity entity, int time) {
 		VoidBowStoppedUsingProcedure.execute(world, entity, itemstack);
 		if (!world.isClientSide() && entity instanceof ServerPlayer player) {
-			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
+			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack, entity) - time);
 			if (pullingPower < 0.1)
 				return;
 			ItemStack stack = findAmmo(player);
@@ -72,10 +74,7 @@ public class VoidBowItem extends Item {
 					projectile.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 				} else {
 					if (stack.isDamageableItem()) {
-						stack.hurtAndBreak(1, world.getRandom(), player, () -> {
-							stack.shrink(1);
-							stack.setDamageValue(0);
-						});
+						PortUtil.hurtAndBreak(stack, 1, player);
 					} else {
 						stack.shrink(1);
 					}

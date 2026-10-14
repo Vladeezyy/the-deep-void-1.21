@@ -46,7 +46,7 @@ public class HarbingerOfCataclysmDiesProcedure {
 								ItemHandlerHelper.giveItemToPlayer(_player, _setstack);
 							}
 							if (!(entityiterator instanceof ServerPlayer _plr5 && _plr5.level() instanceof ServerLevel
-									&& _plr5.getAdvancements().getOrStartProgress(_plr5.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:unholy_psalmody"))).isDone())) {
+									&& _plr5.getAdvancements().getOrStartProgress(_plr5.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:unholy_psalmody"))).isDone())) {
 								if (entityiterator instanceof ServerPlayer _player) {
 									AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:unholy_psalmody"));
 									AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);

@@ -91,7 +91,7 @@ public class HiveWatcherDiesProcedure {
 								ItemHandlerHelper.giveItemToPlayer(_player, _setstack);
 							}
 							if (!(entityiterator instanceof ServerPlayer _plr31 && _plr31.level() instanceof ServerLevel
-									&& _plr31.getAdvancements().getOrStartProgress(_plr31.server.getAdvancements().getAdvancement(ResourceLocation.parse("the_deep_void:ommetaphobia"))).isDone())) {
+									&& _plr31.getAdvancements().getOrStartProgress(_plr31.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:ommetaphobia"))).isDone())) {
 								if (entityiterator instanceof ServerPlayer _player) {
 									AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:ommetaphobia"));
 									AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);

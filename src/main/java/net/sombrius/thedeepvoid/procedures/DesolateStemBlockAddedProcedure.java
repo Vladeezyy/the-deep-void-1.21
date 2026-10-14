@@ -1,0 +1,19 @@
+package net.sombrius.thedeepvoid.procedures;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
+
+public class DesolateStemBlockAddedProcedure {
+	public static void execute(LevelAccessor world, double x, double y, double z) {
+		if (!world.getBlockState(BlockPos.containing(x, y - 1, z)).canOcclude() && !((world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() == TheDeepVoidModBlocks.DESOLATE_STEM.get())
+				&& !((world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() == TheDeepVoidModBlocks.LIVING_GLOOM_STEM.get())) {
+			{
+				BlockPos _pos = BlockPos.containing(x, y, z);
+				Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y, z), null);
+				world.destroyBlock(_pos, false);
+			}
+		}
+	}
+}

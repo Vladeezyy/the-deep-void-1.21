@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aaa",
+    "bbb",
+    "cbc"
+  ],
+  "key": {
+    "a": {
+      "item": "the_deep_void:dark_cloth"
+    },
+    "b": {
+      "item": "the_deep_void:dark_steel_scrap"
+    },
+    "c": {
+      "item": "the_deep_void:ambrosial_flesh_chunk"
+    }
+  },
+  "result": {
+    "item": "the_deep_void:plague_doctor_helmet",
+    "count": 1
+  }
+}

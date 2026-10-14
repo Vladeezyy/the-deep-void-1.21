@@ -1,0 +1,7 @@
+{
+  "parent": "the_deep_void:custom/judgementgreatsword",
+  "textures": {
+    "0": "the_deep_void:block/judgement",
+    "particle": "the_deep_void:item/judgement_greatsword"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "abc",
+    "bdb",
+    "eba"
+  ],
+  "key": {
+    "a": {
+      "item": "the_deep_void:mourner_hide"
+    },
+    "b": {
+      "item": "minecraft:leather"
+    },
+    "c": {
+      "item": "minecraft:gold_ingot"
+    },
+    "d": {
+      "item": "the_deep_void:gooey_delight"
+    },
+    "e": {
+      "item": "the_deep_void:garum"
+    }
+  },
+  "result": {
+    "item": "the_deep_void:noxious_brew",
+    "count": 3
+  }
+}

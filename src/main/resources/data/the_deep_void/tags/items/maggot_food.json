@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:rotten_flesh",
+    "the_deep_void:flesh_block",
+    "the_deep_void:rotten_flesh_chunk",
+    "minecraft:spider_eye",
+    "minecraft:fermented_spider_eye",
+    "the_deep_void:bone_crawler_embryo"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "the_deep_void:custom/apostleofcatastrophehead",
+  "textures": {
+    "all": "the_deep_void:block/apostleofcatastrophehead",
+    "particle": "the_deep_void:block/apostleofcatastrophehead",
+    "0": "the_deep_void:block/apostleofcatastrophehead"
+  },
+  "render_type": "cutout"
+}

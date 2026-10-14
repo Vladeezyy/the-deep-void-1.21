@@ -1,0 +1,16 @@
+package net.sombrius.thedeepvoid.procedures;
+
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
+
+public class PlagueOverlayDisplayOverlayIngameProcedure {
+	public static boolean execute(Entity entity) {
+		if (entity == null)
+			return false;
+		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(TheDeepVoidModMobEffects.PLAGUE)) {
+			return true;
+		}
+		return false;
+	}
+}

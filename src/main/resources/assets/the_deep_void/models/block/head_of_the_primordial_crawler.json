@@ -1,0 +1,9 @@
+{
+  "parent": "the_deep_void:custom/primordialbonecrawlerhead",
+  "textures": {
+    "all": "the_deep_void:block/primordial_bone_crawler_head",
+    "particle": "the_deep_void:block/primordial_bone_crawler_head",
+    "0": "the_deep_void:block/primordial_bone_crawler_head"
+  },
+  "render_type": "cutout"
+}

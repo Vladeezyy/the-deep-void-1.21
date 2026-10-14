@@ -1,0 +1,63 @@
+package net.sombrius.thedeepvoid.procedures;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.Event;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
+
+@EventBusSubscriber(value = {Dist.CLIENT})
+public class BismuthNetheriteArmorDescriptionProcedure {
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onItemTooltip(ItemTooltipEvent event) {
+		execute(event, event.getEntity(), event.getItemStack(), event.getToolTip());
+	}
+
+	public static void execute(Entity entity, ItemStack itemstack, List<Component> tooltip) {
+		execute(null, entity, itemstack, tooltip);
+	}
+
+	private static void execute(@Nullable Event event, Entity entity, ItemStack itemstack, List<Component> tooltip) {
+		if (entity == null || tooltip == null)
+			return;
+		if (itemstack.getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_HELMET.get() || itemstack.getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_LEGGINGS.get()
+				|| itemstack.getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_BOOTS.get() || itemstack.getItem() == TheDeepVoidModItems.DARK_STEEL_BISMUTH_NETHERITE_HELMET.get()
+				|| itemstack.getItem() == TheDeepVoidModItems.DARK_STEEL_BISMUTH_NETHERITE_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.DARK_STEEL_BISMUTH_NETHERITE_LEGGINGS.get()
+				|| itemstack.getItem() == TheDeepVoidModItems.DARK_STEEL_BISMUTH_NETHERITE_BOOTS.get()) {
+			tooltip.add(Component.literal(""));
+			if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_HELMET.get()
+					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_CHESTPLATE.get()
+					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_LEGGINGS.get()
+					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_BOOTS.get()
+					|| (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.DARK_STEEL_BISMUTH_NETHERITE_HELMET.get()
+							&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.DARK_STEEL_BISMUTH_NETHERITE_CHESTPLATE.get()
+							&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.DARK_STEEL_BISMUTH_NETHERITE_LEGGINGS.get()
+							&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.DARK_STEEL_BISMUTH_NETHERITE_BOOTS.get()) {
+				if (Screen.hasShiftDown()) {
+					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.when_worn").getString())));
+					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.bismuth_netherite.worn").getString())));
+				} else {
+					tooltip.add(Component.literal((Component.translatable("armors.the_deep_void.press_shift").getString())));
+				}
+			} else {
+				if (Screen.hasShiftDown()) {
+					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.when_worn").getString())));
+					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.bismuth_netherite.worn").getString())));
+				} else {
+					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.press_shift_nofull").getString())));
+				}
+			}
+		}
+	}
+}

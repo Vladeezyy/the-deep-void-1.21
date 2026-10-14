@@ -1,0 +1,23 @@
+package net.sombrius.thedeepvoid.entity.model;
+
+import net.minecraft.resources.ResourceLocation;
+import net.sombrius.thedeepvoid.entity.IdlingApostleEntity;
+import software.bernie.geckolib.model.GeoModel;
+
+public class IdlingApostleModel extends GeoModel<IdlingApostleEntity> {
+	@Override
+	public ResourceLocation getAnimationResource(IdlingApostleEntity entity) {
+		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "animations/apostleofcatastrophe.animation.json");
+	}
+
+	@Override
+	public ResourceLocation getModelResource(IdlingApostleEntity entity) {
+		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "geo/apostleofcatastrophe.geo.json");
+	}
+
+	@Override
+	public ResourceLocation getTextureResource(IdlingApostleEntity entity) {
+		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/entities/" + entity.getTexture() + ".png");
+	}
+
+}

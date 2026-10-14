@@ -1,0 +1,39 @@
+
+package net.sombrius.thedeepvoid.block;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.MapColor;
+import net.neoforged.neoforge.common.util.DeferredSoundType;
+import net.sombrius.thedeepvoid.procedures.LavenditeOreBlockDestroyedByPlayerProcedure;
+
+public class LavenditeOreBlock extends Block {
+	public LavenditeOreBlock() {
+		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE)
+				.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.amethyst_block.break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.amethyst_block.step")),
+						() -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.amethyst_block.place")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.deepslate.hit")),
+						() -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.deepslate.fall"))))
+				.strength(2f, 4f).requiresCorrectToolForDrops());
+	}
+
+	@Override
+	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+		return 15;
+	}
+
+	@Override
+	public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {
+		boolean retval = super.onDestroyedByPlayer(blockstate, world, pos, entity, willHarvest, fluid);
+		LavenditeOreBlockDestroyedByPlayerProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ(), entity);
+		return retval;
+	}
+}

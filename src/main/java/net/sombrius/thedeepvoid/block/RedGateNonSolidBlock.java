@@ -1,6 +1,9 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import net.minecraft.world.level.LevelReader;
+import javax.annotation.Nullable;
+
 import net.sombrius.thedeepvoid.procedures.RedGateNonSolidOnTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.RedGateNonSolidEntityCollidesInTheBlockProcedure;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
@@ -9,7 +12,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.BlockState;
@@ -48,13 +51,13 @@ public class RedGateNonSolidBlock extends Block {
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader world, BlockPos pos, Player player) {
 		return new ItemStack(TheDeepVoidModBlocks.RED_GATE.get());
 	}
 
 	@Override
-	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
-		return BlockPathTypes.BLOCKED;
+	public PathType getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
+		return PathType.BLOCKED;
 	}
 
 	@Override

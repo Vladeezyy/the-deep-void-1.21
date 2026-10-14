@@ -25,9 +25,7 @@ public class PerilItemInHandTickProcedure {
 					_player.getInventory().setChanged();
 			}
 			{
-				CompoundTag _nbtTag = itemstack.getTag();
-				if (_nbtTag != null)
-					(entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).setTag(_nbtTag.copy());
+				(entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).applyComponents(itemstack.getComponentsPatch());
 			}
 		}
 	}

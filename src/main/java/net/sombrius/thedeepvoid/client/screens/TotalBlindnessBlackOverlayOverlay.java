@@ -21,8 +21,8 @@ import org.checkerframework.checker.units.qual.h;
 public class TotalBlindnessBlackOverlayOverlay {
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void eventHandler(RenderGuiEvent.Pre event) {
-		int w = event.getWindow().getGuiScaledWidth();
-		int h = event.getWindow().getGuiScaledHeight();
+		int w = event.getGuiGraphics().guiWidth();
+		int h = event.getGuiGraphics().guiHeight();
 		Level world = null;
 		double x = 0;
 		double y = 0;

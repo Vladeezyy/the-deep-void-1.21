@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -33,7 +35,7 @@ public class BismuthNetheriteSwordKillEntityProcedure {
 		if (entity == null || sourceentity == null)
 			return;
 		if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(ItemTags.create(ResourceLocation.parse("the_deep_void:bismuth_tool")))
-				&& (entity instanceof LivingEntity _entity ? _entity.getExperienceReward() : 0) > 0) {
+				&& (entity instanceof LivingEntity _entity ? PortUtil.experienceReward(_entity) : 0) > 0) {
 			if (world instanceof ServerLevel _level)
 				_level.addFreshEntity(new ExperienceOrb(_level, (entity.getX()), (entity.getY()), (entity.getZ()), Mth.nextInt(RandomSource.create(), 1, 9)));
 		}

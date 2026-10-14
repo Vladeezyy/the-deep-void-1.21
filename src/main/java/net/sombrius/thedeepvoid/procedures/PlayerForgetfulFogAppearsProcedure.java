@@ -29,7 +29,7 @@ public class PlayerForgetfulFogAppearsProcedure {
 		ClientLevel level = minecraft.level;
 		Entity entity = minecraft.gameRenderer.getMainCamera().getEntity();
 		if (level != null && entity != null) {
-			Vec3 pos = entity.getPosition(minecraft.getPartialTick());
+			Vec3 pos = entity.getPosition(minecraft.getTimer().getGameTimeDeltaPartialTick(true));
 			execute(event, level, pos.x(), pos.z(), entity);
 		}
 	}

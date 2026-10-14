@@ -115,7 +115,7 @@ public class RideableFlyingEyekinEntity extends TamableAnimal implements GeoEnti
 				return new Vec3(dir_x, dir_y, dir_z);
 			}
 		});
-		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2));
 	}
 
 	@Override

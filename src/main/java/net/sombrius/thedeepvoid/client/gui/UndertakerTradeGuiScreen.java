@@ -59,7 +59,7 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		this.renderBackground(guiGraphics);
+		this.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
 		this.renderTooltip(guiGraphics, mouseX, mouseY);
 	}
@@ -127,9 +127,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton1DisplayProcedure.execute(entity))
-					super.render(guiGraphics, gx, gy, ticks);
+					super.renderWidget(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button", imagebutton_button);
@@ -141,9 +141,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton2DisplayProcedure.execute(entity))
-					super.render(guiGraphics, gx, gy, ticks);
+					super.renderWidget(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button1", imagebutton_button1);
@@ -155,9 +155,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton3DisplayProcedure.execute(entity))
-					super.render(guiGraphics, gx, gy, ticks);
+					super.renderWidget(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button2", imagebutton_button2);
@@ -169,9 +169,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton4DisplayProcedure.execute(entity))
-					super.render(guiGraphics, gx, gy, ticks);
+					super.renderWidget(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button3", imagebutton_button3);
@@ -183,9 +183,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton5DisplayProcedure.execute(entity))
-					super.render(guiGraphics, gx, gy, ticks);
+					super.renderWidget(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button4", imagebutton_button4);
@@ -197,9 +197,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton6DisplayProcedure.execute(entity))
-					super.render(guiGraphics, gx, gy, ticks);
+					super.renderWidget(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button5", imagebutton_button5);

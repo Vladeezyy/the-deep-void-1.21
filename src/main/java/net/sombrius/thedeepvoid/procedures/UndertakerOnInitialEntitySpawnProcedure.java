@@ -54,8 +54,7 @@ public class UndertakerOnInitialEntitySpawnProcedure {
 		for (int index2 = 0; index2 < 16; index2++) {
 			temp = BuiltInRegistries.ITEM.getKey((BuiltInRegistries.ITEM.getTag(ItemTags.create(ResourceLocation.parse("the_deep_void:undertaker_void_goods"))).flatMap(_t -> _t.getRandomElement(RandomSource.create())).map(Holder::value).orElseGet(() -> Items.AIR))).toString();
 			if (!(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH))) == ItemStack.EMPTY.getItem())
-					&& !(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH))) == BuiltInRegistries.ITEM
-							.getValue(ResourceLocation.parse(((entity.getPersistentData().getString("secondTrade"))).toLowerCase(java.util.Locale.ENGLISH))))) {
+					&& !(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH))) == BuiltInRegistries.ITEM.get(ResourceLocation.parse(((entity.getPersistentData().getString("secondTrade"))).toLowerCase(java.util.Locale.ENGLISH))))) {
 				entity.getPersistentData().putString("thirdTrade", temp);
 				if (new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse((temp).toLowerCase(java.util.Locale.ENGLISH)))).isStackable()) {
 					entity.getPersistentData().putDouble("thirdTradeQut", (Mth.nextInt(RandomSource.create(), 1, 6)));

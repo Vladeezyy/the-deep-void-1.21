@@ -84,7 +84,7 @@ public class UndertakerRightClickedOnEntityProcedure {
 			sourceentity.getPersistentData().putString("undertakerUuid", (entity.getStringUUID()));
 			if (sourceentity instanceof ServerPlayer _ent) {
 				BlockPos _bpos = BlockPos.containing(x, y, z);
-				NetworkHooks.openScreen((ServerPlayer) _ent, new MenuProvider() {
+				_ent.openMenu(new MenuProvider() {
 					@Override
 					public Component getDisplayName() {
 						return Component.literal("UndertakerTradeGui");

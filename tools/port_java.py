@@ -114,6 +114,15 @@ IMPORTS = {
     'Tier': 'net.minecraft.world.item.Tier',
     'FastColor': 'net.minecraft.util.FastColor',
     'ItemAttributeModifiers': 'net.minecraft.world.item.component.ItemAttributeModifiers',
+    'PotionContents': 'net.minecraft.world.item.alchemy.PotionContents',
+    'RegisterBrewingRecipesEvent': 'net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent',
+    'DeferredSoundType': 'net.neoforged.neoforge.common.util.DeferredSoundType',
+    'PathType': 'net.minecraft.world.level.pathfinder.PathType',
+    'LevelReader': 'net.minecraft.world.level.LevelReader',
+    'Vec3': 'net.minecraft.world.phys.Vec3',
+    'Entity': 'net.minecraft.world.entity.Entity',
+    'Iterables': 'com.google.common.collect.Iterables',
+    'Player': 'net.minecraft.world.entity.player.Player',
     'PortUtil': 'net.sombrius.thedeepvoid.port.PortUtil',
     'Nullable': 'javax.annotation.Nullable',
     'ItemStack': 'net.minecraft.world.item.ItemStack',
@@ -421,11 +430,11 @@ def fix_attribute_modifiers(s):
     s = ''.join(out)
     # hasModifier(new AttributeModifier(id, ...)) -> hasModifier(id)
     while True:
-        m = re.search(r'hasModifier\(\(?new AttributeModifier\(', s)
+        m = re.search(r'hasModifier\(\s*\(?new AttributeModifier\(', s)
         if not m: break
         end, args = split_args(s, m.end() - 1)
         k = end + 1
-        if s[m.end() - len('new AttributeModifier(') - 1] == '(':
+        if s[m.end() - len('new AttributeModifier(') - 1] == '(' and not s[m.start():m.end()].rstrip('(').endswith('hasModifier'):
             k += 1  # closing paren of the extra (...)
         s = s[:m.start()] + 'hasModifier(' + args[0].strip() + s[k:]
     return s
@@ -563,6 +572,100 @@ def fix_default_attributes(s):
     return s
 
 
+def fix_brewing(s):
+    s = re.sub(r'@EventBusSubscriber\(bus = EventBusSubscriber\.Bus\.MOD\)\n(public class \w+ implements IBrewingRecipe)', r'@EventBusSubscriber\n\1', s)
+    s = re.sub(r'public static void init\(FMLCommonSetupEvent event\) \{\s*event\.enqueueWork\(\(\) -> BrewingRecipeRegistry\.addRecipe\((new \w+\(\))\)\);',
+               r'public static void init(RegisterBrewingRecipesEvent event) {\n\t\tevent.getBuilder().addRecipe(\1);', s)
+    s = re.sub(r'PotionUtils\.getPotion\((\w+)\) == ([\w.]+)', r'\1.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).is(\2)', s)
+    s = re.sub(r'PotionUtils\.setPotion\(new ItemStack\((Items\.\w+)\), ([\w.]+)\)', r'PotionContents.createItemStack(\1, \2)', s)
+    s = re.sub(r'PotionUtils\.setPotion\((\w+), ([\w.]+)\);', r'\1.set(DataComponents.POTION_CONTENTS, new PotionContents(\2));', s)
+    s = re.sub(r'import net\.minecraft\.world\.item\.alchemy\.PotionUtils;\n', '', s)
+    s = re.sub(r'import net\.neoforged\.neoforge\.common\.brewing\.BrewingRecipeRegistry;\n', '', s)
+    return s
+
+
+def fix_blocks(s):
+    s = s.replace('new ForgeSoundType(', 'new DeferredSoundType(')
+    s = re.sub(r'import net\.neoforged\.neoforge\.common\.util\.ForgeSoundType;', 'import net.neoforged.neoforge.common.util.DeferredSoundType;', s)
+    s = re.sub(r'public ItemStack getCloneItemStack\(BlockState (\w+), HitResult (\w+), BlockGetter (\w+), BlockPos (\w+), Player (\w+)\)',
+               r'public ItemStack getCloneItemStack(BlockState \1, HitResult \2, LevelReader \3, BlockPos \4, Player \5)', s)
+    s = re.sub(r'public BlockPathTypes getBlockPathType\(BlockState (\w+), BlockGetter (\w+), BlockPos (\w+), Mob (\w+)\)',
+               r'public PathType getBlockPathType(BlockState \1, BlockGetter \2, BlockPos \3, @Nullable Mob \4)', s)
+    s = re.sub(r'\bBlockPathTypes\.', 'PathType.', s)
+    s = re.sub(r'import net\.minecraft\.world\.level\.pathfinder\.BlockPathTypes;', 'import net.minecraft.world.level.pathfinder.PathType;', s)
+    # FlowerBlock(Supplier<MobEffect>, ticks, props) -> (Holder<MobEffect>, seconds, props)
+    s = re.sub(r'super\(\(\) -> (MobEffects\.\w+), (\d+),', lambda m: 'super(%s, %sf,' % (m.group(1), int(m.group(2)) / 20), s)
+    s = remove_method(s, r'public int getEffectDuration\(\)')
+    s = remove_method(s, r'public MobEffect getSuspiciousEffect\(\)')
+    # DoorBlock / TrapDoorBlock / PressurePlate etc.: (props, BlockSetType) -> (BlockSetType, props)
+    s = re.sub(r'super\((BlockBehaviour\.Properties\.of\(\)[^;]*?), (BlockSetType\.\w+)\);', r'super(\2, \1);', s)
+    s = re.sub(r'super\(\(\) -> ([\w.]+\.defaultBlockState\(\)),', r'super(\1,', s)
+    # Block#use(state, level, pos, player, hand, hit) -> useWithoutItem(state, level, pos, player, hit)
+    m = re.search(r'public InteractionResult use\(BlockState (\w+), Level (\w+), BlockPos (\w+), Player (\w+), InteractionHand (\w+), BlockHitResult (\w+)\) \{', s)
+    if m:
+        bs, w, pos, pl, hand, hit = m.groups()
+        e = match_paren(s, m.end() - 1); body = s[m.end():e]
+        body = body.replace('super.use(%s, %s, %s, %s, %s, %s)' % (bs, w, pos, pl, hand, hit), 'super.useWithoutItem(%s, %s, %s, %s, %s)' % (bs, w, pos, pl, hit))
+        if re.search(r'\b%s\b' % hand, body):
+            body = '\n\t\tInteractionHand %s = InteractionHand.MAIN_HAND;' % hand + body
+        s = s[:m.start()] + 'public InteractionResult useWithoutItem(BlockState %s, Level %s, BlockPos %s, Player %s, BlockHitResult %s) {' % (bs, w, pos, pl, hit) + body + s[e:]
+    s = re.sub(r'\.use\(([^;]*?), InteractionHand\.MAIN_HAND, (BlockHitResult\.miss\()', r'.useWithoutItem(\1, \2', s)
+    return s
+
+
+def fix_entities2(s):
+    s = re.sub(r'protected void dropCustomDeathLoot\(DamageSource (\w+), int \w+, boolean (\w+)\) \{\s*super\.dropCustomDeathLoot\(\1, \w+, \2\);',
+               r'protected void dropCustomDeathLoot(ServerLevel serverLevel, DamageSource \1, boolean \2) {\n\t\tsuper.dropCustomDeathLoot(serverLevel, \1, \2);', s)
+    s = re.sub(r'super\.finalizeSpawn\((\w+), (\w+), (\w+), (\w+), \w+\)', r'super.finalizeSpawn(\1, \2, \3, \4)', s)
+    s = re.sub(r'new FollowOwnerGoal\(this, ([^,;]+), ([^,;]+), ([^,;]+), (?:true|false)\)', r'new FollowOwnerGoal(this, \1, \2, \3)', s)
+    s = re.sub(r'public double getMyRidingOffset\(\) \{\s*return ([^;]+);\s*\}',
+               r'public Vec3 getVehicleAttachmentPoint(Entity vehicle) {\n\t\treturn new Vec3(0, -(\1), 0);\n\t}', s)
+    m = re.search(r'public static void init\(RegisterSpawnPlacementsEvent event\) \{', s)
+    if m:
+        e = match_paren(s, m.end() - 1); body = s[m.end():e]
+        j = body.find('event.register(')
+        if j >= 0 and 'Operation.REPLACE' not in body:
+            end, args = split_args(body, j + len('event.register'))
+            if len(args) == 4:
+                body = body[:end] + ', RegisterSpawnPlacementsEvent.Operation.REPLACE' + body[end:]
+                s = s[:m.end()] + body + s[e:]
+    return s
+
+
+def fix_misc3(s):
+    s = s.replace('.getEffect().getCategory()', '.getEffect().value().getCategory()')
+    s = re.sub(r'(\w+)\.getExperienceReward\(\)', r'PortUtil.experienceReward(\1)', s)
+    s = re.sub(r'BuiltInRegistries\.(\w+)\s*\.getValue\(', r'BuiltInRegistries.\1.get(', s)
+    s = s.replace('minecraft.getPartialTick()', 'minecraft.getTimer().getGameTimeDeltaPartialTick(true)')
+    s = re.sub(r'NetworkHooks\.openScreen\(\(ServerPlayer\) (\w+), ', r'\1.openMenu(', s)
+    s = re.sub(r'CompoundTag (\w+) = ([^;]+?)\.getTag\(\);\s*if \(\1 != null\)\s*([^;]+?)\.setTag\(\1\.copy\(\)\);',
+               r'\3.applyComponents(\2.getComponentsPatch());', s)
+    s = re.sub(r'ItemProperties\.getProperty\((Items\.\w+), ', r'ItemProperties.getProperty(new ItemStack(\1), ', s)
+    return s
+
+
+def fix_armor_tick(s):
+    # NeoForge 1.21 dropped IItemExtension#onArmorTick: run it from inventoryTick while worn
+    m = re.search(r'\n\t@Override\n\tpublic void onArmorTick\(ItemStack (\w+), Level (\w+), Player (\w+)\) \{', s)
+    if not m: return s
+    st, w, pl = m.groups()
+    e = match_paren(s, m.end() - 1); body = s[m.end():e].rstrip()
+    body = body.replace('\n\t\t', '\n\t\t\t')
+    new = ('\n\t@Override\n\tpublic void inventoryTick(ItemStack %s, Level %s, Entity _wearer, int slot, boolean selected) {\n'
+           '\t\tsuper.inventoryTick(%s, %s, _wearer, slot, selected);\n'
+           '\t\tif (_wearer instanceof Player %s && Iterables.contains(%s.getArmorSlots(), %s)) {%s\n\t\t}\n\t}') % (st, w, st, w, pl, pl, st, body)
+    return s[:m.start()] + new + s[e + 1:]
+
+
+def fix_gui(s):
+    s = re.sub(r'event\.getWindow\(\)\.getGuiScaledWidth\(\)', 'event.getGuiGraphics().guiWidth()', s)
+    s = re.sub(r'event\.getWindow\(\)\.getGuiScaledHeight\(\)', 'event.getGuiGraphics().guiHeight()', s)
+    s = re.sub(r'this\.renderBackground\((\w+)\);', r'this.renderBackground(\1, mouseX, mouseY, partialTicks);', s)
+    s = re.sub(r'(\}\) \{\s*@Override\s*public void )render\(GuiGraphics (\w+), int (\w+), int (\w+), float (\w+)\) \{([^{}]*?)super\.render\(',
+               r'\1renderWidget(GuiGraphics \2, int \3, int \4, float \5) {\6super.renderWidget(', s)
+    return s
+
+
 def fix_network(s):
     s = re.sub(r'= new ImageButton\((?=[^;]*?, ResourceLocation\.parse\([^;]*?\), \d+, \d+, e -> \{)', '= new PortImageButton(', s)
     s = re.sub(r'TheDeepVoidMod\.PACKET_HANDLER\.sendToServer\(', 'PacketDistributor.sendToServer(', s)
@@ -672,6 +775,12 @@ def convert(s):
     s = fix_vertex_api(s)
     s = fix_item_attribute_event(s)
     s = fix_misc2(s)
+    s = fix_brewing(s)
+    s = fix_blocks(s)
+    s = fix_entities2(s)
+    s = fix_misc3(s)
+    s = fix_armor_tick(s)
+    s = fix_gui(s)
     s = fix_default_attributes(s)
     s = fix_network(s)
     s = fix_enchantments(s)

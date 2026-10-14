@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid;
 
+import net.sombrius.thedeepvoid.init.TheDeepVoidModRecipeTypes;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -63,6 +65,8 @@ public class TheDeepVoidMod {
 		TheDeepVoidModParticleTypes.REGISTRY.register(modEventBus);
 
 		TheDeepVoidModFluids.REGISTRY.register(modEventBus);
+		TheDeepVoidModRecipeTypes.SERIALIZERS.register(modEventBus);
+		TheDeepVoidModRecipeTypes.TYPES.register(modEventBus);
 		TheDeepVoidModFluidTypes.REGISTRY.register(modEventBus);
 		// Start of user code block mod init
 		// End of user code block mod init

@@ -7,7 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
+public class TreasureBagJeiTypeRecipe implements Recipe<RecipeInput> {
 	private final ItemStack output;
 	private final NonNullList<Ingredient> recipeItems;
 
@@ -25,7 +25,7 @@ public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
 	}
 
 	@Override
-	public boolean matches(SimpleContainer pContainer, Level pLevel) {
+	public boolean matches(RecipeInput pContainer, Level pLevel) {
 		if (pLevel.isClientSide()) {
 			return false;
 		}
@@ -38,7 +38,7 @@ public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
 	}
 
 	@Override
-	public ItemStack assemble(SimpleContainer pContainer, HolderLookup.Provider provider) {
+	public ItemStack assemble(RecipeInput pContainer, HolderLookup.Provider provider) {
 		return output;
 	}
 

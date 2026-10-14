@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import net.minecraft.world.level.LevelReader;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +29,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.util.ForgeSoundType;
+import net.neoforged.neoforge.common.util.DeferredSoundType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.procedures.DarkSteelSpikesEntityCollidesInTheBlockProcedure;
@@ -38,7 +40,7 @@ public class TrapDarkSteelSpikesBlock extends Block implements SimpleWaterlogged
 
 	public TrapDarkSteelSpikesBlock() {
 		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM)
-				.sound(new ForgeSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")),
+				.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")),
 						() -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.place")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.nether_wood.hit")),
 						() -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty"))))
 				.strength(1f).noCollission().speedFactor(0.5f).jumpFactor(0.4f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
@@ -90,7 +92,7 @@ public class TrapDarkSteelSpikesBlock extends Block implements SimpleWaterlogged
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader world, BlockPos pos, Player player) {
 		return new ItemStack(TheDeepVoidModBlocks.BONE_SPIKES.get());
 	}
 

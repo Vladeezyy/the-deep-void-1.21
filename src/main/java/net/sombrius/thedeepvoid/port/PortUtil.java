@@ -38,9 +38,21 @@ public final class PortUtil {
 		});
 	}
 
+	/** 1.20 {@code if (stack.hurt(amount, random, player)) ...}: damages the stack and tells whether it broke (1.21 already shrank it). */
+	public static boolean hurtAndBreakReports(ItemStack stack, int amount, @Nullable LivingEntity entity) {
+		int before = stack.getCount();
+		hurtAndBreak(stack, amount, entity);
+		return stack.getCount() < before;
+	}
+
 	/** 1.20 {@code AbstractArrow.setKnockback}: 1.21 takes knockback from the weapon's enchantments only. */
 	public static void setKnockback(AbstractArrow arrow, int knockback) {
 		((ArrowKnockback) arrow).deepvoid$setKnockback(knockback);
+	}
+
+	/** 1.20 {@code LivingEntity#getExperienceReward()}: 1.21 needs the server level and the killer. */
+	public static int experienceReward(LivingEntity entity) {
+		return entity.level() instanceof ServerLevel serverLevel ? entity.getExperienceReward(serverLevel, entity.getLastAttacker()) : 0;
 	}
 
 	/** 1.21 enchantments live in a datapack registry: look them up on whichever side we are. */

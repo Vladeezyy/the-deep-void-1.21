@@ -1,6 +1,7 @@
 package net.sombrius.thedeepvoid.network;
 
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -34,7 +35,7 @@ import java.util.function.Supplier;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class TheDeepVoidModVariables {
-	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoBuiltInRegistries.Keys.ATTACHMENT_TYPES, TheDeepVoidMod.MODID);
+	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, TheDeepVoidMod.MODID);
 	public static final Supplier<AttachmentType<PlayerVariables>> PLAYER_VARIABLES = ATTACHMENT_TYPES.register("player_variables", () -> AttachmentType.serializable(() -> new PlayerVariables()).build());
 
 	@SubscribeEvent

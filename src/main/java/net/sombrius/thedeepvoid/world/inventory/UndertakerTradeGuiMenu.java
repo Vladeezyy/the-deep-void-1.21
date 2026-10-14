@@ -1,6 +1,12 @@
 
 package net.sombrius.thedeepvoid.world.inventory;
 
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
+
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.HashMap;
@@ -18,8 +24,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.common.capabilities.ForgeCapabilities;
-import net.neoforged.neoforge.event.TickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -65,25 +69,27 @@ public class UndertakerTradeGuiMenu extends AbstractContainerMenu implements Sup
 				byte hand = extraData.readByte();
 				ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
 				this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
-				itemstack.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
-					this.internal = capability;
+				IItemHandler cap = itemstack.getCapability(Capabilities.ItemHandler.ITEM);
+				if (cap != null) {
+					this.internal = cap;
 					this.bound = true;
-				});
+				}
 			} else if (extraData.readableBytes() > 1) { // bound to entity
 				extraData.readByte(); // drop padding
 				boundEntity = world.getEntity(extraData.readVarInt());
-				if (boundEntity != null)
-					boundEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
-						this.internal = capability;
+				if (boundEntity != null) {
+					IItemHandler cap = boundEntity.getCapability(Capabilities.ItemHandler.ENTITY);
+					if (cap != null) {
+						this.internal = cap;
 						this.bound = true;
-					});
+					}
+				}
 			} else { // might be bound to block
 				boundBlockEntity = this.world.getBlockEntity(pos);
-				if (boundBlockEntity != null)
-					boundBlockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
-						this.internal = capability;
-						this.bound = true;
-					});
+				if (boundBlockEntity instanceof BaseContainerBlockEntity baseContainerBlockEntity) {
+					this.internal = new InvWrapper(baseContainerBlockEntity);
+					this.bound = true;
+				}
 			}
 		}
 		this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 114, 35) {
@@ -339,7 +345,7 @@ public class UndertakerTradeGuiMenu extends AbstractContainerMenu implements Sup
 				}
 				Slot slot = this.slots.get(i);
 				ItemStack itemstack = slot.getItem();
-				if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameTags(p_38904_, itemstack)) {
+				if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameComponents(p_38904_, itemstack)) {
 					int j = itemstack.getCount() + p_38904_.getCount();
 					int maxSize = Math.min(slot.getMaxStackSize(), p_38904_.getMaxStackSize());
 					if (j <= maxSize) {
@@ -477,9 +483,9 @@ public class UndertakerTradeGuiMenu extends AbstractContainerMenu implements Sup
 	}
 
 	@SubscribeEvent
-	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		Player entity = event.getEntity();
-		if (event.phase == TickEvent.Phase.END && entity.containerMenu instanceof UndertakerTradeGuiMenu) {
+		if (entity.containerMenu instanceof UndertakerTradeGuiMenu) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();

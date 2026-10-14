@@ -140,7 +140,7 @@ public class DoomingCoffinEntity extends PathfinderMob implements GeoEntity {
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata) {
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
+		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata);
 		DoomingCoffinSpawnProcedure.execute(this);
 		return retval;
 	}

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.port;
 
+import net.neoforged.neoforge.common.NeoForge;
+
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -52,17 +54,17 @@ public class ClientExtensionsRegistration {
 		event.registerItem(((VultureItem.Helmet) TheDeepVoidModItems.VULTURE_HELMET.get()).clientExtensions(), TheDeepVoidModItems.VULTURE_HELMET.get());
 		event.registerItem(((VultureItem.Chestplate) TheDeepVoidModItems.VULTURE_CHESTPLATE.get()).clientExtensions(), TheDeepVoidModItems.VULTURE_CHESTPLATE.get());
 		event.registerItem(((PerilOffHandItem) TheDeepVoidModItems.PERIL_OFF_HAND.get()).clientExtensions(), TheDeepVoidModItems.PERIL_OFF_HAND.get());
-		event.registerMobEffect(((ComboMobEffect) TheDeepVoidModMobEffects.COMBO.get()).clientExtensions(), TheDeepVoidModMobEffects.COMBO.get());
-		event.registerMobEffect(((StareMobEffect) TheDeepVoidModMobEffects.STARE.get()).clientExtensions(), TheDeepVoidModMobEffects.STARE.get());
-		event.registerMobEffect(((TrembleMobEffect) TheDeepVoidModMobEffects.TREMBLE.get()).clientExtensions(), TheDeepVoidModMobEffects.TREMBLE.get());
-		event.registerMobEffect(((ParanoiaMobEffect) TheDeepVoidModMobEffects.PARANOIA.get()).clientExtensions(), TheDeepVoidModMobEffects.PARANOIA.get());
-		event.registerMobEffect(((LookingMobEffect) TheDeepVoidModMobEffects.LOOKING.get()).clientExtensions(), TheDeepVoidModMobEffects.LOOKING.get());
-		event.registerMobEffect(((RootBlindMobEffect) TheDeepVoidModMobEffects.ROOT_BLIND.get()).clientExtensions(), TheDeepVoidModMobEffects.ROOT_BLIND.get());
-		event.registerMobEffect(((LurkerHeadNearMobEffect) TheDeepVoidModMobEffects.LURKER_HEAD_NEAR.get()).clientExtensions(), TheDeepVoidModMobEffects.LURKER_HEAD_NEAR.get());
-		event.registerMobEffect(((DistractedMobEffect) TheDeepVoidModMobEffects.DISTRACTED.get()).clientExtensions(), TheDeepVoidModMobEffects.DISTRACTED.get());
-		event.registerMobEffect(((PowerfulShotMobEffect) TheDeepVoidModMobEffects.POWERFUL_SHOT.get()).clientExtensions(), TheDeepVoidModMobEffects.POWERFUL_SHOT.get());
-		event.registerMobEffect(((TotalBlindnessMobEffect) TheDeepVoidModMobEffects.TOTAL_BLINDNESS.get()).clientExtensions(), TheDeepVoidModMobEffects.TOTAL_BLINDNESS.get());
-		event.registerMobEffect(((PitShakeMobEffect) TheDeepVoidModMobEffects.PIT_SHAKE.get()).clientExtensions(), TheDeepVoidModMobEffects.PIT_SHAKE.get());
+		event.registerMobEffect(((ComboMobEffect) TheDeepVoidModMobEffects.COMBO.value()).clientExtensions(), TheDeepVoidModMobEffects.COMBO.value());
+		event.registerMobEffect(((StareMobEffect) TheDeepVoidModMobEffects.STARE.value()).clientExtensions(), TheDeepVoidModMobEffects.STARE.value());
+		event.registerMobEffect(((TrembleMobEffect) TheDeepVoidModMobEffects.TREMBLE.value()).clientExtensions(), TheDeepVoidModMobEffects.TREMBLE.value());
+		event.registerMobEffect(((ParanoiaMobEffect) TheDeepVoidModMobEffects.PARANOIA.value()).clientExtensions(), TheDeepVoidModMobEffects.PARANOIA.value());
+		event.registerMobEffect(((LookingMobEffect) TheDeepVoidModMobEffects.LOOKING.value()).clientExtensions(), TheDeepVoidModMobEffects.LOOKING.value());
+		event.registerMobEffect(((RootBlindMobEffect) TheDeepVoidModMobEffects.ROOT_BLIND.value()).clientExtensions(), TheDeepVoidModMobEffects.ROOT_BLIND.value());
+		event.registerMobEffect(((LurkerHeadNearMobEffect) TheDeepVoidModMobEffects.LURKER_HEAD_NEAR.value()).clientExtensions(), TheDeepVoidModMobEffects.LURKER_HEAD_NEAR.value());
+		event.registerMobEffect(((DistractedMobEffect) TheDeepVoidModMobEffects.DISTRACTED.value()).clientExtensions(), TheDeepVoidModMobEffects.DISTRACTED.value());
+		event.registerMobEffect(((PowerfulShotMobEffect) TheDeepVoidModMobEffects.POWERFUL_SHOT.value()).clientExtensions(), TheDeepVoidModMobEffects.POWERFUL_SHOT.value());
+		event.registerMobEffect(((TotalBlindnessMobEffect) TheDeepVoidModMobEffects.TOTAL_BLINDNESS.value()).clientExtensions(), TheDeepVoidModMobEffects.TOTAL_BLINDNESS.value());
+		event.registerMobEffect(((PitShakeMobEffect) TheDeepVoidModMobEffects.PIT_SHAKE.value()).clientExtensions(), TheDeepVoidModMobEffects.PIT_SHAKE.value());
 		event.registerFluidType(((LiquidVoidFluidType) TheDeepVoidModFluidTypes.LIQUID_VOID_TYPE.get()).clientExtensions(), TheDeepVoidModFluidTypes.LIQUID_VOID_TYPE.get());
 		event.registerFluidType(((LiquidIchorFluidType) TheDeepVoidModFluidTypes.LIQUID_ICHOR_TYPE.get()).clientExtensions(), TheDeepVoidModFluidTypes.LIQUID_ICHOR_TYPE.get());
 		event.registerItem(TheDeepVoidModItems.SOUL_WINGS_CHESTPLATE.get().clientExtensions(), TheDeepVoidModItems.SOUL_WINGS_CHESTPLATE.get());

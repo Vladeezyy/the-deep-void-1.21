@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import com.google.common.collect.Iterables;
+
 import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
@@ -89,9 +91,12 @@ public class SoulWingsItem extends ArmorItem implements GeoItem {
 	}
 
 	@Override
-	public void onArmorTick(ItemStack itemstack, Level world, Player entity) {
-		if (itemstack.getItem() instanceof SoulWingsItem armor && armor.getType() == ArmorItem.Type.CHESTPLATE)
-			PlayerHasSoulWingsTickProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
+	public void inventoryTick(ItemStack itemstack, Level world, Entity _wearer, int slot, boolean selected) {
+		super.inventoryTick(itemstack, world, _wearer, slot, selected);
+		if (_wearer instanceof Player entity && Iterables.contains(entity.getArmorSlots(), itemstack)) {
+			if (itemstack.getItem() instanceof SoulWingsItem armor && armor.getType() == ArmorItem.Type.CHESTPLATE)
+				PlayerHasSoulWingsTickProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
+		}
 	}
 
 	private PlayState predicate(AnimationState event) {

@@ -1,12 +1,13 @@
 
 package net.sombrius.thedeepvoid.recipes.brewing;
 
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
+
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.brewing.BrewingRecipeRegistry;
 import net.neoforged.neoforge.common.brewing.IBrewingRecipe;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -14,11 +15,11 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class LuckPotionRecipeBrewingRecipe implements IBrewingRecipe {
 	@SubscribeEvent
-	public static void init(FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(new LuckPotionRecipeBrewingRecipe()));
+	public static void init(RegisterBrewingRecipesEvent event) {
+		event.getBuilder().addRecipe(new LuckPotionRecipeBrewingRecipe());
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class LuckPotionRecipeBrewingRecipe implements IBrewingRecipe {
 	@Override
 	public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
 		if (isInput(input) && isIngredient(ingredient)) {
-			return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.LUCK);
+			return PotionContents.createItemStack(Items.POTION, Potions.LUCK);
 		}
 		return ItemStack.EMPTY;
 	}

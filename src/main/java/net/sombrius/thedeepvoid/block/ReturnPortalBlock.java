@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import net.minecraft.world.level.LevelReader;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -49,7 +51,7 @@ public class ReturnPortalBlock extends Block {
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader world, BlockPos pos, Player player) {
 		return new ItemStack(Blocks.AIR);
 	}
 

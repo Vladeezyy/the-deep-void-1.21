@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.world.phys.Vec3;
+
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 import net.minecraft.world.level.Explosion;
@@ -38,8 +40,8 @@ public class IchorCloudEntity extends PathfinderMob {
 
 
 	@Override
-	public double getMyRidingOffset() {
-		return -0.35D;
+	public Vec3 getVehicleAttachmentPoint(Entity vehicle) {
+		return new Vec3(0, -(-0.35D), 0);
 	}
 
 	@Override

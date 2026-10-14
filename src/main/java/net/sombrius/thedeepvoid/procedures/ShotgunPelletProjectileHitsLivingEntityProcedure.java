@@ -11,7 +11,7 @@ public class ShotgunPelletProjectileHitsLivingEntityProcedure {
 			return;
 		if (sourceentity instanceof LivingEntity _mobEffectContext) {
 			for (MobEffectInstance mobeffectiterator : _mobEffectContext.getActiveEffects()) {
-				if (mobeffectiterator.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
+				if (mobeffectiterator.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
 					if (entity instanceof LivingEntity _livingEntity)
 						_livingEntity.addEffect(mobeffectiterator);
 				}

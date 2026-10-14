@@ -175,13 +175,13 @@ public class TheDeepVoidModBrewingRecipes implements IModPlugin {
 		ingredientStack.clear();
 		ingredientStack.add(new ItemStack(TheDeepVoidModItems.BLESSED_PEARL.get()));
 		inputStack.add(new ItemStack(TheDeepVoidModItems.FISHY_POTION.get()));
-		PotionUtils.setPotion(potion, Potions.LUCK);
+		potion.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.LUCK));
 		brewingRecipes.add(factory.createBrewingRecipe(List.copyOf(ingredientStack), List.copyOf(inputStack), potion.copy()));
 		ingredientStack.clear();
 		inputStack.clear();
 		ingredientStack.add(new ItemStack(TheDeepVoidModItems.CURSED_PEARL.get()));
 		inputStack.add(new ItemStack(TheDeepVoidModItems.FISHY_POTION.get()));
-		PotionUtils.setPotion(potion, TheDeepVoidModPotions.BAD_LUCK);
+		potion.set(DataComponents.POTION_CONTENTS, new PotionContents(TheDeepVoidModPotions.BAD_LUCK));
 		brewingRecipes.add(factory.createBrewingRecipe(List.copyOf(ingredientStack), List.copyOf(inputStack), potion.copy()));
 		ingredientStack.clear();
 		inputStack.clear();

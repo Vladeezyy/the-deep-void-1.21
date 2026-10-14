@@ -4,6 +4,8 @@
  */
 package net.sombrius.thedeepvoid.init;
 
+import net.minecraft.world.item.ItemStack;
+
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.sombrius.thedeepvoid.item.inventory.NecrosedSkinBackpackInventoryCapability;
@@ -1439,13 +1441,13 @@ public class TheDeepVoidModItems {
 		@OnlyIn(Dist.CLIENT)
 		public static void clientLoad(FMLClientSetupEvent event) {
 			event.enqueueWork(() -> {
-				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
+				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
 				ItemProperties.register(ONYX_FLARE_GUN.get(), ResourceLocation.parse("the_deep_void:onyx_flare_gun_state"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) OnyxFlareGunPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
 				ItemProperties.register(SHADESTORM.get(), ResourceLocation.parse("the_deep_void:shadestorm_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ShadestormPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
 				ItemProperties.register(KNIVES_GLOVE.get(), ResourceLocation.parse("the_deep_void:knives_glove_knife_glove_condition"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) KnivesGlovePropertyValueProviderProcedure.execute(itemStackToRender));
 				ItemProperties.register(BISMUTH_VIAL.get(), ResourceLocation.parse("the_deep_void:bismuth_vial_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));

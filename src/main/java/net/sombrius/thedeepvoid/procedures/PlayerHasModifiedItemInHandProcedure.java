@@ -142,8 +142,7 @@ public class PlayerHasModifiedItemInHandProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_BOOTS.get()
 					&& !(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e")) != null)) {
-				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).hasModifier(
-						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e"), ((double) DeepVoidConfigConfiguration.GRIMROTTENARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)))))
+				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e"))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).addTransientModifier(
 							(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e"), ((double) DeepVoidConfigConfiguration.GRIMROTTENARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)));
 			} else if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e")) != null) {

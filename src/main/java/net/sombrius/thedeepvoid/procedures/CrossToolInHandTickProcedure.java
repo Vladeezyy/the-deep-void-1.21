@@ -17,8 +17,7 @@ public class CrossToolInHandTickProcedure {
 		if (entity == null)
 			return;
 		if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614")) != null)) {
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).hasModifier(
-					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"), ((double) DeepVoidConfigConfiguration.PENITENTCROSSREACHADDITION.get()), AttributeModifier.Operation.ADD_VALUE)))))
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).addTransientModifier(
 						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"), ((double) DeepVoidConfigConfiguration.PENITENTCROSSREACHADDITION.get()), AttributeModifier.Operation.ADD_VALUE)));
 		}

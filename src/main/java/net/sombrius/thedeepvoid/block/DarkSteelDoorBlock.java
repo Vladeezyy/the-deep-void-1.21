@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class DarkSteelDoorBlock extends DoorBlock {
 	public DarkSteelDoorBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(20f, 1200f).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false).dynamicShape(), BlockSetType.IRON);
+		super(BlockSetType.IRON, BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(20f, 1200f).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false).dynamicShape());
 	}
 
 	@Override

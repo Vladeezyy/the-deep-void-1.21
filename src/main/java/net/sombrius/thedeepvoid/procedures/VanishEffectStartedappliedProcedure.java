@@ -140,12 +140,10 @@ public class VanishEffectStartedappliedProcedure {
 					.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).addTransientModifier(
 						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorPoint, AttributeModifier.Operation.ADD_VALUE)));
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).hasModifier(
-					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)))))
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).addTransientModifier(
 						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)));
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).hasModifier(
-					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)))))
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).addTransientModifier(
 						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)));
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.STEP_HEIGHT)

@@ -37,7 +37,7 @@ public class AmalgamRenderer extends MobRenderer<AmalgamEntity, Modelamalgam_rew
 			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/amalgam_rework.png");
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, AmalgamEntity entity, float limbSwing, float limbSwingAmount, int color) {
+			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, AmalgamEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 				Level world = entity.level();
 				double x = entity.getX();
 				double y = entity.getY();

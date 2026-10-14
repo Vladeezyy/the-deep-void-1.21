@@ -25,7 +25,7 @@ public class RedGateOnBlockRightClickedProcedure {
 					if ((world.getBlockState(BlockPos.containing(x + xi, y + i, z + zi))).getBlock() == TheDeepVoidModBlocks.RED_GATE.get()) {
 						if (entity instanceof Player _player) {
 							BlockPos _bp = BlockPos.containing(x + xi, y + i, z + zi);
-							_player.level().getBlockState(_bp).use(_player.level(), _player, InteractionHand.MAIN_HAND, BlockHitResult.miss(new Vec3(_bp.getX(), _bp.getY(), _bp.getZ()), Direction.UP, _bp));
+							_player.level().getBlockState(_bp).useWithoutItem(_player.level(), _player, BlockHitResult.miss(new Vec3(_bp.getX(), _bp.getY(), _bp.getZ()), Direction.UP, _bp));
 						}
 					}
 				}

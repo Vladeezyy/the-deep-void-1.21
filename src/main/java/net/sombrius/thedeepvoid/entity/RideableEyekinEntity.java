@@ -97,7 +97,7 @@ public class RideableEyekinEntity extends TamableAnimal implements GeoEntity {
 		});
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 		this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1));
-		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2));
 		this.targetSelector.addGoal(5, new OwnerHurtTargetGoal(this));
 		this.goalSelector.addGoal(6, new OwnerHurtByTargetGoal(this));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));

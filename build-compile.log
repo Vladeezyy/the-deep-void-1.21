@@ -1,352 +1,75 @@
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:18: error: cannot find symbol
-import net.neoforged.neoforge.common.extensions.IForgeMenuType;
-                                               ^
-  symbol:   class IForgeMenuType
-  location: package net.neoforged.neoforge.common.extensions
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:21: error: package net.neoforged.neoforge.common.capabilities does not exist
-import net.neoforged.neoforge.common.capabilities.ForgeCapabilities;
-                                                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:22: error: cannot find symbol
-import net.neoforged.neoforge.event.TickEvent;
-                                   ^
-  symbol:   class TickEvent
-  location: package net.neoforged.neoforge.event
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:480: error: package TickEvent does not exist
-	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-	                                         ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModRecipeTypes.java:9: error: cannot find symbol
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
-                                   ^
-  symbol:   class FMLJavaModLoadingContext
-  location: package net.neoforged.fml.javafmlmod
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:6: error: cannot find symbol
-import net.minecraft.world.item.alchemy.PotionUtils;
-                                       ^
-  symbol:   class PotionUtils
-  location: package net.minecraft.world.item.alchemy
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:6: error: cannot find symbol
-import net.minecraft.world.item.alchemy.PotionUtils;
-                                       ^
-  symbol:   class PotionUtils
-  location: package net.minecraft.world.item.alchemy
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:7: error: cannot find symbol
-import net.minecraft.world.item.alchemy.PotionUtils;
-                                       ^
-  symbol:   class PotionUtils
-  location: package net.minecraft.world.item.alchemy
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TrapDarkSteelSpikesBlock.java:30: error: cannot find symbol
-import net.neoforged.neoforge.common.util.ForgeSoundType;
-                                         ^
-  symbol:   class ForgeSoundType
-  location: package net.neoforged.neoforge.common.util
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/RedGateNonSolidBlock.java:12: error: cannot find symbol
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
-                                           ^
-  symbol:   class BlockPathTypes
-  location: package net.minecraft.world.level.pathfinder
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/RedGateNonSolidBlock.java:56: error: cannot find symbol
-	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
-	       ^
-  symbol:   class BlockPathTypes
-  location: class RedGateNonSolidBlock
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TeethTrapBlock.java:7: error: cannot find symbol
-import net.neoforged.neoforge.common.util.ForgeSoundType;
-                                         ^
-  symbol:   class ForgeSoundType
-  location: package net.neoforged.neoforge.common.util
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/CrossToolInHandTickProcedure.java:21: error: incompatible types: AttributeModifier cannot be converted to ResourceLocation
-					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"), ((double) DeepVoidConfigConfiguration.PENITENTCROSSREACHADDITION.get()), AttributeModifier.Operation.ADD_VALUE)))))
-					 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/ShotgunPelletProjectileHitsLivingEntityProcedure.java:14: error: cannot find symbol
-				if (mobeffectiterator.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
-				                                 ^
-  symbol:   method getCategory()
-  location: interface Holder<MobEffect>
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/RedGateOnBlockRightClickedProcedure.java:28: error: cannot find symbol
-							_player.level().getBlockState(_bp).use(_player.level(), _player, InteractionHand.MAIN_HAND, BlockHitResult.miss(new Vec3(_bp.getX(), _bp.getY(), _bp.getZ()), Direction.UP, _bp));
-							                                  ^
-  symbol:   method use(Level,Player,InteractionHand,BlockHitResult)
-  location: class BlockState
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/BismuthNetheriteSwordKillEntityProcedure.java:36: error: method getExperienceReward in class LivingEntity cannot be applied to given types;
-				&& (entity instanceof LivingEntity _entity ? _entity.getExperienceReward() : 0) > 0) {
-				                                                    ^
-  required: ServerLevel,Entity
-  found:    no arguments
-  reason: actual and formal argument lists differ in length
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/CustomSkyDeepVoidProcedure.java:34: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
                                          ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/CustomSkyDeepVoidProcedure.java:34: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
                                                                  ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/UndertakerOnInitialEntitySpawnProcedure.java:58: error: cannot find symbol
-							.getValue(ResourceLocation.parse(((entity.getPersistentData().getString("secondTrade"))).toLowerCase(java.util.Locale.ENGLISH))))) {
-							^
-  symbol:   method getValue(ResourceLocation)
-  location: variable ITEM of type DefaultedRegistry<Item>
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/PlayerForgetfulFogAppearsProcedure.java:32: error: cannot find symbol
-			Vec3 pos = entity.getPosition(minecraft.getPartialTick());
-			                                       ^
-  symbol:   method getPartialTick()
-  location: variable minecraft of type Minecraft
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/UndertakerRightClickedOnEntityProcedure.java:87: error: cannot find symbol
-				NetworkHooks.openScreen((ServerPlayer) _ent, new MenuProvider() {
-				^
-  symbol:   variable NetworkHooks
-  location: class UndertakerRightClickedOnEntityProcedure
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/PlayerHasModifiedItemInHandProcedure.java:146: error: incompatible types: AttributeModifier cannot be converted to ResourceLocation
-						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e"), ((double) DeepVoidConfigConfiguration.GRIMROTTENARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)))))
-						 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/PerilItemInHandTickProcedure.java:28: error: cannot find symbol
-				CompoundTag _nbtTag = itemstack.getTag();
-				                               ^
-  symbol:   method getTag()
-  location: variable itemstack of type ItemStack
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/PerilItemInHandTickProcedure.java:30: error: cannot find symbol
-					(entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).setTag(_nbtTag.copy());
-					                                                                                     ^
-  symbol:   method setTag(CompoundTag)
-  location: class ItemStack
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/VanishEffectStartedappliedProcedure.java:144: error: incompatible types: AttributeModifier cannot be converted to ResourceLocation
-					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)))))
-					 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/VanishEffectStartedappliedProcedure.java:148: error: incompatible types: AttributeModifier cannot be converted to ResourceLocation
-					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)))))
-					 ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/RenderSkyDeepVoidProcedure.java:29: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
                                          ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/RenderSkyDeepVoidProcedure.java:29: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
                                                                  ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModFluidTypes.java:16: error: cannot find symbol
-	public static final DeferredRegister<FluidType> REGISTRY = DeferredRegister.create(NeoBuiltInRegistries.FLUID_TYPES, TheDeepVoidMod.MODID);
-	                                                                                   ^
-  symbol:   variable NeoBuiltInRegistries
-  location: class TheDeepVoidModFluidTypes
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModCompostableItems.java:13: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModCompostableItems.java:13: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModJeiPlugin.java:45: error: method getAllRecipesFor in class RecipeManager cannot be applied to given types;
-		List<GluttonBlockJEITypeRecipe> GluttonBlockJEITypeRecipes = recipeManager.getAllRecipesFor(GluttonBlockJEITypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
-		                                                                          ^
-  required: RecipeType<T>
-  found:    Type
-  reason: inference variable I has incompatible bounds
-    equality constraints: SimpleContainer
-    upper bounds: RecipeInput
-  where T,I are type-variables:
-    T extends Recipe<I> declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-    I extends RecipeInput declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModJeiPlugin.java:47: error: method getAllRecipesFor in class RecipeManager cannot be applied to given types;
-		List<SoulForgeJEITypeRecipe> SoulForgeJEITypeRecipes = recipeManager.getAllRecipesFor(SoulForgeJEITypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
-		                                                                    ^
-  required: RecipeType<T>
-  found:    Type
-  reason: inference variable I has incompatible bounds
-    equality constraints: SimpleContainer
-    upper bounds: RecipeInput
-  where T,I are type-variables:
-    T extends Recipe<I> declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-    I extends RecipeInput declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModJeiPlugin.java:49: error: method getAllRecipesFor in class RecipeManager cannot be applied to given types;
-		List<TreasureBagJeiTypeRecipe> TreasureBagJeiTypeRecipes = recipeManager.getAllRecipesFor(TreasureBagJeiTypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
-		                                                                        ^
-  required: RecipeType<T>
-  found:    Type
-  reason: inference variable I has incompatible bounds
-    equality constraints: SimpleContainer
-    upper bounds: RecipeInput
-  where T,I are type-variables:
-    T extends Recipe<I> declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-    I extends RecipeInput declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/GluttonBlockJEITypeRecipe.java:18: error: type argument SimpleContainer is not within bounds of type-variable T
-public class GluttonBlockJEITypeRecipe implements Recipe<SimpleContainer> {
-                                                         ^
-  where T is a type-variable:
-    T extends RecipeInput declared in interface Recipe
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/SoulForgeJEITypeRecipe.java:18: error: type argument SimpleContainer is not within bounds of type-variable T
-public class SoulForgeJEITypeRecipe implements Recipe<SimpleContainer> {
-                                                      ^
-  where T is a type-variable:
-    T extends RecipeInput declared in interface Recipe
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/TreasureBagJeiTypeRecipe.java:18: error: type argument SimpleContainer is not within bounds of type-variable T
-public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
-                                                        ^
-  where T is a type-variable:
-    T extends RecipeInput declared in interface Recipe
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntities.java:217: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntities.java:217: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/StalkerEntity.java:125: error: incompatible types: DamageSource cannot be converted to ServerLevel
-		super.dropCustomDeathLoot(source, looting, recentlyHitIn);
-		                          ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/GooSpitterEntity.java:252: error: no suitable method found for register(EntityType<GooSpitterEntity>,SpawnPlacementType,Types,(entityTyp[...]dom)))
-		event.register(TheDeepVoidModEntities.GOO_SPITTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-		     ^
-    method RegisterSpawnPlacementsEvent.<T#1>register(EntityType<T#1>,SpawnPredicate<T#1>) is not applicable
-      (cannot infer type-variable(s) T#1
-        (actual and formal argument lists differ in length))
-    method RegisterSpawnPlacementsEvent.<T#2>register(EntityType<T#2>,SpawnPredicate<T#2>,Operation) is not applicable
-      (cannot infer type-variable(s) T#2
-        (actual and formal argument lists differ in length))
-    method RegisterSpawnPlacementsEvent.<T#3>register(EntityType<T#3>,SpawnPlacementType,Types,SpawnPredicate<T#3>,Operation) is not applicable
-      (cannot infer type-variable(s) T#3
-        (actual and formal argument lists differ in length))
-  where T#1,T#2,T#3 are type-variables:
-    T#1 extends Entity declared in method <T#1>register(EntityType<T#1>,SpawnPredicate<T#1>)
-    T#2 extends Entity declared in method <T#2>register(EntityType<T#2>,SpawnPredicate<T#2>,Operation)
-    T#3 extends Entity declared in method <T#3>register(EntityType<T#3>,SpawnPlacementType,Types,SpawnPredicate<T#3>,Operation)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/RoamerEntity.java:156: error: no suitable method found for register(EntityType<RoamerEntity>,SpawnPlacementType,Types,(entityTyp[...]dom)))
-		event.register(TheDeepVoidModEntities.ROAMER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-		     ^
-    method RegisterSpawnPlacementsEvent.<T#1>register(EntityType<T#1>,SpawnPredicate<T#1>) is not applicable
-      (cannot infer type-variable(s) T#1
-        (actual and formal argument lists differ in length))
-    method RegisterSpawnPlacementsEvent.<T#2>register(EntityType<T#2>,SpawnPredicate<T#2>,Operation) is not applicable
-      (cannot infer type-variable(s) T#2
-        (actual and formal argument lists differ in length))
-    method RegisterSpawnPlacementsEvent.<T#3>register(EntityType<T#3>,SpawnPlacementType,Types,SpawnPredicate<T#3>,Operation) is not applicable
-      (cannot infer type-variable(s) T#3
-        (actual and formal argument lists differ in length))
-  where T#1,T#2,T#3 are type-variables:
-    T#1 extends Entity declared in method <T#1>register(EntityType<T#1>,SpawnPredicate<T#1>)
-    T#2 extends Entity declared in method <T#2>register(EntityType<T#2>,SpawnPredicate<T#2>,Operation)
-    T#3 extends Entity declared in method <T#3>register(EntityType<T#3>,SpawnPlacementType,Types,SpawnPredicate<T#3>,Operation)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/DoomingTombstoneEntity.java:147: error: cannot find symbol
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		                                                                                   ^
-  symbol:   variable tag
-  location: class DoomingTombstoneEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/RideableEyekinEntity.java:100: error: constructor FollowOwnerGoal in class FollowOwnerGoal cannot be applied to given types;
-		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		                             ^
-  required: TamableAnimal,double,float,float
-  found:    RideableEyekinEntity,int,float,float,boolean
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/RideableFlyingEyekinEntity.java:118: error: constructor FollowOwnerGoal in class FollowOwnerGoal cannot be applied to given types;
-		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-		                             ^
-  required: TamableAnimal,double,float,float
-  found:    RideableFlyingEyekinEntity,int,float,float,boolean
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/HookEndEntity.java:55: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/HiveWatcherEntity.java:162: error: cannot find symbol
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		                                                                                   ^
-  symbol:   variable tag
-  location: class HiveWatcherEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/GrabbingHandsEntity.java:129: error: cannot find symbol
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		                                                                                   ^
-  symbol:   variable tag
-  location: class GrabbingHandsEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorCloudEntity.java:40: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/HarbingerOfCataclysmEntity.java:160: error: cannot find symbol
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		                                                                                   ^
-  symbol:   variable tag
-  location: class HarbingerOfCataclysmEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/SageOfWrathEntity.java:136: error: cannot find symbol
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		                                                                                   ^
-  symbol:   variable tag
-  location: class SageOfWrathEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/UndertakerEntity.java:148: error: cannot find symbol
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		                                                                                   ^
-  symbol:   variable tag
-  location: class UndertakerEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/DoomingCoffinEntity.java:143: error: cannot find symbol
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		                                                                                   ^
-  symbol:   variable tag
-  location: class DoomingCoffinEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/AmbrosiaCloudEntity.java:52: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:424: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:426: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:424: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:426: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1436: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1438: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	                    ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1436: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1438: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	                                            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1442: error: incompatible types: Item cannot be converted to ItemStack
-				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-				                                                                                                                    ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1443: error: incompatible types: Item cannot be converted to ItemStack
-				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-				                                                                                                              ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1446: error: incompatible types: Item cannot be converted to ItemStack
-				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-				                                                                                                                   ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1448: error: incompatible types: Item cannot be converted to ItemStack
-				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-				                                                                                                                    ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:46: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:48: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:46: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:48: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:79: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:81: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
 				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 				             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:91: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:46: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:48: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:46: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:48: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:79: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:81: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
 				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 				             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:91: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:47: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:49: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:47: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:49: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:81: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:83: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
 				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 				             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:93: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:47: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:49: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:47: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:49: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:81: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:83: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
 				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 				             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:93: error: method does not override or implement a method from a supertype
-	@Override
-	^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModModels.java:89: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
                     ^
@@ -365,49 +88,6 @@ public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModKeyMappings.java:29: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:24: error: cannot find symbol
-	public static final DeferredHolder<MenuType<?>, MenuType<VoidBagGuiMenu>> VOID_BAG_GUI = REGISTRY.register("void_bag_gui", () -> IForgeMenuType.create(VoidBagGuiMenu::new));
-	                                                                                                                                 ^
-  symbol:   variable IForgeMenuType
-  location: class TheDeepVoidModMenus
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:25: error: cannot find symbol
-	public static final DeferredHolder<MenuType<?>, MenuType<SoulForgeGUIMenu>> SOUL_FORGE_GUI = REGISTRY.register("soul_forge_gui", () -> IForgeMenuType.create(SoulForgeGUIMenu::new));
-	                                                                                                                                       ^
-  symbol:   variable IForgeMenuType
-  location: class TheDeepVoidModMenus
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:26: error: cannot find symbol
-	public static final DeferredHolder<MenuType<?>, MenuType<NecrosedSkinBackpackGUIMenu>> NECROSED_SKIN_BACKPACK_GUI = REGISTRY.register("necrosed_skin_backpack_gui", () -> IForgeMenuType.create(NecrosedSkinBackpackGUIMenu::new));
-	                                                                                                                                                                          ^
-  symbol:   variable IForgeMenuType
-  location: class TheDeepVoidModMenus
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:27: error: cannot find symbol
-	public static final DeferredHolder<MenuType<?>, MenuType<UndertakerTradeGuiMenu>> UNDERTAKER_TRADE_GUI = REGISTRY.register("undertaker_trade_gui", () -> IForgeMenuType.create(UndertakerTradeGuiMenu::new));
-	                                                                                                                                                         ^
-  symbol:   variable IForgeMenuType
-  location: class TheDeepVoidModMenus
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:68: error: cannot find symbol
-				itemstack.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
-				                        ^
-  symbol:   variable ForgeCapabilities
-  location: class UndertakerTradeGuiMenu
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:76: error: cannot find symbol
-					boundEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
-					                          ^
-  symbol:   variable ForgeCapabilities
-  location: class UndertakerTradeGuiMenu
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:83: error: cannot find symbol
-					boundBlockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
-					                               ^
-  symbol:   variable ForgeCapabilities
-  location: class UndertakerTradeGuiMenu
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:342: error: cannot find symbol
-				if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameTags(p_38904_, itemstack)) {
-				                                                                 ^
-  symbol:   method isSameItemSameTags(ItemStack,ItemStack)
-  location: class ItemStack
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:482: error: package TickEvent does not exist
-		if (event.phase == TickEvent.Phase.END && entity.containerMenu instanceof UndertakerTradeGuiMenu) {
-		                            ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBlockEntities.java:37: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
@@ -420,28 +100,12 @@ public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntityRenderers.java:173: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModRecipeTypes.java:16: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModConfigs.java:13: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(modid = TheDeepVoidMod.MODID, bus = EventBusSubscriber.Bus.MOD)
                                                   ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModRecipeTypes.java:16: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModConfigs.java:13: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(modid = TheDeepVoidMod.MODID, bus = EventBusSubscriber.Bus.MOD)
                                                                           ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModRecipeTypes.java:22: error: cannot find symbol
-		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		                ^
-  symbol:   variable FMLJavaModLoadingContext
-  location: class TheDeepVoidModRecipeTypes
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModConfigs.java:11: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(modid = TheDeepVoidMod.MODID, bus = EventBusSubscriber.Bus.MOD)
-                                                  ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModConfigs.java:11: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(modid = TheDeepVoidMod.MODID, bus = EventBusSubscriber.Bus.MOD)
-                                                                          ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModConfigs.java:16: error: cannot find symbol
-			ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DeepVoidConfigConfiguration.SPEC, "Deep Void Config.toml");
-			                       ^
-  symbol:   method registerConfig(Type,ModConfigSpec,String)
-  location: class ModLoadingContext
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModFluids.java:29: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	                    ^
@@ -454,16 +118,6 @@ public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModParticles.java:61: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBrewingRecipes.java:178: error: cannot find symbol
-		PotionUtils.setPotion(potion, Potions.LUCK);
-		^
-  symbol:   variable PotionUtils
-  location: class TheDeepVoidModBrewingRecipes
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBrewingRecipes.java:184: error: cannot find symbol
-		PotionUtils.setPotion(potion, TheDeepVoidModPotions.BAD_LUCK);
-		^
-  symbol:   variable PotionUtils
-  location: class TheDeepVoidModBrewingRecipes
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModGameRules.java:12: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
@@ -521,15 +175,12 @@ public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MountDashMessage.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java:35: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java:36: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java:35: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java:36: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java:37: error: package NeoBuiltInRegistries does not exist
-	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoBuiltInRegistries.Keys.ATTACHMENT_TYPES, TheDeepVoidMod.MODID);
-	                                                                                                                       ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/SoulForgeGUISlotMessage.java:22: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
@@ -596,61 +247,6 @@ public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/dimension/ThePitDimension.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	                                            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/utils/AnimUtils.java:16: error: no suitable method found for render(PoseStack,VertexConsumer,int,int,float,float,float,float)
-		model.render(stack, buffer, packedLightIn, packedOverlayIn, r, g, b, a);
-		     ^
-    method ModelPart.render(PoseStack,VertexConsumer,int,int) is not applicable
-      (actual and formal argument lists differ in length)
-    method ModelPart.render(PoseStack,VertexConsumer,int,int,int) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:17: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                    ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:17: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:21: error: cannot find symbol
-		event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(new LuckPotionRecipeBrewingRecipe()));
-		                                             ^
-  symbol:   method addRecipe(LuckPotionRecipeBrewingRecipe)
-  location: class BrewingRecipeRegistry
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:37: error: cannot find symbol
-			return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.LUCK);
-			       ^
-  symbol:   variable PotionUtils
-  location: class LuckPotionRecipeBrewingRecipe
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:17: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                    ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:17: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:21: error: cannot find symbol
-		event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(new BadLuckRecipeBrewingRecipe()));
-		                                             ^
-  symbol:   method addRecipe(BadLuckRecipeBrewingRecipe)
-  location: class BrewingRecipeRegistry
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:37: error: cannot find symbol
-			return PotionUtils.setPotion(new ItemStack(Items.POTION), TheDeepVoidModPotions.BAD_LUCK);
-			       ^
-  symbol:   variable PotionUtils
-  location: class BadLuckRecipeBrewingRecipe
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:18: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                    ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:18: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:22: error: cannot find symbol
-		event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(new FishyPotionRecipeBrewingRecipe()));
-		                                             ^
-  symbol:   method addRecipe(FishyPotionRecipeBrewingRecipe)
-  location: class BrewingRecipeRegistry
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:28: error: cannot find symbol
-		return (inputItem == Items.POTION || inputItem == Items.SPLASH_POTION || inputItem == Items.LINGERING_POTION) && PotionUtils.getPotion(input) == Potions.WATER;
-		                                                                                                                 ^
-  symbol:   variable PotionUtils
-  location: class FishyPotionRecipeBrewingRecipe
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GrimRottenBoneItem.java:33: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
@@ -678,995 +274,33 @@ public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/TheBonkItem.java:25: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/HunterBowItem.java:70: error: cannot find symbol
-						if (stack.hurt(1, world.getRandom(), player)) {
-						         ^
-  symbol:   method hurt(int,RandomSource,ServerPlayer)
-  location: variable stack of type ItemStack
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:36: error: <anonymous net.sombrius.thedeepvoid.client.renderer.AmalgamRenderer$2> is not abstract and does not override abstract method render(PoseStack,MultiBufferSource,int,AmalgamEntity,float,float,float,float,float,float) in RenderLayer
-		this.addLayer(new RenderLayer<AmalgamEntity, Modelamalgam_rework<AmalgamEntity>>(this) {
-		                                                                                       ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:39: error: method does not override or implement a method from a supertype
-			@Override
-			^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:49: error: cannot find symbol
-					model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-					                                                          ^
-  symbol: variable partialTicks
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:50: error: cannot find symbol
-					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					                                                    ^
-  symbol: variable ageInTicks
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:50: error: cannot find symbol
-					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					                                                                ^
-  symbol: variable netHeadYaw
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:50: error: cannot find symbol
-					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					                                                                            ^
-  symbol: variable headPitch
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:43: error: <anonymous net.sombrius.thedeepvoid.client.renderer.DarkSteelFlailRenderer$2> is not abstract and does not override abstract method render(PoseStack,MultiBufferSource,int,DarkSteelFlailEntity,float,float,float,float,float,float) in RenderLayer
-		this.addLayer(new RenderLayer<DarkSteelFlailEntity, Modeldark_steel_flail<DarkSteelFlailEntity>>(this) {
-		                                                                                                       ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:46: error: method does not override or implement a method from a supertype
-			@Override
-			^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:56: error: cannot find symbol
-					model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-					                                                          ^
-  symbol: variable partialTicks
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:57: error: cannot find symbol
-					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					                                                    ^
-  symbol: variable ageInTicks
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:57: error: cannot find symbol
-					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					                                                                ^
-  symbol: variable netHeadYaw
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:57: error: cannot find symbol
-					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					                                                                            ^
-  symbol: variable headPitch
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/screens/TotalBlindnessBlackOverlayOverlay.java:24: error: cannot find symbol
-		int w = event.getWindow().getGuiScaledWidth();
-		             ^
-  symbol:   method getWindow()
-  location: variable event of type Pre
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/screens/TotalBlindnessBlackOverlayOverlay.java:25: error: cannot find symbol
-		int h = event.getWindow().getGuiScaledHeight();
-		             ^
-  symbol:   method getWindow()
-  location: variable event of type Pre
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:62: error: method renderBackground in class AbstractContainerScreen<T> cannot be applied to given types;
-		this.renderBackground(guiGraphics);
-		    ^
-  required: GuiGraphics,int,int,float
-  found:    GuiGraphics
-  reason: actual and formal argument lists differ in length
-  where T is a type-variable:
-    T extends AbstractContainerMenu declared in class AbstractContainerScreen
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:130: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$1> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-			            ^
-  overridden method is final
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:144: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$2> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-			            ^
-  overridden method is final
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:158: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$3> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-			            ^
-  overridden method is final
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:172: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$4> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-			            ^
-  overridden method is final
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:186: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$5> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-			            ^
-  overridden method is final
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:200: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$6> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-			            ^
-  overridden method is final
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DesolateLichenBlock.java:28: error: incompatible types: Holder is not a functional interface
-		super(() -> MobEffects.MOVEMENT_SPEED, 100,
-		^
-    multiple non-overriding abstract methods found in interface Holder
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DesolateLichenBlock.java:38: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DarkSteelDoorBlock.java:14: error: incompatible types: Properties cannot be converted to BlockSetType
-		super(BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(20f, 1200f).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false).dynamicShape(), BlockSetType.IRON);
-		                                                                                                                                                                                    ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DungeonDarkSteelBarsBlock.java:35: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DungeonDarkSteelBarsBlock.java:37: error: cannot find symbol
-		super.use(blockstate, world, pos, entity, hand, hit);
-		     ^
-  symbol: method use(BlockState,Level,BlockPos,Player,InteractionHand,BlockHitResult)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/FlailExecutionerSpawnerBlock.java:29: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/FlailExecutionerSpawnerBlock.java:31: error: cannot find symbol
-		super.use(blockstate, world, pos, entity, hand, hit);
-		     ^
-  symbol: method use(BlockState,Level,BlockPos,Player,InteractionHand,BlockHitResult)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TrapDarkSteelSpikesBlock.java:41: error: cannot find symbol
-				.sound(new ForgeSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")),
-				           ^
-  symbol:   class ForgeSoundType
-  location: class TrapDarkSteelSpikesBlock
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TrapDarkSteelSpikesBlock.java:92: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/RedGateNonSolidBlock.java:50: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/RedGateNonSolidBlock.java:57: error: cannot find symbol
-		return BlockPathTypes.BLOCKED;
-		       ^
-  symbol:   variable BlockPathTypes
-  location: class RedGateNonSolidBlock
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/CrackedAncientDeepslateBrickStairsBlock.java:18: error: incompatible types: BlockState is not a functional interface
-		super(() -> Blocks.AIR.defaultBlockState(),
-		^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/ReturnPortalBlock.java:51: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TeethTrapBlock.java:22: error: cannot find symbol
-				.sound(new ForgeSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.slime_block.break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flesh_block_step")),
-				           ^
-  symbol:   class ForgeSoundType
-  location: class TeethTrapBlock
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/TheBonkItem.java:25: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+                                            ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidSickleItem.java:70: warning: [removal] onEntitySwing(ItemStack,LivingEntity) in IItemExtension has been deprecated and marked for removal
+	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity) {
+	               ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidSickleItem.java:71: warning: [removal] onEntitySwing(ItemStack,LivingEntity) in IItemExtension has been deprecated and marked for removal
+		boolean retval = super.onEntitySwing(itemstack, entity);
+		                      ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/extension/SulfurTntDispensedItemExtension.java:16: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+                    ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/extension/SulfurTntDispensedItemExtension.java:16: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+                                            ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GrimSickleItem.java:78: warning: [removal] onEntitySwing(ItemStack,LivingEntity) in IItemExtension has been deprecated and marked for removal
+	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity) {
+	               ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GrimSickleItem.java:79: warning: [removal] onEntitySwing(ItemStack,LivingEntity) in IItemExtension has been deprecated and marked for removal
+		boolean retval = super.onEntitySwing(itemstack, entity);
+		                      ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/RottenPickaxeItem.java:18: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+                    ^
 Note: Some input files use or override a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
 Note: Some input files additionally use or override a deprecated API that is marked for removal.
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
-Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-111 errors
 100 warnings
-
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':compileJava'.
-> Compilation failed; see the compiler output below.
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/BismuthNetheriteSwordKillEntityProcedure.java:36: error: method getExperienceReward in class LivingEntity cannot be applied to given types;
-  				&& (entity instanceof LivingEntity _entity ? _entity.getExperienceReward() : 0) > 0) {
-  				                                                    ^
-    required: ServerLevel,Entity
-    found:    no arguments
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModJeiPlugin.java:45: error: method getAllRecipesFor in class RecipeManager cannot be applied to given types;
-  		List<GluttonBlockJEITypeRecipe> GluttonBlockJEITypeRecipes = recipeManager.getAllRecipesFor(GluttonBlockJEITypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
-  		                                                                          ^
-    required: RecipeType<T>
-    found:    Type
-    reason: inference variable I has incompatible bounds
-      equality constraints: SimpleContainer
-      upper bounds: RecipeInput
-    where T,I are type-variables:
-      T extends Recipe<I> declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-      I extends RecipeInput declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModJeiPlugin.java:47: error: method getAllRecipesFor in class RecipeManager cannot be applied to given types;
-  		List<SoulForgeJEITypeRecipe> SoulForgeJEITypeRecipes = recipeManager.getAllRecipesFor(SoulForgeJEITypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
-  		                                                                    ^
-    required: RecipeType<T>
-    found:    Type
-    reason: inference variable I has incompatible bounds
-      equality constraints: SimpleContainer
-      upper bounds: RecipeInput
-    where T,I are type-variables:
-      T extends Recipe<I> declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-      I extends RecipeInput declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModJeiPlugin.java:49: error: method getAllRecipesFor in class RecipeManager cannot be applied to given types;
-  		List<TreasureBagJeiTypeRecipe> TreasureBagJeiTypeRecipes = recipeManager.getAllRecipesFor(TreasureBagJeiTypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
-  		                                                                        ^
-    required: RecipeType<T>
-    found:    Type
-    reason: inference variable I has incompatible bounds
-      equality constraints: SimpleContainer
-      upper bounds: RecipeInput
-    where T,I are type-variables:
-      T extends Recipe<I> declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-      I extends RecipeInput declared in method <I,T>getAllRecipesFor(RecipeType<T>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/RideableEyekinEntity.java:100: error: constructor FollowOwnerGoal in class FollowOwnerGoal cannot be applied to given types;
-  		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-  		                             ^
-    required: TamableAnimal,double,float,float
-    found:    RideableEyekinEntity,int,float,float,boolean
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/RideableFlyingEyekinEntity.java:118: error: constructor FollowOwnerGoal in class FollowOwnerGoal cannot be applied to given types;
-  		this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
-  		                             ^
-    required: TamableAnimal,double,float,float
-    found:    RideableFlyingEyekinEntity,int,float,float,boolean
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:62: error: method renderBackground in class AbstractContainerScreen<T> cannot be applied to given types;
-  		this.renderBackground(guiGraphics);
-  		    ^
-    required: GuiGraphics,int,int,float
-    found:    GuiGraphics
-    reason: actual and formal argument lists differ in length
-    where T is a type-variable:
-      T extends AbstractContainerMenu declared in class AbstractContainerScreen
-  Note: Some input files additionally use or override a deprecated API that is marked for removal.
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/GooSpitterEntity.java:252: error: no suitable method found for register(EntityType<GooSpitterEntity>,SpawnPlacementType,Types,(entityTyp[...]dom)))
-  		event.register(TheDeepVoidModEntities.GOO_SPITTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-  		     ^
-      method RegisterSpawnPlacementsEvent.<T#1>register(EntityType<T#1>,SpawnPredicate<T#1>) is not applicable
-        (cannot infer type-variable(s) T#1
-          (actual and formal argument lists differ in length))
-      method RegisterSpawnPlacementsEvent.<T#2>register(EntityType<T#2>,SpawnPredicate<T#2>,Operation) is not applicable
-        (cannot infer type-variable(s) T#2
-          (actual and formal argument lists differ in length))
-      method RegisterSpawnPlacementsEvent.<T#3>register(EntityType<T#3>,SpawnPlacementType,Types,SpawnPredicate<T#3>,Operation) is not applicable
-        (cannot infer type-variable(s) T#3
-          (actual and formal argument lists differ in length))
-    where T#1,T#2,T#3 are type-variables:
-      T#1 extends Entity declared in method <T#1>register(EntityType<T#1>,SpawnPredicate<T#1>)
-      T#2 extends Entity declared in method <T#2>register(EntityType<T#2>,SpawnPredicate<T#2>,Operation)
-      T#3 extends Entity declared in method <T#3>register(EntityType<T#3>,SpawnPlacementType,Types,SpawnPredicate<T#3>,Operation)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/RoamerEntity.java:156: error: no suitable method found for register(EntityType<RoamerEntity>,SpawnPlacementType,Types,(entityTyp[...]dom)))
-  		event.register(TheDeepVoidModEntities.ROAMER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-  		     ^
-      method RegisterSpawnPlacementsEvent.<T#1>register(EntityType<T#1>,SpawnPredicate<T#1>) is not applicable
-        (cannot infer type-variable(s) T#1
-          (actual and formal argument lists differ in length))
-      method RegisterSpawnPlacementsEvent.<T#2>register(EntityType<T#2>,SpawnPredicate<T#2>,Operation) is not applicable
-        (cannot infer type-variable(s) T#2
-          (actual and formal argument lists differ in length))
-      method RegisterSpawnPlacementsEvent.<T#3>register(EntityType<T#3>,SpawnPlacementType,Types,SpawnPredicate<T#3>,Operation) is not applicable
-        (cannot infer type-variable(s) T#3
-          (actual and formal argument lists differ in length))
-    where T#1,T#2,T#3 are type-variables:
-      T#1 extends Entity declared in method <T#1>register(EntityType<T#1>,SpawnPredicate<T#1>)
-      T#2 extends Entity declared in method <T#2>register(EntityType<T#2>,SpawnPredicate<T#2>,Operation)
-      T#3 extends Entity declared in method <T#3>register(EntityType<T#3>,SpawnPlacementType,Types,SpawnPredicate<T#3>,Operation)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/utils/AnimUtils.java:16: error: no suitable method found for render(PoseStack,VertexConsumer,int,int,float,float,float,float)
-  		model.render(stack, buffer, packedLightIn, packedOverlayIn, r, g, b, a);
-  		     ^
-      method ModelPart.render(PoseStack,VertexConsumer,int,int) is not applicable
-        (actual and formal argument lists differ in length)
-      method ModelPart.render(PoseStack,VertexConsumer,int,int,int) is not applicable
-        (actual and formal argument lists differ in length)
-  Note: Recompile with -Xlint:deprecation for details.
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:18: error: cannot find symbol
-  import net.neoforged.neoforge.common.extensions.IForgeMenuType;
-                                                 ^
-    symbol:   class IForgeMenuType
-    location: package net.neoforged.neoforge.common.extensions
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:22: error: cannot find symbol
-  import net.neoforged.neoforge.event.TickEvent;
-                                     ^
-    symbol:   class TickEvent
-    location: package net.neoforged.neoforge.event
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModRecipeTypes.java:9: error: cannot find symbol
-  import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
-                                     ^
-    symbol:   class FMLJavaModLoadingContext
-    location: package net.neoforged.fml.javafmlmod
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:6: error: cannot find symbol
-  import net.minecraft.world.item.alchemy.PotionUtils;
-                                         ^
-    symbol:   class PotionUtils
-    location: package net.minecraft.world.item.alchemy
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:6: error: cannot find symbol
-  import net.minecraft.world.item.alchemy.PotionUtils;
-                                         ^
-    symbol:   class PotionUtils
-    location: package net.minecraft.world.item.alchemy
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:7: error: cannot find symbol
-  import net.minecraft.world.item.alchemy.PotionUtils;
-                                         ^
-    symbol:   class PotionUtils
-    location: package net.minecraft.world.item.alchemy
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TrapDarkSteelSpikesBlock.java:30: error: cannot find symbol
-  import net.neoforged.neoforge.common.util.ForgeSoundType;
-                                           ^
-    symbol:   class ForgeSoundType
-    location: package net.neoforged.neoforge.common.util
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/RedGateNonSolidBlock.java:12: error: cannot find symbol
-  import net.minecraft.world.level.pathfinder.BlockPathTypes;
-                                             ^
-    symbol:   class BlockPathTypes
-    location: package net.minecraft.world.level.pathfinder
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/RedGateNonSolidBlock.java:56: error: cannot find symbol
-  	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
-  	       ^
-    symbol:   class BlockPathTypes
-    location: class RedGateNonSolidBlock
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TeethTrapBlock.java:7: error: cannot find symbol
-  import net.neoforged.neoforge.common.util.ForgeSoundType;
-                                           ^
-    symbol:   class ForgeSoundType
-    location: package net.neoforged.neoforge.common.util
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/UndertakerRightClickedOnEntityProcedure.java:87: error: cannot find symbol
-  				NetworkHooks.openScreen((ServerPlayer) _ent, new MenuProvider() {
-  				^
-    symbol:   variable NetworkHooks
-    location: class UndertakerRightClickedOnEntityProcedure
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModFluidTypes.java:16: error: cannot find symbol
-  	public static final DeferredRegister<FluidType> REGISTRY = DeferredRegister.create(NeoBuiltInRegistries.FLUID_TYPES, TheDeepVoidMod.MODID);
-  	                                                                                   ^
-    symbol:   variable NeoBuiltInRegistries
-    location: class TheDeepVoidModFluidTypes
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/DoomingTombstoneEntity.java:147: error: cannot find symbol
-  		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-  		                                                                                   ^
-    symbol:   variable tag
-    location: class DoomingTombstoneEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/HiveWatcherEntity.java:162: error: cannot find symbol
-  		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-  		                                                                                   ^
-    symbol:   variable tag
-    location: class HiveWatcherEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/GrabbingHandsEntity.java:129: error: cannot find symbol
-  		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-  		                                                                                   ^
-    symbol:   variable tag
-    location: class GrabbingHandsEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/HarbingerOfCataclysmEntity.java:160: error: cannot find symbol
-  		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-  		                                                                                   ^
-    symbol:   variable tag
-    location: class HarbingerOfCataclysmEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/SageOfWrathEntity.java:136: error: cannot find symbol
-  		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-  		                                                                                   ^
-    symbol:   variable tag
-    location: class SageOfWrathEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/UndertakerEntity.java:148: error: cannot find symbol
-  		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-  		                                                                                   ^
-    symbol:   variable tag
-    location: class UndertakerEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/DoomingCoffinEntity.java:143: error: cannot find symbol
-  		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-  		                                                                                   ^
-    symbol:   variable tag
-    location: class DoomingCoffinEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:24: error: cannot find symbol
-  	public static final DeferredHolder<MenuType<?>, MenuType<VoidBagGuiMenu>> VOID_BAG_GUI = REGISTRY.register("void_bag_gui", () -> IForgeMenuType.create(VoidBagGuiMenu::new));
-  	                                                                                                                                 ^
-    symbol:   variable IForgeMenuType
-    location: class TheDeepVoidModMenus
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:25: error: cannot find symbol
-  	public static final DeferredHolder<MenuType<?>, MenuType<SoulForgeGUIMenu>> SOUL_FORGE_GUI = REGISTRY.register("soul_forge_gui", () -> IForgeMenuType.create(SoulForgeGUIMenu::new));
-  	                                                                                                                                       ^
-    symbol:   variable IForgeMenuType
-    location: class TheDeepVoidModMenus
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:26: error: cannot find symbol
-  	public static final DeferredHolder<MenuType<?>, MenuType<NecrosedSkinBackpackGUIMenu>> NECROSED_SKIN_BACKPACK_GUI = REGISTRY.register("necrosed_skin_backpack_gui", () -> IForgeMenuType.create(NecrosedSkinBackpackGUIMenu::new));
-  	                                                                                                                                                                          ^
-    symbol:   variable IForgeMenuType
-    location: class TheDeepVoidModMenus
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:27: error: cannot find symbol
-  	public static final DeferredHolder<MenuType<?>, MenuType<UndertakerTradeGuiMenu>> UNDERTAKER_TRADE_GUI = REGISTRY.register("undertaker_trade_gui", () -> IForgeMenuType.create(UndertakerTradeGuiMenu::new));
-  	                                                                                                                                                         ^
-    symbol:   variable IForgeMenuType
-    location: class TheDeepVoidModMenus
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:68: error: cannot find symbol
-  				itemstack.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
-  				                        ^
-    symbol:   variable ForgeCapabilities
-    location: class UndertakerTradeGuiMenu
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:76: error: cannot find symbol
-  					boundEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
-  					                          ^
-    symbol:   variable ForgeCapabilities
-    location: class UndertakerTradeGuiMenu
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:83: error: cannot find symbol
-  					boundBlockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
-  					                               ^
-    symbol:   variable ForgeCapabilities
-    location: class UndertakerTradeGuiMenu
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModRecipeTypes.java:22: error: cannot find symbol
-  		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-  		                ^
-    symbol:   variable FMLJavaModLoadingContext
-    location: class TheDeepVoidModRecipeTypes
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBrewingRecipes.java:178: error: cannot find symbol
-  		PotionUtils.setPotion(potion, Potions.LUCK);
-  		^
-    symbol:   variable PotionUtils
-    location: class TheDeepVoidModBrewingRecipes
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBrewingRecipes.java:184: error: cannot find symbol
-  		PotionUtils.setPotion(potion, TheDeepVoidModPotions.BAD_LUCK);
-  		^
-    symbol:   variable PotionUtils
-    location: class TheDeepVoidModBrewingRecipes
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:37: error: cannot find symbol
-  			return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.LUCK);
-  			       ^
-    symbol:   variable PotionUtils
-    location: class LuckPotionRecipeBrewingRecipe
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:37: error: cannot find symbol
-  			return PotionUtils.setPotion(new ItemStack(Items.POTION), TheDeepVoidModPotions.BAD_LUCK);
-  			       ^
-    symbol:   variable PotionUtils
-    location: class BadLuckRecipeBrewingRecipe
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:28: error: cannot find symbol
-  		return (inputItem == Items.POTION || inputItem == Items.SPLASH_POTION || inputItem == Items.LINGERING_POTION) && PotionUtils.getPotion(input) == Potions.WATER;
-  		                                                                                                                 ^
-    symbol:   variable PotionUtils
-    location: class FishyPotionRecipeBrewingRecipe
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TrapDarkSteelSpikesBlock.java:41: error: cannot find symbol
-  				.sound(new ForgeSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")),
-  				           ^
-    symbol:   class ForgeSoundType
-    location: class TrapDarkSteelSpikesBlock
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/RedGateNonSolidBlock.java:57: error: cannot find symbol
-  		return BlockPathTypes.BLOCKED;
-  		       ^
-    symbol:   variable BlockPathTypes
-    location: class RedGateNonSolidBlock
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TeethTrapBlock.java:22: error: cannot find symbol
-  				.sound(new ForgeSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.slime_block.break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flesh_block_step")),
-  				           ^
-    symbol:   class ForgeSoundType
-    location: class TeethTrapBlock
-  Note: Recompile with -Xlint:unchecked for details.
-  Note: Some input files use or override a deprecated API.
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/HookEndEntity.java:55: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorCloudEntity.java:40: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/AmbrosiaCloudEntity.java:52: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:91: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:91: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:93: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:93: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:39: error: method does not override or implement a method from a supertype
-  			@Override
-  			^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:46: error: method does not override or implement a method from a supertype
-  			@Override
-  			^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DesolateLichenBlock.java:38: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DungeonDarkSteelBarsBlock.java:35: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/FlailExecutionerSpawnerBlock.java:29: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TrapDarkSteelSpikesBlock.java:92: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/RedGateNonSolidBlock.java:50: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/ReturnPortalBlock.java:51: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/CustomSkyDeepVoidProcedure.java:34: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
-                                           ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/CustomSkyDeepVoidProcedure.java:34: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
-                                                                   ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/RenderSkyDeepVoidProcedure.java:29: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
-                                           ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/RenderSkyDeepVoidProcedure.java:29: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
-                                                                   ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModCompostableItems.java:13: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModCompostableItems.java:13: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntities.java:217: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntities.java:217: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:424: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:424: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1436: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-  	                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1436: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-  	                                            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:46: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:46: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:79: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
-  				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
-  				             ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:46: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:46: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsFlyItem.java:79: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
-  				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
-  				             ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:47: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:47: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsItem.java:81: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
-  				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
-  				             ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:47: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:47: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/FlyWingsFlyItem.java:81: warning: [removal] prepForRender(Entity,ItemStack,EquipmentSlot,HumanoidModel<?>) in GeoArmorRenderer has been deprecated and marked for removal
-  				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
-  				             ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModModels.java:89: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModModels.java:89: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:22: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:22: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModKeyMappings.java:29: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModKeyMappings.java:29: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBlockEntities.java:37: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBlockEntities.java:37: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntityRenderers.java:173: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntityRenderers.java:173: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModRecipeTypes.java:16: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(modid = TheDeepVoidMod.MODID, bus = EventBusSubscriber.Bus.MOD)
-                                                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModRecipeTypes.java:16: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(modid = TheDeepVoidMod.MODID, bus = EventBusSubscriber.Bus.MOD)
-                                                                            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModConfigs.java:11: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(modid = TheDeepVoidMod.MODID, bus = EventBusSubscriber.Bus.MOD)
-                                                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModConfigs.java:11: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(modid = TheDeepVoidMod.MODID, bus = EventBusSubscriber.Bus.MOD)
-                                                                            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModFluids.java:29: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-  	                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModFluids.java:29: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-  	                                            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModParticles.java:61: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModParticles.java:61: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModGameRules.java:12: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModGameRules.java:12: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/TreasureBagJeiTypeRecipeCategory.java:39: warning: [removal] getBackground() in IRecipeCategory has been deprecated and marked for removal
-  	public IDrawable getBackground() {
-  	                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/SoulForgeJEITypeRecipeCategory.java:39: warning: [removal] getBackground() in IRecipeCategory has been deprecated and marked for removal
-  	public IDrawable getBackground() {
-  	                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/GluttonBlockJEITypeRecipeCategory.java:39: warning: [removal] getBackground() in IRecipeCategory has been deprecated and marked for removal
-  	public IDrawable getBackground() {
-  	                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WeaverBootsNoGravityMessage.java:19: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WeaverBootsNoGravityMessage.java:19: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WingsUpMessage.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WingsUpMessage.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WingsFowardMessage.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WingsFowardMessage.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/UndertakerTradeGuiSlotMessage.java:24: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/UndertakerTradeGuiSlotMessage.java:24: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MountDownMessage.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MountDownMessage.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/UndertakerTradeGuiButtonMessage.java:29: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/UndertakerTradeGuiButtonMessage.java:29: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MountDashMessage.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MountDashMessage.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java:35: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java:35: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/SoulForgeGUISlotMessage.java:22: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/SoulForgeGUISlotMessage.java:22: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/ArmorToggleMessage.java:19: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/ArmorToggleMessage.java:19: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MountUpMessage.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MountUpMessage.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WingsBackwardMessage.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WingsBackwardMessage.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MountFlyMessage.java:19: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MountFlyMessage.java:19: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MotherCallOutMessage.java:19: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/MotherCallOutMessage.java:19: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/ArmorAbilityMessage.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/ArmorAbilityMessage.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WingsDownMessage.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/WingsDownMessage.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/NecrosedSkinBackpackGUIButtonMessage.java:24: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/NecrosedSkinBackpackGUIButtonMessage.java:24: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/dimension/DeepVoidDimension.java:13: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-  	                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/dimension/DeepVoidDimension.java:13: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-  	                                            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/dimension/ThePitDimension.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-  	                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/dimension/ThePitDimension.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-  	                                            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:17: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:17: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:17: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:17: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:18: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:18: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GrimRottenBoneItem.java:33: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GrimRottenBoneItem.java:33: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CrawlerItem.java:27: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CrawlerItem.java:27: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GunslingerItem.java:22: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GunslingerItem.java:22: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/PerilItem.java:133: warning: [removal] onEntitySwing(ItemStack,LivingEntity) in IItemExtension has been deprecated and marked for removal
-  	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity) {
-  	               ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/PerilItem.java:134: warning: [removal] onEntitySwing(ItemStack,LivingEntity) in IItemExtension has been deprecated and marked for removal
-  		boolean retval = super.onEntitySwing(itemstack, entity);
-  		                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/TheBonkItem.java:25: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/GluttonBlockJEITypeRecipe.java:18: error: type argument SimpleContainer is not within bounds of type-variable T
-  public class GluttonBlockJEITypeRecipe implements Recipe<SimpleContainer> {
-                                                           ^
-    where T is a type-variable:
-      T extends RecipeInput declared in interface Recipe
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/SoulForgeJEITypeRecipe.java:18: error: type argument SimpleContainer is not within bounds of type-variable T
-  public class SoulForgeJEITypeRecipe implements Recipe<SimpleContainer> {
-                                                        ^
-    where T is a type-variable:
-      T extends RecipeInput declared in interface Recipe
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/TreasureBagJeiTypeRecipe.java:18: error: type argument SimpleContainer is not within bounds of type-variable T
-  public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
-                                                          ^
-    where T is a type-variable:
-      T extends RecipeInput declared in interface Recipe
-  Note: Some input files use unchecked or unsafe operations.
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/ShotgunPelletProjectileHitsLivingEntityProcedure.java:14: error: cannot find symbol
-  				if (mobeffectiterator.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
-  				                                 ^
-    symbol:   method getCategory()
-    location: interface Holder<MobEffect>
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/RedGateOnBlockRightClickedProcedure.java:28: error: cannot find symbol
-  							_player.level().getBlockState(_bp).use(_player.level(), _player, InteractionHand.MAIN_HAND, BlockHitResult.miss(new Vec3(_bp.getX(), _bp.getY(), _bp.getZ()), Direction.UP, _bp));
-  							                                  ^
-    symbol:   method use(Level,Player,InteractionHand,BlockHitResult)
-    location: class BlockState
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/UndertakerOnInitialEntitySpawnProcedure.java:58: error: cannot find symbol
-  							.getValue(ResourceLocation.parse(((entity.getPersistentData().getString("secondTrade"))).toLowerCase(java.util.Locale.ENGLISH))))) {
-  							^
-    symbol:   method getValue(ResourceLocation)
-    location: variable ITEM of type DefaultedRegistry<Item>
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/PlayerForgetfulFogAppearsProcedure.java:32: error: cannot find symbol
-  			Vec3 pos = entity.getPosition(minecraft.getPartialTick());
-  			                                       ^
-    symbol:   method getPartialTick()
-    location: variable minecraft of type Minecraft
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/PerilItemInHandTickProcedure.java:28: error: cannot find symbol
-  				CompoundTag _nbtTag = itemstack.getTag();
-  				                               ^
-    symbol:   method getTag()
-    location: variable itemstack of type ItemStack
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/PerilItemInHandTickProcedure.java:30: error: cannot find symbol
-  					(entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).setTag(_nbtTag.copy());
-  					                                                                                     ^
-    symbol:   method setTag(CompoundTag)
-    location: class ItemStack
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:342: error: cannot find symbol
-  				if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameTags(p_38904_, itemstack)) {
-  				                                                                 ^
-    symbol:   method isSameItemSameTags(ItemStack,ItemStack)
-    location: class ItemStack
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModConfigs.java:16: error: cannot find symbol
-  			ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DeepVoidConfigConfiguration.SPEC, "Deep Void Config.toml");
-  			                       ^
-    symbol:   method registerConfig(Type,ModConfigSpec,String)
-    location: class ModLoadingContext
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/LuckPotionRecipeBrewingRecipe.java:21: error: cannot find symbol
-  		event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(new LuckPotionRecipeBrewingRecipe()));
-  		                                             ^
-    symbol:   method addRecipe(LuckPotionRecipeBrewingRecipe)
-    location: class BrewingRecipeRegistry
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/BadLuckRecipeBrewingRecipe.java:21: error: cannot find symbol
-  		event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(new BadLuckRecipeBrewingRecipe()));
-  		                                             ^
-    symbol:   method addRecipe(BadLuckRecipeBrewingRecipe)
-    location: class BrewingRecipeRegistry
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/recipes/brewing/FishyPotionRecipeBrewingRecipe.java:22: error: cannot find symbol
-  		event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(new FishyPotionRecipeBrewingRecipe()));
-  		                                             ^
-    symbol:   method addRecipe(FishyPotionRecipeBrewingRecipe)
-    location: class BrewingRecipeRegistry
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/HunterBowItem.java:70: error: cannot find symbol
-  						if (stack.hurt(1, world.getRandom(), player)) {
-  						         ^
-    symbol:   method hurt(int,RandomSource,ServerPlayer)
-    location: variable stack of type ItemStack
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/screens/TotalBlindnessBlackOverlayOverlay.java:24: error: cannot find symbol
-  		int w = event.getWindow().getGuiScaledWidth();
-  		             ^
-    symbol:   method getWindow()
-    location: variable event of type Pre
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/screens/TotalBlindnessBlackOverlayOverlay.java:25: error: cannot find symbol
-  		int h = event.getWindow().getGuiScaledHeight();
-  		             ^
-    symbol:   method getWindow()
-    location: variable event of type Pre
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:130: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$1> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-  			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-  			            ^
-    overridden method is final
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:144: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$2> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-  			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-  			            ^
-    overridden method is final
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:158: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$3> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-  			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-  			            ^
-    overridden method is final
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:172: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$4> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-  			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-  			            ^
-    overridden method is final
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:186: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$5> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-  			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-  			            ^
-    overridden method is final
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:200: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$6> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
-  			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-  			            ^
-    overridden method is final
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DungeonDarkSteelBarsBlock.java:37: error: cannot find symbol
-  		super.use(blockstate, world, pos, entity, hand, hit);
-  		     ^
-    symbol: method use(BlockState,Level,BlockPos,Player,InteractionHand,BlockHitResult)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/FlailExecutionerSpawnerBlock.java:31: error: cannot find symbol
-  		super.use(blockstate, world, pos, entity, hand, hit);
-  		     ^
-    symbol: method use(BlockState,Level,BlockPos,Player,InteractionHand,BlockHitResult)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:36: error: <anonymous net.sombrius.thedeepvoid.client.renderer.AmalgamRenderer$2> is not abstract and does not override abstract method render(PoseStack,MultiBufferSource,int,AmalgamEntity,float,float,float,float,float,float) in RenderLayer
-  		this.addLayer(new RenderLayer<AmalgamEntity, Modelamalgam_rework<AmalgamEntity>>(this) {
-  		                                                                                       ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:43: error: <anonymous net.sombrius.thedeepvoid.client.renderer.DarkSteelFlailRenderer$2> is not abstract and does not override abstract method render(PoseStack,MultiBufferSource,int,DarkSteelFlailEntity,float,float,float,float,float,float) in RenderLayer
-  		this.addLayer(new RenderLayer<DarkSteelFlailEntity, Modeldark_steel_flail<DarkSteelFlailEntity>>(this) {
-  		                                                                                                       ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/CrossToolInHandTickProcedure.java:21: error: incompatible types: AttributeModifier cannot be converted to ResourceLocation
-  					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"), ((double) DeepVoidConfigConfiguration.PENITENTCROSSREACHADDITION.get()), AttributeModifier.Operation.ADD_VALUE)))))
-  					 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/PlayerHasModifiedItemInHandProcedure.java:146: error: incompatible types: AttributeModifier cannot be converted to ResourceLocation
-  						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "2580eb30-85a0-4616-88dc-f9a0c7e9d71e"), ((double) DeepVoidConfigConfiguration.GRIMROTTENARMORBONUS.get()), AttributeModifier.Operation.ADD_VALUE)))))
-  						 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/VanishEffectStartedappliedProcedure.java:144: error: incompatible types: AttributeModifier cannot be converted to ResourceLocation
-  					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)))))
-  					 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/VanishEffectStartedappliedProcedure.java:148: error: incompatible types: AttributeModifier cannot be converted to ResourceLocation
-  					(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)))))
-  					 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/StalkerEntity.java:125: error: incompatible types: DamageSource cannot be converted to ServerLevel
-  		super.dropCustomDeathLoot(source, looting, recentlyHitIn);
-  		                          ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1442: error: incompatible types: Item cannot be converted to ItemStack
-  				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-  				                                                                                                                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1443: error: incompatible types: Item cannot be converted to ItemStack
-  				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-  				                                                                                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1446: error: incompatible types: Item cannot be converted to ItemStack
-  				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-  				                                                                                                                   ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1448: error: incompatible types: Item cannot be converted to ItemStack
-  				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-  				                                                                                                                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DesolateLichenBlock.java:28: error: incompatible types: Holder is not a functional interface
-  		super(() -> MobEffects.MOVEMENT_SPEED, 100,
-  		^
-      multiple non-overriding abstract methods found in interface Holder
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DarkSteelDoorBlock.java:14: error: incompatible types: Properties cannot be converted to BlockSetType
-  		super(BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(20f, 1200f).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false).dynamicShape(), BlockSetType.IRON);
-  		                                                                                                                                                                                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/CrackedAncientDeepslateBrickStairsBlock.java:18: error: incompatible types: BlockState is not a functional interface
-  		super(() -> Blocks.AIR.defaultBlockState(),
-  		^
-  Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:49: error: cannot find symbol
-  					model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-  					                                                          ^
-    symbol: variable partialTicks
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:50: error: cannot find symbol
-  					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-  					                                                    ^
-    symbol: variable ageInTicks
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:50: error: cannot find symbol
-  					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-  					                                                                ^
-    symbol: variable netHeadYaw
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:50: error: cannot find symbol
-  					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-  					                                                                            ^
-    symbol: variable headPitch
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:56: error: cannot find symbol
-  					model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-  					                                                          ^
-    symbol: variable partialTicks
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:57: error: cannot find symbol
-  					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-  					                                                    ^
-    symbol: variable ageInTicks
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:57: error: cannot find symbol
-  					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-  					                                                                ^
-    symbol: variable netHeadYaw
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:57: error: cannot find symbol
-  					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-  					                                                                            ^
-    symbol: variable headPitch
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:21: error: package net.neoforged.neoforge.common.capabilities does not exist
-  import net.neoforged.neoforge.common.capabilities.ForgeCapabilities;
-                                                   ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:480: error: package TickEvent does not exist
-  	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-  	                                         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:482: error: package TickEvent does not exist
-  		if (event.phase == TickEvent.Phase.END && entity.containerMenu instanceof UndertakerTradeGuiMenu) {
-  		                            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java:37: error: package NeoBuiltInRegistries does not exist
-  	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoBuiltInRegistries.Keys.ATTACHMENT_TYPES, TheDeepVoidMod.MODID);
-  	                                                                                                                       ^
-  111 errors
-  100 warnings
-
-* Try:
-> Check your code and dependencies to fix the compilation error(s)
-> Run with --scan to generate a Build Scan (powered by Develocity).
-
-BUILD FAILED in 3s

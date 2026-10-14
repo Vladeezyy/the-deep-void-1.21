@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -67,9 +69,7 @@ public class HunterBowItem extends Item {
 					projectile.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 				} else {
 					if (stack.isDamageableItem()) {
-						if (stack.hurt(1, world.getRandom(), player)) {
-							stack.shrink(1);
-							stack.setDamageValue(0);
+						if (PortUtil.hurtAndBreakReports(stack, 1, player)) {
 							if (stack.isEmpty())
 								player.getInventory().removeItem(stack);
 						}

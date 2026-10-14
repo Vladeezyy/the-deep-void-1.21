@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import javax.annotation.Nullable;
+
 import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.minecraft.network.protocol.Packet;
@@ -31,12 +33,12 @@ public class ThrownNoxiousBrewEntity extends AbstractArrow implements ItemSuppli
 		super(type, world);
 	}
 
-	public ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity> type, double x, double y, double z, Level world) {
-		super(type, x, y, z, world);
+	public ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity> type, double x, double y, double z, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
-	public ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity> type, LivingEntity entity, Level world) {
-		super(type, entity, world);
+	public ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity> type, LivingEntity entity, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
 
@@ -47,7 +49,7 @@ public class ThrownNoxiousBrewEntity extends AbstractArrow implements ItemSuppli
 	}
 
 	@Override
-	protected ItemStack getPickupItem() {
+	protected ItemStack getDefaultPickupItem() {
 		return PROJECTILE_ITEM;
 	}
 

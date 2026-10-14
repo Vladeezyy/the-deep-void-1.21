@@ -108,6 +108,10 @@ IMPORTS = {
     'NeoForgeMod': 'net.neoforged.neoforge.common.NeoForgeMod',
     'PacketDistributor': 'net.neoforged.neoforge.network.PacketDistributor',
     'PortImageButton': 'net.sombrius.thedeepvoid.port.PortImageButton',
+    'TagKey': 'net.minecraft.tags.TagKey',
+    'BlockTags': 'net.minecraft.tags.BlockTags',
+    'Block': 'net.minecraft.world.level.block.Block',
+    'Tier': 'net.minecraft.world.item.Tier',
     'PortUtil': 'net.sombrius.thedeepvoid.port.PortUtil',
     'Nullable': 'javax.annotation.Nullable',
     'ItemStack': 'net.minecraft.world.item.ItemStack',
@@ -432,6 +436,11 @@ def fix_projectiles(s):
                    r'\1, @Nullable ItemStack firedFromWeapon) {\n\t\tsuper(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);', s)
         s = re.sub(r'(public \w+\(EntityType<[^>]+> type, LivingEntity entity, Level world)\) \{\s*super\(type, entity, world, PROJECTILE_ITEM\);',
                    r'\1, @Nullable ItemStack firedFromWeapon) {\n\t\tsuper(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);', s)
+        s = re.sub(r'(public \w+\(EntityType<[^>]+> type, double x, double y, double z, Level world)\) \{\s*super\(type, x, y, z, world\);',
+                   r'\1, @Nullable ItemStack firedFromWeapon) {\n\t\tsuper(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);', s)
+        s = re.sub(r'(public \w+\(EntityType<[^>]+> type, LivingEntity entity, Level world)\) \{\s*super\(type, entity, world\);',
+                   r'\1, @Nullable ItemStack firedFromWeapon) {\n\t\tsuper(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);', s)
+        s = s.replace('protected ItemStack getPickupItem() {\n\t\treturn PROJECTILE_ITEM;', 'protected ItemStack getDefaultPickupItem() {\n\t\treturn PROJECTILE_ITEM;')
     # callers of the projectile constructors: (TYPE.get(), entity, level) -> + null weapon
     s = re.sub(r'(new \w+Entity\(TheDeepVoidModEntities\.\w+\.get\(\), \w+, \w+(?:\.level\(\))?)\)', r'\1, null)', s)
     s = re.sub(r'(new \w+Entity\(TheDeepVoidModEntities\.\w+\.get\(\), [^,;()]+, [^,;()]+, [^,;()]+, \w+(?:\.level\(\))?)\)', r'\1, null)', s)
@@ -560,6 +569,54 @@ def fix_enchantments(s):
     return s
 
 
+INCORRECT = ['INCORRECT_FOR_WOODEN_TOOL', 'INCORRECT_FOR_STONE_TOOL', 'INCORRECT_FOR_IRON_TOOL', 'INCORRECT_FOR_DIAMOND_TOOL', 'INCORRECT_FOR_NETHERITE_TOOL']
+
+
+def fix_tool_tiers(s):
+    m = re.search(r'super\(new Tier\(\) \{', s)
+    if not m: return s
+    cls = re.search(r'extends (\w+)', s).group(1)
+    ob = m.end() - 1; cb = match_paren(s, ob)
+    body = s[ob + 1:cb]
+    lvl = re.search(r'public int getLevel\(\) \{\s*return (\d+);\s*\}', body)
+    if lvl:
+        tag = INCORRECT[min(int(lvl.group(1)), 4)]
+        body = body.replace(lvl.group(0), 'public TagKey<Block> getIncorrectBlocksForDrops() {\n\t\t\t\treturn BlockTags.%s;\n\t\t\t}' % tag)
+    body = re.sub(r'\n(\t+)public ', r'\n\1@Override\n\1public ', body)
+    body = re.sub(r'\n\t\t\t', '\n\t\t', body).rstrip('\t')
+    # remaining arguments of the super call
+    end, args = split_args(s, m.start() + len('super'))
+    rest = [a.strip() for a in args[1:]]
+    if len(rest) == 3:
+        dmg, spd, props = rest
+        call = 'super(TOOL_TIER, %s.attributes(%s.createAttributes(TOOL_TIER, %s, %s)))' % (props, cls, dmg, spd)
+    else:
+        call = 'super(TOOL_TIER, %s)' % ', '.join(rest)
+    s = s[:m.start()] + call + s[end + 1:]
+    cm = re.search(r'public class \w+ extends \w+(?: implements [\w, <>]+)? \{\n', s)
+    s = s[:cm.end()] + '\tprivate static final Tier TOOL_TIER = new Tier() {' + body + '\t};\n\n' + s[cm.end():]
+    return s
+
+
+def fix_mob_effects(s):
+    if not re.search(r'extends MobEffect\b', s): return s
+    s = s.replace('public boolean isDurationEffectTick(int duration, int amplifier)', 'public boolean shouldApplyEffectTickThisTick(int duration, int amplifier)')
+    m = re.search(r'public void applyEffectTick\(LivingEntity (\w+), int (\w+)\) \{', s)
+    if m:
+        e = match_paren(s, m.end() - 1)
+        body = s[m.end():e].replace('return;', 'return true;')
+        body = re.sub(r'super\.applyEffectTick\((\w+), (\w+)\);', '', body)
+        s = s[:m.start()] + 'public boolean applyEffectTick(LivingEntity %s, int %s) {' % (m.group(1), m.group(2)) + body.rstrip() + '\n\t\treturn super.applyEffectTick(%s, %s);\n\t}' % (m.group(1), m.group(2)) + s[e + 1:]
+    s = re.sub(r'public void addAttributeModifiers\(LivingEntity (\w+), AttributeMap \w+, int (\w+)\) \{', r'public void onEffectStarted(LivingEntity \1, int \2) {', s)
+    s = re.sub(r'super\.addAttributeModifiers\((\w+), \w+, (\w+)\);', r'super.onEffectStarted(\1, \2);', s)
+    m = re.search(r'(@Override\s*)?public void removeAttributeModifiers\(LivingEntity (\w+), AttributeMap \w+, int (\w+)\) \{', s)
+    if m:
+        s = s[:m.start()] + '@Override\n\tpublic void onEffectRemoved(LivingEntity %s, int %s) {' % (m.group(2), m.group(3)) + s[m.end():]
+        s = re.sub(r'\n\s*super\.removeAttributeModifiers\(\w+, \w+, \w+\);', '', s)
+        s = re.sub(r'(public class \w+ extends MobEffect)( \{)', r'\1 implements PortUtil.EffectRemovedListener\2', s)
+    return s
+
+
 def convert(s):
     o = s
     for a, b in PKG: s = re.sub(a, b, s)
@@ -583,6 +640,8 @@ def convert(s):
     s = fix_item_attribute_event(s)
     s = fix_network(s)
     s = fix_enchantments(s)
+    s = fix_tool_tiers(s)
+    s = fix_mob_effects(s)
     if s != o: s = add_imports(s)
     # drop duplicate imports
     seen = set(); lines = []

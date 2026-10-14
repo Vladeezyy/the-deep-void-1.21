@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.sombrius.thedeepvoid.procedures.AbyssalMarkOnEffectActiveTickProcedure;
 import net.sombrius.thedeepvoid.procedures.AbyssalMarkEffectExpiresProcedure;
 
@@ -9,24 +11,24 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffect;
 
-public class AbyssalMarkMobEffect extends MobEffect {
+public class AbyssalMarkMobEffect extends MobEffect implements PortUtil.EffectRemovedListener {
 	public AbyssalMarkMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -14935012);
 	}
 
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		AbyssalMarkOnEffectActiveTickProcedure.execute(entity, amplifier);
+		return super.applyEffectTick(entity, amplifier);
 	}
 
 	@Override
-	public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
-		super.removeAttributeModifiers(entity, attributeMap, amplifier);
+	public void onEffectRemoved(LivingEntity entity, int amplifier) {
 		AbyssalMarkEffectExpiresProcedure.execute(entity.level(), entity);
 	}
 
 	@Override
-	public boolean isDurationEffectTick(int duration, int amplifier) {
+	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
 		return true;
 	}
 }

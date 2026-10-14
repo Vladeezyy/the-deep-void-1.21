@@ -1,13 +1,17 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
+import net.sombrius.thedeepvoid.procedures.RottenHeartEffectExpiresProcedure;
+
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.sombrius.thedeepvoid.procedures.RottenHeartEffectStartedappliedProcedure;
 import net.sombrius.thedeepvoid.procedures.RottenHeartOnEffectActiveTickProcedure;
 
-public class RottenHeartMobEffect extends MobEffect {
+public class RottenHeartMobEffect extends MobEffect implements PortUtil.EffectRemovedListener {
 	public RottenHeartMobEffect() {
 		super(MobEffectCategory.BENEFICIAL, -14145496);
 	}
@@ -26,5 +30,10 @@ public class RottenHeartMobEffect extends MobEffect {
 	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		RottenHeartOnEffectActiveTickProcedure.execute(entity.level(), entity);
 		return super.applyEffectTick(entity, amplifier);
+	}
+
+	@Override
+	public void onEffectRemoved(LivingEntity entity, int amplifier) {
+		RottenHeartEffectExpiresProcedure.execute(entity);
 	}
 }

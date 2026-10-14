@@ -133,32 +133,6 @@ import net.minecraft.world.item.RecordItem;
 public class DarkmareItem extends RecordItem {
                                   ^
   symbol: class RecordItem
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:19: error: package net.neoforged.neoforge.common.capabilities does not exist
-import net.neoforged.neoforge.common.capabilities.Capability;
-                                                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:20: error: package net.neoforged.neoforge.common.capabilities does not exist
-import net.neoforged.neoforge.common.capabilities.ForgeCapabilities;
-                                                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:21: error: cannot find symbol
-import net.neoforged.neoforge.common.util.LazyOptional;
-                                         ^
-  symbol:   class LazyOptional
-  location: package net.neoforged.neoforge.common.util
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:28: error: cannot find symbol
-	private final LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.values());
-	              ^
-  symbol:   class LazyOptional
-  location: class DungeonDarkSteelBarsActiveBlockEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:124: error: cannot find symbol
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-	                                         ^
-  symbol:   class Capability
-  location: class DungeonDarkSteelBarsActiveBlockEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:124: error: cannot find symbol
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-	           ^
-  symbol:   class LazyOptional
-  location: class DungeonDarkSteelBarsActiveBlockEntity
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TrapDarkSteelSpikesBlock.java:30: error: cannot find symbol
 import net.neoforged.neoforge.common.util.ForgeSoundType;
                                          ^
@@ -515,189 +489,14 @@ public class TreasureBagJeiTypeRecipe implements Recipe<SimpleContainer> {
 		                                                                                   ^
   symbol:   variable tag
   location: class HiveWatcherEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:29: error: ShotgunPelletEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-public class ShotgunPelletEntity extends AbstractArrow implements ItemSupplier {
-       ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:38: error: incompatible types: double cannot be converted to LivingEntity
-		super(type, x, y, z, world);
-		            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:42: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-		super(type, entity, world);
-		^
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-  where CAP#1 is a fresh type-variable:
-    CAP#1 extends ShotgunPelletEntity from capture of ? extends ShotgunPelletEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:86: error: no suitable constructor found for ShotgunPelletEntity(EntityType<ShotgunPelletEntity>,LivingEntity,Level,<null>)
-		ShotgunPelletEntity entityarrow = new ShotgunPelletEntity(TheDeepVoidModEntities.SHOTGUN_PELLET.get(), entity, world, null);
-		                                  ^
-    constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:98: error: no suitable constructor found for ShotgunPelletEntity(EntityType<ShotgunPelletEntity>,LivingEntity,Level,<null>)
-		ShotgunPelletEntity entityarrow = new ShotgunPelletEntity(TheDeepVoidModEntities.SHOTGUN_PELLET.get(), entity, entity.level(), null);
-		                                  ^
-    constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/GrabbingHandsEntity.java:129: error: cannot find symbol
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
 		                                                                                   ^
   symbol:   variable tag
   location: class GrabbingHandsEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:25: error: ManiacShotgunPelletEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-public class ManiacShotgunPelletEntity extends AbstractArrow implements ItemSupplier {
-       ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:34: error: incompatible types: double cannot be converted to LivingEntity
-		super(type, x, y, z, world);
-		            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:38: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-		super(type, entity, world);
-		^
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-  where CAP#1 is a fresh type-variable:
-    CAP#1 extends ManiacShotgunPelletEntity from capture of ? extends ManiacShotgunPelletEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:76: error: no suitable constructor found for ManiacShotgunPelletEntity(EntityType<ManiacShotgunPelletEntity>,LivingEntity,Level,<null>)
-		ManiacShotgunPelletEntity entityarrow = new ManiacShotgunPelletEntity(TheDeepVoidModEntities.MANIAC_SHOTGUN_PELLET.get(), entity, world, null);
-		                                        ^
-    constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:88: error: no suitable constructor found for ManiacShotgunPelletEntity(EntityType<ManiacShotgunPelletEntity>,LivingEntity,Level,<null>)
-		ManiacShotgunPelletEntity entityarrow = new ManiacShotgunPelletEntity(TheDeepVoidModEntities.MANIAC_SHOTGUN_PELLET.get(), entity, entity.level(), null);
-		                                        ^
-    constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorCloudEntity.java:40: error: method does not override or implement a method from a supertype
 	@Override
 	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:28: error: IchorFlareShotEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-public class IchorFlareShotEntity extends AbstractArrow implements ItemSupplier {
-       ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:37: error: incompatible types: double cannot be converted to LivingEntity
-		super(type, x, y, z, world);
-		            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:41: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-		super(type, entity, world);
-		^
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-  where CAP#1 is a fresh type-variable:
-    CAP#1 extends IchorFlareShotEntity from capture of ? extends IchorFlareShotEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:91: error: no suitable constructor found for IchorFlareShotEntity(EntityType<IchorFlareShotEntity>,LivingEntity,Level,<null>)
-		IchorFlareShotEntity entityarrow = new IchorFlareShotEntity(TheDeepVoidModEntities.ICHOR_FLARE_SHOT.get(), entity, world, null);
-		                                   ^
-    constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:103: error: no suitable constructor found for IchorFlareShotEntity(EntityType<IchorFlareShotEntity>,LivingEntity,Level,<null>)
-		IchorFlareShotEntity entityarrow = new IchorFlareShotEntity(TheDeepVoidModEntities.ICHOR_FLARE_SHOT.get(), entity, entity.level(), null);
-		                                   ^
-    constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:25: error: BloodthirstyClawsBloodSpitEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-public class BloodthirstyClawsBloodSpitEntity extends AbstractArrow implements ItemSupplier {
-       ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:34: error: incompatible types: double cannot be converted to LivingEntity
-		super(type, x, y, z, world);
-		            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:38: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-		super(type, entity, world);
-		^
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-  where CAP#1 is a fresh type-variable:
-    CAP#1 extends BloodthirstyClawsBloodSpitEntity from capture of ? extends BloodthirstyClawsBloodSpitEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:76: error: no suitable constructor found for BloodthirstyClawsBloodSpitEntity(EntityType<BloodthirstyClawsBloodSpitEntity>,LivingEntity,Level,<null>)
-		BloodthirstyClawsBloodSpitEntity entityarrow = new BloodthirstyClawsBloodSpitEntity(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), entity, world, null);
-		                                               ^
-    constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:88: error: no suitable constructor found for BloodthirstyClawsBloodSpitEntity(EntityType<BloodthirstyClawsBloodSpitEntity>,LivingEntity,Level,<null>)
-		BloodthirstyClawsBloodSpitEntity entityarrow = new BloodthirstyClawsBloodSpitEntity(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), entity, entity.level(), null);
-		                                               ^
-    constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:25: error: PerilBulletNoCooldownEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-public class PerilBulletNoCooldownEntity extends AbstractArrow implements ItemSupplier {
-       ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:34: error: incompatible types: double cannot be converted to LivingEntity
-		super(type, x, y, z, world);
-		            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:38: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-		super(type, entity, world);
-		^
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-  where CAP#1 is a fresh type-variable:
-    CAP#1 extends PerilBulletNoCooldownEntity from capture of ? extends PerilBulletNoCooldownEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:76: error: no suitable constructor found for PerilBulletNoCooldownEntity(EntityType<PerilBulletNoCooldownEntity>,LivingEntity,Level,<null>)
-		PerilBulletNoCooldownEntity entityarrow = new PerilBulletNoCooldownEntity(TheDeepVoidModEntities.PERIL_BULLET_NO_COOLDOWN.get(), entity, world, null);
-		                                          ^
-    constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:88: error: no suitable constructor found for PerilBulletNoCooldownEntity(EntityType<PerilBulletNoCooldownEntity>,LivingEntity,Level,<null>)
-		PerilBulletNoCooldownEntity entityarrow = new PerilBulletNoCooldownEntity(TheDeepVoidModEntities.PERIL_BULLET_NO_COOLDOWN.get(), entity, entity.level(), null);
-		                                          ^
-    constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/HarbingerOfCataclysmEntity.java:160: error: cannot find symbol
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
 		                                                                                   ^
@@ -718,86 +517,16 @@ public class PerilBulletNoCooldownEntity extends AbstractArrow implements ItemSu
 		                                                                                   ^
   symbol:   variable tag
   location: class DoomingCoffinEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:26: error: ThrownNoxiousBrewEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-public class ThrownNoxiousBrewEntity extends AbstractArrow implements ItemSupplier {
-       ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:35: error: incompatible types: double cannot be converted to LivingEntity
-		super(type, x, y, z, world);
-		            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:39: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-		super(type, entity, world);
-		^
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-  where CAP#1 is a fresh type-variable:
-    CAP#1 extends ThrownNoxiousBrewEntity from capture of ? extends ThrownNoxiousBrewEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:82: error: no suitable constructor found for ThrownNoxiousBrewEntity(EntityType<ThrownNoxiousBrewEntity>,LivingEntity,Level,<null>)
-		ThrownNoxiousBrewEntity entityarrow = new ThrownNoxiousBrewEntity(TheDeepVoidModEntities.THROWN_NOXIOUS_BREW.get(), entity, world, null);
-		                                      ^
-    constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:94: error: no suitable constructor found for ThrownNoxiousBrewEntity(EntityType<ThrownNoxiousBrewEntity>,LivingEntity,Level,<null>)
-		ThrownNoxiousBrewEntity entityarrow = new ThrownNoxiousBrewEntity(TheDeepVoidModEntities.THROWN_NOXIOUS_BREW.get(), entity, entity.level(), null);
-		                                      ^
-    constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:28: error: BarbedArrowEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
-       ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:37: error: incompatible types: double cannot be converted to LivingEntity
-		super(type, x, y, z, world);
-		            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:41: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-		super(type, entity, world);
-		^
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-      (actual and formal argument lists differ in length)
-  where CAP#1 is a fresh type-variable:
-    CAP#1 extends BarbedArrowEntity from capture of ? extends BarbedArrowEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:90: error: no suitable constructor found for BarbedArrowEntity(EntityType<BarbedArrowEntity>,LivingEntity,Level,<null>)
-		BarbedArrowEntity entityarrow = new BarbedArrowEntity(TheDeepVoidModEntities.BARBED_ARROW.get(), entity, world, null);
-		                                ^
-    constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:102: error: no suitable constructor found for BarbedArrowEntity(EntityType<BarbedArrowEntity>,LivingEntity,Level,<null>)
-		BarbedArrowEntity entityarrow = new BarbedArrowEntity(TheDeepVoidModEntities.BARBED_ARROW.get(), entity, entity.level(), null);
-		                                ^
-    constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,double,double,double,Level) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,LivingEntity,Level) is not applicable
-      (actual and formal argument lists differ in length)
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/AmbrosiaCloudEntity.java:52: error: method does not override or implement a method from a supertype
 	@Override
 	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:419: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:424: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:419: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:424: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:535: error: no suitable method found for register(String,()->new Lu[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:540: error: no suitable method found for register(String,()->new Lu[...]tem())
 	public static final DeferredHolder<Item, Item> LURKING_MUSIC_DISC = REGISTRY.register("lurking_music_disc", () -> new LurkingMusicDiscItem());
 	                                                                            ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -811,7 +540,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:540: error: no suitable method found for register(String,()->new Ch[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:545: error: no suitable method found for register(String,()->new Ch[...]tem())
 	public static final DeferredHolder<Item, Item> CHASMS_MUSIC_DISC = REGISTRY.register("chasms_music_disc", () -> new ChasmsMusicDiscItem());
 	                                                                           ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -825,7 +554,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:824: error: no suitable method found for register(String,()->new Si[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:829: error: no suitable method found for register(String,()->new Si[...]tem())
 	public static final DeferredHolder<Item, Item> SINS_AND_SINNERS = REGISTRY.register("sins_and_sinners", () -> new SinsAndSinnersItem());
 	                                                                          ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -839,7 +568,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:886: error: no suitable method found for register(String,()->new Da[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:891: error: no suitable method found for register(String,()->new Da[...]tem())
 	public static final DeferredHolder<Item, Item> DARKMARE = REGISTRY.register("darkmare", () -> new DarkmareItem());
 	                                                                  ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -853,7 +582,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:936: error: no suitable method found for register(String,()->new Ch[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:941: error: no suitable method found for register(String,()->new Ch[...]tem())
 	public static final DeferredHolder<Item, Item> CHAINSAW = REGISTRY.register("chainsaw", () -> new ChainsawItem());
 	                                                                  ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -867,7 +596,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:958: error: no suitable method found for register(String,()->new Pi[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:963: error: no suitable method found for register(String,()->new Pi[...]tem())
 	public static final DeferredHolder<Item, Item> PITCH_BLACK = REGISTRY.register("pitch_black", () -> new PitchBlackItem());
 	                                                                     ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -881,7 +610,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:977: error: no suitable method found for register(String,()->new Th[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:982: error: no suitable method found for register(String,()->new Th[...]tem())
 	public static final DeferredHolder<Item, Item> THE_HAUNT = REGISTRY.register("the_haunt", () -> new TheHauntItem());
 	                                                                   ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -895,7 +624,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1137: error: no suitable method found for register(String,()->new Mo[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1142: error: no suitable method found for register(String,()->new Mo[...]tem())
 	public static final DeferredHolder<Item, Item> MONSTERS_LAIR = REGISTRY.register("monsters_lair", () -> new MonstersLairItem());
 	                                                                       ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -909,7 +638,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1339: error: no suitable method found for register(String,()->new Sl[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1344: error: no suitable method found for register(String,()->new Sl[...]tem())
 	public static final DeferredHolder<Item, Item> SLAUGHTER = REGISTRY.register("slaughter", () -> new SlaughterItem());
 	                                                                   ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -923,7 +652,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1407: error: no suitable method found for register(String,()->new Ch[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1412: error: no suitable method found for register(String,()->new Ch[...]tem())
 	public static final DeferredHolder<Item, Item> CHANT_OF_THE_FORGOTTEN = REGISTRY.register("chant_of_the_forgotten", () -> new ChantOfTheForgottenItem());
 	                                                                                ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -937,7 +666,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1408: error: no suitable method found for register(String,()->new Ch[...]tem())
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1413: error: no suitable method found for register(String,()->new Ch[...]tem())
 	public static final DeferredHolder<Item, Item> CHANT_OF_THE_FORGOTTEN_DISTORTED = REGISTRY.register("chant_of_the_forgotten_distorted", () -> new ChantOfTheForgottenDistortedItem());
 	                                                                                          ^
     method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -951,18 +680,24 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
     I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
     T extends Object declared in class DeferredRegister
     I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1429: error: incompatible types: Item cannot be converted to ItemStack
-			ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-			                                                                                                                    ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1430: error: incompatible types: Item cannot be converted to ItemStack
-			ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-			                                                                                                              ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1433: error: incompatible types: Item cannot be converted to ItemStack
-			ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-			                                                                                                                   ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1435: error: incompatible types: Item cannot be converted to ItemStack
-			ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-			                                                                                                                    ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1436: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+	                    ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1436: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+	                                            ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1442: error: incompatible types: Item cannot be converted to ItemStack
+				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				                                                                                                                    ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1443: error: incompatible types: Item cannot be converted to ItemStack
+				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				                                                                                                              ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1446: error: incompatible types: Item cannot be converted to ItemStack
+				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				                                                                                                                   ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1448: error: incompatible types: Item cannot be converted to ItemStack
+				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				                                                                                                                    ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:46: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
@@ -1047,36 +782,12 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModModels.java:89: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:22: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:22: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
                                             ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:25: error: <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>) has private access in MenuScreens
-			MenuScreens.register(TheDeepVoidModMenus.VOID_BAG_GUI.get(), VoidBagGuiScreen::new);
-			           ^
-  where M,U are type-variables:
-    M extends AbstractContainerMenu declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-    U extends Screen,MenuAccess<M> declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:26: error: <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>) has private access in MenuScreens
-			MenuScreens.register(TheDeepVoidModMenus.SOUL_FORGE_GUI.get(), SoulForgeGUIScreen::new);
-			           ^
-  where M,U are type-variables:
-    M extends AbstractContainerMenu declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-    U extends Screen,MenuAccess<M> declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:27: error: <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>) has private access in MenuScreens
-			MenuScreens.register(TheDeepVoidModMenus.NECROSED_SKIN_BACKPACK_GUI.get(), NecrosedSkinBackpackGUIScreen::new);
-			           ^
-  where M,U are type-variables:
-    M extends AbstractContainerMenu declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-    U extends Screen,MenuAccess<M> declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:28: error: <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>) has private access in MenuScreens
-			MenuScreens.register(TheDeepVoidModMenus.UNDERTAKER_TRADE_GUI.get(), UndertakerTradeGuiScreen::new);
-			           ^
-  where M,U are type-variables:
-    M extends AbstractContainerMenu declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-    U extends Screen,MenuAccess<M> declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModKeyMappings.java:29: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
                     ^
@@ -1126,6 +837,12 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:482: error: package TickEvent does not exist
 		if (event.phase == TickEvent.Phase.END && entity.containerMenu instanceof UndertakerTradeGuiMenu) {
 		                            ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBlockEntities.java:37: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+                    ^
+/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBlockEntities.java:37: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+                                            ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntityRenderers.java:173: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
                     ^
@@ -1383,9 +1100,6 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CrawlerItem.java:27: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                     ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CrawlerItem.java:27: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                            ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/RotTongueItem.java:41: error: method does not override or implement a method from a supertype
 	@Override
 	^
@@ -1404,43 +1118,6 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/RotTongueItem.java:70: error: incompatible types: EquipmentSlot is not a functional interface
 		itemstack.hurtAndBreak(1, entity, i -> i.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 		         ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DarkSteelHoeItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.DarkSteelHoeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DarkSteelHoeItem.java:16: error: constructor HoeItem in class HoeItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DarkSteelShovelItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.DarkSteelShovelItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DarkSteelShovelItem.java:16: error: constructor ShovelItem in class ShovelItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CruelStilettoItem.java:22: error: <anonymous net.sombrius.thedeepvoid.item.CruelStilettoItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CruelStilettoItem.java:22: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-		super(new Tier() {
-		^
-    constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GunslingerItem.java:22: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                    ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GunslingerItem.java:22: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                            ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DoubleBarrelShotgunItem.java:46: warning: [removal] initializeClient(Consumer<IClientItemExtensions>) in Item has been deprecated and marked for removal
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-	            ^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DoubleBarrelShotgunItem.java:56: error: cannot find symbol
 			private static final HumanoidModel.ArmPose DoubleBarrelShotgunPose = HumanoidModel.ArmPose.create("DoubleBarrelShotgun", false, (model, entity, arm) -> {
 			                                                                                          ^
@@ -1476,68 +1153,11 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 			                                                                                   ^
   symbol:   method create(String,boolean,(model,ent[...]; } })
   location: class ArmPose
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/TombstoneItem.java:24: error: <anonymous net.sombrius.thedeepvoid.item.TombstoneItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/TombstoneItem.java:24: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-		super(new Tier() {
-		^
-    constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumPickaxeItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.VoidriumPickaxeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumPickaxeItem.java:16: error: constructor PickaxeItem in class PickaxeItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidSickleItem.java:23: error: <anonymous net.sombrius.thedeepvoid.item.VoidSickleItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidSickleItem.java:23: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-		super(new Tier() {
-		^
-    constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-      (actual and formal argument lists differ in length)
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DisgustingMealItem.java:16: error: cannot find symbol
 		super(new Item.Properties().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(4).saturationModifier(1f).meat().build()));
 		                                                                                                                                      ^
   symbol:   method meat()
   location: class Builder
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/OnyxHoeItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.OnyxHoeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/OnyxHoeItem.java:16: error: constructor HoeItem in class HoeItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumShovelItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.VoidriumShovelItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumShovelItem.java:16: error: constructor ShovelItem in class ShovelItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/StalkerScytheClawItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.StalkerScytheClawItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/StalkerScytheClawItem.java:16: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-		super(new Tier() {
-		^
-    constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-      (actual and formal argument lists differ in length)
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/HunterBowItem.java:59: error: method getUseDuration in class HunterBowItem cannot be applied to given types;
 			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
 			                                                 ^
@@ -1552,15 +1172,6 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 						         ^
   symbol:   method hurt(int,RandomSource,ServerPlayer)
   location: variable stack of type ItemStack
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneShovelItem.java:14: error: <anonymous net.sombrius.thedeepvoid.item.BloodstoneShovelItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneShovelItem.java:14: error: constructor ShovelItem in class ShovelItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BlackHoleItem.java:73: error: no suitable method found for hurtAndBreak(int,RandomSource,ServerPlayer,()->{ stac[...]0); })
 						stack.hurtAndBreak(1, world.getRandom(), player, () -> {
 						     ^
@@ -1617,15 +1228,6 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
       (argument mismatch; RandomSource cannot be converted to ServerLevel)
     method ItemStack.hurtAndBreak(int,ServerLevel,LivingEntity,Consumer<Item>) is not applicable
       (argument mismatch; RandomSource cannot be converted to ServerLevel)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BismuthNetheriteHoeItem.java:26: error: <anonymous net.sombrius.thedeepvoid.item.BismuthNetheriteHoeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BismuthNetheriteHoeItem.java:26: error: constructor HoeItem in class HoeItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SharpshooterItem.java:79: error: method getUseDuration in class SharpshooterItem cannot be applied to given types;
 			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
 			                                                 ^
@@ -1657,15 +1259,6 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/IchorGreatswordItem.java:67: error: incompatible types: EquipmentSlot is not a functional interface
 		itemstack.hurtAndBreak(1, entity, i -> i.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 		         ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstonePickaxeItem.java:14: error: <anonymous net.sombrius.thedeepvoid.item.BloodstonePickaxeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstonePickaxeItem.java:14: error: constructor PickaxeItem in class PickaxeItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/ShadestormItem.java:70: error: method getUseDuration in class ShadestormItem cannot be applied to given types;
 			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
 			                                                 ^
@@ -1679,34 +1272,6 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
       (argument mismatch; RandomSource cannot be converted to ServerLevel)
     method ItemStack.hurtAndBreak(int,ServerLevel,LivingEntity,Consumer<Item>) is not applicable
       (argument mismatch; RandomSource cannot be converted to ServerLevel)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumSwordItem.java:23: error: <anonymous net.sombrius.thedeepvoid.item.VoidriumSwordItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumSwordItem.java:23: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-		super(new Tier() {
-		^
-    constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneAxeItem.java:14: error: <anonymous net.sombrius.thedeepvoid.item.BloodstoneAxeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneAxeItem.java:14: error: constructor AxeItem in class AxeItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneHoeItem.java:14: error: <anonymous net.sombrius.thedeepvoid.item.BloodstoneHoeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneHoeItem.java:14: error: constructor HoeItem in class HoeItem cannot be applied to given types;
-		super(new Tier() {
-		^
-  required: Tier,Properties
-  found:    <anonymous Tier>,int,float,Properties
-  reason: actual and formal argument lists differ in length
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodBowItem.java:79: error: method getUseDuration in class BloodBowItem cannot be applied to given types;
 			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
 			                                                 ^
@@ -1742,16 +1307,6 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BallAndChainItem.java:39: error: incompatible types: EquipmentSlot cannot be converted to ItemStack
 		return super.getDefaultAttributeModifiers(equipmentSlot);
 		                                          ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CoffinItem.java:17: error: <anonymous net.sombrius.thedeepvoid.item.CoffinItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-		super(new Tier() {
-		                 ^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CoffinItem.java:17: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-		super(new Tier() {
-		^
-    constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-      (actual and formal argument lists differ in length)
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CookedFleshItem.java:14: error: cannot find symbol
 		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(1.2f).meat().build()));
 		                                                                                                                                        ^
@@ -1843,168 +1398,6 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
 			            ^
   overridden method is final
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:18: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:24: error: applyEffectTick(LivingEntity,int) in VanishMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:23: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:28: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:30: error: method removeAttributeModifiers in class MobEffect cannot be applied to given types;
-		super.removeAttributeModifiers(entity, attributeMap, amplifier);
-		     ^
-  required: AttributeMap
-  found:    LivingEntity,AttributeMap,int
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:34: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/SunderMobEffect.java:12: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DestinedToDieMobEffect.java:12: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:18: error: applyEffectTick(LivingEntity,int) in HexedMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:17: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:22: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:24: error: method removeAttributeModifiers in class MobEffect cannot be applied to given types;
-		super.removeAttributeModifiers(entity, attributeMap, amplifier);
-		     ^
-  required: AttributeMap
-  found:    LivingEntity,AttributeMap,int
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:28: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/IchorBurnMobEffect.java:17: error: applyEffectTick(LivingEntity,int) in IchorBurnMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/IchorBurnMobEffect.java:16: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/IchorBurnMobEffect.java:21: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VulnerableMobEffect.java:12: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DecompositionMobEffect.java:16: error: applyEffectTick(LivingEntity,int) in DecompositionMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DecompositionMobEffect.java:15: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DecompositionMobEffect.java:20: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PlagueMobEffect.java:17: error: applyEffectTick(LivingEntity,int) in PlagueMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PlagueMobEffect.java:16: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PlagueMobEffect.java:21: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/TotalBlindnessMobEffect.java:14: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BarbedTipsMobEffect.java:16: error: applyEffectTick(LivingEntity,int) in BarbedTipsMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BarbedTipsMobEffect.java:15: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BarbedTipsMobEffect.java:20: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:18: error: applyEffectTick(LivingEntity,int) in AbyssalMarkMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:17: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:22: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:24: error: method removeAttributeModifiers in class MobEffect cannot be applied to given types;
-		super.removeAttributeModifiers(entity, attributeMap, amplifier);
-		     ^
-  required: AttributeMap
-  found:    LivingEntity,AttributeMap,int
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:28: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BlossomMobEffect.java:17: error: applyEffectTick(LivingEntity,int) in BlossomMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BlossomMobEffect.java:16: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BlossomMobEffect.java:21: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/RotMobEffect.java:17: error: applyEffectTick(LivingEntity,int) in RotMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/RotMobEffect.java:16: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/RotMobEffect.java:21: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PitShakeMobEffect.java:19: error: applyEffectTick(LivingEntity,int) in PitShakeMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PitShakeMobEffect.java:18: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PitShakeMobEffect.java:23: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DominateMobEffect.java:16: error: applyEffectTick(LivingEntity,int) in DominateMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DominateMobEffect.java:15: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DominateMobEffect.java:20: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/TrembleMobEffect.java:21: error: applyEffectTick(LivingEntity,int) in TrembleMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-	            ^
-  return type void is not compatible with boolean
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/TrembleMobEffect.java:20: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/TrembleMobEffect.java:25: error: method does not override or implement a method from a supertype
-	@Override
-	^
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/SulfurGlassPaneBlock.java:19: error: getBeaconColorMultiplier(BlockState,LevelReader,BlockPos,BlockPos) in SulfurGlassPaneBlock cannot implement getBeaconColorMultiplier(BlockState,LevelReader,BlockPos,BlockPos) in IBlockExtension
 	public float[] getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
 	               ^
@@ -2012,62 +1405,6 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/SulfurGlassPaneBlock.java:18: error: method does not override or implement a method from a supertype
 	@Override
 	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:28: error: cannot find symbol
-	private final LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.values());
-	                                                                               ^
-  symbol:   method create(DungeonDarkSteelBarsActiveBlockEntity,Direction[])
-  location: class SidedInvWrapper
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:34: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:36: error: cannot find symbol
-		super.load(compound);
-		     ^
-  symbol: method load(CompoundTag)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:39: error: method loadAllItems in class ContainerHelper cannot be applied to given types;
-		ContainerHelper.loadAllItems(compound, this.stacks);
-		               ^
-  required: CompoundTag,NonNullList<ItemStack>,Provider
-  found:    CompoundTag,NonNullList<ItemStack>
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:42: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:44: error: method saveAdditional in class BaseContainerBlockEntity cannot be applied to given types;
-		super.saveAdditional(compound);
-		     ^
-  required: CompoundTag,Provider
-  found:    CompoundTag
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:46: error: no suitable method found for saveAllItems(CompoundTag,NonNullList<ItemStack>)
-			ContainerHelper.saveAllItems(compound, this.stacks);
-			               ^
-    method ContainerHelper.saveAllItems(CompoundTag,NonNullList<ItemStack>,Provider) is not applicable
-      (actual and formal argument lists differ in length)
-    method ContainerHelper.saveAllItems(CompoundTag,NonNullList<ItemStack>,boolean,Provider) is not applicable
-      (actual and formal argument lists differ in length)
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:55: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:57: error: method saveWithFullMetadata in class BlockEntity cannot be applied to given types;
-		return this.saveWithFullMetadata();
-		           ^
-  required: Provider
-  found:    no arguments
-  reason: actual and formal argument lists differ in length
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:123: error: method does not override or implement a method from a supertype
-	@Override
-	^
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:125: error: cannot find symbol
-		if (!this.remove && facing != null && capability == ForgeCapabilities.ITEM_HANDLER)
-		                                                    ^
-  symbol:   variable ForgeCapabilities
-  location: class DungeonDarkSteelBarsActiveBlockEntity
-/Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:133: error: cannot find symbol
-		for (LazyOptional<? extends IItemHandler> handler : handlers)
-		     ^
-  symbol:   class LazyOptional
-  location: class DungeonDarkSteelBarsActiveBlockEntity
 /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/BismuthGlassPaneBlock.java:19: error: getBeaconColorMultiplier(BlockState,LevelReader,BlockPos,BlockPos) in BismuthGlassPaneBlock cannot implement getBeaconColorMultiplier(BlockState,LevelReader,BlockPos,BlockPos) in IBlockExtension
 	public float[] getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
 	               ^
@@ -2223,7 +1560,7 @@ Note: Some input files additionally use or override a deprecated API that is mar
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-384 errors
+248 errors
 100 warnings
 
 FAILURE: Build failed with an exception.
@@ -2282,47 +1619,11 @@ Execution failed for task ':compileJava'.
     required: TamableAnimal,double,float,float
     found:    RideableFlyingEyekinEntity,int,float,float,boolean
     reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DarkSteelHoeItem.java:16: error: constructor HoeItem in class HoeItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DarkSteelShovelItem.java:16: error: constructor ShovelItem in class ShovelItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumPickaxeItem.java:16: error: constructor PickaxeItem in class PickaxeItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/OnyxHoeItem.java:16: error: constructor HoeItem in class HoeItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumShovelItem.java:16: error: constructor ShovelItem in class ShovelItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
-    reason: actual and formal argument lists differ in length
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/HunterBowItem.java:59: error: method getUseDuration in class HunterBowItem cannot be applied to given types;
   			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
   			                                                 ^
     required: ItemStack,LivingEntity
     found:    ItemStack
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneShovelItem.java:14: error: constructor ShovelItem in class ShovelItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
     reason: actual and formal argument lists differ in length
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/NervesOfSteelItem.java:79: error: method getUseDuration in class NervesOfSteelItem cannot be applied to given types;
   			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
@@ -2336,41 +1637,17 @@ Execution failed for task ':compileJava'.
     required: ItemStack,LivingEntity
     found:    ItemStack
     reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BismuthNetheriteHoeItem.java:26: error: constructor HoeItem in class HoeItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
-    reason: actual and formal argument lists differ in length
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SharpshooterItem.java:79: error: method getUseDuration in class SharpshooterItem cannot be applied to given types;
   			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
   			                                                 ^
     required: ItemStack,LivingEntity
     found:    ItemStack
     reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstonePickaxeItem.java:14: error: constructor PickaxeItem in class PickaxeItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
-    reason: actual and formal argument lists differ in length
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/ShadestormItem.java:70: error: method getUseDuration in class ShadestormItem cannot be applied to given types;
   			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
   			                                                 ^
     required: ItemStack,LivingEntity
     found:    ItemStack
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneAxeItem.java:14: error: constructor AxeItem in class AxeItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneHoeItem.java:14: error: constructor HoeItem in class HoeItem cannot be applied to given types;
-  		super(new Tier() {
-  		^
-    required: Tier,Properties
-    found:    <anonymous Tier>,int,float,Properties
     reason: actual and formal argument lists differ in length
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodBowItem.java:79: error: method getUseDuration in class BloodBowItem cannot be applied to given types;
   			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack) - time);
@@ -2386,42 +1663,6 @@ Execution failed for task ':compileJava'.
     reason: actual and formal argument lists differ in length
     where T is a type-variable:
       T extends AbstractContainerMenu declared in class AbstractContainerScreen
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:30: error: method removeAttributeModifiers in class MobEffect cannot be applied to given types;
-  		super.removeAttributeModifiers(entity, attributeMap, amplifier);
-  		     ^
-    required: AttributeMap
-    found:    LivingEntity,AttributeMap,int
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:24: error: method removeAttributeModifiers in class MobEffect cannot be applied to given types;
-  		super.removeAttributeModifiers(entity, attributeMap, amplifier);
-  		     ^
-    required: AttributeMap
-    found:    LivingEntity,AttributeMap,int
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:24: error: method removeAttributeModifiers in class MobEffect cannot be applied to given types;
-  		super.removeAttributeModifiers(entity, attributeMap, amplifier);
-  		     ^
-    required: AttributeMap
-    found:    LivingEntity,AttributeMap,int
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:39: error: method loadAllItems in class ContainerHelper cannot be applied to given types;
-  		ContainerHelper.loadAllItems(compound, this.stacks);
-  		               ^
-    required: CompoundTag,NonNullList<ItemStack>,Provider
-    found:    CompoundTag,NonNullList<ItemStack>
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:44: error: method saveAdditional in class BaseContainerBlockEntity cannot be applied to given types;
-  		super.saveAdditional(compound);
-  		     ^
-    required: CompoundTag,Provider
-    found:    CompoundTag
-    reason: actual and formal argument lists differ in length
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:57: error: method saveWithFullMetadata in class BlockEntity cannot be applied to given types;
-  		return this.saveWithFullMetadata();
-  		           ^
-    required: Provider
-    found:    no arguments
-    reason: actual and formal argument lists differ in length
   Note: Some input files additionally use or override a deprecated API that is marked for removal.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/procedures/IfPlayerFallsInVoidProcedure.java:68: error: no suitable constructor found for ClientboundUpdateMobEffectPacket(int,MobEffectInstance)
   								_player.connection.send(new ClientboundUpdateMobEffectPacket(_player.getId(), _effectinstance));
@@ -2571,210 +1812,7 @@ Execution failed for task ':compileJava'.
       T#1 extends Entity declared in method <T#1>register(EntityType<T#1>,SpawnPredicate<T#1>)
       T#2 extends Entity declared in method <T#2>register(EntityType<T#2>,SpawnPredicate<T#2>,Operation)
       T#3 extends Entity declared in method <T#3>register(EntityType<T#3>,SpawnPlacementType,Types,SpawnPredicate<T#3>,Operation)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:42: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-  		super(type, entity, world);
-  		^
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-    where CAP#1 is a fresh type-variable:
-      CAP#1 extends ShotgunPelletEntity from capture of ? extends ShotgunPelletEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:86: error: no suitable constructor found for ShotgunPelletEntity(EntityType<ShotgunPelletEntity>,LivingEntity,Level,<null>)
-  		ShotgunPelletEntity entityarrow = new ShotgunPelletEntity(TheDeepVoidModEntities.SHOTGUN_PELLET.get(), entity, world, null);
-  		                                  ^
-      constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:98: error: no suitable constructor found for ShotgunPelletEntity(EntityType<ShotgunPelletEntity>,LivingEntity,Level,<null>)
-  		ShotgunPelletEntity entityarrow = new ShotgunPelletEntity(TheDeepVoidModEntities.SHOTGUN_PELLET.get(), entity, entity.level(), null);
-  		                                  ^
-      constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ShotgunPelletEntity.ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:38: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-  		super(type, entity, world);
-  		^
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-    where CAP#1 is a fresh type-variable:
-      CAP#1 extends ManiacShotgunPelletEntity from capture of ? extends ManiacShotgunPelletEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:76: error: no suitable constructor found for ManiacShotgunPelletEntity(EntityType<ManiacShotgunPelletEntity>,LivingEntity,Level,<null>)
-  		ManiacShotgunPelletEntity entityarrow = new ManiacShotgunPelletEntity(TheDeepVoidModEntities.MANIAC_SHOTGUN_PELLET.get(), entity, world, null);
-  		                                        ^
-      constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:88: error: no suitable constructor found for ManiacShotgunPelletEntity(EntityType<ManiacShotgunPelletEntity>,LivingEntity,Level,<null>)
-  		ManiacShotgunPelletEntity entityarrow = new ManiacShotgunPelletEntity(TheDeepVoidModEntities.MANIAC_SHOTGUN_PELLET.get(), entity, entity.level(), null);
-  		                                        ^
-      constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ManiacShotgunPelletEntity.ManiacShotgunPelletEntity(EntityType<? extends ManiacShotgunPelletEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:41: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-  		super(type, entity, world);
-  		^
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-    where CAP#1 is a fresh type-variable:
-      CAP#1 extends IchorFlareShotEntity from capture of ? extends IchorFlareShotEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:91: error: no suitable constructor found for IchorFlareShotEntity(EntityType<IchorFlareShotEntity>,LivingEntity,Level,<null>)
-  		IchorFlareShotEntity entityarrow = new IchorFlareShotEntity(TheDeepVoidModEntities.ICHOR_FLARE_SHOT.get(), entity, world, null);
-  		                                   ^
-      constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:103: error: no suitable constructor found for IchorFlareShotEntity(EntityType<IchorFlareShotEntity>,LivingEntity,Level,<null>)
-  		IchorFlareShotEntity entityarrow = new IchorFlareShotEntity(TheDeepVoidModEntities.ICHOR_FLARE_SHOT.get(), entity, entity.level(), null);
-  		                                   ^
-      constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor IchorFlareShotEntity.IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:38: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-  		super(type, entity, world);
-  		^
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-    where CAP#1 is a fresh type-variable:
-      CAP#1 extends BloodthirstyClawsBloodSpitEntity from capture of ? extends BloodthirstyClawsBloodSpitEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:76: error: no suitable constructor found for BloodthirstyClawsBloodSpitEntity(EntityType<BloodthirstyClawsBloodSpitEntity>,LivingEntity,Level,<null>)
-  		BloodthirstyClawsBloodSpitEntity entityarrow = new BloodthirstyClawsBloodSpitEntity(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), entity, world, null);
-  		                                               ^
-      constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:88: error: no suitable constructor found for BloodthirstyClawsBloodSpitEntity(EntityType<BloodthirstyClawsBloodSpitEntity>,LivingEntity,Level,<null>)
-  		BloodthirstyClawsBloodSpitEntity entityarrow = new BloodthirstyClawsBloodSpitEntity(TheDeepVoidModEntities.BLOODTHIRSTY_CLAWS_BLOOD_SPIT.get(), entity, entity.level(), null);
-  		                                               ^
-      constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor BloodthirstyClawsBloodSpitEntity.BloodthirstyClawsBloodSpitEntity(EntityType<? extends BloodthirstyClawsBloodSpitEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:38: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-  		super(type, entity, world);
-  		^
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-    where CAP#1 is a fresh type-variable:
-      CAP#1 extends PerilBulletNoCooldownEntity from capture of ? extends PerilBulletNoCooldownEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:76: error: no suitable constructor found for PerilBulletNoCooldownEntity(EntityType<PerilBulletNoCooldownEntity>,LivingEntity,Level,<null>)
-  		PerilBulletNoCooldownEntity entityarrow = new PerilBulletNoCooldownEntity(TheDeepVoidModEntities.PERIL_BULLET_NO_COOLDOWN.get(), entity, world, null);
-  		                                          ^
-      constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:88: error: no suitable constructor found for PerilBulletNoCooldownEntity(EntityType<PerilBulletNoCooldownEntity>,LivingEntity,Level,<null>)
-  		PerilBulletNoCooldownEntity entityarrow = new PerilBulletNoCooldownEntity(TheDeepVoidModEntities.PERIL_BULLET_NO_COOLDOWN.get(), entity, entity.level(), null);
-  		                                          ^
-      constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor PerilBulletNoCooldownEntity.PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:39: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-  		super(type, entity, world);
-  		^
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-    where CAP#1 is a fresh type-variable:
-      CAP#1 extends ThrownNoxiousBrewEntity from capture of ? extends ThrownNoxiousBrewEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:82: error: no suitable constructor found for ThrownNoxiousBrewEntity(EntityType<ThrownNoxiousBrewEntity>,LivingEntity,Level,<null>)
-  		ThrownNoxiousBrewEntity entityarrow = new ThrownNoxiousBrewEntity(TheDeepVoidModEntities.THROWN_NOXIOUS_BREW.get(), entity, world, null);
-  		                                      ^
-      constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:94: error: no suitable constructor found for ThrownNoxiousBrewEntity(EntityType<ThrownNoxiousBrewEntity>,LivingEntity,Level,<null>)
-  		ThrownNoxiousBrewEntity entityarrow = new ThrownNoxiousBrewEntity(TheDeepVoidModEntities.THROWN_NOXIOUS_BREW.get(), entity, entity.level(), null);
-  		                                      ^
-      constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor ThrownNoxiousBrewEntity.ThrownNoxiousBrewEntity(EntityType<? extends ThrownNoxiousBrewEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:41: error: no suitable constructor found for AbstractArrow(EntityType<CAP#1>,LivingEntity,Level)
-  		super(type, entity, world);
-  		^
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,double,double,double,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor AbstractArrow.AbstractArrow(EntityType<? extends AbstractArrow>,LivingEntity,Level,ItemStack,ItemStack) is not applicable
-        (actual and formal argument lists differ in length)
-    where CAP#1 is a fresh type-variable:
-      CAP#1 extends BarbedArrowEntity from capture of ? extends BarbedArrowEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:90: error: no suitable constructor found for BarbedArrowEntity(EntityType<BarbedArrowEntity>,LivingEntity,Level,<null>)
-  		BarbedArrowEntity entityarrow = new BarbedArrowEntity(TheDeepVoidModEntities.BARBED_ARROW.get(), entity, world, null);
-  		                                ^
-      constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:102: error: no suitable constructor found for BarbedArrowEntity(EntityType<BarbedArrowEntity>,LivingEntity,Level,<null>)
-  		BarbedArrowEntity entityarrow = new BarbedArrowEntity(TheDeepVoidModEntities.BARBED_ARROW.get(), entity, entity.level(), null);
-  		                                ^
-      constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,double,double,double,Level) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor BarbedArrowEntity.BarbedArrowEntity(EntityType<? extends BarbedArrowEntity>,LivingEntity,Level) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:535: error: no suitable method found for register(String,()->new Lu[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:540: error: no suitable method found for register(String,()->new Lu[...]tem())
   	public static final DeferredHolder<Item, Item> LURKING_MUSIC_DISC = REGISTRY.register("lurking_music_disc", () -> new LurkingMusicDiscItem());
   	                                                                            ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2788,7 +1826,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:540: error: no suitable method found for register(String,()->new Ch[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:545: error: no suitable method found for register(String,()->new Ch[...]tem())
   	public static final DeferredHolder<Item, Item> CHASMS_MUSIC_DISC = REGISTRY.register("chasms_music_disc", () -> new ChasmsMusicDiscItem());
   	                                                                           ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2802,7 +1840,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:824: error: no suitable method found for register(String,()->new Si[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:829: error: no suitable method found for register(String,()->new Si[...]tem())
   	public static final DeferredHolder<Item, Item> SINS_AND_SINNERS = REGISTRY.register("sins_and_sinners", () -> new SinsAndSinnersItem());
   	                                                                          ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2816,7 +1854,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:886: error: no suitable method found for register(String,()->new Da[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:891: error: no suitable method found for register(String,()->new Da[...]tem())
   	public static final DeferredHolder<Item, Item> DARKMARE = REGISTRY.register("darkmare", () -> new DarkmareItem());
   	                                                                  ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2830,7 +1868,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:936: error: no suitable method found for register(String,()->new Ch[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:941: error: no suitable method found for register(String,()->new Ch[...]tem())
   	public static final DeferredHolder<Item, Item> CHAINSAW = REGISTRY.register("chainsaw", () -> new ChainsawItem());
   	                                                                  ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2844,7 +1882,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:958: error: no suitable method found for register(String,()->new Pi[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:963: error: no suitable method found for register(String,()->new Pi[...]tem())
   	public static final DeferredHolder<Item, Item> PITCH_BLACK = REGISTRY.register("pitch_black", () -> new PitchBlackItem());
   	                                                                     ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2858,7 +1896,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:977: error: no suitable method found for register(String,()->new Th[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:982: error: no suitable method found for register(String,()->new Th[...]tem())
   	public static final DeferredHolder<Item, Item> THE_HAUNT = REGISTRY.register("the_haunt", () -> new TheHauntItem());
   	                                                                   ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2872,7 +1910,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1137: error: no suitable method found for register(String,()->new Mo[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1142: error: no suitable method found for register(String,()->new Mo[...]tem())
   	public static final DeferredHolder<Item, Item> MONSTERS_LAIR = REGISTRY.register("monsters_lair", () -> new MonstersLairItem());
   	                                                                       ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2886,7 +1924,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1339: error: no suitable method found for register(String,()->new Sl[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1344: error: no suitable method found for register(String,()->new Sl[...]tem())
   	public static final DeferredHolder<Item, Item> SLAUGHTER = REGISTRY.register("slaughter", () -> new SlaughterItem());
   	                                                                   ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2900,7 +1938,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1407: error: no suitable method found for register(String,()->new Ch[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1412: error: no suitable method found for register(String,()->new Ch[...]tem())
   	public static final DeferredHolder<Item, Item> CHANT_OF_THE_FORGOTTEN = REGISTRY.register("chant_of_the_forgotten", () -> new ChantOfTheForgottenItem());
   	                                                                                ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2914,7 +1952,7 @@ Execution failed for task ':compileJava'.
       I#1 extends Item declared in method <I#1>register(String,Supplier<? extends I#1>)
       T extends Object declared in class DeferredRegister
       I#2 extends Item declared in method <I#2>register(String,Function<ResourceLocation,? extends I#2>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1408: error: no suitable method found for register(String,()->new Ch[...]tem())
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1413: error: no suitable method found for register(String,()->new Ch[...]tem())
   	public static final DeferredHolder<Item, Item> CHANT_OF_THE_FORGOTTEN_DISTORTED = REGISTRY.register("chant_of_the_forgotten_distorted", () -> new ChantOfTheForgottenDistortedItem());
   	                                                                                          ^
       method DeferredRegister.<I#1>register(String,Supplier<? extends I#1>) is not applicable
@@ -2934,34 +1972,6 @@ Execution failed for task ':compileJava'.
       method ModelPart.render(PoseStack,VertexConsumer,int,int) is not applicable
         (actual and formal argument lists differ in length)
       method ModelPart.render(PoseStack,VertexConsumer,int,int,int) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CruelStilettoItem.java:22: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-  		super(new Tier() {
-  		^
-      constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/TombstoneItem.java:24: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-  		super(new Tier() {
-  		^
-      constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidSickleItem.java:23: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-  		super(new Tier() {
-  		^
-      constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/StalkerScytheClawItem.java:16: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-  		super(new Tier() {
-  		^
-      constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
         (actual and formal argument lists differ in length)
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BlackHoleItem.java:73: error: no suitable method found for hurtAndBreak(int,RandomSource,ServerPlayer,()->{ stac[...]0); })
   						stack.hurtAndBreak(1, world.getRandom(), player, () -> {
@@ -2998,13 +2008,6 @@ Execution failed for task ':compileJava'.
         (argument mismatch; RandomSource cannot be converted to ServerLevel)
       method ItemStack.hurtAndBreak(int,ServerLevel,LivingEntity,Consumer<Item>) is not applicable
         (argument mismatch; RandomSource cannot be converted to ServerLevel)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumSwordItem.java:23: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-  		super(new Tier() {
-  		^
-      constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-        (actual and formal argument lists differ in length)
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodBowItem.java:90: error: no suitable method found for hurtAndBreak(int,RandomSource,ServerPlayer,()->{ stac[...]0); })
   						stack.hurtAndBreak(1, world.getRandom(), player, () -> {
   						     ^
@@ -3019,20 +2022,6 @@ Execution failed for task ':compileJava'.
         (argument mismatch; RandomSource cannot be converted to ServerLevel)
       method ItemStack.hurtAndBreak(int,ServerLevel,LivingEntity,Consumer<Item>) is not applicable
         (argument mismatch; RandomSource cannot be converted to ServerLevel)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CoffinItem.java:17: error: no suitable constructor found for SwordItem(<anonymous Tier>,int,float,Properties)
-  		super(new Tier() {
-  		^
-      constructor SwordItem.SwordItem(Tier,Properties) is not applicable
-        (actual and formal argument lists differ in length)
-      constructor SwordItem.SwordItem(Tier,Properties,Tool) is not applicable
-        (actual and formal argument lists differ in length)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:46: error: no suitable method found for saveAllItems(CompoundTag,NonNullList<ItemStack>)
-  			ContainerHelper.saveAllItems(compound, this.stacks);
-  			               ^
-      method ContainerHelper.saveAllItems(CompoundTag,NonNullList<ItemStack>,Provider) is not applicable
-        (actual and formal argument lists differ in length)
-      method ContainerHelper.saveAllItems(CompoundTag,NonNullList<ItemStack>,boolean,Provider) is not applicable
-        (actual and formal argument lists differ in length)
   Note: Recompile with -Xlint:deprecation for details.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModMenus.java:18: error: cannot find symbol
   import net.neoforged.neoforge.common.extensions.IForgeMenuType;
@@ -3119,26 +2108,6 @@ Execution failed for task ':compileJava'.
                                  ^
     symbol:   class RecordItem
     location: package net.minecraft.world.item
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:21: error: cannot find symbol
-  import net.neoforged.neoforge.common.util.LazyOptional;
-                                           ^
-    symbol:   class LazyOptional
-    location: package net.neoforged.neoforge.common.util
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:28: error: cannot find symbol
-  	private final LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.values());
-  	              ^
-    symbol:   class LazyOptional
-    location: class DungeonDarkSteelBarsActiveBlockEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:124: error: cannot find symbol
-  	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-  	                                         ^
-    symbol:   class Capability
-    location: class DungeonDarkSteelBarsActiveBlockEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:124: error: cannot find symbol
-  	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-  	           ^
-    symbol:   class LazyOptional
-    location: class DungeonDarkSteelBarsActiveBlockEntity
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TrapDarkSteelSpikesBlock.java:30: error: cannot find symbol
   import net.neoforged.neoforge.common.util.ForgeSoundType;
                                            ^
@@ -3274,16 +2243,6 @@ Execution failed for task ':compileJava'.
   		                                                                                                                 ^
     symbol:   variable PotionUtils
     location: class FishyPotionRecipeBrewingRecipe
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:125: error: cannot find symbol
-  		if (!this.remove && facing != null && capability == ForgeCapabilities.ITEM_HANDLER)
-  		                                                    ^
-    symbol:   variable ForgeCapabilities
-    location: class DungeonDarkSteelBarsActiveBlockEntity
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:133: error: cannot find symbol
-  		for (LazyOptional<? extends IItemHandler> handler : handlers)
-  		     ^
-    symbol:   class LazyOptional
-    location: class DungeonDarkSteelBarsActiveBlockEntity
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/TrapDarkSteelSpikesBlock.java:41: error: cannot find symbol
   				.sound(new ForgeSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")),
   				           ^
@@ -3317,30 +2276,6 @@ Execution failed for task ':compileJava'.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/ItemAnimationFactory.java:172: error: player has private access in PlayerEvent
   						((PerilOffHandItem) event.player.getOffhandItem().getItem()).animationprocedure = animation;
   						                         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:25: error: <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>) has private access in MenuScreens
-  			MenuScreens.register(TheDeepVoidModMenus.VOID_BAG_GUI.get(), VoidBagGuiScreen::new);
-  			           ^
-    where M,U are type-variables:
-      M extends AbstractContainerMenu declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-      U extends Screen,MenuAccess<M> declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:26: error: <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>) has private access in MenuScreens
-  			MenuScreens.register(TheDeepVoidModMenus.SOUL_FORGE_GUI.get(), SoulForgeGUIScreen::new);
-  			           ^
-    where M,U are type-variables:
-      M extends AbstractContainerMenu declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-      U extends Screen,MenuAccess<M> declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:27: error: <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>) has private access in MenuScreens
-  			MenuScreens.register(TheDeepVoidModMenus.NECROSED_SKIN_BACKPACK_GUI.get(), NecrosedSkinBackpackGUIScreen::new);
-  			           ^
-    where M,U are type-variables:
-      M extends AbstractContainerMenu declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-      U extends Screen,MenuAccess<M> declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:28: error: <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>) has private access in MenuScreens
-  			MenuScreens.register(TheDeepVoidModMenus.UNDERTAKER_TRADE_GUI.get(), UndertakerTradeGuiScreen::new);
-  			           ^
-    where M,U are type-variables:
-      M extends AbstractContainerMenu declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
-      U extends Screen,MenuAccess<M> declared in method <M,U>register(MenuType<? extends M>,ScreenConstructor<M,U>)
   Note: Recompile with -Xlint:unchecked for details.
   Note: Some input files use or override a deprecated API.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/HookEndEntity.java:55: error: method does not override or implement a method from a supertype
@@ -3382,115 +2317,7 @@ Execution failed for task ':compileJava'.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java:46: error: method does not override or implement a method from a supertype
   			@Override
   			^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:18: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:23: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:28: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:34: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/SunderMobEffect.java:12: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DestinedToDieMobEffect.java:12: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:17: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:22: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:28: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/IchorBurnMobEffect.java:16: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/IchorBurnMobEffect.java:21: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VulnerableMobEffect.java:12: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DecompositionMobEffect.java:15: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DecompositionMobEffect.java:20: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PlagueMobEffect.java:16: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PlagueMobEffect.java:21: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/TotalBlindnessMobEffect.java:14: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BarbedTipsMobEffect.java:15: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BarbedTipsMobEffect.java:20: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:17: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:22: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:28: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BlossomMobEffect.java:16: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BlossomMobEffect.java:21: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/RotMobEffect.java:16: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/RotMobEffect.java:21: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PitShakeMobEffect.java:18: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PitShakeMobEffect.java:23: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DominateMobEffect.java:15: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DominateMobEffect.java:20: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/TrembleMobEffect.java:20: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/TrembleMobEffect.java:25: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/SulfurGlassPaneBlock.java:18: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:34: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:42: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:55: error: method does not override or implement a method from a supertype
-  	@Override
-  	^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:123: error: method does not override or implement a method from a supertype
   	@Override
   	^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/BismuthGlassPaneBlock.java:18: error: method does not override or implement a method from a supertype
@@ -3577,12 +2404,18 @@ Execution failed for task ':compileJava'.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntities.java:217: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
   @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                               ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:419: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:424: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                       ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:419: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:424: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                               ^
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1436: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+  	                    ^
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1436: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+  	                                            ^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/SoulWingsItem.java:46: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
   @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                       ^
@@ -3637,10 +2470,10 @@ Execution failed for task ':compileJava'.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModModels.java:89: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
   @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
                                               ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:20: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:22: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
   @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
                       ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:20: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModScreens.java:22: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
   @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
                                               ^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModKeyMappings.java:29: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
@@ -3648,6 +2481,12 @@ Execution failed for task ':compileJava'.
                       ^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModKeyMappings.java:29: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
   @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
+                                              ^
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBlockEntities.java:37: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+                      ^
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModBlockEntities.java:37: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                                               ^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModEntityRenderers.java:173: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
   @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -3841,18 +2680,6 @@ Execution failed for task ':compileJava'.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CrawlerItem.java:27: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
   @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
                       ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CrawlerItem.java:27: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GunslingerItem.java:22: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                      ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/GunslingerItem.java:22: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
-  @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DoubleBarrelShotgunItem.java:46: warning: [removal] initializeClient(Consumer<IClientItemExtensions>) in Item has been deprecated and marked for removal
-  	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-  	            ^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/jei_recipes/GluttonBlockJEITypeRecipe.java:18: error: type argument SimpleContainer is not within bounds of type-variable T
   public class GluttonBlockJEITypeRecipe implements Recipe<SimpleContainer> {
                                                            ^
@@ -4019,11 +2846,6 @@ Execution failed for task ':compileJava'.
   		             ^
     symbol:   method getWindow()
     location: variable event of type Pre
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:28: error: cannot find symbol
-  	private final LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.values());
-  	                                                                               ^
-    symbol:   method create(DungeonDarkSteelBarsActiveBlockEntity,Direction[])
-    location: class SidedInvWrapper
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/gui/UndertakerTradeGuiScreen.java:130: error: render(GuiGraphics,int,int,float) in <anonymous net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen$1> cannot override render(GuiGraphics,int,int,float) in AbstractWidget
   			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
   			            ^
@@ -4048,10 +2870,6 @@ Execution failed for task ':compileJava'.
   			public void render(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
   			            ^
     overridden method is final
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:36: error: cannot find symbol
-  		super.load(compound);
-  		     ^
-    symbol: method load(CompoundTag)
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/DungeonDarkSteelBarsBlock.java:37: error: cannot find symbol
   		super.use(blockstate, world, pos, entity, hand, hit);
   		     ^
@@ -4060,54 +2878,6 @@ Execution failed for task ':compileJava'.
   		super.use(blockstate, world, pos, entity, hand, hit);
   		     ^
     symbol: method use(BlockState,Level,BlockPos,Player,InteractionHand,BlockHitResult)
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/VanishMobEffect.java:24: error: applyEffectTick(LivingEntity,int) in VanishMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/HexedMobEffect.java:18: error: applyEffectTick(LivingEntity,int) in HexedMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/IchorBurnMobEffect.java:17: error: applyEffectTick(LivingEntity,int) in IchorBurnMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DecompositionMobEffect.java:16: error: applyEffectTick(LivingEntity,int) in DecompositionMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PlagueMobEffect.java:17: error: applyEffectTick(LivingEntity,int) in PlagueMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BarbedTipsMobEffect.java:16: error: applyEffectTick(LivingEntity,int) in BarbedTipsMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/AbyssalMarkMobEffect.java:18: error: applyEffectTick(LivingEntity,int) in AbyssalMarkMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/BlossomMobEffect.java:17: error: applyEffectTick(LivingEntity,int) in BlossomMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/RotMobEffect.java:17: error: applyEffectTick(LivingEntity,int) in RotMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/PitShakeMobEffect.java:19: error: applyEffectTick(LivingEntity,int) in PitShakeMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/DominateMobEffect.java:16: error: applyEffectTick(LivingEntity,int) in DominateMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/potion/TrembleMobEffect.java:21: error: applyEffectTick(LivingEntity,int) in TrembleMobEffect cannot override applyEffectTick(LivingEntity,int) in MobEffect
-  	public void applyEffectTick(LivingEntity entity, int amplifier) {
-  	            ^
-    return type void is not compatible with boolean
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/SulfurGlassPaneBlock.java:19: error: getBeaconColorMultiplier(BlockState,LevelReader,BlockPos,BlockPos) in SulfurGlassPaneBlock cannot implement getBeaconColorMultiplier(BlockState,LevelReader,BlockPos,BlockPos) in IBlockExtension
   	public float[] getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
   	               ^
@@ -4168,75 +2938,6 @@ Execution failed for task ':compileJava'.
   	public float[] getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
   	               ^
     return type float[] is not compatible with Integer
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:29: error: ShotgunPelletEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-  public class ShotgunPelletEntity extends AbstractArrow implements ItemSupplier {
-         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:25: error: ManiacShotgunPelletEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-  public class ManiacShotgunPelletEntity extends AbstractArrow implements ItemSupplier {
-         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:28: error: IchorFlareShotEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-  public class IchorFlareShotEntity extends AbstractArrow implements ItemSupplier {
-         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:25: error: BloodthirstyClawsBloodSpitEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-  public class BloodthirstyClawsBloodSpitEntity extends AbstractArrow implements ItemSupplier {
-         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:25: error: PerilBulletNoCooldownEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-  public class PerilBulletNoCooldownEntity extends AbstractArrow implements ItemSupplier {
-         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:26: error: ThrownNoxiousBrewEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-  public class ThrownNoxiousBrewEntity extends AbstractArrow implements ItemSupplier {
-         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:28: error: BarbedArrowEntity is not abstract and does not override abstract method getDefaultPickupItem() in AbstractArrow
-  public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
-         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DarkSteelHoeItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.DarkSteelHoeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/DarkSteelShovelItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.DarkSteelShovelItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CruelStilettoItem.java:22: error: <anonymous net.sombrius.thedeepvoid.item.CruelStilettoItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/TombstoneItem.java:24: error: <anonymous net.sombrius.thedeepvoid.item.TombstoneItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumPickaxeItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.VoidriumPickaxeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidSickleItem.java:23: error: <anonymous net.sombrius.thedeepvoid.item.VoidSickleItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/OnyxHoeItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.OnyxHoeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumShovelItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.VoidriumShovelItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/StalkerScytheClawItem.java:16: error: <anonymous net.sombrius.thedeepvoid.item.StalkerScytheClawItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneShovelItem.java:14: error: <anonymous net.sombrius.thedeepvoid.item.BloodstoneShovelItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BismuthNetheriteHoeItem.java:26: error: <anonymous net.sombrius.thedeepvoid.item.BismuthNetheriteHoeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstonePickaxeItem.java:14: error: <anonymous net.sombrius.thedeepvoid.item.BloodstonePickaxeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/VoidriumSwordItem.java:23: error: <anonymous net.sombrius.thedeepvoid.item.VoidriumSwordItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneAxeItem.java:14: error: <anonymous net.sombrius.thedeepvoid.item.BloodstoneAxeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/BloodstoneHoeItem.java:14: error: <anonymous net.sombrius.thedeepvoid.item.BloodstoneHoeItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/CoffinItem.java:17: error: <anonymous net.sombrius.thedeepvoid.item.CoffinItem$1> is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
-  		super(new Tier() {
-  		                 ^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java:36: error: <anonymous net.sombrius.thedeepvoid.client.renderer.AmalgamRenderer$2> is not abstract and does not override abstract method render(PoseStack,MultiBufferSource,int,AmalgamEntity,float,float,float,float,float,float) in RenderLayer
   		this.addLayer(new RenderLayer<AmalgamEntity, Modelamalgam_rework<AmalgamEntity>>(this) {
   		                                                                                       ^
@@ -4258,39 +2959,18 @@ Execution failed for task ':compileJava'.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/StalkerEntity.java:125: error: incompatible types: DamageSource cannot be converted to ServerLevel
   		super.dropCustomDeathLoot(source, looting, recentlyHitIn);
   		                          ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ShotgunPelletEntity.java:38: error: incompatible types: double cannot be converted to LivingEntity
-  		super(type, x, y, z, world);
-  		            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ManiacShotgunPelletEntity.java:34: error: incompatible types: double cannot be converted to LivingEntity
-  		super(type, x, y, z, world);
-  		            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/IchorFlareShotEntity.java:37: error: incompatible types: double cannot be converted to LivingEntity
-  		super(type, x, y, z, world);
-  		            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BloodthirstyClawsBloodSpitEntity.java:34: error: incompatible types: double cannot be converted to LivingEntity
-  		super(type, x, y, z, world);
-  		            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/PerilBulletNoCooldownEntity.java:34: error: incompatible types: double cannot be converted to LivingEntity
-  		super(type, x, y, z, world);
-  		            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/ThrownNoxiousBrewEntity.java:35: error: incompatible types: double cannot be converted to LivingEntity
-  		super(type, x, y, z, world);
-  		            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/entity/BarbedArrowEntity.java:37: error: incompatible types: double cannot be converted to LivingEntity
-  		super(type, x, y, z, world);
-  		            ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1429: error: incompatible types: Item cannot be converted to ItemStack
-  			ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-  			                                                                                                                    ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1430: error: incompatible types: Item cannot be converted to ItemStack
-  			ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-  			                                                                                                              ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1433: error: incompatible types: Item cannot be converted to ItemStack
-  			ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-  			                                                                                                                   ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1435: error: incompatible types: Item cannot be converted to ItemStack
-  			ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-  			                                                                                                                    ^
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1442: error: incompatible types: Item cannot be converted to ItemStack
+  				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+  				                                                                                                                    ^
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1443: error: incompatible types: Item cannot be converted to ItemStack
+  				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+  				                                                                                                              ^
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1446: error: incompatible types: Item cannot be converted to ItemStack
+  				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+  				                                                                                                                   ^
+  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/init/TheDeepVoidModItems.java:1448: error: incompatible types: Item cannot be converted to ItemStack
+  				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+  				                                                                                                                    ^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/item/RotTongueItem.java:45: error: incompatible types: EquipmentSlot cannot be converted to ItemStack
   			builder.putAll(super.getDefaultAttributeModifiers(equipmentSlot));
   			                                                  ^
@@ -4444,19 +3124,13 @@ Execution failed for task ':compileJava'.
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:480: error: package TickEvent does not exist
   	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
   	                                         ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:19: error: package net.neoforged.neoforge.common.capabilities does not exist
-  import net.neoforged.neoforge.common.capabilities.Capability;
-                                                   ^
-  /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/block/entity/DungeonDarkSteelBarsActiveBlockEntity.java:20: error: package net.neoforged.neoforge.common.capabilities does not exist
-  import net.neoforged.neoforge.common.capabilities.ForgeCapabilities;
-                                                   ^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/world/inventory/UndertakerTradeGuiMenu.java:482: error: package TickEvent does not exist
   		if (event.phase == TickEvent.Phase.END && entity.containerMenu instanceof UndertakerTradeGuiMenu) {
   		                            ^
   /Users/vladeezy/Desktop/the deep void 1.21+/src/main/java/net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java:37: error: package NeoBuiltInRegistries does not exist
   	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoBuiltInRegistries.Keys.ATTACHMENT_TYPES, TheDeepVoidMod.MODID);
   	                                                                                                                       ^
-  384 errors
+  248 errors
   100 warnings
 
 * Try:

@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import javax.annotation.Nullable;
+
 import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.minecraft.network.protocol.Packet;
@@ -30,12 +32,12 @@ public class PerilBulletNoCooldownEntity extends AbstractArrow implements ItemSu
 		super(type, world);
 	}
 
-	public PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity> type, double x, double y, double z, Level world) {
-		super(type, x, y, z, world);
+	public PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity> type, double x, double y, double z, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
-	public PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity> type, LivingEntity entity, Level world) {
-		super(type, entity, world);
+	public PerilBulletNoCooldownEntity(EntityType<? extends PerilBulletNoCooldownEntity> type, LivingEntity entity, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
 
@@ -46,7 +48,7 @@ public class PerilBulletNoCooldownEntity extends AbstractArrow implements ItemSu
 	}
 
 	@Override
-	protected ItemStack getPickupItem() {
+	protected ItemStack getDefaultPickupItem() {
 		return PROJECTILE_ITEM;
 	}
 

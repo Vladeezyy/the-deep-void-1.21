@@ -1,6 +1,10 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.tags.TagKey;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
+
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -13,32 +17,40 @@ import net.sombrius.thedeepvoid.procedures.CoffinEntityIsHitProcedure;
 import net.sombrius.thedeepvoid.procedures.CoffinInInventoryProcedure;
 
 public class CoffinItem extends SwordItem {
+	private static final Tier TOOL_TIER = new Tier() {
+		@Override
+		public int getUses() {
+			return 0;
+		}
+
+		@Override
+		public float getSpeed() {
+			return 4f;
+		}
+
+		@Override
+		public float getAttackDamageBonus() {
+			return 4f;
+		}
+
+		@Override
+		public TagKey<Block> getIncorrectBlocksForDrops() {
+			return BlockTags.INCORRECT_FOR_IRON_TOOL;
+		}
+
+		@Override
+		public int getEnchantmentValue() {
+			return 0;
+		}
+
+		@Override
+		public Ingredient getRepairIngredient() {
+			return Ingredient.of();
+		}
+	};
+
 	public CoffinItem() {
-		super(new Tier() {
-			public int getUses() {
-				return 0;
-			}
-
-			public float getSpeed() {
-				return 4f;
-			}
-
-			public float getAttackDamageBonus() {
-				return 4f;
-			}
-
-			public int getLevel() {
-				return 2;
-			}
-
-			public int getEnchantmentValue() {
-				return 0;
-			}
-
-			public Ingredient getRepairIngredient() {
-				return Ingredient.of();
-			}
-		}, 3, -3.2f, new Item.Properties().fireResistant());
+		super(TOOL_TIER, new Item.Properties().fireResistant().attributes(SwordItem.createAttributes(TOOL_TIER, 3, -3.2f)));
 	}
 
 	@Override

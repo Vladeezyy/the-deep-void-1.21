@@ -1,12 +1,16 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
+import net.sombrius.thedeepvoid.procedures.BrokenArmorEffectExpiresProcedure;
+
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.sombrius.thedeepvoid.procedures.BrokenArmorEffectStartedappliedProcedure;
 
-public class BrokenArmorMobEffect extends MobEffect {
+public class BrokenArmorMobEffect extends MobEffect implements PortUtil.EffectRemovedListener {
 	public BrokenArmorMobEffect() {
 		super(MobEffectCategory.HARMFUL, -13093847);
 	}
@@ -14,5 +18,10 @@ public class BrokenArmorMobEffect extends MobEffect {
 	@Override
 	public void onEffectStarted(LivingEntity entity, int amplifier) {
 		BrokenArmorEffectStartedappliedProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
+	}
+
+	@Override
+	public void onEffectRemoved(LivingEntity entity, int amplifier) {
+		BrokenArmorEffectExpiresProcedure.execute(entity);
 	}
 }

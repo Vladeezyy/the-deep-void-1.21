@@ -14,12 +14,13 @@ public class IchorBurnMobEffect extends MobEffect {
 	}
 
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		IchorBurnOnEffectActiveTickProcedure.execute(entity.level(), entity, amplifier);
+		return super.applyEffectTick(entity, amplifier);
 	}
 
 	@Override
-	public boolean isDurationEffectTick(int duration, int amplifier) {
+	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
 		return IchorBurnActiveTickConditionProcedure.execute(duration);
 	}
 }

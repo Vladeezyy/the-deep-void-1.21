@@ -61,6 +61,11 @@ public final class PortUtil {
 			stack.enchant(holder, level);
 	}
 
+	/** 1.20 MobEffect#removeAttributeModifiers hook (effect expired or removed); called from {@link PortEvents}. */
+	public interface EffectRemovedListener {
+		void onEffectRemoved(LivingEntity entity, int amplifier);
+	}
+
 	public interface ArrowKnockback {
 		void deepvoid$setKnockback(int knockback);
 

@@ -4,6 +4,11 @@
  */
 package net.sombrius.thedeepvoid.init;
 
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.sombrius.thedeepvoid.item.inventory.NecrosedSkinBackpackInventoryCapability;
+import net.neoforged.api.distmarker.OnlyIn;
+
 import net.minecraft.core.registries.Registries;
 
 import net.sombrius.thedeepvoid.procedures.VoidBowPropertyProcedure;
@@ -416,7 +421,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.renderer.item.ItemProperties;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class TheDeepVoidModItems {
 	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(Registries.ITEM, TheDeepVoidMod.MODID);
 	public static final DeferredHolder<Item, Item> BLOCK_OF_BONE_PILE = block(TheDeepVoidModBlocks.BLOCK_OF_BONE_PILE);
@@ -1424,42 +1429,51 @@ public class TheDeepVoidModItems {
 	}
 
 	@SubscribeEvent
-	public static void clientLoad(FMLClientSetupEvent event) {
-		event.enqueueWork(() -> {
-			ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-			ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-			ItemProperties.register(ONYX_FLARE_GUN.get(), ResourceLocation.parse("the_deep_void:onyx_flare_gun_state"),
-					(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) OnyxFlareGunPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-			ItemProperties.register(SHADESTORM.get(), ResourceLocation.parse("the_deep_void:shadestorm_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ShadestormPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
-			ItemProperties.register(KNIVES_GLOVE.get(), ResourceLocation.parse("the_deep_void:knives_glove_knife_glove_condition"),
-					(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) KnivesGlovePropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(BISMUTH_VIAL.get(), ResourceLocation.parse("the_deep_void:bismuth_vial_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(NERVES_OF_STEEL.get(), ResourceLocation.parse("the_deep_void:nerves_of_steel_pulling"),
-					(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) NervesOfSteelPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(NERVES_OF_STEEL.get(), ResourceLocation.parse("the_deep_void:nerves_of_steel_glow"),
-					(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) NervesOfSteelPropertyValueProvider2Procedure.execute(itemStackToRender));
-			ItemProperties.register(BLOOD_BOW.get(), ResourceLocation.parse("the_deep_void:blood_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BloodBowPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(THE_CATCHER.get(), ResourceLocation.parse("the_deep_void:the_catcher_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) TheCatcherPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(SHARPSHOOTER.get(), ResourceLocation.parse("the_deep_void:sharpshooter_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) SharpshooterValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(VOID_BOW.get(), ResourceLocation.parse("the_deep_void:void_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) VoidBowPropertyProcedure.execute(itemStackToRender));
-			ItemProperties.register(ROT_TONGUE.get(), ResourceLocation.parse("the_deep_void:rot_tongue_blocking"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) RotTonguePropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(BLACK_HOLE.get(), ResourceLocation.parse("the_deep_void:black_hole_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BlackHolePropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(BLOODY_CHAINSAW.get(), ResourceLocation.parse("the_deep_void:bloody_chainsaw_activated"),
-					(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BloodyChainsawPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(BISMUTH_BOTTLE.get(), ResourceLocation.parse("the_deep_void:bismuth_bottle_xp"),
-					(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(BISMUTH_JAR.get(), ResourceLocation.parse("the_deep_void:bismuth_jar_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(STINGER.get(), ResourceLocation.parse("the_deep_void:stinger_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) StingerPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(CLAW_SCYTHE.get(), ResourceLocation.parse("the_deep_void:claw_scythe_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ClawScythePropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(BALL_AND_CHAIN.get(), ResourceLocation.parse("the_deep_void:ball_and_chain_secret"),
-					(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BallAndChainPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(HAMMER_AND_CHISEL.get(), ResourceLocation.parse("the_deep_void:hammer_and_chisel_state"),
-					(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) HammerAndChiselPropertyValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(HUNTER_BOW.get(), ResourceLocation.parse("the_deep_void:hunter_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) HunterBowValueProviderProcedure.execute(itemStackToRender));
-			ItemProperties.register(ICHOR_GREATSWORD.get(), ResourceLocation.parse("the_deep_void:ichor_greatsword_blocking"),
-					(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) RotTonguePropertyValueProviderProcedure.execute(itemStackToRender));
-		});
+	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) -> new NecrosedSkinBackpackInventoryCapability(stack), NECROSED_SKIN_BACKPACK.get());
+	}
+
+	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+	public static class ItemsClientSideHandler {
+		@SubscribeEvent
+		@OnlyIn(Dist.CLIENT)
+		public static void clientLoad(FMLClientSetupEvent event) {
+			event.enqueueWork(() -> {
+				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				ItemProperties.register(ONYX_FLARE_GUN.get(), ResourceLocation.parse("the_deep_void:onyx_flare_gun_state"),
+						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) OnyxFlareGunPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				ItemProperties.register(SHADESTORM.get(), ResourceLocation.parse("the_deep_void:shadestorm_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ShadestormPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), ItemProperties.getProperty(Items.SHIELD, ResourceLocation.parse("blocking")));
+				ItemProperties.register(KNIVES_GLOVE.get(), ResourceLocation.parse("the_deep_void:knives_glove_knife_glove_condition"),
+						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) KnivesGlovePropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(BISMUTH_VIAL.get(), ResourceLocation.parse("the_deep_void:bismuth_vial_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(NERVES_OF_STEEL.get(), ResourceLocation.parse("the_deep_void:nerves_of_steel_pulling"),
+						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) NervesOfSteelPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(NERVES_OF_STEEL.get(), ResourceLocation.parse("the_deep_void:nerves_of_steel_glow"),
+						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) NervesOfSteelPropertyValueProvider2Procedure.execute(itemStackToRender));
+				ItemProperties.register(BLOOD_BOW.get(), ResourceLocation.parse("the_deep_void:blood_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BloodBowPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(THE_CATCHER.get(), ResourceLocation.parse("the_deep_void:the_catcher_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) TheCatcherPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(SHARPSHOOTER.get(), ResourceLocation.parse("the_deep_void:sharpshooter_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) SharpshooterValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(VOID_BOW.get(), ResourceLocation.parse("the_deep_void:void_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) VoidBowPropertyProcedure.execute(itemStackToRender));
+				ItemProperties.register(ROT_TONGUE.get(), ResourceLocation.parse("the_deep_void:rot_tongue_blocking"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) RotTonguePropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(BLACK_HOLE.get(), ResourceLocation.parse("the_deep_void:black_hole_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BlackHolePropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(BLOODY_CHAINSAW.get(), ResourceLocation.parse("the_deep_void:bloody_chainsaw_activated"),
+						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BloodyChainsawPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(BISMUTH_BOTTLE.get(), ResourceLocation.parse("the_deep_void:bismuth_bottle_xp"),
+						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(BISMUTH_JAR.get(), ResourceLocation.parse("the_deep_void:bismuth_jar_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(STINGER.get(), ResourceLocation.parse("the_deep_void:stinger_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) StingerPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(CLAW_SCYTHE.get(), ResourceLocation.parse("the_deep_void:claw_scythe_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ClawScythePropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(BALL_AND_CHAIN.get(), ResourceLocation.parse("the_deep_void:ball_and_chain_secret"),
+						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BallAndChainPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(HAMMER_AND_CHISEL.get(), ResourceLocation.parse("the_deep_void:hammer_and_chisel_state"),
+						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) HammerAndChiselPropertyValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(HUNTER_BOW.get(), ResourceLocation.parse("the_deep_void:hunter_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) HunterBowValueProviderProcedure.execute(itemStackToRender));
+				ItemProperties.register(ICHOR_GREATSWORD.get(), ResourceLocation.parse("the_deep_void:ichor_greatsword_blocking"),
+						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) RotTonguePropertyValueProviderProcedure.execute(itemStackToRender));
+			});
+		}
 	}
 }

@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.sombrius.thedeepvoid.procedures.HexedOnEffectActiveTickProcedure;
 import net.sombrius.thedeepvoid.procedures.HexedEffectExpiresProcedure;
 
@@ -9,24 +11,24 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffect;
 
-public class HexedMobEffect extends MobEffect {
+public class HexedMobEffect extends MobEffect implements PortUtil.EffectRemovedListener {
 	public HexedMobEffect() {
 		super(MobEffectCategory.HARMFUL, -14567726);
 	}
 
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		HexedOnEffectActiveTickProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity, amplifier);
+		return super.applyEffectTick(entity, amplifier);
 	}
 
 	@Override
-	public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
-		super.removeAttributeModifiers(entity, attributeMap, amplifier);
+	public void onEffectRemoved(LivingEntity entity, int amplifier) {
 		HexedEffectExpiresProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
 	}
 
 	@Override
-	public boolean isDurationEffectTick(int duration, int amplifier) {
+	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
 		return true;
 	}
 }

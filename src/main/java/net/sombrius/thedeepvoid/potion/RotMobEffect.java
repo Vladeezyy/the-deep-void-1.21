@@ -14,12 +14,13 @@ public class RotMobEffect extends MobEffect {
 	}
 
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		RotOnEffectActiveTickProcedure.execute(entity.level(), entity, amplifier);
+		return super.applyEffectTick(entity, amplifier);
 	}
 
 	@Override
-	public boolean isDurationEffectTick(int duration, int amplifier) {
+	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
 		return RotActiveTickConditionProcedure.execute(duration);
 	}
 }

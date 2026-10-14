@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import javax.annotation.Nullable;
+
 import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.minecraft.network.protocol.Packet;
@@ -33,12 +35,12 @@ public class IchorFlareShotEntity extends AbstractArrow implements ItemSupplier 
 		super(type, world);
 	}
 
-	public IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity> type, double x, double y, double z, Level world) {
-		super(type, x, y, z, world);
+	public IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity> type, double x, double y, double z, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
-	public IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity> type, LivingEntity entity, Level world) {
-		super(type, entity, world);
+	public IchorFlareShotEntity(EntityType<? extends IchorFlareShotEntity> type, LivingEntity entity, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
 
@@ -49,7 +51,7 @@ public class IchorFlareShotEntity extends AbstractArrow implements ItemSupplier 
 	}
 
 	@Override
-	protected ItemStack getPickupItem() {
+	protected ItemStack getDefaultPickupItem() {
 		return PROJECTILE_ITEM;
 	}
 

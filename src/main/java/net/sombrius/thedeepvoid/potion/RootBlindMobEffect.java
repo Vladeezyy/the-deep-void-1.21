@@ -1,6 +1,10 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
+import net.sombrius.thedeepvoid.procedures.RootBlindEffectExpiresProcedure;
+
 import java.util.function.Consumer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
@@ -11,7 +15,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.client.extensions.common.IClientMobEffectExtensions;
 import net.sombrius.thedeepvoid.procedures.RootBlindOnEffectActiveTickProcedure;
 
-public class RootBlindMobEffect extends MobEffect {
+public class RootBlindMobEffect extends MobEffect implements PortUtil.EffectRemovedListener {
 	public RootBlindMobEffect() {
 		super(MobEffectCategory.HARMFUL, -13290701);
 	}
@@ -45,5 +49,10 @@ public class RootBlindMobEffect extends MobEffect {
 				return false;
 			}
 		});
+	}
+
+	@Override
+	public void onEffectRemoved(LivingEntity entity, int amplifier) {
+		RootBlindEffectExpiresProcedure.execute(entity.level(), entity);
 	}
 }

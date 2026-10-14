@@ -4,6 +4,8 @@
  */
 package net.sombrius.thedeepvoid.init;
 
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+
 import net.sombrius.thedeepvoid.client.gui.VoidBagGuiScreen;
 import net.sombrius.thedeepvoid.client.gui.UndertakerTradeGuiScreen;
 import net.sombrius.thedeepvoid.client.gui.SoulForgeGUIScreen;
@@ -20,12 +22,10 @@ import net.minecraft.client.gui.screens.MenuScreens;
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class TheDeepVoidModScreens {
 	@SubscribeEvent
-	public static void clientLoad(FMLClientSetupEvent event) {
-		event.enqueueWork(() -> {
-			MenuScreens.register(TheDeepVoidModMenus.VOID_BAG_GUI.get(), VoidBagGuiScreen::new);
-			MenuScreens.register(TheDeepVoidModMenus.SOUL_FORGE_GUI.get(), SoulForgeGUIScreen::new);
-			MenuScreens.register(TheDeepVoidModMenus.NECROSED_SKIN_BACKPACK_GUI.get(), NecrosedSkinBackpackGUIScreen::new);
-			MenuScreens.register(TheDeepVoidModMenus.UNDERTAKER_TRADE_GUI.get(), UndertakerTradeGuiScreen::new);
-		});
+	public static void clientLoad(RegisterMenuScreensEvent event) {
+		event.register(TheDeepVoidModMenus.VOID_BAG_GUI.get(), VoidBagGuiScreen::new);
+		event.register(TheDeepVoidModMenus.SOUL_FORGE_GUI.get(), SoulForgeGUIScreen::new);
+		event.register(TheDeepVoidModMenus.NECROSED_SKIN_BACKPACK_GUI.get(), NecrosedSkinBackpackGUIScreen::new);
+		event.register(TheDeepVoidModMenus.UNDERTAKER_TRADE_GUI.get(), UndertakerTradeGuiScreen::new);
 	}
 }

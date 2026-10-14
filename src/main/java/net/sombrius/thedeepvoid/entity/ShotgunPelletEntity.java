@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import javax.annotation.Nullable;
+
 import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.sombrius.thedeepvoid.procedures.ShotgunPelletWhileProjectileFlyingTickProcedure;
@@ -34,12 +36,12 @@ public class ShotgunPelletEntity extends AbstractArrow implements ItemSupplier {
 		super(type, world);
 	}
 
-	public ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity> type, double x, double y, double z, Level world) {
-		super(type, x, y, z, world);
+	public ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity> type, double x, double y, double z, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
-	public ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity> type, LivingEntity entity, Level world) {
-		super(type, entity, world);
+	public ShotgunPelletEntity(EntityType<? extends ShotgunPelletEntity> type, LivingEntity entity, Level world, @Nullable ItemStack firedFromWeapon) {
+		super(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);
 	}
 
 
@@ -50,7 +52,7 @@ public class ShotgunPelletEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	@Override
-	protected ItemStack getPickupItem() {
+	protected ItemStack getDefaultPickupItem() {
 		return PROJECTILE_ITEM;
 	}
 

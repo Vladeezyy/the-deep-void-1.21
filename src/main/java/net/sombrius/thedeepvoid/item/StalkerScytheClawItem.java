@@ -1,6 +1,10 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.tags.TagKey;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
+
 import net.sombrius.thedeepvoid.procedures.StalkerScytheClawLivingEntityIsHitWithToolProcedure;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
@@ -12,32 +16,40 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.LivingEntity;
 
 public class StalkerScytheClawItem extends SwordItem {
+	private static final Tier TOOL_TIER = new Tier() {
+		@Override
+		public int getUses() {
+			return 3021;
+		}
+
+		@Override
+		public float getSpeed() {
+			return 8.5f;
+		}
+
+		@Override
+		public float getAttackDamageBonus() {
+			return 8f;
+		}
+
+		@Override
+		public TagKey<Block> getIncorrectBlocksForDrops() {
+			return BlockTags.INCORRECT_FOR_DIAMOND_TOOL;
+		}
+
+		@Override
+		public int getEnchantmentValue() {
+			return 15;
+		}
+
+		@Override
+		public Ingredient getRepairIngredient() {
+			return Ingredient.of(new ItemStack(TheDeepVoidModItems.ROTTEN_BONE.get()));
+		}
+	};
+
 	public StalkerScytheClawItem() {
-		super(new Tier() {
-			public int getUses() {
-				return 3021;
-			}
-
-			public float getSpeed() {
-				return 8.5f;
-			}
-
-			public float getAttackDamageBonus() {
-				return 8f;
-			}
-
-			public int getLevel() {
-				return 3;
-			}
-
-			public int getEnchantmentValue() {
-				return 15;
-			}
-
-			public Ingredient getRepairIngredient() {
-				return Ingredient.of(new ItemStack(TheDeepVoidModItems.ROTTEN_BONE.get()));
-			}
-		}, 3, -2.8f, new Item.Properties().fireResistant());
+		super(TOOL_TIER, new Item.Properties().fireResistant().attributes(SwordItem.createAttributes(TOOL_TIER, 3, -2.8f)));
 	}
 
 	@Override

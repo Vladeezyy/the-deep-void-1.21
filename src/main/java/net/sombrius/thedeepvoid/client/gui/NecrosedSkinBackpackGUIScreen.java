@@ -1,5 +1,9 @@
 package net.sombrius.thedeepvoid.client.gui;
 
+import net.sombrius.thedeepvoid.port.PortImageButton;
+
+import net.neoforged.neoforge.network.PacketDistributor;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.HashMap;
 import net.minecraft.client.gui.GuiGraphics;
@@ -76,9 +80,9 @@ public class NecrosedSkinBackpackGUIScreen extends AbstractContainerScreen<Necro
 	@Override
 	public void init() {
 		super.init();
-		imagebutton_crafting_icon = new ImageButton(this.leftPos + -17, this.topPos + -3, 18, 18, 0, 0, 18, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_crafting_icon.png"), 18, 36, e -> {
+		imagebutton_crafting_icon = new PortImageButton(this.leftPos + -17, this.topPos + -3, 18, 18, 0, 0, 18, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_crafting_icon.png"), 18, 36, e -> {
 			if (true) {
-				TheDeepVoidMod.PACKET_HANDLER.sendToServer(new NecrosedSkinBackpackGUIButtonMessage(0, x, y, z));
+				PacketDistributor.sendToServer(new NecrosedSkinBackpackGUIButtonMessage(0, x, y, z));
 				NecrosedSkinBackpackGUIButtonMessage.handleButtonAction(entity, 0, x, y, z);
 			}
 		});

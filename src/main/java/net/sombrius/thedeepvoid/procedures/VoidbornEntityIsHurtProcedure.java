@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.commands.CommandSource;
@@ -42,7 +44,7 @@ public class VoidbornEntityIsHurtProcedure {
 				&& (entity instanceof VoidbornEntity _datEntI ? _datEntI.getEntityData().get(VoidbornEntity.DATA_hitCooldown) : 0) <= 0) {
 			if (entity instanceof VoidbornEntity _datEntSetI)
 				_datEntSetI.getEntityData().set(VoidbornEntity.DATA_hit, (int) ((entity instanceof VoidbornEntity _datEntI ? _datEntI.getEntityData().get(VoidbornEntity.DATA_hit) : 0)
-						+ (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.RADIANCE.get(), (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY)) != 0 ? 2 : 1)));
+						+ (PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.RADIANCE) != 0 ? 2 : 1)));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 200, 0, false, false));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())

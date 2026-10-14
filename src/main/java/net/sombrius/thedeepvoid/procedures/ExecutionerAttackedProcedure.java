@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.neoforged.bus.api.ICancellableEvent;
 
 import net.sombrius.thedeepvoid.entity.FlailExecutionerEntity;
@@ -81,10 +83,10 @@ public class ExecutionerAttackedProcedure {
 							}
 						}
 						if ((entity instanceof ExecutionerEntity _datEntI ? _datEntI.getEntityData().get(ExecutionerEntity.DATA_stunCooldown) : 0) >= 5
-								+ Math.ceil((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getEnchantmentLevel(Enchantments.KNOCKBACK) * 1.5)) {
+								+ Math.ceil(PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), Enchantments.KNOCKBACK) * 1.5)) {
 							if (entity instanceof ExecutionerEntity _datEntSetI)
 								_datEntSetI.getEntityData().set(ExecutionerEntity.DATA_stunCooldown, (int) ((entity instanceof ExecutionerEntity _datEntI ? _datEntI.getEntityData().get(ExecutionerEntity.DATA_stunCooldown) : 0)
-										- (5 + Math.ceil((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getEnchantmentLevel(Enchantments.KNOCKBACK) * 1.5))));
+										- (5 + Math.ceil(PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), Enchantments.KNOCKBACK) * 1.5))));
 						}
 					} else {
 						if (world instanceof Level _level) {

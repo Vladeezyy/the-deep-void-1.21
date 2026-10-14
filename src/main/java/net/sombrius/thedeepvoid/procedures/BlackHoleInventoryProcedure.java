@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -77,7 +79,7 @@ public class BlackHoleInventoryProcedure {
 				}
 			}
 		}
-		if (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.DIMENSIONAL_BURST.get(), itemstack) != 0
+		if (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.DIMENSIONAL_BURST) != 0
 				&& itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("ammo") > (double) DeepVoidConfigConfiguration.BLACKHOLESTORELIMIT.get()) {
 			if (entity instanceof Player _player) {
 				ItemStack _setstack = new ItemStack(Items.ARROW).copy();

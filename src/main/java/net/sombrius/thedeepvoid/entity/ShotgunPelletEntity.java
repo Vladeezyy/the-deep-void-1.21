@@ -8,8 +8,6 @@ import net.sombrius.thedeepvoid.procedures.ShotgunPelletProjectileHitsLivingEnti
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraftforge.network.PlayMessages;
-import net.minecraftforge.network.NetworkHooks;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.api.distmarker.Dist;
 

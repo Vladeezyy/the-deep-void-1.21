@@ -1,0 +1,21 @@
+{
+  "description": {
+    "translate": "enchantment.the_deep_void.void_vision"
+  },
+  "supported_items": "#the_deep_void:enchantable/void_vision",
+  "primary_items": "#the_deep_void:enchantable/void_vision_primary",
+  "weight": 1,
+  "max_level": 1,
+  "min_cost": {
+    "base": 11,
+    "per_level_above_first": 10
+  },
+  "max_cost": {
+    "base": 16,
+    "per_level_above_first": 10
+  },
+  "anvil_cost": 8,
+  "slots": [
+    "any"
+  ]
+}

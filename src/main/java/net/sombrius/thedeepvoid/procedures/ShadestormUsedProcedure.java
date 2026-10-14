@@ -75,7 +75,7 @@ public class ShadestormUsedProcedure {
 									return entityToSpawn;
 								}
 							}.getArrow(projectileLevel, entity, (float) (double) DeepVoidConfigConfiguration.SHADESTORMSHADEARROW.get(), 0,
-									(byte) (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, itemstack) != 0 ? itemstack.getEnchantmentLevel(Enchantments.PIERCING) + 1 : 1));
+									(byte) (PortUtil.enchantmentLevel(itemstack, Enchantments.PIERCING) != 0 ? PortUtil.enchantmentLevel(itemstack, Enchantments.PIERCING) + 1 : 1));
 							_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
 							_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) 1.6, 5);
 							projectileLevel.addFreshEntity(_entityToSpawn);

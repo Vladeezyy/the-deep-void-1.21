@@ -1,47 +1,33 @@
-
 /*
  *	MCreator note: This file will be REGENERATED on each build.
  */
 package net.sombrius.thedeepvoid.init;
 
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
 
-import net.sombrius.thedeepvoid.enchantment.VoidVisionEnchantment;
-import net.sombrius.thedeepvoid.enchantment.ScourgeOfFleshEnchantment;
-import net.sombrius.thedeepvoid.enchantment.RadianceEnchantment;
-import net.sombrius.thedeepvoid.enchantment.QuickTriggerEnchantment;
-import net.sombrius.thedeepvoid.enchantment.NecrosedEnchantment;
-import net.sombrius.thedeepvoid.enchantment.MarksmanEnchantment;
-import net.sombrius.thedeepvoid.enchantment.DimensionalBurstEnchantment;
-import net.sombrius.thedeepvoid.enchantment.CurseOfSorrowEnchantment;
-import net.sombrius.thedeepvoid.enchantment.CurseOfGodsBloodEnchantment;
-import net.sombrius.thedeepvoid.enchantment.CrateCatcherEnchantment;
-import net.sombrius.thedeepvoid.enchantment.ConservationEnchantment;
-import net.sombrius.thedeepvoid.enchantment.BoneWalkerEnchantment;
-import net.sombrius.thedeepvoid.enchantment.BaitEnchantment;
-import net.sombrius.thedeepvoid.enchantment.AkimboEnchantment;
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.neoforged.neoforge.registries.DeferredRegister;
-
-import net.minecraft.world.item.enchantment.Enchantment;
-
+/** 1.21: enchantments are data driven (data/the_deep_void/enchantment); the code refers to them by key. */
 public class TheDeepVoidModEnchantments {
-	public static final DeferredRegister<Enchantment> REGISTRY = DeferredRegister.create(Registries.ENCHANTMENT, TheDeepVoidMod.MODID);
-	public static final DeferredHolder<Enchantment, Enchantment> VOID_VISION = REGISTRY.register("void_vision", () -> new VoidVisionEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> NECROSED = REGISTRY.register("necrosed", () -> new NecrosedEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> SCOURGE_OF_FLESH = REGISTRY.register("scourge_of_flesh", () -> new ScourgeOfFleshEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> BONE_WALKER = REGISTRY.register("bone_walker", () -> new BoneWalkerEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> CURSE_OF_SORROW = REGISTRY.register("curse_of_sorrow", () -> new CurseOfSorrowEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> CRATE_CATCHER = REGISTRY.register("crate_catcher", () -> new CrateCatcherEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> CURSE_OF_GODS_BLOOD = REGISTRY.register("curse_of_gods_blood", () -> new CurseOfGodsBloodEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> BAIT = REGISTRY.register("bait", () -> new BaitEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> RADIANCE = REGISTRY.register("radiance", () -> new RadianceEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> CONSERVATION = REGISTRY.register("conservation", () -> new ConservationEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> DIMENSIONAL_BURST = REGISTRY.register("dimensional_burst", () -> new DimensionalBurstEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> QUICK_TRIGGER = REGISTRY.register("quick_trigger", () -> new QuickTriggerEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> MARKSMAN = REGISTRY.register("marksman", () -> new MarksmanEnchantment());
-	public static final DeferredHolder<Enchantment, Enchantment> AKIMBO = REGISTRY.register("akimbo", () -> new AkimboEnchantment());
+	public static final ResourceKey<Enchantment> AKIMBO = key("akimbo");
+	public static final ResourceKey<Enchantment> BAIT = key("bait");
+	public static final ResourceKey<Enchantment> BONE_WALKER = key("bone_walker");
+	public static final ResourceKey<Enchantment> CONSERVATION = key("conservation");
+	public static final ResourceKey<Enchantment> CRATE_CATCHER = key("crate_catcher");
+	public static final ResourceKey<Enchantment> CURSE_OF_GODS_BLOOD = key("curse_of_gods_blood");
+	public static final ResourceKey<Enchantment> CURSE_OF_SORROW = key("curse_of_sorrow");
+	public static final ResourceKey<Enchantment> DIMENSIONAL_BURST = key("dimensional_burst");
+	public static final ResourceKey<Enchantment> MARKSMAN = key("marksman");
+	public static final ResourceKey<Enchantment> NECROSED = key("necrosed");
+	public static final ResourceKey<Enchantment> QUICK_TRIGGER = key("quick_trigger");
+	public static final ResourceKey<Enchantment> RADIANCE = key("radiance");
+	public static final ResourceKey<Enchantment> SCOURGE_OF_FLESH = key("scourge_of_flesh");
+	public static final ResourceKey<Enchantment> VOID_VISION = key("void_vision");
+
+	private static ResourceKey<Enchantment> key(String name) {
+		return ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, name));
+	}
 }

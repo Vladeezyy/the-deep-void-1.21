@@ -50,7 +50,7 @@ public class PerilRightClickProcedure {
 		if (entity == null)
 			return;
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
-			if (!(EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.AKIMBO.get(), itemstack) != 0)) {
+			if (!(PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.AKIMBO) != 0)) {
 				if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("shot") > 0 && (entity instanceof Player _plrCldRem8 ? _plrCldRem8.getCooldowns().getCooldownPercent(itemstack.getItem(), 0f) * 100 : 0) <= 0) {
 					if (entity.isShiftKeyDown()) {
 						if (entity instanceof Player _player)

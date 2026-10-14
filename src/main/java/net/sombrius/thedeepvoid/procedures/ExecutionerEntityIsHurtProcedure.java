@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +21,7 @@ public class ExecutionerEntityIsHurtProcedure {
 		if (sourceentity instanceof LivingEntity && sourceentity.isSprinting() && sourceentity.onGround() && (entity instanceof ExecutionerEntity _datEntL3 && _datEntL3.getEntityData().get(ExecutionerEntity.DATA_attacking)) == false
 				&& (entity instanceof ExecutionerEntity _datEntI ? _datEntI.getEntityData().get(ExecutionerEntity.DATA_stunCooldown) : 0) <= 0) {
 			if (entity instanceof ExecutionerEntity _datEntSetI)
-				_datEntSetI.getEntityData().set(ExecutionerEntity.DATA_stunCooldown, (int) (300 + (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getEnchantmentLevel(Enchantments.KNOCKBACK) * 20));
+				_datEntSetI.getEntityData().set(ExecutionerEntity.DATA_stunCooldown, (int) (300 + PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), Enchantments.KNOCKBACK) * 20));
 			if (entity instanceof ExecutionerEntity _datEntSetL)
 				_datEntSetL.getEntityData().set(ExecutionerEntity.DATA_stunned, true);
 			if (world instanceof Level _level) {

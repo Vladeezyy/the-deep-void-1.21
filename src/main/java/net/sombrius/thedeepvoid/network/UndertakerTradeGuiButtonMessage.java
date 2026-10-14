@@ -1,17 +1,22 @@
-
 package net.sombrius.thedeepvoid.network;
 
-import java.util.HashMap;
-import java.util.function.Supplier;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+
+import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.protocol.PacketFlow;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.core.BlockPos;
+
+import java.util.HashMap;
+
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 import net.sombrius.thedeepvoid.procedures.UndertakerButton1ClickProcedure;
 import net.sombrius.thedeepvoid.procedures.UndertakerButton2ClickProcedure;
@@ -22,41 +27,29 @@ import net.sombrius.thedeepvoid.procedures.UndertakerButton6ClickProcedure;
 import net.sombrius.thedeepvoid.world.inventory.UndertakerTradeGuiMenu;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public class UndertakerTradeGuiButtonMessage {
-	private final int buttonID, x, y, z;
-
-	public UndertakerTradeGuiButtonMessage(FriendlyByteBuf buffer) {
-		this.buttonID = buffer.readInt();
-		this.x = buffer.readInt();
-		this.y = buffer.readInt();
-		this.z = buffer.readInt();
-	}
-
-	public UndertakerTradeGuiButtonMessage(int buttonID, int x, int y, int z) {
-		this.buttonID = buttonID;
-		this.x = x;
-		this.y = y;
-		this.z = z;
-	}
-
-	public static void buffer(UndertakerTradeGuiButtonMessage message, FriendlyByteBuf buffer) {
+public record UndertakerTradeGuiButtonMessage(int buttonID, int x, int y, int z) implements CustomPacketPayload {
+	public static final Type<UndertakerTradeGuiButtonMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "undertaker_trade_gui_button"));
+	public static final StreamCodec<RegistryFriendlyByteBuf, UndertakerTradeGuiButtonMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, UndertakerTradeGuiButtonMessage message) -> {
 		buffer.writeInt(message.buttonID);
 		buffer.writeInt(message.x);
 		buffer.writeInt(message.y);
 		buffer.writeInt(message.z);
+	}, (RegistryFriendlyByteBuf buffer) -> new UndertakerTradeGuiButtonMessage(buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt()));
+
+	@Override
+	public Type<UndertakerTradeGuiButtonMessage> type() {
+		return TYPE;
 	}
 
-	public static void handler(UndertakerTradeGuiButtonMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-		NetworkEvent.Context context = contextSupplier.get();
-		context.enqueueWork(() -> {
-			Player entity = context.getSender();
-			int buttonID = message.buttonID;
-			int x = message.x;
-			int y = message.y;
-			int z = message.z;
-			handleButtonAction(entity, buttonID, x, y, z);
-		});
-		context.setPacketHandled(true);
+	public static void handleData(final UndertakerTradeGuiButtonMessage message, final IPayloadContext context) {
+		if (context.flow() == PacketFlow.SERVERBOUND) {
+			context.enqueueWork(() -> {
+				handleButtonAction(context.player(), message.buttonID, message.x, message.y, message.z);
+			}).exceptionally(e -> {
+				context.connection().disconnect(Component.literal(e.getMessage()));
+				return null;
+			});
+		}
 	}
 
 	public static void handleButtonAction(Player entity, int buttonID, int x, int y, int z) {
@@ -93,6 +86,6 @@ public class UndertakerTradeGuiButtonMessage {
 
 	@SubscribeEvent
 	public static void registerMessage(FMLCommonSetupEvent event) {
-		TheDeepVoidMod.addNetworkMessage(UndertakerTradeGuiButtonMessage.class, UndertakerTradeGuiButtonMessage::buffer, UndertakerTradeGuiButtonMessage::new, UndertakerTradeGuiButtonMessage::handler);
+		TheDeepVoidMod.addNetworkMessage(UndertakerTradeGuiButtonMessage.TYPE, UndertakerTradeGuiButtonMessage.STREAM_CODEC, UndertakerTradeGuiButtonMessage::handleData);
 	}
 }

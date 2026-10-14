@@ -1,6 +1,16 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraft.core.registries.Registries;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.minecraft.core.Holder;
+import java.util.EnumMap;
+import net.minecraft.Util;
+import net.neoforged.neoforge.registries.RegisterEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import java.util.List;
+
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,92 +25,51 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.resources.ResourceLocation;
 
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public abstract class RottenBoneArmorItem extends ArmorItem {
+	public static Holder<ArmorMaterial> ARMOR_MATERIAL = null;
+
+	@SubscribeEvent
+	public static void registerArmorMaterial(RegisterEvent event) {
+		event.register(Registries.ARMOR_MATERIAL, registerHelper -> {
+			ArmorMaterial armorMaterial = new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+				map.put(ArmorItem.Type.BOOTS, 2);
+				map.put(ArmorItem.Type.LEGGINGS, 4);
+				map.put(ArmorItem.Type.CHESTPLATE, 5);
+				map.put(ArmorItem.Type.HELMET, 2);
+				map.put(ArmorItem.Type.BODY, 5);
+			}), 15, DeferredHolder.create(Registries.SOUND_EVENT, ResourceLocation.parse("item.armor.equip_leather")), () -> Ingredient.of(new ItemStack(TheDeepVoidModItems.ROTTEN_BONE.get())),
+					List.of(new ArmorMaterial.Layer(ResourceLocation.parse("the_deep_void:rotten_bone_"))), 1f, 0f);
+			registerHelper.register(ResourceLocation.parse("the_deep_void:rotten_bone_armor"), armorMaterial);
+			ARMOR_MATERIAL = BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(armorMaterial);
+		});
+	}
+
 	public RottenBoneArmorItem(ArmorItem.Type type, Item.Properties properties) {
-		super(new ArmorMaterial() {
-			@Override
-			public int getDurabilityForType(ArmorItem.Type type) {
-				return new int[]{13, 15, 16, 11}[type.getSlot().getIndex()] * 20;
-			}
-
-			@Override
-			public int getDefenseForType(ArmorItem.Type type) {
-				return new int[]{2, 4, 5, 2}[type.getSlot().getIndex()];
-			}
-
-			@Override
-			public int getEnchantmentValue() {
-				return 15;
-			}
-
-			@Override
-			public SoundEvent getEquipSound() {
-				return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.armor.equip_leather"));
-			}
-
-			@Override
-			public Ingredient getRepairIngredient() {
-				return Ingredient.of(new ItemStack(TheDeepVoidModItems.ROTTEN_BONE.get()));
-			}
-
-			@Override
-			public String getName() {
-				return "rotten_bone_armor";
-			}
-
-			@Override
-			public float getToughness() {
-				return 1f;
-			}
-
-			@Override
-			public float getKnockbackResistance() {
-				return 0f;
-			}
-		}, type, properties);
+		super(ARMOR_MATERIAL, type, properties);
 	}
 
 	public static class Helmet extends RottenBoneArmorItem {
 		public Helmet() {
-			super(ArmorItem.Type.HELMET, new Item.Properties());
-		}
-
-		@Override
-		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-			return "the_deep_void:textures/models/armor/rotten_bone__layer_1.png";
+			super(ArmorItem.Type.HELMET, new Item.Properties().durability(220));
 		}
 	}
 
 	public static class Chestplate extends RottenBoneArmorItem {
 		public Chestplate() {
-			super(ArmorItem.Type.CHESTPLATE, new Item.Properties());
-		}
-
-		@Override
-		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-			return "the_deep_void:textures/models/armor/rotten_bone__layer_1.png";
+			super(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(320));
 		}
 	}
 
 	public static class Leggings extends RottenBoneArmorItem {
 		public Leggings() {
-			super(ArmorItem.Type.LEGGINGS, new Item.Properties());
-		}
-
-		@Override
-		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-			return "the_deep_void:textures/models/armor/rotten_bone__layer_2.png";
+			super(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(300));
 		}
 	}
 
 	public static class Boots extends RottenBoneArmorItem {
 		public Boots() {
-			super(ArmorItem.Type.BOOTS, new Item.Properties());
-		}
-
-		@Override
-		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-			return "the_deep_void:textures/models/armor/rotten_bone__layer_1.png";
+			super(ArmorItem.Type.BOOTS, new Item.Properties().durability(260));
 		}
 	}
 }

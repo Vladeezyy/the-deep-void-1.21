@@ -29,7 +29,6 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModFluids;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModMenus;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
-import net.sombrius.thedeepvoid.init.TheDeepVoidModPaintings;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModParticleTypes;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModPotions;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModSounds;
@@ -58,10 +57,8 @@ public class TheDeepVoidMod {
 		TheDeepVoidModVariables.ATTACHMENT_TYPES.register(modEventBus);
 		TheDeepVoidModFeatures.REGISTRY.register(modEventBus);
 		StructureFeature.REGISTRY.register(modEventBus);
-		TheDeepVoidModPaintings.REGISTRY.register(modEventBus);
 		TheDeepVoidModPotions.REGISTRY.register(modEventBus);
 		TheDeepVoidModMobEffects.REGISTRY.register(modEventBus);
-		TheDeepVoidModEnchantments.REGISTRY.register(modEventBus);
 		TheDeepVoidModMenus.REGISTRY.register(modEventBus);
 		TheDeepVoidModParticleTypes.REGISTRY.register(modEventBus);
 

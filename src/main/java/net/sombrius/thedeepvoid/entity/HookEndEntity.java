@@ -9,8 +9,6 @@ import net.sombrius.thedeepvoid.procedures.HookEndTickProcedure;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraftforge.network.PlayMessages;
-import net.minecraftforge.network.NetworkHooks;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.projectile.ThrownPotion;

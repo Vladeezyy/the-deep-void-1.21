@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.neoforged.bus.api.ICancellableEvent;
 
 import net.minecraft.core.component.DataComponents;
@@ -75,7 +77,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 			}
 			if (world.getBiome(BlockPos.containing(entity.getPersistentData().getDouble("rottenRodX"), entity.getPersistentData().getDouble("rottenRodY"), entity.getPersistentData().getDouble("rottenRodZ")))
 					.is(TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:flesh_biome")))) {
-				if (Math.random() < 0.1 + (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getEnchantmentLevel(TheDeepVoidModEnchantments.BAIT.get()) / 10
+				if (Math.random() < 0.1 + PortUtil.enchantmentLevel((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.BAIT) / 10
 						&& !(entity instanceof LivingEntity _livEnt17 && _livEnt17.hasEffect(TheDeepVoidModMobEffects.CREATURE_REPELLENT))) {
 					if (world instanceof ServerLevel _level) {
 						Entity entityToSpawn = TheDeepVoidModEntities.FLESH_LAMPREY.get().spawn(_level,
@@ -85,7 +87,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 						}
 					}
 				} else {
-					if (Math.random() < (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getEnchantmentLevel(TheDeepVoidModEnchantments.CRATE_CATCHER.get()) / 20
+					if (Math.random() < PortUtil.enchantmentLevel((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.CRATE_CATCHER) / 20
 							+ (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("crateChance")
 							+ ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.CRATE_MAGNET) ? _livEnt.getEffect(TheDeepVoidModMobEffects.CRATE_MAGNET).getAmplifier() : 0) + 1) / 10) {
 						if (world instanceof ServerLevel _level)
@@ -113,7 +115,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 				}
 			} else if (world.getBiome(BlockPos.containing(entity.getPersistentData().getDouble("rottenRodX"), entity.getPersistentData().getDouble("rottenRodY"), entity.getPersistentData().getDouble("rottenRodZ")))
 					.is(TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:bone_crawler_nest")))) {
-				if (Math.random() < 0.1 + (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getEnchantmentLevel(TheDeepVoidModEnchantments.BAIT.get()) / 10
+				if (Math.random() < 0.1 + PortUtil.enchantmentLevel((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.BAIT) / 10
 						&& !(entity instanceof LivingEntity _livEnt47 && _livEnt47.hasEffect(TheDeepVoidModMobEffects.CREATURE_REPELLENT))) {
 					if (Math.random() < 0.5) {
 						if (world instanceof ServerLevel _level) {
@@ -133,7 +135,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 						}
 					}
 				} else {
-					if (Math.random() < (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getEnchantmentLevel(TheDeepVoidModEnchantments.CRATE_CATCHER.get()) / 20
+					if (Math.random() < PortUtil.enchantmentLevel((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.CRATE_CATCHER) / 20
 							+ (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("crateChance")
 							+ ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.CRATE_MAGNET) ? _livEnt.getEffect(TheDeepVoidModMobEffects.CRATE_MAGNET).getAmplifier() : 0) + 1) / 10) {
 						if (world instanceof ServerLevel _level)
@@ -160,7 +162,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 					}
 				}
 			} else {
-				if (Math.random() < 0.1 + (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getEnchantmentLevel(TheDeepVoidModEnchantments.BAIT.get()) / 10
+				if (Math.random() < 0.1 + PortUtil.enchantmentLevel((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.BAIT) / 10
 						&& !(entity instanceof LivingEntity _livEnt77 && _livEnt77.hasEffect(TheDeepVoidModMobEffects.CREATURE_REPELLENT))) {
 					if (world instanceof ServerLevel _level) {
 						Entity entityToSpawn = TheDeepVoidModEntities.SEEKER.get().spawn(_level,
@@ -170,7 +172,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 						}
 					}
 				} else {
-					if (Math.random() < (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getEnchantmentLevel(TheDeepVoidModEnchantments.CRATE_CATCHER.get()) / 20
+					if (Math.random() < PortUtil.enchantmentLevel((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.CRATE_CATCHER) / 20
 							+ (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("crateChance")
 							+ ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.CRATE_MAGNET) ? _livEnt.getEffect(TheDeepVoidModMobEffects.CRATE_MAGNET).getAmplifier() : 0) + 1) / 10) {
 						if (world instanceof ServerLevel _level)

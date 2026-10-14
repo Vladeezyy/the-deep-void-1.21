@@ -1,65 +1,52 @@
-
 package net.sombrius.thedeepvoid.network;
 
-import java.util.HashMap;
-import java.util.function.Supplier;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+
+import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.protocol.PacketFlow;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.core.BlockPos;
+
+import java.util.HashMap;
+
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 import net.sombrius.thedeepvoid.procedures.UndertakerItemTakenFromSlotProcedure;
 import net.sombrius.thedeepvoid.world.inventory.UndertakerTradeGuiMenu;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public class UndertakerTradeGuiSlotMessage {
-	private final int slotID, x, y, z, changeType, meta;
-
-	public UndertakerTradeGuiSlotMessage(int slotID, int x, int y, int z, int changeType, int meta) {
-		this.slotID = slotID;
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.changeType = changeType;
-		this.meta = meta;
-	}
-
-	public UndertakerTradeGuiSlotMessage(FriendlyByteBuf buffer) {
-		this.slotID = buffer.readInt();
-		this.x = buffer.readInt();
-		this.y = buffer.readInt();
-		this.z = buffer.readInt();
-		this.changeType = buffer.readInt();
-		this.meta = buffer.readInt();
-	}
-
-	public static void buffer(UndertakerTradeGuiSlotMessage message, FriendlyByteBuf buffer) {
+public record UndertakerTradeGuiSlotMessage(int slotID, int x, int y, int z, int changeType, int meta) implements CustomPacketPayload {
+	public static final Type<UndertakerTradeGuiSlotMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "undertaker_trade_gui_slot"));
+	public static final StreamCodec<RegistryFriendlyByteBuf, UndertakerTradeGuiSlotMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, UndertakerTradeGuiSlotMessage message) -> {
 		buffer.writeInt(message.slotID);
 		buffer.writeInt(message.x);
 		buffer.writeInt(message.y);
 		buffer.writeInt(message.z);
 		buffer.writeInt(message.changeType);
 		buffer.writeInt(message.meta);
+	}, (RegistryFriendlyByteBuf buffer) -> new UndertakerTradeGuiSlotMessage(buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt()));
+
+	@Override
+	public Type<UndertakerTradeGuiSlotMessage> type() {
+		return TYPE;
 	}
 
-	public static void handler(UndertakerTradeGuiSlotMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-		NetworkEvent.Context context = contextSupplier.get();
-		context.enqueueWork(() -> {
-			Player entity = context.getSender();
-			int slotID = message.slotID;
-			int changeType = message.changeType;
-			int meta = message.meta;
-			int x = message.x;
-			int y = message.y;
-			int z = message.z;
-			handleSlotAction(entity, slotID, changeType, meta, x, y, z);
-		});
-		context.setPacketHandled(true);
+	public static void handleData(final UndertakerTradeGuiSlotMessage message, final IPayloadContext context) {
+		if (context.flow() == PacketFlow.SERVERBOUND) {
+			context.enqueueWork(() -> {
+				handleSlotAction(context.player(), message.slotID, message.changeType, message.meta, message.x, message.y, message.z);
+			}).exceptionally(e -> {
+				context.connection().disconnect(Component.literal(e.getMessage()));
+				return null;
+			});
+		}
 	}
 
 	public static void handleSlotAction(Player entity, int slot, int changeType, int meta, int x, int y, int z) {
@@ -76,6 +63,6 @@ public class UndertakerTradeGuiSlotMessage {
 
 	@SubscribeEvent
 	public static void registerMessage(FMLCommonSetupEvent event) {
-		TheDeepVoidMod.addNetworkMessage(UndertakerTradeGuiSlotMessage.class, UndertakerTradeGuiSlotMessage::buffer, UndertakerTradeGuiSlotMessage::new, UndertakerTradeGuiSlotMessage::handler);
+		TheDeepVoidMod.addNetworkMessage(UndertakerTradeGuiSlotMessage.TYPE, UndertakerTradeGuiSlotMessage.STREAM_CODEC, UndertakerTradeGuiSlotMessage::handleData);
 	}
 }

@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.world.inventory;
 
+import net.neoforged.neoforge.network.PacketDistributor;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -465,7 +467,7 @@ public class UndertakerTradeGuiMenu extends AbstractContainerMenu implements Sup
 
 	private void slotChanged(int slotid, int ctype, int meta) {
 		if (this.world != null && this.world.isClientSide()) {
-			TheDeepVoidMod.PACKET_HANDLER.sendToServer(new UndertakerTradeGuiSlotMessage(slotid, x, y, z, ctype, meta));
+			PacketDistributor.sendToServer(new UndertakerTradeGuiSlotMessage(slotid, x, y, z, ctype, meta));
 			UndertakerTradeGuiSlotMessage.handleSlotAction(entity, slotid, ctype, meta, x, y, z);
 		}
 	}

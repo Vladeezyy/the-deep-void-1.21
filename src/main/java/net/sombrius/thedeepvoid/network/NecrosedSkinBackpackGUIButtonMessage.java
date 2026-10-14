@@ -1,57 +1,50 @@
-
 package net.sombrius.thedeepvoid.network;
 
-import java.util.HashMap;
-import java.util.function.Supplier;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+
+import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.protocol.PacketFlow;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.core.BlockPos;
+
+import java.util.HashMap;
+
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 import net.sombrius.thedeepvoid.procedures.NecrosedSkinBackpackCraftingButtonClickedProcedure;
 import net.sombrius.thedeepvoid.world.inventory.NecrosedSkinBackpackGUIMenu;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public class NecrosedSkinBackpackGUIButtonMessage {
-	private final int buttonID, x, y, z;
-
-	public NecrosedSkinBackpackGUIButtonMessage(FriendlyByteBuf buffer) {
-		this.buttonID = buffer.readInt();
-		this.x = buffer.readInt();
-		this.y = buffer.readInt();
-		this.z = buffer.readInt();
-	}
-
-	public NecrosedSkinBackpackGUIButtonMessage(int buttonID, int x, int y, int z) {
-		this.buttonID = buttonID;
-		this.x = x;
-		this.y = y;
-		this.z = z;
-	}
-
-	public static void buffer(NecrosedSkinBackpackGUIButtonMessage message, FriendlyByteBuf buffer) {
+public record NecrosedSkinBackpackGUIButtonMessage(int buttonID, int x, int y, int z) implements CustomPacketPayload {
+	public static final Type<NecrosedSkinBackpackGUIButtonMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "necrosed_skin_backpack_gui_button"));
+	public static final StreamCodec<RegistryFriendlyByteBuf, NecrosedSkinBackpackGUIButtonMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, NecrosedSkinBackpackGUIButtonMessage message) -> {
 		buffer.writeInt(message.buttonID);
 		buffer.writeInt(message.x);
 		buffer.writeInt(message.y);
 		buffer.writeInt(message.z);
+	}, (RegistryFriendlyByteBuf buffer) -> new NecrosedSkinBackpackGUIButtonMessage(buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt()));
+
+	@Override
+	public Type<NecrosedSkinBackpackGUIButtonMessage> type() {
+		return TYPE;
 	}
 
-	public static void handler(NecrosedSkinBackpackGUIButtonMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-		NetworkEvent.Context context = contextSupplier.get();
-		context.enqueueWork(() -> {
-			Player entity = context.getSender();
-			int buttonID = message.buttonID;
-			int x = message.x;
-			int y = message.y;
-			int z = message.z;
-			handleButtonAction(entity, buttonID, x, y, z);
-		});
-		context.setPacketHandled(true);
+	public static void handleData(final NecrosedSkinBackpackGUIButtonMessage message, final IPayloadContext context) {
+		if (context.flow() == PacketFlow.SERVERBOUND) {
+			context.enqueueWork(() -> {
+				handleButtonAction(context.player(), message.buttonID, message.x, message.y, message.z);
+			}).exceptionally(e -> {
+				context.connection().disconnect(Component.literal(e.getMessage()));
+				return null;
+			});
+		}
 	}
 
 	public static void handleButtonAction(Player entity, int buttonID, int x, int y, int z) {
@@ -68,6 +61,6 @@ public class NecrosedSkinBackpackGUIButtonMessage {
 
 	@SubscribeEvent
 	public static void registerMessage(FMLCommonSetupEvent event) {
-		TheDeepVoidMod.addNetworkMessage(NecrosedSkinBackpackGUIButtonMessage.class, NecrosedSkinBackpackGUIButtonMessage::buffer, NecrosedSkinBackpackGUIButtonMessage::new, NecrosedSkinBackpackGUIButtonMessage::handler);
+		TheDeepVoidMod.addNetworkMessage(NecrosedSkinBackpackGUIButtonMessage.TYPE, NecrosedSkinBackpackGUIButtonMessage.STREAM_CODEC, NecrosedSkinBackpackGUIButtonMessage::handleData);
 	}
 }

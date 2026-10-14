@@ -45,7 +45,7 @@ public class DoubleBarrelShotgunRightClickProcedure {
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 				}
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), (int) (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.MARKSMAN.get(), itemstack) != 0 ? 30 : 10));
+					_player.getCooldowns().addCooldown(itemstack.getItem(), (int) (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.MARKSMAN) != 0 ? 30 : 10));
 				if (itemstack.getItem() instanceof DoubleBarrelShotgunItem)
 					{
 						final String _tagName = "geckoAnim";
@@ -121,7 +121,7 @@ public class DoubleBarrelShotgunRightClickProcedure {
 								Mth.nextInt(RandomSource.create(), (int) 0.99, (int) 1.01), false);
 					}
 				}
-				if (!(EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.MARKSMAN.get(), itemstack) != 0)) {
+				if (!(PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.MARKSMAN) != 0)) {
 					entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * (-1)), (Math.sin(Math.toRadians(0 - entity.getXRot())) * (-0.5)), (Math.cos(Math.toRadians(entity.getYRot())) * (-1))));
 				}
 			} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("shot") <= 0) {

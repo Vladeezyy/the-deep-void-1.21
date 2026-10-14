@@ -1,12 +1,18 @@
 package net.sombrius.thedeepvoid.port;
 
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import net.neoforged.neoforge.common.CommonHooks;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Holder;
 
 import javax.annotation.Nullable;
 
@@ -35,6 +41,24 @@ public final class PortUtil {
 	/** 1.20 {@code AbstractArrow.setKnockback}: 1.21 takes knockback from the weapon's enchantments only. */
 	public static void setKnockback(AbstractArrow arrow, int knockback) {
 		((ArrowKnockback) arrow).deepvoid$setKnockback(knockback);
+	}
+
+	/** 1.21 enchantments live in a datapack registry: look them up on whichever side we are. */
+	@Nullable
+	public static Holder<Enchantment> enchantment(ResourceKey<Enchantment> key) {
+		HolderLookup.RegistryLookup<Enchantment> lookup = CommonHooks.resolveLookup(Registries.ENCHANTMENT);
+		return lookup == null ? null : lookup.get(key).orElse(null);
+	}
+
+	public static int enchantmentLevel(ItemStack stack, ResourceKey<Enchantment> key) {
+		Holder<Enchantment> holder = enchantment(key);
+		return holder == null ? 0 : stack.getEnchantmentLevel(holder);
+	}
+
+	public static void enchant(ItemStack stack, ResourceKey<Enchantment> key, int level) {
+		Holder<Enchantment> holder = enchantment(key);
+		if (holder != null)
+			stack.enchant(holder, level);
 	}
 
 	public interface ArrowKnockback {

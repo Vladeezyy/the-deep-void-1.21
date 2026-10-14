@@ -43,30 +43,30 @@ public class BoneWalkerOnBootsProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		if (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CURSE_OF_SORROW.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY)) != 0
-				|| EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CURSE_OF_SORROW.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY)) != 0
-				|| EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CURSE_OF_SORROW.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY)) != 0
-				|| EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CURSE_OF_SORROW.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY)) != 0) {
+		if (PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY), TheDeepVoidModEnchantments.CURSE_OF_SORROW) != 0
+				|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY), TheDeepVoidModEnchantments.CURSE_OF_SORROW) != 0
+				|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY), TheDeepVoidModEnchantments.CURSE_OF_SORROW) != 0
+				|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.CURSE_OF_SORROW) != 0) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.DEAD_INSIDE, 20, 0, false, false));
 		}
-		if (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CURSE_OF_GODS_BLOOD.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY)) != 0
-				|| EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CURSE_OF_GODS_BLOOD.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY)) != 0
-				|| EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CURSE_OF_GODS_BLOOD.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY)) != 0
-				|| EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CURSE_OF_GODS_BLOOD.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY)) != 0) {
+		if (PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY), TheDeepVoidModEnchantments.CURSE_OF_GODS_BLOOD) != 0
+				|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY), TheDeepVoidModEnchantments.CURSE_OF_GODS_BLOOD) != 0
+				|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY), TheDeepVoidModEnchantments.CURSE_OF_GODS_BLOOD) != 0
+				|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.CURSE_OF_GODS_BLOOD) != 0) {
 			if (!(entity instanceof LivingEntity _livEnt17 && _livEnt17.hasEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL))) {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL, 1200, 0, false, false));
 			}
 		}
-		if (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.BONE_WALKER.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY)) != 0
+		if (PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0
 				&& (world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:natural_bone_block")))) {
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae")) != null)) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
 						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae"))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
 							.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae"),
-									((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getEnchantmentLevel(TheDeepVoidModEnchantments.BONE_WALKER.get()) * 0.105 + 1.18),
+									(PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) * 0.105 + 1.18),
 									AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
 			}
 			if (Math.random() < 0.01 && !(new Object() {
@@ -101,13 +101,13 @@ public class BoneWalkerOnBootsProcedure {
 					entity.getPersistentData().putDouble("boneWalkerPlayerZ", (entity.getZ()));
 				});
 			}
-		} else if ((!(EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.BONE_WALKER.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY)) != 0)
-				|| EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.BONE_WALKER.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY)) != 0
+		} else if ((!(PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0)
+				|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0
 						&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:natural_bone_block"))))
 				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae")) != null) {
 			TheDeepVoidMod.queueServerWork(15, () -> {
-				if ((!(EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.BONE_WALKER.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY)) != 0)
-						|| EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.BONE_WALKER.get(), (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY)) != 0
+				if ((!(PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0)
+						|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0
 								&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:natural_bone_block"))))
 						&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae")) != null) {
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae"));

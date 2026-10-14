@@ -43,7 +43,7 @@ public class ApostasyRightClickedProcedure {
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:rounds") > 0) {
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), (int) (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.MARKSMAN.get(), itemstack) != 0 ? 45 : 25));
+					_player.getCooldowns().addCooldown(itemstack.getItem(), (int) (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.MARKSMAN) != 0 ? 45 : 25));
 				if (itemstack.getItem() instanceof ApostasyItem)
 					{
 						final String _tagName = "geckoAnim";
@@ -116,7 +116,7 @@ public class ApostasyRightClickedProcedure {
 						}
 					}
 				}
-				if (!(EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.MARKSMAN.get(), itemstack) != 0)) {
+				if (!(PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.MARKSMAN) != 0)) {
 					entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * (-1.7)), (Math.sin(Math.toRadians(0 - entity.getXRot())) * (-0.8)), (Math.cos(Math.toRadians(entity.getYRot())) * (-1.7))));
 				}
 				{

@@ -301,7 +301,7 @@ public class OnyxFlareGunRightclickedProcedure {
 					ItemStack _ist = itemstack;
 					PortUtil.hurtAndBreak(_ist, 1, null);
 				}
-				if (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.CONSERVATION.get(), itemstack) != 0) {
+				if (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.CONSERVATION) != 0) {
 					if (Math.random() < 0.85) {
 						(entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).shrink(1);
 					}

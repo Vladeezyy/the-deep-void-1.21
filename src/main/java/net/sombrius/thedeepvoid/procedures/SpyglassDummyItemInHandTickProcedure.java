@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortUtil;
+
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +22,7 @@ public class SpyglassDummyItemInHandTickProcedure {
 				if (_entity instanceof Player _player)
 					_player.getInventory().setChanged();
 			}
-			(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).enchant(TheDeepVoidModEnchantments.VOID_VISION.get(), 1);
+			PortUtil.enchant((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.VOID_VISION, 1);
 		} else {
 			if (entity instanceof LivingEntity _entity) {
 				ItemStack _setstack = new ItemStack(Items.SPYGLASS).copy();
@@ -29,7 +31,7 @@ public class SpyglassDummyItemInHandTickProcedure {
 				if (_entity instanceof Player _player)
 					_player.getInventory().setChanged();
 			}
-			(entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).enchant(TheDeepVoidModEnchantments.VOID_VISION.get(), 1);
+			PortUtil.enchant((entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.VOID_VISION, 1);
 		}
 	}
 }

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:enchantable/crossbow",
+    "the_deep_void:black_hole"
+  ]
+}

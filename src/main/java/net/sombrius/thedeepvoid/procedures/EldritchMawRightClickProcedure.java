@@ -50,7 +50,7 @@ public class EldritchMawRightClickProcedure {
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 				}
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), (int) (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.MARKSMAN.get(), itemstack) != 0 ? 45 : 25));
+					_player.getCooldowns().addCooldown(itemstack.getItem(), (int) (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.MARKSMAN) != 0 ? 45 : 25));
 				if (itemstack.getItem() instanceof EldritchMawItem)
 					{
 						final String _tagName = "geckoAnim";
@@ -117,7 +117,7 @@ public class EldritchMawRightClickProcedure {
 						}
 					}
 				}
-				if (!(EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.MARKSMAN.get(), itemstack) != 0)) {
+				if (!(PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.MARKSMAN) != 0)) {
 					entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * (-0.5)), (Math.sin(Math.toRadians(0 - entity.getXRot())) * (-1)), (Math.cos(Math.toRadians(entity.getYRot())) * (-0.5))));
 				}
 				TheDeepVoidMod.queueServerWork(15, () -> {

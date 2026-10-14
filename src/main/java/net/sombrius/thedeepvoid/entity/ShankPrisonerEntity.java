@@ -15,8 +15,6 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraftforge.network.PlayMessages;
-import net.minecraftforge.network.NetworkHooks;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;

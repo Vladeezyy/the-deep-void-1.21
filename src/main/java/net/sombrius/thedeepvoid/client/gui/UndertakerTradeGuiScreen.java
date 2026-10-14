@@ -1,5 +1,9 @@
 package net.sombrius.thedeepvoid.client.gui;
 
+import net.sombrius.thedeepvoid.port.PortImageButton;
+
+import net.neoforged.neoforge.network.PacketDistributor;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.HashMap;
 import net.minecraft.client.gui.GuiGraphics;
@@ -116,9 +120,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 	@Override
 	public void init() {
 		super.init();
-		imagebutton_button = new ImageButton(this.leftPos + 4, this.topPos + 18, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button.png"), 68, 40, e -> {
+		imagebutton_button = new PortImageButton(this.leftPos + 4, this.topPos + 18, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button.png"), 68, 40, e -> {
 			if (UndertakerButton1DisplayProcedure.execute(entity)) {
-				TheDeepVoidMod.PACKET_HANDLER.sendToServer(new UndertakerTradeGuiButtonMessage(0, x, y, z));
+				PacketDistributor.sendToServer(new UndertakerTradeGuiButtonMessage(0, x, y, z));
 				UndertakerTradeGuiButtonMessage.handleButtonAction(entity, 0, x, y, z);
 			}
 		}) {
@@ -130,9 +134,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 		};
 		guistate.put("button:imagebutton_button", imagebutton_button);
 		this.addRenderableWidget(imagebutton_button);
-		imagebutton_button1 = new ImageButton(this.leftPos + 4, this.topPos + 38, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button1.png"), 68, 40, e -> {
+		imagebutton_button1 = new PortImageButton(this.leftPos + 4, this.topPos + 38, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button1.png"), 68, 40, e -> {
 			if (UndertakerButton2DisplayProcedure.execute(entity)) {
-				TheDeepVoidMod.PACKET_HANDLER.sendToServer(new UndertakerTradeGuiButtonMessage(1, x, y, z));
+				PacketDistributor.sendToServer(new UndertakerTradeGuiButtonMessage(1, x, y, z));
 				UndertakerTradeGuiButtonMessage.handleButtonAction(entity, 1, x, y, z);
 			}
 		}) {
@@ -144,9 +148,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 		};
 		guistate.put("button:imagebutton_button1", imagebutton_button1);
 		this.addRenderableWidget(imagebutton_button1);
-		imagebutton_button2 = new ImageButton(this.leftPos + 4, this.topPos + 58, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button2.png"), 68, 40, e -> {
+		imagebutton_button2 = new PortImageButton(this.leftPos + 4, this.topPos + 58, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button2.png"), 68, 40, e -> {
 			if (UndertakerButton3DisplayProcedure.execute(entity)) {
-				TheDeepVoidMod.PACKET_HANDLER.sendToServer(new UndertakerTradeGuiButtonMessage(2, x, y, z));
+				PacketDistributor.sendToServer(new UndertakerTradeGuiButtonMessage(2, x, y, z));
 				UndertakerTradeGuiButtonMessage.handleButtonAction(entity, 2, x, y, z);
 			}
 		}) {
@@ -158,9 +162,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 		};
 		guistate.put("button:imagebutton_button2", imagebutton_button2);
 		this.addRenderableWidget(imagebutton_button2);
-		imagebutton_button3 = new ImageButton(this.leftPos + 4, this.topPos + 78, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button3.png"), 68, 40, e -> {
+		imagebutton_button3 = new PortImageButton(this.leftPos + 4, this.topPos + 78, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button3.png"), 68, 40, e -> {
 			if (UndertakerButton4DisplayProcedure.execute(entity)) {
-				TheDeepVoidMod.PACKET_HANDLER.sendToServer(new UndertakerTradeGuiButtonMessage(3, x, y, z));
+				PacketDistributor.sendToServer(new UndertakerTradeGuiButtonMessage(3, x, y, z));
 				UndertakerTradeGuiButtonMessage.handleButtonAction(entity, 3, x, y, z);
 			}
 		}) {
@@ -172,9 +176,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 		};
 		guistate.put("button:imagebutton_button3", imagebutton_button3);
 		this.addRenderableWidget(imagebutton_button3);
-		imagebutton_button4 = new ImageButton(this.leftPos + 4, this.topPos + 98, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button4.png"), 68, 40, e -> {
+		imagebutton_button4 = new PortImageButton(this.leftPos + 4, this.topPos + 98, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button4.png"), 68, 40, e -> {
 			if (UndertakerButton5DisplayProcedure.execute(entity)) {
-				TheDeepVoidMod.PACKET_HANDLER.sendToServer(new UndertakerTradeGuiButtonMessage(4, x, y, z));
+				PacketDistributor.sendToServer(new UndertakerTradeGuiButtonMessage(4, x, y, z));
 				UndertakerTradeGuiButtonMessage.handleButtonAction(entity, 4, x, y, z);
 			}
 		}) {
@@ -186,9 +190,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 		};
 		guistate.put("button:imagebutton_button4", imagebutton_button4);
 		this.addRenderableWidget(imagebutton_button4);
-		imagebutton_button5 = new ImageButton(this.leftPos + 4, this.topPos + 118, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button5.png"), 68, 40, e -> {
+		imagebutton_button5 = new PortImageButton(this.leftPos + 4, this.topPos + 118, 68, 20, 0, 0, 20, ResourceLocation.parse("the_deep_void:textures/screens/atlas/imagebutton_button5.png"), 68, 40, e -> {
 			if (UndertakerButton6DisplayProcedure.execute(entity)) {
-				TheDeepVoidMod.PACKET_HANDLER.sendToServer(new UndertakerTradeGuiButtonMessage(5, x, y, z));
+				PacketDistributor.sendToServer(new UndertakerTradeGuiButtonMessage(5, x, y, z));
 				UndertakerTradeGuiButtonMessage.handleButtonAction(entity, 5, x, y, z);
 			}
 		}) {

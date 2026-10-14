@@ -33,7 +33,7 @@ public class BlackHoleRightClickProcedure {
 		if (entity == null)
 			return;
 		if (!entity.isShiftKeyDown()) {
-			if (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.DIMENSIONAL_BURST.get(), itemstack) != 0) {
+			if (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.DIMENSIONAL_BURST) != 0) {
 				if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("ammo") < (double) DeepVoidConfigConfiguration.BLACKHOLESTORELIMIT.get()) {
 					{
 						final String _tagName = "loading";
@@ -53,7 +53,7 @@ public class BlackHoleRightClickProcedure {
 				_player.getCooldowns().addCooldown(itemstack.getItem(), 1);
 			if (entity instanceof LivingEntity _entity)
 				_entity.stopUsingItem();
-			if (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.DIMENSIONAL_BURST.get(), itemstack) != 0) {
+			if (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.DIMENSIONAL_BURST) != 0) {
 				for (int index0 = 0; index0 < (int) itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("ammo"); index0++) {
 					{
 						Entity _shootFrom = entity;
@@ -125,7 +125,7 @@ public class BlackHoleRightClickProcedure {
 						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9, 1, false);
 					}
 				}
-				if (EnchantmentHelper.getItemEnchantmentLevel(TheDeepVoidModEnchantments.QUICK_TRIGGER.get(), itemstack) != 0) {
+				if (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.QUICK_TRIGGER) != 0) {
 					TheDeepVoidMod.queueServerWork(2, () -> {
 						{
 							Entity _shootFrom = entity;

@@ -104,6 +104,10 @@ IMPORTS = {
     'AdvancementHolder': 'net.minecraft.advancements.AdvancementHolder',
     'Holder': 'net.minecraft.core.Holder',
     'TriState': 'net.neoforged.neoforge.common.util.TriState',
+    'EquipmentSlotGroup': 'net.minecraft.world.entity.EquipmentSlotGroup',
+    'NeoForgeMod': 'net.neoforged.neoforge.common.NeoForgeMod',
+    'PacketDistributor': 'net.neoforged.neoforge.network.PacketDistributor',
+    'PortImageButton': 'net.sombrius.thedeepvoid.port.PortImageButton',
     'PortUtil': 'net.sombrius.thedeepvoid.port.PortUtil',
     'Nullable': 'javax.annotation.Nullable',
     'ItemStack': 'net.minecraft.world.item.ItemStack',
@@ -496,6 +500,66 @@ def fix_vertex_api(s):
     return s
 
 
+def fix_item_attribute_event(s):
+    s = s.replace('ForgeMod.ENTITY_REACH.get()', 'Attributes.ENTITY_INTERACTION_RANGE').replace('ForgeMod.BLOCK_REACH.get()', 'Attributes.BLOCK_INTERACTION_RANGE')
+    s = s.replace('ForgeMod.STEP_HEIGHT_ADDITION.get()', 'Attributes.STEP_HEIGHT').replace('ForgeMod.ENTITY_GRAVITY.get()', 'Attributes.GRAVITY')
+    s = re.sub(r'(?<!Neo)ForgeMod\.SWIM_SPEED\.get\(\)', 'NeoForgeMod.SWIM_SPEED', s)
+    key = re.compile(r'if \(event instanceof ItemAttributeModifierEvent (\w+) && \1\.getSlotType\(\) == EquipmentSlot\.(\w+)\) \{')
+    while True:
+        m = key.search(s)
+        if not m: break
+        e = match_paren(s, m.end() - 1)
+        var, slot = m.group(1), m.group(2)
+        body = s[m.end():e]
+        out = []; i = 0; k = var + '.addModifier('
+        while True:
+            j = body.find(k, i)
+            if j < 0: out.append(body[i:]); break
+            end, args = split_args(body, j + len(k) - 1)
+            out.append(body[i:j]); out.append(k + ','.join(args) + ', EquipmentSlotGroup.%s)' % slot); i = end + 1
+        s = s[:m.start()] + 'if (event instanceof ItemAttributeModifierEvent %s) {' % var + ''.join(out) + s[e:]
+    return s
+
+
+def fix_network(s):
+    s = re.sub(r'= new ImageButton\((?=[^;]*?, ResourceLocation\.parse\([^;]*?\), \d+, \d+, e -> \{)', '= new PortImageButton(', s)
+    s = re.sub(r'TheDeepVoidMod\.PACKET_HANDLER\.sendToServer\(', 'PacketDistributor.sendToServer(', s)
+    return s
+
+
+ENCH = r'(?:TheDeepVoidModEnchantments\.\w+(?:\.get\(\))?|Enchantments\.\w+)'
+
+
+def fix_enchantments(s):
+    strip = lambda a: re.sub(r'\.get\(\)$', '', a.strip())
+    out = []; i = 0; key = 'EnchantmentHelper.getItemEnchantmentLevel('
+    while True:
+        j = s.find(key, i)
+        if j < 0: out.append(s[i:]); break
+        end, args = split_args(s, j + len(key) - 1)
+        if len(args) == 2 and re.fullmatch(ENCH, args[0].strip()):
+            out.append(s[i:j]); out.append('PortUtil.enchantmentLevel(%s, %s)' % (args[1].strip(), strip(args[0]))); i = end + 1
+        else:
+            out.append(s[i:j + len(key)]); i = j + len(key)
+    s = ''.join(out)
+    for meth, fmt in (('.getEnchantmentLevel(', 'PortUtil.enchantmentLevel(%s, %s)'), ('.enchant(', 'PortUtil.enchant(%s, %s)')):
+        out = []; i = 0
+        while True:
+            j = s.find(meth, i)
+            if j < 0: out.append(s[i:]); break
+            end, args = split_args(s, j + len(meth) - 1)
+            if re.fullmatch(ENCH, args[0].strip()) and len(args) == (1 if meth == '.getEnchantmentLevel(' else 2):
+                r0 = receiver_start(s, j)
+                rest = ', '.join([strip(args[0])] + [a.strip() for a in args[1:]])
+                # receiver text already copied into out: cut it back
+                joined = ''.join(out) + s[i:r0]
+                out = [joined, fmt % (s[r0:j], rest)]; i = end + 1
+            else:
+                out.append(s[i:j + len(meth)]); i = j + len(meth)
+        s = ''.join(out)
+    return s
+
+
 def convert(s):
     o = s
     for a, b in PKG: s = re.sub(a, b, s)
@@ -516,6 +580,9 @@ def convert(s):
     s = fix_small_apis(s)
     s = fix_plants(s)
     s = fix_vertex_api(s)
+    s = fix_item_attribute_event(s)
+    s = fix_network(s)
+    s = fix_enchantments(s)
     if s != o: s = add_imports(s)
     # drop duplicate imports
     seen = set(); lines = []

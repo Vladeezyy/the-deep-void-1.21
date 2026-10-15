@@ -21,8 +21,8 @@ public class MiniatureCofferItem extends Item {
 	@Override
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext level, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, level, list, flag);
-		list.add(Component.literal("\u00A7bCreative mode only"));
-		list.add(Component.literal("\u00A79Summons the Undertaker naturally"));
+		list.add(Component.translatable("text.the_deep_void.port.creative_mode_only"));
+		list.add(Component.translatable("text.the_deep_void.port.summons_the_undertaker_naturally"));
 	}
 
 	@Override

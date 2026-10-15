@@ -117,7 +117,7 @@ public class SoulForgeBlock extends Block implements SimpleWaterloggedBlock, Ent
 			player.openMenu(new MenuProvider() {
 				@Override
 				public Component getDisplayName() {
-					return Component.literal("Soul Forge");
+					return Component.translatable("text.the_deep_void.port.soul_forge");
 				}
 
 				@Override

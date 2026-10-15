@@ -84,7 +84,7 @@ public class InfestedBoneCrawlerEggBlockEntity extends RandomizableContainerBloc
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Infested Bone Crawler Egg");
+		return Component.translatable("text.the_deep_void.port.infested_bone_crawler_egg");
 	}
 
 	@Override

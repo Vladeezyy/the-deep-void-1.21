@@ -84,7 +84,7 @@ public class DeepslateSarcophagusBlockEntity extends RandomizableContainerBlockE
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Deepslate Sarcophagus (Loot)");
+		return Component.translatable("text.the_deep_void.port.deepslate_sarcophagus_loot");
 	}
 
 	@Override

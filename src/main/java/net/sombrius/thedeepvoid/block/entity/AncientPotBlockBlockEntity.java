@@ -84,7 +84,7 @@ public class AncientPotBlockBlockEntity extends RandomizableContainerBlockEntity
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Ancient Pot");
+		return Component.translatable("text.the_deep_void.port.ancient_pot");
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class HardFleshIngotItem extends Item {
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, list, flag);
 		list.add(Component.literal(""));
-		list.add(Component.literal("\u00A77Applies to:"));
-		list.add(Component.literal(" \u00A79Rotten Bone Armor"));
+		list.add(Component.translatable("text.the_deep_void.port.applies_to"));
+		list.add(Component.translatable("text.the_deep_void.port.rotten_bone_armor"));
 	}
 }

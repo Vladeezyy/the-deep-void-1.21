@@ -64,6 +64,16 @@ overrides with namespaces. Hand-written 1.21 data lives in `tools/overlay/` and 
 - Data left in the 1.99 sources for removed content is skipped: the Desolate Soil feature (code removed in 1.96.8) and the
   Mimicking Shadow spawns (entity removed in 1.99); 1.20.1 would not load a world with them either.
 
+## Localization
+
+- English text that 1.99.3.1 wrote straight into the code (armor and item tooltips, chat messages, JEI category names;
+  40 classes) is `Component.translatable("text.the_deep_void.port.*")` now (`tools/localize_literals.py`), with the same
+  English text in `en_us`.
+- Translations live in `tools/lang/<language>.json` and `convert_resources.py` merges them over the upstream lang files:
+  Russian and Simplified Chinese completed, Spanish (`es_es`) and Brazilian Portuguese (`pt_br`) added. Names that stay the
+  same in every language (music disc titles, `Combo`, …) are listed in `tools/lang/untranslatable.txt`;
+  `tools/lang_todo.py <language>` lists what is still untranslated.
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

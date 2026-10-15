@@ -84,7 +84,7 @@ public class AncientDeepslateDartTrapBlockEntity extends RandomizableContainerBl
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Ancient Deepslate Dart Trap");
+		return Component.translatable("text.the_deep_void.port.ancient_deepslate_dart_trap");
 	}
 
 	@Override

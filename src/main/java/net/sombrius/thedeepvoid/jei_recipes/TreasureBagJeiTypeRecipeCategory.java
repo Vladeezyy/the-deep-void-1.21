@@ -32,7 +32,7 @@ public class TreasureBagJeiTypeRecipeCategory implements IRecipeCategory<Treasur
 
 	@Override
 	public Component getTitle() {
-		return Component.literal("Treasure Bag");
+		return Component.translatable("text.the_deep_void.port.treasure_bag");
 	}
 
 	@Override

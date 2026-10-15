@@ -84,7 +84,7 @@ public class DungeonDarkSteelBarsActiveBlockEntity extends RandomizableContainer
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Dungeon Dark Steel Bars");
+		return Component.translatable("text.the_deep_void.port.dungeon_dark_steel_bars");
 	}
 
 	@Override

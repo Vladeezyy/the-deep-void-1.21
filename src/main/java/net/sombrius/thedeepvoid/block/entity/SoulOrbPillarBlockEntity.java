@@ -84,7 +84,7 @@ public class SoulOrbPillarBlockEntity extends RandomizableContainerBlockEntity i
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Soul Orb Pillar");
+		return Component.translatable("text.the_deep_void.port.soul_orb_pillar");
 	}
 
 	@Override

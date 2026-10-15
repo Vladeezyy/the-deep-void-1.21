@@ -76,7 +76,7 @@ public class TheBonkItem extends SwordItem {
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, list, flag);
-		list.add(Component.literal("\u00A7bCreative mode only"));
-		list.add(Component.literal(" \u00A79Removes boss spawns completely (hive's brain, eye of the watcher, giant bone crawler egg)"));
+		list.add(Component.translatable("text.the_deep_void.port.creative_mode_only"));
+		list.add(Component.translatable("text.the_deep_void.port.removes_boss_spawns_completely_hive_s_brain"));
 	}
 }

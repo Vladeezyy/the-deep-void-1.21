@@ -69,7 +69,7 @@ public class HiveWatcherPlayerCountProcedure {
 						_vars.syncPlayerVariables(entityiterator);
 					}
 					if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.literal("\u00A76\u00A7kDisc \u00A76Monster's Lair - by Darren Curtis \u00A76\u00A7kDisc"), true);
+						_player.displayClientMessage(Component.translatable("text.the_deep_void.port.disc_monster_s_lair_by_darren_curtis"), true);
 				}
 			}
 		}

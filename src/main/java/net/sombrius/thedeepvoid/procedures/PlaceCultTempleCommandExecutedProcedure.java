@@ -13,6 +13,6 @@ public class PlaceCultTempleCommandExecutedProcedure {
 		TheDeepVoidModVariables.MapVariables.get(world).CultTemplePlaced = false;
 		TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
 		if (entity instanceof Player _player && !_player.level().isClientSide())
-			_player.displayClientMessage(Component.literal("The Cult Temple will be generated on next world load"), false);
+			_player.displayClientMessage(Component.translatable("text.the_deep_void.port.the_cult_temple_will_be_generated_on"), false);
 	}
 }

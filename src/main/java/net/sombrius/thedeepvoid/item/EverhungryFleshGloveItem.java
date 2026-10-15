@@ -69,7 +69,7 @@ public class EverhungryFleshGloveItem extends AxeItem {
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, list, flag);
-		list.add(Component.literal("\u00A77Inflicts Laceration on hit, increasing the damage dealt each hit"));
+		list.add(Component.translatable("text.the_deep_void.port.inflicts_laceration_on_hit_increasing_the_damage"));
 	}
 
 	@Override

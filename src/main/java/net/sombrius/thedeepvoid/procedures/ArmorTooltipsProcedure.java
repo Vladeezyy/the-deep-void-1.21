@@ -21,10 +21,10 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ROTTEN_BONE_ARMOR_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
 					tooltip.add(Component.literal(" "));
-					tooltip.add(Component.literal("\u00A77On Armor Ability key pressed:"));
-					tooltip.add(Component.literal(" \u00A79-Makes the wearer invisible. When in this state, speed is increased. Upon attacking a foe, the effect ends and double damage is dealt."));
+					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.makes_the_wearer_invisible_when_in_this"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -35,11 +35,11 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ONYX_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ONYX_ARMOR_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When in darkness:"));
-					tooltip.add(Component.literal(" \u00A79-Attacks get repeated with half the damage"));
-					tooltip.add(Component.literal(" \u00A79-Allows the wearer to see in darkness"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.attacks_get_repeated_with_half_the_damage"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_see_in_darkness"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -50,14 +50,14 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77On Armor Ability key pressed:"));
-					tooltip.add(Component.literal(" \u00A79-Makes the wearer invisible. When in this state, speed is increased. Upon attacking a foe, the effect ends and double damage is dealt."));
-					tooltip.add(Component.literal("\u00A77When in darkness or when under the effects of Rotten Heart:"));
-					tooltip.add(Component.literal(" \u00A79-The armor becomes harder"));
-					tooltip.add(Component.literal("\u00A77Upon killing an entity:"));
-					tooltip.add(Component.literal(" \u00A79-Resets the cooldown"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.makes_the_wearer_invisible_when_in_this"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness_or_when_under_the"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.the_armor_becomes_harder"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.upon_killing_an_entity"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.resets_the_cooldown"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -68,10 +68,10 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.LAVENDITE_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.LAVENDITE_ARMOR_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When attacked:"));
-					tooltip.add(Component.literal(" \u00A79-Deflects any projectile"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.deflects_any_projectile"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -82,10 +82,10 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_LAVENDITE_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_LAVENDITE_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When attacked:"));
-					tooltip.add(Component.literal(" \u00A79-Deflects any projectile back at the shooter"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.deflects_any_projectile_back_at_the_shooter"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -96,17 +96,17 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When worn:"));
-					tooltip.add(Component.literal(" \u00A79-XP heals the wearer"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.xp_heals_the_wearer"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_HELMET.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_HELMET.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77When in darkness:"));
-				tooltip.add(Component.literal(" \u00A79-Allows the wearer to see in darkness"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_see_in_darkness"));
 			} else {
 				if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_HELMET.get()
 						&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_CHESTPLATE.get()
@@ -116,14 +116,14 @@ public class ArmorTooltipsProcedure {
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_CHESTPLATE.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get())) {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_LEGGINGS.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77When in darkness:"));
-				tooltip.add(Component.literal(" \u00A79-The wearer can run faster"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_can_run_faster"));
 			} else {
 				if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_HELMET.get()
 						&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_CHESTPLATE.get()
@@ -133,14 +133,14 @@ public class ArmorTooltipsProcedure {
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_CHESTPLATE.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get())) {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_BOOTS.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77When worn:"));
-				tooltip.add(Component.literal(" \u00A79-Negates fall damage"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.negates_fall_damage"));
 			} else {
 				if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_HELMET.get()
 						&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_CHESTPLATE.get()
@@ -150,14 +150,14 @@ public class ArmorTooltipsProcedure {
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_CHESTPLATE.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get())) {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_CHESTPLATE.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77When at half health:"));
-				tooltip.add(Component.literal(" \u00A79-The wearer is granted Resistance and Strength"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.when_at_half_health"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_is_granted_resistance_and_strength"));
 			} else {
 				if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_HELMET.get()
 						&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_CHESTPLATE.get()
@@ -167,7 +167,7 @@ public class ArmorTooltipsProcedure {
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_CHESTPLATE.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get())) {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -178,23 +178,23 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When in darkness:"));
-					tooltip.add(Component.literal(" \u00A79-Attacks get repeated with half the damage"));
-					tooltip.add(Component.literal("\u00A77On Armor Ability key pressed:"));
-					tooltip.add(Component.literal(" \u00A79-Teleports the wearer"));
-					tooltip.add(Component.literal("\u00A77When attacked:"));
-					tooltip.add(Component.literal(" \u00A79-Damages the attacker"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.attacks_get_repeated_with_half_the_damage"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.teleports_the_wearer"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.damages_the_attacker"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOID_CLOAK_CHESTPLATE.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77On Armor Ability key pressed:"));
-				tooltip.add(Component.literal(" \u00A79-Allows the wearer to phase through walls"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_phase_through_walls"));
 			} else {
-				tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.FLESH_ARMOR_HELMET.get() || itemstack.getItem() == TheDeepVoidModItems.FLESH_ARMOR_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.FLESH_ARMOR_LEGGINGS.get()
@@ -204,12 +204,12 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLESH_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLESH_ARMOR_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When attacked:"));
-					tooltip.add(Component.literal(" \u00A79-The armor becomes more resilient and heavier"));
-					tooltip.add(Component.literal("\u00A77On Armor Ability key pressed:"));
-					tooltip.add(Component.literal(" \u00A79-Unleashes a devastating roar that damages every entity around the wearer based on the resilience of the armor"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.the_armor_becomes_more_resilient_and_heavier"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.unleashes_a_devastating_roar_that_damages_every"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -220,15 +220,15 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ALL_SEEING_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ALL_SEEING_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When worn"));
-					tooltip.add(Component.literal(" \u00A79-Any player around the wearer will glow and the wearer will receive strength"));
-					tooltip.add(Component.literal("\u00A77When entity targets the wearer:"));
-					tooltip.add(Component.literal(" \u00A79-The entity is given the glowing effect"));
-					tooltip.add(Component.literal(" \u00A79-The wearer gets empowered with strength"));
-					tooltip.add(Component.literal("\u00A77On Armor Ability key pressed:"));
-					tooltip.add(Component.literal(" \u00A79-Allows the wearer to dash"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn_2"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.any_player_around_the_wearer_will_glow"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_entity_targets_the_wearer"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.the_entity_is_given_the_glowing_effect"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_gets_empowered_with_strength"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_dash"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -239,20 +239,20 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When worn:"));
-					tooltip.add(Component.literal(" \u00A79-Immunity to Rot"));
-					tooltip.add(Component.literal(" \u00A79-The wearer becomes invisible, faster and more resistant on bone blocks"));
-					tooltip.add(Component.literal(" \u00A79-Bone Crawlers won't attack the wearer"));
-					tooltip.add(Component.literal(" \u00A79-Eating Bone Mush or other food made from it will give Regeneration I"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.immunity_to_rot"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_becomes_invisible_faster_and_more"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.bone_crawlers_won_t_attack_the_wearer"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.eating_bone_mush_or_other_food_made"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.GRIM_CRAWLER_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.CRAWLER_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.CRAWLER_ROYALTY_CHESTPLATE.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77On Armor Ability key pressed:"));
-				tooltip.add(Component.literal(" \u00A79-The wearer can slow fall"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_can_slow_fall"));
 			} else {
 				if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_CRAWLER_HELMET.get()
 						&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_CRAWLER_CHESTPLATE.get()
@@ -262,7 +262,7 @@ public class ArmorTooltipsProcedure {
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_CHESTPLATE.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_LEGGINGS.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_BOOTS.get())) {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -273,15 +273,15 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_CRAWLER_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_CRAWLER_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When worn:"));
-					tooltip.add(Component.literal(" \u00A79-Immunity to Rot"));
-					tooltip.add(Component.literal(" \u00A79-The wearer becomes invisible, faster and more resistant on bone blocks"));
-					tooltip.add(Component.literal(" \u00A79-Bone Crawlers won't attack the wearer"));
-					tooltip.add(Component.literal("\u00A77When in darkness:"));
-					tooltip.add(Component.literal(" \u00A79-All attacks inflict Rot I"));
-					tooltip.add(Component.literal(" \u00A79-Allows the wearer to see in darkness"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.immunity_to_rot"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_becomes_invisible_faster_and_more"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.bone_crawlers_won_t_attack_the_wearer"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.all_attacks_inflict_rot_i"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_see_in_darkness"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -292,15 +292,15 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_ROYALTY_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_ROYALTY_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When worn:"));
-					tooltip.add(Component.literal(" \u00A79-Immunity to Rot"));
-					tooltip.add(Component.literal(" \u00A79-The wearer becomes invisible, faster and more resistant on bone blocks"));
-					tooltip.add(Component.literal(" \u00A79-Bone Crawlers won't attack the wearer"));
-					tooltip.add(Component.literal(" \u00A79-All attacks inflict Rot I"));
-					tooltip.add(Component.literal("\u00A77When in darkness:"));
-					tooltip.add(Component.literal(" \u00A79-Allows the wearer to see in darkness"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.immunity_to_rot"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_becomes_invisible_faster_and_more"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.bone_crawlers_won_t_attack_the_wearer"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.all_attacks_inflict_rot_i"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_see_in_darkness"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
@@ -311,52 +311,52 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CULT_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CULT_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When worn:"));
-					tooltip.add(Component.literal(" \u00A79-Grants Void's Blessing"));
-					tooltip.add(Component.literal(" \u00A79-The wearer runs faster"));
-					tooltip.add(Component.literal(" \u00A79-Light damages the wearer"));
-					tooltip.add(Component.literal("\u00A77When attacked:"));
-					tooltip.add(Component.literal(" \u00A79-Doubles any damage received"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.grants_void_s_blessing"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_runs_faster"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.light_damages_the_wearer"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.doubles_any_damage_received"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_MASK_HELMET.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77When worn:"));
-				tooltip.add(Component.literal(" \u00A79-Built Overseers around the wearer are empowered"));
-				tooltip.add(Component.literal(" \u00A79-The wearer can no longer heal naturally, only Regeneration, Instant Health and Golden Blood can heal health"));
-				tooltip.add(Component.literal("\u00A77When killing a foe:"));
-				tooltip.add(Component.literal(" \u00A79-The wearer's health is enhanced until death or the mask is removed. This has a limit and when reached, the wearer will instead get strength and speed temporarily"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.built_overseers_around_the_wearer_are_empowered"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_can_no_longer_heal_naturally"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.when_killing_a_foe"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_s_health_is_enhanced_until"));
 			} else {
-				tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_ROBE_CHESTPLATE.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77When attacking:"));
-				tooltip.add(Component.literal(" \u00A79-Each 4 hit, the wearer is teleported behind the foe and given Regeneration II for 7 seconds"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.when_attacking"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.each_4_hit_the_wearer_is_teleported"));
 			} else {
-				tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_LEGGINGS_LEGGINGS.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77When attacked:"));
-				tooltip.add(Component.literal(" \u00A79-The wearer has a chance to dodge the attack"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_has_a_chance_to_dodge"));
 			} else {
-				tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_BOOTS_BOOTS.get()) {
 			if (Screen.hasShiftDown()) {
-				tooltip.add(Component.literal("\u00A77On No Gravity key pressed:"));
-				tooltip.add(Component.literal(" \u00A79-Allows the wearer to walk on air if there are no solid blocks underneath"));
-				tooltip.add(Component.literal("\u00A77On Armor Ability key pressed:"));
-				tooltip.add(Component.literal(" \u00A79-The wearer will dash where they're facing"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.on_no_gravity_key_pressed"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_walk_on_air"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_will_dash_where_they_re"));
 			} else {
-				tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+				tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 			}
 		}
 		if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.WEAVER_MASK_HELMET.get()
@@ -366,8 +366,8 @@ public class ArmorTooltipsProcedure {
 			if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_MASK_HELMET.get() || itemstack.getItem() == TheDeepVoidModItems.WEAVER_ROBE_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.WEAVER_LEGGINGS_LEGGINGS.get()
 					|| itemstack.getItem() == TheDeepVoidModItems.WEAVER_BOOTS_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77Full Armor:"));
-					tooltip.add(Component.literal(" \u00A79-Slowly withers away the soul of nearby victims"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.full_armor"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.slowly_withers_away_the_soul_of_nearby"));
 				}
 			}
 		}
@@ -378,15 +378,15 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get()) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add(Component.literal("\u00A77When in darkness:"));
-					tooltip.add(Component.literal(" \u00A79-Attacks get repeated with a bit more than half the damage"));
-					tooltip.add(Component.literal("\u00A77On Armor Ability key pressed:"));
-					tooltip.add(Component.literal(" \u00A79-Teleports the wearer, damaging the very soul of victims they pass through, applying Hexed I and giving Regeneration I"));
-					tooltip.add(Component.literal("\u00A77When attacked:"));
-					tooltip.add(Component.literal(" \u00A79-Damages the attacker"));
-					tooltip.add(Component.literal(" \u00A79-Summons Shadow Hands to attack"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.attacks_get_repeated_with_a_bit_more"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.teleports_the_wearer_damaging_the_very_soul"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.damages_the_attacker"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.summons_shadow_hands_to_attack"));
 				} else {
-					tooltip.add(Component.literal("\u00A76Press Shift to show abilities"));
+					tooltip.add(Component.translatable("text.the_deep_void.port.press_shift_to_show_abilities"));
 				}
 			}
 		}

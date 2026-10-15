@@ -24,8 +24,8 @@ public class EntityTurnerItem extends Item {
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, list, flag);
-		list.add(Component.literal("\u00A7bCreative mode only"));
-		list.add(Component.literal("\u00A79Right click to make all entities in a 3 block radius look at you"));
+		list.add(Component.translatable("text.the_deep_void.port.creative_mode_only"));
+		list.add(Component.translatable("text.the_deep_void.port.right_click_to_make_all_entities_in"));
 	}
 
 	@Override

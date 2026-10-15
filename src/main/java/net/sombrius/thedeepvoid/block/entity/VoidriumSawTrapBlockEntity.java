@@ -84,7 +84,7 @@ public class VoidriumSawTrapBlockEntity extends RandomizableContainerBlockEntity
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Voidrium Saw Trap");
+		return Component.translatable("text.the_deep_void.port.voidrium_saw_trap");
 	}
 
 	@Override

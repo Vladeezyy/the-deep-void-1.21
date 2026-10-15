@@ -60,6 +60,13 @@ fight bosses with complex attack patterns for some of the strongest gear in the 
 Needed on both the client and the server. **JEI** is optional (custom recipe categories).
 Settings: `config/Deep Void Config.toml` (or in game with the Configured mod).
 
+## 🌍 Languages
+
+English · Русский · 简体中文 · Español · Português (Brasil)
+
+The Russian and Chinese translations were finished and Spanish and Portuguese were added in this port. Tooltips that
+the original wrote in English straight in the code are translatable too.
+
 ## 🔧 What changed in the port
 
 The content and the numbers are the same as in 1.20.1. Where Minecraft 1.21 works differently, the port keeps the
@@ -134,6 +141,16 @@ The Deep Void добавляет хоррор-измерение под бедр
 
 Нужен и на клиенте, и на сервере. **JEI** — по желанию (свои категории рецептов).
 Настройки: `config/Deep Void Config.toml` (или в игре через мод Configured).
+
+</details>
+
+<details>
+<summary><b>🌍 Языки</b></summary>
+
+English · Русский · 简体中文 · Español · Português (Brasil)
+
+В порте русский и китайский переводы доведены до конца, добавлены испанский и португальский. Подсказки, которые в
+оригинале были написаны по-английски прямо в коде, тоже переводятся.
 
 </details>
 

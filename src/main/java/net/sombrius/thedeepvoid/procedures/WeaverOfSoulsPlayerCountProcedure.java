@@ -50,7 +50,7 @@ public class WeaverOfSoulsPlayerCountProcedure {
 						_vars.syncPlayerVariables(entityiterator);
 					}
 					if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.literal("\u00A79\u00A7kDisc \u00A79Darkmare - by Dark Fantasy Studio \u00A79\u00A7kDisc"), true);
+						_player.displayClientMessage(Component.translatable("text.the_deep_void.port.disc_darkmare_by_dark_fantasy_studio_disc"), true);
 				}
 			}
 		}

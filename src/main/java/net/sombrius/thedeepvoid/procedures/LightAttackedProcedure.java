@@ -65,7 +65,7 @@ public class LightAttackedProcedure {
 					_cancellable.setCanceled(true);
 				}
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal("\u00A7b\u00A7l\u00A7kSOUL \u00A7b\u00A7lTake me. \u00A7b\u00A7l\u00A7kSOUL"), true);
+					_player.displayClientMessage(Component.translatable("text.the_deep_void.port.soul_take_me_soul"), true);
 			} else {
 				if (!entity.level().isClientSide())
 					entity.discard();

@@ -48,10 +48,10 @@ public class CreepOMeterRightclickedProcedure {
 						}
 					}.compareDistOf(x, y, z)).findFirst().orElse(null)) instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == entity) {
 						if (entity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(Component.literal("The Stalker is after you"), false);
+							_player.displayClientMessage(Component.translatable("text.the_deep_void.port.the_stalker_is_after_you"), false);
 					} else {
 						if (entity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(Component.literal("The Stalker is no longer after you"), false);
+							_player.displayClientMessage(Component.translatable("text.the_deep_void.port.the_stalker_is_no_longer_after_you"), false);
 					}
 				}
 			} else {

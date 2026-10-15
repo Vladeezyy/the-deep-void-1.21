@@ -1,0 +1,8 @@
+{
+  "sound_event": "the_deep_void:false_hydra_sing_distorted",
+  "description": {
+    "translate": "item.the_deep_void.chant_of_the_forgotten_distorted.desc"
+  },
+  "length_in_seconds": 41.0,
+  "comparator_output": 15
+}

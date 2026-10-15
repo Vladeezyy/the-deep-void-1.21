@@ -9,17 +9,13 @@
     },
     "size": {
       "type": "uniform",
-      "value": {
-        "min_inclusive": 5,
-        "max_inclusive": 8
-      }
+      "min_inclusive": 5,
+      "max_inclusive": 8
     },
     "rim_size": {
       "type": "uniform",
-      "value": {
-        "min_inclusive": 1,
-        "max_inclusive": 4
-      }
+      "min_inclusive": 1,
+      "max_inclusive": 4
     }
   }
 }

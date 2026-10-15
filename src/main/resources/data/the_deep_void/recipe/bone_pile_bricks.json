@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "aa",
+    "aa"
+  ],
+  "key": {
+    "a": {
+      "item": "the_deep_void:block_of_bone_pile"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "the_deep_void:bone_pile_bricks"
+  }
+}

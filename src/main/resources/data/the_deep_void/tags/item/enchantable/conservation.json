@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:enchantable/weapon",
+    "the_deep_void:onyx_flare_gun"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aab",
+    " cd",
+    "ed "
+  ],
+  "key": {
+    "a": {
+      "item": "the_deep_void:void_matter"
+    },
+    "b": {
+      "item": "the_deep_void:voided_heart"
+    },
+    "c": {
+      "item": "the_deep_void:void_matter_scythe"
+    },
+    "d": {
+      "item": "the_deep_void:dark_steel_scrap"
+    },
+    "e": {
+      "item": "the_deep_void:ancient_onyx"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "the_deep_void:grim_scythe"
+  }
+}

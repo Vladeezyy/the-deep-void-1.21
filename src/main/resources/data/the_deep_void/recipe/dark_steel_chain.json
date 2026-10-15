@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "a",
+    "a",
+    "a"
+  ],
+  "key": {
+    "a": {
+      "item": "the_deep_void:dark_steel_nugget"
+    }
+  },
+  "result": {
+    "count": 6,
+    "id": "the_deep_void:dark_steel_chain"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bane_of_arthropods",
+    "minecraft:smite",
+    "minecraft:sharpness",
+    "the_deep_void:radiance"
+  ]
+}

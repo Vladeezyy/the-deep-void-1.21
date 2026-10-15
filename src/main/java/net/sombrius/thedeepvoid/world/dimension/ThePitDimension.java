@@ -15,7 +15,6 @@ import net.neoforged.neoforge.client.event.RegisterDimensionSpecialEffectsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.sombrius.thedeepvoid.procedures.ThePitPlayerEntersDimensionProcedure;
 
-@EventBusSubscriber
 public class ThePitDimension {
 	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	public static class ThePitSpecialEffectsHandler {

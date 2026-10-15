@@ -20,10 +20,8 @@
       "xz_spread": 0,
       "y_spread": {
         "type": "uniform",
-        "value": {
-          "min_inclusive": -4,
-          "max_inclusive": 0
-        }
+        "min_inclusive": -4,
+        "max_inclusive": 0
       }
     }
   ]

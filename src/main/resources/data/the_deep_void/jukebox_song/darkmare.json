@@ -1,0 +1,8 @@
+{
+  "sound_event": "the_deep_void:darkmare",
+  "description": {
+    "translate": "item.the_deep_void.darkmare.desc"
+  },
+  "length_in_seconds": 181.0,
+  "comparator_output": 7
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a"
+  ],
+  "key": {
+    "a": {
+      "tag": "the_deep_void:dead_man_hand"
+    }
+  },
+  "result": {
+    "count": 16,
+    "id": "the_deep_void:rotten_bone"
+  }
+}

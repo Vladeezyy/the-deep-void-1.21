@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "experience": 0.1,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "the_deep_void:solid_void_block"
+  },
+  "result": {
+    "id": "the_deep_void:smooth_solid_void"
+  }
+}

@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 
 import java.util.List;
 
-@EventBusSubscriber
+@EventBusSubscriber(value = Dist.CLIENT)
 public class ModifiedWeaponDescriptionsProcedure {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent

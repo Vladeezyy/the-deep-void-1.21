@@ -1,0 +1,8 @@
+{
+  "sound_event": "the_deep_void:the_haunt",
+  "description": {
+    "translate": "item.the_deep_void.the_haunt.desc"
+  },
+  "length_in_seconds": 251.0,
+  "comparator_output": 8
+}

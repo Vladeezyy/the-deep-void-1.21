@@ -13,7 +13,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
-@EventBusSubscriber
+@EventBusSubscriber(value = Dist.CLIENT)
 public class MendingStoneDescriptionProcedure {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent

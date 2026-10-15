@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aaa",
+    "aba"
+  ],
+  "key": {
+    "a": {
+      "item": "the_deep_void:dark_cloth"
+    },
+    "b": {
+      "item": "the_deep_void:tattered_cult_hood"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "the_deep_void:cult_helmet"
+  }
+}

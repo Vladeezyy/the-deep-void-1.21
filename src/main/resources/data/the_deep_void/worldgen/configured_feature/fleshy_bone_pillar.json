@@ -29,10 +29,8 @@
       },
       "trunk_offset_y": {
         "type": "uniform",
-        "value": {
-          "min_inclusive": 1,
-          "max_inclusive": 3
-        }
+        "min_inclusive": 1,
+        "max_inclusive": 3
       },
       "above_root_placement": {
         "above_root_placement_chance": 0.5,

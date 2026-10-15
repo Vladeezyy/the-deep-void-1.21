@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a"
+  ],
+  "key": {
+    "a": {
+      "item": "the_deep_void:chant_of_the_forgotten_distorted"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "the_deep_void:chant_of_the_forgotten"
+  }
+}

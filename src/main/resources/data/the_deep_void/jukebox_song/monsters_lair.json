@@ -1,0 +1,8 @@
+{
+  "sound_event": "the_deep_void:monsters_lair",
+  "description": {
+    "translate": "item.the_deep_void.monsters_lair.desc"
+  },
+  "length_in_seconds": 180.0,
+  "comparator_output": 8
+}

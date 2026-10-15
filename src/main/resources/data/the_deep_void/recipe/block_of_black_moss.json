@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "aa",
+    "aa"
+  ],
+  "key": {
+    "a": {
+      "item": "the_deep_void:black_moss"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "the_deep_void:block_of_black_moss"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#the_deep_void:is_deep_void",
+  "features": "the_deep_void:marrow_pillar",
+  "step": "underground_decoration"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "the_deep_void:glutton_block_jei_type",
+  "ingredients": [
+    {
+      "item": "minecraft:end_stone"
+    }
+  ],
+  "output": {
+    "count": 4,
+    "id": "minecraft:end_stone_bricks"
+  }
+}

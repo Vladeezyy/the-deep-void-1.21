@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a"
+  ],
+  "key": {
+    "a": {
+      "item": "the_deep_void:cinnabar"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "minecraft:red_dye"
+  }
+}

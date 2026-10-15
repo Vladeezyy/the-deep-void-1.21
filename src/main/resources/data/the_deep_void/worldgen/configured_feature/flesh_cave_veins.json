@@ -51,10 +51,8 @@
       },
       "trunk_offset_y": {
         "type": "uniform",
-        "value": {
-          "min_inclusive": 3,
-          "max_inclusive": 7
-        }
+        "min_inclusive": 3,
+        "max_inclusive": 7
       },
       "above_root_placement": {
         "above_root_placement_chance": 0.14,
@@ -108,17 +106,13 @@
       "place_branch_per_log_probability": 0.5,
       "extra_branch_length": {
         "type": "minecraft:uniform",
-        "value": {
-          "min_inclusive": 0,
-          "max_inclusive": 1
-        }
+        "min_inclusive": 0,
+        "max_inclusive": 1
       },
       "extra_branch_steps": {
         "type": "minecraft:uniform",
-        "value": {
-          "min_inclusive": 1,
-          "max_inclusive": 4
-        }
+        "min_inclusive": 1,
+        "max_inclusive": 4
       }
     },
     "minimum_size": {

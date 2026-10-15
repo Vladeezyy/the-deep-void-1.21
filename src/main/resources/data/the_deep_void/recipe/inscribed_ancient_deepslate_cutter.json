@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "the_deep_void:cobbled_ancient_deepslate"
+  },
+  "result": {
+    "id": "the_deep_void:inscribed_ancient_deepslate",
+    "count": 1
+  }
+}

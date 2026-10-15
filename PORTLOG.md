@@ -30,6 +30,10 @@ resources: 1.21 folder names (`loot_table`, `recipe`, `advancement`, `tags/item`
 `predicates`), `enchant_with_levels` treasure → `options`, int/float providers without the `value` wrapper, trim material
 overrides with namespaces. Hand-written 1.21 data lives in `tools/overlay/` and is copied on top.
 
+Languages: `tools/overlay/assets/the_deep_void/lang/` holds the port's uk_ua, de_de, es_es and pt_br (all keys of
+en_us) and the ru_ru of 1.99.3.1 with its 218 missing keys added (the Undertaker, new effects, death messages …).
+The converter copies them over the upstream files.
+
 ## Deviations from 1.20.1 (why)
 
 - **Enchantments are data** (1.21): the 14 enchantment classes became `data/the_deep_void/enchantment/*.json`.

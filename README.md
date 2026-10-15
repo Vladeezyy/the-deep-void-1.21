@@ -70,6 +70,8 @@ The content and the numbers are the same as in 1.20.1. Where Minecraft 1.21 work
 - Arrows of the mod's weapons keep their own knockback; the guns keep their arm poses.
 - World generation fixes: lakes of Liquid Void / Ichor no longer crash chunk generation on 1.21, big structures (giant
   skulls) are cut cleanly at the chunk border instead of spamming the log.
+- Languages: English, Russian (completed), Ukrainian, German, Spanish and Portuguese (Brazil); the Chinese translation
+  of 1.20.1 is kept. The new translations were written for the port, not by native speakers.
 
 The full list (with the reasons) is in **[PORTLOG.md](PORTLOG.md)**.
 
@@ -147,6 +149,8 @@ The Deep Void добавляет хоррор-измерение под бедр
 - Стрелы оружия мода сохранили свою отдачу, у пушек остались свои позы рук.
 - Исправления генерации мира: озёра Жидкой пустоты / Ихора больше не роняют генерацию чанков на 1.21, большие
   структуры (гигантские черепа) аккуратно обрезаются по границе чанка вместо сотен ошибок в логе.
+- Языки: английский, русский (дополнен), украинский, немецкий, испанский и португальский (Бразилия); китайский перевод
+  из 1.20.1 сохранён. Новые переводы сделаны для порта, не носителями языка.
 
 Полный список (с причинами) — в **[PORTLOG.md](PORTLOG.md)**.
 

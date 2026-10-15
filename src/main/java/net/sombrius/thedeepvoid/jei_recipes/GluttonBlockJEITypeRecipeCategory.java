@@ -32,7 +32,7 @@ public class GluttonBlockJEITypeRecipeCategory implements IRecipeCategory<Glutto
 
 	@Override
 	public Component getTitle() {
-		return Component.literal("Glutton Block");
+		return Component.translatable("text.the_deep_void.port.glutton_block");
 	}
 
 	@Override

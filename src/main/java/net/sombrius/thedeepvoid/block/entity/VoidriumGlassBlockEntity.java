@@ -84,7 +84,7 @@ public class VoidriumGlassBlockEntity extends RandomizableContainerBlockEntity i
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Voidrium Glass");
+		return Component.translatable("text.the_deep_void.port.voidrium_glass");
 	}
 
 	@Override

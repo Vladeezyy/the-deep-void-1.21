@@ -86,7 +86,7 @@ public class SoulForgeBlockEntity extends RandomizableContainerBlockEntity imple
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Soul Forge");
+		return Component.translatable("text.the_deep_void.port.soul_forge");
 	}
 
 	@Override

@@ -60,6 +60,14 @@ fight bosses with complex attack patterns for some of the strongest gear in the 
 Needed on both the client and the server. **JEI** is optional (custom recipe categories).
 Settings: `config/Deep Void Config.toml` (or in game with the Configured mod).
 
+## 🌍 Languages
+
+English · Русский · Українська · Deutsch · 简体中文 · Español · Português (Brasil)
+
+The Russian and Chinese translations were finished and Ukrainian, German, Spanish and Portuguese were added in this
+port. Tooltips that
+the original wrote in English straight in the code are translatable too.
+
 ## 🔧 What changed in the port
 
 The content and the numbers are the same as in 1.20.1. Where Minecraft 1.21 works differently, the port keeps the
@@ -70,8 +78,6 @@ The content and the numbers are the same as in 1.20.1. Where Minecraft 1.21 work
 - Arrows of the mod's weapons keep their own knockback; the guns keep their arm poses.
 - World generation fixes: lakes of Liquid Void / Ichor no longer crash chunk generation on 1.21, big structures (giant
   skulls) are cut cleanly at the chunk border instead of spamming the log.
-- Languages: English, Russian (completed), Ukrainian, German, Spanish and Portuguese (Brazil); the Chinese translation
-  of 1.20.1 is kept. The new translations were written for the port, not by native speakers.
 
 The full list (with the reasons) is in **[PORTLOG.md](PORTLOG.md)**.
 
@@ -140,6 +146,17 @@ The Deep Void добавляет хоррор-измерение под бедр
 </details>
 
 <details>
+<summary><b>🌍 Языки</b></summary>
+
+English · Русский · Українська · Deutsch · 简体中文 · Español · Português (Brasil)
+
+В порте русский и китайский переводы доведены до конца, добавлены украинский, немецкий, испанский и
+португальский. Подсказки, которые в
+оригинале были написаны по-английски прямо в коде, тоже переводятся.
+
+</details>
+
+<details>
 <summary><b>🔧 Что изменилось при портировании</b></summary>
 
 Содержимое и все числа — как в 1.20.1. Там, где Minecraft 1.21 устроен иначе, порт сохраняет поведение 1.20.1:
@@ -149,8 +166,6 @@ The Deep Void добавляет хоррор-измерение под бедр
 - Стрелы оружия мода сохранили свою отдачу, у пушек остались свои позы рук.
 - Исправления генерации мира: озёра Жидкой пустоты / Ихора больше не роняют генерацию чанков на 1.21, большие
   структуры (гигантские черепа) аккуратно обрезаются по границе чанка вместо сотен ошибок в логе.
-- Языки: английский, русский (дополнен), украинский, немецкий, испанский и португальский (Бразилия); китайский перевод
-  из 1.20.1 сохранён. Новые переводы сделаны для порта, не носителями языка.
 
 Полный список (с причинами) — в **[PORTLOG.md](PORTLOG.md)**.
 

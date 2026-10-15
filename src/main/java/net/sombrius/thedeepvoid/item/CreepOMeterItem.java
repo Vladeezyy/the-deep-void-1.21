@@ -26,10 +26,10 @@ public class CreepOMeterItem extends Item {
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, list, flag);
-		list.add(Component.literal("\u00A7bCreative mode only"));
-		list.add(Component.literal("\u00A79Shows the spawn timer for the Stalker"));
-		list.add(Component.literal(" \u00A79-Right click to show the Stalking Stalker"));
-		list.add(Component.literal(" \u00A79-Right click while sneaking to show if the Stalker is after you"));
+		list.add(Component.translatable("text.the_deep_void.port.creative_mode_only"));
+		list.add(Component.translatable("text.the_deep_void.port.shows_the_spawn_timer_for_the_stalker"));
+		list.add(Component.translatable("text.the_deep_void.port.right_click_to_show_the_stalking_stalker"));
+		list.add(Component.translatable("text.the_deep_void.port.right_click_while_sneaking_to_show_if"));
 	}
 
 	@Override

@@ -84,7 +84,7 @@ public class GluttonBlockBlockEntity extends RandomizableContainerBlockEntity im
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Glutton Block");
+		return Component.translatable("text.the_deep_void.port.glutton_block");
 	}
 
 	@Override

@@ -383,6 +383,16 @@ def main():
             else:
                 shutil.copyfile(src, dst)
             count('overlay file')
+    # translations: tools/lang/<lang>.json is merged over the upstream lang file (new languages are created)
+    ldir = os.path.join(HERE, 'lang'); adir = os.path.join(OUT, 'assets', 'the_deep_void', 'lang')
+    for f in sorted(os.listdir(ldir)):
+        if not f.endswith('.json'): continue
+        dst = os.path.join(adir, f)
+        cur = json.load(open(dst, encoding='utf-8')) if os.path.exists(dst) else {}
+        cur.update(json.load(open(os.path.join(ldir, f), encoding='utf-8')))
+        with open(dst, 'w', encoding='utf-8') as fh:
+            json.dump(cur, fh, indent=2, ensure_ascii=False); fh.write('\n')
+        count('lang ' + f[:-5])
     print('files', n)
     for k, v in sorted(stats.items()): print(' ', v, k)
 

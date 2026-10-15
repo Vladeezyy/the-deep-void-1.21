@@ -30,10 +30,6 @@ resources: 1.21 folder names (`loot_table`, `recipe`, `advancement`, `tags/item`
 `predicates`), `enchant_with_levels` treasure → `options`, int/float providers without the `value` wrapper, trim material
 overrides with namespaces. Hand-written 1.21 data lives in `tools/overlay/` and is copied on top.
 
-Languages: `tools/overlay/assets/the_deep_void/lang/` holds the port's uk_ua, de_de, es_es and pt_br (all keys of
-en_us) and the ru_ru of 1.99.3.1 with its 218 missing keys added (the Undertaker, new effects, death messages …).
-The converter copies them over the upstream files.
-
 ## Deviations from 1.20.1 (why)
 
 - **Enchantments are data** (1.21): the 14 enchantment classes became `data/the_deep_void/enchantment/*.json`.
@@ -67,6 +63,18 @@ The converter copies them over the upstream files.
   unchanged, world generation crashed ("Requested chunk unavailable").
 - Data left in the 1.99 sources for removed content is skipped: the Desolate Soil feature (code removed in 1.96.8) and the
   Mimicking Shadow spawns (entity removed in 1.99); 1.20.1 would not load a world with them either.
+
+## Localization
+
+- English text that 1.99.3.1 wrote straight into the code (armor and item tooltips, chat messages, JEI category names;
+  40 classes) is `Component.translatable("text.the_deep_void.port.*")` now (`tools/localize_literals.py`), with the same
+  English text in `en_us`.
+- Translations live in `tools/lang/<language>.json` and `convert_resources.py` merges them over the upstream lang files:
+  Russian and Simplified Chinese completed, Ukrainian (`uk_ua`), German (`de_de`), Spanish (`es_es`) and Brazilian
+  Portuguese (`pt_br`) added. Every required language (en, ru, uk, de, es, pt_br) has all keys of `en_us`; the untranslatable
+  ones carry the English text. Names that stay the
+  same in every language (music disc titles, `Combo`, …) are listed in `tools/lang/untranslatable.txt`;
+  `tools/lang_todo.py <language>` lists what is still untranslated.
 
 ## Known, unchanged from 1.20.1
 

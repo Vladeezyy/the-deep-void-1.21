@@ -32,7 +32,7 @@ public class SoulForgeJEITypeRecipeCategory implements IRecipeCategory<SoulForge
 
 	@Override
 	public Component getTitle() {
-		return Component.literal("Soul Forging");
+		return Component.translatable("text.the_deep_void.port.soul_forging");
 	}
 
 	@Override

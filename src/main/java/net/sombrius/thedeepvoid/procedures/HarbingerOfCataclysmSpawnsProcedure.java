@@ -44,7 +44,7 @@ public class HarbingerOfCataclysmSpawnsProcedure {
 						_vars.syncPlayerVariables(entityiterator);
 					}
 					if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.literal("\u00A7c\u00A7kDisc \u00A7cDealing With The Devil - by Darren Curtis \u00A7c\u00A7kDisc"), true);
+						_player.displayClientMessage(Component.translatable("text.the_deep_void.port.disc_dealing_with_the_devil_by_darren"), true);
 				}
 			}
 		}

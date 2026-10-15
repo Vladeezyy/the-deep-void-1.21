@@ -84,7 +84,7 @@ public class AncientDeepslateSawTrapBlockEntity extends RandomizableContainerBlo
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Ancient Deepslate Saw Trap");
+		return Component.translatable("text.the_deep_void.port.ancient_deepslate_saw_trap");
 	}
 
 	@Override

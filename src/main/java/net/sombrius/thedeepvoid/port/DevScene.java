@@ -26,6 +26,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Holder;
@@ -46,12 +47,17 @@ import com.mojang.datafixers.util.Pair;
 /**
  * Development scene, inert unless the {@code deepvoid.scene} system property is set ({@code ./gradlew runScene}): creates or
  * opens the world {@code dv_scene} (seed 1234), visits Deep Void biomes, spawns some of the mod's mobs and saves
- * {@code run/screenshots/scene_*.png}, then quits.
+ * {@code run/screenshots/scene_*.png}, then quits. With {@code -Pscene=lang} it only prints some of the mod's translated texts
+ * to the chat and saves {@code scene_lang_<language>.png}.
  */
 @EventBusSubscriber(modid = TheDeepVoidMod.MODID, value = Dist.CLIENT)
 public final class DevScene {
 	private static final boolean ENABLED = System.getProperty("deepvoid.scene") != null;
-	private static final String WORLD = "dv_scene";
+	private static final boolean LANG_ONLY = "lang".equals(System.getProperty("deepvoid.scene"));
+	private static final List<String> LANG_KEYS = List.of("item.the_deep_void.void_pendant", "item.the_deep_void.void_pendant.descr1", "biome.the_deep_void.misted_remnants",
+			"entity.the_deep_void.stalker", "text.the_deep_void.port.the_stalker_is_after_you", "text.the_deep_void.port.press_shift_to_show_abilities", "effect.the_deep_void.hexed.description",
+			"entity.the_deep_void.undertaker.canopy1");
+	private static final String WORLD = LANG_ONLY ? "dv_lang" : "dv_scene";
 	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
 	private static final List<Pair<Integer, Consumer<Minecraft>>> STEPS = new ArrayList<>();
 	private static boolean opened;
@@ -66,6 +72,16 @@ public final class DevScene {
 			MinecraftServer server = p.getServer();
 			server.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
 		}));
+		if (LANG_ONLY) {
+			at(100, mc -> server(mc, p -> LANG_KEYS.forEach(key -> p.sendSystemMessage(Component.translatable(key)))));
+			at(140, mc -> shot(mc, "lang_" + mc.options.languageCode));
+			at(160, Minecraft::stop);
+		} else {
+			biomesAndMobs();
+		}
+	}
+
+	private static void biomesAndMobs() {
 		at(45, mc -> mc.options.hideGui = true);
 		int t = 200;
 		for (String biome : List.of("forgotten_valley", "grim_canopy", "crawler_nest", "ashen_crags", "misted_remnants", "staring_hills", "gloomy_deathgrounds")) {

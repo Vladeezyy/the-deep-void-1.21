@@ -46,7 +46,7 @@ public class ApostleSpawnsProcedure {
 						_vars.syncPlayerVariables(entityiterator);
 					}
 					if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.literal("\u00A7c\u00A7kDisc \u00A7cChainsaw - by Dark Fantasy Studio \u00A7c\u00A7kDisc"), true);
+						_player.displayClientMessage(Component.translatable("text.the_deep_void.port.disc_chainsaw_by_dark_fantasy_studio_disc"), true);
 				}
 			}
 		}

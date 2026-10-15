@@ -18,6 +18,21 @@ v1.99.3.1 by **Sombrius** (Forge 1.20.1) to **NeoForge 1.21.1**. All the content
   chunk border instead of filling the log with errors.
 - Every difference from 1.20.1 and the reason for it: [PORTLOG.md](https://github.com/Vladeezyy/the-deep-void-1.21/blob/main/PORTLOG.md)
 
+### Languages
+English, Russian, Simplified Chinese, Spanish and Portuguese (Brazil). The Russian and Chinese translations were
+completed and Spanish and Portuguese were added; tooltips that the original wrote in English straight in the code are
+translatable now as well.
+
+### License
+This port is under **LGPL-3.0-only** ([LICENSE](https://github.com/Vladeezyy/the-deep-void-1.21/blob/main/LICENSE)).
+The original The Deep Void is under the MIT License; its text and copyright notice are kept in
+[licenses/LICENSE-MIT](https://github.com/Vladeezyy/the-deep-void-1.21/blob/main/licenses/LICENSE-MIT), and all license
+texts are included in the jar.
+
+### Update
+The jar was rebuilt with the translations and the license files (same version, no gameplay changes). If you downloaded
+it earlier, replace it with this one.
+
 Tested on a dedicated NeoForge 21.1.259 server and in a client (the Deep Void biomes, world generation, the mod's mobs).
 
 All credit for the mod goes to Sombrius and The Deep Void Team. Please report bugs of this port here, not to the original

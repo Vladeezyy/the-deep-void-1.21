@@ -26,9 +26,9 @@ public class EntityImmobilizerItem extends Item {
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, list, flag);
-		list.add(Component.literal("\u00A7bCreative mode only"));
-		list.add(Component.literal("\u00A79Force motion vector (x,y,z) to 0 for all entities in a 200 block radius while in inventory"));
-		list.add(Component.literal("\u00A79Right click to enable glowing"));
+		list.add(Component.translatable("text.the_deep_void.port.creative_mode_only"));
+		list.add(Component.translatable("text.the_deep_void.port.force_motion_vector_x_y_z_to"));
+		list.add(Component.translatable("text.the_deep_void.port.right_click_to_enable_glowing"));
 	}
 
 	@Override

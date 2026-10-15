@@ -39,7 +39,7 @@ neoForge {
         // Scripted scene (port/DevScene): opens run/saves/dv_scene, visits Deep Void biomes, screenshots, quits.
         scene {
             client()
-            systemProperty 'deepvoid.scene', 'true'
+            systemProperty 'deepvoid.scene', project.findProperty('scene') ?: 'true'
         }
         server {
             server()

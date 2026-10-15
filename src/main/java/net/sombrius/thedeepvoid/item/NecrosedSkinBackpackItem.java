@@ -29,7 +29,7 @@ public class NecrosedSkinBackpackItem extends Item {
 			serverPlayer.openMenu(new MenuProvider() {
 				@Override
 				public Component getDisplayName() {
-					return Component.literal("Necrosed Skin Backpack");
+					return Component.translatable("text.the_deep_void.port.necrosed_skin_backpack");
 				}
 
 				@Override

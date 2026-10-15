@@ -84,7 +84,7 @@ public class WatcherOnBlockEntity extends RandomizableContainerBlockEntity imple
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Watcher On");
+		return Component.translatable("text.the_deep_void.port.watcher_on");
 	}
 
 	@Override

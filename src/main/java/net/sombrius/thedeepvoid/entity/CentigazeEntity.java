@@ -1,6 +1,11 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.neoforged.neoforge.common.NeoForge;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -137,6 +142,9 @@ public class CentigazeEntity extends Monster implements GeoEntity {
 	}
 
 	public static void init(RegisterSpawnPlacementsEvent event) {
+		// 1.20.1 registered no placement either; NeoForge wants one for entities with natural spawns
+		event.register(TheDeepVoidModEntities.CENTIGAZE.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules,
+				RegisterSpawnPlacementsEvent.Operation.REPLACE);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

@@ -9,3 +9,5 @@ out/
 run/
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
+*.log
+build-*.log

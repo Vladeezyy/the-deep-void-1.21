@@ -17,6 +17,9 @@ TAG_FOLDERS = {'blocks': 'block', 'items': 'item', 'entity_types': 'entity_type'
                'game_events': 'game_event', 'functions': 'function'}
 C_TAGS = {'c:tools/bows': 'c:tools/bow', 'c:tools/shields': 'c:tools/shield', 'c:tools/shield': 'c:tools/shield'}
 stats = {}
+# Unused MCreator leftovers that never loaded (element rotations other than ±22.5/45, upper-case file name)
+UNUSED_ASSETS = {'assets/the_deep_void/models/custom/%s.json' % m for m in ('flaregun', 'falsehydrahead', 'bone_helix', 'bone_helix_new')} | {
+    'assets/the_deep_void/models/block/pusSackNew.json'}
 
 
 def count(k):
@@ -233,6 +236,23 @@ def entity_ids():
     return ENTITY_IDS
 
 
+def prune_stale_recipes():
+    """Recipes that use or make items the 1.99 code no longer registers (1.20.1 also only logged and skipped them)."""
+    java = os.path.join(SRC, '..', 'java', 'net', 'sombrius', 'thedeepvoid', 'init')
+    items = set(re.findall(r'register\("(\w+)"', open(os.path.join(java, 'TheDeepVoidModItems.java')).read()))
+    blocks = dict(re.findall(r'(\w+) = REGISTRY\.register\("(\w+)"', open(os.path.join(java, 'TheDeepVoidModBlocks.java')).read()))
+    items |= {blocks[b] for b in re.findall(r'(?:block|doubleBlock)\(TheDeepVoidModBlocks\.(\w+)', open(os.path.join(java, 'TheDeepVoidModItems.java')).read()) if b in blocks}
+    d = os.path.join(OUT, 'data', 'the_deep_void', 'recipe'); n = 0
+    for f in os.listdir(d):
+        txt = open(os.path.join(d, f)).read()
+        refs = re.findall(r'"(?:item|id)"\s*:\s*"the_deep_void:(\w+)"', txt)
+        gone = sorted({r for r in refs if r not in items})
+        if gone:
+            os.remove(os.path.join(d, f)); n += 1
+            print('SKIPPED recipe', f, '(removed items:', ', '.join(gone) + ')')
+    count('stale recipes skipped') if n else None
+
+
 def prune_stale_worldgen():
     """Drop configured features whose feature type the 1.99 code no longer registers, and everything that uses them."""
     java = os.path.join(SRC, '..', 'java', 'net', 'sombrius', 'thedeepvoid')
@@ -309,6 +329,8 @@ def main():
             src = os.path.join(dp, f)
             rel = os.path.relpath(src, SRC).replace(os.sep, '/')
             if not (rel.startswith('assets/') or rel.startswith('data/')): continue
+            if rel in UNUSED_ASSETS:
+                print('SKIPPED', rel, '(unused model the game cannot load: invalid rotation or file name)'); continue
             out_rel = target_path(rel)
             dst = os.path.join(OUT, out_rel)
             os.makedirs(os.path.dirname(dst), exist_ok=True)
@@ -329,6 +351,7 @@ def main():
                 shutil.copyfile(src, dst)
             n += 1
     prune_stale_worldgen()
+    prune_stale_recipes()
     # paintings: 1.21 painting variants are data (sizes from the 1.20.1 Java registry, in pixels)
     up_java = os.path.join(SRC, '..', 'java', 'net', 'sombrius', 'thedeepvoid', 'init', 'TheDeepVoidModPaintings.java')
     if os.path.exists(up_java):

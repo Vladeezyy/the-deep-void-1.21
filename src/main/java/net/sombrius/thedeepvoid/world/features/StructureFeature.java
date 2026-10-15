@@ -1,5 +1,8 @@
 package net.sombrius.thedeepvoid.world.features;
 
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.ChunkPos;
+
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -39,6 +42,11 @@ public class StructureFeature extends Feature<StructureFeatureConfiguration> {
 		StructureTemplate template = structureManager.getOrCreate(config.structure());
 		StructurePlaceSettings placeSettings = (new StructurePlaceSettings()).setRotation(rotation).setMirror(mirror).setRandom(random).setIgnoreEntities(false)
 				.addProcessor(new BlockIgnoreProcessor(config.ignoredBlocks().stream().map(Holder::value).toList()));
+		// A feature may only write into its own chunk and the neighbouring ones; clip the template to that area
+		// (1.20.1 dropped the blocks outside it as well, logging an error for each).
+		ChunkPos chunk = new ChunkPos(context.origin());
+		placeSettings.setBoundingBox(new BoundingBox(chunk.getMinBlockX() - 16, worldGenLevel.getMinBuildHeight(), chunk.getMinBlockZ() - 16, chunk.getMaxBlockX() + 16,
+				worldGenLevel.getMaxBuildHeight(), chunk.getMaxBlockZ() + 16));
 		template.placeInWorld(worldGenLevel, placePos, placePos, placeSettings, random, 4);
 		return true;
 	}

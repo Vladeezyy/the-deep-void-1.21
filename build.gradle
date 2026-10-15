@@ -99,3 +99,9 @@ idea {
         downloadJavadoc = true
     }
 }
+
+// License texts inside the mod jar
+tasks.named('jar', Jar).configure {
+    from('LICENSE') { rename { 'LICENSE_thedeepvoid' } }
+    from('licenses') { into 'licenses/thedeepvoid' }
+}

@@ -9,7 +9,7 @@
 [![Minecraft 1.21.1](https://img.shields.io/badge/Minecraft-1.21.1-3c8527)](https://www.minecraft.net)
 [![NeoForge 21.1](https://img.shields.io/badge/NeoForge-21.1.197%2B-e0682b)](https://neoforged.net)
 [![GeckoLib 4.9](https://img.shields.io/badge/requires-GeckoLib%204.9%2B-8a2be2)](https://modrinth.com/mod/geckolib)
-[![License MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![License LGPL-3.0](https://img.shields.io/badge/license-LGPL--3.0-blue)](LICENSE)
 
 An unofficial port of **[The Deep Void](https://www.curseforge.com/minecraft/mc-mods/the-deep-void)** v1.99.3.1
 by **Sombrius** from Forge 1.20.1 to **NeoForge 1.21.1**, with all of its content.
@@ -81,7 +81,7 @@ The full list (with the reasons) is in **[PORTLOG.md](PORTLOG.md)**.
 - **Port** to NeoForge 1.21.1 — [Vladeezyy](https://github.com/Vladeezyy).
 - Bugs of **this port**: [issues](../../issues). Please don't report port bugs to the original author.
 
-MIT License, like the original.
+This port: **LGPL-3.0-only** ([LICENSE](LICENSE), GPL-3.0 text in [COPYING](licenses/COPYING)), Copyright (c) 2026 Vladeezyy. The original The Deep Void is under the MIT License; its text and copyright notice are kept in [LICENSE-MIT](licenses/LICENSE-MIT). Forks and modified versions must stay open under the same license and credit the authors. Please download the mod only from the official release pages.
 
 ---
 
@@ -161,7 +161,7 @@ The Deep Void добавляет хоррор-измерение под бедр
 - **Порт** на NeoForge 1.21.1 — [Vladeezyy](https://github.com/Vladeezyy).
 - Ошибки **этого порта** — в [issues](../../issues). Пожалуйста, не отправляйте ошибки порта автору оригинала.
 
-Лицензия MIT, как у оригинала.
+Этот порт: **LGPL-3.0-only** ([LICENSE](LICENSE), текст GPL-3.0 в [COPYING](licenses/COPYING)), Copyright (c) 2026 Vladeezyy. Оригинальный The Deep Void — под лицензией MIT, её текст и копирайт сохранены в [LICENSE-MIT](licenses/LICENSE-MIT). Форки и изменённые версии обязаны оставаться открытыми под той же лицензией и указывать авторов. Пожалуйста, скачивайте мод только со страниц официальных релизов.
 
 </details>
 

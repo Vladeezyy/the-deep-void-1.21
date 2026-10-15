@@ -76,7 +76,11 @@ public final class DevScene {
 		}
 		at(t, mc -> server(mc, DevScene::mobs));
 		at(t + 80, mc -> shot(mc, "mobs"));
-		at(t + 100, Minecraft::stop);
+		at(t + 100, mc -> server(mc, p -> go(p, "misted_remnants")));
+		at(t + 260, mc -> server(mc, DevScene::settle));
+		at(t + 300, mc -> server(mc, DevScene::mobs2));
+		at(t + 380, mc -> shot(mc, "mobs2"));
+		at(t + 400, Minecraft::stop);
 	}
 
 	private static void at(int t, Consumer<Minecraft> action) {
@@ -129,8 +133,11 @@ public final class DevScene {
 	/** Drops the player a few blocks above the ground under them once the chunks are there. */
 	private static void settle(ServerPlayer player) {
 		ServerLevel level = player.serverLevel();
+		level.getChunk(player.getBlockX() >> 4, player.getBlockZ() >> 4); // make sure the column is generated
 		int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING, player.getBlockX(), player.getBlockZ());
-		player.teleportTo(level, player.getX(), y + 6, player.getZ(), 45.0F, 20.0F);
+		if (y <= level.getMinBuildHeight() + 1)
+			y = 100;
+		player.teleportTo(level, player.getX(), y + 8, player.getZ(), 45.0F, 25.0F);
 	}
 
 	private static void mobs(ServerPlayer player) {
@@ -146,6 +153,25 @@ public final class DevScene {
 			i++;
 		}
 		player.teleportTo(level, player.getX(), player.getY(), player.getZ(), player.getYRot(), 10.0F);
+	}
+
+	private static void mobs2(ServerPlayer player) {
+		spawnRow(player, List.of("hollowed", "maggot", "eyekin", "wanderer", "lurker", "seeker"));
+	}
+
+	private static void spawnRow(ServerPlayer player, List<String> ids) {
+		ServerLevel level = player.serverLevel();
+		int i = 0;
+		for (String id : ids) {
+			EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
+			double angle = Math.toRadians(player.getYRot() + 90 - 50 + i * 20);
+			double x = player.getX() + Math.cos(angle) * 7, z = player.getZ() + Math.sin(angle) * 7;
+			BlockPos pos = BlockPos.containing(x, level.getHeight(Heightmap.Types.MOTION_BLOCKING, (int) x, (int) z), z);
+			Entity e = type.spawn(level, pos, MobSpawnType.COMMAND);
+			if (e instanceof Mob mob)
+				mob.setNoAi(true);
+			i++;
+		}
 	}
 
 	private static void shot(Minecraft mc, String name) {

@@ -63,3 +63,8 @@ overrides with namespaces. Hand-written 1.21 data lives in `tools/overlay/` and 
   unchanged, world generation crashed ("Requested chunk unavailable").
 - Data left in the 1.99 sources for removed content is skipped: the Desolate Soil feature (code removed in 1.96.8) and the
   Mimicking Shadow spawns (entity removed in 1.99); 1.20.1 would not load a world with them either.
+
+## Known, unchanged from 1.20.1
+
+- Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may
+  write to; the game drops those few blocks and logs "Detected setBlock in a far chunk". 1.20.1 did exactly the same.

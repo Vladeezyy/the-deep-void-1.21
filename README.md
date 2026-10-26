@@ -51,11 +51,10 @@ fight bosses with complex attack patterns for some of the strongest gear in the 
   <img src="docs/images/staring_hills.jpg" width="49%" alt="Staring Hills">
 </p>
 
-## 📦 Installation
+## 📦 Requirements
 
-1. Install **NeoForge 21.1.197** or newer for Minecraft **1.21.1**.
-2. Put **[GeckoLib](https://modrinth.com/mod/geckolib)** (4.9 or newer, NeoForge 1.21.1) into `mods`.
-3. Put `the-deep-void-neoforge-1.99.3.1+1.21.1.jar` from the [releases](../../releases) into `mods`.
+- **NeoForge 21.1.197** or newer for Minecraft **1.21.1**.
+- **[GeckoLib](https://modrinth.com/mod/geckolib)** (4.9 or newer, NeoForge 1.21.1).
 
 Needed on both the client and the server. **JEI** is optional (custom recipe categories).
 Settings: `config/Deep Void Config.toml` (or in game with the Configured mod).
@@ -134,11 +133,10 @@ The Deep Void добавляет хоррор-измерение под бедр
 </details>
 
 <details>
-<summary><b>📦 Установка</b></summary>
+<summary><b>📦 Требования</b></summary>
 
-1. Установите **NeoForge 21.1.197** или новее для Minecraft **1.21.1**.
-2. Положите в `mods` **[GeckoLib](https://modrinth.com/mod/geckolib)** (4.9 или новее, NeoForge 1.21.1).
-3. Положите в `mods` файл `the-deep-void-neoforge-1.99.3.1+1.21.1.jar` из [релизов](../../releases).
+- **NeoForge 21.1.197** или новее для Minecraft **1.21.1**.
+- **[GeckoLib](https://modrinth.com/mod/geckolib)** (4.9 или новее, NeoForge 1.21.1).
 
 Нужен и на клиенте, и на сервере. **JEI** — по желанию (свои категории рецептов).
 Настройки: `config/Deep Void Config.toml` (или в игре через мод Configured).

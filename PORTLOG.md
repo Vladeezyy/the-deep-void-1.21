@@ -205,6 +205,26 @@ Lurker port, the Deep Void rules `tools/port_dv_1_21_11.py`, GeckoLib 5, render 
   items scene (guns in third person, Blockbench armor, GeckoLib wings) on both loaders. Not checked yet: a NeoForge
   production server with the jar, the guns' first-person arms (the scene shows none on 1.21.1 either), MSPT / FPS.
 
+## Minecraft 26.1.2 (branch mc/26.1.2, 2026-10-31)
+
+NeoForge 26.1.2.125, Fabric API 0.155.3, GeckoLib 5.5.2 (Modrinth only, `com.geckolib`), JEI 29.53; the game is not
+obfuscated: Java 25, Fabric Loom 1.18 (`net.fabricmc.fabric-loom`, access widener in the `official` namespace, the jar
+task instead of remapJar). Repeatable from the originals: `tools/port_26_1.sh` (the 1.21.11 pipeline, then
+`tools/port_26_1.py` of the Midnight Lurker port and `tools/port_dv_26_1.py`); data: `tools/port_resources_26_1.py`.
+
+- Lakes: 26.1's lake feature moves its origin by −8 itself, the 1.21 placement did the same (twice reached chunks the
+  generation cannot see: a crash); the placement offset is gone. Random patches are placement modifiers (count, random
+  offset, the inner filter) as vanilla's patches.
+- Block and fluid layers come from the textures (no render type maps); fluid textures are fluid models.
+- Saved data files are `data/the_deep_void/<name>.dat` of the dimension; a 1.21 world's file is read once from where
+  1.21 kept it (`TheDeepVoidModVariables.legacyData`). Not checked on an updated world.
+- Trim materials come from the items' properties (`trimMaterial`), crafting remainders and recipe results are item
+  stack templates, the JEI recipe serializers are records.
+- Light: 26.1 gives a dimension its minimum light by `ambient_light_color` (the mod's: `#0a0a0a` as vanilla's
+  overworld); night vision is grey in 26.1, so the Deep Void looks darker than on 1.21.11 with night vision (vanilla).
+- Checked: dev server (both), production server (Fabric with the jar), the world scene and the items scene on both
+  loaders. Not checked: a NeoForge production server, MSPT / FPS.
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

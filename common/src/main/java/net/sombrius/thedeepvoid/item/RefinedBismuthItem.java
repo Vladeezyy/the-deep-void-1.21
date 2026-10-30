@@ -16,7 +16,7 @@ public class RefinedBismuthItem extends Item {
 	}
 
 	@Override
-	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, tooltipDisplay, list, flag);
 		list.accept(Component.literal(""));

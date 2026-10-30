@@ -98,7 +98,7 @@ public class PinkCandlestickBlock extends Block implements SimpleWaterloggedBloc
 		return super.updateShape(state, world, tickAccess, currentPos, facing, facingPos, facingState, random);
 	}
 
-	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	@Override
 	public void animateTick(BlockState blockstate, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(blockstate, world, pos, random);

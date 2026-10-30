@@ -12,7 +12,7 @@ import net.sombrius.thedeepvoid.port.bus.Dist;
 import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 import net.sombrius.thedeepvoid.procedures.ChainParticleVisualScaleProcedure;
 
-@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 public class MorningstarChainParticle extends SingleQuadParticle {
 	public static MorningstarChainParticleProvider provider(SpriteSet spriteSet) {
 		return new MorningstarChainParticleProvider(spriteSet);

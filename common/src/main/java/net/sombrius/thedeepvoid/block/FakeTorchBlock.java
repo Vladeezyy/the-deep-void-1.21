@@ -69,7 +69,7 @@ public class FakeTorchBlock extends Block {
 		FakeTorchOnTickUpdateProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
-	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	@Override
 	public void animateTick(BlockState blockstate, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(blockstate, world, pos, random);

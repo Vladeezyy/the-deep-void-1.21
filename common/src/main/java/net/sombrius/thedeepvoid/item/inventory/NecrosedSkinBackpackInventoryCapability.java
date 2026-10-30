@@ -17,7 +17,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 @EventBusSubscriber(Dist.CLIENT)
 public class NecrosedSkinBackpackInventoryCapability extends ComponentItemHandler {
 	@SubscribeEvent
-	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public static void onItemDropped(ItemTossEvent event) {
 		if (event.getEntity().getItem().getItem() == TheDeepVoidModItems.NECROSED_SKIN_BACKPACK.get()) {
 			if (Minecraft.getInstance().screen instanceof NecrosedSkinBackpackGUIScreen) {

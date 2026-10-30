@@ -58,22 +58,22 @@ public final class Registrar<R> {
 
     /** New item properties with the id of the item being registered */
     public static Item.Properties itemProps() {
-        return net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().setId(current(Registries.ITEM));
+        return new Item.Properties().setId(current(Registries.ITEM));
     }
 
     /** New block properties with the id of the block being registered */
     public static BlockBehaviour.Properties blockProps() {
-        return net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().setId(current(Registries.BLOCK));
+        return BlockBehaviour.Properties.of().setId(current(Registries.BLOCK));
     }
 
     /** The properties of another block, with the id of the block being registered */
     public static BlockBehaviour.Properties blockCopy(BlockBehaviour block) {
-        return net.sombrius.thedeepvoid.port.platform.Registrar.blockCopy(block).setId(current(Registries.BLOCK));
+        return BlockBehaviour.Properties.ofFullCopy(block).setId(current(Registries.BLOCK));
     }
 
     /** The properties of another block (1.20 copy rules), with the id of the block being registered */
     public static BlockBehaviour.Properties blockLegacyCopy(BlockBehaviour block) {
-        return net.sombrius.thedeepvoid.port.platform.Registrar.blockLegacyCopy(block).setId(current(Registries.BLOCK));
+        return BlockBehaviour.Properties.ofLegacyCopy(block).setId(current(Registries.BLOCK));
     }
 
     @SuppressWarnings("unchecked")

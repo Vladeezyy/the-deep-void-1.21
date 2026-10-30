@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:chain",
+    "minecraft:iron_chain",
     "the_deep_void:cinnabar_chain",
     "the_deep_void:dark_steel_chain"
   ]

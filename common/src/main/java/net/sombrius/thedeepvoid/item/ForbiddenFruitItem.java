@@ -24,7 +24,7 @@ public class ForbiddenFruitItem extends Item {
 	}
 
 	@Override
-	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public boolean isFoil(ItemStack itemstack) {
 		return true;
 	}

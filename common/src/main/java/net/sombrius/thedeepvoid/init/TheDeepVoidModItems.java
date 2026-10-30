@@ -1436,7 +1436,7 @@ public class TheDeepVoidModItems {
 	@EventBusSubscriber(value = Dist.CLIENT)
 	public static class ItemsClientSideHandler {
 		@SubscribeEvent
-		@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+		@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 		public static void clientLoad(FMLClientSetupEvent event) {
 			event.enqueueWork(() -> {
 				net.sombrius.thedeepvoid.port.PortItemProperties.register(ONYX_FLARE_GUN.get(), Identifier.parse("the_deep_void:onyx_flare_gun_state"),

@@ -18,10 +18,10 @@ import net.sombrius.thedeepvoid.procedures.CoffinEntityIsHitProcedure;
 import net.sombrius.thedeepvoid.procedures.CoffinInInventoryProcedure;
 
 public class CoffinItem extends Item {
-	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 0, 4f, 4f, 0, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/none")));
+	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 0, 4f, 4f, 1, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/none")));
 
 	public CoffinItem() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant().sword(TOOL_TIER, 3, -3.2f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant().sword(TOOL_TIER, 3, -3.2f).component(net.minecraft.core.component.DataComponents.ENCHANTABLE, null));
 	}
 
 	@Override

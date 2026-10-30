@@ -10,7 +10,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.sombrius.thedeepvoid.port.bus.Dist;
 import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 
-@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 public class BloodSmokeParticle extends SingleQuadParticle {
 	public static BloodSmokeParticleProvider provider(SpriteSet spriteSet) {
 		return new BloodSmokeParticleProvider(spriteSet);

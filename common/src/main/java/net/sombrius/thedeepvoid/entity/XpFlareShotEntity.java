@@ -37,7 +37,7 @@ public class XpFlareShotEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	@Override
-	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public ItemStack getItem() {
 		return PROJECTILE_ITEM;
 	}

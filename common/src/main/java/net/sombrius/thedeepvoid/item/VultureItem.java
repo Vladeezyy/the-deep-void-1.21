@@ -82,7 +82,7 @@ public abstract class VultureItem extends Item {
 				private HumanoidModel<?> armorModel;
 
 				@Override
-				@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+				@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 				public net.minecraft.client.model.Model getHumanoidArmorModel(ItemStack stack, net.minecraft.client.resources.model.EquipmentClientInfo.LayerType layerType, net.minecraft.client.model.Model original) {
 					if (this.armorModel == null)
 						this.armorModel = new HumanoidModel(new ModelPart(Collections.emptyList(), Map.of("body", new Modelvulture_chestplate(Minecraft.getInstance().getEntityModels().bakeLayer(Modelvulture_chestplate.LAYER_LOCATION)).Body,

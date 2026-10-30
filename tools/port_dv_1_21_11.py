@@ -109,6 +109,8 @@ def use(s):
 
 
 def properties(s):
+    if 'public final class Registrar' in s or 'public class Registrar' in s:
+        return s
     s = s.replace('new Item.Properties()', f'{REGISTRAR}.itemProps()')
     s = s.replace('BlockBehaviour.Properties.of()', f'{REGISTRAR}.blockProps()')
     s = s.replace('BlockBehaviour.Properties.ofFullCopy(', f'{REGISTRAR}.blockCopy(')
@@ -364,6 +366,10 @@ def procs(s):
     # JEI 27: brewing recipes have ids
     s = re.sub(r'(brewingRecipes\.add\(factory\.createBrewingRecipe\((?:(?!"brewing_")[^;])*?)\)\);', r'\1, Identifier.fromNamespaceAndPath("the_deep_void", "brewing_" + brewingRecipes.size())));', s)
     s = re.sub(r'\b(BuiltInRegistries\.[A-Z_]+)\.getOrCreateTag\(', r'\1.getOrThrow(', s)
+    # NeoForge 21.9+ does not strip @OnlyIn members any more: a tooltip's "entity or the client player" merges Entity
+    # and LocalPlayer, which makes the verifier load LocalPlayer on a dedicated server
+    s = s.replace('itemstack.getEntityRepresentation() : Minecraft.getInstance().player;', f'itemstack.getEntityRepresentation() : {PKG}.port.PortUtil.clientPlayer.get();')
+    s = s.replace('@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) ', '')
     # NeoForge 21.11 uses the vanilla TriState
     s = s.replace('net.neoforged.neoforge.common.util.TriState', 'net.minecraft.util.TriState')
     # smaller renames and signature changes
@@ -516,6 +522,11 @@ def items4(s):
     if m:
         s = s[:m.start()] + ('\t/** NeoForge IItemExtension */\n\tpublic ItemStack getCraftingRemainder(ItemStack itemstack) {\n' + m.group(1) + '\n\t}\n\n'
                              '\t/** Fabric FabricItem */\n\tpublic ItemStack getRecipeRemainder(ItemStack itemstack) {\n\t\treturn getCraftingRemainder(itemstack);\n\t}\n') + s[m.end():]
+    # 1.21.2: an enchantability of 0 (no enchanting table, as in 1.21.1) is not allowed: 1, then the component goes
+    m = re.search(r'(new ToolMaterial\([^;]*?, )0(, net\.minecraft\.tags\.TagKey\.create)', s)
+    if m and re.search(r'\.(sword|pickaxe)\(TOOL_TIER, [^)]*\)\)', s):
+        s = s[:m.start()] + m.group(1) + '1' + m.group(2) + s[m.end():]
+        s = re.sub(r'(\.(?:sword|pickaxe)\(TOOL_TIER, [^)]*\))\)', r'\1.component(net.minecraft.core.component.DataComponents.ENCHANTABLE, null))', s, count=1)
     # 1.21.2: fluids convert to sources on the server; 1.21.11 comparator output knows the side
     s = s.replace('protected boolean canConvertToSource(Level level) {', 'protected boolean canConvertToSource(ServerLevel level) {')
     if 'canConvertToSource(ServerLevel' in s:

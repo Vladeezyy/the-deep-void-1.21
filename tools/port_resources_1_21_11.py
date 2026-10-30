@@ -168,6 +168,119 @@ def equipment():
     return len(assets), moved
 
 
+DATA = 'common/src/main/resources/data/'
+# exact JSON string values renamed in 1.21.2-1.21.11
+DATA_RENAMES = {
+    '#minecraft:enchantable/sword': '#minecraft:enchantable/sweeping',
+    'minecraft:chain': 'minecraft:iron_chain',
+}
+# The Deep Void and The Pit have a fixed midnight (1.21.1 fixed_time 18000) and no timelines in 1.21.11: the colors
+# 1.21.1 darkened by the time of day are baked into the biomes (sky black, fog as the overworld effects' formula)
+FOG_AT_MIDNIGHT = (0.06, 0.06, 0.09)
+
+
+def rgb(value, scale=(1, 1, 1)):
+    value &= 0xFFFFFF
+    r, g, b = (value >> 16) & 255, (value >> 8) & 255, value & 255
+    return '#%02x%02x%02x' % tuple(round(c * k) for c, k in zip((r, g, b), scale))
+
+
+def music(m):
+    out = {'max_delay': m['max_delay'], 'min_delay': m['min_delay'], 'sound': m['sound']}
+    if m.get('replace_current_music'):
+        out['replace_current_music'] = True
+    return out
+
+
+def biome(data):
+    """1.21.11: biome visuals and sounds are environment attributes; carvers are a list"""
+    if 'attributes' in data:
+        return data
+    effects = data.pop('effects')
+    attributes = {}
+    sounds = {}
+    if 'ambient_sound' in effects:
+        sounds['loop'] = effects.pop('ambient_sound')
+    if 'additions_sound' in effects:
+        sounds['additions'] = effects.pop('additions_sound')
+    if 'mood_sound' in effects:
+        sounds['mood'] = effects.pop('mood_sound')
+    if sounds:
+        attributes['minecraft:audio/ambient_sounds'] = sounds
+    if 'music' in effects:
+        attributes['minecraft:audio/background_music'] = {'default': music(effects.pop('music'))}
+    if 'particle' in effects:
+        particle = effects.pop('particle')
+        options = dict(particle['options'])
+        options['type'] = options['type'] if ':' in options['type'] else 'minecraft:' + options['type']
+        attributes['minecraft:visual/ambient_particles'] = [{'particle': options, 'probability': particle['probability']}]
+    attributes['minecraft:visual/sky_color'] = rgb(effects.pop('sky_color'), (0, 0, 0))
+    attributes['minecraft:visual/fog_color'] = rgb(effects.pop('fog_color'), FOG_AT_MIDNIGHT)
+    if 'water_fog_color' in effects:
+        attributes['minecraft:visual/water_fog_color'] = rgb(effects.pop('water_fog_color'))
+    new_effects = {}
+    for key in ('foliage_color', 'grass_color', 'water_color', 'dry_foliage_color'):
+        if key in effects:
+            new_effects[key] = rgb(effects.pop(key))
+    new_effects.update(effects)
+    carvers = data.get('carvers', [])
+    if isinstance(carvers, dict):
+        carvers = [c for step in carvers.values() for c in (step if isinstance(step, list) else [step])]
+    out = {'attributes': attributes, 'carvers': carvers}
+    for key in ('downfall', 'has_precipitation', 'temperature', 'temperature_modifier'):
+        if key in data:
+            out[key] = data[key]
+    out['effects'] = new_effects
+    for key in ('features', 'spawn_costs', 'spawners'):
+        if key in data:
+            out[key] = data[key]
+    return out
+
+
+def noise_router(settings):
+    """1.21.11: initial_density_without_jaggedness -> preliminary_surface_level (the top surface of the old density,
+    shifted by the old threshold, as vanilla's own conversion)"""
+    router = settings.get('noise_router', {})
+    if 'initial_density_without_jaggedness' not in router:
+        return settings
+    noise = settings['noise']
+    old = router.pop('initial_density_without_jaggedness')
+    router['preliminary_surface_level'] = {'type': 'minecraft:find_top_surface', 'density': {'type': 'minecraft:add', 'argument1': -0.390625, 'argument2': old},
+                                           'cell_height': noise['size_vertical'] * 4, 'lower_bound': noise['min_y'], 'upper_bound': noise['min_y'] + noise['height']}
+    return settings
+
+
+def rename_values(node):
+    if isinstance(node, dict):
+        return {k: rename_values(v) for k, v in node.items()}
+    if isinstance(node, list):
+        return [rename_values(v) for v in node]
+    if isinstance(node, str):
+        return DATA_RENAMES.get(node, node)
+    return node
+
+
+def convert_data():
+    changed = 0
+    for path in glob.glob(DATA + '**/*.json', recursive=True):
+        try:
+            node = read_json(path)
+        except ValueError:
+            # lenient JSON (Minecraft reads it); left as it is
+            print('not strict JSON, skipped:', path)
+            continue
+        out = rename_values(node)
+        if re.search(r'/data/[^/]+/worldgen/biome/', path):
+            out = biome(out)
+        if re.search(r'/data/[^/]+/worldgen/noise_settings/', path):
+            out = noise_router(out)
+        if re.search(r'/data/[^/]+/dimension/', path) and isinstance(out.get('generator', {}).get('settings'), dict):
+            noise_router(out['generator']['settings'])
+        if out != node:
+            changed += write_json(path, out)
+    return changed
+
+
 def main():
     eggs = spawn_egg_colors()
     egg_textures()
@@ -180,6 +293,7 @@ def main():
             continue
         written += write_json(ASSETS + f'items/{item_id}.json', data)
     count, moved = equipment()
+    print("data files changed", convert_data())
     print(f'models changed {changed}; item definitions written {written}; no model: {missing}; equipment assets {count}, textures moved {moved}')
 
 

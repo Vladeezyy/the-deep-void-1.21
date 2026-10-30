@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:enchantable/sword",
+    "#minecraft:enchantable/sweeping",
     "the_deep_void:peril"
   ]
 }

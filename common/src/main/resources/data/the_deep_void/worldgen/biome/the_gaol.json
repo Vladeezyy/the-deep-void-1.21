@@ -1,44 +1,41 @@
 {
+  "attributes": {
+    "minecraft:audio/ambient_sounds": {
+      "loop": "the_deep_void:gaol_of_heretics_loop",
+      "additions": {
+        "sound": "the_deep_void:quiet_slow_whisper",
+        "tick_chance": 0.0111
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "intentionally_empty",
+        "replace_current_music": true
+      }
+    },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:white_ash"
+        },
+        "probability": 0.008
+      }
+    ],
+    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/fog_color": "#000000",
+    "minecraft:visual/water_fog_color": "#000000"
+  },
+  "carvers": [],
+  "downfall": 0,
   "has_precipitation": false,
   "temperature": 0.8,
-  "downfall": 0,
   "effects": {
-    "ambient_sound": "the_deep_void:gaol_of_heretics_loop",
-    "additions_sound": {
-      "sound": "the_deep_void:quiet_slow_whisper",
-      "tick_chance": 0.0111
-    },
-    "music": {
-      "sound": "intentionally_empty",
-      "min_delay": 12000,
-      "max_delay": 24000,
-      "replace_current_music": true
-    },
-    "particle": {
-      "options": {
-        "type": "white_ash"
-      },
-      "probability": 0.008
-    },
-    "foliage_color": -16053236,
-    "grass_color": -16053236,
-    "sky_color": -16777216,
-    "fog_color": -16777216,
-    "water_color": -16777216,
-    "water_fog_color": -16777216
+    "foliage_color": "#0b0c0c",
+    "grass_color": "#0b0c0c",
+    "water_color": "#000000"
   },
-  "spawners": {
-    "monster": [],
-    "creature": [],
-    "ambient": [],
-    "axolotls": [],
-    "underground_water_creature": [],
-    "water_creature": [],
-    "water_ambient": [],
-    "misc": []
-  },
-  "spawn_costs": {},
-  "carvers": {},
   "features": [
     [],
     [],
@@ -51,5 +48,16 @@
     [],
     [],
     []
-  ]
+  ],
+  "spawn_costs": {},
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  }
 }

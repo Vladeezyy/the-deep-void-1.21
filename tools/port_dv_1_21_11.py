@@ -280,6 +280,21 @@ def saves(s):
     return s
 
 
+def particles(s):
+    """1.21.9: particles are SingleQuadParticles with a sprite from the start and a render layer"""
+    if 'extends TextureSheetParticle' not in s:
+        return s
+    s = s.replace('extends TextureSheetParticle', 'extends SingleQuadParticle')
+    s = re.sub(r'(SpriteSet spriteSet\) \{\n\t\tsuper\(world, x, y, z)\);', r'\1, spriteSet.first());', s)
+    s = re.sub(r'public ParticleRenderType getRenderType\(\) \{\n(\t+)return ParticleRenderType\.PARTICLE_SHEET_(\w+);',
+               lambda m: 'public SingleQuadParticle.Layer getLayer() {\n' + m.group(1) + 'return SingleQuadParticle.Layer.' + ('TRANSLUCENT' if m.group(2) == 'TRANSLUCENT' else 'OPAQUE') + ';', s)
+    s = s.replace('double xSpeed, double ySpeed, double zSpeed) {', 'double xSpeed, double ySpeed, double zSpeed, net.minecraft.util.RandomSource random) {')
+    s = s.replace('this.pickSprite(spriteSet);', 'this.setSprite(spriteSet.get(this.random));')
+    s = s.replace('import net.minecraft.client.particle.TextureSheetParticle;', 'import net.minecraft.client.particle.SingleQuadParticle;')
+    s = s.replace('import net.minecraft.client.particle.ParticleRenderType;\n', '')
+    return add_import(s, 'net.minecraft.client.particle.SingleQuadParticle')
+
+
 def port(s):
     s = s.replace('.getGameProfile().getId()', '.getGameProfile().id()')
     s = tiers(s)
@@ -291,6 +306,7 @@ def port(s):
     s = items3(s)
     s = blocks(s)
     s = saves(s)
+    s = particles(s)
     return s
 
 

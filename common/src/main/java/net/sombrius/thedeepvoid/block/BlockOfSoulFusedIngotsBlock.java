@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockOfSoulFusedIngotsBlock extends Block {
 	public BlockOfSoulFusedIngotsBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.NETHERITE_BLOCK).strength(3.5f, 5f).requiresCorrectToolForDrops().emissiveRendering((bs, br, bp) -> true));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.NETHERITE_BLOCK).strength(3.5f, 5f).requiresCorrectToolForDrops().emissiveRendering(bs -> true));
 	}
 
 	@Override

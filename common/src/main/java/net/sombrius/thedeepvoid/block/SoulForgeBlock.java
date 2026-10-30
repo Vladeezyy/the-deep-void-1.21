@@ -51,7 +51,7 @@ public class SoulForgeBlock extends Block implements SimpleWaterloggedBlock, Ent
 
 	public SoulForgeBlock() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.ANVIL).strength(-1, 3600000).noOcclusion().pushReaction(PushReaction.BLOCK)
-				.emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+				.emissiveRendering(bs -> true).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
 	}
 

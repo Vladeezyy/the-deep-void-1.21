@@ -12,7 +12,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class IchorLanternBlock extends Block {
 	public IchorLanternBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.GOLD).sound(SoundType.FROGLIGHT).strength(0.3f).lightLevel(s -> 12).emissiveRendering((bs, br, bp) -> true));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.GOLD).sound(SoundType.FROGLIGHT).strength(0.3f).lightLevel(s -> 12).emissiveRendering(bs -> true));
 	}
 
 	@Override

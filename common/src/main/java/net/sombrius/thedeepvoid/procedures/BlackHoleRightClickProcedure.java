@@ -21,6 +21,7 @@ import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
@@ -61,7 +62,7 @@ public class BlackHoleRightClickProcedure {
 						if (!projectileLevel.isClientSide()) {
 							Projectile _entityToSpawn = new Object() {
 								public Projectile getArrow(Level level, Entity shooter, float damage, int knockback, byte piercing) {
-									AbstractArrow entityToSpawn = new Arrow(EntityType.ARROW, level);
+									AbstractArrow entityToSpawn = new Arrow(EntityTypes.ARROW, level);
 									entityToSpawn.setOwner(shooter);
 									entityToSpawn.setBaseDamage(damage);
 									PortUtil.setKnockback(entityToSpawn, knockback);
@@ -103,7 +104,7 @@ public class BlackHoleRightClickProcedure {
 					if (!projectileLevel.isClientSide()) {
 						Projectile _entityToSpawn = new Object() {
 							public Projectile getArrow(Level level, Entity shooter, float damage, int knockback, byte piercing) {
-								AbstractArrow entityToSpawn = new Arrow(EntityType.ARROW, level);
+								AbstractArrow entityToSpawn = new Arrow(EntityTypes.ARROW, level);
 								entityToSpawn.setOwner(shooter);
 								entityToSpawn.setBaseDamage(damage);
 								PortUtil.setKnockback(entityToSpawn, knockback);
@@ -133,7 +134,7 @@ public class BlackHoleRightClickProcedure {
 							if (!projectileLevel.isClientSide()) {
 								Projectile _entityToSpawn = new Object() {
 									public Projectile getArrow(Level level, Entity shooter, float damage, int knockback) {
-										AbstractArrow entityToSpawn = new Arrow(EntityType.ARROW, level);
+										AbstractArrow entityToSpawn = new Arrow(EntityTypes.ARROW, level);
 										entityToSpawn.setOwner(shooter);
 										entityToSpawn.setBaseDamage(damage);
 										PortUtil.setKnockback(entityToSpawn, knockback);

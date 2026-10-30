@@ -25,7 +25,7 @@ import net.sombrius.thedeepvoid.procedures.RedGateOnBlockRightClickedProcedure;
 public class RedGateBlock extends Block {
 	public RedGateBlock() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.FIRE).sound(SoundType.GLASS).strength(-1, 3600000).noOcclusion().pushReaction(PushReaction.BLOCK)
-				.emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+				.emissiveRendering(bs -> true).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	@Override

@@ -183,8 +183,8 @@ public final class TheDeepVoidNeoForgeClient {
 			}
 
 			@Override
-			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
-				return ours.renderInventoryText(instance, screen, guiGraphics, x, y, blitOffset);
+			public boolean extractInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int canvasWidth, int color) {
+				return ours.extractInventoryText(instance, screen, guiGraphics, x, y, canvasWidth, color);
 			}
 		};
 	}

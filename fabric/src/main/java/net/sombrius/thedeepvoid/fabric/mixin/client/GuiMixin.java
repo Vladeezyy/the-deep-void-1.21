@@ -10,15 +10,15 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.Hud;
 import net.minecraft.client.DeltaTracker;
 
 import net.sombrius.thedeepvoid.port.neo.HasClientExtensions;
 import net.sombrius.thedeepvoid.port.bus.RenderGuiEvent;
 import net.sombrius.thedeepvoid.port.bus.ModBus;
 
-/** NeoForge's RenderGuiEvent.Pre (before every HUD layer) and isVisibleInGui of the mod's effects */
-@Mixin(Gui.class)
+/** (26.2: the HUD is Hud) NeoForge's RenderGuiEvent.Pre (before every HUD layer) and isVisibleInGui of the mod's effects */
+@Mixin(Hud.class)
 abstract class GuiMixin {
 	@Inject(method = "extractRenderState", at = @At("HEAD"))
 	private void deepvoid$renderPre(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {

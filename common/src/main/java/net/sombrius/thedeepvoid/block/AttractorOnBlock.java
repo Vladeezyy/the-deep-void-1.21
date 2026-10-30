@@ -21,7 +21,7 @@ import net.sombrius.thedeepvoid.procedures.AttractorUpdateTickProcedure;
 
 public class AttractorOnBlock extends Block {
 	public AttractorOnBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.METAL).strength(3f).requiresCorrectToolForDrops().emissiveRendering((bs, br, bp) -> true));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.METAL).strength(3f).requiresCorrectToolForDrops().emissiveRendering(bs -> true));
 	}
 
 	@Override

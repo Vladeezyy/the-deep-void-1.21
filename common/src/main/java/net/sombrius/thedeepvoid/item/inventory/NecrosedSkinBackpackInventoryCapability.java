@@ -20,7 +20,7 @@ public class NecrosedSkinBackpackInventoryCapability extends ComponentItemHandle
 	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public static void onItemDropped(ItemTossEvent event) {
 		if (event.getEntity().getItem().getItem() == TheDeepVoidModItems.NECROSED_SKIN_BACKPACK.get()) {
-			if (Minecraft.getInstance().screen instanceof NecrosedSkinBackpackGUIScreen) {
+			if (Minecraft.getInstance().gui.screen() instanceof NecrosedSkinBackpackGUIScreen) {
 				Minecraft.getInstance().player.closeContainer();
 			}
 		}

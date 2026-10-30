@@ -43,7 +43,7 @@ import net.sombrius.thedeepvoid.procedures.VoidriumGlassSpecialInformationProced
 public class VoidriumGlassBlock extends Block implements EntityBlock, net.sombrius.thedeepvoid.port.PortBlockItem.Tooltip {
 	public VoidriumGlassBlock() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.HAT).sound(SoundType.GLASS).strength(25f, 6f).lightLevel(s -> 8).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.BLOCK)
-				.emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+				.emissiveRendering(bs -> true).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)

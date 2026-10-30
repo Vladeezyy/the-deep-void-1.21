@@ -253,7 +253,7 @@ public class TheDeepVoidModKeyMappings {
 	public static class KeyEventListener {
 		@SubscribeEvent
 		public static void onClientTick(ClientTickEvent.Post event) {
-			if (Minecraft.getInstance().screen == null) {
+			if (Minecraft.getInstance().gui.screen() == null) {
 				ARMOR_ABILITY.consumeClick();
 				ARMOR_TOGGLE.consumeClick();
 				MOTHER_CALL_OUT.consumeClick();

@@ -14,7 +14,7 @@ public interface IClientMobEffectExtensions {
 		return true;
 	}
 
-	default boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
+	default boolean extractInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int canvasWidth, int color) {
 		return false;
 	}
 }

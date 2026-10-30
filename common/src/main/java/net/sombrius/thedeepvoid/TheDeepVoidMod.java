@@ -26,7 +26,6 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModBlockEntities;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import net.minecraft.util.Tuple;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.codec.StreamCodec;
@@ -77,23 +76,34 @@ public class TheDeepVoidMod {
 		Platform.INSTANCE.registerPayload(id, (StreamCodec<? super RegistryFriendlyByteBuf, T>) reader, handler);
 	}
 
-	private static final Collection<Tuple<Runnable, Integer>> workQueue = new ConcurrentLinkedQueue<>();
+	/** A queued action and its ticks left (26.2 removed net.minecraft.util.Tuple, MCreator's pair) */
+	private static final class Work {
+		final Runnable action;
+		int ticks;
+
+		Work(Runnable action, int ticks) {
+			this.action = action;
+			this.ticks = ticks;
+		}
+	}
+
+	private static final Collection<Work> workQueue = new ConcurrentLinkedQueue<>();
 
 	/** Runs {@code action} after {@code tick} server ticks (only when called on the server thread, as in MCreator) */
 	public static void queueServerWork(int tick, Runnable action) {
 		MinecraftServer server = Platform.INSTANCE.currentServer();
 		if (server != null && server.isSameThread())
-			workQueue.add(new Tuple<>(action, tick));
+			workQueue.add(new Work(action, tick));
 	}
 
 	private static void tick(ServerTickEvent.Post event) {
-		List<Tuple<Runnable, Integer>> actions = new ArrayList<>();
+		List<Work> actions = new ArrayList<>();
 		workQueue.forEach(work -> {
-			work.setB(work.getB() - 1);
-			if (work.getB() == 0)
+			work.ticks--;
+			if (work.ticks == 0)
 				actions.add(work);
 		});
-		actions.forEach(e -> e.getA().run());
+		actions.forEach(e -> e.action.run());
 		workQueue.removeAll(actions);
 	}
 }

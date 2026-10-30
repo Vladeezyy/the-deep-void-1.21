@@ -13,6 +13,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
@@ -81,7 +82,7 @@ public class ArmorAbilityVultureProcedure {
 									if (world instanceof ServerLevel projectileLevel) {
 										Projectile _entityToSpawn = new Object() {
 											public Projectile getArrow(Level level, Entity shooter, float damage, int knockback) {
-												AbstractArrow entityToSpawn = new Arrow(EntityType.ARROW, level);
+												AbstractArrow entityToSpawn = new Arrow(EntityTypes.ARROW, level);
 												entityToSpawn.setOwner(shooter);
 												entityToSpawn.setBaseDamage(damage);
 												PortUtil.setKnockback(entityToSpawn, knockback);

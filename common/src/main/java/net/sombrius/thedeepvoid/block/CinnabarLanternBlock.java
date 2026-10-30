@@ -38,7 +38,7 @@ public class CinnabarLanternBlock extends Block implements SimpleWaterloggedBloc
 					return 10;
 				return 10;
 			}
-		}.getLightLevel())).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.DESTROY).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+		}.getLightLevel())).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.DESTROY).emissiveRendering(bs -> true).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}
 

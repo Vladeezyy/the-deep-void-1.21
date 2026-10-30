@@ -25,7 +25,7 @@ import net.sombrius.thedeepvoid.procedures.VoidEffigyOpenRedstoneOffProcedure;
 public class VoidEffigyOpenBlock extends Block {
 	public VoidEffigyOpenBlock() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.BASALT).strength(2f, 999f).lightLevel(s -> 12).requiresCorrectToolForDrops().noOcclusion()
-				.emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+				.emissiveRendering(bs -> true).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class TrembleMobEffect extends MobEffect implements net.sombrius.thedeepv
 			}
 
 			@Override
-			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
+			public boolean extractInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int canvasWidth, int color) {
 				return false;
 			}
 

@@ -40,7 +40,7 @@ public class RootBlindMobEffect extends MobEffect implements PortUtil.EffectRemo
 			}
 
 			@Override
-			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
+			public boolean extractInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int canvasWidth, int color) {
 				return false;
 			}
 

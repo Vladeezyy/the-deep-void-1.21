@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -95,7 +96,7 @@ public final class DevScene {
 	}
 
 	private static void biomesAndMobs() {
-		at(45, mc -> mc.options.hideGui = true);
+		at(45, mc -> setHudHidden(mc, true));
 		int t = 200;
 		for (String biome : List.of("forgotten_valley", "grim_canopy", "crawler_nest", "ashen_crags", "misted_remnants", "staring_hills", "gloomy_deathgrounds")) {
 			at(t, mc -> server(mc, p -> go(p, biome)));
@@ -153,7 +154,7 @@ public final class DevScene {
 			command(level.getServer(), "time set 6000");
 			for (int i = 0; i < 100; i++) {
 				double angle = i * 2.4, r = 8 + (i % 17);
-				spawnNoAi(level, EntityType.PIG, p.getX() + Math.cos(angle) * r, p.getZ() + Math.sin(angle) * r);
+				spawnNoAi(level, EntityTypes.PIG, p.getX() + Math.cos(angle) * r, p.getZ() + Math.sin(angle) * r);
 			}
 			if (modMobs) {
 				int i = 0;
@@ -201,7 +202,7 @@ public final class DevScene {
 	 * person: {@code scene_item_<name>_1.png} / {@code _3.png}.
 	 */
 	private static void items() {
-		at(45, mc -> mc.options.hideGui = true);
+		at(45, mc -> setHudHidden(mc, true));
 		at(60, mc -> server(mc, p -> {
 			p.teleportTo(p.level().getServer().overworld(), 0.5, 120, 0.5, java.util.Set.of(), 0F, 0F, true);
 			p.level().setBlock(BlockPos.containing(0, 118, 0), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState(), 3);
@@ -251,18 +252,18 @@ public final class DevScene {
 			return;
 		Minecraft mc = Minecraft.getInstance();
 		if (!opened && ++menuTicks % 100 == 0)
-			TheDeepVoidMod.LOGGER.info("[scene] waiting on {}", mc.screen == null ? "no screen" : mc.screen.getClass().getName());
+			TheDeepVoidMod.LOGGER.info("[scene] waiting on {}", mc.gui.screen() == null ? "no screen" : mc.gui.screen().getClass().getName());
 		// a fresh run folder opens the accessibility onboarding first
-		if (mc.screen instanceof AccessibilityOnboardingScreen) {
+		if (mc.gui.screen() instanceof AccessibilityOnboardingScreen) {
 			mc.options.onboardAccessibility = false;
 			mc.options.save();
-			mc.setScreen(new TitleScreen());
+			mc.gui.setScreen(new TitleScreen());
 			return;
 		}
-		if (!opened && mc.screen instanceof TitleScreen) {
+		if (!opened && mc.gui.screen() instanceof TitleScreen) {
 			opened = true;
 			if (mc.getLevelSource().levelExists(WORLD)) {
-				mc.createWorldOpenFlows().openWorld(WORLD, () -> mc.setScreen(new TitleScreen()));
+				mc.createWorldOpenFlows().openWorld(WORLD, () -> mc.gui.setScreen(new TitleScreen()));
 			} else {
 				LevelSettings settings = new LevelSettings(WORLD, GameType.CREATIVE, new LevelSettings.DifficultySettings(Difficulty.NORMAL, false, false), true, WorldDataConfiguration.DEFAULT);
 				mc.createWorldOpenFlows().createFreshLevel(WORLD, settings, new WorldOptions(1234L, true, false), WorldPresets::createNormalWorldDimensions, new TitleScreen());
@@ -272,8 +273,8 @@ public final class DevScene {
 		if (mc.player == null || mc.getSingleplayerServer() == null)
 			return;
 		mc.options.pauseOnLostFocus = false;
-		if (mc.screen instanceof PauseScreen)
-			mc.setScreen(null);
+		if (mc.gui.screen() instanceof PauseScreen)
+			mc.gui.setScreen(null);
 		tick++;
 		for (Pair<Integer, Consumer<Minecraft>> step : STEPS) {
 			if (step.getFirst() == tick) {
@@ -342,6 +343,13 @@ public final class DevScene {
 	}
 
 	private static void shot(Minecraft mc, String name) {
-		Screenshot.grab(mc.gameDirectory, "scene_" + name + ".png", mc.getMainRenderTarget(), 1, c -> TheDeepVoidMod.LOGGER.info("[scene] {}", c.getString()));
+		Screenshot.grab(mc.gameDirectory, "scene_" + name + ".png", mc.gameRenderer.mainRenderTarget(), 1, c -> TheDeepVoidMod.LOGGER.info("[scene] {}", c.getString()));
+	}
+
+	/** 26.2: the HUD is hidden through Minecraft.gui.hud, which only toggles */
+	private static void setHudHidden(net.minecraft.client.Minecraft mc, boolean hidden)
+	{
+		if(mc.gui.hud.isHidden() != hidden)
+			mc.gui.hud.toggle();
 	}
 }

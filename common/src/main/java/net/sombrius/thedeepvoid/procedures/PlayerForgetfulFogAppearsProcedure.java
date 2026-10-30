@@ -27,7 +27,7 @@ public class PlayerForgetfulFogAppearsProcedure {
 	public static void updateWorldTick(ClientTickEvent.Pre event) {
 		Minecraft minecraft = Minecraft.getInstance();
 		ClientLevel level = minecraft.level;
-		Entity entity = minecraft.gameRenderer.getMainCamera().entity();
+		Entity entity = minecraft.gameRenderer.mainCamera().entity();
 		if (level != null && entity != null) {
 			Vec3 pos = entity.getPosition(minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(true));
 			execute(event, level, pos.x(), pos.z(), entity);

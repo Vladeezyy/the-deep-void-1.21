@@ -4,13 +4,19 @@
 {
 cd "$(dirname "$0")/.."
 . tools/watchdog.sh
-kill_dev() { pkill -f 'fml.modFolders=the_deep_void' 2>/dev/null; }
+# a thread dump first: a hang shows where it waits
+kill_dev() {
+    for pid in $(pgrep -f 'fml.modFolders=the_deep_void'); do jstack "$pid" > build-bench-threads.txt 2>&1; done
+    pkill -f 'fml.modFolders=the_deep_void' 2>/dev/null
+}
 label=${1:-run}
 mkdir -p build/bench
 LOG=build-bench.log
+# a fresh world every run (same seed): a reopened bench world waited on a screen once
+rm -rf run/saves/dv_bench
 run_watched "$LOG" 1200 ./gradlew runScene -Pscene=bench --console=plain
 code=$?
 grep -E 'Minecraft Crash Report|HUNG' "$LOG" | head -3
-grep -oE '\[bench\] phase=.*' "$LOG" | tee -a "build/bench/$label.txt"
+grep -oE '\[bench\] (phase|profile).*' "$LOG" | tee -a "build/bench/$label.txt"
 exit $code
 }

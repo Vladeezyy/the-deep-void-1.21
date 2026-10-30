@@ -6,12 +6,8 @@
     "bbb"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:teeth_block"
-    },
-    "b": {
-      "item": "the_deep_void:flesh_block"
-    }
+    "a": "the_deep_void:teeth_block",
+    "b": "the_deep_void:flesh_block"
   },
   "result": {
     "count": 2,

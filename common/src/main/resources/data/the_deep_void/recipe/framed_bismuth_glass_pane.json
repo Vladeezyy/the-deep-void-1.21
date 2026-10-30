@@ -6,9 +6,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:framed_bismuth_glass"
-    }
+    "a": "the_deep_void:framed_bismuth_glass"
   },
   "result": {
     "count": 16,

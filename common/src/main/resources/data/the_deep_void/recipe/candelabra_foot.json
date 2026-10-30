@@ -7,12 +7,8 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:onyx"
-    },
-    "b": {
-      "item": "the_deep_void:dark_steel_nugget"
-    }
+    "a": "the_deep_void:onyx",
+    "b": "the_deep_void:dark_steel_nugget"
   },
   "result": {
     "count": 8,

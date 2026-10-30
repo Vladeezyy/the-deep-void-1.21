@@ -7,21 +7,11 @@
     "de "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:soul_fused_ingot"
-    },
-    "b": {
-      "item": "the_deep_void:ancient_gun_part"
-    },
-    "c": {
-      "item": "minecraft:spyglass"
-    },
-    "d": {
-      "item": "the_deep_void:hard_flesh_ingot"
-    },
-    "e": {
-      "item": "the_deep_void:worm_tooth"
-    }
+    "a": "the_deep_void:soul_fused_ingot",
+    "b": "the_deep_void:ancient_gun_part",
+    "c": "minecraft:spyglass",
+    "d": "the_deep_void:hard_flesh_ingot",
+    "e": "the_deep_void:worm_tooth"
   },
   "result": {
     "count": 1,

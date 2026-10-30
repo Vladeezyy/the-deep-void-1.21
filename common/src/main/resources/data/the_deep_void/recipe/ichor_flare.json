@@ -7,18 +7,10 @@
     "ddd"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:crystallized_ichor"
-    },
-    "b": {
-      "item": "minecraft:gunpowder"
-    },
-    "c": {
-      "item": "the_deep_void:flesh_block"
-    },
-    "d": {
-      "item": "minecraft:gold_ingot"
-    }
+    "a": "the_deep_void:crystallized_ichor",
+    "b": "minecraft:gunpowder",
+    "c": "the_deep_void:flesh_block",
+    "d": "minecraft:gold_ingot"
   },
   "result": {
     "count": 2,

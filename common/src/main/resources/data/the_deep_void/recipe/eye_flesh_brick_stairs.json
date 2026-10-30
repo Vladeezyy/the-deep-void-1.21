@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:eye_flesh_bricks"
-    }
+    "a": "the_deep_void:eye_flesh_bricks"
   },
   "result": {
     "count": 4,

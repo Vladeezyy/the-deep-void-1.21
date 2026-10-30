@@ -250,6 +250,84 @@ def noise_router(settings):
     return settings
 
 
+INGREDIENT_TAGS = DATA + 'the_deep_void/tags/item/recipe_ingredients/'
+
+
+def ingredient(node, name):
+    """1.21.2: an ingredient is an id, "#tag" or a list of ids; a list with tags becomes a tag of its own"""
+    if isinstance(node, dict) and set(node) == {'item'}:
+        return node['item']
+    if isinstance(node, dict) and set(node) == {'tag'}:
+        return '#' + node['tag']
+    if isinstance(node, list):
+        values = [ingredient(v, name) for v in node]
+        if len(values) == 1:
+            return values[0]
+        if any(isinstance(v, str) and v.startswith('#') for v in values):
+            write_json(INGREDIENT_TAGS + name + '.json', {'replace': False, 'values': values})
+            return '#the_deep_void:recipe_ingredients/' + name
+        return values
+    return node
+
+
+def recipe(data, name, patterns):
+    for key in ('ingredient', 'base', 'addition', 'template'):
+        if key in data:
+            data[key] = ingredient(data[key], f'{name}_{key}')
+    if 'key' in data:
+        data['key'] = {k: ingredient(v, f'{name}_{k}') for k, v in data['key'].items()}
+    if 'ingredients' in data:
+        data['ingredients'] = [ingredient(v, f'{name}_{i}') for i, v in enumerate(data['ingredients'])]
+    # 1.21.5: the trim recipe names its pattern (the pattern no longer names its template)
+    if data.get('type') == 'minecraft:smithing_trim' and 'pattern' not in data and data.get('template') in patterns:
+        data['pattern'] = patterns[data['template']]
+    return data
+
+
+def trim_patterns():
+    """template item -> trim pattern (1.21.1 trim patterns named their template item)"""
+    out = {}
+    for path in glob.glob(DATA + '*/trim_pattern/*.json'):
+        node = read_json(path)
+        ns = path.split('/data/')[1].split('/')[0]
+        name = os.path.basename(path)[:-5]
+        if 'template_item' in node:
+            out[node.pop('template_item')] = f'{ns}:{name}'
+            node.setdefault('decal', False)
+            write_json(path, node)
+    return out
+
+
+TRIM_PROVIDERS = 'common/src/main/resources/the_deep_void_trim_materials.json'
+
+
+def trim_materials():
+    """1.21.5: a trim material comes from its item's provides_trim_material component (port.PortTrimMaterials
+    reads the item -> material map written here); the material lost its ingredient and model index"""
+    providers = read_json(TRIM_PROVIDERS) if os.path.exists(TRIM_PROVIDERS) else {}
+    for path in glob.glob(DATA + '*/trim_material/*.json'):
+        node = read_json(path)
+        ns = path.split('/data/')[1].split('/')[0]
+        if 'ingredient' in node:
+            providers[node.pop('ingredient')] = f'{ns}:{os.path.basename(path)[:-5]}'
+            node.pop('item_model_index', None)
+            write_json(path, node)
+    write_json(TRIM_PROVIDERS, dict(sorted(providers.items())))
+
+
+def loot_without_air(data):
+    """1.21.11: a loot item entry may not be air (MCreator's "drops nothing"); empty pools go"""
+    pools = []
+    for pool in data.get('pools', []):
+        entries = [e for e in pool.get('entries', []) if not (e.get('type') == 'minecraft:item' and e.get('name') == 'minecraft:air')]
+        if entries:
+            pool['entries'] = entries
+            pools.append(pool)
+    if 'pools' in data:
+        data['pools'] = pools
+    return data
+
+
 def rename_values(node):
     if isinstance(node, dict):
         return {k: rename_values(v) for k, v in node.items()}
@@ -262,6 +340,8 @@ def rename_values(node):
 
 def convert_data():
     changed = 0
+    patterns = trim_patterns()
+    trim_materials()
     for path in glob.glob(DATA + '**/*.json', recursive=True):
         try:
             node = read_json(path)
@@ -272,6 +352,10 @@ def convert_data():
         out = rename_values(node)
         if re.search(r'/data/[^/]+/worldgen/biome/', path):
             out = biome(out)
+        if re.search(r'/data/[^/]+/recipe/', path):
+            out = recipe(out, os.path.basename(path)[:-5], patterns)
+        if re.search(r'/data/[^/]+/loot_table/', path):
+            out = loot_without_air(out)
         if re.search(r'/data/[^/]+/worldgen/noise_settings/', path):
             out = noise_router(out)
         if re.search(r'/data/[^/]+/dimension/', path) and isinstance(out.get('generator', {}).get('settings'), dict):

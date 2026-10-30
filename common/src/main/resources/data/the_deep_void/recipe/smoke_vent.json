@@ -7,15 +7,9 @@
     "cbc"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:gunpowder"
-    },
-    "b": {
-      "item": "minecraft:cobbled_deepslate"
-    },
-    "c": {
-      "item": "the_deep_void:ash_pile"
-    }
+    "a": "minecraft:gunpowder",
+    "b": "minecraft:cobbled_deepslate",
+    "c": "the_deep_void:ash_pile"
   },
   "result": {
     "count": 4,

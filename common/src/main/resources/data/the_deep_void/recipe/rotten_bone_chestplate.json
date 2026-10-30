@@ -7,15 +7,9 @@
     "cbc"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:mourner_hide"
-    },
-    "b": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "c": {
-      "item": "minecraft:bone"
-    }
+    "a": "the_deep_void:mourner_hide",
+    "b": "the_deep_void:rotten_bone",
+    "c": "minecraft:bone"
   },
   "result": {
     "count": 1,

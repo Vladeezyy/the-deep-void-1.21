@@ -6,12 +6,8 @@
     "ba"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:bone_block"
-    },
-    "b": {
-      "item": "minecraft:bone"
-    }
+    "a": "minecraft:bone_block",
+    "b": "minecraft:bone"
   },
   "result": {
     "count": 8,

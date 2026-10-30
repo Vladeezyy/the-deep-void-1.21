@@ -7,15 +7,9 @@
     "cc "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "b": {
-      "item": "the_deep_void:bone_scythe"
-    },
-    "c": {
-      "item": "the_deep_void:bone_crawler_molt_piece"
-    }
+    "a": "the_deep_void:rotten_bone",
+    "b": "the_deep_void:bone_scythe",
+    "c": "the_deep_void:bone_crawler_molt_piece"
   },
   "result": {
     "count": 1,

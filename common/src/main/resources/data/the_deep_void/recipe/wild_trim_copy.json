@@ -7,12 +7,8 @@
     " a "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:misted_bone"
-    },
-    "b": {
-      "item": "minecraft:wild_armor_trim_smithing_template"
-    }
+    "a": "the_deep_void:misted_bone",
+    "b": "minecraft:wild_armor_trim_smithing_template"
   },
   "result": {
     "count": 2,

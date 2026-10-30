@@ -7,27 +7,13 @@
     "fgf"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:soul_fused_ingot"
-    },
-    "b": {
-      "item": "the_deep_void:block_of_voidrium"
-    },
-    "c": {
-      "item": "the_deep_void:sulfur_glass"
-    },
-    "d": {
-      "item": "the_deep_void:cinnabar_glass"
-    },
-    "e": {
-      "item": "the_deep_void:bismuth_glass"
-    },
-    "f": {
-      "item": "the_deep_void:sacred_cinnabar"
-    },
-    "g": {
-      "item": "the_deep_void:void_matter"
-    }
+    "a": "the_deep_void:soul_fused_ingot",
+    "b": "the_deep_void:block_of_voidrium",
+    "c": "the_deep_void:sulfur_glass",
+    "d": "the_deep_void:cinnabar_glass",
+    "e": "the_deep_void:bismuth_glass",
+    "f": "the_deep_void:sacred_cinnabar",
+    "g": "the_deep_void:void_matter"
   },
   "result": {
     "count": 1,

@@ -3,5 +3,5 @@
   "description": {
     "translate": "trim_pattern.the_deep_void.sorrow"
   },
-  "template_item": "the_deep_void:sorrow_armor_trim"
+  "decal": false
 }

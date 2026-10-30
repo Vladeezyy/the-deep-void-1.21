@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:lurker_head"
-    }
+    "a": "the_deep_void:lurker_head"
   },
   "result": {
     "count": 1,

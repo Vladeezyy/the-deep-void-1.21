@@ -5,9 +5,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:pustulent_flesh_block"
-    }
+    "a": "the_deep_void:pustulent_flesh_block"
   },
   "result": {
     "count": 6,

@@ -6,9 +6,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:bone_pile_bricks"
-    }
+    "a": "the_deep_void:bone_pile_bricks"
   },
   "result": {
     "count": 6,

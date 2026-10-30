@@ -7,15 +7,9 @@
     "cb "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "b": {
-      "item": "the_deep_void:lavendite"
-    },
-    "c": {
-      "item": "the_deep_void:onyx"
-    }
+    "a": "the_deep_void:rotten_bone",
+    "b": "the_deep_void:lavendite",
+    "c": "the_deep_void:onyx"
   },
   "result": {
     "count": 2,

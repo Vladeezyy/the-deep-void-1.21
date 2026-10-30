@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:dark_steel_scrap"
-    }
+    "a": "the_deep_void:dark_steel_scrap"
   },
   "result": {
     "count": 9,

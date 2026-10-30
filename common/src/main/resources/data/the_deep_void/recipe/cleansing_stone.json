@@ -2,30 +2,14 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "the_deep_void:cobbled_ancient_deepslate"
-    },
-    {
-      "item": "the_deep_void:cobbled_ancient_deepslate"
-    },
-    {
-      "item": "the_deep_void:cobbled_ancient_deepslate"
-    },
-    {
-      "item": "the_deep_void:cobbled_ancient_deepslate"
-    },
-    {
-      "item": "minecraft:lapis_lazuli"
-    },
-    {
-      "item": "minecraft:lapis_lazuli"
-    },
-    {
-      "item": "minecraft:lapis_lazuli"
-    },
-    {
-      "item": "minecraft:lapis_lazuli"
-    }
+    "the_deep_void:cobbled_ancient_deepslate",
+    "the_deep_void:cobbled_ancient_deepslate",
+    "the_deep_void:cobbled_ancient_deepslate",
+    "the_deep_void:cobbled_ancient_deepslate",
+    "minecraft:lapis_lazuli",
+    "minecraft:lapis_lazuli",
+    "minecraft:lapis_lazuli",
+    "minecraft:lapis_lazuli"
   ],
   "result": {
     "count": 1,

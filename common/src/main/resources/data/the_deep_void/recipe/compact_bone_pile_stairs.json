@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:compact_bone_pile"
-    }
+    "a": "the_deep_void:compact_bone_pile"
   },
   "result": {
     "count": 4,

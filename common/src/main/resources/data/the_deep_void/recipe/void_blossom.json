@@ -7,12 +7,8 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:cobbled_deepslate"
-    },
-    "b": {
-      "item": "the_deep_void:black_moss"
-    }
+    "a": "minecraft:cobbled_deepslate",
+    "b": "the_deep_void:black_moss"
   },
   "result": {
     "count": 8,

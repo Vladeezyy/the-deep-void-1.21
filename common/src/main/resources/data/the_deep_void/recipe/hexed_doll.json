@@ -7,21 +7,11 @@
     "ec "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:mourner_hide"
-    },
-    "b": {
-      "item": "minecraft:soul_sand"
-    },
-    "c": {
-      "item": "the_deep_void:black_moss"
-    },
-    "d": {
-      "item": "the_deep_void:refined_onyx"
-    },
-    "e": {
-      "item": "the_deep_void:void_matter"
-    }
+    "a": "the_deep_void:mourner_hide",
+    "b": "minecraft:soul_sand",
+    "c": "the_deep_void:black_moss",
+    "d": "the_deep_void:refined_onyx",
+    "e": "the_deep_void:void_matter"
   },
   "result": {
     "count": 1,

@@ -7,18 +7,10 @@
     "ddd"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:glowstone_dust"
-    },
-    "b": {
-      "item": "minecraft:gunpowder"
-    },
-    "c": {
-      "item": "minecraft:glowstone"
-    },
-    "d": {
-      "item": "minecraft:gold_ingot"
-    }
+    "a": "minecraft:glowstone_dust",
+    "b": "minecraft:gunpowder",
+    "c": "minecraft:glowstone",
+    "d": "minecraft:gold_ingot"
   },
   "result": {
     "count": 2,

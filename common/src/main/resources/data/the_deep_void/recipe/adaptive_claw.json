@@ -7,15 +7,9 @@
     "abc"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:misted_bone"
-    },
-    "b": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "c": {
-      "tag": "the_deep_void:hydra_heart"
-    }
+    "a": "the_deep_void:misted_bone",
+    "b": "the_deep_void:rotten_bone",
+    "c": "#the_deep_void:hydra_heart"
   },
   "result": {
     "count": 1,

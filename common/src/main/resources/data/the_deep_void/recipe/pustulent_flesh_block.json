@@ -2,33 +2,15 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "the_deep_void:flesh_block"
-    },
-    {
-      "item": "the_deep_void:flesh_block"
-    },
-    {
-      "item": "the_deep_void:flesh_block"
-    },
-    {
-      "item": "the_deep_void:flesh_block"
-    },
-    {
-      "item": "the_deep_void:pus_flower"
-    },
-    {
-      "item": "the_deep_void:flesh_block"
-    },
-    {
-      "item": "the_deep_void:flesh_block"
-    },
-    {
-      "item": "the_deep_void:flesh_block"
-    },
-    {
-      "item": "the_deep_void:flesh_block"
-    }
+    "the_deep_void:flesh_block",
+    "the_deep_void:flesh_block",
+    "the_deep_void:flesh_block",
+    "the_deep_void:flesh_block",
+    "the_deep_void:pus_flower",
+    "the_deep_void:flesh_block",
+    "the_deep_void:flesh_block",
+    "the_deep_void:flesh_block",
+    "the_deep_void:flesh_block"
   ],
   "result": {
     "count": 8,

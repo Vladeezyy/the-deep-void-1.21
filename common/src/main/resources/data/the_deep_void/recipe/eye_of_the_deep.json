@@ -7,15 +7,9 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "tag": "minecraft:coals"
-    },
-    "b": {
-      "item": "minecraft:quartz"
-    },
-    "c": {
-      "item": "minecraft:ender_pearl"
-    }
+    "a": "#minecraft:coals",
+    "b": "minecraft:quartz",
+    "c": "minecraft:ender_pearl"
   },
   "result": {
     "count": 1,

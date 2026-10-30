@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:bone"
-    }
+    "a": "minecraft:bone"
   },
   "result": {
     "count": 1,

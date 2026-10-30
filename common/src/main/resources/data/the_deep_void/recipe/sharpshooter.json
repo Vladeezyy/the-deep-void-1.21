@@ -7,18 +7,10 @@
     "cdd"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:lurker_head"
-    },
-    "b": {
-      "item": "minecraft:gold_block"
-    },
-    "c": {
-      "item": "the_deep_void:block_of_misted_bone_pile"
-    },
-    "d": {
-      "item": "minecraft:string"
-    }
+    "a": "the_deep_void:lurker_head",
+    "b": "minecraft:gold_block",
+    "c": "the_deep_void:block_of_misted_bone_pile",
+    "d": "minecraft:string"
   },
   "result": {
     "count": 1,

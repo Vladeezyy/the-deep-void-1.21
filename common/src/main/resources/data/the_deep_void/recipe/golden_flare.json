@@ -7,15 +7,9 @@
     "ccc"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:gold_nugget"
-    },
-    "b": {
-      "item": "minecraft:gunpowder"
-    },
-    "c": {
-      "item": "minecraft:gold_ingot"
-    }
+    "a": "minecraft:gold_nugget",
+    "b": "minecraft:gunpowder",
+    "c": "minecraft:gold_ingot"
   },
   "result": {
     "count": 2,

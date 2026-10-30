@@ -3,7 +3,5 @@
   "description": {
     "color": "#4B4B4B",
     "translate": "trim_material.the_deep_void.dark_steel_trim"
-  },
-  "ingredient": "the_deep_void:dark_steel_scrap",
-  "item_model_index": 0.0
+  }
 }

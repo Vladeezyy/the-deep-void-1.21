@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:fly_wing_piece"
-    }
+    "a": "the_deep_void:fly_wing_piece"
   },
   "result": {
     "count": 1,

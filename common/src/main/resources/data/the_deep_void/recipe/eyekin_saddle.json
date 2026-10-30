@@ -7,24 +7,12 @@
     "efe"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:flesh_chunk"
-    },
-    "b": {
-      "item": "the_deep_void:flesh_block"
-    },
-    "c": {
-      "item": "the_deep_void:ambrosial_flesh_chunk"
-    },
-    "d": {
-      "item": "the_deep_void:flesh_bone"
-    },
-    "e": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "f": {
-      "item": "the_deep_void:refined_cinnabar"
-    }
+    "a": "the_deep_void:flesh_chunk",
+    "b": "the_deep_void:flesh_block",
+    "c": "the_deep_void:ambrosial_flesh_chunk",
+    "d": "the_deep_void:flesh_bone",
+    "e": "the_deep_void:rotten_bone",
+    "f": "the_deep_void:refined_cinnabar"
   },
   "result": {
     "count": 1,

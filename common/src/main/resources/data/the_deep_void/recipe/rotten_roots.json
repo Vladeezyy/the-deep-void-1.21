@@ -6,9 +6,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_wood"
-    }
+    "a": "the_deep_void:rotten_wood"
   },
   "result": {
     "count": 6,

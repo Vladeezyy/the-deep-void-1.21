@@ -1,9 +1,7 @@
 {
   "type": "the_deep_void:glutton_block_jei_type",
   "ingredients": [
-    {
-      "tag": "the_deep_void:glutton_tier1"
-    }
+    "#the_deep_void:glutton_tier1"
   ],
   "output": {
     "count": 2,

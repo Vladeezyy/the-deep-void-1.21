@@ -6,12 +6,8 @@
     "b"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:black_candle"
-    },
-    "b": {
-      "item": "the_deep_void:candelabra_foot"
-    }
+    "a": "minecraft:black_candle",
+    "b": "the_deep_void:candelabra_foot"
   },
   "result": {
     "count": 1,

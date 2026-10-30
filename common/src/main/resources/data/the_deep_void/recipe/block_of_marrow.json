@@ -7,12 +7,8 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:bone_block"
-    },
-    "b": {
-      "item": "the_deep_void:bone_marrow"
-    }
+    "a": "minecraft:bone_block",
+    "b": "the_deep_void:bone_marrow"
   },
   "result": {
     "count": 6,

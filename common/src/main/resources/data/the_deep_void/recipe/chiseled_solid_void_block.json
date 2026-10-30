@@ -6,9 +6,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:solid_void_slab"
-    }
+    "a": "the_deep_void:solid_void_slab"
   },
   "result": {
     "count": 1,

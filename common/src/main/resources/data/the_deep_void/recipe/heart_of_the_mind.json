@@ -7,18 +7,10 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:hard_flesh_block"
-    },
-    "b": {
-      "item": "the_deep_void:block_of_ancient_flesh"
-    },
-    "c": {
-      "item": "the_deep_void:flesh_bone"
-    },
-    "d": {
-      "item": "the_deep_void:voided_heart"
-    }
+    "a": "the_deep_void:hard_flesh_block",
+    "b": "the_deep_void:block_of_ancient_flesh",
+    "c": "the_deep_void:flesh_bone",
+    "d": "the_deep_void:voided_heart"
   },
   "result": {
     "count": 1,

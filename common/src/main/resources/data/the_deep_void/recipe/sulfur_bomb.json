@@ -7,15 +7,9 @@
     " a "
   ],
   "key": {
-    "a": {
-      "item": "minecraft:gunpowder"
-    },
-    "b": {
-      "item": "minecraft:string"
-    },
-    "c": {
-      "item": "the_deep_void:block_of_raw_sulfur"
-    }
+    "a": "minecraft:gunpowder",
+    "b": "minecraft:string",
+    "c": "the_deep_void:block_of_raw_sulfur"
   },
   "result": {
     "count": 4,

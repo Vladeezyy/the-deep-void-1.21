@@ -7,15 +7,9 @@
     "cb "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:onyx_needle"
-    },
-    "b": {
-      "item": "the_deep_void:bone_crawler_molt_piece"
-    },
-    "c": {
-      "item": "the_deep_void:bone_crawler_chitin"
-    }
+    "a": "the_deep_void:onyx_needle",
+    "b": "the_deep_void:bone_crawler_molt_piece",
+    "c": "the_deep_void:bone_crawler_chitin"
   },
   "result": {
     "count": 1,

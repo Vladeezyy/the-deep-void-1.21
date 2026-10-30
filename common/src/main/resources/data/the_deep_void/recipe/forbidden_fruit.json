@@ -7,15 +7,9 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:ambrosia"
-    },
-    "b": {
-      "item": "the_deep_void:sacred_cinnabar"
-    },
-    "c": {
-      "item": "minecraft:enchanted_golden_apple"
-    }
+    "a": "the_deep_void:ambrosia",
+    "b": "the_deep_void:sacred_cinnabar",
+    "c": "minecraft:enchanted_golden_apple"
   },
   "result": {
     "count": 1,

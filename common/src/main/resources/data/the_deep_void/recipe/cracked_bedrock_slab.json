@@ -5,9 +5,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:cracked_bedrock"
-    }
+    "a": "the_deep_void:cracked_bedrock"
   },
   "result": {
     "count": 6,

@@ -7,9 +7,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:connected_marrow"
-    }
+    "a": "the_deep_void:connected_marrow"
   },
   "result": {
     "count": 3,

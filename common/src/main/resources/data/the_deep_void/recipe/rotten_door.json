@@ -7,9 +7,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_planks"
-    }
+    "a": "the_deep_void:rotten_planks"
   },
   "result": {
     "count": 3,

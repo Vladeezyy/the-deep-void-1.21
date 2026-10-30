@@ -5,9 +5,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:goo_bricks"
-    }
+    "a": "the_deep_void:goo_bricks"
   },
   "result": {
     "count": 6,

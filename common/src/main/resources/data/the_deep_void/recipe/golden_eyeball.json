@@ -7,12 +7,8 @@
     " a "
   ],
   "key": {
-    "a": {
-      "item": "minecraft:gold_ingot"
-    },
-    "b": {
-      "item": "the_deep_void:eyeball"
-    }
+    "a": "minecraft:gold_ingot",
+    "b": "the_deep_void:eyeball"
   },
   "result": {
     "count": 1,

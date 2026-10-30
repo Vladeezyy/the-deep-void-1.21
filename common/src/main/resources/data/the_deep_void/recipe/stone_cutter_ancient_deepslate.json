@@ -6,12 +6,8 @@
     "bbb"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:iron_ingot"
-    },
-    "b": {
-      "item": "the_deep_void:ancient_deepslate"
-    }
+    "a": "minecraft:iron_ingot",
+    "b": "the_deep_void:ancient_deepslate"
   },
   "result": {
     "count": 1,

@@ -7,15 +7,9 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:refined_cinnabar"
-    },
-    "b": {
-      "item": "the_deep_void:monolithic_stone"
-    },
-    "c": {
-      "item": "the_deep_void:seer"
-    }
+    "a": "the_deep_void:refined_cinnabar",
+    "b": "the_deep_void:monolithic_stone",
+    "c": "the_deep_void:seer"
   },
   "result": {
     "count": 1,

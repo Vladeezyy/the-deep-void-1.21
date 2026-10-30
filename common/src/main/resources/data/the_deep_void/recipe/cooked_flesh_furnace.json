@@ -3,9 +3,7 @@
   "category": "food",
   "experience": 0.1,
   "cookingtime": 140,
-  "ingredient": {
-    "item": "the_deep_void:flesh_block"
-  },
+  "ingredient": "the_deep_void:flesh_block",
   "result": {
     "id": "the_deep_void:cooked_flesh"
   }

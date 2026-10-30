@@ -7,15 +7,9 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:cobbled_ancient_deepslate"
-    },
-    "b": {
-      "item": "the_deep_void:refined_onyx"
-    },
-    "c": {
-      "item": "the_deep_void:block_of_rotten_bone_pile"
-    }
+    "a": "the_deep_void:cobbled_ancient_deepslate",
+    "b": "the_deep_void:refined_onyx",
+    "c": "the_deep_void:block_of_rotten_bone_pile"
   },
   "result": {
     "count": 1,

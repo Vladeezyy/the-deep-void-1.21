@@ -2,33 +2,15 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    {
-      "item": "minecraft:string"
-    },
-    {
-      "item": "minecraft:string"
-    },
-    {
-      "item": "minecraft:string"
-    },
-    {
-      "item": "minecraft:glass_bottle"
-    },
-    {
-      "item": "the_deep_void:crystallized_ichor"
-    },
-    {
-      "item": "minecraft:string"
-    },
-    {
-      "item": "minecraft:glass_bottle"
-    },
-    {
-      "item": "minecraft:glass_bottle"
-    },
-    {
-      "item": "minecraft:glass_bottle"
-    }
+    "minecraft:string",
+    "minecraft:string",
+    "minecraft:string",
+    "minecraft:glass_bottle",
+    "the_deep_void:crystallized_ichor",
+    "minecraft:string",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle"
   ],
   "result": {
     "count": 4,

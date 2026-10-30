@@ -7,12 +7,8 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:cinnabar"
-    },
-    "b": {
-      "item": "minecraft:torch"
-    }
+    "a": "the_deep_void:cinnabar",
+    "b": "minecraft:torch"
   },
   "result": {
     "count": 1,

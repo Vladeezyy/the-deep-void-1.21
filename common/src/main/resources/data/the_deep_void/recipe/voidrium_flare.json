@@ -7,15 +7,9 @@
     "ccc"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rough_voidrium"
-    },
-    "b": {
-      "item": "minecraft:gunpowder"
-    },
-    "c": {
-      "item": "minecraft:gold_ingot"
-    }
+    "a": "the_deep_void:rough_voidrium",
+    "b": "minecraft:gunpowder",
+    "c": "minecraft:gold_ingot"
   },
   "result": {
     "count": 2,

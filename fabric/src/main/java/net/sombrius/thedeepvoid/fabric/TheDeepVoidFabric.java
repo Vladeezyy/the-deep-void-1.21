@@ -105,7 +105,6 @@ public final class TheDeepVoidFabric implements ModInitializer {
 					return this;
 				}
 			}))));
-			attributeModifiers(context);
 		});
 		fuelAndFlammability();
 		ModBus.post(new FMLCommonSetupEvent());
@@ -142,23 +141,6 @@ public final class TheDeepVoidFabric implements ModInitializer {
 		ServerMessageEvents.ALLOW_CHAT_MESSAGE.register((message, sender, params) -> !ModBus.post(new ServerChatEvent(sender, message.signedContent(), message.decoratedContent())));
 		ServerEntityEvents.ENTITY_LOAD.register((entity, level) -> ModBus.post(new EntityJoinLevelEvent(entity, level)));
 		ServerEntityEvents.ENTITY_UNLOAD.register((entity, level) -> ModBus.post(new EntityLeaveLevelEvent(entity, level)));
-	}
-
-	/** NeoForge's ItemAttributeModifierEvent for the mod's items (their listeners only add per-item constants) */
-	private static void attributeModifiers(DefaultItemComponentEvents.ModifyContext context) {
-		for (var entry : TheDeepVoidModItems.REGISTRY.getEntries()) {
-			Item item = entry.get();
-			ItemAttributeModifiers base = item.components().getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
-			ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
-			base.modifiers().forEach(modifier -> builder.add(modifier.attribute(), modifier.modifier(), modifier.slot()));
-			boolean[] added = {false};
-			ModBus.post(new ItemAttributeModifierEvent(new ItemStack(item), (attribute, modifier, slot) -> {
-				builder.add(attribute, modifier, slot);
-				added[0] = true;
-			}));
-			if (added[0])
-				context.modify(item, components -> components.set(DataComponents.ATTRIBUTE_MODIFIERS, builder.build()));
-		}
 	}
 
 	/** NeoForge's FurnaceFuelBurnTimeEvent and IBlockExtension#getFlammability for the mod's items and blocks */

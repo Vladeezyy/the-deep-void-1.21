@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:melted_goo"
-    }
+    "a": "the_deep_void:melted_goo"
   },
   "result": {
     "count": 4,

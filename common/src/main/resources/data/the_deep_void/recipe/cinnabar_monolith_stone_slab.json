@@ -5,9 +5,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:cinnabar_monolith_stone"
-    }
+    "a": "the_deep_void:cinnabar_monolith_stone"
   },
   "result": {
     "count": 6,

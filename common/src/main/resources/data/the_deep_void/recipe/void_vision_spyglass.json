@@ -1,14 +1,8 @@
 {
   "type": "minecraft:smithing_transform",
-  "template": {
-    "item": "the_deep_void:void_lens"
-  },
-  "base": {
-    "item": "minecraft:spyglass"
-  },
-  "addition": {
-    "item": "the_deep_void:refined_onyx"
-  },
+  "template": "the_deep_void:void_lens",
+  "base": "minecraft:spyglass",
+  "addition": "the_deep_void:refined_onyx",
   "result": {
     "id": "the_deep_void:spyglass_dummy"
   }

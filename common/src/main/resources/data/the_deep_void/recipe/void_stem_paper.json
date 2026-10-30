@@ -5,9 +5,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:void_stem"
-    }
+    "a": "the_deep_void:void_stem"
   },
   "result": {
     "count": 3,

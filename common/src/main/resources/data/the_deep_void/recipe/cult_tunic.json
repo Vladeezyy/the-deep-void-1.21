@@ -7,15 +7,9 @@
     "aca"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:dark_cloth"
-    },
-    "b": {
-      "item": "the_deep_void:tattered_cult_tunic"
-    },
-    "c": {
-      "item": "the_deep_void:rune_of_void"
-    }
+    "a": "the_deep_void:dark_cloth",
+    "b": "the_deep_void:tattered_cult_tunic",
+    "c": "the_deep_void:rune_of_void"
   },
   "result": {
     "count": 1,

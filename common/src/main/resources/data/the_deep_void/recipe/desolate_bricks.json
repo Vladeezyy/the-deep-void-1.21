@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:desolate_soil"
-    }
+    "a": "the_deep_void:desolate_soil"
   },
   "result": {
     "count": 4,

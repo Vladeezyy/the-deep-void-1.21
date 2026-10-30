@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:soul_fused_ingot"
-    }
+    "a": "the_deep_void:soul_fused_ingot"
   },
   "result": {
     "count": 1,

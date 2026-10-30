@@ -7,12 +7,8 @@
     " a "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:seer"
-    },
-    "b": {
-      "item": "the_deep_void:eye_lantern"
-    }
+    "a": "the_deep_void:seer",
+    "b": "the_deep_void:eye_lantern"
   },
   "result": {
     "count": 1,

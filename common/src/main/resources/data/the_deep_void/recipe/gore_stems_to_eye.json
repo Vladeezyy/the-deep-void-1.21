@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:gore_stems"
-    }
+    "a": "the_deep_void:gore_stems"
   },
   "result": {
     "count": 3,

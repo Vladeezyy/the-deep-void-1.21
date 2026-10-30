@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:desolate_stem"
-    }
+    "a": "the_deep_void:desolate_stem"
   },
   "result": {
     "count": 4,

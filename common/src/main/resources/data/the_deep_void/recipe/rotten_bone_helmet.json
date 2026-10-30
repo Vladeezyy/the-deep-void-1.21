@@ -6,12 +6,8 @@
     "b b"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:mourner_hide"
-    },
-    "b": {
-      "item": "the_deep_void:rotten_bone"
-    }
+    "a": "the_deep_void:mourner_hide",
+    "b": "the_deep_void:rotten_bone"
   },
   "result": {
     "count": 1,

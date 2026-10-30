@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:bismuth_bricks"
-    }
+    "a": "the_deep_void:bismuth_bricks"
   },
   "result": {
     "count": 6,

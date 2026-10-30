@@ -7,15 +7,9 @@
     " c "
   ],
   "key": {
-    "a": {
-      "item": "minecraft:gold_ingot"
-    },
-    "b": {
-      "item": "the_deep_void:bottle_of_ambrosia"
-    },
-    "c": {
-      "item": "the_deep_void:flesh_chunk"
-    }
+    "a": "minecraft:gold_ingot",
+    "b": "the_deep_void:bottle_of_ambrosia",
+    "c": "the_deep_void:flesh_chunk"
   },
   "result": {
     "count": 1,

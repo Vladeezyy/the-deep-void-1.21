@@ -2,27 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "the_deep_void:sacred_cinnabar"
-    },
-    {
-      "item": "the_deep_void:voidrium_gem"
-    },
-    {
-      "item": "the_deep_void:refined_bismuth"
-    },
-    {
-      "item": "the_deep_void:refined_bismuth"
-    },
-    {
-      "item": "the_deep_void:voidrium_gem"
-    },
-    {
-      "item": "the_deep_void:voidrium_gem"
-    },
-    {
-      "item": "the_deep_void:voidrium_gem"
-    }
+    "the_deep_void:sacred_cinnabar",
+    "the_deep_void:voidrium_gem",
+    "the_deep_void:refined_bismuth",
+    "the_deep_void:refined_bismuth",
+    "the_deep_void:voidrium_gem",
+    "the_deep_void:voidrium_gem",
+    "the_deep_void:voidrium_gem"
   ],
   "result": {
     "count": 1,

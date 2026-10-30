@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:block_of_voidrium"
-    }
+    "a": "the_deep_void:block_of_voidrium"
   },
   "result": {
     "count": 9,

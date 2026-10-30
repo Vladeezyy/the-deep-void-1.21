@@ -5,12 +5,8 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:bone_crawler_molt_piece"
-    },
-    "b": {
-      "item": "the_deep_void:grim_crawler_chestplate"
-    }
+    "a": "the_deep_void:bone_crawler_molt_piece",
+    "b": "the_deep_void:grim_crawler_chestplate"
   },
   "result": {
     "count": 1,

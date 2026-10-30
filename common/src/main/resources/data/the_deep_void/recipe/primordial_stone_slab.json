@@ -5,9 +5,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:primordial_stone_replica"
-    }
+    "a": "the_deep_void:primordial_stone_replica"
   },
   "result": {
     "count": 6,

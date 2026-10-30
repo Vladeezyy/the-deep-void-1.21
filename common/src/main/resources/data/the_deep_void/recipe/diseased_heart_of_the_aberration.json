@@ -7,15 +7,9 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:black_moss"
-    },
-    "b": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "c": {
-      "tag": "the_deep_void:hydra_heart"
-    }
+    "a": "the_deep_void:black_moss",
+    "b": "the_deep_void:rotten_bone",
+    "c": "#the_deep_void:hydra_heart"
   },
   "result": {
     "count": 2,

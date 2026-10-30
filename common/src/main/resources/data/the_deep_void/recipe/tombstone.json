@@ -7,21 +7,11 @@
     "ded"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:smooth_ancient_deepslate"
-    },
-    "b": {
-      "item": "the_deep_void:ancient_deepslate_bricks"
-    },
-    "c": {
-      "item": "the_deep_void:coffin"
-    },
-    "d": {
-      "item": "the_deep_void:soul_fused_ingot"
-    },
-    "e": {
-      "item": "the_deep_void:voidrium_alloy"
-    }
+    "a": "the_deep_void:smooth_ancient_deepslate",
+    "b": "the_deep_void:ancient_deepslate_bricks",
+    "c": "the_deep_void:coffin",
+    "d": "the_deep_void:soul_fused_ingot",
+    "e": "the_deep_void:voidrium_alloy"
   },
   "result": {
     "count": 1,

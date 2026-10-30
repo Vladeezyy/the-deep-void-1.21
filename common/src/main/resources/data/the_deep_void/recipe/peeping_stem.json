@@ -6,12 +6,8 @@
     "b"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:eyeball"
-    },
-    "b": {
-      "item": "the_deep_void:tendons"
-    }
+    "a": "the_deep_void:eyeball",
+    "b": "the_deep_void:tendons"
   },
   "result": {
     "count": 1,

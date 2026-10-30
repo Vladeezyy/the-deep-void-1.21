@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "the_deep_void:sulfur"
-    },
-    {
-      "tag": "minecraft:coals"
-    }
+    "the_deep_void:sulfur",
+    "#minecraft:coals"
   ],
   "result": {
     "count": 1,

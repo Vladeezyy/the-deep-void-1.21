@@ -7,12 +7,8 @@
     " b "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "b": {
-      "item": "the_deep_void:hunter_hide"
-    }
+    "a": "the_deep_void:rotten_bone",
+    "b": "the_deep_void:hunter_hide"
   },
   "result": {
     "count": 1,

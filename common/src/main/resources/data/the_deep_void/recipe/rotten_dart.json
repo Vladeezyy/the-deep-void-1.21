@@ -6,12 +6,8 @@
     "b"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "b": {
-      "item": "minecraft:feather"
-    }
+    "a": "the_deep_void:rotten_bone",
+    "b": "minecraft:feather"
   },
   "result": {
     "count": 4,

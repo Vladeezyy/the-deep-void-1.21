@@ -1,12 +1,8 @@
 {
   "type": "the_deep_void:soul_forge_jei_type",
   "ingredients": [
-    {
-      "item": "the_deep_void:soul_shard"
-    },
-    {
-      "item": "minecraft:netherite_ingot"
-    }
+    "the_deep_void:soul_shard",
+    "minecraft:netherite_ingot"
   ],
   "output": {
     "count": 1,

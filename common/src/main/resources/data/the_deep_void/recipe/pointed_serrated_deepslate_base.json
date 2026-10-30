@@ -6,9 +6,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:deepslate_serrated_stalagmite_middle"
-    }
+    "a": "the_deep_void:deepslate_serrated_stalagmite_middle"
   },
   "result": {
     "count": 2,

@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:stripped_rotten_log"
-    }
+    "a": "the_deep_void:stripped_rotten_log"
   },
   "result": {
     "count": 4,

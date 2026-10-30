@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:chant_of_the_forgotten"
-    }
+    "a": "the_deep_void:chant_of_the_forgotten"
   },
   "result": {
     "count": 1,

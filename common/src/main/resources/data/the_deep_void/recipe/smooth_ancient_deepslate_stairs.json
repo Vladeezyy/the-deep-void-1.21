@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:smooth_ancient_deepslate"
-    }
+    "a": "the_deep_void:smooth_ancient_deepslate"
   },
   "result": {
     "count": 4,

@@ -3,9 +3,7 @@
   "category": "food",
   "experience": 0.1,
   "cookingtime": 60,
-  "ingredient": {
-    "item": "the_deep_void:void_fly_maggot"
-  },
+  "ingredient": "the_deep_void:void_fly_maggot",
   "result": {
     "id": "the_deep_void:cooked_void_fly_maggot"
   }

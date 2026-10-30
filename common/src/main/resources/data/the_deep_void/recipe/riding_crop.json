@@ -7,15 +7,9 @@
     "bc "
   ],
   "key": {
-    "a": {
-      "item": "minecraft:leather"
-    },
-    "b": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "c": {
-      "item": "the_deep_void:mourner_hide"
-    }
+    "a": "minecraft:leather",
+    "b": "the_deep_void:rotten_bone",
+    "c": "the_deep_void:mourner_hide"
   },
   "result": {
     "count": 1,

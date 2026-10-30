@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:corpse_pile"
-    }
+    "a": "the_deep_void:corpse_pile"
   },
   "result": {
     "count": 1,

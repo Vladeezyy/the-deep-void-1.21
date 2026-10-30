@@ -7,21 +7,11 @@
     "eba"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:mourner_hide"
-    },
-    "b": {
-      "item": "minecraft:leather"
-    },
-    "c": {
-      "item": "minecraft:gold_ingot"
-    },
-    "d": {
-      "item": "the_deep_void:gooey_delight"
-    },
-    "e": {
-      "item": "the_deep_void:garum"
-    }
+    "a": "the_deep_void:mourner_hide",
+    "b": "minecraft:leather",
+    "c": "minecraft:gold_ingot",
+    "d": "the_deep_void:gooey_delight",
+    "e": "the_deep_void:garum"
   },
   "result": {
     "count": 3,

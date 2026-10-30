@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "the_deep_void:cinnabar_monolith_stone"
-  },
+  "ingredient": "the_deep_void:cinnabar_monolith_stone",
   "result": {
     "id": "the_deep_void:cinnabar_monolith_stone_stairs",
     "count": 1

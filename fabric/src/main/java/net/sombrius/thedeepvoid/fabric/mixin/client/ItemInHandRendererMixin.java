@@ -23,7 +23,7 @@ import net.sombrius.thedeepvoid.port.neo.HasClientExtensions;
 abstract class ItemInHandRendererMixin {
 	@WrapOperation(method = "renderArmWithItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;applyItemArmTransform(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/HumanoidArm;F)V"))
 	private void deepvoid$handTransform(ItemInHandRenderer self, PoseStack poseStack, HumanoidArm arm, float equippedProgress, Operation<Void> original, AbstractClientPlayer player, float partialTicks,
-			float pitch, InteractionHand hand, float swingProgress, ItemStack stack, float equippedProg, PoseStack pose, MultiBufferSource buffer, int combinedLight) {
+			float pitch, InteractionHand hand, float swingProgress, ItemStack stack, float equippedProg, PoseStack pose, net.minecraft.client.renderer.SubmitNodeCollector collector, int combinedLight) {
 		if (stack.getItem() instanceof HasClientExtensions.Item item && player instanceof LocalPlayer local
 				&& item.clientExtensions().applyForgeHandTransform(poseStack, local, arm, stack, partialTicks, equippedProgress, swingProgress))
 			return;

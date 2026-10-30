@@ -7,18 +7,10 @@
     "ddd"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:flesh_bone"
-    },
-    "b": {
-      "item": "the_deep_void:flesh_block"
-    },
-    "c": {
-      "item": "the_deep_void:esoteric_tome"
-    },
-    "d": {
-      "item": "the_deep_void:ambrosial_flesh_chunk"
-    }
+    "a": "the_deep_void:flesh_bone",
+    "b": "the_deep_void:flesh_block",
+    "c": "the_deep_void:esoteric_tome",
+    "d": "the_deep_void:ambrosial_flesh_chunk"
   },
   "result": {
     "count": 1,

@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_bone"
-    }
+    "a": "the_deep_void:rotten_bone"
   },
   "result": {
     "count": 1,

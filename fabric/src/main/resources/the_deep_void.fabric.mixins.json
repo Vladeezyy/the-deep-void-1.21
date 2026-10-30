@@ -17,7 +17,8 @@
     "PotionSlotMixin",
     "ResultSlotMixin",
     "ServerPlayerGameModeMixin",
-    "ServerPlayerMixin"
+    "ServerPlayerMixin",
+    "ItemStackMixin"
   ],
   "client": [
     "client.ClientLevelMixin",

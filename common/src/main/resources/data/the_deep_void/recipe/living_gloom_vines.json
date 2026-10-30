@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:living_gloom_stem"
-    }
+    "a": "the_deep_void:living_gloom_stem"
   },
   "result": {
     "count": 4,

@@ -7,21 +7,11 @@
     "eee"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "b": {
-      "item": "the_deep_void:rotten_bone_block"
-    },
-    "c": {
-      "item": "the_deep_void:lavendite"
-    },
-    "d": {
-      "item": "minecraft:soul_torch"
-    },
-    "e": {
-      "item": "the_deep_void:onyx"
-    }
+    "a": "the_deep_void:rotten_bone",
+    "b": "the_deep_void:rotten_bone_block",
+    "c": "the_deep_void:lavendite",
+    "d": "minecraft:soul_torch",
+    "e": "the_deep_void:onyx"
   },
   "result": {
     "count": 2,

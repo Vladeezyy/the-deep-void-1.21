@@ -6,12 +6,8 @@
     "bbb"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:cobbled_deepslate"
-    },
-    "b": {
-      "item": "the_deep_void:ancient_deepslate_bricks"
-    }
+    "a": "minecraft:cobbled_deepslate",
+    "b": "the_deep_void:ancient_deepslate_bricks"
   },
   "result": {
     "count": 1,

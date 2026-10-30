@@ -3,6 +3,7 @@ package net.sombrius.thedeepvoid.fabric.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
+import com.llamalad7.mixinextras.sugar.ref.LocalDoubleRef;
 import com.llamalad7.mixinextras.sugar.Local;
 
 import org.objectweb.asm.Opcodes;
@@ -44,9 +45,6 @@ abstract class LivingEntityMixin {
 	@Shadow
 	protected int useItemRemaining;
 	@Shadow
-	protected Player lastHurtByPlayer;
-
-	@Shadow
 	public abstract ItemStack getItemInHand(InteractionHand hand);
 
 	@Shadow
@@ -57,21 +55,21 @@ abstract class LivingEntityMixin {
 	}
 
 	/** LivingIncomingDamageEvent: after vanilla's invulnerability and fire resistance checks */
-	@Inject(method = "hurt", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;noActionTime:I", opcode = Opcodes.PUTFIELD), cancellable = true)
-	private void deepvoid$incomingDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+	@Inject(method = "hurtServer", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;noActionTime:I", opcode = Opcodes.PUTFIELD), cancellable = true)
+	private void deepvoid$incomingDamage(ServerLevel level, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		if (ModBus.post(new LivingIncomingDamageEvent(deepvoid$self(), source, amount)))
 			cir.setReturnValue(false);
 	}
 
-	/** LivingShieldBlockEvent: a listener may let the damage through */
-	@WrapOperation(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isDamageSourceBlocked(Lnet/minecraft/world/damagesource/DamageSource;)Z"))
-	private boolean deepvoid$shieldBlock(LivingEntity self, DamageSource source, Operation<Boolean> original, @Local(argsOnly = true) float amount) {
-		boolean blocked = original.call(self, source);
-		if (!blocked)
-			return false;
+	/** LivingShieldBlockEvent: a listener may let the damage through (1.21.5: the blocked amount) */
+	@WrapOperation(method = "hurtServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;applyItemBlocking(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)F"))
+	private float deepvoid$shieldBlock(LivingEntity self, ServerLevel level, DamageSource source, float amount, Operation<Float> original) {
+		float blocked = original.call(self, level, source, amount);
+		if (blocked <= 0)
+			return blocked;
 		LivingShieldBlockEvent event = new LivingShieldBlockEvent(self, source, amount, true);
 		ModBus.post(event);
-		return event.getBlocked() && !event.isCanceled();
+		return event.getBlocked() && !event.isCanceled() ? blocked : 0;
 	}
 
 	@Inject(method = "die", at = @At("HEAD"), cancellable = true)
@@ -91,9 +89,9 @@ abstract class LivingEntityMixin {
 	}
 
 	@Inject(method = "causeFallDamage", at = @At("HEAD"), cancellable = true)
-	private void deepvoid$fall(float fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir, @Local(argsOnly = true, ordinal = 0) LocalFloatRef distance,
-			@Local(argsOnly = true, ordinal = 1) LocalFloatRef damageMultiplier) {
-		LivingFallEvent event = new LivingFallEvent(deepvoid$self(), fallDistance, multiplier);
+	private void deepvoid$fall(double fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir, @Local(argsOnly = true) LocalDoubleRef distance,
+			@Local(argsOnly = true) LocalFloatRef damageMultiplier) {
+		LivingFallEvent event = new LivingFallEvent(deepvoid$self(), (float) fallDistance, multiplier);
 		if (ModBus.post(event)) {
 			cir.setReturnValue(false);
 			return;
@@ -110,17 +108,19 @@ abstract class LivingEntityMixin {
 			cir.setReturnValue(false);
 	}
 
-	@WrapOperation(method = "removeAllEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onEffectRemoved(Lnet/minecraft/world/effect/MobEffectInstance;)V"))
-	private void deepvoid$removeAllEffects(LivingEntity self, MobEffectInstance instance, Operation<Void> original) {
-		ModBus.post(new MobEffectEvent.Remove(self, instance));
-		original.call(self, instance);
+	@WrapOperation(method = "removeAllEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onEffectsRemoved(Ljava/util/Collection;)V"))
+	private void deepvoid$removeAllEffects(LivingEntity self, java.util.Collection<MobEffectInstance> instances, Operation<Void> original) {
+		for (MobEffectInstance instance : instances)
+			ModBus.post(new MobEffectEvent.Remove(self, instance));
+		original.call(self, instances);
 	}
 
 	/** MobEffectEvent.Expired: an effect ran out (server) */
-	@WrapOperation(method = "tickEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onEffectRemoved(Lnet/minecraft/world/effect/MobEffectInstance;)V"))
-	private void deepvoid$effectExpired(LivingEntity self, MobEffectInstance instance, Operation<Void> original) {
-		ModBus.post(new MobEffectEvent.Expired(self, instance));
-		original.call(self, instance);
+	@WrapOperation(method = "tickEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onEffectsRemoved(Ljava/util/Collection;)V"))
+	private void deepvoid$effectExpired(LivingEntity self, java.util.Collection<MobEffectInstance> instances, Operation<Void> original) {
+		for (MobEffectInstance instance : instances)
+			ModBus.post(new MobEffectEvent.Expired(self, instance));
+		original.call(self, instances);
 	}
 
 	/** LivingEntityUseItemEvent.Start: canceling it stops the use, the duration can change */
@@ -162,8 +162,15 @@ abstract class LivingEntityMixin {
 
 	@WrapOperation(method = "dropExperience", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getExperienceReward(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;)I"))
 	private int deepvoid$experienceDrop(LivingEntity self, ServerLevel level, Entity killer, Operation<Integer> original) {
-		LivingExperienceDropEvent event = new LivingExperienceDropEvent(self, this.lastHurtByPlayer, original.call(self, level, killer));
+		LivingExperienceDropEvent event = new LivingExperienceDropEvent(self, self.getLastHurtByPlayer(), original.call(self, level, killer));
 		return ModBus.post(event) ? 0 : event.getDroppedExperience();
+	}
+
+	/** ItemTossEvent (1.21.4: players drop through LivingEntity's drop) */
+	@Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("RETURN"))
+	private void deepvoid$drop(ItemStack stack, boolean randomly, boolean retainOwnership, CallbackInfoReturnable<net.minecraft.world.entity.item.ItemEntity> cir) {
+		if (cir.getReturnValue() != null && deepvoid$self() instanceof Player player)
+			ModBus.post(new net.sombrius.thedeepvoid.port.bus.ItemTossEvent(cir.getReturnValue(), player));
 	}
 
 	/** NeoForge's onEntitySwing: an item may handle the swing itself */

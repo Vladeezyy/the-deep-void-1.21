@@ -26,12 +26,6 @@ abstract class PlayerMixin {
 		ModBus.post(new PlayerTickEvent.Post((Player) (Object) this));
 	}
 
-	@Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("RETURN"))
-	private void deepvoid$drop(ItemStack stack, boolean randomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
-		if (cir.getReturnValue() != null)
-			ModBus.post(new ItemTossEvent(cir.getReturnValue(), (Player) (Object) this));
-	}
-
 	@Inject(method = "giveExperiencePoints", at = @At("HEAD"), cancellable = true)
 	private void deepvoid$xpChange(int xpPoints, CallbackInfo ci, @Local(argsOnly = true) LocalIntRef amount) {
 		PlayerXpEvent.XpChange event = new PlayerXpEvent.XpChange((Player) (Object) this, xpPoints);

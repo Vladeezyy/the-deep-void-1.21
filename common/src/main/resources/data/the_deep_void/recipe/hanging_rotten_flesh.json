@@ -5,12 +5,8 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:rotten_flesh"
-    },
-    "b": {
-      "item": "the_deep_void:flesh_block"
-    }
+    "a": "minecraft:rotten_flesh",
+    "b": "the_deep_void:flesh_block"
   },
   "result": {
     "count": 6,

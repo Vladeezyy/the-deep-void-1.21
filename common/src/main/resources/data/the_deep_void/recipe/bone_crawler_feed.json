@@ -2,33 +2,15 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "the_deep_void:bone_marrow"
-    },
-    {
-      "item": "minecraft:bone"
-    },
-    {
-      "item": "the_deep_void:bone_marrow"
-    },
-    {
-      "item": "minecraft:bone"
-    },
-    {
-      "item": "the_deep_void:rotten_bone"
-    },
-    {
-      "item": "minecraft:bone"
-    },
-    {
-      "item": "the_deep_void:bone_marrow"
-    },
-    {
-      "item": "minecraft:bone"
-    },
-    {
-      "item": "the_deep_void:bone_marrow"
-    }
+    "the_deep_void:bone_marrow",
+    "minecraft:bone",
+    "the_deep_void:bone_marrow",
+    "minecraft:bone",
+    "the_deep_void:rotten_bone",
+    "minecraft:bone",
+    "the_deep_void:bone_marrow",
+    "minecraft:bone",
+    "the_deep_void:bone_marrow"
   ],
   "result": {
     "count": 3,

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "the_deep_void:corpse_in_a_cage"
-    },
-    {
-      "item": "the_deep_void:cinnabar"
-    }
+    "the_deep_void:corpse_in_a_cage",
+    "the_deep_void:cinnabar"
   ],
   "result": {
     "count": 1,

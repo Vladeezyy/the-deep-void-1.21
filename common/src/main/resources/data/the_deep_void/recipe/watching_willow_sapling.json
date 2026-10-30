@@ -7,15 +7,9 @@
     " b "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:hanging_marrow"
-    },
-    "b": {
-      "item": "the_deep_void:rotten_log"
-    },
-    "c": {
-      "item": "the_deep_void:infested_rotten_log"
-    }
+    "a": "the_deep_void:hanging_marrow",
+    "b": "the_deep_void:rotten_log",
+    "c": "the_deep_void:infested_rotten_log"
   },
   "result": {
     "count": 2,

@@ -7,12 +7,8 @@
     " a "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:misted_bone"
-    },
-    "b": {
-      "item": "the_deep_void:smithing_template_rot"
-    }
+    "a": "the_deep_void:misted_bone",
+    "b": "the_deep_void:smithing_template_rot"
   },
   "result": {
     "count": 2,

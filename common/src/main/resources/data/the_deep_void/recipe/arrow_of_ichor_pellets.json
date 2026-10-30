@@ -7,15 +7,9 @@
     "bb "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:bottle_of_ambrosia"
-    },
-    "b": {
-      "item": "minecraft:feather"
-    },
-    "c": {
-      "item": "the_deep_void:ambrosial_flesh_chunk"
-    }
+    "a": "the_deep_void:bottle_of_ambrosia",
+    "b": "minecraft:feather",
+    "c": "the_deep_void:ambrosial_flesh_chunk"
   },
   "result": {
     "count": 4,

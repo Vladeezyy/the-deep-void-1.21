@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:block_of_refined_bismuth"
-    }
+    "a": "the_deep_void:block_of_refined_bismuth"
   },
   "result": {
     "count": 4,

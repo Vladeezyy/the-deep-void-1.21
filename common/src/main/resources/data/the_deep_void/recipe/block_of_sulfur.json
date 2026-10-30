@@ -7,12 +7,8 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:sulfur_powder"
-    },
-    "b": {
-      "item": "the_deep_void:block_of_raw_sulfur"
-    }
+    "a": "the_deep_void:sulfur_powder",
+    "b": "the_deep_void:block_of_raw_sulfur"
   },
   "result": {
     "count": 1,

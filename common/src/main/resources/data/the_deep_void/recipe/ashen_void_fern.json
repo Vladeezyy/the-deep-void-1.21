@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "the_deep_void:ash_pile"
-    },
-    {
-      "item": "the_deep_void:void_fern"
-    }
+    "the_deep_void:ash_pile",
+    "the_deep_void:void_fern"
   ],
   "result": {
     "count": 1,

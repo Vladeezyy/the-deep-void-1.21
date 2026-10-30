@@ -7,18 +7,10 @@
     "bdb"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:teeth_block"
-    },
-    "b": {
-      "item": "the_deep_void:flesh_bricks"
-    },
-    "c": {
-      "item": "minecraft:stone_pressure_plate"
-    },
-    "d": {
-      "item": "minecraft:redstone"
-    }
+    "a": "the_deep_void:teeth_block",
+    "b": "the_deep_void:flesh_bricks",
+    "c": "minecraft:stone_pressure_plate",
+    "d": "minecraft:redstone"
   },
   "result": {
     "count": 4,

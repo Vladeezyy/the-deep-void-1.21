@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:block_of_misted_bone_pile"
-    }
+    "a": "the_deep_void:block_of_misted_bone_pile"
   },
   "result": {
     "count": 9,

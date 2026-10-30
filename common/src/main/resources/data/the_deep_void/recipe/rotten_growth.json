@@ -6,9 +6,7 @@
     "a  "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:bone_marrow"
-    }
+    "a": "the_deep_void:bone_marrow"
   },
   "result": {
     "count": 6,

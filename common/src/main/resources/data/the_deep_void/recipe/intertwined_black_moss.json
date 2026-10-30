@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:block_of_black_moss"
-    }
+    "a": "the_deep_void:block_of_black_moss"
   },
   "result": {
     "count": 8,

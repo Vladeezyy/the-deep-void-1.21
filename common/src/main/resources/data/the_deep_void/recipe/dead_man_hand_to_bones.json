@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "tag": "the_deep_void:dead_man_hand"
-    }
+    "a": "#the_deep_void:dead_man_hand"
   },
   "result": {
     "count": 16,

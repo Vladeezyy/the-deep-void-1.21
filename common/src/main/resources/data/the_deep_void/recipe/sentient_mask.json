@@ -7,18 +7,10 @@
     "cdc"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:misted_bone"
-    },
-    "b": {
-      "tag": "the_deep_void:hydra_heart"
-    },
-    "c": {
-      "item": "minecraft:gold_ingot"
-    },
-    "d": {
-      "item": "the_deep_void:rotten_bone"
-    }
+    "a": "the_deep_void:misted_bone",
+    "b": "#the_deep_void:hydra_heart",
+    "c": "minecraft:gold_ingot",
+    "d": "the_deep_void:rotten_bone"
   },
   "result": {
     "count": 1,

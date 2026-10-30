@@ -7,18 +7,10 @@
     "ada"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:elytra_piece"
-    },
-    "b": {
-      "item": "minecraft:phantom_membrane"
-    },
-    "c": {
-      "item": "minecraft:echo_shard"
-    },
-    "d": {
-      "item": "the_deep_void:sacred_cinnabar"
-    }
+    "a": "the_deep_void:elytra_piece",
+    "b": "minecraft:phantom_membrane",
+    "c": "minecraft:echo_shard",
+    "d": "the_deep_void:sacred_cinnabar"
   },
   "result": {
     "count": 1,

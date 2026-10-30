@@ -7,21 +7,11 @@
     "ded"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:cooked_flesh"
-    },
-    "b": {
-      "item": "the_deep_void:eyeball"
-    },
-    "c": {
-      "tag": "the_deep_void:big_eyes"
-    },
-    "d": {
-      "item": "the_deep_void:tendrils"
-    },
-    "e": {
-      "item": "minecraft:bowl"
-    }
+    "a": "the_deep_void:cooked_flesh",
+    "b": "the_deep_void:eyeball",
+    "c": "#the_deep_void:big_eyes",
+    "d": "the_deep_void:tendrils",
+    "e": "minecraft:bowl"
   },
   "result": {
     "count": 1,

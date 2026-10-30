@@ -3,9 +3,7 @@
   "category": "food",
   "experience": 0.6,
   "cookingtime": 100,
-  "ingredient": {
-    "item": "the_deep_void:pusfish"
-  },
+  "ingredient": "the_deep_void:pusfish",
   "result": {
     "id": "the_deep_void:cooked_pusfish"
   }

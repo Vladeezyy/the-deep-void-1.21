@@ -6,12 +6,8 @@
     "ba"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:voidlight"
-    },
-    "b": {
-      "item": "the_deep_void:desolate_soil"
-    }
+    "a": "the_deep_void:voidlight",
+    "b": "the_deep_void:desolate_soil"
   },
   "result": {
     "count": 4,

@@ -7,18 +7,10 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:redstone_block"
-    },
-    "b": {
-      "item": "the_deep_void:dark_steel_scrap"
-    },
-    "c": {
-      "item": "the_deep_void:ancient_deepslate_saw_trap_track"
-    },
-    "d": {
-      "item": "the_deep_void:rough_voidrium"
-    }
+    "a": "minecraft:redstone_block",
+    "b": "the_deep_void:dark_steel_scrap",
+    "c": "the_deep_void:ancient_deepslate_saw_trap_track",
+    "d": "the_deep_void:rough_voidrium"
   },
   "result": {
     "count": 1,

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "the_deep_void:smooth_monolithic_stone"
-  },
+  "ingredient": "the_deep_void:smooth_monolithic_stone",
   "result": {
     "id": "the_deep_void:smooth_monolithic_stone_slab",
     "count": 2

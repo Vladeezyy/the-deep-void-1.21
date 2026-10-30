@@ -7,15 +7,9 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:smooth_ancient_deepslate"
-    },
-    "b": {
-      "item": "minecraft:redstone_block"
-    },
-    "c": {
-      "item": "the_deep_void:void_filled_sponge"
-    }
+    "a": "the_deep_void:smooth_ancient_deepslate",
+    "b": "minecraft:redstone_block",
+    "c": "the_deep_void:void_filled_sponge"
   },
   "result": {
     "count": 1,

@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:eye_cake"
-    }
+    "a": "the_deep_void:eye_cake"
   },
   "result": {
     "count": 4,

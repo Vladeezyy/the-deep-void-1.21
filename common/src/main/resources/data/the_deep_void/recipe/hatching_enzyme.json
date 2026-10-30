@@ -7,18 +7,10 @@
     "dbd"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "b": {
-      "item": "the_deep_void:goo_ball"
-    },
-    "c": {
-      "item": "the_deep_void:grimberry_juice"
-    },
-    "d": {
-      "item": "the_deep_void:bone_mush"
-    }
+    "a": "the_deep_void:rotten_bone",
+    "b": "the_deep_void:goo_ball",
+    "c": "the_deep_void:grimberry_juice",
+    "d": "the_deep_void:bone_mush"
   },
   "result": {
     "count": 1,

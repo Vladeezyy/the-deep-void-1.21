@@ -6,12 +6,8 @@
     "b"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:wall_corpse"
-    },
-    "b": {
-      "item": "the_deep_void:ferryman_lantern"
-    }
+    "a": "the_deep_void:wall_corpse",
+    "b": "the_deep_void:ferryman_lantern"
   },
   "result": {
     "count": 1,

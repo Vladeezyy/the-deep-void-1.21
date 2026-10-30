@@ -6,12 +6,8 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:dark_cloth"
-    },
-    "b": {
-      "item": "the_deep_void:tattered_cult_boots"
-    }
+    "a": "the_deep_void:dark_cloth",
+    "b": "the_deep_void:tattered_cult_boots"
   },
   "result": {
     "count": 1,

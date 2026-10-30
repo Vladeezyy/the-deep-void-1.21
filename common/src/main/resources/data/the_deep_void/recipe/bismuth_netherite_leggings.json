@@ -1,14 +1,8 @@
 {
   "type": "minecraft:smithing_transform",
-  "template": {
-    "item": "the_deep_void:smithing_template_bismuth"
-  },
-  "base": {
-    "item": "minecraft:netherite_leggings"
-  },
-  "addition": {
-    "item": "the_deep_void:refined_bismuth"
-  },
+  "template": "the_deep_void:smithing_template_bismuth",
+  "base": "minecraft:netherite_leggings",
+  "addition": "the_deep_void:refined_bismuth",
   "result": {
     "id": "the_deep_void:bismuth_netherite_leggings"
   }

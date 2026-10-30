@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:cinnabar"
-    }
+    "a": "the_deep_void:cinnabar"
   },
   "result": {
     "count": 4,

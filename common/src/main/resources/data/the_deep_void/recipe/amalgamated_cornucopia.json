@@ -7,15 +7,9 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:golden_carrot"
-    },
-    "b": {
-      "item": "the_deep_void:golden_eyeball"
-    },
-    "c": {
-      "tag": "the_deep_void:hydra_heart"
-    }
+    "a": "minecraft:golden_carrot",
+    "b": "the_deep_void:golden_eyeball",
+    "c": "#the_deep_void:hydra_heart"
   },
   "result": {
     "count": 1,

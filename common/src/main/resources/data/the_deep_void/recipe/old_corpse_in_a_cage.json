@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "the_deep_void:cage"
-    },
-    {
-      "item": "the_deep_void:old_corpse"
-    }
+    "the_deep_void:cage",
+    "the_deep_void:old_corpse"
   ],
   "result": {
     "count": 1,

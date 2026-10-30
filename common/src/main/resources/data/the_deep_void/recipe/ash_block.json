@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:ash_pile"
-    }
+    "a": "the_deep_void:ash_pile"
   },
   "result": {
     "count": 1,

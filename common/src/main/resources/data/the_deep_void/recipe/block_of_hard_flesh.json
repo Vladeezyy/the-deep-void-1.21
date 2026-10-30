@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:hard_flesh_ingot"
-    }
+    "a": "the_deep_void:hard_flesh_ingot"
   },
   "result": {
     "count": 1,

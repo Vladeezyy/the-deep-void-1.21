@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:lavendite"
-    }
+    "a": "the_deep_void:lavendite"
   },
   "result": {
     "count": 1,

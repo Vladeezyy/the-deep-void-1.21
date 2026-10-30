@@ -7,15 +7,9 @@
     "ccc"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:deepslate"
-    },
-    "b": {
-      "item": "minecraft:fire_charge"
-    },
-    "c": {
-      "item": "the_deep_void:ancient_deepslate"
-    }
+    "a": "minecraft:deepslate",
+    "b": "minecraft:fire_charge",
+    "c": "the_deep_void:ancient_deepslate"
   },
   "result": {
     "count": 4,

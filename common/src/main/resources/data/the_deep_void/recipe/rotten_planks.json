@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:rotten_log"
-    }
+    "a": "the_deep_void:rotten_log"
   },
   "result": {
     "count": 4,

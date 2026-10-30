@@ -7,12 +7,8 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:porous_flesh"
-    },
-    "b": {
-      "item": "the_deep_void:tendrils"
-    }
+    "a": "the_deep_void:porous_flesh",
+    "b": "the_deep_void:tendrils"
   },
   "result": {
     "count": 9,

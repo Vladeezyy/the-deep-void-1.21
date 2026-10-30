@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:seer"
-    }
+    "a": "the_deep_void:seer"
   },
   "result": {
     "count": 4,

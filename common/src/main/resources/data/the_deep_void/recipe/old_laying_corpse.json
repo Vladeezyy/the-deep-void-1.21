@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:laying_corpse"
-    }
+    "a": "the_deep_void:laying_corpse"
   },
   "result": {
     "count": 1,

@@ -7,12 +7,8 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:flesh_block"
-    },
-    "b": {
-      "item": "the_deep_void:bottle_of_ambrosia"
-    }
+    "a": "the_deep_void:flesh_block",
+    "b": "the_deep_void:bottle_of_ambrosia"
   },
   "result": {
     "count": 8,

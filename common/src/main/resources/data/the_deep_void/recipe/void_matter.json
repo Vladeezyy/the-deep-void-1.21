@@ -2,33 +2,15 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "the_deep_void:grim_shard"
-    },
-    {
-      "item": "the_deep_void:solid_void"
-    },
-    {
-      "item": "the_deep_void:grim_shard"
-    },
-    {
-      "item": "the_deep_void:black_moss"
-    },
-    {
-      "item": "the_deep_void:voided_heart"
-    },
-    {
-      "item": "the_deep_void:black_moss"
-    },
-    {
-      "item": "the_deep_void:grim_shard"
-    },
-    {
-      "item": "the_deep_void:solid_void"
-    },
-    {
-      "item": "the_deep_void:grim_shard"
-    }
+    "the_deep_void:grim_shard",
+    "the_deep_void:solid_void",
+    "the_deep_void:grim_shard",
+    "the_deep_void:black_moss",
+    "the_deep_void:voided_heart",
+    "the_deep_void:black_moss",
+    "the_deep_void:grim_shard",
+    "the_deep_void:solid_void",
+    "the_deep_void:grim_shard"
   ],
   "result": {
     "count": 5,

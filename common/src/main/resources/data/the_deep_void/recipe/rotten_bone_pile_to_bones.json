@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:block_of_rotten_bone_pile"
-    }
+    "a": "the_deep_void:block_of_rotten_bone_pile"
   },
   "result": {
     "count": 4,

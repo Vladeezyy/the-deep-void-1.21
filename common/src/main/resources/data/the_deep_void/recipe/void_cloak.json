@@ -7,15 +7,9 @@
     "cac"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:void_matter"
-    },
-    "b": {
-      "item": "the_deep_void:ancient_onyx"
-    },
-    "c": {
-      "item": "the_deep_void:grim_gem"
-    }
+    "a": "the_deep_void:void_matter",
+    "b": "the_deep_void:ancient_onyx",
+    "c": "the_deep_void:grim_gem"
   },
   "result": {
     "count": 1,

@@ -7,18 +7,10 @@
     " d "
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:voidrium_gem"
-    },
-    "b": {
-      "item": "the_deep_void:sacred_cinnabar"
-    },
-    "c": {
-      "item": "minecraft:shield"
-    },
-    "d": {
-      "item": "the_deep_void:rotten_bone"
-    }
+    "a": "the_deep_void:voidrium_gem",
+    "b": "the_deep_void:sacred_cinnabar",
+    "c": "minecraft:shield",
+    "d": "the_deep_void:rotten_bone"
   },
   "result": {
     "count": 1,

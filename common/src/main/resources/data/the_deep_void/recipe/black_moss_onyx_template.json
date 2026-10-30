@@ -7,21 +7,11 @@
     "eee"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:mourner_hide"
-    },
-    "b": {
-      "item": "the_deep_void:rotten_bone"
-    },
-    "c": {
-      "item": "the_deep_void:cobbled_ancient_deepslate"
-    },
-    "d": {
-      "item": "the_deep_void:refined_onyx"
-    },
-    "e": {
-      "item": "the_deep_void:black_moss"
-    }
+    "a": "the_deep_void:mourner_hide",
+    "b": "the_deep_void:rotten_bone",
+    "c": "the_deep_void:cobbled_ancient_deepslate",
+    "d": "the_deep_void:refined_onyx",
+    "e": "the_deep_void:black_moss"
   },
   "result": {
     "count": 1,

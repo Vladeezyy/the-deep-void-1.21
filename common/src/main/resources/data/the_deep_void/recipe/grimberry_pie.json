@@ -7,18 +7,10 @@
     "bdb"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:sugar"
-    },
-    "b": {
-      "item": "the_deep_void:grimberry"
-    },
-    "c": {
-      "item": "the_deep_void:grimberry_juice"
-    },
-    "d": {
-      "item": "minecraft:egg"
-    }
+    "a": "minecraft:sugar",
+    "b": "the_deep_void:grimberry",
+    "c": "the_deep_void:grimberry_juice",
+    "d": "minecraft:egg"
   },
   "result": {
     "count": 1,

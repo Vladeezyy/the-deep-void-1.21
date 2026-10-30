@@ -1,14 +1,8 @@
 {
   "type": "minecraft:smithing_transform",
-  "template": {
-    "item": "the_deep_void:smithing_template_onyx"
-  },
-  "base": {
-    "item": "minecraft:diamond_leggings"
-  },
-  "addition": {
-    "item": "the_deep_void:refined_onyx"
-  },
+  "template": "the_deep_void:smithing_template_onyx",
+  "base": "minecraft:diamond_leggings",
+  "addition": "the_deep_void:refined_onyx",
   "result": {
     "id": "the_deep_void:onyx_armor_leggings"
   }

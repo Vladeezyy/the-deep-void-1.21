@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:block_of_refined_onyx"
-    }
+    "a": "the_deep_void:block_of_refined_onyx"
   },
   "result": {
     "count": 6,

@@ -6,12 +6,8 @@
     "b"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:smoke_vent"
-    },
-    "b": {
-      "item": "the_deep_void:vent_stone"
-    }
+    "a": "the_deep_void:smoke_vent",
+    "b": "the_deep_void:vent_stone"
   },
   "result": {
     "count": 2,

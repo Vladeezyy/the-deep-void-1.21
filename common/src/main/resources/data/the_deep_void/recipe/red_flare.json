@@ -7,15 +7,9 @@
     "ccc"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:redstone"
-    },
-    "b": {
-      "item": "minecraft:gunpowder"
-    },
-    "c": {
-      "item": "minecraft:gold_ingot"
-    }
+    "a": "minecraft:redstone",
+    "b": "minecraft:gunpowder",
+    "c": "minecraft:gold_ingot"
   },
   "result": {
     "count": 2,

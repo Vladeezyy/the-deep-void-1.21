@@ -7,18 +7,10 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:ancient_deepslate"
-    },
-    "b": {
-      "item": "the_deep_void:deepslate_lava_geyser"
-    },
-    "c": {
-      "item": "minecraft:redstone_torch"
-    },
-    "d": {
-      "item": "minecraft:lava_bucket"
-    }
+    "a": "the_deep_void:ancient_deepslate",
+    "b": "the_deep_void:deepslate_lava_geyser",
+    "c": "minecraft:redstone_torch",
+    "d": "minecraft:lava_bucket"
   },
   "result": {
     "count": 1,

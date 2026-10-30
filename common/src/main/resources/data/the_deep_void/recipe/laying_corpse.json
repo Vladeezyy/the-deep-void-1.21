@@ -6,12 +6,8 @@
     "bbb"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:block_of_bone_pile"
-    },
-    "b": {
-      "item": "minecraft:bone"
-    }
+    "a": "the_deep_void:block_of_bone_pile",
+    "b": "minecraft:bone"
   },
   "result": {
     "count": 1,

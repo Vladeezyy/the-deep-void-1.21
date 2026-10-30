@@ -7,12 +7,8 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:goo_ball"
-    },
-    "b": {
-      "item": "the_deep_void:flesh_block"
-    }
+    "a": "the_deep_void:goo_ball",
+    "b": "the_deep_void:flesh_block"
   },
   "result": {
     "count": 8,

@@ -7,12 +7,8 @@
     "bbb"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:cracked_bedrock"
-    },
-    "b": {
-      "tag": "minecraft:sand"
-    }
+    "a": "the_deep_void:cracked_bedrock",
+    "b": "#minecraft:sand"
   },
   "result": {
     "count": 6,

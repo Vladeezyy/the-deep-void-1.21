@@ -7,18 +7,10 @@
     "ddd"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:disturbing_root"
-    },
-    "b": {
-      "item": "the_deep_void:infested_rotten_roots"
-    },
-    "c": {
-      "item": "the_deep_void:esoteric_tome"
-    },
-    "d": {
-      "item": "the_deep_void:cobbled_ancient_deepslate"
-    }
+    "a": "the_deep_void:disturbing_root",
+    "b": "the_deep_void:infested_rotten_roots",
+    "c": "the_deep_void:esoteric_tome",
+    "d": "the_deep_void:cobbled_ancient_deepslate"
   },
   "result": {
     "count": 1,

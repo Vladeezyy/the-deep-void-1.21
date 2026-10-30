@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:sulfur"
-    }
+    "a": "the_deep_void:sulfur"
   },
   "result": {
     "count": 1,

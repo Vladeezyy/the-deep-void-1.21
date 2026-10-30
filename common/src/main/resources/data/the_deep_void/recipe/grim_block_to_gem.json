@@ -5,9 +5,7 @@
     "a"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:grim_block"
-    }
+    "a": "the_deep_void:grim_block"
   },
   "result": {
     "count": 9,

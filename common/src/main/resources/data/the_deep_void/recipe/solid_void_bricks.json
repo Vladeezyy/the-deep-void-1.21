@@ -6,9 +6,7 @@
     "aa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:solid_void_block"
-    }
+    "a": "the_deep_void:solid_void_block"
   },
   "result": {
     "count": 4,

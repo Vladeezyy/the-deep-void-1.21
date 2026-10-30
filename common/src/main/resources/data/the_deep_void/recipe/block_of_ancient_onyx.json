@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:ancient_onyx"
-    }
+    "a": "the_deep_void:ancient_onyx"
   },
   "result": {
     "count": 1,

@@ -5,9 +5,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:polished_lavendite_block"
-    }
+    "a": "the_deep_void:polished_lavendite_block"
   },
   "result": {
     "count": 6,

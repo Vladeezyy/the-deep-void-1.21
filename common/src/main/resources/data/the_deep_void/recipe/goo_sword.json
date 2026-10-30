@@ -7,18 +7,10 @@
     "cdc"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:goo_ball"
-    },
-    "b": {
-      "item": "the_deep_void:block_of_goo"
-    },
-    "c": {
-      "item": "the_deep_void:bone_crawler_chitin"
-    },
-    "d": {
-      "item": "the_deep_void:rotten_bone"
-    }
+    "a": "the_deep_void:goo_ball",
+    "b": "the_deep_void:block_of_goo",
+    "c": "the_deep_void:bone_crawler_chitin",
+    "d": "the_deep_void:rotten_bone"
   },
   "result": {
     "count": 1,

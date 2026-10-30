@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:bone_crawler_chitin"
-    }
+    "a": "the_deep_void:bone_crawler_chitin"
   },
   "result": {
     "count": 1,

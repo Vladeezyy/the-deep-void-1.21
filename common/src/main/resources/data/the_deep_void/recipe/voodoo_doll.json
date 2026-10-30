@@ -7,21 +7,11 @@
     "bce"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:onyx_needle"
-    },
-    "b": {
-      "item": "the_deep_void:sacred_cinnabar"
-    },
-    "c": {
-      "item": "the_deep_void:soul_fused_ingot"
-    },
-    "d": {
-      "item": "the_deep_void:hexed_doll"
-    },
-    "e": {
-      "item": "the_deep_void:voidrium_gem"
-    }
+    "a": "the_deep_void:onyx_needle",
+    "b": "the_deep_void:sacred_cinnabar",
+    "c": "the_deep_void:soul_fused_ingot",
+    "d": "the_deep_void:hexed_doll",
+    "e": "the_deep_void:voidrium_gem"
   },
   "result": {
     "count": 1,

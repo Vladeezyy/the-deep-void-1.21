@@ -7,15 +7,9 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:redstone_block"
-    },
-    "b": {
-      "item": "the_deep_void:dark_steel_scrap"
-    },
-    "c": {
-      "item": "the_deep_void:smooth_ancient_deepslate"
-    }
+    "a": "minecraft:redstone_block",
+    "b": "the_deep_void:dark_steel_scrap",
+    "c": "the_deep_void:smooth_ancient_deepslate"
   },
   "result": {
     "count": 1,

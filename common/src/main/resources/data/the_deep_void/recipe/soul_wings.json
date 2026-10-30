@@ -7,18 +7,10 @@
     "d d"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:phantom_membrane"
-    },
-    "b": {
-      "item": "the_deep_void:soul_fused_ingot"
-    },
-    "c": {
-      "item": "the_deep_void:rough_voidrium"
-    },
-    "d": {
-      "item": "the_deep_void:soul_shard"
-    }
+    "a": "minecraft:phantom_membrane",
+    "b": "the_deep_void:soul_fused_ingot",
+    "c": "the_deep_void:rough_voidrium",
+    "d": "the_deep_void:soul_shard"
   },
   "result": {
     "count": 1,

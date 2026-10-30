@@ -1,9 +1,7 @@
 {
   "type": "the_deep_void:glutton_block_jei_type",
   "ingredients": [
-    {
-      "tag": "the_deep_void:glutton_givexp"
-    }
+    "#the_deep_void:glutton_givexp"
   ],
   "output": {
     "count": 1,

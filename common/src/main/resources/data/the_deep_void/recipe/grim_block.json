@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:grim_gem"
-    }
+    "a": "the_deep_void:grim_gem"
   },
   "result": {
     "count": 1,

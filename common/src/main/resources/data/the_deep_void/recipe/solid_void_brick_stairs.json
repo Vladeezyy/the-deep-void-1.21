@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "the_deep_void:solid_void_bricks"
-    }
+    "a": "the_deep_void:solid_void_bricks"
   },
   "result": {
     "count": 8,

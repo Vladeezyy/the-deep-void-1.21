@@ -1,0 +1,36 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.sombrius.thedeepvoid.fabric.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BlockItemMixin",
+    "EntityMixin",
+    "EntityTickMixin",
+    "FishingHookMixin",
+    "FurnaceResultSlotMixin",
+    "ItemEntityMixin",
+    "LivingEntityMixin",
+    "MobMixin",
+    "PlayerMixin",
+    "PotionBrewingMixin",
+    "PotionSlotMixin",
+    "ResultSlotMixin",
+    "ServerPlayerGameModeMixin",
+    "ServerPlayerMixin"
+  ],
+  "client": [
+    "client.ClientLevelMixin",
+    "client.EffectRenderingInventoryScreenMixin",
+    "client.FogRendererMixin",
+    "client.GuiMixin",
+    "client.HumanoidModelMixin",
+    "client.ItemInHandRendererMixin",
+    "client.LevelRendererMixin",
+    "client.MultiPlayerGameModeMixin",
+    "client.PlayerRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

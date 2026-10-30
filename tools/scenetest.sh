@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 LOADER=${LOADER:-neoforge}
 case $LOADER in
 	neoforge) PROC='fml.modFolders=the_deep_void' ;;
-	fabric) PROC="$(basename "$PWD")/(fabric/)?\.gradle/loom-cache|deepvoid\.scene" ;;
+	fabric) PROC="fabric\.dli\.config=.*$(basename "$PWD" | sed 's/ /@@0020/g; s/[.+]/\\&/g')/" ;;
 	*) echo "LOADER must be neoforge or fabric"; exit 2 ;;
 esac
 kill_dev() { pkill -f "$PROC" 2>/dev/null; }

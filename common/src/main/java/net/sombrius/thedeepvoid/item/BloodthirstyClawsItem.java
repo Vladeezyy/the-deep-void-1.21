@@ -21,7 +21,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.procedures.BloodthirstyClawsDescriptionProcedure;
 import net.sombrius.thedeepvoid.procedures.BloodthirstyClawsEntitySwingsItemProcedure;
 
-public class BloodthirstyClawsItem extends SwordItem {
+public class BloodthirstyClawsItem extends SwordItem implements net.sombrius.thedeepvoid.port.PortItemHooks.EntitySwing {
 	private static final Tier TOOL_TIER = new Tier() {
 		@Override
 		public int getUses() {

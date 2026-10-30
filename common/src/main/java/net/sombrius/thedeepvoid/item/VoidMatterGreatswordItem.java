@@ -22,7 +22,7 @@ import net.sombrius.thedeepvoid.procedures.VoidMatterGreatswordDescriptionProced
 import net.sombrius.thedeepvoid.procedures.VoidMatterGreatswordEntitySwingsItemProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidMatterGreatswordLivingEntityIsHitWithToolProcedure;
 
-public class VoidMatterGreatswordItem extends SwordItem {
+public class VoidMatterGreatswordItem extends SwordItem implements net.sombrius.thedeepvoid.port.PortItemHooks.EntitySwing {
 	private static final Tier TOOL_TIER = new Tier() {
 		@Override
 		public int getUses() {

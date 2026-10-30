@@ -8,7 +8,7 @@ cd "$(dirname "$0")/.."
 LOADER=${LOADER:-neoforge}
 case $LOADER in
 	neoforge) PROC='fml.modFolders=the_deep_void' ;;
-	fabric) PROC="$(basename "$PWD")/(fabric/)?\.gradle/loom-cache|deepvoid\.scene" ;;
+	fabric) PROC="fabric\.dli\.config=.*$(basename "$PWD" | sed 's/ /@@0020/g; s/[.+]/\\&/g')/" ;;
 esac
 kill_dev() {
     for pid in $(pgrep -f "$PROC"); do jstack "$pid" > build-bench-threads.txt 2>&1; done

@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.sombrius.thedeepvoid.procedures.GrimLickerHookRightClickedProcedure;
 import net.sombrius.thedeepvoid.procedures.LickerHookSwingProcedure;
 
-public class GrimLickerHookItem extends Item {
+public class GrimLickerHookItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.EntitySwing {
 	public GrimLickerHookItem() {
 		super(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON));
 	}

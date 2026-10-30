@@ -51,7 +51,7 @@ configurations {
 }
 
 artifacts {
-    commonStubs sourceSets.stubs.output.classesDirs.singleFile
+    commonStubs(sourceSets.stubs.output.classesDirs.singleFile) { builtBy compileStubsJava }
     commonJava sourceSets.main.java.sourceDirectories.singleFile
     commonResources file('src/main/resources')
 }

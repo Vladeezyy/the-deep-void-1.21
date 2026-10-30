@@ -22,7 +22,7 @@ import net.sombrius.thedeepvoid.procedures.GrimSickleHitProcedure;
 import net.sombrius.thedeepvoid.procedures.ReapingHookEntitySwingsItemProcedure;
 import net.sombrius.thedeepvoid.procedures.ReapingHookSpecialInformationProcedure;
 
-public class GrimSickleItem extends SwordItem {
+public class GrimSickleItem extends SwordItem implements net.sombrius.thedeepvoid.port.PortItemHooks.EntitySwing {
 	private static final Tier TOOL_TIER = new Tier() {
 		@Override
 		public int getUses() {

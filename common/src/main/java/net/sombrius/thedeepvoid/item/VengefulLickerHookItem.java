@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.sombrius.thedeepvoid.procedures.LickerHookSwingProcedure;
 import net.sombrius.thedeepvoid.procedures.VengefulLickerHookRightClickProcedure;
 
-public class VengefulLickerHookItem extends Item {
+public class VengefulLickerHookItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.EntitySwing {
 	public VengefulLickerHookItem() {
 		super(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON));
 	}

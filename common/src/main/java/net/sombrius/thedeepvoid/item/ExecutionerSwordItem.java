@@ -18,7 +18,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.procedures.ExecutionerSwordSwingItemProcedure;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public class ExecutionerSwordItem extends SwordItem {
+public class ExecutionerSwordItem extends SwordItem implements net.sombrius.thedeepvoid.port.PortItemHooks.EntitySwing {
 	private static final Tier TOOL_TIER = new Tier() {
 		@Override
 		public int getUses() {

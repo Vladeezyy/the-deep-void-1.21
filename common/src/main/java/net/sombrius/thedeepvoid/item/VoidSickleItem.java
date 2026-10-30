@@ -22,7 +22,7 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class VoidSickleItem extends SwordItem {
+public class VoidSickleItem extends SwordItem implements net.sombrius.thedeepvoid.port.PortItemHooks.EntitySwing {
 	private static final Tier TOOL_TIER = new Tier() {
 		@Override
 		public int getUses() {

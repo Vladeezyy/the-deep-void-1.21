@@ -237,6 +237,7 @@ def rewrite_code(path, src):
     src = src.replace("net.neoforged.neoforge.event.level.LevelEvent", f"{PKG}.port.bus.LevelEvent")
     # items and effects with client extensions: the loaders find them through these interfaces
     src = implement_owner(src, "public IClientItemExtensions clientExtensions()", f"{PKG}.port.neo.HasClientExtensions.Item")
+    src = implement_owner(src, "public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity)", f"{PKG}.port.PortItemHooks.EntitySwing")
     src = implement_owner(src, "public IClientMobEffectExtensions clientExtensions()", f"{PKG}.port.neo.HasClientExtensions.Effect")
     # client-only members: NeoForge strips @OnlyIn on a dedicated server, Fabric Loader strips @Environment
     src = re.sub(r"(?<![.\w])@OnlyIn\(Dist\.CLIENT\)", "@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)", src)

@@ -29,6 +29,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.HolderLookup;
 
+import net.sombrius.thedeepvoid.port.PortBench;
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 
 import java.util.function.Supplier;
@@ -207,8 +208,10 @@ public class TheDeepVoidModVariables {
 
 		public void syncData(LevelAccessor world) {
 			this.setDirty();
-			if (world instanceof ServerLevel level)
+			if (world instanceof ServerLevel level) {
+				PortBench.syncs++;
 				PacketDistributor.sendToPlayersInDimension(level, new SavedDataSyncMessage(1, this));
+			}
 		}
 
 		static WorldVariables clientSide = new WorldVariables();
@@ -286,8 +289,10 @@ public class TheDeepVoidModVariables {
 
 		public void syncData(LevelAccessor world) {
 			this.setDirty();
-			if (world instanceof Level && !world.isClientSide())
+			if (world instanceof Level && !world.isClientSide()) {
+				PortBench.syncs++;
 				PacketDistributor.sendToAllPlayers(new SavedDataSyncMessage(0, this));
+			}
 		}
 
 		static MapVariables clientSide = new MapVariables();
@@ -633,8 +638,10 @@ public class TheDeepVoidModVariables {
 		}
 
 		public void syncPlayerVariables(Entity entity) {
-			if (entity instanceof ServerPlayer serverPlayer)
+			if (entity instanceof ServerPlayer serverPlayer) {
+				PortBench.syncs++;
 				PacketDistributor.sendToPlayer(serverPlayer, new PlayerVariablesSyncMessage(this));
+			}
 		}
 	}
 

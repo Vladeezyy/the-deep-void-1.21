@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.port;
 
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.LevelSettings;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.EntityType;
@@ -36,6 +38,7 @@ import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.Minecraft;
 
+import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 
 import java.util.function.Consumer;
@@ -48,7 +51,8 @@ import com.mojang.datafixers.util.Pair;
  * Development scene, inert unless the {@code deepvoid.scene} system property is set ({@code ./gradlew runScene}): creates or
  * opens the world {@code dv_scene} (seed 1234), visits Deep Void biomes, spawns some of the mod's mobs and saves
  * {@code run/screenshots/scene_*.png}, then quits. With {@code -Pscene=lang} it only prints some of the mod's translated texts
- * to the chat and saves {@code scene_lang_<language>.png}.
+ * to the chat and saves {@code scene_lang_<language>.png}. With {@code -Pscene=bench} it measures the tick cost of the mod's
+ * tick handlers ({@link PortBench}, {@code tools/bench.sh}).
  */
 @EventBusSubscriber(modid = TheDeepVoidMod.MODID, value = Dist.CLIENT)
 public final class DevScene {
@@ -57,7 +61,8 @@ public final class DevScene {
 	private static final List<String> LANG_KEYS = List.of("item.the_deep_void.void_pendant", "item.the_deep_void.void_pendant.descr1", "biome.the_deep_void.misted_remnants",
 			"entity.the_deep_void.stalker", "text.the_deep_void.port.the_stalker_is_after_you", "text.the_deep_void.port.press_shift_to_show_abilities", "effect.the_deep_void.hexed.description",
 			"entity.the_deep_void.undertaker.canopy1");
-	private static final String WORLD = LANG_ONLY ? "dv_lang" : "dv_scene";
+	private static final boolean BENCH = "bench".equals(System.getProperty("deepvoid.scene"));
+	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : "dv_scene";
 	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
 	private static final List<Pair<Integer, Consumer<Minecraft>>> STEPS = new ArrayList<>();
 	private static boolean opened;
@@ -72,7 +77,10 @@ public final class DevScene {
 			MinecraftServer server = p.getServer();
 			server.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
 		}));
-		if (LANG_ONLY) {
+		if (BENCH) {
+			NeoForge.EVENT_BUS.register(PortBench.class);
+			bench();
+		} else if (LANG_ONLY) {
 			at(100, mc -> server(mc, p -> LANG_KEYS.forEach(key -> p.sendSystemMessage(Component.translatable(key)))));
 			at(140, mc -> shot(mc, "lang_" + mc.options.languageCode));
 			at(160, Minecraft::stop);
@@ -97,6 +105,86 @@ public final class DevScene {
 		at(t + 300, mc -> server(mc, DevScene::mobs2));
 		at(t + 380, mc -> shot(mc, "mobs2"));
 		at(t + 400, Minecraft::stop);
+	}
+
+	/**
+	 * Three places, each with 100 pigs without AI around a survival player: the overworld, the Forgotten Valley of the Deep
+	 * Void, and the same with a stalker, a watching stalker, an overseer and a void dweller behind the player (the handlers
+	 * that look for them then run their inner loops). Each place is measured 4 times for 200 ticks, alternating the base
+	 * line (the mod's tick handlers off the event bus) and the mod, then once more with each player tick handler timed on its own.
+	 */
+	private static void bench() {
+		at(41, mc -> {
+			mc.options.framerateLimit().set(260);
+			mc.options.enableVsync().set(false);
+			mc.options.renderDistance().set(12);
+			mc.options.simulationDistance().set(10);
+		});
+		int t = 100;
+		t = benchPhase(t, "overworld", p -> p.teleportTo(p.getServer().overworld(), 0.5, 200, 0.5, 0F, 20F), false);
+		t = benchPhase(t, "deep_void", p -> go(p, "forgotten_valley"), false);
+		t = benchPhase(t, "deep_void_mobs", p -> go(p, "forgotten_valley"), true);
+		at(t, mc -> PortBench.summary());
+		at(t + 20, Minecraft::stop);
+	}
+
+	private static int benchPhase(int t, String phase, Consumer<ServerPlayer> place, boolean modMobs) {
+		at(t, mc -> server(mc, p -> {
+			PortBench.setModTickHandlers(true);
+			p.setGameMode(GameType.CREATIVE);
+			p.getAbilities().flying = true;
+			p.onUpdateAbilities();
+			place.accept(p);
+		}));
+		at(t + 160, mc -> server(mc, DevScene::settle));
+		at(t + 200, mc -> server(mc, p -> {
+			ServerLevel level = p.serverLevel();
+			for (Entity e : level.getEntities((Entity) null, p.getBoundingBox().inflate(128), e -> !(e instanceof Player)))
+				e.discard();
+			p.setGameMode(GameType.SURVIVAL);
+			p.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1000000, 4, false, false));
+			p.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1000000, 0, false, false));
+			level.getServer().getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, level.getServer());
+			level.getServer().overworld().setDayTime(6000);
+			for (int i = 0; i < 100; i++) {
+				double angle = i * 2.4, r = 8 + (i % 17);
+				spawnNoAi(level, EntityType.PIG, p.getX() + Math.cos(angle) * r, p.getZ() + Math.sin(angle) * r);
+			}
+			if (modMobs) {
+				int i = 0;
+				for (String id : List.of("stalker", "watching_stalker", "overseer", "void_dweller")) {
+					double angle = Math.toRadians(p.getYRot() - 90 - 30 + i++ * 20); // behind the player, out of its sight
+					spawnNoAi(level, BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, id)), p.getX() + Math.cos(angle) * 12,
+							p.getZ() + Math.sin(angle) * 12);
+				}
+			}
+		}));
+		t += 300;
+		for (int k = 0; k < 4; k++) {
+			boolean mod = k % 2 == 1;
+			at(t, mc -> server(mc, p -> {
+				PortBench.setModTickHandlers(mod);
+				p.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).StalkerCount = 0; // no stalker spawns during the windows
+			}));
+			at(t + 60, mc -> server(mc, p -> PortBench.begin()));
+			at(t + 260, mc -> server(mc, p -> PortBench.end(phase)));
+			t += 280;
+		}
+		at(t, mc -> server(mc, p -> PortBench.setProfiling(true)));
+		at(t + 60, mc -> server(mc, p -> PortBench.begin()));
+		at(t + 260, mc -> server(mc, p -> {
+			PortBench.end(phase);
+			PortBench.setProfiling(false);
+		}));
+		return t + 280;
+	}
+
+	private static void spawnNoAi(ServerLevel level, EntityType<?> type, double x, double z) {
+		BlockPos pos = BlockPos.containing(x, level.getHeight(Heightmap.Types.MOTION_BLOCKING, (int) Math.floor(x), (int) Math.floor(z)), z);
+		if (type.spawn(level, pos, MobSpawnType.COMMAND) instanceof Mob mob) {
+			mob.setNoAi(true);
+			mob.setPersistenceRequired();
+		}
 	}
 
 	private static void at(int t, Consumer<Minecraft> action) {

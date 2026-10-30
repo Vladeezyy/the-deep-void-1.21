@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
@@ -16,6 +17,8 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class AmbientSoundProcedure {
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().getY(), event.getEntity());
@@ -28,7 +31,7 @@ public class AmbientSoundProcedure {
 	private static void execute(@Nullable Event event, double y, Entity entity) {
 		if (entity == null)
 			return;
-		if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"))) {
+		if ((entity.level().dimension()) == DIM_DEEP_VOID) {
 			if (y >= 20) {
 				if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).ForgottenValleyAmbientSound >= 12000) {
 					{

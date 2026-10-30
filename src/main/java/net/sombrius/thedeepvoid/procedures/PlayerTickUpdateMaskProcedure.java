@@ -17,6 +17,8 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class PlayerTickUpdateMaskProcedure {
+	private static final ResourceLocation ID_A2A1826B_7829_42ED_986E_984EBF45427B = ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b");
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity());
@@ -36,7 +38,7 @@ public class PlayerTickUpdateMaskProcedure {
 					_vars.healthBoostLevel = 0;
 					_vars.syncPlayerVariables(entity);
 				}
-				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"));
+				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ID_A2A1826B_7829_42ED_986E_984EBF45427B);
 			}
 		}
 		if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_HELMET.get())

@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortEntities;
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -45,7 +46,7 @@ public class PlayerLooksAtStalkingProcedure {
 		if (entity == null)
 			return;
 		double distance = 0;
-		if (!world.getEntitiesOfClass(OverseerEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50), e -> true).isEmpty()) {
+		if (!PortEntities.find(world, OverseerEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50)).isEmpty()) {
 			if (!(new Object() {
 				public boolean checkGamemode(Entity _ent) {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
@@ -71,19 +72,19 @@ public class PlayerLooksAtStalkingProcedure {
 				for (int index0 = 0; index0 < 40; index0++) {
 					{
 						final Vec3 _center = new Vec3((entity.getX() + entity.getLookAngle().x * distance), (entity.getY() + entity.getLookAngle().y * distance), (entity.getZ() + entity.getLookAngle().z * distance));
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(5 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+						List<? extends Entity> _entfound = PortEntities.find(world, OverseerEntity.class, new AABB(_center, _center).inflate(5 / 2d)).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof OverseerEntity) {
 								if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 									_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.LOOKING, 5, 0, false, false));
-								if (!(!world.getEntitiesOfClass(OverseerPillarEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 1, 1, 1), e -> true).isEmpty())) {
+								if (!(!PortEntities.find(world, OverseerPillarEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 1, 1, 1)).isEmpty())) {
 									if (world instanceof ServerLevel _level) {
 										Entity entityToSpawn = TheDeepVoidModEntities.OVERSEER_PILLAR.get().spawn(_level, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), MobSpawnType.MOB_SUMMONED);
 										if (entityToSpawn != null) {
 											entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 										}
 									}
-									if (((Entity) world.getEntitiesOfClass(OverseerPillarEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 2, 2, 2), e -> true).stream()
+									if (((Entity) PortEntities.find(world, OverseerPillarEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 2, 2, 2)).stream()
 											.sorted(new Object() {
 												Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 													return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
@@ -101,7 +102,7 @@ public class PlayerLooksAtStalkingProcedure {
 				}
 			}
 		}
-		if (!world.getEntitiesOfClass(BigOverseerEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50), e -> true).isEmpty()) {
+		if (!PortEntities.find(world, BigOverseerEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50)).isEmpty()) {
 			if (!(new Object() {
 				public boolean checkGamemode(Entity _ent) {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
@@ -127,19 +128,19 @@ public class PlayerLooksAtStalkingProcedure {
 				for (int index1 = 0; index1 < 40; index1++) {
 					{
 						final Vec3 _center = new Vec3((entity.getX() + entity.getLookAngle().x * distance), (entity.getY() + entity.getLookAngle().y * distance), (entity.getZ() + entity.getLookAngle().z * distance));
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(5 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+						List<? extends Entity> _entfound = PortEntities.find(world, BigOverseerEntity.class, new AABB(_center, _center).inflate(5 / 2d)).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof BigOverseerEntity) {
 								if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 									_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.LOOKING, 5, 0, false, false));
-								if (!(!world.getEntitiesOfClass(OverseerBigPillarEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 1, 1, 1), e -> true).isEmpty())) {
+								if (!(!PortEntities.find(world, OverseerBigPillarEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 1, 1, 1)).isEmpty())) {
 									if (world instanceof ServerLevel _level) {
 										Entity entityToSpawn = TheDeepVoidModEntities.OVERSEER_BIG_PILLAR.get().spawn(_level, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), MobSpawnType.MOB_SUMMONED);
 										if (entityToSpawn != null) {
 											entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 										}
 									}
-									if (((Entity) world.getEntitiesOfClass(OverseerBigPillarEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 2, 2, 2), e -> true).stream()
+									if (((Entity) PortEntities.find(world, OverseerBigPillarEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 2, 2, 2)).stream()
 											.sorted(new Object() {
 												Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 													return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
@@ -157,7 +158,7 @@ public class PlayerLooksAtStalkingProcedure {
 				}
 			}
 		}
-		if (!world.getEntitiesOfClass(OverseerPillarEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50), e -> true).isEmpty()) {
+		if (!PortEntities.find(world, OverseerPillarEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50)).isEmpty()) {
 			if (!(new Object() {
 				public boolean checkGamemode(Entity _ent) {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
@@ -183,7 +184,7 @@ public class PlayerLooksAtStalkingProcedure {
 				for (int index2 = 0; index2 < 40; index2++) {
 					{
 						final Vec3 _center = new Vec3((entity.getX() + entity.getLookAngle().x * distance), (entity.getY() + entity.getLookAngle().y * distance), (entity.getZ() + entity.getLookAngle().z * distance));
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(5 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+						List<? extends Entity> _entfound = PortEntities.find(world, OverseerPillarEntity.class, new AABB(_center, _center).inflate(5 / 2d)).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof OverseerPillarEntity) {
 								if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -195,7 +196,7 @@ public class PlayerLooksAtStalkingProcedure {
 				}
 			}
 		}
-		if (!world.getEntitiesOfClass(OverseerBigPillarEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50), e -> true).isEmpty()) {
+		if (!PortEntities.find(world, OverseerBigPillarEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50)).isEmpty()) {
 			if (!(new Object() {
 				public boolean checkGamemode(Entity _ent) {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
@@ -221,7 +222,7 @@ public class PlayerLooksAtStalkingProcedure {
 				for (int index3 = 0; index3 < 40; index3++) {
 					{
 						final Vec3 _center = new Vec3((entity.getX() + entity.getLookAngle().x * distance), (entity.getY() + entity.getLookAngle().y * distance), (entity.getZ() + entity.getLookAngle().z * distance));
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(5 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+						List<? extends Entity> _entfound = PortEntities.find(world, OverseerBigPillarEntity.class, new AABB(_center, _center).inflate(5 / 2d)).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof OverseerBigPillarEntity) {
 								if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -233,7 +234,7 @@ public class PlayerLooksAtStalkingProcedure {
 				}
 			}
 		}
-		if (!world.getEntitiesOfClass(AmalgamEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50), e -> true).isEmpty()) {
+		if (!PortEntities.find(world, AmalgamEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50)).isEmpty()) {
 			if (!(new Object() {
 				public boolean checkGamemode(Entity _ent) {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
@@ -259,7 +260,7 @@ public class PlayerLooksAtStalkingProcedure {
 				for (int index4 = 0; index4 < 40; index4++) {
 					{
 						final Vec3 _center = new Vec3((entity.getX() + entity.getLookAngle().x * distance), (entity.getY() + entity.getLookAngle().y * distance), (entity.getZ() + entity.getLookAngle().z * distance));
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(8 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+						List<? extends Entity> _entfound = PortEntities.find(world, AmalgamEntity.class, new AABB(_center, _center).inflate(8 / 2d)).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof AmalgamEntity) {
 								if (!(!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 30, 30, 30), e -> true).isEmpty())

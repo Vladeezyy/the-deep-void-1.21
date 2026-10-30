@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -14,6 +15,8 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class PlayerIsInThePitProcedure {
+	private static final ResourceKey<Level> DIM_THE_PIT = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:the_pit"));
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity());
@@ -26,7 +29,7 @@ public class PlayerIsInThePitProcedure {
 	private static void execute(@Nullable Event event, Entity entity) {
 		if (entity == null)
 			return;
-		if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:the_pit"))
+		if ((entity.level().dimension()) == DIM_THE_PIT
 				&& entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).playMusicPit == true) {
 			if (!entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).MusicLock) {
 				{

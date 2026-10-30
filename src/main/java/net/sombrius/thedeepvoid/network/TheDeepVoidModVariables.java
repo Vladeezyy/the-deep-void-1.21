@@ -29,6 +29,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.HolderLookup;
 
+import net.sombrius.thedeepvoid.port.PortSync;
 import net.sombrius.thedeepvoid.port.PortBench;
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 
@@ -638,7 +639,7 @@ public class TheDeepVoidModVariables {
 		}
 
 		public void syncPlayerVariables(Entity entity) {
-			if (entity instanceof ServerPlayer serverPlayer) {
+			if (entity instanceof ServerPlayer serverPlayer && !PortSync.defer(serverPlayer)) {
 				PortBench.syncs++;
 				PacketDistributor.sendToPlayer(serverPlayer, new PlayerVariablesSyncMessage(this));
 			}

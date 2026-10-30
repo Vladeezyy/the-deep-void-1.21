@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.sombrius.thedeepvoid.port.PortUtil;
 
 import java.util.UUID;
@@ -31,6 +33,12 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 
 @EventBusSubscriber
 public class BoneWalkerOnBootsProcedure {
+	private static final ResourceLocation ID_17F680A8_8450_45E4_9EC0_26712E00F05C = ResourceLocation.fromNamespaceAndPath("the_deep_void", "17f680a8-8450-45e4-9ec0-26712e00f05c");
+	private static final ResourceLocation ID_9618D7A9_FB3B_497D_8FAA_4E8AEE6459AE = ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae");
+
+	private static final TagKey<Block> BLOCK_TAG_FLESH_BLOCKS = BlockTags.create(ResourceLocation.parse("the_deep_void:flesh_blocks"));
+	private static final TagKey<Block> BLOCK_TAG_NATURAL_BONE_BLOCK = BlockTags.create(ResourceLocation.parse("the_deep_void:natural_bone_block"));
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().level(), event.getEntity());
@@ -60,12 +68,12 @@ public class BoneWalkerOnBootsProcedure {
 			}
 		}
 		if (PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0
-				&& (world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:natural_bone_block")))) {
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae")) != null)) {
+				&& (world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BLOCK_TAG_NATURAL_BONE_BLOCK)) {
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ID_9618D7A9_FB3B_497D_8FAA_4E8AEE6459AE) != null)) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
-						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae"))))
+						.hasModifier(ID_9618D7A9_FB3B_497D_8FAA_4E8AEE6459AE)))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
-							.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae"),
+							.addTransientModifier((new AttributeModifier(ID_9618D7A9_FB3B_497D_8FAA_4E8AEE6459AE,
 									(PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) * 0.105 + 1.18),
 									AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
 			}
@@ -103,35 +111,35 @@ public class BoneWalkerOnBootsProcedure {
 			}
 		} else if ((!(PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0)
 				|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0
-						&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:natural_bone_block"))))
-				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae")) != null) {
+						&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BLOCK_TAG_NATURAL_BONE_BLOCK))
+				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ID_9618D7A9_FB3B_497D_8FAA_4E8AEE6459AE) != null) {
 			TheDeepVoidMod.queueServerWork(15, () -> {
 				if ((!(PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0)
 						|| PortUtil.enchantmentLevel((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY), TheDeepVoidModEnchantments.BONE_WALKER) != 0
-								&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:natural_bone_block"))))
-						&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae")) != null) {
-					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae"));
+								&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BLOCK_TAG_NATURAL_BONE_BLOCK))
+						&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ID_9618D7A9_FB3B_497D_8FAA_4E8AEE6459AE) != null) {
+					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).removeModifier(ID_9618D7A9_FB3B_497D_8FAA_4E8AEE6459AE);
 				}
 			});
 		}
 		if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ICHOR_STRIDER_BOOTS.get()
-				&& (world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:flesh_blocks")))) {
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "17f680a8-8450-45e4-9ec0-26712e00f05c")) != null)) {
+				&& (world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BLOCK_TAG_FLESH_BLOCKS)) {
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ID_17F680A8_8450_45E4_9EC0_26712E00F05C) != null)) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
-						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "17f680a8-8450-45e4-9ec0-26712e00f05c"))))
+						.hasModifier(ID_17F680A8_8450_45E4_9EC0_26712E00F05C)))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
-							.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "17f680a8-8450-45e4-9ec0-26712e00f05c"), 1.35, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
+							.addTransientModifier((new AttributeModifier(ID_17F680A8_8450_45E4_9EC0_26712E00F05C, 1.35, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
 			}
 		} else if ((!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ICHOR_STRIDER_BOOTS.get())
 				|| (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ICHOR_STRIDER_BOOTS.get()
-						&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:flesh_blocks"))))
-				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "17f680a8-8450-45e4-9ec0-26712e00f05c")) != null) {
+						&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BLOCK_TAG_FLESH_BLOCKS))
+				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ID_17F680A8_8450_45E4_9EC0_26712E00F05C) != null) {
 			TheDeepVoidMod.queueServerWork(15, () -> {
 				if ((!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ICHOR_STRIDER_BOOTS.get())
 						|| (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ICHOR_STRIDER_BOOTS.get()
-								&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:flesh_blocks"))))
-						&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "17f680a8-8450-45e4-9ec0-26712e00f05c")) != null) {
-					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "17f680a8-8450-45e4-9ec0-26712e00f05c"));
+								&& !(world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ()))).is(BLOCK_TAG_FLESH_BLOCKS))
+						&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).getModifier(ID_17F680A8_8450_45E4_9EC0_26712E00F05C) != null) {
+					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED).removeModifier(ID_17F680A8_8450_45E4_9EC0_26712E00F05C);
 				}
 			});
 		}

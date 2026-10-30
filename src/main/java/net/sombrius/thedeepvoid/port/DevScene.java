@@ -159,7 +159,7 @@ public final class DevScene {
 				}
 			}
 		}));
-		t += 300;
+		t += 600; // the biome search and the new chunks hold the server up to ~15 s after the teleport
 		for (int k = 0; k < 4; k++) {
 			boolean mod = k % 2 == 1;
 			at(t, mc -> server(mc, p -> {
@@ -172,6 +172,10 @@ public final class DevScene {
 		}
 		at(t, mc -> server(mc, p -> PortBench.setProfiling(true)));
 		at(t + 60, mc -> server(mc, p -> PortBench.begin()));
+		at(t + 250, mc -> {
+			TheDeepVoidMod.LOGGER.info("[bench] index phase={} client {}", phase, PortEntities.check(mc.level, mc.player.getX(), mc.player.getY(), mc.player.getZ()));
+			server(mc, p -> TheDeepVoidMod.LOGGER.info("[bench] index phase={} server {}", phase, PortEntities.check(p.level(), p.getX(), p.getY(), p.getZ())));
+		});
 		at(t + 260, mc -> server(mc, p -> {
 			PortBench.end(phase);
 			PortBench.setProfiling(false);

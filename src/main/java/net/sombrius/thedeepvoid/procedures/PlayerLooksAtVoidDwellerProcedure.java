@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortEntities;
+import net.minecraft.world.level.Level;
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -23,6 +25,8 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class PlayerLooksAtVoidDwellerProcedure {
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity());
@@ -36,12 +40,12 @@ public class PlayerLooksAtVoidDwellerProcedure {
 		if (entity == null)
 			return;
 		double distance = 0;
-		if (!world.getEntitiesOfClass(VoidDwellerEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50), e -> true).isEmpty()) {
+		if (!PortEntities.find(world, VoidDwellerEntity.class, AABB.ofSize(new Vec3(x, y, z), 50, 50, 50)).isEmpty()) {
 			distance = 1;
 			for (int index0 = 0; index0 < 20; index0++) {
 				{
 					final Vec3 _center = new Vec3((entity.getX() + entity.getLookAngle().x * distance), (entity.getY() + entity.getLookAngle().y * distance), (entity.getZ() + entity.getLookAngle().z * distance));
-					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(1 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+					List<? extends Entity> _entfound = PortEntities.find(world, VoidDwellerEntity.class, new AABB(_center, _center).inflate(1 / 2d)).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof VoidDwellerEntity) {
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -54,7 +58,7 @@ public class PlayerLooksAtVoidDwellerProcedure {
 				distance = distance + 1;
 			}
 		}
-		if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).StalkerCount > 0 && !((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void")))
+		if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).StalkerCount > 0 && !((entity.level().dimension()) == DIM_DEEP_VOID)
 				&& DeepVoidConfigConfiguration.STALKED.get() == false) {
 			{
 				TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);

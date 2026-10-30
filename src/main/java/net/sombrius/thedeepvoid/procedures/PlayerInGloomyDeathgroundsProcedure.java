@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortEntities;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandSource;
@@ -33,6 +34,13 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class PlayerInGloomyDeathgroundsProcedure {
+	private static final ResourceLocation BIOME_CRAWLER_NEST = ResourceLocation.parse("the_deep_void:crawler_nest");
+	private static final ResourceLocation BIOME_DRIFTING_MONOLITHS = ResourceLocation.parse("the_deep_void:drifting_monoliths");
+	private static final ResourceLocation BIOME_GAOL_OF_HERETICS = ResourceLocation.parse("the_deep_void:gaol_of_heretics");
+	private static final ResourceLocation BIOME_GATHERING_GROUNDS = ResourceLocation.parse("the_deep_void:gathering_grounds");
+	private static final ResourceLocation BIOME_MISTED_REMNANTS = ResourceLocation.parse("the_deep_void:misted_remnants");
+	private static final ResourceLocation BIOME_THE_GAOL = ResourceLocation.parse("the_deep_void:the_gaol");
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity());
@@ -45,7 +53,7 @@ public class PlayerInGloomyDeathgroundsProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:gathering_grounds"))) {
+		if (world.getBiome(BlockPos.containing(x, y, z)).is(BIOME_GATHERING_GROUNDS)) {
 			if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).gatheringAmbience >= 400) {
 				{
 					TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);
@@ -68,7 +76,7 @@ public class PlayerInGloomyDeathgroundsProcedure {
 					_vars.syncPlayerVariables(entity);
 				}
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:misted_remnants"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(BIOME_MISTED_REMNANTS)) {
 			if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).mistedRemnantAmbience >= 2000) {
 				{
 					TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);
@@ -201,12 +209,12 @@ public class PlayerInGloomyDeathgroundsProcedure {
 					}
 					return false;
 				}
-			}.checkGamemode(entity)) && !(!world.getEntitiesOfClass(FalseHydraEntity.class, AABB.ofSize(new Vec3(x, y, z), 64, 64, 64), e -> true).isEmpty()) && TheDeepVoidModVariables.MapVariables.get(world).hydraKilled == false
+			}.checkGamemode(entity)) && !(!PortEntities.find(world, FalseHydraEntity.class, AABB.ofSize(new Vec3(x, y, z), 64, 64, 64)).isEmpty()) && TheDeepVoidModVariables.MapVariables.get(world).hydraKilled == false
 					&& DeepVoidConfigConfiguration.DOBRAINFOG.get() == true) {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.BRAIN_FOG, (int) (double) DeepVoidConfigConfiguration.BRAINFOGDURATION.get(), 0, false, false));
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:drifting_monoliths"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(BIOME_DRIFTING_MONOLITHS)) {
 			if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).monolithAmbience >= 700) {
 				{
 					TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);
@@ -237,7 +245,7 @@ public class PlayerInGloomyDeathgroundsProcedure {
 					_vars.syncPlayerVariables(entity);
 				}
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:crawler_nest"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(BIOME_CRAWLER_NEST)) {
 			if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).nestAmbience >= 300) {
 				{
 					TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);
@@ -268,7 +276,7 @@ public class PlayerInGloomyDeathgroundsProcedure {
 					_vars.syncPlayerVariables(entity);
 				}
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:gaol_of_heretics")) || world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:the_gaol"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(BIOME_GAOL_OF_HERETICS) || world.getBiome(BlockPos.containing(x, y, z)).is(BIOME_THE_GAOL)) {
 			if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).gaol_ambience >= 500) {
 				{
 					TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);

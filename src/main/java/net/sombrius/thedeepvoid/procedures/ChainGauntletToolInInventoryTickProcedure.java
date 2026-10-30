@@ -15,6 +15,8 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 @EventBusSubscriber
 public class ChainGauntletToolInInventoryTickProcedure {
+	private static final ResourceLocation ID_01387B5F_4DBD_4D94_B869_7F35D57D896E = ResourceLocation.fromNamespaceAndPath("the_deep_void", "01387b5f-4dbd-4d94-b869-7f35d57d896e");
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity());
@@ -28,8 +30,8 @@ public class ChainGauntletToolInInventoryTickProcedure {
 		if (entity == null)
 			return;
 		if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CHAIN_GAUNTLET.get())
-				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "01387b5f-4dbd-4d94-b869-7f35d57d896e")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "01387b5f-4dbd-4d94-b869-7f35d57d896e"));
+				&& ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).getModifier(ID_01387B5F_4DBD_4D94_B869_7F35D57D896E) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).removeModifier(ID_01387B5F_4DBD_4D94_B869_7F35D57D896E);
 		}
 	}
 }

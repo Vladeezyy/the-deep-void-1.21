@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortEntities;
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -25,6 +26,8 @@ import net.sombrius.thedeepvoid.entity.WatchingStalkerEntity;
 
 @EventBusSubscriber
 public class StalkingStalkerLookedAtProcedure {
+	private static final ResourceLocation BIOME_MISTED_REMNANTS = ResourceLocation.parse("the_deep_void:misted_remnants");
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity());
@@ -57,15 +60,15 @@ public class StalkingStalkerLookedAtProcedure {
 				return false;
 			}
 		}.checkGamemode(entity))) {
-			if (!world.getEntitiesOfClass(WatchingStalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 250, 250, 250), e -> true).isEmpty()) {
+			if (!PortEntities.find(world, WatchingStalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 250, 250, 250)).isEmpty()) {
 				distance = 1;
 				for (int index0 = 0; index0 < 20; index0++) {
 					{
 						final Vec3 _center = new Vec3((entity.getX() + entity.getLookAngle().x * distance), (entity.getY() + entity.getLookAngle().y * distance), (entity.getZ() + entity.getLookAngle().z * distance));
-						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(4 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+						List<? extends Entity> _entfound = PortEntities.find(world, WatchingStalkerEntity.class, new AABB(_center, _center).inflate(4 / 2d)).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof WatchingStalkerEntity) {
-								if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:misted_remnants"))) {
+								if (world.getBiome(BlockPos.containing(x, y, z)).is(BIOME_MISTED_REMNANTS)) {
 									if (!entityiterator.level().isClientSide())
 										entityiterator.discard();
 								} else {

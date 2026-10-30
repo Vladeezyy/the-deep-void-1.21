@@ -1,5 +1,8 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortEntities;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -31,6 +34,9 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class SpawnUndertakerInDeepVoidProcedure {
+	private static final TagKey<Biome> BIOME_TAG_UNDERTAKER_CANNOT_SPAWN = TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:undertaker_cannot_spawn"));
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().level(), event.getEntity());
@@ -50,10 +56,10 @@ public class SpawnUndertakerInDeepVoidProcedure {
 		if (DeepVoidConfigConfiguration.SPAWNUNDERTAKER.get() == true) {
 			if (TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn > 0 && world.getLevelData().getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) == true) {
 				TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn = TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn - 1 / (world.players().size() <= 0 ? 1 : world.players().size());
-				TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
+				TheDeepVoidModVariables.MapVariables.get(world).setDirty(); // only the server reads it: saved, not sent every tick
 			} else if (TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn <= 0 && world.getLevelData().getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) == true
 					&& !(entity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(TheDeepVoidModMobEffects.WEAVER_CURSE)) && !(entity instanceof LivingEntity _livEnt6 && _livEnt6.hasEffect(TheDeepVoidModMobEffects.CALL_OF_THE_VOID))
-					&& (entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"))) {
+					&& (entity.level().dimension()) == DIM_DEEP_VOID) {
 				TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn = (double) DeepVoidConfigConfiguration.UNDERTAKERSPAWNTIMER.get();
 				TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
 				if (Math.random() < (double) DeepVoidConfigConfiguration.UNDERTAKERSPAWNCHANCE.get()) {
@@ -63,9 +69,9 @@ public class SpawnUndertakerInDeepVoidProcedure {
 						rndZ = entity.getZ() + Mth.nextInt(RandomSource.create(), -48, 48);
 						if (world.isEmptyBlock(BlockPos.containing(rndX, rndY, rndZ)) && world.isEmptyBlock(BlockPos.containing(rndX, rndY + 1, rndZ)) && world.getBlockState(BlockPos.containing(rndX, rndY - 1, rndZ)).canOcclude()
 								&& world.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int) rndX, (int) rndZ) == rndY
-								&& !(!world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(rndX, rndY, rndZ), 96, 96, 96), e -> true).isEmpty())
-								&& !(!world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3(rndX, rndY, rndZ), 96, 96, 96), e -> true).isEmpty())
-								&& !world.getBiome(BlockPos.containing(rndX, rndY, rndZ)).is(TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:undertaker_cannot_spawn")))) {
+								&& !(!PortEntities.find(world, UndertakerEntity.class, AABB.ofSize(new Vec3(rndX, rndY, rndZ), 96, 96, 96)).isEmpty())
+								&& !(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3(rndX, rndY, rndZ), 96, 96, 96)).isEmpty())
+								&& !world.getBiome(BlockPos.containing(rndX, rndY, rndZ)).is(BIOME_TAG_UNDERTAKER_CANNOT_SPAWN)) {
 							if (world instanceof ServerLevel _serverLevel) {
 								Entity entityinstance = TheDeepVoidModEntities.UNDERTAKER.get().create(_serverLevel, null, BlockPos.containing(rndX, rndY, rndZ), MobSpawnType.MOB_SUMMONED, false, false);
 								if (entityinstance != null) {

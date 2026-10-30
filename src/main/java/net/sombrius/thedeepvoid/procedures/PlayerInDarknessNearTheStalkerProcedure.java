@@ -1,5 +1,8 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortEntities;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -39,6 +42,9 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class PlayerInDarknessNearTheStalkerProcedure {
+	private static final TagKey<Block> BLOCK_TAG_LIGHT_CANNOT_REACH = BlockTags.create(ResourceLocation.parse("the_deep_void:light_cannot_reach"));
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity());
@@ -51,7 +57,7 @@ public class PlayerInDarknessNearTheStalkerProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void")) || (entity.level().dimension()) == Level.OVERWORLD && DeepVoidConfigConfiguration.STALKED.get() == true) {
+		if ((entity.level().dimension()) == DIM_DEEP_VOID || (entity.level().dimension()) == Level.OVERWORLD && DeepVoidConfigConfiguration.STALKED.get() == true) {
 			if (!(new Object() {
 				public boolean checkGamemode(Entity _ent) {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
@@ -73,7 +79,7 @@ public class PlayerInDarknessNearTheStalkerProcedure {
 					return false;
 				}
 			}.checkGamemode(entity))) {
-				if (!(!world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 180, 180, 180), e -> true).isEmpty())) {
+				if (!(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 180, 180, 180)).isEmpty())) {
 					if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y, z)) <= (double) DeepVoidConfigConfiguration.STALKERLIGHTLEVEL.get()) {
 						if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).StalkerCount >= (double) DeepVoidConfigConfiguration.STALKERSPAWNTIMER.get()) {
 							{
@@ -144,7 +150,7 @@ public class PlayerInDarknessNearTheStalkerProcedure {
 								});
 							}
 						}
-						if ((world.getBlockState(BlockPos.containing(x, y - 0.5, z))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:light_cannot_reach")))
+						if ((world.getBlockState(BlockPos.containing(x, y - 0.5, z))).is(BLOCK_TAG_LIGHT_CANNOT_REACH)
 								&& world.getMaxLocalRawBrightness(BlockPos.containing(x, y + 1, z)) > (double) DeepVoidConfigConfiguration.STALKERLIGHTLEVEL.get()) {
 							if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).StalkerCount > 0) {
 								{

@@ -4,9 +4,13 @@
   "package": "net.sombrius.thedeepvoid.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "AbstractArrowMixin"
+    "AbstractArrowMixin",
+    "LevelMixin",
+    "ServerLevelEntityCallbacksMixin"
   ],
-  "client": [],
+  "client": [
+    "ClientLevelEntityCallbacksMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

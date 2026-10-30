@@ -17,6 +17,6 @@ rm -rf run/saves/dv_bench
 run_watched "$LOG" 1200 ./gradlew runScene -Pscene=bench --console=plain
 code=$?
 grep -E 'Minecraft Crash Report|HUNG' "$LOG" | head -3
-grep -oE '\[bench\] (phase|profile).*' "$LOG" | tee -a "build/bench/$label.txt"
+grep -oE '\[bench\] (phase|profile|index).*' "$LOG" | tee -a "build/bench/$label.txt"
 exit $code
 }

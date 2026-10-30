@@ -119,9 +119,17 @@ import net.sombrius.thedeepvoid.entity.WeaverOfSoulsBossEntity;
 
 @EventBusSubscriber
 public class EntityAnimationFactory {
+	/** Port: every entity ticks through here; only the mod's own classes go on to the ~110 instanceof checks. */
+	private static final ClassValue<Boolean> MOD_ENTITY = new ClassValue<>() {
+		@Override
+		protected Boolean computeValue(Class<?> type) {
+			return type.getName().startsWith("net.sombrius.thedeepvoid.");
+		}
+	};
+
 	@SubscribeEvent
 	public static void onEntityTick(EntityTickEvent.Pre event) {
-		if (event != null && event.getEntity() != null) {
+		if (event != null && event.getEntity() != null && MOD_ENTITY.get(event.getEntity().getClass())) {
 			if (event.getEntity() instanceof MournerEntity syncable) {
 				String animation = syncable.getSyncedAnimation();
 				if (!animation.equals("undefined")) {

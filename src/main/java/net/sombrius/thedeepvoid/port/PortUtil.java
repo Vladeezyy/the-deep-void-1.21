@@ -16,6 +16,10 @@ import net.minecraft.core.Holder;
 
 import javax.annotation.Nullable;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Optional;
+import java.util.Map;
+
 /** Helpers for 1.20 calls that have no direct 1.21 equivalent. */
 public final class PortUtil {
 	private PortUtil() {
@@ -57,12 +61,32 @@ public final class PortUtil {
 
 	/** 1.21 enchantments live in a datapack registry: look them up on whichever side we are. */
 	@Nullable
-	public static Holder<Enchantment> enchantment(ResourceKey<Enchantment> key) {
-		HolderLookup.RegistryLookup<Enchantment> lookup = CommonHooks.resolveLookup(Registries.ENCHANTMENT);
-		return lookup == null ? null : lookup.get(key).orElse(null);
+	/** The holders of the last two enchantment lookups (the server's and the client's in single player). */
+	private static volatile EnchantmentCache cacheA, cacheB;
+
+	private record EnchantmentCache(HolderLookup.RegistryLookup<Enchantment> lookup, Map<ResourceKey<Enchantment>, Optional<Holder.Reference<Enchantment>>> holders) {
 	}
 
+	public static Holder<Enchantment> enchantment(ResourceKey<Enchantment> key) {
+		HolderLookup.RegistryLookup<Enchantment> lookup = CommonHooks.resolveLookup(Registries.ENCHANTMENT);
+		if (lookup == null)
+			return null;
+		EnchantmentCache cache = cacheA;
+		if (cache == null || cache.lookup() != lookup) {
+			cache = cacheB;
+			if (cache == null || cache.lookup() != lookup) {
+				cache = new EnchantmentCache(lookup, new ConcurrentHashMap<>());
+				cacheB = cacheA;
+			}
+			cacheA = cache;
+		}
+		return cache.holders().computeIfAbsent(key, lookup::get).orElse(null);
+	}
+
+	/** Called by the tick handlers for every armor slot: an empty slot has no enchantments, no lookup and no event needed. */
 	public static int enchantmentLevel(ItemStack stack, ResourceKey<Enchantment> key) {
+		if (stack.isEmpty())
+			return 0;
 		Holder<Enchantment> holder = enchantment(key);
 		return holder == null ? 0 : stack.getEnchantmentLevel(holder);
 	}

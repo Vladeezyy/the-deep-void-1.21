@@ -34,6 +34,8 @@ import javax.annotation.Nullable;
 
 @EventBusSubscriber
 public class IfPlayerFallsInVoidProcedure {
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().getX(), event.getEntity().getZ(), event.getEntity());
@@ -48,7 +50,7 @@ public class IfPlayerFallsInVoidProcedure {
 			return;
 		if (DeepVoidConfigConfiguration.PLAYERSTELEPORTINVOID.get() == true) {
 			if (DeepVoidConfigConfiguration.ALLOWOTHERWORLDTP.get() == true) {
-				if (entity.getY() < (double) DeepVoidConfigConfiguration.TELEPORTHEIGHT.get() && !((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void")))) {
+				if (entity.getY() < (double) DeepVoidConfigConfiguration.TELEPORTHEIGHT.get() && !((entity.level().dimension()) == DIM_DEEP_VOID)) {
 					{
 						boolean _setval = true;
 						TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);
@@ -56,7 +58,7 @@ public class IfPlayerFallsInVoidProcedure {
 						_vars.syncPlayerVariables(entity);
 					}
 					if (entity instanceof ServerPlayer _player && !_player.level().isClientSide()) {
-						ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+						ResourceKey<Level> destinationType = DIM_DEEP_VOID;
 						if (_player.level().dimension() == destinationType)
 							return;
 						ServerLevel nextLevel = _player.server.getLevel(destinationType);
@@ -80,7 +82,7 @@ public class IfPlayerFallsInVoidProcedure {
 							_vars.syncPlayerVariables(entity);
 						}
 						if (entity instanceof ServerPlayer _player && !_player.level().isClientSide()) {
-							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+							ResourceKey<Level> destinationType = DIM_DEEP_VOID;
 							if (_player.level().dimension() == destinationType)
 								return;
 							ServerLevel nextLevel = _player.server.getLevel(destinationType);
@@ -105,7 +107,7 @@ public class IfPlayerFallsInVoidProcedure {
 				_vars.syncPlayerVariables(entity);
 			}
 			if (entity instanceof ServerPlayer _player && !_player.level().isClientSide()) {
-				ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+				ResourceKey<Level> destinationType = DIM_DEEP_VOID;
 				if (_player.level().dimension() == destinationType)
 					return;
 				ServerLevel nextLevel = _player.server.getLevel(destinationType);
@@ -127,7 +129,7 @@ public class IfPlayerFallsInVoidProcedure {
 				}
 			}
 		}
-		if (DeepVoidConfigConfiguration.DEEPVOIDTP.get() == true && entity.getY() < -70 && (entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"))) {
+		if (DeepVoidConfigConfiguration.DEEPVOIDTP.get() == true && entity.getY() < -70 && (entity.level().dimension()) == DIM_DEEP_VOID) {
 			{
 				Entity _ent = entity;
 				_ent.teleportTo(x, 300, z);

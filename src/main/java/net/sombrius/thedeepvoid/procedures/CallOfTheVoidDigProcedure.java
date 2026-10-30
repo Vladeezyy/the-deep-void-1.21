@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortEntities;
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -51,8 +52,7 @@ public class CallOfTheVoidDigProcedure {
 				if (entity.getPersistentData().getDouble("deep_void:digCooldown") >= 10) {
 					entity.getPersistentData().putDouble("deep_void:digCooldown", 0);
 					entity.getPersistentData().putDouble("deep_void:digTime", (entity.getPersistentData().getDouble("deep_void:digTime") + 10));
-					if (!(!world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10), e -> true).isEmpty()) && !world.getEntitiesOfClass(StalkerEntity.class,
-							AABB.ofSize(new Vec3((entity.getPersistentData().getDouble("deep_void:xDig")), (entity.getPersistentData().getDouble("deep_void:yDig")), (entity.getPersistentData().getDouble("deep_void:zDig"))), 350, 350, 350), e -> true)
+					if (!(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10)).isEmpty()) && !PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getPersistentData().getDouble("deep_void:xDig")), (entity.getPersistentData().getDouble("deep_void:yDig")), (entity.getPersistentData().getDouble("deep_void:zDig"))), 350, 350, 350))
 							.isEmpty()) {
 						if (world.getBlockState(BlockPos.containing(entity.getPersistentData().getDouble("deep_void:xDig"), entity.getPersistentData().getDouble("deep_void:yDig") - 1, entity.getPersistentData().getDouble("deep_void:zDig")))
 								.canOcclude()) {
@@ -69,8 +69,7 @@ public class CallOfTheVoidDigProcedure {
 								}
 							}
 						}
-					} else if (!world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10), e -> true).isEmpty() || !(!world.getEntitiesOfClass(StalkerEntity.class,
-							AABB.ofSize(new Vec3((entity.getPersistentData().getDouble("deep_void:xDig")), (entity.getPersistentData().getDouble("deep_void:yDig")), (entity.getPersistentData().getDouble("deep_void:zDig"))), 350, 350, 350), e -> true)
+					} else if (!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10)).isEmpty() || !(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getPersistentData().getDouble("deep_void:xDig")), (entity.getPersistentData().getDouble("deep_void:yDig")), (entity.getPersistentData().getDouble("deep_void:zDig"))), 350, 350, 350))
 							.isEmpty())) {
 						{
 							TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);
@@ -93,10 +92,9 @@ public class CallOfTheVoidDigProcedure {
 					}
 					entity.getPersistentData().putDouble("deep_void:digCooldown", 0);
 					entity.getPersistentData().putDouble("deep_void:digTime", 0);
-					if (!world.getEntitiesOfClass(StalkerEntity.class,
-							AABB.ofSize(new Vec3((entity.getPersistentData().getDouble("deep_void:xDig")), (entity.getPersistentData().getDouble("deep_void:yDig")), (entity.getPersistentData().getDouble("deep_void:zDig"))), 350, 350, 350), e -> true)
+					if (!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getPersistentData().getDouble("deep_void:xDig")), (entity.getPersistentData().getDouble("deep_void:yDig")), (entity.getPersistentData().getDouble("deep_void:zDig"))), 350, 350, 350))
 							.isEmpty()) {
-						if (!(!world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10), e -> true).isEmpty())
+						if (!(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10)).isEmpty())
 								&& !world
 										.getEntitiesOfClass(Player.class,
 												AABB.ofSize(new Vec3((entity.getPersistentData().getDouble("deep_void:xDig")), (entity.getPersistentData().getDouble("deep_void:yDig")), (entity.getPersistentData().getDouble("deep_void:zDig"))), 25,
@@ -106,8 +104,8 @@ public class CallOfTheVoidDigProcedure {
 								&& world.getBlockState(BlockPos.containing(entity.getPersistentData().getDouble("deep_void:xDig"), entity.getPersistentData().getDouble("deep_void:yDig") - 1, entity.getPersistentData().getDouble("deep_void:zDig")))
 										.canOcclude()) {
 							{
-								Entity _ent = ((Entity) world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(
-										new Vec3((entity.getPersistentData().getDouble("deep_void:xDig")), (entity.getPersistentData().getDouble("deep_void:yDig")), (entity.getPersistentData().getDouble("deep_void:zDig"))), 350, 350, 350), e -> true)
+								Entity _ent = ((Entity) PortEntities.find(world, StalkerEntity.class, AABB.ofSize(
+										new Vec3((entity.getPersistentData().getDouble("deep_void:xDig")), (entity.getPersistentData().getDouble("deep_void:yDig")), (entity.getPersistentData().getDouble("deep_void:zDig"))), 350, 350, 350))
 										.stream().sorted(new Object() {
 											Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 												return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));

@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortEntities;
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -33,12 +34,12 @@ public class PlayerLooksAtStalkerProcedure {
 		if (entity == null)
 			return;
 		double distance = 0;
-		if (!world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 250, 250, 250), e -> true).isEmpty()) {
+		if (!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 250, 250, 250)).isEmpty()) {
 			distance = 1;
 			for (int index0 = 0; index0 < 20; index0++) {
 				{
 					final Vec3 _center = new Vec3((entity.getX() + entity.getLookAngle().x * distance), (entity.getY() + entity.getLookAngle().y * distance), (entity.getZ() + entity.getLookAngle().z * distance));
-					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(1 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+					List<? extends Entity> _entfound = PortEntities.find(world, StalkerEntity.class, new AABB(_center, _center).inflate(1 / 2d)).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof StalkerEntity
 								&& !world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 28, 28, 28), e -> true).isEmpty() == false) {

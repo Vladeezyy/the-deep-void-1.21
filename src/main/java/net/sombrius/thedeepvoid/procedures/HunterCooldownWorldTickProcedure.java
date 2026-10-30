@@ -22,7 +22,7 @@ public class HunterCooldownWorldTickProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world) {
 		if (TheDeepVoidModVariables.MapVariables.get(world).hunterSpawnCooldown > 0) {
 			TheDeepVoidModVariables.MapVariables.get(world).hunterSpawnCooldown = TheDeepVoidModVariables.MapVariables.get(world).hunterSpawnCooldown - 1;
-			TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
+			TheDeepVoidModVariables.MapVariables.get(world).setDirty(); // only the server reads it: saved, not sent every tick
 		}
 	}
 }

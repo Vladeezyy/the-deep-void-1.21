@@ -1,5 +1,8 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.sombrius.thedeepvoid.port.PortEntities;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.biome.Biome;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -36,6 +39,10 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class StalkingStalkerSpawnsProcedure {
+	private static final TagKey<Biome> BIOME_TAG_STALKER_SAFE = TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:stalker_safe"));
+	private static final TagKey<Block> BLOCK_TAG_LIGHT_CANNOT_REACH = BlockTags.create(ResourceLocation.parse("the_deep_void:light_cannot_reach"));
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity());
@@ -49,7 +56,7 @@ public class StalkingStalkerSpawnsProcedure {
 		if (entity == null)
 			return;
 		if (DeepVoidConfigConfiguration.STALKERSPAWNS.get() == true) {
-			if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void")) || (entity.level().dimension()) == Level.OVERWORLD && DeepVoidConfigConfiguration.STALKED.get() == true) {
+			if ((entity.level().dimension()) == DIM_DEEP_VOID || (entity.level().dimension()) == Level.OVERWORLD && DeepVoidConfigConfiguration.STALKED.get() == true) {
 				if (!(new Object() {
 					public boolean checkGamemode(Entity _ent) {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
@@ -71,10 +78,10 @@ public class StalkingStalkerSpawnsProcedure {
 						return false;
 					}
 				}.checkGamemode(entity))) {
-					if (!world.getBiome(BlockPos.containing(x, y, z)).is(TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:stalker_safe")))) {
+					if (!world.getBiome(BlockPos.containing(x, y, z)).is(BIOME_TAG_STALKER_SAFE)) {
 						if (y > 0 || (entity.level().dimension()) == Level.OVERWORLD && DeepVoidConfigConfiguration.STALKED.get() == true) {
 							if (entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).StalkerCount < (double) DeepVoidConfigConfiguration.STALKERSPAWNTIMER.get()) {
-								if (!(!world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 180, 180, 180), e -> true).isEmpty())
+								if (!(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 180, 180, 180)).isEmpty())
 										&& !(entity instanceof LivingEntity _livEnt17 && _livEnt17.hasEffect(TheDeepVoidModMobEffects.VOID_BLESSING))
 										&& !(entity instanceof LivingEntity _livEnt18 && _livEnt18.hasEffect(TheDeepVoidModMobEffects.WEAVER_CURSE))) {
 									if (entity instanceof LivingEntity _livEnt19 && _livEnt19.hasEffect(TheDeepVoidModMobEffects.DEAD_INSIDE)) {
@@ -85,7 +92,7 @@ public class StalkingStalkerSpawnsProcedure {
 											_vars.syncPlayerVariables(entity);
 										}
 									} else {
-										if ((world.getBlockState(BlockPos.containing(x, y - 0.5, z))).is(BlockTags.create(ResourceLocation.parse("the_deep_void:light_cannot_reach")))) {
+										if ((world.getBlockState(BlockPos.containing(x, y - 0.5, z))).is(BLOCK_TAG_LIGHT_CANNOT_REACH)) {
 											if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y + 1, z)) == 0) {
 												{
 													TheDeepVoidModVariables.PlayerVariables _vars = entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES);
@@ -117,7 +124,7 @@ public class StalkingStalkerSpawnsProcedure {
 									if (!(!world
 											.getEntitiesOfClass(Player.class,
 													AABB.ofSize(new Vec3(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, (entity.getY()), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ), 60, 60, 60), e -> true)
-											.isEmpty()) && !(!world.getEntitiesOfClass(WatchingStalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 160, 160, 160), e -> true).isEmpty())) {
+											.isEmpty()) && !(!PortEntities.find(world, WatchingStalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 160, 160, 160)).isEmpty())) {
 										if (world instanceof ServerLevel _serverLevel) {
 											Entity entityinstance = TheDeepVoidModEntities.WATCHING_STALKER.get().create(_serverLevel, null,
 													BlockPos.containing(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, entity.getY(), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ), MobSpawnType.MOB_SUMMONED, false,

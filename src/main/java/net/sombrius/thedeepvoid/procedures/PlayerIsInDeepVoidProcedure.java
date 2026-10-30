@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.world.level.biome.Biome;
 import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
@@ -32,6 +33,10 @@ import javax.annotation.Nullable;
 
 @EventBusSubscriber
 public class PlayerIsInDeepVoidProcedure {
+	private static final TagKey<Biome> BIOME_TAG_FALLING_CORPSE_SPAWN = TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:falling_corpse_spawn"));
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+	private static final ResourceKey<Level> DIM_THE_PIT = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:the_pit"));
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity());
@@ -44,7 +49,7 @@ public class PlayerIsInDeepVoidProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"))) {
+		if ((entity.level().dimension()) == DIM_DEEP_VOID) {
 			if (DeepVoidConfigConfiguration.PLAYERHALLUCINATES.get() == true) {
 				if (entity.getY() < 1 && (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.HALLUCINATE) ? _livEnt.getEffect(TheDeepVoidModMobEffects.HALLUCINATE).getDuration() : 0) <= 8) {
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -80,7 +85,7 @@ public class PlayerIsInDeepVoidProcedure {
 				}
 			}
 		}
-		if (((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"))) == false
+		if (((entity.level().dimension()) == DIM_DEEP_VOID) == false
 				&& entity.getData(TheDeepVoidModVariables.PLAYER_VARIABLES).StalkerSpawn == true) {
 			{
 				boolean _setval = false;
@@ -89,7 +94,7 @@ public class PlayerIsInDeepVoidProcedure {
 				_vars.syncPlayerVariables(entity);
 			}
 		}
-		if (world.getBiome(BlockPos.containing(x, y, z)).is(TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:falling_corpse_spawn"))) && y >= 40) {
+		if (world.getBiome(BlockPos.containing(x, y, z)).is(BIOME_TAG_FALLING_CORPSE_SPAWN) && y >= 40) {
 			if (DeepVoidConfigConfiguration.SPAWNFALLINGCORPSE.get() == true) {
 				if ((entity instanceof LivingEntity _livEnt14 && _livEnt14.hasEffect(TheDeepVoidModMobEffects.LURKER_HEAD_NEAR)) == false) {
 					if (Math.random() < 0.005) {
@@ -126,7 +131,7 @@ public class PlayerIsInDeepVoidProcedure {
 				_vars.syncPlayerVariables(entity);
 			}
 		}
-		if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:the_pit"))) {
+		if ((entity.level().dimension()) == DIM_THE_PIT) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.WEAVER_CURSE, 20, 0, false, false));
 		}

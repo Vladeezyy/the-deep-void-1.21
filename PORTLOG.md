@@ -239,6 +239,9 @@ NeoForge 26.2.0.93, Fabric API 0.161.0, GeckoLib 5.5.6, JEI 30.48. Repeatable fr
   vanilla's rules); trees and the mod's fleshy formations put their `below_trunk_provider` instead of `dirt_provider`.
 - Structure features (giant skulls and the like) are clipped one block inside the zone a feature may write to: 26.2
   logs the reads of the edge blocks' neighbours outside it.
+- The bone pile deltas (see «Known, unchanged from 1.20.1») now also log "Detected unsafe terrain read" (hundreds
+  while exploring): 26.2 logs the reads outside the write zone as well. Kept as in the original (smaller deltas would
+  change how the biomes look).
 - `neoforge.mods.toml` names the logo `iconFile` (`logoFile` is deprecated and shows a warning screen).
 - Checked: dev server (both), production server (Fabric with the jar), the world scene and the items scene on both
   loaders, guns in first person (the scene shows the HUD there: a hidden HUD hides the hand as well). Not checked: a

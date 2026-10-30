@@ -120,9 +120,9 @@ public class MisanthropyItem extends Item implements GeoItem, net.sombrius.thede
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		AnimationController<MisanthropyItem> procedureController = new AnimationController<>("procedureController", 0, this::procedurePredicate);
+		AnimationController<MisanthropyItem> procedureController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedureController", 0, this::procedurePredicate);
 		data.add(procedureController);
-		AnimationController<MisanthropyItem> idleController = new AnimationController<>("idleController", 0, this::idlePredicate);
+		AnimationController<MisanthropyItem> idleController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("idleController", 0, this::idlePredicate);
 		data.add(idleController);
 	}
 

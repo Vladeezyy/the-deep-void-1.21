@@ -68,6 +68,7 @@ public final class DevScene {
 	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 	private static final List<Pair<Integer, Consumer<Minecraft>>> STEPS = new ArrayList<>();
 	private static boolean opened;
+	private static int menuTicks;
 	private static int tick;
 
 	static {
@@ -244,6 +245,8 @@ public final class DevScene {
 		if (!ENABLED)
 			return;
 		Minecraft mc = Minecraft.getInstance();
+		if (!opened && ++menuTicks % 100 == 0)
+			TheDeepVoidMod.LOGGER.info("[scene] waiting on {}", mc.screen == null ? "no screen" : mc.screen.getClass().getName());
 		// a fresh run folder opens the accessibility onboarding first
 		if (mc.screen instanceof AccessibilityOnboardingScreen) {
 			mc.options.onboardAccessibility = false;

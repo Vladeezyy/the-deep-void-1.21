@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class VoidbornModel extends GeoModel<VoidbornEntity> {
 	@Override
 	public Identifier getAnimationResource(VoidbornEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/cavenightmare.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "cavenightmare");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/cavenightmare.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "cavenightmare");
 	}
 
 	@Override

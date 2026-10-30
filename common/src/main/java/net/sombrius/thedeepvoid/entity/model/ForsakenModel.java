@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class ForsakenModel extends GeoModel<ForsakenEntity> {
 	@Override
 	public Identifier getAnimationResource(ForsakenEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/forsaken.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "forsaken");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/forsaken.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "forsaken");
 	}
 
 	@Override

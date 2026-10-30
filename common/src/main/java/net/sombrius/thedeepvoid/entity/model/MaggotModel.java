@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class MaggotModel extends GeoModel<MaggotEntity> {
 	@Override
 	public Identifier getAnimationResource(MaggotEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/maggot.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "maggot");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/maggot.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "maggot");
 	}
 
 	@Override

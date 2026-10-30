@@ -8,12 +8,12 @@ import software.bernie.geckolib.renderer.base.GeoRenderState;
 public class MisanthropyItemModel extends GeoModel<MisanthropyItem> {
 	@Override
 	public Identifier getAnimationResource(MisanthropyItem animatable) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/misanthropyarms.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "misanthropyarms");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/misanthropyarms.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "misanthropyarms");
 	}
 
 	@Override

@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class RoamerModel extends GeoModel<RoamerEntity> {
 	@Override
 	public Identifier getAnimationResource(RoamerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/roamerlurk.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "roamerlurk");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/roamerlurk.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "roamerlurk");
 	}
 
 	@Override

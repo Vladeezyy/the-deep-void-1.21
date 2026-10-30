@@ -161,7 +161,11 @@ def equipment():
         for kind in ('humanoid', 'humanoid_leggings'):
             if os.path.exists(ASSETS + f'textures/entity/equipment/{kind}/{name}.png'):
                 layers[kind] = [{'texture': f'{NS}:{name}'}]
-        write_json(ASSETS + f'equipment/{name}.json', {'layers': layers})
+        # GeckoLib armor has no layers: no equipment asset (an empty one does not load)
+        if layers:
+            write_json(ASSETS + f'equipment/{name}.json', {'layers': layers})
+        elif os.path.exists(ASSETS + f'equipment/{name}.json'):
+            os.remove(ASSETS + f'equipment/{name}.json')
     # several materials may share a layer: the old textures go once all are copied
     for old in done:
         os.remove(old)
@@ -365,6 +369,20 @@ def convert_data():
     return changed
 
 
+def geckolib():
+    """GeckoLib 5: geo models in geckolib/models, animations in geckolib/animations"""
+    moved = 0
+    for old, new in (('geo', 'geckolib/models'), ('animations', 'geckolib/animations')):
+        for path in glob.glob(ASSETS + old + '/*.json'):
+            target = ASSETS + new + '/' + os.path.basename(path)
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            shutil.move(path, target)
+            moved += 1
+        if os.path.isdir(ASSETS + old) and not os.listdir(ASSETS + old):
+            os.rmdir(ASSETS + old)
+    return moved
+
+
 def main():
     eggs = spawn_egg_colors()
     egg_textures()
@@ -377,7 +395,7 @@ def main():
             continue
         written += write_json(ASSETS + f'items/{item_id}.json', data)
     count, moved = equipment()
-    print("data files changed", convert_data())
+    print("data files changed", convert_data(), "; GeckoLib files moved", geckolib())
     print(f'models changed {changed}; item definitions written {written}; no model: {missing}; equipment assets {count}, textures moved {moved}')
 
 

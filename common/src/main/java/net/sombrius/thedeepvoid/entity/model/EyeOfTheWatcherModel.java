@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class EyeOfTheWatcherModel extends GeoModel<EyeOfTheWatcherEntity> {
 	@Override
 	public Identifier getAnimationResource(EyeOfTheWatcherEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/eyeofthewatcher.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "eyeofthewatcher");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/eyeofthewatcher.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "eyeofthewatcher");
 	}
 
 	@Override

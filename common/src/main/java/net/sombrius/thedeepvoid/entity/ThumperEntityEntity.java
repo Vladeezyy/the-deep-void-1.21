@@ -216,8 +216,8 @@ public class ThumperEntityEntity extends PathfinderMob implements GeoEntity {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>("movement", 4, this::movementPredicate));
-		data.add(new AnimationController<>("procedure", 4, this::procedurePredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("movement", 4, this::movementPredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedure", 4, this::procedurePredicate));
 	}
 
 	@Override

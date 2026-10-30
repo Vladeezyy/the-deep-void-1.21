@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class EverhungerModel extends GeoModel<EverhungerEntity> {
 	@Override
 	public Identifier getAnimationResource(EverhungerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/everhunger.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "everhunger");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/everhunger.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "everhunger");
 	}
 
 	@Override

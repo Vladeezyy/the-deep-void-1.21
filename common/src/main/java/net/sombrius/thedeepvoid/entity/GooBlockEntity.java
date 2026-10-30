@@ -22,7 +22,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.procedures.GooBlockProjectileHitsBlockProcedure;
 import net.sombrius.thedeepvoid.procedures.GooBlockWhileProjectileFlyingTickProcedure;
 
-@net.neoforged.api.distmarker.OnlyIn(value = net.neoforged.api.distmarker.Dist.CLIENT, _interface = ItemSupplier.class) @net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
+@net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
 public class GooBlockEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(TheDeepVoidModBlocks.BLOCK_OF_GOO.get());
 

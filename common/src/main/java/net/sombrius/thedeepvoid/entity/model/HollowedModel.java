@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class HollowedModel extends GeoModel<HollowedEntity> {
 	@Override
 	public Identifier getAnimationResource(HollowedEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/hollowed.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hollowed");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/hollowed.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hollowed");
 	}
 
 	@Override

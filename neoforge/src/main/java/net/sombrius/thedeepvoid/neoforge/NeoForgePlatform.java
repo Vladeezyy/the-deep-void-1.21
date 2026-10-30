@@ -153,7 +153,9 @@ public final class NeoForgePlatform implements Platform {
 
 	@Override
 	public <T extends CustomPacketPayload> void registerPayload(CustomPacketPayload.Type<T> type, StreamCodec<? super RegistryFriendlyByteBuf, T> codec, IPayloadHandler<T> handler) {
-		PAYLOADS.add(registrar -> registrar.playBidirectional(type, codec, (payload, context) -> handler.handle(payload, new IPayloadContext() {
+		// 21.9+: a clientbound handler is registered with the payload (or in RegisterClientPayloadHandlersEvent); the
+		// mod's handlers check the flow themselves, so one handler serves both sides as in 1.21.1
+		net.neoforged.neoforge.network.handling.IPayloadHandler<T> both = (payload, context) -> handler.handle(payload, new IPayloadContext() {
 			@Override
 			public PacketFlow flow() {
 				return context.flow();
@@ -173,7 +175,8 @@ public final class NeoForgePlatform implements Platform {
 			public Connection connection() {
 				return reason -> context.disconnect(reason);
 			}
-		})));
+		});
+		PAYLOADS.add(registrar -> registrar.playBidirectional(type, codec, both, both));
 	}
 
 	@Override

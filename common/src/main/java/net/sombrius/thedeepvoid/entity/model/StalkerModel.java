@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class StalkerModel extends GeoModel<StalkerEntity> {
 	@Override
 	public Identifier getAnimationResource(StalkerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/stalkernew.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "stalkernew");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/stalkernew.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "stalkernew");
 	}
 
 	@Override

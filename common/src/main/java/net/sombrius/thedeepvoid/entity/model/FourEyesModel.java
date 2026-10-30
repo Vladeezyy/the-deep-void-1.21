@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class FourEyesModel extends GeoModel<FourEyesEntity> {
 	@Override
 	public Identifier getAnimationResource(FourEyesEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/foureyes.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "foureyes");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/foureyes.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "foureyes");
 	}
 
 	@Override

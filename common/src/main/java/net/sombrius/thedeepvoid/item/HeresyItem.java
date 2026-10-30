@@ -120,9 +120,9 @@ public class HeresyItem extends Item implements GeoItem, net.sombrius.thedeepvoi
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		AnimationController<HeresyItem> procedureController = new AnimationController<>("procedureController", 0, this::procedurePredicate);
+		AnimationController<HeresyItem> procedureController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedureController", 0, this::procedurePredicate);
 		data.add(procedureController);
-		AnimationController<HeresyItem> idleController = new AnimationController<>("idleController", 0, this::idlePredicate);
+		AnimationController<HeresyItem> idleController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("idleController", 0, this::idlePredicate);
 		data.add(idleController);
 	}
 

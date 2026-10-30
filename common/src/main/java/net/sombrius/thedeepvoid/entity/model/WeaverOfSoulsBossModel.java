@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class WeaverOfSoulsBossModel extends GeoModel<WeaverOfSoulsBossEntity> {
 	@Override
 	public Identifier getAnimationResource(WeaverOfSoulsBossEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/fallenweaver.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "fallenweaver");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/fallenweaver.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "fallenweaver");
 	}
 
 	@Override

@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class HiveWatcherModel extends GeoModel<HiveWatcherEntity> {
 	@Override
 	public Identifier getAnimationResource(HiveWatcherEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/hivewatcher.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hivewatcher");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/hivewatcher.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hivewatcher");
 	}
 
 	@Override

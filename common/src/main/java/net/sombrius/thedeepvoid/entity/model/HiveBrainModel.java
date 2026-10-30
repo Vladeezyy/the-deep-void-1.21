@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class HiveBrainModel extends GeoModel<HiveBrainEntity> {
 	@Override
 	public Identifier getAnimationResource(HiveBrainEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/hive_brain.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hive_brain");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/hive_brain.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hive_brain");
 	}
 
 	@Override

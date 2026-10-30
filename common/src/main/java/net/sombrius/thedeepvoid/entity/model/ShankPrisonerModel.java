@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class ShankPrisonerModel extends GeoModel<ShankPrisonerEntity> {
 	@Override
 	public Identifier getAnimationResource(ShankPrisonerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/shankprisoner.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "shankprisoner");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/shankprisoner.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "shankprisoner");
 	}
 
 	@Override

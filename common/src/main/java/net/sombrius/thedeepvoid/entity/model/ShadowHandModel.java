@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class ShadowHandModel extends GeoModel<ShadowHandEntity> {
 	@Override
 	public Identifier getAnimationResource(ShadowHandEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/shadowhand.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "shadowhand");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/shadowhand.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "shadowhand");
 	}
 
 	@Override

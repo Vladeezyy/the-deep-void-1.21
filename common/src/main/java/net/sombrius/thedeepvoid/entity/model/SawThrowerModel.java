@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class SawThrowerModel extends GeoModel<SawThrowerEntity> {
 	@Override
 	public Identifier getAnimationResource(SawThrowerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/saw_thrower.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "saw_thrower");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/saw_thrower.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "saw_thrower");
 	}
 
 	@Override

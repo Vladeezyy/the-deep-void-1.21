@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class PreserverModel extends GeoModel<PreserverEntity> {
 	@Override
 	public Identifier getAnimationResource(PreserverEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/preserver.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "preserver");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/preserver.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "preserver");
 	}
 
 	@Override

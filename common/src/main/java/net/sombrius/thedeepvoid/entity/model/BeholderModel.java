@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class BeholderModel extends GeoModel<BeholderEntity> {
 	@Override
 	public Identifier getAnimationResource(BeholderEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/beholder.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "beholder");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/beholder.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "beholder");
 	}
 
 	@Override

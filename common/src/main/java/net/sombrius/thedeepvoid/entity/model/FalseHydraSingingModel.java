@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class FalseHydraSingingModel extends GeoModel<FalseHydraSingingEntity> {
 	@Override
 	public Identifier getAnimationResource(FalseHydraSingingEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/falsehydra.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "falsehydra");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/falsehydra.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "falsehydra");
 	}
 
 	@Override

@@ -8,12 +8,12 @@ import software.bernie.geckolib.renderer.base.GeoRenderState;
 public class ApostasyItemModel extends GeoModel<ApostasyItem> {
 	@Override
 	public Identifier getAnimationResource(ApostasyItem animatable) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/apostasyarms.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "apostasyarms");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/apostasyarms.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "apostasyarms");
 	}
 
 	@Override

@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class DeathMawModel extends GeoModel<DeathMawEntity> {
 	@Override
 	public Identifier getAnimationResource(DeathMawEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/deathmaw.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "deathmaw");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/deathmaw.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "deathmaw");
 	}
 
 	@Override

@@ -120,9 +120,9 @@ public class ApostasyItem extends Item implements GeoItem, net.sombrius.thedeepv
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		AnimationController<ApostasyItem> procedureController = new AnimationController<>("procedureController", 0, this::procedurePredicate);
+		AnimationController<ApostasyItem> procedureController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedureController", 0, this::procedurePredicate);
 		data.add(procedureController);
-		AnimationController<ApostasyItem> idleController = new AnimationController<>("idleController", 0, this::idlePredicate);
+		AnimationController<ApostasyItem> idleController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("idleController", 0, this::idlePredicate);
 		data.add(idleController);
 	}
 

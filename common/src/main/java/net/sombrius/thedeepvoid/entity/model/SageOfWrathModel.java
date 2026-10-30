@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class SageOfWrathModel extends GeoModel<SageOfWrathEntity> {
 	@Override
 	public Identifier getAnimationResource(SageOfWrathEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/tellerofdemise.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "tellerofdemise");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/tellerofdemise.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "tellerofdemise");
 	}
 
 	@Override

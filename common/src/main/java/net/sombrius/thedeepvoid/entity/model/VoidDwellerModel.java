@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class VoidDwellerModel extends GeoModel<VoidDwellerEntity> {
 	@Override
 	public Identifier getAnimationResource(VoidDwellerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/voidwatcher.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "voidwatcher");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/voidwatcher.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "voidwatcher");
 	}
 
 	@Override

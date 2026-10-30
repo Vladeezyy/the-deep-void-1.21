@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class FleshCubeModel extends GeoModel<FleshCubeEntity> {
 	@Override
 	public Identifier getAnimationResource(FleshCubeEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/fleshcube.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "fleshcube");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/fleshcube.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "fleshcube");
 	}
 
 	@Override

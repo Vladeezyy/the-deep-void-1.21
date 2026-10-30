@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class VoidbornTentaclesModel extends GeoModel<VoidbornTentaclesEntity> {
 	@Override
 	public Identifier getAnimationResource(VoidbornTentaclesEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/voidborntentacles.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "voidborntentacles");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/voidborntentacles.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "voidborntentacles");
 	}
 
 	@Override

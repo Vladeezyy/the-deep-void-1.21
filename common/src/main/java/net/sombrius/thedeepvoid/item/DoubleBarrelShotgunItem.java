@@ -125,9 +125,9 @@ public class DoubleBarrelShotgunItem extends Item implements GeoItem, net.sombri
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		AnimationController<DoubleBarrelShotgunItem> procedureController = new AnimationController<>("procedureController", 0, this::procedurePredicate);
+		AnimationController<DoubleBarrelShotgunItem> procedureController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedureController", 0, this::procedurePredicate);
 		data.add(procedureController);
-		AnimationController<DoubleBarrelShotgunItem> idleController = new AnimationController<>("idleController", 0, this::idlePredicate);
+		AnimationController<DoubleBarrelShotgunItem> idleController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("idleController", 0, this::idlePredicate);
 		data.add(idleController);
 	}
 

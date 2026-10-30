@@ -370,6 +370,10 @@ def procs(s):
     # and LocalPlayer, which makes the verifier load LocalPlayer on a dedicated server
     s = s.replace('itemstack.getEntityRepresentation() : Minecraft.getInstance().player;', f'itemstack.getEntityRepresentation() : {PKG}.port.PortUtil.clientPlayer.get();')
     s = s.replace('@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) ', '')
+    # (NeoForge shows a loading warning screen for any @OnlyIn; Fabric keeps its @EnvironmentInterface)
+    s = re.sub(r'@net\.neoforged\.api\.distmarker\.OnlyIn\(value = net\.neoforged\.api\.distmarker\.Dist\.CLIENT, _interface = [\w.]+\.class\) ', '', s)
+    # NeoForge 21.11: arm poses also tell whether they affect the offhand pose (the mod's: like ITEM)
+    s = s.replace('new EnumProxy<>(HumanoidModel.ArmPose.class, false, (IArmPoseTransformer)', 'new EnumProxy<>(HumanoidModel.ArmPose.class, false, false, (IArmPoseTransformer)')
     # NeoForge 21.11 uses the vanilla TriState
     s = s.replace('net.neoforged.neoforge.common.util.TriState', 'net.minecraft.util.TriState')
     # smaller renames and signature changes

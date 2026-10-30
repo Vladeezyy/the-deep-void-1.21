@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class ApostleCloneModel extends GeoModel<ApostleCloneEntity> {
 	@Override
 	public Identifier getAnimationResource(ApostleCloneEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/apostleofcatastrophe.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "apostleofcatastrophe");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/apostleofcatastrophe.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "apostleofcatastrophe");
 	}
 
 	@Override

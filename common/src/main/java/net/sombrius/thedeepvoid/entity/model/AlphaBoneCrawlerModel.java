@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class AlphaBoneCrawlerModel extends GeoModel<AlphaBoneCrawlerEntity> {
 	@Override
 	public Identifier getAnimationResource(AlphaBoneCrawlerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/alphacrawlerremodel.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "alphacrawlerremodel");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/alphacrawlerremodel.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "alphacrawlerremodel");
 	}
 
 	@Override

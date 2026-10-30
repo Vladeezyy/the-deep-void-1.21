@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class SleepingPrimordialCrawlerModel extends GeoModel<SleepingPrimordialCrawlerEntity> {
 	@Override
 	public Identifier getAnimationResource(SleepingPrimordialCrawlerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/primordialbonecrawler.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "primordialbonecrawler");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/primordialbonecrawler.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "primordialbonecrawler");
 	}
 
 	@Override

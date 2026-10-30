@@ -288,8 +288,8 @@ public class MaskedHunterEntity extends Monster implements GeoEntity {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>("movement", 5, this::movementPredicate));
-		data.add(new AnimationController<>("procedure", 5, this::procedurePredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("movement", 5, this::movementPredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedure", 5, this::procedurePredicate));
 	}
 
 	@Override

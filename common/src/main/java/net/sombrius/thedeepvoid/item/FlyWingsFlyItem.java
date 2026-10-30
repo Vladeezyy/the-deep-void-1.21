@@ -125,8 +125,8 @@ public class FlyWingsFlyItem extends Item implements GeoItem {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>("controller", 5, this::predicate));
-		data.add(new AnimationController<>("procedureController", 5, this::procedurePredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("controller", 5, this::predicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedureController", 5, this::procedurePredicate));
 	}
 
 	@Override

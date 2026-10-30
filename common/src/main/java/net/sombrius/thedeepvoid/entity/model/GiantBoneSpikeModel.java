@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class GiantBoneSpikeModel extends GeoModel<GiantBoneSpikeEntity> {
 	@Override
 	public Identifier getAnimationResource(GiantBoneSpikeEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/giant_spike.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "giant_spike");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/giant_spike.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "giant_spike");
 	}
 
 	@Override

@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class BuiltBigOverseerModel extends GeoModel<BuiltBigOverseerEntity> {
 	@Override
 	public Identifier getAnimationResource(BuiltBigOverseerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/overseer3blocks.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "overseer3blocks");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/overseer3blocks.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "overseer3blocks");
 	}
 
 	@Override

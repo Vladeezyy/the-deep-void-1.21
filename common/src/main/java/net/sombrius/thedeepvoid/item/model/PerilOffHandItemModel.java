@@ -8,12 +8,12 @@ import software.bernie.geckolib.renderer.base.GeoRenderState;
 public class PerilOffHandItemModel extends GeoModel<PerilOffHandItem> {
 	@Override
 	public Identifier getAnimationResource(PerilOffHandItem animatable) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/perilarms.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "perilarms");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/perilarms.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "perilarms");
 	}
 
 	@Override

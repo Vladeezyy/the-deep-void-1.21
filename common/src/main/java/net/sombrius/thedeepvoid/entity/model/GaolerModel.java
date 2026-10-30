@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class GaolerModel extends GeoModel<GaolerEntity> {
 	@Override
 	public Identifier getAnimationResource(GaolerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/gaoler.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "gaoler");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/gaoler.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "gaoler");
 	}
 
 	@Override

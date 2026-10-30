@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class LickerModel extends GeoModel<LickerEntity> {
 	@Override
 	public Identifier getAnimationResource(LickerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/lickerremodeled.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "lickerremodeled");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/lickerremodeled.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "lickerremodeled");
 	}
 
 	@Override

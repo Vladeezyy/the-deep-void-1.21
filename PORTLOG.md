@@ -165,6 +165,42 @@ and after runs were alternated twice (`tools/bench_table.py`). Apple M4, JDK 21,
 - Checked: dev server (both), production server (NeoForge 21.1.259 with the jar, Fabric `prodServer`), the dev scene
   (biomes, mobs) and the items scene (guns, armor models, wings) with matching screenshots on both loaders.
 
+## Minecraft 1.21.11 (branch mc/1.21.11, 2026-10-30)
+
+NeoForge 21.11.48, Fabric API 0.141.6, GeckoLib 5.4.5, JEI 27.54. Repeatable from the 1.21.1 sources:
+`tools/port_1_21_11.sh` (restore the MCreator originals, multiloader split, the generic 1.21.11 rules of the Midnight
+Lurker port, the Deep Void rules `tools/port_dv_1_21_11.py`, GeckoLib 5, render states, moved imports), then
+`tools/port_resources_1_21_11.py` for assets and data. Both scripts are idempotent.
+
+- **Items**: tool and armor materials are records (repair items as tags `the_deep_void:tool_materials/*`, armor
+  layers as equipment assets from `tools/armor_assets.json`, textures in `textures/entity/equipment`); every item has an
+  item model definition. MCreator's item properties (bows, states) are one range-select property
+  `the_deep_void:procedure` (`port.PortItemProperties`), shields use `minecraft:using_item`; spawn eggs are two layers
+  of an own template tinted with the 1.20.1 colors. Tooltips of blocks come through `port.PortBlockItem`. Crafting
+  remainders are stack-based on both loaders. Enchantability 0 (three blades) means "no enchanting table" as before.
+- **GeckoLib 5**: entities and renderers on render states; the seven guns share `port.GeoArmsItemRenderer` (the
+  player's arms on the RightArm / LeftArm bones in first person, from an own baked player model) and come from the
+  items' render providers (`geckolib:geckolib` special item model); the wings are GeckoLib armor (GeckoLib draws them
+  on both loaders, no Fabric code any more).
+- **Armor models** (hunter, vulture, plague doctor): built once per item instead of every frame; the render state poses
+  them. Fabric: `ArmorRenderer` with `submitTransformCopyingModel`.
+- **Sky and fog**: no `DimensionSpecialEffects`. The Deep Void and The Pit are data: `skybox: overworld` without sun,
+  moon and stars (`mixins.SkyRendererMixin`), no clouds, a fixed midnight baked into the biome colors (1.21.1 darkened
+  them by the time of day). MCreator's fog procedures set the terrain fog of the frame (`FogData`; the sky and clouds
+  fade with it); fog shapes are gone (always spherical).
+- **Renderers** with layers shown by procedures compute the conditions with the render state (`PortRender.LayerState`).
+- **JEI**: the three display-only recipe types are synced to the client (NeoForge `OnDatapackSyncEvent.sendRecipes`,
+  Fabric `RecipeSynchronization`) into `port.PortRecipeSync`; brewing recipes have ids.
+- **Data**: biome visuals and sounds are environment attributes, carvers a list, the noise router has a preliminary
+  surface level, recipes use id ingredients, trim patterns / materials as 1.21.5 (the materials come from the items'
+  `provides_trim_material`, `port.PortTrimMaterials`), loot tables lost the air entries.
+- **NeoForge 21.11** strips no `@OnlyIn` any more: all are gone (a load warning screen otherwise); client-only code that
+  a dedicated server would verify (the tooltips' "client player" fallback) goes through `PortUtil.clientPlayer`. Item
+  capabilities use the transfer API (vanilla container wrappers); player variables are saved under `data` in the
+  attachment (1.21.1 worlds start with fresh player variables on NeoForge).
+- **Fabric**: attribute modifiers of the items are added when the game applies them (tags and config are not ready at
+  init); gun arm poses go through the humanoid render state.
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

@@ -124,9 +124,9 @@ public class PerilOffHandItem extends Item implements GeoItem, net.sombrius.thed
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		AnimationController<PerilOffHandItem> procedureController = new AnimationController<>("procedureController", 0, this::procedurePredicate);
+		AnimationController<PerilOffHandItem> procedureController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedureController", 0, this::procedurePredicate);
 		data.add(procedureController);
-		AnimationController<PerilOffHandItem> idleController = new AnimationController<>("idleController", 0, this::idlePredicate);
+		AnimationController<PerilOffHandItem> idleController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("idleController", 0, this::idlePredicate);
 		data.add(idleController);
 	}
 

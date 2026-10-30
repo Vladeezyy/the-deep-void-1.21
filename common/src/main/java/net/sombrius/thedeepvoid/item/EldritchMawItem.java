@@ -120,9 +120,9 @@ public class EldritchMawItem extends Item implements GeoItem, net.sombrius.thede
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		AnimationController<EldritchMawItem> procedureController = new AnimationController<>("procedureController", 0, this::procedurePredicate);
+		AnimationController<EldritchMawItem> procedureController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedureController", 0, this::procedurePredicate);
 		data.add(procedureController);
-		AnimationController<EldritchMawItem> idleController = new AnimationController<>("idleController", 0, this::idlePredicate);
+		AnimationController<EldritchMawItem> idleController = new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("idleController", 0, this::idlePredicate);
 		data.add(idleController);
 	}
 

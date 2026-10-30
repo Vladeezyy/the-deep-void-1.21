@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class ApostleBossModel extends GeoModel<ApostleBossEntity> {
 	@Override
 	public Identifier getAnimationResource(ApostleBossEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/apostleofcatastrophe.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "apostleofcatastrophe");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/apostleofcatastrophe.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "apostleofcatastrophe");
 	}
 
 	@Override

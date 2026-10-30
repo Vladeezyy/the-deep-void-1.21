@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class SkullSmasherModel extends GeoModel<SkullSmasherEntity> {
 	@Override
 	public Identifier getAnimationResource(SkullSmasherEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/skull_smasher.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "skull_smasher");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/skull_smasher.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "skull_smasher");
 	}
 
 	@Override

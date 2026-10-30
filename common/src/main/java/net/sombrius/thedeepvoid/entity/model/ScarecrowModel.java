@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class ScarecrowModel extends GeoModel<ScarecrowEntity> {
 	@Override
 	public Identifier getAnimationResource(ScarecrowEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/scarecrow.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "scarecrow");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/scarecrow.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "scarecrow");
 	}
 
 	@Override

@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class BogWalkerModel extends GeoModel<BogWalkerEntity> {
 	@Override
 	public Identifier getAnimationResource(BogWalkerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/bogwalker.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "bogwalker");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/bogwalker.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "bogwalker");
 	}
 
 	@Override

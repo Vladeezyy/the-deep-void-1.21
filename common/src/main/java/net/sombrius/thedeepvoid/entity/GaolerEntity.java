@@ -208,9 +208,9 @@ public class GaolerEntity extends Monster implements GeoEntity {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>("movement", 6, this::movementPredicate));
-		data.add(new AnimationController<>("attacking", 6, this::attackingPredicate));
-		data.add(new AnimationController<>("procedure", 6, this::procedurePredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("movement", 6, this::movementPredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("attacking", 6, this::attackingPredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedure", 6, this::procedurePredicate));
 	}
 
 	@Override

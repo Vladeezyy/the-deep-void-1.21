@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class DoomingCoffinModel extends GeoModel<DoomingCoffinEntity> {
 	@Override
 	public Identifier getAnimationResource(DoomingCoffinEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/coffinentity.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "coffinentity");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/coffinentity.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "coffinentity");
 	}
 
 	@Override

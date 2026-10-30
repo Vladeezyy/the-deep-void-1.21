@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class SummonedDevourerModel extends GeoModel<SummonedDevourerEntity> {
 	@Override
 	public Identifier getAnimationResource(SummonedDevourerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/devourer.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "devourer");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/devourer.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "devourer");
 	}
 
 	@Override

@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class OverseerModel extends GeoModel<OverseerEntity> {
 	@Override
 	public Identifier getAnimationResource(OverseerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/overseer.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "overseer");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/overseer.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "overseer");
 	}
 
 	@Override

@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class AbductorModel extends GeoModel<AbductorEntity> {
 	@Override
 	public Identifier getAnimationResource(AbductorEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/abductor.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "abductor");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/abductor.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "abductor");
 	}
 
 	@Override

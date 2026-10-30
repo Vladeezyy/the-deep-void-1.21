@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class RootedModel extends GeoModel<RootedEntity> {
 	@Override
 	public Identifier getAnimationResource(RootedEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/rooted.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "rooted");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/rooted.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "rooted");
 	}
 
 	@Override

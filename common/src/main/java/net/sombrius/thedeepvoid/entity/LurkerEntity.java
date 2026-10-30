@@ -311,9 +311,9 @@ public class LurkerEntity extends Monster implements RangedAttackMob, GeoEntity 
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>("movement", 10, this::movementPredicate));
-		data.add(new AnimationController<>("attacking", 10, this::attackingPredicate));
-		data.add(new AnimationController<>("procedure", 10, this::procedurePredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("movement", 10, this::movementPredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("attacking", 10, this::attackingPredicate));
+		data.add(new net.sombrius.thedeepvoid.port.GeoAnims.Controller<>("procedure", 10, this::procedurePredicate));
 	}
 
 	@Override

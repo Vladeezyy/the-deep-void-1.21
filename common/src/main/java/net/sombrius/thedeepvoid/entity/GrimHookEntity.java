@@ -24,7 +24,7 @@ import net.sombrius.thedeepvoid.procedures.GrimHookHitsBlockProcedure;
 import net.sombrius.thedeepvoid.procedures.GrimHookHitsEntityProcedure;
 import net.sombrius.thedeepvoid.procedures.GrimHookTickProcedure;
 
-@net.neoforged.api.distmarker.OnlyIn(value = net.neoforged.api.distmarker.Dist.CLIENT, _interface = ItemSupplier.class) @net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
+@net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
 public class GrimHookEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Blocks.AIR);
 

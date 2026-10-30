@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class SporeSpewerModel extends GeoModel<SporeSpewerEntity> {
 	@Override
 	public Identifier getAnimationResource(SporeSpewerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/sporespewer.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "sporespewer");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/sporespewer.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "sporespewer");
 	}
 
 	@Override

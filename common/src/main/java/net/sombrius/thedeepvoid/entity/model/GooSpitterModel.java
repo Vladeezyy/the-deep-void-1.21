@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class GooSpitterModel extends GeoModel<GooSpitterEntity> {
 	@Override
 	public Identifier getAnimationResource(GooSpitterEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/spittercrawlerremodel.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "spittercrawlerremodel");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/spittercrawlerremodel.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "spittercrawlerremodel");
 	}
 
 	@Override

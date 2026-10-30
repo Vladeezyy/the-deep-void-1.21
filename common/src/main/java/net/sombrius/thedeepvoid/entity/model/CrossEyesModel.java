@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class CrossEyesModel extends GeoModel<CrossEyesEntity> {
 	@Override
 	public Identifier getAnimationResource(CrossEyesEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/crosseye.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "crosseye");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/crosseye.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "crosseye");
 	}
 
 	@Override

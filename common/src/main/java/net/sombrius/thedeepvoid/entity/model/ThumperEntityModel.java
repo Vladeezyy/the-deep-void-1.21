@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class ThumperEntityModel extends GeoModel<ThumperEntityEntity> {
 	@Override
 	public Identifier getAnimationResource(ThumperEntityEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/thumper.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "thumper");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/thumper.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "thumper");
 	}
 
 	@Override

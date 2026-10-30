@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class GoreExpectoratorModel extends GeoModel<GoreExpectoratorEntity> {
 	@Override
 	public Identifier getAnimationResource(GoreExpectoratorEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/gore_spitter.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "gore_spitter");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/gore_spitter.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "gore_spitter");
 	}
 
 	@Override

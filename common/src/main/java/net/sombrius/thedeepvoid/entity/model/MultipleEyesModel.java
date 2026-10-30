@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class MultipleEyesModel extends GeoModel<MultipleEyesEntity> {
 	@Override
 	public Identifier getAnimationResource(MultipleEyesEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/multipleeyes.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "multipleeyes");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/multipleeyes.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "multipleeyes");
 	}
 
 	@Override

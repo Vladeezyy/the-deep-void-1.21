@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class MisanthropicHivemindModel extends GeoModel<MisanthropicHivemindEntity> {
 	@Override
 	public Identifier getAnimationResource(MisanthropicHivemindEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/hivemindrework.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hivemindrework");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/hivemindrework.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hivemindrework");
 	}
 
 	@Override

@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class SummonedHiveFangsModel extends GeoModel<SummonedHiveFangsEntity> {
 	@Override
 	public Identifier getAnimationResource(SummonedHiveFangsEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/hivefangs.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hivefangs");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/hivefangs.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "hivefangs");
 	}
 
 	@Override

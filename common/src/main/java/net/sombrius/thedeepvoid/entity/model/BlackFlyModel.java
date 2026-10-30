@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class BlackFlyModel extends GeoModel<BlackFlyEntity> {
 	@Override
 	public Identifier getAnimationResource(BlackFlyEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/voidfly.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "voidfly");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/voidfly.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "voidfly");
 	}
 
 	@Override

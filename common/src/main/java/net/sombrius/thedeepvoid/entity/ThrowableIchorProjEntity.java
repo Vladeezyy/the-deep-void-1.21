@@ -23,7 +23,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.procedures.ThrowableIchorProjProjectileHitsBlockProcedure;
 import net.sombrius.thedeepvoid.procedures.ThrowableIchorProjWhileProjectileFlyingTickProcedure;
 
-@net.neoforged.api.distmarker.OnlyIn(value = net.neoforged.api.distmarker.Dist.CLIENT, _interface = ItemSupplier.class) @net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
+@net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
 public class ThrowableIchorProjEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(TheDeepVoidModItems.THROWABLE_ICHOR.get());
 

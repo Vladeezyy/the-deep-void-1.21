@@ -20,6 +20,11 @@ def port(s, cls):
         s = s.replace('(AnimationState event)', f'(AnimationTest<{cls}> event)')
         s = s.replace('import software.bernie.geckolib.animation.AnimationState;', 'import software.bernie.geckolib.animation.state.AnimationTest;')
         s = re.sub(r'new AnimationController<>\(this, ', 'new AnimationController<>(', s)
+    # GeckoLib 5: models and animations live in geckolib/models and geckolib/animations, named without folder and suffix
+    s = re.sub(r'Identifier\.fromNamespaceAndPath\("the_deep_void", "animations/([\w.-]+?)\.animation\.json"\)', r'Identifier.fromNamespaceAndPath("the_deep_void", "\1")', s)
+    s = re.sub(r'Identifier\.fromNamespaceAndPath\("the_deep_void", "geo/([\w.-]+?)\.geo\.json"\)', r'Identifier.fromNamespaceAndPath("the_deep_void", "\1")', s)
+    # GeckoLib 5.4 crashes on an animation the file does not have (GeckoLib 4 skipped it): port.GeoAnims.Controller
+    s = re.sub(r'\bnew AnimationController<>\("', f'new {PKG}.port.GeoAnims.Controller<>("', s)
     # the armor stand check returned CONTINUE either way; GeckoLib 5 render states have no entity
     s = re.sub(r'\n\t+Entity entity = \(Entity\) event\.getData\(DataTickets\.ENTITY\);\n\t+if \(entity instanceof ArmorStand\) \{\n\t+return PlayState\.CONTINUE;\n\t+\}', '', s)
     s = s.replace('software.bernie.geckolib.cache.object.GeoBone', 'software.bernie.geckolib.cache.model.GeoBone')

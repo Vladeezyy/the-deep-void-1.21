@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class SeekerModel extends GeoModel<SeekerEntity> {
 	@Override
 	public Identifier getAnimationResource(SeekerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/seeker.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "seeker");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/seeker.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "seeker");
 	}
 
 	@Override

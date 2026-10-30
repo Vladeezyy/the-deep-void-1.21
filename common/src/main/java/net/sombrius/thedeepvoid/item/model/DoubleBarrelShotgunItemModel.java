@@ -8,12 +8,12 @@ import software.bernie.geckolib.renderer.base.GeoRenderState;
 public class DoubleBarrelShotgunItemModel extends GeoModel<DoubleBarrelShotgunItem> {
 	@Override
 	public Identifier getAnimationResource(DoubleBarrelShotgunItem animatable) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/spitearms.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "spitearms");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/spitearms.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "spitearms");
 	}
 
 	@Override

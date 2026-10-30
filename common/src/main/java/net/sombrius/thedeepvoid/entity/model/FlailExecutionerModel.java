@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class FlailExecutionerModel extends GeoModel<FlailExecutionerEntity> {
 	@Override
 	public Identifier getAnimationResource(FlailExecutionerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/flail_executioner.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "flail_executioner");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/flail_executioner.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "flail_executioner");
 	}
 
 	@Override

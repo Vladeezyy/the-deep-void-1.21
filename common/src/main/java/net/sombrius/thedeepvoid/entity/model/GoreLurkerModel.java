@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class GoreLurkerModel extends GeoModel<GoreLurkerEntity> {
 	@Override
 	public Identifier getAnimationResource(GoreLurkerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/harvestmen.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "harvestmen");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/harvestmen.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "harvestmen");
 	}
 
 	@Override

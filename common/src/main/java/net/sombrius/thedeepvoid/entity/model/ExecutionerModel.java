@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class ExecutionerModel extends GeoModel<ExecutionerEntity> {
 	@Override
 	public Identifier getAnimationResource(ExecutionerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/executioner.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "executioner");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/executioner.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "executioner");
 	}
 
 	@Override

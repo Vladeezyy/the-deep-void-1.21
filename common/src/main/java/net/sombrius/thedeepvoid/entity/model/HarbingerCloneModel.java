@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class HarbingerCloneModel extends GeoModel<HarbingerCloneEntity> {
 	@Override
 	public Identifier getAnimationResource(HarbingerCloneEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/harbinger.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "harbinger");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/harbinger.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "harbinger");
 	}
 
 	@Override

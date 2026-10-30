@@ -8,12 +8,12 @@ import software.bernie.geckolib.renderer.base.GeoRenderState;
 public class FlyWingsFlyModel extends GeoModel<FlyWingsFlyItem> {
 	@Override
 	public Identifier getAnimationResource(FlyWingsFlyItem object) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/flywings.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "flywings");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/flywings.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "flywings");
 	}
 
 	@Override

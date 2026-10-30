@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class DeathVultureModel extends GeoModel<DeathVultureEntity> {
 	@Override
 	public Identifier getAnimationResource(DeathVultureEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/vulture.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "vulture");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/vulture.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "vulture");
 	}
 
 	@Override

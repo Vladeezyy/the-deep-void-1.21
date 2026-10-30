@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class MaskedHunterModel extends GeoModel<MaskedHunterEntity> {
 	@Override
 	public Identifier getAnimationResource(MaskedHunterEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/huntertrue.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "huntertrue");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/huntertrue.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "huntertrue");
 	}
 
 	@Override

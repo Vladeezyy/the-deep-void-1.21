@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class CentigazeModel extends GeoModel<CentigazeEntity> {
 	@Override
 	public Identifier getAnimationResource(CentigazeEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/eyecentipede.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "eyecentipede");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/eyecentipede.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "eyecentipede");
 	}
 
 	@Override

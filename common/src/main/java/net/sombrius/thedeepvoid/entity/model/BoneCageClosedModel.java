@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class BoneCageClosedModel extends GeoModel<BoneCageClosedEntity> {
 	@Override
 	public Identifier getAnimationResource(BoneCageClosedEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/bone_cage.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "bone_cage");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/bone_cage.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "bone_cage");
 	}
 
 	@Override

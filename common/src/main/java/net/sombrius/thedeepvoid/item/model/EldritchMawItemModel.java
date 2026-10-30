@@ -8,12 +8,12 @@ import software.bernie.geckolib.renderer.base.GeoRenderState;
 public class EldritchMawItemModel extends GeoModel<EldritchMawItem> {
 	@Override
 	public Identifier getAnimationResource(EldritchMawItem animatable) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/eldritchmawarms.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "eldritchmawarms");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/eldritchmawarms.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "eldritchmawarms");
 	}
 
 	@Override

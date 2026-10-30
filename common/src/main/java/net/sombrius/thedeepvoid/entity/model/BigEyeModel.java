@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class BigEyeModel extends GeoModel<BigEyeEntity> {
 	@Override
 	public Identifier getAnimationResource(BigEyeEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/bigeye.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "bigeye");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/bigeye.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "bigeye");
 	}
 
 	@Override

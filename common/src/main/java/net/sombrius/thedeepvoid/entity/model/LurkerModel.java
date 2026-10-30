@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 public class LurkerModel extends GeoModel<LurkerEntity> {
 	@Override
 	public Identifier getAnimationResource(LurkerEntity entity) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/lurker.animation.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "lurker");
 	}
 
 	@Override
 	public Identifier getModelResource(GeoRenderState renderState) {
-		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/lurker.geo.json");
+		return Identifier.fromNamespaceAndPath("the_deep_void", "lurker");
 	}
 
 	@Override

@@ -4,5 +4,5 @@
     "particle": "the_deep_void:block/executioner_spawner",
     "pane": "the_deep_void:block/executioner_spawner"
   },
-  "render_type": "cutout_mipped"
+  "render_type": "minecraft:cutout"
 }

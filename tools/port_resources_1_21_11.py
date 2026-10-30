@@ -383,6 +383,41 @@ def geckolib():
     return moved
 
 
+RENDER_LAYERS = 'common/src/main/resources/the_deep_void_render_layers.json'
+
+
+def render_types():
+    """1.21.11: no cutout_mipped (an unknown render type is solid); Fabric reads no render_type from models, so the
+    blocks' layers go to a map the Fabric client applies (BlockRenderLayerMap)"""
+    changed = 0
+    for path in glob.glob(ASSETS + 'models/**/*.json', recursive=True):
+        node = read_json(path)
+        if node.get('render_type') in ('cutout_mipped', 'minecraft:cutout_mipped'):
+            node['render_type'] = 'minecraft:cutout'
+            changed += write_json(path, node)
+    layers = {}
+    for path in sorted(glob.glob(ASSETS + 'blockstates/*.json')):
+        state = read_json(path)
+        models = []
+        for variant in state.get('variants', {}).values():
+            models += variant if isinstance(variant, list) else [variant]
+        for part in state.get('multipart', []):
+            apply = part.get('apply', {})
+            models += apply if isinstance(apply, list) else [apply]
+        for model in models:
+            ref = model.get('model', '')
+            if not ref.startswith(NS + ':'):
+                continue
+            file = ASSETS + 'models/' + ref.split(':', 1)[1] + '.json'
+            if os.path.exists(file):
+                kind = read_json(file).get('render_type', '').split(':')[-1]
+                if kind in ('cutout', 'translucent'):
+                    layers[f'{NS}:' + os.path.basename(path)[:-5]] = kind
+                    break
+    write_json(RENDER_LAYERS, layers)
+    return changed, len(layers)
+
+
 def main():
     eggs = spawn_egg_colors()
     egg_textures()
@@ -395,6 +430,7 @@ def main():
             continue
         written += write_json(ASSETS + f'items/{item_id}.json', data)
     count, moved = equipment()
+    print('render types', render_types())
     print("data files changed", convert_data(), "; GeckoLib files moved", geckolib())
     print(f'models changed {changed}; item definitions written {written}; no model: {missing}; equipment assets {count}, textures moved {moved}')
 

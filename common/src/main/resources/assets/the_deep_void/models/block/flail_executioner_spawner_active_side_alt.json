@@ -5,5 +5,5 @@
     "edge": "the_deep_void:block/executioner_spawner_active",
     "pane": "the_deep_void:block/executioner_spawner_active"
   },
-  "render_type": "cutout_mipped"
+  "render_type": "minecraft:cutout"
 }

@@ -99,6 +99,7 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 		ModBus.post(new RegisterKeyMappingsEvent(KeyBindingHelper::registerKeyBinding));
 		itemExtensions();
 		fluids();
+		blockRenderLayers();
 		ModBus.post(new FMLClientSetupEvent());
 		// 1.21.4: MCreator's item properties are one range select property (port.PortItemProperties)
 		RangeSelectItemModelPropertiesAccessor.idMapper().put(PortItemProperties.ID, PortItemProperties.MAP_CODEC);
@@ -157,6 +158,22 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 			if (m.getName().equals(method))
 				return true;
 		return false;
+	}
+
+	/**
+	 * NeoForge takes a block's layer from the render_type of its model; Fabric does not read it. The map comes from
+	 * the models (tools/port_resources_1_21_11.py).
+	 */
+	private static void blockRenderLayers() {
+		try (java.io.InputStream in = TheDeepVoidFabricClient.class.getResourceAsStream("/the_deep_void_render_layers.json")) {
+			if (in == null)
+				return;
+			com.google.gson.JsonObject map = com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
+			map.entrySet().forEach(entry -> net.minecraft.core.registries.BuiltInRegistries.BLOCK.getOptional(Identifier.parse(entry.getKey())).ifPresent(block -> BlockRenderLayerMap.putBlock(block,
+					"translucent".equals(entry.getValue().getAsString()) ? net.minecraft.client.renderer.chunk.ChunkSectionLayer.TRANSLUCENT : net.minecraft.client.renderer.chunk.ChunkSectionLayer.CUTOUT)));
+		} catch (java.io.IOException e) {
+			net.sombrius.thedeepvoid.TheDeepVoidMod.LOGGER.error("Block render layers", e);
+		}
 	}
 
 	/** NeoForge's fluid type client extensions of the two fluids (still and flowing textures) */

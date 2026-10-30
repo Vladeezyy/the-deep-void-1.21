@@ -29,7 +29,6 @@ abstract class AvatarRendererMixin {
 			ItemStack stack = avatar.getItemInHand(hand);
 			if (!(stack.getItem() instanceof HasClientExtensions.Item item))
 				continue;
-			FabricArmPoses.lastPose = null;
 			HumanoidModel.ArmPose pose = item.clientExtensions().getArmPose(avatar, hand, stack);
 			if (pose == null)
 				continue;
@@ -37,8 +36,10 @@ abstract class AvatarRendererMixin {
 				state.rightArmPose = pose;
 			else
 				state.leftArmPose = pose;
-			if (FabricArmPoses.lastPose != null && PortArmPoses.TRANSFORMERS.containsKey(FabricArmPoses.lastPose))
-				names[arm.ordinal()] = FabricArmPoses.lastPose;
+			// MCreator keeps the pose in a static field (PortArmPoses.pose runs once): the pose is named after the item
+			String name = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath().toUpperCase(java.util.Locale.ROOT);
+			if (pose == HumanoidModel.ArmPose.ITEM && PortArmPoses.TRANSFORMERS.containsKey(name))
+				names[arm.ordinal()] = name;
 		}
 	}
 }

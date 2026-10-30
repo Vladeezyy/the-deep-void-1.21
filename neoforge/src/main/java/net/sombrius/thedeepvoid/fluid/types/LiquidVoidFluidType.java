@@ -2,7 +2,7 @@
 package net.sombrius.thedeepvoid.fluid.types;
 
 import java.util.function.Consumer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.common.SoundActions;
@@ -16,15 +16,15 @@ public class LiquidVoidFluidType extends FluidType {
 
 	public IClientFluidTypeExtensions clientExtensions() {
 		return new IClientFluidTypeExtensions() {
-			private static final ResourceLocation STILL_TEXTURE = ResourceLocation.parse("the_deep_void:block/liquid_void"), FLOWING_TEXTURE = ResourceLocation.parse("the_deep_void:block/liquid_void");
+			private static final Identifier STILL_TEXTURE = Identifier.parse("the_deep_void:block/liquid_void"), FLOWING_TEXTURE = Identifier.parse("the_deep_void:block/liquid_void");
 
 			@Override
-			public ResourceLocation getStillTexture() {
+			public Identifier getStillTexture() {
 				return STILL_TEXTURE;
 			}
 
 			@Override
-			public ResourceLocation getFlowingTexture() {
+			public Identifier getFlowingTexture() {
 				return FLOWING_TEXTURE;
 			}
 		};

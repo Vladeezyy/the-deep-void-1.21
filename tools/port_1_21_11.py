@@ -177,9 +177,13 @@ def port(s):
     return s
 
 
+# the NeoForge-only MCreator files of tools/manual-files.txt ("neoforge: ..."), restored into the neoforge module
+NEOFORGE_ONLY = ['neoforge/src/main/java/' + line.split(':', 1)[1].strip() for line in open('tools/manual-files.txt') if line.startswith('neoforge:')]
+
+
 def main():
     changed = 0
-    for path in glob.glob(ROOT + '**/*.java', recursive=True):
+    for path in glob.glob(ROOT + '**/*.java', recursive=True) + NEOFORGE_ONLY:
         s = open(path, encoding='utf-8').read()
         o = port(s)
         if o != s:

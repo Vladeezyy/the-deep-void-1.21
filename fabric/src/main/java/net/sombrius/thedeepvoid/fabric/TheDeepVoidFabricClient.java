@@ -1,9 +1,8 @@
 package net.sombrius.thedeepvoid.fabric;
 
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
@@ -14,32 +13,29 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.api.ClientModInitializer;
 
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.Minecraft;
 
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import net.sombrius.thedeepvoid.port.bus.RenderFrameEvent;
 import net.sombrius.thedeepvoid.port.bus.RegisterParticleProvidersEvent;
@@ -59,6 +55,11 @@ import net.sombrius.thedeepvoid.port.neo.IClientItemExtensions;
 import net.sombrius.thedeepvoid.port.neo.HasClientExtensions;
 import net.sombrius.thedeepvoid.port.PortUtil;
 import net.sombrius.thedeepvoid.port.PortClient;
+import net.sombrius.thedeepvoid.port.PortItemProperties;
+import net.sombrius.thedeepvoid.port.PortRecipeSync;
+import net.sombrius.thedeepvoid.fabric.mixin.client.RangeSelectItemModelPropertiesAccessor;
+import net.minecraft.client.resources.model.EquipmentClientInfo;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.sombrius.thedeepvoid.port.PortArmPoses;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModFluids;
@@ -72,7 +73,7 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 		ClientEventIndex.register();
 		PortUtil.clientRegistries = () -> Minecraft.getInstance().level == null ? null : Minecraft.getInstance().level.registryAccess();
 		PortUtil.clientPlayer = () -> Minecraft.getInstance().player;
-		PortClient.fluidRenderLayer = BlockRenderLayerMap.INSTANCE::putFluid;
+		PortClient.fluidRenderLayer = BlockRenderLayerMap::putFluid;
 		// Fabric has no enum extension: a gun pose is vanilla's ITEM pose, the transformer runs after the animation (mixin)
 		PortArmPoses.poses = name -> {
 			FabricArmPoses.lastPose = name;
@@ -90,7 +91,7 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 		ModBus.post(new EntityRenderersEvent.RegisterLayerDefinitions((location, definition) -> EntityModelLayerRegistry.registerModelLayer(location, definition::get)));
 		ModBus.post(new RegisterParticleProvidersEvent(new RegisterParticleProvidersEvent.Sink() {
 			@Override
-			public <T extends ParticleOptions> void register(ParticleType<T> type, ParticleEngine.SpriteParticleRegistration<T> registration) {
+			public <T extends ParticleOptions> void register(ParticleType<T> type, net.minecraft.client.particle.ParticleResources.SpriteParticleRegistration<T> registration) {
 				ParticleFactoryRegistry.getInstance().register(type, registration::create);
 			}
 		}));
@@ -99,6 +100,15 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 		itemExtensions();
 		fluids();
 		ModBus.post(new FMLClientSetupEvent());
+		// 1.21.4: MCreator's item properties are one range select property (port.PortItemProperties)
+		RangeSelectItemModelPropertiesAccessor.idMapper().put(PortItemProperties.ID, PortItemProperties.MAP_CODEC);
+		// 1.21.2: the JEI recipe types the server synced (port.PortRecipeSync)
+		net.fabricmc.fabric.api.client.recipe.v1.sync.ClientRecipeSynchronizedEvent.EVENT.register((minecraft, recipes) -> {
+			java.util.List<net.minecraft.world.item.crafting.RecipeHolder<?>> ours = new java.util.ArrayList<>();
+			for (var type : PortRecipeSync.TYPES)
+				ours.addAll(recipes.getAllOfType((net.minecraft.world.item.crafting.RecipeType) type.get()));
+			PortRecipeSync.setRecipes(net.minecraft.world.item.crafting.RecipeMap.create(ours));
+		});
 
 		ClientTickEvents.START_CLIENT_TICK.register(minecraft -> ModBus.post(new ClientTickEvent.Pre()));
 		ClientTickEvents.END_CLIENT_TICK.register(minecraft -> ModBus.post(new ClientTickEvent.Post()));
@@ -108,7 +118,7 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 		ItemTooltipCallback.EVENT.register((stack, context, type, lines) -> ModBus.post(new ItemTooltipEvent(stack, Minecraft.getInstance().player, lines, type, context)));
 		ClientEntityEvents.ENTITY_LOAD.register((entity, level) -> ModBus.post(new EntityJoinLevelEvent(entity, level)));
 		ClientEntityEvents.ENTITY_UNLOAD.register((entity, level) -> ModBus.post(new EntityLeaveLevelEvent(entity, level)));
-		WorldRenderEvents.END.register(context -> {
+		WorldRenderEvents.END_MAIN.register(context -> {
 			if (ModBus.hasListeners(RenderFrameEvent.Post.class))
 				ModBus.post(new RenderFrameEvent.Post());
 		});
@@ -119,56 +129,28 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 				FabricPlatform.context(PacketFlow.CLIENTBOUND, context.player(), reason -> context.client().getConnection().getConnection().disconnect(reason))));
 	}
 
-	/** NeoForge's client item extensions: the item renderers and the armor models (the arm poses and hand transforms: mixins) */
+	/**
+	 * NeoForge's client item extensions: the armor models of the Blockbench armor (the arm poses and hand transforms:
+	 * mixins). GeckoLib draws its items and armor itself (render providers).
+	 */
 	private static void itemExtensions() {
 		for (var entry : TheDeepVoidModItems.REGISTRY.getEntries()) {
 			Item item = entry.get();
 			if (!(item instanceof HasClientExtensions.Item owner))
 				continue;
 			IClientItemExtensions extensions = owner.clientExtensions();
-			if (overrides(extensions, "getCustomRenderer")) {
-				BlockEntityWithoutLevelRenderer[] renderer = {null};
-				BuiltinItemRendererRegistry.INSTANCE.register(item, (stack, mode, pose, buffers, light, overlay) -> {
-					if (renderer[0] == null)
-						renderer[0] = extensions.getCustomRenderer();
-					renderer[0].renderByItem(stack, mode, pose, buffers, light, overlay);
-				});
-			}
 			if (overrides(extensions, "getHumanoidArmorModel"))
-				ArmorRenderer.register((pose, buffers, stack, entity, slot, light, contextModel) -> {
-					HumanoidModel<?> model = extensions.getHumanoidArmorModel(entity, stack, slot, contextModel);
-					@SuppressWarnings({"unchecked", "rawtypes"})
-					HumanoidModel<LivingEntity> parent = (HumanoidModel) contextModel;
-					@SuppressWarnings({"unchecked", "rawtypes"})
-					HumanoidModel<LivingEntity> armor = (HumanoidModel) model;
-					if (model instanceof GeoArmorRenderer<?> geo) {
-						// GeckoLib's own armor path on Fabric: the renderer needs the buffer source of this frame
-						geo.prepForRender(entity, stack, slot, contextModel, buffers, Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true), 0, 0, 0, 0);
-						parent.copyPropertiesTo(armor);
-						geo.renderToBuffer(pose, null, light, OverlayTexture.NO_OVERLAY, -1);
-						return;
-					}
-					parent.copyPropertiesTo(armor);
-					ResourceLocation texture = armorTexture(stack, entity, slot);
-					armor.renderToBuffer(pose, buffers.getBuffer(RenderType.armorCutoutNoCull(texture)), light, OverlayTexture.NO_OVERLAY, -1);
+				ArmorRenderer.register((pose, collector, stack, state, slot, light, contextModel) -> {
+					EquipmentClientInfo.LayerType type = slot == EquipmentSlot.LEGS ? EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS : EquipmentClientInfo.LayerType.HUMANOID;
+					@SuppressWarnings("unchecked")
+					HumanoidModel<HumanoidRenderState> model = (HumanoidModel<HumanoidRenderState>) extensions.getHumanoidArmorModel(stack, type, contextModel);
+					Identifier texture = extensions.getArmorTexture(stack, type, null, MISSING_TEXTURE);
+					ArmorRenderer.submitTransformCopyingModel(contextModel, state, model, state, true, collector, pose, RenderTypes.armorCutoutNoCull(texture), light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
 				}, item);
 		}
 	}
 
-	/** The item's NeoForge-only getArmorTexture, else its armor material's first layer */
-	private static ResourceLocation armorTexture(ItemStack stack, LivingEntity entity, EquipmentSlot slot) {
-		Item item = stack.getItem();
-		ArmorMaterial.Layer layer = item instanceof net.minecraft.world.item.ArmorItem armor ? armor.getMaterial().value().layers().get(0) : null;
-		try {
-			Method method = item.getClass().getMethod("getArmorTexture", ItemStack.class, Entity.class, EquipmentSlot.class, ArmorMaterial.Layer.class, boolean.class);
-			Object texture = method.invoke(item, stack, entity, slot, layer, slot == EquipmentSlot.LEGS);
-			if (texture instanceof ResourceLocation location)
-				return location;
-		} catch (ReflectiveOperationException e) {
-			// no own texture
-		}
-		return layer != null ? layer.texture(slot == EquipmentSlot.LEGS) : ResourceLocation.withDefaultNamespace("textures/misc/white.png");
-	}
+	private static final Identifier MISSING_TEXTURE = Identifier.withDefaultNamespace("textures/misc/white.png");
 
 	static boolean overrides(Object extensions, String method) {
 		for (Method m : extensions.getClass().getDeclaredMethods())
@@ -184,6 +166,6 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 	}
 
 	private static void fluid(Fluid still, Fluid flowing, String stillTexture, String flowingTexture) {
-		FluidRenderHandlerRegistry.INSTANCE.register(still, flowing, new SimpleFluidRenderHandler(ResourceLocation.parse(stillTexture), ResourceLocation.parse(flowingTexture)));
+		FluidRenderHandlerRegistry.INSTANCE.register(still, flowing, new SimpleFluidRenderHandler(Identifier.parse(stillTexture), Identifier.parse(flowingTexture)));
 	}
 }

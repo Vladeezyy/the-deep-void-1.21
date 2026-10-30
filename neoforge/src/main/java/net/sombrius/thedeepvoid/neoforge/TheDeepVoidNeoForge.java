@@ -69,7 +69,7 @@ public final class TheDeepVoidNeoForge {
 		modBus.addListener((RegisterEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterEvent(event.getRegistryKey(),
 				new net.sombrius.thedeepvoid.port.bus.RegisterEvent.Sink() {
 					@Override
-					public <T> void register(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>> registry, net.minecraft.resources.ResourceLocation id, T value) {
+					public <T> void register(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>> registry, net.minecraft.resources.Identifier id, T value) {
 						event.register(registry, id, () -> value);
 					}
 				})));
@@ -136,7 +136,7 @@ public final class TheDeepVoidNeoForge {
 				event.setCanceled(true);
 		});
 		bus.addListener((LivingFallEvent event) -> {
-			var ours = new net.sombrius.thedeepvoid.port.bus.LivingFallEvent(event.getEntity(), event.getDistance(), event.getDamageMultiplier());
+			var ours = new net.sombrius.thedeepvoid.port.bus.LivingFallEvent(event.getEntity(), (float) event.getDistance(), event.getDamageMultiplier());
 			if (ModBus.post(ours))
 				event.setCanceled(true);
 			event.setDistance(ours.getDistance());
@@ -161,7 +161,7 @@ public final class TheDeepVoidNeoForge {
 			ModBus.post(ours);
 			event.setBlocked(!ours.isCanceled() && ours.getBlocked());
 			event.setBlockedDamage(ours.getBlockedDamage());
-			event.setShieldDamage(ours.shieldDamage());
+			event.setShieldDamage(Math.round(ours.shieldDamage()));
 		});
 		bus.addListener((LivingExperienceDropEvent event) -> {
 			var ours = new net.sombrius.thedeepvoid.port.bus.LivingExperienceDropEvent(event.getEntity(), event.getAttackingPlayer(), event.getDroppedExperience());
@@ -239,6 +239,8 @@ public final class TheDeepVoidNeoForge {
 				event.setCanceled(true);
 			event.setMessage(ours.getMessage());
 		});
+		// 1.21.2: clients get no recipes; the server sends the JEI recipe types (port.PortRecipeSync)
+		bus.addListener((net.neoforged.neoforge.event.OnDatapackSyncEvent event) -> net.sombrius.thedeepvoid.port.PortRecipeSync.TYPES.forEach(type -> event.sendRecipes(type.get())));
 		bus.addListener((FurnaceFuelBurnTimeEvent event) -> {
 			var ours = new net.sombrius.thedeepvoid.port.bus.FurnaceFuelBurnTimeEvent(event.getItemStack(), event.getBurnTime());
 			if (ModBus.post(ours))
@@ -253,8 +255,10 @@ public final class TheDeepVoidNeoForge {
 		PortCaps.blockProviders().forEach((type, provider) -> {
 			@SuppressWarnings("unchecked")
 			BlockEntityType<BlockEntity> beType = (BlockEntityType<BlockEntity>) type;
-			event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, beType, (be, side) -> NeoForgeItemHandler.of(provider.apply(be, side)));
+			// 21.9+: the transfer API; the mod's block entities are vanilla containers, wrapped as NeoForge does for its own
+			event.registerBlockEntity(Capabilities.Item.BLOCK, beType, (be, side) -> be instanceof net.minecraft.world.WorldlyContainer worldly && side != null
+					? new net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper(worldly, side)
+					: be instanceof net.minecraft.world.Container container ? net.neoforged.neoforge.transfer.item.VanillaContainerWrapper.of(container) : null);
 		});
-		PortCaps.itemProviders().forEach((item, provider) -> event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) -> NeoForgeItemHandler.of(provider.apply(stack)), item));
 	}
 }

@@ -32,7 +32,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.PacketFlow;
@@ -40,6 +40,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.core.Registry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.BlockPos;
@@ -70,19 +72,28 @@ public final class NeoForgePlatform implements Platform {
 
 	private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, TheDeepVoidMod.MODID);
 	static final Supplier<AttachmentType<TheDeepVoidModVariables.PlayerVariables>> PLAYER_VARIABLES = ATTACHMENT_TYPES.register(TheDeepVoidModVariables.PLAYER_VARIABLES_ID.getPath(),
-			() -> AttachmentType.builder(TheDeepVoidModVariables.PlayerVariables::new).serialize(new IAttachmentSerializer<CompoundTag, TheDeepVoidModVariables.PlayerVariables>() {
+			() -> AttachmentType.builder(TheDeepVoidModVariables.PlayerVariables::new).serialize(new IAttachmentSerializer<TheDeepVoidModVariables.PlayerVariables>() {
+				// 21.9+: attachments save to ValueOutput; the variables keep their compound under "data"
 				@Override
-				public TheDeepVoidModVariables.PlayerVariables read(IAttachmentHolder holder, CompoundTag tag, HolderLookup.Provider provider) {
+				public TheDeepVoidModVariables.PlayerVariables read(IAttachmentHolder holder, ValueInput input) {
 					TheDeepVoidModVariables.PlayerVariables variables = new TheDeepVoidModVariables.PlayerVariables();
-					variables.deserializeNBT(provider, tag);
+					input.read("data", CompoundTag.CODEC).ifPresent(tag -> variables.deserializeNBT(registries(holder), tag));
 					return variables;
 				}
 
 				@Override
-				public CompoundTag write(TheDeepVoidModVariables.PlayerVariables variables, HolderLookup.Provider provider) {
-					return variables.serializeNBT(provider);
+				public boolean write(TheDeepVoidModVariables.PlayerVariables variables, ValueOutput output) {
+					output.store("data", CompoundTag.CODEC, variables.serializeNBT(registries(null)));
+					return true;
 				}
 			}).build());
+
+	private static HolderLookup.Provider registries(IAttachmentHolder holder) {
+		if (holder instanceof net.minecraft.world.entity.Entity entity)
+			return entity.registryAccess();
+		MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+		return server != null ? server.registryAccess() : net.minecraft.core.RegistryAccess.EMPTY;
+	}
 
 	static void registerAll(IEventBus modBus) {
 		REGISTERS.values().forEach(register -> register.register(modBus));
@@ -100,7 +111,7 @@ public final class NeoForgePlatform implements Platform {
 	}
 
 	@Override
-	public <R, T extends R> void register(ResourceKey<? extends Registry<R>> registry, ResourceLocation id, Supplier<? extends T> factory) {
+	public <R, T extends R> void register(ResourceKey<? extends Registry<R>> registry, Identifier id, Supplier<? extends T> factory) {
 		registerFor(registry).register(id.getPath(), factory);
 	}
 
@@ -167,7 +178,7 @@ public final class NeoForgePlatform implements Platform {
 
 	@Override
 	public void sendToServer(CustomPacketPayload payload) {
-		PacketDistributor.sendToServer(payload);
+		net.neoforged.neoforge.client.network.ClientPacketDistributor.sendToServer(payload);
 	}
 
 	@Override

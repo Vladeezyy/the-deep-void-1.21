@@ -27,7 +27,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.PacketFlow;
@@ -71,7 +71,7 @@ import java.nio.file.Path;
  * Fabric data attachments.
  */
 public final class FabricPlatform implements Platform {
-	private record Pending(ResourceLocation id, Supplier<?> factory) {
+	private record Pending(Identifier id, Supplier<?> factory) {
 	}
 
 	/** A packet the client handles (registered by the client entry point) */
@@ -84,7 +84,7 @@ public final class FabricPlatform implements Platform {
 
 	/** NeoForge's getPersistentData(): the entity's / block entity's own tag, saved with it */
 	static final AttachmentType<CompoundTag> PERSISTENT_DATA = AttachmentRegistry.<CompoundTag>builder().persistent(CompoundTag.CODEC).initializer(CompoundTag::new)
-			.buildAndRegister(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "persistent_data"));
+			.buildAndRegister(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, "persistent_data"));
 	/** The player variables (their item stacks need the registries: the server's, else the client's) */
 	static final AttachmentType<TheDeepVoidModVariables.PlayerVariables> PLAYER_VARIABLES = AttachmentRegistry.<TheDeepVoidModVariables.PlayerVariables>builder()
 			.persistent(CompoundTag.CODEC.xmap(tag -> {
@@ -104,33 +104,32 @@ public final class FabricPlatform implements Platform {
 	 */
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	static void registerAll() {
-		Set<ResourceLocation> order = new LinkedHashSet<>();
-		order.add(Registries.ATTRIBUTE.location());
-		order.add(Registries.DATA_COMPONENT_TYPE.location());
-		order.add(Registries.SOUND_EVENT.location());
-		order.add(Registries.ARMOR_MATERIAL.location());
-		List<ResourceLocation> modded = new ArrayList<>();
+		Set<Identifier> order = new LinkedHashSet<>();
+		order.add(Registries.ATTRIBUTE.identifier());
+		order.add(Registries.DATA_COMPONENT_TYPE.identifier());
+		order.add(Registries.SOUND_EVENT.identifier());
+		List<Identifier> modded = new ArrayList<>();
 		// the registry of registries in registration order (its keySet() has no order)
 		for (Registry<?> each : BuiltInRegistries.REGISTRY) {
-			ResourceLocation id = each.key().location();
+			Identifier id = each.key().identifier();
 			if (id.getNamespace().equals("minecraft"))
 				order.add(id);
 			else
 				modded.add(id);
 		}
 		order.addAll(modded);
-		for (ResourceLocation registryId : order) {
+		for (Identifier registryId : order) {
 			ResourceKey<? extends Registry<?>> key = ResourceKey.createRegistryKey(registryId);
 			ModBus.post(new RegisterEvent(key, new RegisterEvent.Sink() {
 				@Override
-				public <T> void register(ResourceKey<? extends Registry<T>> registry, ResourceLocation id, T value) {
-					Registry.register((Registry<T>) BuiltInRegistries.REGISTRY.get(registry.location()), id, value);
+				public <T> void register(ResourceKey<? extends Registry<T>> registry, Identifier id, T value) {
+					Registry.register((Registry<T>) BuiltInRegistries.REGISTRY.getValue(registry.identifier()), id, value);
 				}
 			}));
 			List<Pending> entries = PENDING.remove(key);
 			if (entries == null)
 				continue;
-			Registry registry = BuiltInRegistries.REGISTRY.get(registryId);
+			Registry registry = BuiltInRegistries.REGISTRY.getValue(registryId);
 			for (Pending entry : entries)
 				Registry.register(registry, entry.id(), entry.factory().get());
 		}
@@ -139,7 +138,7 @@ public final class FabricPlatform implements Platform {
 	}
 
 	@Override
-	public <R, T extends R> void register(ResourceKey<? extends Registry<R>> registry, ResourceLocation id, Supplier<? extends T> factory) {
+	public <R, T extends R> void register(ResourceKey<? extends Registry<R>> registry, Identifier id, Supplier<? extends T> factory) {
 		PENDING.computeIfAbsent(registry, key -> new ArrayList<>()).add(new Pending(id, factory));
 	}
 

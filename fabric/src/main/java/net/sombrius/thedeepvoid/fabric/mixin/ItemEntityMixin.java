@@ -17,7 +17,7 @@ abstract class ItemEntityMixin {
 	@Inject(method = "playerTouch", at = @At("HEAD"))
 	private void deepvoid$pickup(Player player, CallbackInfo ci) {
 		ItemEntity self = (ItemEntity) (Object) this;
-		if (!self.level().isClientSide)
+		if (!self.level().isClientSide())
 			ModBus.post(new ItemEntityPickupEvent.Pre(player, self));
 	}
 }

@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.port;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -16,11 +16,11 @@ public final class PortArmPoses {
 	/** NeoForge's {@code IArmPoseTransformer} */
 	@FunctionalInterface
 	public interface Transformer {
-		void applyTransform(HumanoidModel<?> model, LivingEntity entity, HumanoidArm arm);
+		void applyTransform(HumanoidModel<?> model, HumanoidRenderState state, HumanoidArm arm);
 	}
 
 	/** All the mod's poses lift both arms the same way, as in 1.99.3.1 */
-	private static final Transformer AIM = (model, entity, arm) -> {
+	private static final Transformer AIM = (model, state, arm) -> {
 		if (arm == HumanoidArm.LEFT) {
 			model.rightArm.xRot = -45F + model.head.xRot;
 			model.leftArm.xRot = -45F + model.head.xRot;

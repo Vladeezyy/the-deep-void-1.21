@@ -364,6 +364,8 @@ def procs(s):
     # JEI 27: brewing recipes have ids
     s = re.sub(r'(brewingRecipes\.add\(factory\.createBrewingRecipe\((?:(?!"brewing_")[^;])*?)\)\);', r'\1, Identifier.fromNamespaceAndPath("the_deep_void", "brewing_" + brewingRecipes.size())));', s)
     s = re.sub(r'\b(BuiltInRegistries\.[A-Z_]+)\.getOrCreateTag\(', r'\1.getOrThrow(', s)
+    # NeoForge 21.11 uses the vanilla TriState
+    s = s.replace('net.neoforged.neoforge.common.util.TriState', 'net.minecraft.util.TriState')
     # smaller renames and signature changes
     s = re.sub(r'\bBlocks\.CHAIN\b', 'Blocks.IRON_CHAIN', s)
     s = re.sub(r'\bItems\.CHAIN\b', 'Items.IRON_CHAIN', s)
@@ -612,9 +614,13 @@ def port(s):
     return s
 
 
+# the NeoForge-only MCreator files of tools/manual-files.txt ("neoforge: ..."), restored into the neoforge module
+NEOFORGE_ONLY = ['neoforge/src/main/java/' + line.split(':', 1)[1].strip() for line in open('tools/manual-files.txt') if line.startswith('neoforge:')]
+
+
 def main():
     changed = 0
-    for path in glob.glob(ROOT + '**/*.java', recursive=True):
+    for path in glob.glob(ROOT + '**/*.java', recursive=True) + NEOFORGE_ONLY:
         s = open(path, encoding='utf-8').read()
         o = port(s)
         if o != s:

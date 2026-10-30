@@ -1,7 +1,7 @@
 
 package net.sombrius.thedeepvoid.block;
 
-import net.neoforged.neoforge.common.util.TriState;
+import net.minecraft.util.TriState;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -27,7 +27,9 @@
     "client.HumanoidModelMixin",
     "client.ItemInHandRendererMixin",
     "client.MultiPlayerGameModeMixin",
-    "client.PlayerRendererMixin"
+    "client.AvatarRendererMixin",
+    "client.HumanoidRenderStateMixin",
+    "client.RangeSelectItemModelPropertiesAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

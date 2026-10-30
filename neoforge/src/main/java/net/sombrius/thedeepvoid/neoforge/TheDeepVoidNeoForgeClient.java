@@ -31,11 +31,10 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.Minecraft;
 
@@ -86,15 +85,20 @@ public final class TheDeepVoidNeoForgeClient {
 		modBus.addListener((RegisterParticleProvidersEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterParticleProvidersEvent(
 				new net.sombrius.thedeepvoid.port.bus.RegisterParticleProvidersEvent.Sink() {
 					@Override
-					public <T extends ParticleOptions> void register(ParticleType<T> type, ParticleEngine.SpriteParticleRegistration<T> registration) {
+					public <T extends ParticleOptions> void register(ParticleType<T> type, net.minecraft.client.particle.ParticleResources.SpriteParticleRegistration<T> registration) {
 						event.registerSpriteSet(type, registration);
 					}
 				})));
 		modBus.addListener((RegisterMenuScreensEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterMenuScreensEvent(event::register)));
 		modBus.addListener((RegisterKeyMappingsEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterKeyMappingsEvent(event::register)));
 		modBus.addListener(TheDeepVoidNeoForgeClient::registerClientExtensions);
+		// 1.21.4: MCreator's item properties are one range select property (port.PortItemProperties)
+		modBus.addListener((net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent event) -> event.register(net.sombrius.thedeepvoid.port.PortItemProperties.ID,
+				net.sombrius.thedeepvoid.port.PortItemProperties.MAP_CODEC));
 
 		IEventBus bus = NeoForge.EVENT_BUS;
+		// 1.21.2: the JEI recipe types the server sent (port.PortRecipeSync), before JEI reads them
+		bus.addListener(net.neoforged.bus.api.EventPriority.HIGH, (net.neoforged.neoforge.client.event.RecipesReceivedEvent event) -> net.sombrius.thedeepvoid.port.PortRecipeSync.setRecipes(event.getRecipeMap()));
 		bus.addListener((ClientTickEvent.Pre event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ClientTickEvent.Pre()));
 		bus.addListener((ClientTickEvent.Post event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ClientTickEvent.Post()));
 		bus.addListener((RenderGuiEvent.Pre event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RenderGuiEvent.Pre(event.getGuiGraphics())));
@@ -132,12 +136,6 @@ public final class TheDeepVoidNeoForgeClient {
 	private static IClientItemExtensions item(net.sombrius.thedeepvoid.port.neo.IClientItemExtensions ours) {
 		return new IClientItemExtensions() {
 			@Override
-			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-				BlockEntityWithoutLevelRenderer renderer = ours.getCustomRenderer();
-				return renderer != null ? renderer : IClientItemExtensions.super.getCustomRenderer();
-			}
-
-			@Override
 			public HumanoidModel.ArmPose getArmPose(LivingEntity entity, InteractionHand hand, ItemStack stack) {
 				return ours.getArmPose(entity, hand, stack);
 			}
@@ -148,8 +146,13 @@ public final class TheDeepVoidNeoForgeClient {
 			}
 
 			@Override
-			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> original) {
-				return ours.getHumanoidArmorModel(entity, stack, slot, original);
+			public net.minecraft.client.model.Model getHumanoidArmorModel(ItemStack stack, net.minecraft.client.resources.model.EquipmentClientInfo.LayerType layerType, net.minecraft.client.model.Model original) {
+				return ours.getHumanoidArmorModel(stack, layerType, original);
+			}
+
+			@Override
+			public net.minecraft.resources.Identifier getArmorTexture(ItemStack stack, net.minecraft.client.resources.model.EquipmentClientInfo.LayerType type, net.minecraft.client.resources.model.EquipmentClientInfo.Layer layer, net.minecraft.resources.Identifier _default) {
+				return ours.getArmorTexture(stack, type, layer, _default);
 			}
 		};
 	}
@@ -167,7 +170,7 @@ public final class TheDeepVoidNeoForgeClient {
 			}
 
 			@Override
-			public boolean renderInventoryText(MobEffectInstance instance, EffectRenderingInventoryScreen<?> screen, GuiGraphics guiGraphics, int x, int y, int blitOffset) {
+			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int x, int y, int blitOffset) {
 				return ours.renderInventoryText(instance, screen, guiGraphics, x, y, blitOffset);
 			}
 		};

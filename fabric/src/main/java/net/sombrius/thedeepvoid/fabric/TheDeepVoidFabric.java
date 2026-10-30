@@ -1,6 +1,6 @@
 package net.sombrius.thedeepvoid.fabric;
 
-import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -70,6 +70,9 @@ public final class TheDeepVoidFabric implements ModInitializer {
 		TheDeepVoidMod.init();
 		ModBus.post(new FMLConstructModEvent());
 		FabricPlatform.registerAll();
+		// 1.21.2: clients get no recipes; the JEI recipe types are synced by their serializers (port.PortRecipeSync)
+		for (var type : net.sombrius.thedeepvoid.init.TheDeepVoidModRecipeTypes.SERIALIZERS.getEntries())
+			net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization.synchronizeRecipeSerializer(type.get());
 		ModBus.post(new EntityAttributeCreationEvent(FabricDefaultAttributeRegistry::register));
 		ModBus.post(new RegisterSpawnPlacementsEvent(new RegisterSpawnPlacementsEvent.Sink() {
 			@Override
@@ -83,7 +86,7 @@ public final class TheDeepVoidFabric implements ModInitializer {
 		ModBus.post(new RegisterCapabilitiesEvent());
 		FabricBiomeModifiers.register();
 		// NeoForge's tags for its poison damage, the soils (canSustainPlant) and the bookshelf (getEnchantPowerBonus)
-		net.fabricmc.fabric.api.resource.ResourceManagerHelper.registerBuiltinResourcePack(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "neoforge_compat"),
+		net.fabricmc.fabric.api.resource.ResourceManagerHelper.registerBuiltinResourcePack(net.minecraft.resources.Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, "neoforge_compat"),
 				net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer(TheDeepVoidMod.MODID).orElseThrow(), net.minecraft.network.chat.Component.literal("The Deep Void: NeoForge data"),
 				net.fabricmc.fabric.api.resource.ResourcePackActivationType.ALWAYS_ENABLED);
 		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((tab, entries) -> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab)
@@ -154,17 +157,20 @@ public final class TheDeepVoidFabric implements ModInitializer {
 				added[0] = true;
 			}));
 			if (added[0])
-				context.modify(item, components -> components.set(DataComponents.ATTRIBUTE_MODIFIERS, builder.build().withTooltip(base.showInTooltip())));
+				context.modify(item, components -> components.set(DataComponents.ATTRIBUTE_MODIFIERS, builder.build()));
 		}
 	}
 
 	/** NeoForge's FurnaceFuelBurnTimeEvent and IBlockExtension#getFlammability for the mod's items and blocks */
 	private static void fuelAndFlammability() {
-		for (var entry : TheDeepVoidModItems.REGISTRY.getEntries()) {
-			FurnaceFuelBurnTimeEvent event = new FurnaceFuelBurnTimeEvent(new ItemStack(entry.get()), -1);
-			if (ModBus.post(event))
-				FuelRegistry.INSTANCE.add(entry.get(), event.getBurnTime());
-		}
+		// 1.21.2: fuel values are built with the registries (once per data load)
+		FuelRegistryEvents.BUILD.register((builder, context) -> {
+			for (var entry : TheDeepVoidModItems.REGISTRY.getEntries()) {
+				FurnaceFuelBurnTimeEvent event = new FurnaceFuelBurnTimeEvent(new ItemStack(entry.get()), -1);
+				if (ModBus.post(event))
+					builder.add(entry.get(), event.getBurnTime());
+			}
+		});
 		for (var entry : TheDeepVoidModBlocks.REGISTRY.getEntries()) {
 			Block block = entry.get();
 			int burn = blockInt(block, "getFlammability");

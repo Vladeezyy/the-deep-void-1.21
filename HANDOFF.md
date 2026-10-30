@@ -21,11 +21,16 @@
   и предметов на обоих загрузчиках (скриншоты в `<loader>/run/screenshots`). Не проверено: production-сервер NeoForge
   с jar, руки GeckoLib-пушек от первого лица (сцена их не показывает и на 1.21.1), замер MSPT/FPS на 1.21.11.
   Раздел «Minecraft 1.21.11» в `PORTLOG.md`, разбор `modding-kb/porting/mc-versions/1.21.11/the-deep-void.md`.
-- `mc/26.1.2` — **сделано (2026-10-31, локально)**: NeoForge 26.1.2.125 + Fabric 0.155.3, GeckoLib 5.5.2, JEI 29.53,
+- `mc/26.1.2` — **сделано (2026-10-31, запушено)**: NeoForge 26.1.2.125 + Fabric 0.155.3, GeckoLib 5.5.2, JEI 29.53,
   Java 25, Loom 1.18. Повторяемо: `tools/port_26_1.sh` + `tools/port_resources_26_1.py` (после ресурсов 1.21.11).
   Проверено: dev-серверы обоих, production-сервер Fabric, сцены мира и предметов на обоих. Раздел «Minecraft 26.1.2» в
   `PORTLOG.md`, разбор `modding-kb/porting/mc-versions/26.1/the-deep-void.md`.
-- Дальше: `mc/26.2` от `mc/26.1.2`, потом `mc/26.3`.
+- `mc/26.2` — **сделано (2026-10-31, локально)**: NeoForge 26.2.0.93 + Fabric 0.161.0, GeckoLib 5.5.6, JEI 30.48.
+  Повторяемо: `tools/port_26_2.sh` + `tools/port_resources_26_2.py` (после ресурсов 1.21.11 и 26.1). Проверено:
+  dev-серверы обоих, production-сервер Fabric, сцены мира и предметов на обоих (пушки от первого лица — теперь сцена
+  включает HUD на этих кадрах). Раздел «Minecraft 26.2» в `PORTLOG.md`, разбор
+  `modding-kb/porting/mc-versions/26.2/the-deep-void.md`.
+- Дальше: `mc/26.3` от `mc/26.2`.
 
 ## Масштаб (замерено)
 - 3108 Java-файлов, ~206 тыс. строк (MCreator), 1643 импорта GeckoLib, 36 — JEI.

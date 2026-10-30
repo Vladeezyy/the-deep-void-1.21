@@ -213,9 +213,16 @@ public final class DevScene {
 		int t = 140;
 		for (String id : List.of("heresy", "double_barrel_shotgun", "eldritch_maw", "misanthropy")) {
 			at(t, mc -> server(mc, p -> p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new net.minecraft.world.item.ItemStack(item(id)))));
-			at(t + 30, mc -> mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON));
+			// a hidden HUD hides the hand as well
+			at(t + 30, mc -> {
+				mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON);
+				setHudHidden(mc, false);
+			});
 			at(t + 40, mc -> shot(mc, "item_" + id + "_1"));
-			at(t + 50, mc -> mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT));
+			at(t + 50, mc -> {
+				mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT);
+				setHudHidden(mc, true);
+			});
 			at(t + 60, mc -> shot(mc, "item_" + id + "_3"));
 			t += 80;
 		}
@@ -253,6 +260,11 @@ public final class DevScene {
 		Minecraft mc = Minecraft.getInstance();
 		if (!opened && ++menuTicks % 100 == 0)
 			TheDeepVoidMod.LOGGER.info("[scene] waiting on {}", mc.gui.screen() == null ? "no screen" : mc.gui.screen().getClass().getName());
+		// NeoForge 26.2 warns about dependencies with an old logoFile before the main menu (common does not see the class)
+		if (mc.gui.screen() != null && mc.gui.screen().getClass().getSimpleName().equals("LoadingErrorScreen")) {
+			mc.gui.setScreen(new TitleScreen());
+			return;
+		}
 		// a fresh run folder opens the accessibility onboarding first
 		if (mc.gui.screen() instanceof AccessibilityOnboardingScreen) {
 			mc.options.onboardAccessibility = false;
@@ -286,7 +298,13 @@ public final class DevScene {
 
 	private static void server(Minecraft mc, Consumer<ServerPlayer> action) {
 		MinecraftServer server = mc.getSingleplayerServer();
-		server.execute(() -> action.accept(server.getPlayerList().getPlayer(mc.player.getUUID())));
+		java.util.UUID id = mc.player.getUUID();
+		server.execute(() -> {
+			// the tasks left when the scene quits run after the player has gone
+			ServerPlayer player = server.getPlayerList().getPlayer(id);
+			if (player != null)
+				action.accept(player);
+		});
 	}
 
 	private static void go(ServerPlayer player, String biome) {

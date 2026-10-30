@@ -225,6 +225,25 @@ task instead of remapJar). Repeatable from the originals: `tools/port_26_1.sh` (
 - Checked: dev server (both), production server (Fabric with the jar), the world scene and the items scene on both
   loaders. Not checked: a NeoForge production server, MSPT / FPS.
 
+## Minecraft 26.2 (branch mc/26.2, 2026-10-31)
+
+NeoForge 26.2.0.93, Fabric API 0.161.0, GeckoLib 5.5.6, JEI 30.48. Repeatable from the originals:
+`tools/port_26_2.sh` (the 26.1.2 pipeline, then modding-kb's `tools/port_262.py` and `tools/port_dv_26_2.py`); data:
+`tools/port_resources_26_2.py` after the 1.21.11 and 26.1 converters.
+
+- The screen and the HUD live in `Minecraft.gui` (`gui.screen()`, `gui.hud`); the Fabric mixins target `Hud` and
+  `ItemInHandRenderer.submitArmWithItem`; NeoForge's effect text is `extractInventoryText`.
+- `net.minecraft.util.Tuple` is gone: the server work queue of `TheDeepVoidMod` has its own entry class.
+- Emissive blocks: `emissiveRendering` takes the block state only.
+- Lakes name what they may replace (`can_place_feature`, `can_replace_with_air_or_fluid`, `can_replace_with_barrier`,
+  vanilla's rules); trees and the mod's fleshy formations put their `below_trunk_provider` instead of `dirt_provider`.
+- Structure features (giant skulls and the like) are clipped one block inside the zone a feature may write to: 26.2
+  logs the reads of the edge blocks' neighbours outside it.
+- `neoforge.mods.toml` names the logo `iconFile` (`logoFile` is deprecated and shows a warning screen).
+- Checked: dev server (both), production server (Fabric with the jar), the world scene and the items scene on both
+  loaders, guns in first person (the scene shows the HUD there: a hidden HUD hides the hand as well). Not checked: a
+  NeoForge production server, MSPT / FPS.
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

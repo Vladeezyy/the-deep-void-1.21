@@ -16,6 +16,13 @@ def port(s):
     s = s.replace('renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset)',
                   'extractInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int canvasWidth, int color)')
     s = s.replace('ours.renderInventoryText(instance, screen, guiGraphics, x, y, blitOffset)', 'ours.extractInventoryText(instance, screen, guiGraphics, x, y, canvasWidth, color)')
+    # 26.2 logs reads outside the write zone: a template placed up to the zone's edge reads the neighbours of its edge
+    # blocks (shapes, fluids) one block further, in the chunk at distance 2; clip the template one block inside
+    s = s.replace('new BoundingBox(chunk.getMinBlockX() - 16, worldGenLevel.getMinY(), chunk.getMinBlockZ() - 16, chunk.getMaxBlockX() + 16,\n\t\t\t\tworldGenLevel.getMaxY(), chunk.getMaxBlockZ() + 16)',
+                  'new BoundingBox(chunk.getMinBlockX() - 15, worldGenLevel.getMinY(), chunk.getMinBlockZ() - 15, chunk.getMaxBlockX() + 15,\n\t\t\t\tworldGenLevel.getMaxY(), chunk.getMaxBlockZ() + 15)')
+    if '(placing reads' not in s:
+        s = s.replace('// A feature may only write into its own chunk and the neighbouring ones; clip the template to that area',
+                      '// A feature may only write into its own chunk and the neighbouring ones; clip the template to that area, one\n\t\t// block inside (placing reads the neighbours of the edge blocks)')
     return s
 
 

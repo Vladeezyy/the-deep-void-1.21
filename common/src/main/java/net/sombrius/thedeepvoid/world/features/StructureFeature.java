@@ -42,11 +42,12 @@ public class StructureFeature extends Feature<StructureFeatureConfiguration> {
 		StructureTemplate template = structureManager.getOrCreate(config.structure());
 		StructurePlaceSettings placeSettings = (new StructurePlaceSettings()).setRotation(rotation).setMirror(mirror).setRandom(random).setIgnoreEntities(false)
 				.addProcessor(new BlockIgnoreProcessor(config.ignoredBlocks().stream().map(Holder::value).toList()));
-		// A feature may only write into its own chunk and the neighbouring ones; clip the template to that area
+		// A feature may only write into its own chunk and the neighbouring ones; clip the template to that area, one
+		// block inside (placing reads the neighbours of the edge blocks)
 		// (1.20.1 dropped the blocks outside it as well, logging an error for each).
 		ChunkPos chunk = ChunkPos.containing(context.origin());
-		placeSettings.setBoundingBox(new BoundingBox(chunk.getMinBlockX() - 16, worldGenLevel.getMinY(), chunk.getMinBlockZ() - 16, chunk.getMaxBlockX() + 16,
-				worldGenLevel.getMaxY(), chunk.getMaxBlockZ() + 16));
+		placeSettings.setBoundingBox(new BoundingBox(chunk.getMinBlockX() - 15, worldGenLevel.getMinY(), chunk.getMinBlockZ() - 15, chunk.getMaxBlockX() + 15,
+				worldGenLevel.getMaxY(), chunk.getMaxBlockZ() + 15));
 		template.placeInWorld(worldGenLevel, placePos, placePos, placeSettings, random, 4);
 		return true;
 	}

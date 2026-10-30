@@ -392,7 +392,7 @@ def procs(s):
         s = s.replace('new BlockItem(', f'new {PKG}.port.PortBlockItem(')
     # 1.21.5: blocks have no tooltips; the block item asks the block (port.PortBlockItem)
     if re.search(r'public class \w+ extends Block\b', s) and 'super.appendHoverText(itemstack, context, tooltipDisplay, list, flag);' in s:
-        s = re.sub(r'\t@Override\n(\t@net\.neoforged[^\n]*\n\tpublic void appendHoverText\()', r'\1', s)
+        s = re.sub(r'\t@Override\n(\t@net\.(?:neoforged|fabricmc)[^\n]*\n\tpublic void appendHoverText\()', r'\1', s)
         s = s.replace('\t\tsuper.appendHoverText(itemstack, context, tooltipDisplay, list, flag);\n', '')
         s = re.sub(r'(public class \w+ extends Block)( implements ([\w, ]+))? \{', lambda m: m.group(1) + ' implements ' + (m.group(3) + ', ' if m.group(3) else '') + f'{PKG}.port.PortBlockItem.Tooltip {{', s, count=1)
     if re.search(r'\bItemStack\b', s) and 'import net.minecraft.world.item.ItemStack;' not in s and 'import net.minecraft.world.item.*;' not in s and 'class ItemStack' not in s:
@@ -419,7 +419,7 @@ def armor_models(s):
                lambda m: 'public net.minecraft.client.model.Model getHumanoidArmorModel(ItemStack stack, net.minecraft.client.resources.model.EquipmentClientInfo.LayerType layerType, net.minecraft.client.model.Model original) {\n'
                          + m.group(1) + 'if (this.armorModel == null)\n' + m.group(1) + '\tthis.armorModel = ' + m.group(2) + ';\n' + m.group(1) + 'return this.armorModel;', s, flags=re.S)
     s = re.sub(r'"head", ' + HEAD_PART, rf'"head", {PKG}.port.PortArmorModels.head(\1)', s)
-    s = re.sub(r'(\n(\t+)@Override\n(?:\t+@net\.neoforged[^\n]*\n)?\t+public net\.minecraft\.client\.model\.Model getHumanoidArmorModel)', r'\n\2private HumanoidModel<?> armorModel;\n\1', s)
+    s = re.sub(r'(\n(\t+)@Override\n(?:\t+@net\.(?:neoforged|fabricmc)[^\n]*\n)?\t+public net\.minecraft\.client\.model\.Model getHumanoidArmorModel)', r'\n\2private HumanoidModel<?> armorModel;\n\1', s)
     # the texture of the piece (getArmorTexture of NeoForge's item extension in 1.21.1)
     s = re.sub(r'(\t\t\t\};\n\t\t\}\n)\n\t\tpublic Identifier getArmorTexture\(ItemStack stack, Entity entity, EquipmentSlot slot, Object layer, boolean innerModel\) \{\n\t\t\treturn (Identifier\.parse\("[^"]+"\));\n\t\t\}\n',
                r'\n\t\t\t\t@Override\n\t\t\t\tpublic Identifier getArmorTexture(ItemStack stack, net.minecraft.client.resources.model.EquipmentClientInfo.LayerType type, net.minecraft.client.resources.model.EquipmentClientInfo.Layer layer, Identifier _default) {\n\t\t\t\t\treturn \2;\n\t\t\t\t}\n\1', s)

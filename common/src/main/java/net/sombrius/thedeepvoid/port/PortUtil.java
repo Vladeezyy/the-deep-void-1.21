@@ -23,7 +23,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
@@ -72,7 +71,12 @@ public final class PortUtil {
 		return client == null ? null : client.lookup(key).orElse(null);
 	}
 
-	/** 1.20's {@code net.sombrius.thedeepvoid.port.PortUtil.wearing(entity, stack)}: the stack is worn in an armor slot */
+	/** 1.21.6's ValueInput has no {@code contains(key)} */
+	public static boolean has(net.minecraft.world.level.storage.ValueInput input, String key) {
+		return input.read(key, com.mojang.serialization.Codec.PASSTHROUGH).isPresent();
+	}
+
+	/** 1.20's armor slot check (the stack is worn in an armor slot) */
 	public static boolean wearing(Entity entity, ItemStack stack) {
 		if (entity instanceof LivingEntity living)
 			for (net.minecraft.world.entity.EquipmentSlot slot : net.minecraft.world.entity.EquipmentSlot.values())
@@ -101,9 +105,9 @@ public final class PortUtil {
 	}
 
 	/** NeoForge's {@code net.sombrius.thedeepvoid.port.PortUtil.swordAttributes(Tier, float, float)} (vanilla takes an int damage) */
-	public static ItemAttributeModifiers swordAttributes(Tier tier, float attackDamage, float attackSpeed) {
+	public static ItemAttributeModifiers swordAttributes(net.minecraft.world.item.ToolMaterial tier, float attackDamage, float attackSpeed) {
 		return ItemAttributeModifiers.builder()
-				.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamage + tier.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamage + tier.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 				.add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
 	}
 

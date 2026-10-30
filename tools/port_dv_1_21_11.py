@@ -195,6 +195,91 @@ def armor(s):
     return s
 
 
+def method_body(s, start):
+    """Index of the closing brace of the method whose body opens at s[start] ('{')"""
+    depth, i = 0, start
+    while True:
+        c = s[i]
+        if c == '{':
+            depth += 1
+        elif c == '}':
+            depth -= 1
+            if depth == 0:
+                return i
+        elif c == '"':
+            i = s.index('"', i + 1)
+            while s[i - 1] == '\\':
+                i = s.index('"', i + 1)
+        i += 1
+
+
+def items3(s):
+    s = re.sub(r'\bUseAnim\b', 'ItemUseAnimation', s)
+    s = s.replace('import net.minecraft.world.item.ItemUseAnimation;\n', '').replace('import net.minecraft.world.item.UseAnim;\n', '')
+    if 'ItemUseAnimation' in s:
+        s = add_import(s, 'net.minecraft.world.item.ItemUseAnimation')
+    # 1.21.2: releaseUsing tells whether the use was released (the bows: true)
+    pos = 0
+    while (m := re.search(r'public void releaseUsing\(ItemStack (\w+), Level (\w+), LivingEntity (\w+), int (\w+)\) \{', s[pos:])):
+        start = pos + m.start()
+        open_brace = pos + m.end() - 1
+        close = method_body(s, open_brace)
+        body = s[open_brace:close].replace('\t\treturn;', '\t\treturn true;')
+        body = re.sub(r'(\s)return;', r'\1return true;', body)
+        s = s[:start] + s[start:open_brace].replace('public void releaseUsing', 'public boolean releaseUsing') + body + '\treturn true;\n\t' + s[close:]
+        pos = start + 10
+    s = re.sub(r'super\.releaseUsing\((\w+), (\w+), (\w+), (\w+)\);', r'super.releaseUsing(\1, \2, \3, \4);', s)
+    s = re.sub(r'LivingEntity\.getSlotForHand\(([^()]*(?:\([^()]*\))?)\)', r'\1.asEquipmentSlot()', s)
+    s = re.sub(r'\.getInventory\(\)\.items\b', '.getInventory().getNonEquipmentItems()', s)
+    s = s.replace('SwordItem.createAttributes(', f'{PKG}.port.PortUtil.swordAttributes(')
+    # 1.21.2: hurtEnemy returns nothing (the item is always damaged by postHurtEnemy)
+    s = re.sub(r'public boolean hurtEnemy\(ItemStack (\w+), LivingEntity (\w+), LivingEntity (\w+)\) \{\n(\t+)boolean retval = super\.hurtEnemy\(\1, \2, \3\);',
+               r'public void hurtEnemy(ItemStack \1, LivingEntity \2, LivingEntity \3) {\n\4super.hurtEnemy(\1, \2, \3);', s)
+    if 'public void hurtEnemy(' in s:
+        s = re.sub(r'(public void hurtEnemy\([^)]*\) \{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*?)\n\t+return retval;', r'\1', s)
+    return s
+
+
+VI = 'net.minecraft.world.level.storage.ValueInput'
+VO = 'net.minecraft.world.level.storage.ValueOutput'
+
+
+def blocks(s):
+    """1.21.2-1.21.9 block signatures, for every block class (not only the ones extending Block)"""
+    s = re.sub(r'public BlockState updateShape\(BlockState (\w+), Direction (\w+), BlockState (\w+), LevelAccessor (\w+), BlockPos (\w+), BlockPos (\w+)\)',
+               r'public BlockState updateShape(BlockState \1, LevelReader \4, net.minecraft.world.level.ScheduledTickAccess tickAccess, BlockPos \5, Direction \2, BlockPos \6, BlockState \3, net.minecraft.util.RandomSource random)', s)
+    if 'ScheduledTickAccess tickAccess' in s:
+        s = re.sub(r'super\.updateShape\((\w+), (\w+), (\w+), (\w+), (\w+), (\w+)\)', r'super.updateShape(\1, \4, tickAccess, \5, \2, \6, \3, random)', s)
+        s = re.sub(r'\b(world|level)\.scheduleTick\((\w+), Fluids\.WATER, Fluids\.WATER\.getTickDelay\(\1\)\)', r'tickAccess.scheduleTick(\2, Fluids.WATER, Fluids.WATER.getTickDelay(\1))', s)
+        s = add_import(s, 'net.minecraft.world.level.LevelReader')
+    # neighborChanged: the neighbor's position became its orientation (null: unknown); the old fromPos is the block itself
+    s = re.sub(r'public void neighborChanged\(BlockState (\w+), Level (\w+), BlockPos (\w+), Block (\w+), BlockPos (\w+), boolean (\w+)\) \{\n(\t+)super\.neighborChanged\(\1, \2, \3, \4, \5, \6\);',
+               r'public void neighborChanged(BlockState \1, Level \2, BlockPos \3, Block \4, @Nullable net.minecraft.world.level.redstone.Orientation orientation, boolean \6) {\n\7super.neighborChanged(\1, \2, \3, \4, orientation, \6);\n\7BlockPos \5 = \3;', s)
+    if 'Orientation orientation' in s:
+        s = add_import(s, 'javax.annotation.Nullable')
+    s = s.replace('public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos)', 'public int getLightBlock(BlockState state)')
+    s = s.replace('public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos)', 'public boolean propagatesSkylightDown(BlockState state)')
+    s = re.sub(r'public ItemStack getCloneItemStack\(LevelReader (\w+), BlockPos (\w+), BlockState (\w+)\)', r'public ItemStack getCloneItemStack(LevelReader \1, BlockPos \2, BlockState \3, boolean includeData)', s)
+    s = re.sub(r'super\.getCloneItemStack\((\w+), (\w+), (\w+)\)', r'super.getCloneItemStack(\1, \2, \3, includeData)', s)
+    s = re.sub(r'public void entityInside\(BlockState (\w+), Level (\w+), BlockPos (\w+), Entity (\w+)\) \{\n(\t+)super\.entityInside\(\1, \2, \3, \4\);',
+               r'public void entityInside(BlockState \1, Level \2, BlockPos \3, Entity \4, net.minecraft.world.entity.InsideBlockEffectApplier effectApplier, boolean intersects) {\n\5super.entityInside(\1, \2, \3, \4, effectApplier, intersects);', s)
+    return s
+
+
+def saves(s):
+    """1.21.6: entities and block entities save to ValueOutput / load from ValueInput (the same keys)"""
+    s = s.replace('public void addAdditionalSaveData(CompoundTag compound)', f'public void addAdditionalSaveData({VO} compound)')
+    s = s.replace('public void readAdditionalSaveData(CompoundTag compound)', f'public void readAdditionalSaveData({VI} compound)')
+    s = re.sub(r'public void loadAdditional\(CompoundTag (\w+), HolderLookup\.Provider \w+\) \{\n(\t+)super\.loadAdditional\(\1, \w+\);',
+               rf'public void loadAdditional({VI} \1) {{\n\2super.loadAdditional(\1);', s)
+    s = re.sub(r'public void saveAdditional\(CompoundTag (\w+), HolderLookup\.Provider \w+\) \{\n(\t+)super\.saveAdditional\(\1, \w+\);',
+               rf'public void saveAdditional({VO} \1) {{\n\2super.saveAdditional(\1);', s)
+    s = re.sub(r'ContainerHelper\.(loadAllItems|saveAllItems)\((\w+), ([\w.]+), \w+\)', r'ContainerHelper.\1(\2, \3)', s)
+    if VI in s or VO in s:
+        s = re.sub(r'\bcompound\.contains\(("[^"]+")\)', rf'{PKG}.port.PortUtil.has(compound, \1)', s)
+    return s
+
+
 def port(s):
     s = s.replace('.getGameProfile().getId()', '.getGameProfile().id()')
     s = tiers(s)
@@ -203,6 +288,9 @@ def port(s):
     s = tools(s)
     s = use(s)
     s = armor(s)
+    s = items3(s)
+    s = blocks(s)
+    s = saves(s)
     return s
 
 

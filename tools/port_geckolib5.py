@@ -159,7 +159,7 @@ ENTITY_IMPORTS = {
 
 def entity(path):
     s = read(path)
-    if 'implements GeoEntity' not in s or 'AnimationTest<' in s:
+    if not re.search(r'implements [^{]*\bGeoEntity\b', s) or 'AnimationTest<' in s:
         return
     cls = re.search(r'public class (\w+)', s).group(1)
     for a, b in ENTITY_IMPORTS.items():

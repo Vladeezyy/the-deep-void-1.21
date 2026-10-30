@@ -40,6 +40,8 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.Minecraft;
 
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
+
 import net.sombrius.thedeepvoid.port.bus.RenderFrameEvent;
 import net.sombrius.thedeepvoid.port.bus.RegisterParticleProvidersEvent;
 import net.sombrius.thedeepvoid.port.bus.RegisterMenuScreensEvent;
@@ -142,6 +144,13 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 					HumanoidModel<LivingEntity> parent = (HumanoidModel) contextModel;
 					@SuppressWarnings({"unchecked", "rawtypes"})
 					HumanoidModel<LivingEntity> armor = (HumanoidModel) model;
+					if (model instanceof GeoArmorRenderer<?> geo) {
+						// GeckoLib's own armor path on Fabric: the renderer needs the buffer source of this frame
+						geo.prepForRender(entity, stack, slot, contextModel, buffers, Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true), 0, 0, 0, 0);
+						parent.copyPropertiesTo(armor);
+						geo.renderToBuffer(pose, null, light, OverlayTexture.NO_OVERLAY, -1);
+						return;
+					}
 					parent.copyPropertiesTo(armor);
 					ResourceLocation texture = armorTexture(stack, entity, slot);
 					armor.renderToBuffer(pose, buffers.getBuffer(RenderType.armorCutoutNoCull(texture)), light, OverlayTexture.NO_OVERLAY, -1);

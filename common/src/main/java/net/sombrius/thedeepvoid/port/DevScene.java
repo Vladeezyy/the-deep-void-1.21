@@ -62,7 +62,8 @@ public final class DevScene {
 			"entity.the_deep_void.stalker", "text.the_deep_void.port.the_stalker_is_after_you", "text.the_deep_void.port.press_shift_to_show_abilities", "effect.the_deep_void.hexed.description",
 			"entity.the_deep_void.undertaker.canopy1");
 	private static final boolean BENCH = "bench".equals(System.getProperty("deepvoid.scene"));
-	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : "dv_scene";
+	private static final boolean ITEMS = "items".equals(System.getProperty("deepvoid.scene"));
+	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : ITEMS ? "dv_items" : "dv_scene";
 	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
 	private static final List<Pair<Integer, Consumer<Minecraft>>> STEPS = new ArrayList<>();
 	private static boolean opened;
@@ -77,7 +78,9 @@ public final class DevScene {
 			MinecraftServer server = p.getServer();
 			server.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
 		}));
-		if (BENCH) {
+		if (ITEMS) {
+			items();
+		} else if (BENCH) {
 			PortBench.register();
 			bench();
 		} else if (LANG_ONLY) {
@@ -189,6 +192,46 @@ public final class DevScene {
 			mob.setNoAi(true);
 			mob.setPersistenceRequired();
 		}
+	}
+
+	/**
+	 * The items with client extensions (gun renderers and arm poses, armor models, GeckoLib wings), in first and third
+	 * person: {@code scene_item_<name>_1.png} / {@code _3.png}.
+	 */
+	private static void items() {
+		at(45, mc -> mc.options.hideGui = true);
+		at(60, mc -> server(mc, p -> {
+			p.teleportTo(p.getServer().overworld(), 0.5, 120, 0.5, 0F, 0F);
+			p.serverLevel().setBlock(BlockPos.containing(0, 118, 0), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState(), 3);
+			p.getAbilities().flying = false;
+			p.onUpdateAbilities();
+			p.getServer().overworld().setDayTime(6000);
+		}));
+		int t = 140;
+		for (String id : List.of("heresy", "double_barrel_shotgun", "eldritch_maw", "misanthropy")) {
+			at(t, mc -> server(mc, p -> p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new net.minecraft.world.item.ItemStack(item(id)))));
+			at(t + 30, mc -> mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON));
+			at(t + 40, mc -> shot(mc, "item_" + id + "_1"));
+			at(t + 50, mc -> mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT));
+			at(t + 60, mc -> shot(mc, "item_" + id + "_3"));
+			t += 80;
+		}
+		at(t, mc -> server(mc, p -> {
+			p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, net.minecraft.world.item.ItemStack.EMPTY);
+			p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD, new net.minecraft.world.item.ItemStack(item("hunters_helmet")));
+			p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST, new net.minecraft.world.item.ItemStack(item("soul_wings_chestplate")));
+		}));
+		at(t + 40, mc -> shot(mc, "item_armor_3"));
+		at(t + 50, mc -> server(mc, p -> {
+			p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD, new net.minecraft.world.item.ItemStack(item("vulture_helmet")));
+			p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST, new net.minecraft.world.item.ItemStack(item("fly_wings_chestplate")));
+		}));
+		at(t + 90, mc -> shot(mc, "item_armor2_3"));
+		at(t + 110, Minecraft::stop);
+	}
+
+	private static net.minecraft.world.item.Item item(String id) {
+		return BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
 	}
 
 	private static void at(int t, Consumer<Minecraft> action) {

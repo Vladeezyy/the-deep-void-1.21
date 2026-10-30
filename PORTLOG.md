@@ -76,6 +76,56 @@ overrides with namespaces. Hand-written 1.21 data lives in `tools/overlay/` and 
   same in every language (music disc titles, `Combo`, …) are listed in `tools/lang/untranslatable.txt`;
   `tools/lang_todo.py <language>` lists what is still untranslated.
 
+## Performance: tick handlers (2026-10-30)
+
+MCreator's per-tick procedures, measured with the bench scene (`tools/bench.sh`, `DevScene` + `PortBench`):
+a survival player with 100 pigs without AI around, in the overworld, in the Forgotten Valley, and there with a stalker,
+a watching stalker, an overseer and a void dweller behind the player. Every place gets 200-tick windows alternating
+the **base line** (the same world with the mod's tick subscribers taken off the event bus) and the mod. The times are
+those of all the listeners of the event (first to last listener), per tick. Mean of 4 windows per cell; the before
+and after runs were alternated twice (`tools/bench_table.py`). Apple M4, JDK 21, dev client with the integrated server.
+
+| Place | Measure | Base line | Before | After |
+| --- | --- | ---: | ---: | ---: |
+| Overworld | player tick, server, µs | 10 | 126 | 99 |
+| Overworld | player tick, client, µs | 7 | 88 | 74 |
+| Overworld | entity ticks (105 entities), server, µs | 10.9 | 36.1 | 8.7 |
+| Overworld | level ticks, µs | 3.2 | 11.6 | 5.3 |
+| Overworld | sync packets / s | 0 | 100 | 0 |
+| Deep Void | player tick, server, µs | 14 | 232 | 199 |
+| Deep Void | player tick, client, µs | 8 | 138 | 127 |
+| Deep Void | entity ticks, server, µs | 11.7 | 58.4 | 12.6 |
+| Deep Void | level ticks, µs | 3.8 | 28.3 | 6.5 |
+| Deep Void | sync packets / s | 0 | 160 | 20 |
+| Deep Void + stalkers, overseer | player tick, server, µs | 3 | 198 | 123 |
+| Deep Void + stalkers, overseer | player tick, client, µs | 2 | 127 | 77 |
+| Deep Void + stalkers, overseer | entity ticks, server, µs | 10.2 | 38.9 | 16.8 |
+| Deep Void + stalkers, overseer | level ticks, µs | 2.5 | 19.6 | 4.8 |
+| Deep Void + stalkers, overseer | sync packets / s | 0 | 140 | 20 |
+| all three | MSPT, ms | 1.5–2.2 | 1.8–2.1 | 1.7–2.2 |
+| all three | FPS | 302 / 611 / 480 | 329 / 595 / 464 | 294 / 592 / 461 |
+
+- MSPT and FPS of one player in a dev world are within the noise (±0.5 ms, ±15 %); the handler times are what moved.
+  The handler numbers are per player: a server with 10 players pays them 10 times, and before the fix every
+  map-variable sync went to **every** player, every tick.
+- The windows run 1–3 minutes after start, before the JIT has compiled handlers called 20 times a second; long play
+  should be cheaper in both columns.
+- **Fixes** (`c1b7802`, mechanical part `tools/port_perf.py`, idempotent):
+  - `getEntitiesOfClass(Stalker/Overseer/…, box up to 250 blocks)` every tick, plus 20–40 small searches along the
+    view ray → `PortEntities.find`: per-level list of the 10 entity classes those handlers look for, kept from
+    `onTrackingStart` to `onTrackingEnd` (mixins on `ServerLevel/ClientLevel$EntityCallbacks`), the same set
+    `getEntitiesOfClass` sees. The ray loops that only acted on one class ask for that class. The bench checks the list
+    against `getEntitiesOfClass` on both sides in every place (`[bench] index … ok`).
+  - Player variables (~80 fields + 4 item stacks as NBT) were synced after every change, up to 8 times a tick →
+    `PortSync`: one packet at the end of the player's tick.
+  - `hunterSpawnCooldown` and `undertakerSpawn` (read only on the server) were sent to all players every tick per
+    level / per player → saved (`setDirty`), not sent.
+  - `ResourceKey` / `TagKey` / `ResourceLocation` built from strings on every call → constants.
+  - `PortUtil.enchantmentLevel` (armor checks, up to 9 a tick): no registry lookup and no `GetEnchantmentLevelEvent`
+    for an empty slot, holders cached per registry.
+  - `EntityAnimationFactory` ran ~110 `instanceof` on every entity of the world every tick → only the mod's classes.
+- Left as in 1.20.1: what the remaining ~25 handlers cost (each a few µs of attribute, item and variable checks).
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

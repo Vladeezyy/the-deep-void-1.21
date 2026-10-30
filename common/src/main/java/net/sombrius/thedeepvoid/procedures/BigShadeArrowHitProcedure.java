@@ -210,8 +210,8 @@ public class BigShadeArrowHitProcedure {
 						(float) (amount + PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY), Enchantments.POWER) + 1));
 			}
 		}
-		if (entity instanceof LivingEntity && immediatesourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:nocooldown_bullet")))
-				&& !entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:nocooldown_bullet"))) && !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:gun")))
+		if (entity instanceof LivingEntity && immediatesourceentity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:nocooldown_bullet")))
+				&& !entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:nocooldown_bullet"))) && !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:gun")))
 				&& !((entity instanceof LivingEntity _entUseItem133 ? _entUseItem133.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem)) {
 			if (event instanceof ICancellableEvent _cancellable) {
 				_cancellable.setCanceled(true);
@@ -225,8 +225,8 @@ public class BigShadeArrowHitProcedure {
 			if (!immediatesourceentity.level().isClientSide())
 				immediatesourceentity.discard();
 		}
-		if (immediatesourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:bullet")))
-				&& !immediatesourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:nocooldown_bullet")))
+		if (immediatesourceentity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:bullet")))
+				&& !immediatesourceentity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:nocooldown_bullet")))
 				&& !((entity instanceof LivingEntity _entUseItem150 ? _entUseItem150.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem)
 				&& (sourceentity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GUNSLINGER_HELMET.get()
 				&& (sourceentity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GUNSLINGER_CHESTPLATE.get()
@@ -243,8 +243,8 @@ public class BigShadeArrowHitProcedure {
 					immediatesourceentity.discard();
 			}
 		}
-		if (!(immediatesourceentity == sourceentity) && !immediatesourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:bullet")))
-				&& !immediatesourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:nocooldown_bullet")))
+		if (!(immediatesourceentity == sourceentity) && !immediatesourceentity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:bullet")))
+				&& !immediatesourceentity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:nocooldown_bullet")))
 				&& !((entity instanceof LivingEntity _entUseItem169 ? _entUseItem169.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem)
 				&& (sourceentity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VULTURE_HELMET.get()
 				&& (sourceentity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VULTURE_CHESTPLATE.get()

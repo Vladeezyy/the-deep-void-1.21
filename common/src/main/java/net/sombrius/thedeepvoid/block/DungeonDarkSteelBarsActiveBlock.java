@@ -23,7 +23,7 @@ public class DungeonDarkSteelBarsActiveBlock extends IronBarsBlock implements En
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

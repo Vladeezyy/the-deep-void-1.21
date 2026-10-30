@@ -134,7 +134,7 @@ public class DarkSteelSawOnEntityTickUpdateProcedure {
 			for (Entity entityiterator : _entfound) {
 				if (entityiterator instanceof LivingEntity && !(entityiterator instanceof DarkSteelSawEntity) && !(entityiterator == entity)) {
 					entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)),
-							(float) (entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 11 : 6));
+							(float) (entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 11 : 6));
 					if (Math.random() < 0.4) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {

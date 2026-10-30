@@ -46,7 +46,7 @@ public class SoulForgeJEITypeRecipeCategory implements IRecipeCategory<SoulForge
 	}
 
 	@Override
-	public void draw(SoulForgeJEITypeRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphics guiGraphics, double mouseX, double mouseY) {
+	public void draw(SoulForgeJEITypeRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
 		this.background.draw(guiGraphics);
 	}
 

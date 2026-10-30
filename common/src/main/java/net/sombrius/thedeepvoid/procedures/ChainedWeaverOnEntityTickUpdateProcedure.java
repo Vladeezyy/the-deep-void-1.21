@@ -79,7 +79,7 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 						if (entityiterator instanceof Player) {
 							if (Math.random() < 0.25) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient1").getString())), true);
+									_player.sendOverlayMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient1").getString())));
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
 										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
@@ -91,7 +91,7 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 								}
 							} else if (Math.random() < 0.25) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient2").getString())), true);
+									_player.sendOverlayMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient2").getString())));
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
 										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
@@ -103,7 +103,7 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 								}
 							} else if (Math.random() < 0.25) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient3").getString())), true);
+									_player.sendOverlayMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient3").getString())));
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
 										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
@@ -115,7 +115,7 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 								}
 							} else if (Math.random() < 0.25) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient4").getString())), true);
+									_player.sendOverlayMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient4").getString())));
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
 										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
@@ -127,7 +127,7 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 								}
 							} else {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient1").getString())), true);
+									_player.sendOverlayMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient1").getString())));
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
 										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),

@@ -12,11 +12,11 @@ import net.minecraft.world.level.material.MapColor;
 
 public class BloodLanternBlock extends Block {
 	public BloodLanternBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.FIRE).sound(SoundType.FROGLIGHT).strength(0.3f).lightLevel(s -> 12).hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.FIRE).sound(SoundType.FROGLIGHT).strength(0.3f).lightLevel(s -> 12).emissiveRendering((bs, br, bp) -> true));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 }

@@ -69,7 +69,7 @@ public class ExecutionerDarkSteelFlailOnEntityTickUpdateProcedure {
 					if (entityiterator instanceof LivingEntity && !(entityiterator == entity) && entityiterator.onGround() && !(entityiterator instanceof FlailExecutionerEntity) && !(entityiterator instanceof ExecutionerEntity)) {
 						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:boss_attack"))), entity),
 								(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
-						if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
+						if (!entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 							entityiterator.setDeltaMovement(new Vec3((entityiterator.getDeltaMovement().x()), 0.6, (entityiterator.getDeltaMovement().z())));
 						}
 					}

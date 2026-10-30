@@ -33,7 +33,7 @@ public class VoidEffigyBlock extends Block implements net.sombrius.thedeepvoid.p
 
 	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : net.sombrius.thedeepvoid.port.PortUtil.clientPlayer.get();
+		Entity entity = net.sombrius.thedeepvoid.port.PortUtil.clientPlayer.get();
 		list.accept(Component.literal(VoidEffigyDescriptionProcedure.execute()));
 	}
 
@@ -43,7 +43,7 @@ public class VoidEffigyBlock extends Block implements net.sombrius.thedeepvoid.p
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

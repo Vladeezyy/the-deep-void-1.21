@@ -47,7 +47,7 @@ public class DeepslateSerratedStalagmiteMiddleBlock extends Block implements Sim
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

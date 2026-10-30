@@ -13,6 +13,6 @@ public class PlaceSepulcherCommandExecutedProcedure {
 		TheDeepVoidModVariables.MapVariables.get(world).WeaverTemplePlaced = false;
 		TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
 		if (entity instanceof Player _player && !_player.level().isClientSide())
-			_player.displayClientMessage(Component.translatable("text.the_deep_void.port.the_sepulcher_will_be_generated_on_next"), false);
+			_player.sendSystemMessage(Component.translatable("text.the_deep_void.port.the_sepulcher_will_be_generated_on_next"));
 	}
 }

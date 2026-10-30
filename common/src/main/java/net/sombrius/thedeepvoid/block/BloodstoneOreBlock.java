@@ -20,7 +20,7 @@ public class BloodstoneOreBlock extends Block implements net.sombrius.thedeepvoi
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

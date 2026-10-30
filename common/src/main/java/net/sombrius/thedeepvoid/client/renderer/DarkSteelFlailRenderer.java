@@ -15,8 +15,8 @@ import net.sombrius.thedeepvoid.procedures.DarkSteelFlailDisplayConditionProcedu
 public class DarkSteelFlailRenderer extends MobRenderer<DarkSteelFlailEntity, PortRender.LayerState, Modeldark_steel_flail<PortRender.LayerState>> {
 	public DarkSteelFlailRenderer(EntityRendererProvider.Context context) {
 		super(context, new Modeldark_steel_flail<>(context.bakeLayer(Modeldark_steel_flail.LAYER_LOCATION)), 0f);
-		this.addLayer(PortRender.layer(this, this.getModel(), Identifier.parse("the_deep_void:textures/entities/remflail.png"), RenderTypes::entityCutoutNoCull, state -> state.layers[0], false));
-		this.addLayer(PortRender.layer(this, this.getModel(), Identifier.parse("the_deep_void:textures/entities/flail.png"), RenderTypes::entityCutoutNoCull, state -> state.layers[1], false));
+		this.addLayer(PortRender.layer(this, this.getModel(), Identifier.parse("the_deep_void:textures/entities/remflail.png"), RenderTypes::entityCutout, state -> state.layers[0], false));
+		this.addLayer(PortRender.layer(this, this.getModel(), Identifier.parse("the_deep_void:textures/entities/flail.png"), RenderTypes::entityCutout, state -> state.layers[1], false));
 	}
 
 	@Override

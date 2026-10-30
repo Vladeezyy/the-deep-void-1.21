@@ -6,7 +6,7 @@ import net.sombrius.thedeepvoid.port.PortImageButton;
 import net.sombrius.thedeepvoid.port.neo.PacketDistributor;
 
 import java.util.HashMap;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -45,27 +45,19 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 	ImageButton imagebutton_button5;
 
 	public UndertakerTradeGuiScreen(UndertakerTradeGuiMenu container, Inventory inventory, Component text) {
-		super(container, inventory, text);
+		super(container, inventory, text, 246, 166);
 		this.world = container.world;
 		this.x = container.x;
 		this.y = container.y;
 		this.z = container.z;
 		this.entity = container.entity;
-		this.imageWidth = 246;
-		this.imageHeight = 166;
 	}
 
 	private static final Identifier texture = Identifier.parse("the_deep_void:textures/screens/undertaker_trade_gui.png");
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		this.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
-		super.render(guiGraphics, mouseX, mouseY, partialTicks);
-		this.renderTooltip(guiGraphics, mouseX, mouseY);
-	}
-
-	@Override
-	protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int gx, int gy) {
+	public void extractBackground(GuiGraphicsExtractor guiGraphics, int gx, int gy, float partialTicks) {
+		super.extractBackground(guiGraphics, gx, gy, partialTicks);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, texture, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 		if (UndertakerShowNormalScaleProcedure.execute(entity)) {
 			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.parse("the_deep_void:textures/screens/scale.png"), this.leftPos + 144, this.topPos + 31, 0, 0, 28, 21, 28, 21);
@@ -109,9 +101,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 	}
 
 	@Override
-	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-		guiGraphics.drawString(this.font, Component.translatable("gui.the_deep_void.undertaker_trade_gui.label_trades"), 22, 5, -12829636, false);
-		guiGraphics.drawString(this.font, Component.translatable("gui.the_deep_void.undertaker_trade_gui.label_undertaker"), 132, 5, -12829636, false);
+	protected void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
+		guiGraphics.text(this.font, Component.translatable("gui.the_deep_void.undertaker_trade_gui.label_trades"), 22, 5, -12829636, false);
+		guiGraphics.text(this.font, Component.translatable("gui.the_deep_void.undertaker_trade_gui.label_undertaker"), 132, 5, -12829636, false);
 	}
 
 	@Override
@@ -124,9 +116,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void renderContents(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void extractContents(GuiGraphicsExtractor guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton1DisplayProcedure.execute(entity))
-					super.renderContents(guiGraphics, gx, gy, ticks);
+					super.extractContents(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button", imagebutton_button);
@@ -138,9 +130,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void renderContents(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void extractContents(GuiGraphicsExtractor guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton2DisplayProcedure.execute(entity))
-					super.renderContents(guiGraphics, gx, gy, ticks);
+					super.extractContents(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button1", imagebutton_button1);
@@ -152,9 +144,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void renderContents(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void extractContents(GuiGraphicsExtractor guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton3DisplayProcedure.execute(entity))
-					super.renderContents(guiGraphics, gx, gy, ticks);
+					super.extractContents(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button2", imagebutton_button2);
@@ -166,9 +158,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void renderContents(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void extractContents(GuiGraphicsExtractor guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton4DisplayProcedure.execute(entity))
-					super.renderContents(guiGraphics, gx, gy, ticks);
+					super.extractContents(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button3", imagebutton_button3);
@@ -180,9 +172,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void renderContents(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void extractContents(GuiGraphicsExtractor guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton5DisplayProcedure.execute(entity))
-					super.renderContents(guiGraphics, gx, gy, ticks);
+					super.extractContents(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button4", imagebutton_button4);
@@ -194,9 +186,9 @@ public class UndertakerTradeGuiScreen extends AbstractContainerScreen<Undertaker
 			}
 		}) {
 			@Override
-			public void renderContents(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+			public void extractContents(GuiGraphicsExtractor guiGraphics, int gx, int gy, float ticks) {
 				if (UndertakerButton6DisplayProcedure.execute(entity))
-					super.renderContents(guiGraphics, gx, gy, ticks);
+					super.extractContents(guiGraphics, gx, gy, ticks);
 			}
 		};
 		guistate.put("button:imagebutton_button5", imagebutton_button5);

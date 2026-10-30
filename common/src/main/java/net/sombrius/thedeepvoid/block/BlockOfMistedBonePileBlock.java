@@ -21,7 +21,7 @@ public class BlockOfMistedBonePileBlock extends Block implements BonemealableBlo
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

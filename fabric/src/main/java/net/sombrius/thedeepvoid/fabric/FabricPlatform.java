@@ -3,11 +3,11 @@ package net.sombrius.thedeepvoid.fabric;
 import io.netty.buffer.Unpooled;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuType;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
@@ -182,8 +182,8 @@ public final class FabricPlatform implements Platform {
 	@SuppressWarnings("unchecked")
 	public <T extends CustomPacketPayload> void registerPayload(CustomPacketPayload.Type<T> type, StreamCodec<? super RegistryFriendlyByteBuf, T> codec, IPayloadHandler<T> handler) {
 		StreamCodec<RegistryFriendlyByteBuf, T> registryCodec = (StreamCodec<RegistryFriendlyByteBuf, T>) codec;
-		PayloadTypeRegistry.playS2C().register(type, registryCodec);
-		PayloadTypeRegistry.playC2S().register(type, registryCodec);
+		PayloadTypeRegistry.clientboundPlay().register(type, registryCodec);
+		PayloadTypeRegistry.serverboundPlay().register(type, registryCodec);
 		// Fabric runs the receivers on the game thread
 		ServerPlayNetworking.registerGlobalReceiver(type, (payload, context) -> handler.handle(payload, context(PacketFlow.SERVERBOUND, context.player(),
 				reason -> context.player().connection.disconnect(reason))));
@@ -249,7 +249,7 @@ public final class FabricPlatform implements Platform {
 	@Override
 	public <M extends AbstractContainerMenu> MenuType<M> menuType(MenuFactory<M> factory) {
 		// the extra data travels as bytes and is read back with the client's registries
-		return new ExtendedScreenHandlerType<>((int id, Inventory inventory, byte[] data) -> factory.create(id, inventory,
+		return new ExtendedMenuType<>((int id, Inventory inventory, byte[] data) -> factory.create(id, inventory,
 				new RegistryFriendlyByteBuf(Unpooled.wrappedBuffer(data), inventory.player.registryAccess())), ByteBufCodecs.BYTE_ARRAY);
 	}
 
@@ -259,7 +259,7 @@ public final class FabricPlatform implements Platform {
 		extraData.accept(buf);
 		byte[] data = new byte[buf.readableBytes()];
 		buf.readBytes(data);
-		player.openMenu(new ExtendedScreenHandlerFactory<byte[]>() {
+		player.openMenu(new ExtendedMenuProvider<byte[]>() {
 			@Override
 			public byte[] getScreenOpeningData(ServerPlayer opener) {
 				return data;
@@ -310,6 +310,6 @@ public final class FabricPlatform implements Platform {
 
 	@Override
 	public CreativeModeTab.Builder creativeTabBuilder() {
-		return FabricItemGroup.builder();
+		return FabricCreativeModeTab.builder();
 	}
 }

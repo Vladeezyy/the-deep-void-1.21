@@ -26,7 +26,7 @@ public class FleshParasiteLivingEntityIsHitWithItemProcedure {
 	public static void execute(LevelAccessor world, Entity entity, Entity sourceentity, ItemStack itemstack) {
 		if (entity == null || sourceentity == null)
 			return;
-		if (!entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:cannot_use_flesh_parasite")))
+		if (!entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:cannot_use_flesh_parasite")))
 				&& !((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:the_pit")))
 				&& (sourceentity instanceof Player _plrCldRem5 ? _plrCldRem5.getCooldowns().getCooldownPercent(itemstack, 0f) * 100 : 0) <= 0) {
 			if (sourceentity instanceof Player _player)

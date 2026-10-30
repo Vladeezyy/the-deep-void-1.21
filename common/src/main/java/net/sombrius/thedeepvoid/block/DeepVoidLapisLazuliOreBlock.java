@@ -20,7 +20,7 @@ public class DeepVoidLapisLazuliOreBlock extends Block implements net.sombrius.t
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

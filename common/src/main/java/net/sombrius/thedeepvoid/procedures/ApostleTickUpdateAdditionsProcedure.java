@@ -69,7 +69,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof Player) {
 							if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-								_player.displayClientMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt1").getString())), false);
+								_player.sendSystemMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt1").getString())));
 						}
 					}
 				}
@@ -80,7 +80,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof Player) {
 							if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-								_player.displayClientMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt2").getString())), false);
+								_player.sendSystemMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt2").getString())));
 						}
 					}
 				}
@@ -91,7 +91,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof Player) {
 							if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-								_player.displayClientMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt3").getString())), false);
+								_player.sendSystemMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt3").getString())));
 						}
 					}
 				}
@@ -102,7 +102,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof Player) {
 							if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-								_player.displayClientMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt4").getString())), false);
+								_player.sendSystemMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt4").getString())));
 						}
 					}
 				}
@@ -113,7 +113,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof Player) {
 							if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-								_player.displayClientMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt6").getString())), false);
+								_player.sendSystemMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt6").getString())));
 						}
 					}
 				}
@@ -142,7 +142,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line1").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line1").getString())));
 							}
 						}
 					}
@@ -153,7 +153,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line2").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line2").getString())));
 							}
 						}
 					}
@@ -164,7 +164,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line3").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line3").getString())));
 							}
 						}
 					}
@@ -175,7 +175,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line4").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line4").getString())));
 							}
 						}
 					}
@@ -186,7 +186,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line5").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.combat_line5").getString())));
 							}
 						}
 					}
@@ -339,7 +339,7 @@ public class ApostleTickUpdateAdditionsProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt5").getString())), false);
+									_player.sendSystemMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.taunt5").getString())));
 							}
 						}
 					}

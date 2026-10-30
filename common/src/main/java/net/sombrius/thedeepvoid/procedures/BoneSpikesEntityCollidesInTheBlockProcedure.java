@@ -18,10 +18,10 @@ public class BoneSpikesEntityCollidesInTheBlockProcedure {
 			return;
 		if (entity instanceof LivingEntity && !(entity instanceof MaskedHunterEntity)) {
 			entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)),
-					(float) (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 10 : 2));
+					(float) (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 10 : 2));
 			if (Math.random() < 0.02) {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.ROT.holder(), 80, (int) (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 1 : 0)));
+					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.ROT.holder(), 80, (int) (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 1 : 0)));
 			}
 		}
 	}

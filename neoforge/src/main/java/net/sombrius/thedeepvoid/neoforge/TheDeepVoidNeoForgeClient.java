@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.neoforge;
 
+import net.sombrius.thedeepvoid.init.TheDeepVoidModFluids;
+
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -30,12 +32,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.Minecraft;
 
 import net.sombrius.thedeepvoid.port.bus.ModBus;
@@ -61,7 +62,9 @@ public final class TheDeepVoidNeoForgeClient {
 		ClientEventIndex.register();
 		PortUtil.clientRegistries = () -> Minecraft.getInstance().level == null ? null : Minecraft.getInstance().level.registryAccess();
 		PortUtil.clientPlayer = () -> Minecraft.getInstance().player;
-		PortClient.fluidRenderLayer = ItemBlockRenderTypes::setRenderLayer;
+		// 26.1: a fluid's layer comes from the transparency of its textures (RegisterFluidModelsEvent)
+		PortClient.fluidRenderLayer = (fluid, layer) -> {
+		};
 		PortArmPoses.poses = name -> switch (name) {
 			case "APOSTASY" -> ArmPoses.APOSTASY.getValue();
 			case "DOUBLE_BARREL_SHOTGUN" -> ArmPoses.DOUBLE_BARREL_SHOTGUN.getValue();
@@ -92,6 +95,7 @@ public final class TheDeepVoidNeoForgeClient {
 		modBus.addListener((RegisterMenuScreensEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterMenuScreensEvent(event::register)));
 		modBus.addListener((RegisterKeyMappingsEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterKeyMappingsEvent(event::register)));
 		modBus.addListener(TheDeepVoidNeoForgeClient::registerClientExtensions);
+		modBus.addListener(TheDeepVoidNeoForgeClient::registerFluidModels);
 		// 1.21.4: MCreator's item properties are one range select property (port.PortItemProperties)
 		modBus.addListener((net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent event) -> event.register(net.sombrius.thedeepvoid.port.PortItemProperties.ID,
 				net.sombrius.thedeepvoid.port.PortItemProperties.MAP_CODEC));
@@ -120,6 +124,17 @@ public final class TheDeepVoidNeoForgeClient {
 	}
 
 	/** The mod's item and effect extensions (port.neo) as NeoForge's, and the fluid types' own */
+	/** 26.1: fluid textures are fluid models (1.21.1: the fluid types' client extensions) */
+	private static void registerFluidModels(net.neoforged.neoforge.client.event.RegisterFluidModelsEvent event) {
+		event.register(fluidModel("the_deep_void:block/liquid_void", "the_deep_void:block/liquid_void"), TheDeepVoidModFluids.LIQUID_VOID.get(), TheDeepVoidModFluids.FLOWING_LIQUID_VOID.get());
+		event.register(fluidModel("the_deep_void:block/liquid_ichor_still", "the_deep_void:block/liquid_ichor_flow"), TheDeepVoidModFluids.LIQUID_ICHOR.get(), TheDeepVoidModFluids.FLOWING_LIQUID_ICHOR.get());
+	}
+
+	private static net.minecraft.client.renderer.block.FluidModel.Unbaked fluidModel(String still, String flowing) {
+		return new net.minecraft.client.renderer.block.FluidModel.Unbaked(new net.minecraft.client.resources.model.sprite.Material(net.minecraft.resources.Identifier.parse(still)),
+				new net.minecraft.client.resources.model.sprite.Material(net.minecraft.resources.Identifier.parse(flowing)), null, null);
+	}
+
 	private static void registerClientExtensions(RegisterClientExtensionsEvent event) {
 		for (var entry : TheDeepVoidModItems.REGISTRY.getEntries()) {
 			if (entry.get() instanceof HasClientExtensions.Item item)
@@ -129,8 +144,6 @@ public final class TheDeepVoidNeoForgeClient {
 			if (entry.get() instanceof HasClientExtensions.Effect effect)
 				event.registerMobEffect(effect(effect.clientExtensions()), entry.get());
 		}
-		event.registerFluidType(((LiquidVoidFluidType) TheDeepVoidModFluidTypes.LIQUID_VOID_TYPE.get()).clientExtensions(), TheDeepVoidModFluidTypes.LIQUID_VOID_TYPE.get());
-		event.registerFluidType(((LiquidIchorFluidType) TheDeepVoidModFluidTypes.LIQUID_ICHOR_TYPE.get()).clientExtensions(), TheDeepVoidModFluidTypes.LIQUID_ICHOR_TYPE.get());
 	}
 
 	private static IClientItemExtensions item(net.sombrius.thedeepvoid.port.neo.IClientItemExtensions ours) {
@@ -170,7 +183,7 @@ public final class TheDeepVoidNeoForgeClient {
 			}
 
 			@Override
-			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int x, int y, int blitOffset) {
+			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
 				return ours.renderInventoryText(instance, screen, guiGraphics, x, y, blitOffset);
 			}
 		};

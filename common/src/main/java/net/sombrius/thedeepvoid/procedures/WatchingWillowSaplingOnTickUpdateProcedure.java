@@ -19,7 +19,7 @@ public class WatchingWillowSaplingOnTickUpdateProcedure {
 					StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "watching_willow1_void"));
 					if (template != null) {
 						template.placeInWorld(_serverworld, BlockPos.containing(x - 5, y, z - 5), BlockPos.containing(x - 5, y, z - 5), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false),
-								_serverworld.random, 3);
+								_serverworld.getRandom(), 3);
 					}
 				}
 			}

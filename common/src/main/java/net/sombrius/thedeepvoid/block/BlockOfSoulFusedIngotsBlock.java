@@ -10,11 +10,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockOfSoulFusedIngotsBlock extends Block {
 	public BlockOfSoulFusedIngotsBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.NETHERITE_BLOCK).strength(3.5f, 5f).requiresCorrectToolForDrops().hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.NETHERITE_BLOCK).strength(3.5f, 5f).requiresCorrectToolForDrops().emissiveRendering((bs, br, bp) -> true));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 }

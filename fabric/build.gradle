@@ -1,6 +1,6 @@
 plugins {
     id 'multiloader-loader'
-    id 'fabric-loom'
+    id 'net.fabricmc.fabric-loom'
 }
 
 repositories {
@@ -12,15 +12,14 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-    modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+    implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    implementation "maven.modrinth:geckolib:${geckolib_fabric_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-fabric-api:${jei_fabric_version}"
-    modLocalRuntime "mezz.jei:jei-${minecraft_version}-fabric:${jei_fabric_version}"
+    localRuntime "mezz.jei:jei-${minecraft_version}-fabric:${jei_fabric_version}"
     // JEI needs its config library at runtime (a separate mod on Fabric)
-    modLocalRuntime "net.mezzdev.config:mezz_config-${minecraft_version}-fabric:${mezz_config_version}"
+    localRuntime "net.mezzdev.config:mezz_config-${minecraft_version}-fabric:${mezz_config_version}"
     // compile-time stubs of NeoForge types in NeoForge-only overrides of the common code (not packaged)
     compileOnly project(path: ':common', configuration: 'commonStubs')
     runtimeOnly project(path: ':common', configuration: 'commonStubs')
@@ -56,18 +55,18 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs += ['-Xmaxerrs', '100000']
 }
 
-// The release jar on a production (intermediary-mapped) Fabric server with Fabric API and GeckoLib
+// The release jar on a production Fabric server with Fabric API and GeckoLib
 configurations {
     productionMods { transitive = false }
 }
 dependencies {
     productionMods "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-    productionMods "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+    productionMods "maven.modrinth:geckolib:${geckolib_fabric_version}"
 }
 def prodDir = file('run-prod')
 tasks.register('prodServer', net.fabricmc.loom.task.prod.ServerProductionRunTask) {
-    dependsOn remapJar
-    mods.from(remapJar.archiveFile)
+    dependsOn jar
+    mods.from(jar.archiveFile)
     mods.from(configurations.productionMods)
     runDir = prodDir
     timeout = java.time.Duration.ofMinutes(5)

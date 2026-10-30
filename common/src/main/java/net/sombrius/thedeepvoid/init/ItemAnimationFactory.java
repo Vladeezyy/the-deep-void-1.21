@@ -15,7 +15,7 @@ import net.sombrius.thedeepvoid.item.HeresyItem;
 import net.sombrius.thedeepvoid.item.MisanthropyItem;
 import net.sombrius.thedeepvoid.item.PerilItem;
 import net.sombrius.thedeepvoid.item.PerilOffHandItem;
-import software.bernie.geckolib.animatable.GeoItem;
+import com.geckolib.animatable.GeoItem;
 
 @EventBusSubscriber
 public class ItemAnimationFactory {

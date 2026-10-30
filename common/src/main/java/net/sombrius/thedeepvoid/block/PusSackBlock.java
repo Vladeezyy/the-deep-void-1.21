@@ -31,7 +31,7 @@ public class PusSackBlock extends FlowerBlock {
 	}
 
 	public PathType getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
-		return PathType.DANGER_OTHER;
+		return PathType.DAMAGING_IN_NEIGHBOR;
 	}
 
 

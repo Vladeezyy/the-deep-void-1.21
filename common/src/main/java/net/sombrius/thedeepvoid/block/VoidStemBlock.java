@@ -54,7 +54,7 @@ public class VoidStemBlock extends Block implements SimpleWaterloggedBlock, Bone
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

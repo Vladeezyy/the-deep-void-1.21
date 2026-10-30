@@ -27,7 +27,7 @@ public class MeltedGooStairsBlock extends StairBlock {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 4;
 	}
 }

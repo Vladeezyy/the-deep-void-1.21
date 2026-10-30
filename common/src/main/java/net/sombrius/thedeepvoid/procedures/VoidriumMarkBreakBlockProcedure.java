@@ -54,7 +54,7 @@ public class VoidriumMarkBreakBlockProcedure {
 							_cancellable.setCanceled(true);
 						}
 						if (entity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(Component.literal(("\u00A7c" + Component.translatable("effect.the_deep_void.weaver_curse.warn").getString())), true);
+							_player.sendOverlayMessage(Component.literal(("\u00A7c" + Component.translatable("effect.the_deep_void.weaver_curse.warn").getString())));
 					}
 				}
 			}
@@ -75,7 +75,7 @@ public class VoidriumMarkBreakBlockProcedure {
 							_cancellable.setCanceled(true);
 						}
 						if (entity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(Component.literal(("\u00A7c" + Component.translatable("effect.the_deep_void.weaver_curse.warn").getString())), true);
+							_player.sendOverlayMessage(Component.literal(("\u00A7c" + Component.translatable("effect.the_deep_void.weaver_curse.warn").getString())));
 					}
 				}
 			}

@@ -24,7 +24,7 @@ public class GrimSoilBlock extends Block implements net.sombrius.thedeepvoid.por
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

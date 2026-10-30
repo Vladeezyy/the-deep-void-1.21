@@ -5,7 +5,7 @@ import net.minecraft.util.ARGB;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
-import software.bernie.geckolib.cache.model.GeoBone;
+import com.geckolib.cache.model.GeoBone;
 
 public class AnimUtils {
 	public static void renderPartOverBone(ModelPart model, GeoBone bone, PoseStack stack, VertexConsumer buffer, int packedLightIn, int packedOverlayIn, float alpha) {

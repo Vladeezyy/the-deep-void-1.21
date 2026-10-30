@@ -79,7 +79,7 @@ public class PlayerKillsStalkerOrNightmareProcedure {
 					}
 				}
 			}
-			if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:voidling")))
+			if (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:voidling")))
 					&& PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.RADIANCE) != 0
 					&& !(sourceentity instanceof ServerPlayer _plr21 && _plr21.level() instanceof ServerLevel
 							&& _plr21.getAdvancements().getOrStartProgress(_plr21.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:fight_the_sun"))).isDone())) {

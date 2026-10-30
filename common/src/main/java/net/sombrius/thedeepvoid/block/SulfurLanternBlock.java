@@ -38,7 +38,7 @@ public class SulfurLanternBlock extends Block implements SimpleWaterloggedBlock 
 					return 14;
 				return 14;
 			}
-		}.getLightLevel())).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.DESTROY).hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+		}.getLightLevel())).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.DESTROY).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}
 
@@ -48,7 +48,7 @@ public class SulfurLanternBlock extends Block implements SimpleWaterloggedBlock 
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

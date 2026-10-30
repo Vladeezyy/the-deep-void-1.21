@@ -24,7 +24,7 @@ public class RottenMossBlock extends Block implements BonemealableBlock {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

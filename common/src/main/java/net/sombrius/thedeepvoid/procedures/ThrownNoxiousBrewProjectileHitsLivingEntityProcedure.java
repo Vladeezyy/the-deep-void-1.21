@@ -68,8 +68,8 @@ public class ThrownNoxiousBrewProjectileHitsLivingEntityProcedure {
 					}
 					if ((entity instanceof UndertakerEntity _datEntL5 && _datEntL5.getEntityData().get(UndertakerEntity.DATA_empty)) == true) {
 						if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(
-									Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.receive_brew_empty").getString())), false);
+							_player.sendSystemMessage(
+									Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.receive_brew_empty").getString())));
 						if (sourceentity instanceof Player _player) {
 							ItemStack _setstack = new ItemStack(TheDeepVoidModItems.DARK_STEEL_COIN.get()).copy();
 							_setstack.setCount(Mth.nextInt(RandomSource.create(), 4, 8));
@@ -90,8 +90,7 @@ public class ThrownNoxiousBrewProjectileHitsLivingEntityProcedure {
 							}
 						}
 						if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.receive_brew").getString())),
-									false);
+							_player.sendSystemMessage(Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.receive_brew").getString())));
 						if (!entity.level().isClientSide())
 							entity.discard();
 					}

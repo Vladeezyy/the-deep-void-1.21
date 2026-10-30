@@ -6,6 +6,6 @@ import net.minecraft.world.item.Rarity;
 
 public class SoulShardItem extends Item {
 	public SoulShardItem() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.UNCOMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().trimMaterial(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.TRIM_MATERIAL, net.minecraft.resources.Identifier.parse("the_deep_void:soul_trim"))).stacksTo(64).rarity(Rarity.UNCOMMON));
 	}
 }

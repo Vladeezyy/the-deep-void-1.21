@@ -42,7 +42,7 @@ public class BlueFireBlock extends Block implements SimpleWaterloggedBlock {
 				.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.fire.extinguish")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty")),
 						() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty")),
 						() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty"))))
-				.instabreak().lightLevel(s -> 15).noOcclusion().pushReaction(PushReaction.DESTROY).hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+				.instabreak().lightLevel(s -> 15).noOcclusion().pushReaction(PushReaction.DESTROY).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}
 
@@ -52,7 +52,7 @@ public class BlueFireBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 
@@ -96,7 +96,7 @@ public class BlueFireBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	public PathType getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
-		return PathType.DANGER_FIRE;
+		return PathType.FIRE_IN_NEIGHBOR;
 	}
 
 	@Override

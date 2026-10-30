@@ -45,7 +45,7 @@ public class RottingWallCorpseBlock extends Block implements SimpleWaterloggedBl
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

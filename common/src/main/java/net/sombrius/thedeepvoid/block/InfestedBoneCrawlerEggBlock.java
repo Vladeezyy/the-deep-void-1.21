@@ -50,7 +50,7 @@ public class InfestedBoneCrawlerEggBlock extends Block implements SimpleWaterlog
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

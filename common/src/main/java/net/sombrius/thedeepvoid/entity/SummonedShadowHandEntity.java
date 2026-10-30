@@ -43,16 +43,16 @@ import net.sombrius.thedeepvoid.port.bus.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.procedures.SummonedHandTickProcedure;
 import net.sombrius.thedeepvoid.procedures.SummonedShadowHandOnInitialEntitySpawnProcedure;
-import software.bernie.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.GeoEntity;
 
 import net.sombrius.thedeepvoid.port.GeoAnims;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animatable.manager.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.state.AnimationTest;
-import software.bernie.geckolib.animation.object.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.state.AnimationTest;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.util.GeckoLibUtil;
 
 public class SummonedShadowHandEntity extends TamableAnimal implements GeoEntity {
 	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(SummonedShadowHandEntity.class, EntityDataSerializers.BOOLEAN);

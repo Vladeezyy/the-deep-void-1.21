@@ -1,12 +1,12 @@
 package net.sombrius.thedeepvoid.port;
 
-import software.bernie.geckolib.renderer.base.GeoRenderState;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.animation.state.AnimationTest;
-import software.bernie.geckolib.animation.object.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animatable.GeoAnimatable;
+import com.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.model.GeoModel;
+import com.geckolib.animation.state.AnimationTest;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animatable.GeoAnimatable;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
@@ -37,12 +37,12 @@ public final class GeoAnims {
 
 	/** GeckoLib 4's {@code getPartialTick()} of the animation state */
 	public static float partialTick(AnimationTest<?> test) {
-		return test.renderState().getOrDefaultGeckolibData(software.bernie.geckolib.constant.DataTickets.PARTIAL_TICK, 0f);
+		return test.renderState().getOrDefaultGeckolibData(com.geckolib.constant.DataTickets.PARTIAL_TICK, 0f);
 	}
 
 	/** GeckoLib 4 item renderers told the item their display context; GeckoLib 5 has it in the render state */
 	public static boolean firstPerson(AnimationTest<?> test) {
-		net.minecraft.world.item.ItemDisplayContext context = test.getData(software.bernie.geckolib.constant.DataTickets.ITEM_RENDER_PERSPECTIVE);
+		net.minecraft.world.item.ItemDisplayContext context = test.getData(com.geckolib.constant.DataTickets.ITEM_RENDER_PERSPECTIVE);
 		return context != null && context.firstPerson();
 	}
 

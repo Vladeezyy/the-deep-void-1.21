@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.Mixin;
 
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.DeltaTracker;
 
@@ -21,7 +21,7 @@ import net.sombrius.thedeepvoid.port.bus.ModBus;
 @Mixin(Gui.class)
 abstract class GuiMixin {
 	@Inject(method = "render", at = @At("HEAD"))
-	private void deepvoid$renderPre(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+	private void deepvoid$renderPre(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 		ModBus.post(new RenderGuiEvent.Pre(guiGraphics));
 	}
 

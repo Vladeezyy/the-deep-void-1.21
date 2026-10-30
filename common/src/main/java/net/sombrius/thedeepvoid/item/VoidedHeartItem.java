@@ -16,13 +16,13 @@ public class VoidedHeartItem extends Item {
 	}
 
 	/** NeoForge IItemExtension */
-	public ItemStack getCraftingRemainder(ItemStack itemstack) {
-		return new ItemStack(this);
+	public net.minecraft.world.item.ItemStackTemplate getCraftingRemainder(net.minecraft.world.item.ItemInstance instance) {
+		return new net.minecraft.world.item.ItemStackTemplate(this);
 	}
 
 	/** Fabric FabricItem */
-	public ItemStack getRecipeRemainder(ItemStack itemstack) {
-		return getCraftingRemainder(itemstack);
+	public net.minecraft.world.item.ItemStackTemplate getCraftingRemainder(ItemStack itemstack) {
+		return new net.minecraft.world.item.ItemStackTemplate(this);
 	}
 
 	@Override

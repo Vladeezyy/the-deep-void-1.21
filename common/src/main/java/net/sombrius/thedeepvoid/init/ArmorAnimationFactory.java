@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.item.FlyWingsFlyItem;
 import net.sombrius.thedeepvoid.item.FlyWingsItem;
 import net.sombrius.thedeepvoid.item.SoulWingsFlyItem;
 import net.sombrius.thedeepvoid.item.SoulWingsItem;
-import software.bernie.geckolib.animatable.GeoItem;
+import com.geckolib.animatable.GeoItem;
 
 @EventBusSubscriber
 public class ArmorAnimationFactory {

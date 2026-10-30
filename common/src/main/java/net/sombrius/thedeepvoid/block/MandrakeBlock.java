@@ -43,7 +43,7 @@ public class MandrakeBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

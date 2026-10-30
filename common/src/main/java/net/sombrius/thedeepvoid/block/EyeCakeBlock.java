@@ -59,7 +59,7 @@ public class EyeCakeBlock extends Block implements SimpleWaterloggedBlock, net.s
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

@@ -30,7 +30,7 @@ public class SulfurOreBlock extends Block implements net.sombrius.thedeepvoid.po
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

@@ -34,10 +34,10 @@ public class IdlingApostleEntityIsHurtProcedure {
 						if (entityiterator instanceof Player) {
 							if (entityiterator instanceof LivingEntity _livEnt4 && _livEnt4.hasEffect(TheDeepVoidModMobEffects.VOID_BLESSING.holder())) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.hurt1").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.hurt1").getString())));
 							} else {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.hurt2").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.hurt2").getString())));
 							}
 						}
 					}

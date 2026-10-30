@@ -40,6 +40,6 @@ public class LurkerShrineOnBlockRightClickedProcedure {
 			}
 		}
 		if (entity instanceof Player _player && !_player.level().isClientSide())
-			_player.displayClientMessage(Component.literal((Component.translatable("block.the_deep_void.lurker_shrine.set_spawn").getString())), false);
+			_player.sendSystemMessage(Component.literal((Component.translatable("block.the_deep_void.lurker_shrine.set_spawn").getString())));
 	}
 }

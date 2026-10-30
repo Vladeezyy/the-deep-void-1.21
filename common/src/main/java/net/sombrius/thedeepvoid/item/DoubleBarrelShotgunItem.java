@@ -3,16 +3,16 @@ package net.sombrius.thedeepvoid.item;
 
 import net.minecraft.world.InteractionResult;
 
-import software.bernie.geckolib.util.GeckoLibUtil;
-import software.bernie.geckolib.animation.object.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.animation.state.AnimationTest;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animatable.manager.AnimatableManager;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.GeoRenderProvider;
-import software.bernie.geckolib.renderer.GeoItemRenderer;
+import com.geckolib.util.GeckoLibUtil;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.state.AnimationTest;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.GeoItem;
+import com.geckolib.animatable.client.GeoRenderProvider;
+import com.geckolib.renderer.GeoItemRenderer;
 
 import net.sombrius.thedeepvoid.procedures.DoubleBarrelShotgunRightClickProcedure;
 import net.sombrius.thedeepvoid.item.renderer.DoubleBarrelShotgunItemRenderer;

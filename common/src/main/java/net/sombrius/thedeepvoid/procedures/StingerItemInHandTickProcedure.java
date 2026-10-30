@@ -58,8 +58,8 @@ public class StingerItemInHandTickProcedure {
 										(float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
 							}
 						}
-						if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))
-								&& !entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:unaffected_by_allseeing")))) {
+						if (!entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))
+								&& !entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:unaffected_by_allseeing")))) {
 							Vec3 motion = entityiterator.getDeltaMovement().scale(0.1);
 							entityiterator.setDeltaMovement(motion);
 						}
@@ -135,8 +135,8 @@ public class StingerItemInHandTickProcedure {
 										(float) 0.7, false);
 							}
 						}
-						if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))
-								&& !entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:unaffected_by_allseeing")))) {
+						if (!entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))
+								&& !entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:unaffected_by_allseeing")))) {
 							entityiterator.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * 1), 0.1, (Math.cos(Math.toRadians(entity.getYRot())) * 1)));
 						}
 					}

@@ -20,7 +20,7 @@ public class DeepVoidDiamondOreBlock extends Block implements net.sombrius.thede
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

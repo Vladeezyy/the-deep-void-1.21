@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
 import net.sombrius.thedeepvoid.item.SoulWingsFlyItem;
 import net.sombrius.thedeepvoid.item.model.SoulWingsFlyModel;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.renderer.GeoArmorRenderer;
+import com.geckolib.renderer.base.GeoRenderState;
 
 public class SoulWingsFlyArmorRenderer<R extends HumanoidRenderState & GeoRenderState> extends GeoArmorRenderer<SoulWingsFlyItem, R> {
 	public SoulWingsFlyArmorRenderer() {

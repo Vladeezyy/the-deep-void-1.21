@@ -35,7 +35,7 @@ public class StalkerBreaksBlocksProcedure {
 		if (entity == null)
 			return;
 		if (DeepVoidConfigConfiguration.STALKERBREAKSBLOCKS.get() == true) {
-			if (entity.getType().is(ENTITY_TAG_CAN_BREAK_BLOCKS)) {
+			if (entity.getType().builtInRegistryHolder().is(ENTITY_TAG_CAN_BREAK_BLOCKS)) {
 				if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 					if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:break_block", 0) >= 10) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:break_block", 0);

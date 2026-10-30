@@ -16,7 +16,7 @@ public class CinnabarMonolithStoneBlock extends Block {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 }

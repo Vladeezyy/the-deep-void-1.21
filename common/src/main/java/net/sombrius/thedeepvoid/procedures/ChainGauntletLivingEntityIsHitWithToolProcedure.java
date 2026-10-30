@@ -15,7 +15,7 @@ public class ChainGauntletLivingEntityIsHitWithToolProcedure {
 		if (entity == null || sourceentity == null)
 			return;
 		if ((sourceentity instanceof Player _plrCldRem1 ? _plrCldRem1.getCooldowns().getCooldownPercent(itemstack, 0f) * 100 : 0) <= 0
-				&& !entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
+				&& !entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 			if (sourceentity instanceof Player _player)
 				_player.getCooldowns().addCooldown(itemstack, 140);
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())

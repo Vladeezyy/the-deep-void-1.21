@@ -64,7 +64,7 @@ public class HarbingerGroundPoundProcedure {
 				final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(10 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (entityiterator instanceof LivingEntity && !(entityiterator == entity) && !entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && entityiterator.onGround()) {
+					if (entityiterator instanceof LivingEntity && !(entityiterator == entity) && !entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && entityiterator.onGround()) {
 						entityiterator.setDeltaMovement(new Vec3(((entity.getX() - entityiterator.getX()) * (-0.25)), 0.8, ((entity.getZ() - entityiterator.getZ()) * (-0.25))));
 						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:boss_attack"))), entity), 18);
 					}

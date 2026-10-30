@@ -16,7 +16,7 @@ public class ArmorToggleOnKeyPressedProcedure {
 				_vars.syncPlayerVariables(entity);
 			}
 			if (entity instanceof Player _player && !_player.level().isClientSide())
-				_player.displayClientMessage(Component.literal((Component.translatable("key.the_deep_void.armor_toggle.msg_inactive").getString())), true);
+				_player.sendOverlayMessage(Component.literal((Component.translatable("key.the_deep_void.armor_toggle.msg_inactive").getString())));
 		} else if (TheDeepVoidModVariables.of(entity).armorToggle == true) {
 			{
 				TheDeepVoidModVariables.PlayerVariables _vars = TheDeepVoidModVariables.of(entity);
@@ -24,7 +24,7 @@ public class ArmorToggleOnKeyPressedProcedure {
 				_vars.syncPlayerVariables(entity);
 			}
 			if (entity instanceof Player _player && !_player.level().isClientSide())
-				_player.displayClientMessage(Component.literal((Component.translatable("key.the_deep_void.armor_toggle.msg_active").getString())), true);
+				_player.sendOverlayMessage(Component.literal((Component.translatable("key.the_deep_void.armor_toggle.msg_active").getString())));
 		}
 	}
 }

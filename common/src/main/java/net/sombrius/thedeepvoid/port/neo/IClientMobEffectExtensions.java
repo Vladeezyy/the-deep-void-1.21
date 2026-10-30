@@ -1,6 +1,6 @@
 package net.sombrius.thedeepvoid.port.neo;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.effect.MobEffectInstance;
 
@@ -14,7 +14,7 @@ public interface IClientMobEffectExtensions {
 		return true;
 	}
 
-	default boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int x, int y, int blitOffset) {
+	default boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
 		return false;
 	}
 }

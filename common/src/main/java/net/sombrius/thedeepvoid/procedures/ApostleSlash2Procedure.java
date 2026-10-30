@@ -68,7 +68,7 @@ public class ApostleSlash2Procedure {
 				final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(4 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && entityiterator instanceof LivingEntity) {
+					if (!entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && entityiterator instanceof LivingEntity) {
 						if ((entityiterator instanceof LivingEntity _entUseItem40 ? _entUseItem40.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 							if (entityiterator instanceof Player _player)
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem42 ? _entUseItem42.getUseItem() : ItemStack.EMPTY), 40);
@@ -111,7 +111,7 @@ public class ApostleSlash2Procedure {
 				final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(4.6 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && entityiterator instanceof LivingEntity) {
+					if (!entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && entityiterator instanceof LivingEntity) {
 						if ((entityiterator instanceof LivingEntity _entUseItem74 ? _entUseItem74.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 							if (entityiterator instanceof Player _player)
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem76 ? _entUseItem76.getUseItem() : ItemStack.EMPTY), 40);
@@ -158,7 +158,7 @@ public class ApostleSlash2Procedure {
 				final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(4.6 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && entityiterator instanceof LivingEntity) {
+					if (!entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && entityiterator instanceof LivingEntity) {
 						if ((entityiterator instanceof LivingEntity _entUseItem117 ? _entUseItem117.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 							if (entityiterator instanceof Player _player)
 								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem119 ? _entUseItem119.getUseItem() : ItemStack.EMPTY), 40);

@@ -53,7 +53,7 @@ public class TrapDarkSteelSpikesBlock extends Block implements SimpleWaterlogged
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

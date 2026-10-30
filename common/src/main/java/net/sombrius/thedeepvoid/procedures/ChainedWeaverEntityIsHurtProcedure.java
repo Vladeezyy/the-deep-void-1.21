@@ -57,19 +57,19 @@ public class ChainedWeaverEntityIsHurtProcedure {
 					}
 					if ((entity instanceof ChainedWeaverEntity _datEntI ? _datEntI.getEntityData().get(ChainedWeaverEntity.DATA_chainBreak) : 0) == 2) {
 						if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.hurt1").getString())), false);
+							_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.hurt1").getString())));
 					}
 					if ((entity instanceof ChainedWeaverEntity _datEntI ? _datEntI.getEntityData().get(ChainedWeaverEntity.DATA_chainBreak) : 0) == 5) {
 						if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.hurt2").getString())), false);
+							_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.hurt2").getString())));
 					}
 					if ((entity instanceof ChainedWeaverEntity _datEntI ? _datEntI.getEntityData().get(ChainedWeaverEntity.DATA_chainBreak) : 0) == 7) {
 						if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.hurt3").getString())), false);
+							_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.hurt3").getString())));
 					}
 					if ((entity instanceof ChainedWeaverEntity _datEntI ? _datEntI.getEntityData().get(ChainedWeaverEntity.DATA_chainBreak) : 0) == 9) {
 						if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-							_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.hurt4").getString())), false);
+							_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.hurt4").getString())));
 					}
 				}
 			}

@@ -26,7 +26,7 @@ public class StalkerSetsTargetProcedure {
 	private static void execute(@Nullable Event event, Entity entity, Entity sourceentity) {
 		if (entity == null || sourceentity == null)
 			return;
-		if (sourceentity instanceof StalkerEntity && (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:stalker_cannot_target"))) || entity == sourceentity)) {
+		if (sourceentity instanceof StalkerEntity && (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:stalker_cannot_target"))) || entity == sourceentity)) {
 			if (sourceentity instanceof Mob) {
 				try {
 					((Mob) sourceentity).setTarget(null);

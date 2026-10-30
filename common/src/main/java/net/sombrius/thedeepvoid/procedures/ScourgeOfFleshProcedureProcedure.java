@@ -41,7 +41,7 @@ public class ScourgeOfFleshProcedureProcedure {
 		if (damagesource == null || entity == null || sourceentity == null)
 			return;
 		if (PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.SCOURGE_OF_FLESH) != 0) {
-			if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:fleshkin")))) {
+			if (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:fleshkin")))) {
 				if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:enchantment_damage")))) {
 					if (entity instanceof MisanthropicHivemindEntity) {
 						entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:enchantment_damage"))), sourceentity),
@@ -61,7 +61,7 @@ public class ScourgeOfFleshProcedureProcedure {
 			}
 		}
 		if (PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.RADIANCE) != 0) {
-			if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:voidling")))) {
+			if (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:voidling")))) {
 				if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:enchantment_damage")))) {
 					entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:enchantment_damage"))), sourceentity),
 							(float) (amount + 6));

@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.jei_recipes;
 
+import net.minecraft.world.item.ItemStackTemplate;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -16,10 +17,10 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 public class TreasureBagJeiTypeRecipe implements Recipe<RecipeInput> {
-	private final ItemStack output;
+	private final ItemStackTemplate output;
 	private final NonNullList<Ingredient> recipeItems;
 
-	public TreasureBagJeiTypeRecipe(ItemStack output, NonNullList<Ingredient> recipeItems) {
+	public TreasureBagJeiTypeRecipe(ItemStackTemplate output, NonNullList<Ingredient> recipeItems) {
 		this.output = output;
 		this.recipeItems = recipeItems;
 	}
@@ -37,12 +38,12 @@ public class TreasureBagJeiTypeRecipe implements Recipe<RecipeInput> {
 	}
 
 	@Override
-	public ItemStack assemble(RecipeInput pContainer, HolderLookup.Provider provider) {
-		return output;
+	public ItemStack assemble(RecipeInput pContainer) {
+		return output.create();
 	}
 
 	public ItemStack getResultItem(HolderLookup.Provider provider) {
-		return output.copy();
+		return output.create();
 	}
 
 	@Override
@@ -53,6 +54,16 @@ public class TreasureBagJeiTypeRecipe implements Recipe<RecipeInput> {
 	@Override
 	public RecipeSerializer<TreasureBagJeiTypeRecipe> getSerializer() {
 		return Serializer.INSTANCE;
+	}
+
+	@Override
+	public String group() {
+		return "";
+	}
+
+	@Override
+	public boolean showNotification() {
+		return false;
 	}
 
 	@Override
@@ -78,10 +89,9 @@ public class TreasureBagJeiTypeRecipe implements Recipe<RecipeInput> {
 		public static final String ID = "treasure_bag_jei_type";
 	}
 
-	public static class Serializer implements RecipeSerializer<TreasureBagJeiTypeRecipe> {
-		public static final Serializer INSTANCE = new Serializer();
+	public static class Serializer {
 		private static final MapCodec<TreasureBagJeiTypeRecipe> CODEC = RecordCodecBuilder
-				.mapCodec(builder -> builder.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter(recipe -> recipe.output), Ingredient.CODEC.listOf().fieldOf("ingredients").flatXmap(ingredients -> {
+				.mapCodec(builder -> builder.group(ItemStackTemplate.CODEC.fieldOf("output").forGetter(recipe -> recipe.output), Ingredient.CODEC.listOf().fieldOf("ingredients").flatXmap(ingredients -> {
 					Ingredient[] aingredient = ingredients.toArray(Ingredient[]::new); // Skip the empty check and create the array.
 					if (aingredient.length == 0) {
 						return DataResult.error(() -> "No ingredients found in custom recipe");
@@ -90,23 +100,15 @@ public class TreasureBagJeiTypeRecipe implements Recipe<RecipeInput> {
 					}
 				}, DataResult::success).forGetter(recipe -> recipe.recipeItems)).apply(builder, TreasureBagJeiTypeRecipe::new));
 		public static final StreamCodec<RegistryFriendlyByteBuf, TreasureBagJeiTypeRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
+		public static final RecipeSerializer<TreasureBagJeiTypeRecipe> INSTANCE = new RecipeSerializer<>(CODEC, STREAM_CODEC);
 
-		@Override
-		public MapCodec<TreasureBagJeiTypeRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, TreasureBagJeiTypeRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 
 		private static TreasureBagJeiTypeRecipe fromNetwork(RegistryFriendlyByteBuf buf) {
 			int size = buf.readVarInt();
 			NonNullList<Ingredient> inputs = NonNullList.createWithCapacity(size);
 			for (int i = 0; i < size; i++)
 				inputs.add(Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
-			return new TreasureBagJeiTypeRecipe(ItemStack.STREAM_CODEC.decode(buf), inputs);
+			return new TreasureBagJeiTypeRecipe(ItemStackTemplate.STREAM_CODEC.decode(buf), inputs);
 		}
 
 		private static void toNetwork(RegistryFriendlyByteBuf buf, TreasureBagJeiTypeRecipe recipe) {
@@ -114,7 +116,7 @@ public class TreasureBagJeiTypeRecipe implements Recipe<RecipeInput> {
 			for (Ingredient ing : recipe.getIngredients()) {
 				Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ing);
 			}
-			ItemStack.STREAM_CODEC.encode(buf, recipe.getResultItem(null));
+			ItemStackTemplate.STREAM_CODEC.encode(buf, recipe.output);
 		}
 	}
 }

@@ -150,7 +150,7 @@ public final class DevScene {
 			p.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 1000000, 4, false, false));
 			p.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1000000, 0, false, false));
 			level.getGameRules().set(GameRules.ADVANCE_TIME, false, level.getServer());
-			level.getServer().overworld().setDayTime(6000);
+			command(level.getServer(), "time set 6000");
 			for (int i = 0; i < 100; i++) {
 				double angle = i * 2.4, r = 8 + (i % 17);
 				spawnNoAi(level, EntityType.PIG, p.getX() + Math.cos(angle) * r, p.getZ() + Math.sin(angle) * r);
@@ -207,7 +207,7 @@ public final class DevScene {
 			p.level().setBlock(BlockPos.containing(0, 118, 0), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState(), 3);
 			p.getAbilities().flying = false;
 			p.onUpdateAbilities();
-			p.level().getServer().overworld().setDayTime(6000);
+			command(p.level().getServer(), "time set 6000");
 		}));
 		int t = 140;
 		for (String id : List.of("heresy", "double_barrel_shotgun", "eldritch_maw", "misanthropy")) {
@@ -236,6 +236,11 @@ public final class DevScene {
 		return BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
 	}
 
+	/** 26.1: the time of day is a clock; the time command sets it */
+	private static void command(MinecraftServer server, String command) {
+		server.getCommands().performPrefixedCommand(server.createCommandSourceStack().withSuppressedOutput(), command);
+	}
+
 	private static void at(int t, Consumer<Minecraft> action) {
 		STEPS.add(Pair.of(t, action));
 	}
@@ -259,7 +264,7 @@ public final class DevScene {
 			if (mc.getLevelSource().levelExists(WORLD)) {
 				mc.createWorldOpenFlows().openWorld(WORLD, () -> mc.setScreen(new TitleScreen()));
 			} else {
-				LevelSettings settings = new LevelSettings(WORLD, GameType.CREATIVE, false, Difficulty.NORMAL, true, new GameRules(WorldDataConfiguration.DEFAULT.enabledFeatures()), WorldDataConfiguration.DEFAULT);
+				LevelSettings settings = new LevelSettings(WORLD, GameType.CREATIVE, new LevelSettings.DifficultySettings(Difficulty.NORMAL, false, false), true, WorldDataConfiguration.DEFAULT);
 				mc.createWorldOpenFlows().createFreshLevel(WORLD, settings, new WorldOptions(1234L, true, false), WorldPresets::createNormalWorldDimensions, new TitleScreen());
 			}
 			return;

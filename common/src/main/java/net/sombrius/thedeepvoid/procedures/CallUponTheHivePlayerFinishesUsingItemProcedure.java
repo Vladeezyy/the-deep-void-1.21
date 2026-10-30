@@ -117,11 +117,11 @@ public class CallUponTheHivePlayerFinishesUsingItemProcedure {
 				}
 			} else {
 				if (entity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("item.the_deep_void.call_upon_the_hive.too_far").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("item.the_deep_void.call_upon_the_hive.too_far").getString())));
 			}
 		} else {
 			if (entity instanceof Player _player && !_player.level().isClientSide())
-				_player.displayClientMessage(Component.literal((Component.translatable("item.the_deep_void.call_upon_the_hive.not_suitable").getString())), false);
+				_player.sendSystemMessage(Component.literal((Component.translatable("item.the_deep_void.call_upon_the_hive.not_suitable").getString())));
 		}
 	}
 }

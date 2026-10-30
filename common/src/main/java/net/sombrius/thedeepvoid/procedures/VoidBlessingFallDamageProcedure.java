@@ -105,7 +105,7 @@ public class VoidBlessingFallDamageProcedure {
 			}
 		}
 		if ((entity instanceof LivingEntity _livEnt21 && _livEnt21.hasEffect(TheDeepVoidModMobEffects.DEBILITATED.holder()) && !(entity instanceof LivingEntity _livEnt22 && _livEnt22.hasEffect(TheDeepVoidModMobEffects.VOID_BLESSING.holder()))
-				|| entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable")))
+				|| entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable")))
 						&& (entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:the_pit")))
 				&& distance >= 8) {
 			if (world instanceof Level _level) {

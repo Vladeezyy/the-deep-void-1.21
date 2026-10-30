@@ -65,7 +65,7 @@ public class PenitentInACageBlock extends Block implements SimpleWaterloggedBloc
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

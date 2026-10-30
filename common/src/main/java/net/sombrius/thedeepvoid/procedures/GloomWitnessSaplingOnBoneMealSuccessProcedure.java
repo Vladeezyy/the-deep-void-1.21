@@ -20,7 +20,7 @@ public class GloomWitnessSaplingOnBoneMealSuccessProcedure {
 				StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "giant_gloom_lantern_plant"));
 				if (template != null) {
 					template.placeInWorld(_serverworld, BlockPos.containing(x - 3, y, z - 3), BlockPos.containing(x - 3, y, z - 3), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false),
-							_serverworld.random, 3);
+							_serverworld.getRandom(), 3);
 				}
 			}
 			if ((world.getBlockState(BlockPos.containing(x, y, z))).getBlock() == blockstate.getBlock()) {

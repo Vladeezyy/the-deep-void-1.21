@@ -17,14 +17,14 @@ public class CreepOMeterItemInHandTickProcedure {
 			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("deep_void:secondFunction", false) == true) {
 				if (TheDeepVoidModVariables.of(entity).StalkerStalkCount < (double) DeepVoidConfigConfiguration.STALKERSPAWNTIMER.get() / 2) {
 					if (entity instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.literal(("" + TheDeepVoidModVariables.of(entity).stalkWatcherCount)), true);
+						_player.sendOverlayMessage(Component.literal(("" + TheDeepVoidModVariables.of(entity).stalkWatcherCount)));
 				} else if (TheDeepVoidModVariables.of(entity).StalkerStalkCount >= (double) DeepVoidConfigConfiguration.STALKERSPAWNTIMER.get() / 2) {
 					if (entity instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.literal(("" + TheDeepVoidModVariables.of(entity).StalkerStalkCount)), true);
+						_player.sendOverlayMessage(Component.literal(("" + TheDeepVoidModVariables.of(entity).StalkerStalkCount)));
 				}
 			} else {
 				if (entity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal(("" + TheDeepVoidModVariables.of(entity).StalkerCount)), true);
+					_player.sendOverlayMessage(Component.literal(("" + TheDeepVoidModVariables.of(entity).StalkerCount)));
 			}
 		}
 	}

@@ -47,7 +47,7 @@ public class MagentaCandlestickBlock extends Block implements SimpleWaterloggedB
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

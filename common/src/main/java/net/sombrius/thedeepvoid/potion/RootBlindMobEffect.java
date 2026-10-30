@@ -7,7 +7,7 @@ import net.sombrius.thedeepvoid.port.PortUtil;
 import net.sombrius.thedeepvoid.procedures.RootBlindEffectExpiresProcedure;
 
 import java.util.function.Consumer;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -40,7 +40,7 @@ public class RootBlindMobEffect extends MobEffect implements PortUtil.EffectRemo
 			}
 
 			@Override
-			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int x, int y, int blitOffset) {
+			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
 				return false;
 			}
 

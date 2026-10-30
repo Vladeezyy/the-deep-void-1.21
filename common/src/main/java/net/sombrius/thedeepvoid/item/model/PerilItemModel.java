@@ -2,8 +2,8 @@ package net.sombrius.thedeepvoid.item.model;
 
 import net.minecraft.resources.Identifier;
 import net.sombrius.thedeepvoid.item.PerilItem;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.model.GeoModel;
+import com.geckolib.renderer.base.GeoRenderState;
 
 public class PerilItemModel extends GeoModel<PerilItem> {
 	@Override

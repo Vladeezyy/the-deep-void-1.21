@@ -20,7 +20,7 @@ public class FossilizedFleshBlock extends Block implements net.sombrius.thedeepv
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

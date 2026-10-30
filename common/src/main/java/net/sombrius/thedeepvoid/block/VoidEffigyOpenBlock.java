@@ -24,7 +24,7 @@ import net.sombrius.thedeepvoid.procedures.VoidEffigyOpenRedstoneOffProcedure;
 
 public class VoidEffigyOpenBlock extends Block {
 	public VoidEffigyOpenBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.BASALT).strength(2f, 999f).lightLevel(s -> 12).requiresCorrectToolForDrops().noOcclusion().hasPostProcess((bs, br, bp) -> true)
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.BASALT).strength(2f, 999f).lightLevel(s -> 12).requiresCorrectToolForDrops().noOcclusion()
 				.emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
@@ -34,7 +34,7 @@ public class VoidEffigyOpenBlock extends Block {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

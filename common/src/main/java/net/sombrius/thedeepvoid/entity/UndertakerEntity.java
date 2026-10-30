@@ -45,16 +45,16 @@ import net.sombrius.thedeepvoid.procedures.UndertakerEntityDiesProcedure;
 import net.sombrius.thedeepvoid.procedures.UndertakerOnEntityTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.UndertakerOnInitialEntitySpawnProcedure;
 import net.sombrius.thedeepvoid.procedures.UndertakerRightClickedOnEntityProcedure;
-import software.bernie.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.GeoEntity;
 
 import net.sombrius.thedeepvoid.port.GeoAnims;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animatable.manager.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.state.AnimationTest;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.animation.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.state.AnimationTest;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.util.GeckoLibUtil;
 
 public class UndertakerEntity extends PathfinderMob implements GeoEntity {
 	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(UndertakerEntity.class, EntityDataSerializers.BOOLEAN);

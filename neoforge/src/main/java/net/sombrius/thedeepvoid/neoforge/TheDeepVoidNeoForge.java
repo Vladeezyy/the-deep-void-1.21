@@ -94,7 +94,7 @@ public final class TheDeepVoidNeoForge {
 
 					@Override
 					public net.sombrius.thedeepvoid.port.bus.ModifyDefaultComponentsEvent.Builder remove(DataComponentType<?> type) {
-						builder.remove(type);
+						builder.set(type, null);
 						return this;
 					}
 				})))));
@@ -219,7 +219,7 @@ public final class TheDeepVoidNeoForge {
 			if (ModBus.post(new net.sombrius.thedeepvoid.port.bus.PlayerInteractEvent.LeftClickBlock(event.getEntity(), event.getPos(), event.getFace())))
 				event.setCanceled(true);
 		});
-		bus.addListener((BlockEvent.BreakEvent event) -> {
+		bus.addListener((net.neoforged.neoforge.event.level.block.BreakBlockEvent event) -> {
 			if (ModBus.post(new net.sombrius.thedeepvoid.port.bus.BlockEvent.BreakEvent(event.getLevel(), event.getPos(), event.getState(), event.getPlayer())))
 				event.setCanceled(true);
 		});

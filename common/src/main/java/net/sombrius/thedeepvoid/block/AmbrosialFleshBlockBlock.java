@@ -22,7 +22,7 @@ public class AmbrosialFleshBlockBlock extends Block {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 }

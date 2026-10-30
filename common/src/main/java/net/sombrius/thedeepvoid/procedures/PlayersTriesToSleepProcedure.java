@@ -53,7 +53,7 @@ public class PlayersTriesToSleepProcedure {
 						}
 					}
 					if (entity instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.bed.ominous_presence").getString())), true);
+						_player.sendOverlayMessage(Component.literal((Component.translatable("text.the_deep_void.bed.ominous_presence").getString())));
 				});
 			}
 		}

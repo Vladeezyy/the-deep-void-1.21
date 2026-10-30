@@ -18,15 +18,7 @@ public class LiquidVoidFluidType extends FluidType {
 		return new IClientFluidTypeExtensions() {
 			private static final Identifier STILL_TEXTURE = Identifier.parse("the_deep_void:block/liquid_void"), FLOWING_TEXTURE = Identifier.parse("the_deep_void:block/liquid_void");
 
-			@Override
-			public Identifier getStillTexture() {
-				return STILL_TEXTURE;
-			}
 
-			@Override
-			public Identifier getFlowingTexture() {
-				return FLOWING_TEXTURE;
-			}
 		};
 	}
 }

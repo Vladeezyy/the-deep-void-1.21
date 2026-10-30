@@ -17,7 +17,7 @@ public class DarkSteelSpikesEntityCollidesInTheBlockProcedure {
 			return;
 		if (entity instanceof LivingEntity && !(entity instanceof MaskedHunterEntity) && !(entity instanceof DarkSteelSawEntity)) {
 			entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)),
-					(float) (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 10 : 3));
+					(float) (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 10 : 3));
 		}
 	}
 }

@@ -68,7 +68,7 @@ public class FalseHydraPokeProcedure {
 							(entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()));
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(7 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if (entityiterator instanceof LivingEntity && !entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
+						if (entityiterator instanceof LivingEntity && !entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 							if ((entityiterator instanceof LivingEntity _entUseItem18 ? _entUseItem18.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 								if (entityiterator instanceof Player _player)
 									_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem20 ? _entUseItem20.getUseItem() : ItemStack.EMPTY), 100);
@@ -125,7 +125,7 @@ public class FalseHydraPokeProcedure {
 							(entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()));
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(7 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if (entityiterator instanceof LivingEntity && !entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
+						if (entityiterator instanceof LivingEntity && !entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 							if ((entityiterator instanceof LivingEntity _entUseItem58 ? _entUseItem58.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 								if (entityiterator instanceof Player _player)
 									_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem60 ? _entUseItem60.getUseItem() : ItemStack.EMPTY), 100);
@@ -184,7 +184,7 @@ public class FalseHydraPokeProcedure {
 							(entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()));
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(7 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if (entityiterator instanceof LivingEntity && !entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
+						if (entityiterator instanceof LivingEntity && !entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 							if ((entityiterator instanceof LivingEntity _entUseItem98 ? _entUseItem98.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 								if (entityiterator instanceof Player _player)
 									_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem100 ? _entUseItem100.getUseItem() : ItemStack.EMPTY), 100);
@@ -241,7 +241,7 @@ public class FalseHydraPokeProcedure {
 							(entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()));
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(7 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if (entityiterator instanceof LivingEntity && !entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
+						if (entityiterator instanceof LivingEntity && !entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 							if ((entityiterator instanceof LivingEntity _entUseItem138 ? _entUseItem138.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 								if (entityiterator instanceof Player _player)
 									_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem140 ? _entUseItem140.getUseItem() : ItemStack.EMPTY), 100);

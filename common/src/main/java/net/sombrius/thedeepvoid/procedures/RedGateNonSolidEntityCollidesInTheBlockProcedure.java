@@ -11,7 +11,7 @@ public class RedGateNonSolidEntityCollidesInTheBlockProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
-		if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
+		if (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 			entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * (-0.5)), 0, (Math.cos(Math.toRadians(entity.getYRot())) * (-0.5))));
 		} else if (entity instanceof Projectile) {
 			if (!entity.level().isClientSide())

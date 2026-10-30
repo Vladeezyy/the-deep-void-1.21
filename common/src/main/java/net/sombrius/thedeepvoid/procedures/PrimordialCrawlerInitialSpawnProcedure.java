@@ -51,7 +51,7 @@ public class PrimordialCrawlerInitialSpawnProcedure {
 						_vars.syncPlayerVariables(entityiterator);
 					}
 					if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.translatable("text.the_deep_void.port.disc_the_haunt_phase_spiders_battle_by"), true);
+						_player.sendOverlayMessage(Component.translatable("text.the_deep_void.port.disc_the_haunt_phase_spiders_battle_by"));
 				}
 			}
 		}

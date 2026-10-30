@@ -213,7 +213,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 				final Vec3 _center = new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0)));
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(0.5 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (entityiterator instanceof ItemEntity || entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:can_be_fished")))) {
+					if (entityiterator instanceof ItemEntity || entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:can_be_fished")))) {
 						entityiterator.setDeltaMovement(new Vec3(((entity.getX() - entityiterator.getX()) * 0.15), (((entity.getY() + 1) - entityiterator.getY()) * 0.15), ((entity.getZ() - entityiterator.getZ()) * 0.15)));
 					}
 				}

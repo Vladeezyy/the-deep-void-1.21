@@ -38,7 +38,7 @@ public class CinnabarLanternBlock extends Block implements SimpleWaterloggedBloc
 					return 10;
 				return 10;
 			}
-		}.getLightLevel())).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.DESTROY).hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+		}.getLightLevel())).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.DESTROY).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}
 
@@ -48,7 +48,7 @@ public class CinnabarLanternBlock extends Block implements SimpleWaterloggedBloc
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

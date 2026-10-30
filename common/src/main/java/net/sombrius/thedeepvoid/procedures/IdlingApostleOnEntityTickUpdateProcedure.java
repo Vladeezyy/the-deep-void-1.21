@@ -46,7 +46,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm1").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm1").getString())));
 							}
 						}
 					}
@@ -57,7 +57,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm2").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm2").getString())));
 							}
 						}
 					}
@@ -68,7 +68,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm3").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm3").getString())));
 							}
 						}
 					}
@@ -79,7 +79,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm4").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm4").getString())));
 							}
 						}
 					}
@@ -90,7 +90,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm5").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm5").getString())));
 							}
 						}
 					}
@@ -101,7 +101,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm6").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm6").getString())));
 							}
 						}
 					}
@@ -112,7 +112,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm7").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm7").getString())));
 							}
 						}
 					}
@@ -123,7 +123,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm8").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm8").getString())));
 							}
 						}
 					}
@@ -134,7 +134,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm9").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm9").getString())));
 							}
 						}
 					}
@@ -145,7 +145,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm10").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm10").getString())));
 							}
 						}
 					}
@@ -156,7 +156,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm11").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm11").getString())));
 							}
 						}
 					}
@@ -167,7 +167,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm12").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm12").getString())));
 							}
 						}
 					}
@@ -178,7 +178,7 @@ public class IdlingApostleOnEntityTickUpdateProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof Player) {
 								if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm13").getString())), false);
+									_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.apostle.psalm13").getString())));
 							}
 						}
 					}

@@ -1,22 +1,22 @@
 package net.sombrius.thedeepvoid.fabric;
 
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLevelEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityLevelChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.api.ModInitializer;
@@ -89,7 +89,7 @@ public final class TheDeepVoidFabric implements ModInitializer {
 		net.fabricmc.fabric.api.resource.ResourceManagerHelper.registerBuiltinResourcePack(net.minecraft.resources.Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, "neoforge_compat"),
 				net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer(TheDeepVoidMod.MODID).orElseThrow(), net.minecraft.network.chat.Component.literal("The Deep Void: NeoForge data"),
 				net.fabricmc.fabric.api.resource.ResourcePackActivationType.ALWAYS_ENABLED);
-		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((tab, entries) -> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab)
+		CreativeModeTabEvents.MODIFY_OUTPUT_ALL.register((tab, entries) -> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab)
 				.ifPresent(key -> ModBus.post(new BuildCreativeModeTabContentsEvent(key, entries::accept))));
 		DefaultItemComponentEvents.MODIFY.register(context -> {
 			ModBus.post(new ModifyDefaultComponentsEvent((item, patch) -> context.modify(item.asItem(), builder -> patch.accept(new ModifyDefaultComponentsEvent.Builder() {
@@ -113,13 +113,13 @@ public final class TheDeepVoidFabric implements ModInitializer {
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> FabricPlatform.server = null);
 		ServerTickEvents.START_SERVER_TICK.register(server -> ModBus.post(new ServerTickEvent.Pre(server)));
 		ServerTickEvents.END_SERVER_TICK.register(server -> ModBus.post(new ServerTickEvent.Post(server)));
-		ServerTickEvents.END_WORLD_TICK.register(level -> ModBus.post(new LevelTickEvent.Post(level)));
-		ServerWorldEvents.LOAD.register((server, level) -> ModBus.post(new LevelEvent.Load(level)));
+		ServerTickEvents.END_LEVEL_TICK.register(level -> ModBus.post(new LevelTickEvent.Post(level)));
+		ServerLevelEvents.LOAD.register((server, level) -> ModBus.post(new LevelEvent.Load(level)));
 		CommandRegistrationCallback.EVENT.register((dispatcher, context, selection) -> ModBus.post(new RegisterCommandsEvent(dispatcher, selection, context)));
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> ModBus.post(new PlayerEvent.PlayerLoggedInEvent(handler.getPlayer())));
 		ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> ModBus.post(new PlayerEvent.Clone(newPlayer, oldPlayer, !alive)));
 		ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> ModBus.post(new PlayerEvent.PlayerRespawnEvent(newPlayer, alive)));
-		ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register(
+		ServerEntityLevelChangeEvents.AFTER_PLAYER_CHANGE_LEVEL.register(
 				(player, origin, destination) -> ModBus.post(new PlayerEvent.PlayerChangedDimensionEvent(player, origin.dimension(), destination.dimension())));
 		EntitySleepEvents.STOP_SLEEPING.register((entity, pos) -> {
 			if (entity instanceof Player player)
@@ -146,7 +146,7 @@ public final class TheDeepVoidFabric implements ModInitializer {
 	/** NeoForge's FurnaceFuelBurnTimeEvent and IBlockExtension#getFlammability for the mod's items and blocks */
 	private static void fuelAndFlammability() {
 		// 1.21.2: fuel values are built with the registries (once per data load)
-		FuelRegistryEvents.BUILD.register((builder, context) -> {
+		FuelValueEvents.BUILD.register((builder, context) -> {
 			for (var entry : TheDeepVoidModItems.REGISTRY.getEntries()) {
 				FurnaceFuelBurnTimeEvent event = new FurnaceFuelBurnTimeEvent(new ItemStack(entry.get()), -1);
 				if (ModBus.post(event))

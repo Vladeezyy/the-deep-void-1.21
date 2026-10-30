@@ -20,7 +20,7 @@ public class DeepVoidRedstoneOreBlock extends Block implements net.sombrius.thed
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

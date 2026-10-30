@@ -31,7 +31,7 @@ public class PusSackMobplayerCollidesWithPlantProcedure {
 		if (entity == null)
 			return;
 		if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODY_RIB_CAGE_CHESTPLATE.get())) {
-			if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:fleshkin"))) == false) {
+			if (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:fleshkin"))) == false) {
 				world.destroyBlock(BlockPos.containing(x, y, z), false);
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {

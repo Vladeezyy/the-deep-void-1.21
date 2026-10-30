@@ -16,7 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.BlockAndLightGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -43,16 +43,16 @@ import net.sombrius.thedeepvoid.procedures.VoidriumGlassSpecialInformationProced
 public class VoidriumGlassBlock extends Block implements EntityBlock, net.sombrius.thedeepvoid.port.PortBlockItem.Tooltip {
 	public VoidriumGlassBlock() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.HAT).sound(SoundType.GLASS).strength(25f, 6f).lightLevel(s -> 8).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.BLOCK)
-				.hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+				.emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : net.sombrius.thedeepvoid.port.PortUtil.clientPlayer.get();
+		Entity entity = net.sombrius.thedeepvoid.port.PortUtil.clientPlayer.get();
 		list.accept(Component.literal(VoidriumGlassSpecialInformationProcedure.execute()));
 	}
 
-		public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndTintGetter world, BlockPos pos, FluidState fluidstate) {
+		public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndLightGetter world, BlockPos pos, FluidState fluidstate) {
 		return true;
 	}
 
@@ -71,7 +71,7 @@ public class VoidriumGlassBlock extends Block implements EntityBlock, net.sombri
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

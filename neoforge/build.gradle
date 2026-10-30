@@ -46,7 +46,7 @@ repositories {
 dependencies {
     // Fabric Loader's @Environment in the common code (class-retention annotation)
     compileOnly "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+    implementation "maven.modrinth:geckolib:${geckolib_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"

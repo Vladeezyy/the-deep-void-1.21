@@ -42,7 +42,7 @@ public class OvergrownGloomGrowthBlock extends Block implements SimpleWaterlogge
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 

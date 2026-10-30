@@ -124,7 +124,7 @@ public class PlayerDiesInPitProcedure {
 				if (world instanceof ServerLevel _serverworld) {
 					StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "the_pit_7_regenerate"));
 					if (template != null) {
-						template.placeInWorld(_serverworld, new BlockPos(0, 0, 0), new BlockPos(0, 0, 0), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.random, 3);
+						template.placeInWorld(_serverworld, new BlockPos(0, 0, 0), new BlockPos(0, 0, 0), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.getRandom(), 3);
 					}
 				}
 				world.setBlock(new BlockPos(0, 0, 0), Blocks.AIR.defaultBlockState(), 3);

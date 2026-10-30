@@ -84,7 +84,7 @@ public class ApostleUsesChainProcedure {
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 								_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.CHAINED.holder(), 30, 0));
 							if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-								_player.displayClientMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.usechain").getString())), false);
+								_player.sendSystemMessage(Component.literal(("\u00A7c" + Component.translatable("text.the_deep_void.apostle.usechain").getString())));
 						}
 					}
 				}

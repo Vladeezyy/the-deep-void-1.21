@@ -46,7 +46,7 @@ public class TreasureBagJeiTypeRecipeCategory implements IRecipeCategory<Treasur
 	}
 
 	@Override
-	public void draw(TreasureBagJeiTypeRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphics guiGraphics, double mouseX, double mouseY) {
+	public void draw(TreasureBagJeiTypeRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
 		this.background.draw(guiGraphics);
 	}
 

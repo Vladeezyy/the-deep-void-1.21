@@ -89,7 +89,7 @@ public class PlayerAttackedByBossProcedure {
 					}
 				}
 			}
-			if (entity instanceof Player && (sourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) || sourceentity instanceof GiantShadowHandEntity)
+			if (entity instanceof Player && (sourceentity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) || sourceentity instanceof GiantShadowHandEntity)
 					&& !(sourceentity instanceof SpawnBoneSpikesEntity) && !(sourceentity instanceof BoneBlockadeEntity) && !(sourceentity instanceof FleshFangsEntity)
 					&& !((entity instanceof LivingEntity _entUseItem27 ? _entUseItem27.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) && immediatesourceentity == sourceentity
 					&& !(entity instanceof LivingEntity _livEnt30 && _livEnt30.hasEffect(TheDeepVoidModMobEffects.BROKEN_ARMOR.holder())) && DeepVoidConfigConfiguration.BOSSESBREAKARMOR.get() == true) {
@@ -97,12 +97,12 @@ public class PlayerAttackedByBossProcedure {
 					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.BROKEN_ARMOR.holder(), 400, 0));
 			}
 		}
-		if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && sourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
+		if (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss"))) && sourceentity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 			if (event instanceof ICancellableEvent _cancellable) {
 				_cancellable.setCanceled(true);
 			}
 		}
-		if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:affected_by_cap")))
+		if (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:affected_by_cap")))
 				&& amount > (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) * (double) DeepVoidConfigConfiguration.DAMAGECAPPERCENTAGE.get() && DeepVoidConfigConfiguration.DODAMAGECAP.get() == true && !(new Object() {
 					public boolean checkGamemode(Entity _ent) {
 						if (_ent instanceof ServerPlayer _serverPlayer) {

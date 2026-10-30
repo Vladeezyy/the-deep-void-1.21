@@ -37,7 +37,7 @@ public class SpiteArrowRenderer extends EntityRenderer<SpiteArrowEntity, net.som
 	}
 
 	@Override
-	public void submit(net.sombrius.thedeepvoid.port.PortRender.RotatedState state, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.CameraRenderState camera) {
+	public void submit(net.sombrius.thedeepvoid.port.PortRender.RotatedState state, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
 		poseStack.pushPose();
 		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot - 90));
 		poseStack.mulPose(Axis.ZP.rotationDegrees(90 + state.xRot));

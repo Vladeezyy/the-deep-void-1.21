@@ -31,7 +31,7 @@ public class VoidSickleItem extends Item implements net.sombrius.thedeepvoid.por
 	@Override
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext level, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, level, tooltipDisplay, list, flag);
-		Entity entity = itemstack.getEntityRepresentation();
+		Entity entity = net.sombrius.thedeepvoid.port.PortUtil.clientPlayer.get();
 		list.accept(Component.literal(VoidSickleDescriptionProcedure.execute()));
 	}
 

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.network;
 
+import javax.annotation.Nullable;
+
 
 import net.sombrius.thedeepvoid.port.bus.PlayerEvent;
 import net.sombrius.thedeepvoid.port.bus.EventBusSubscriber;
@@ -193,9 +195,11 @@ public class TheDeepVoidModVariables {
 
 	public static class WorldVariables extends SavedData {
 		public static final String DATA_NAME = "the_deep_void_worldvars";
-		/** 1.21.5: saved data has a type with a codec (the data fixes of the random sequences touch none of its keys) */
-		public static final SavedDataType<WorldVariables> TYPE = new SavedDataType<>(DATA_NAME, WorldVariables::new,
-				CompoundTag.CODEC.xmap(tag -> load(tag, null), data -> data.save(new CompoundTag(), null)), DataFixTypes.SAVED_DATA_RANDOM_SEQUENCES);
+		/** 26.1: saved data is data/the_deep_void/<name>.dat of its dimension; a 1.21 world's file is read once (legacyData) */
+		public static final SavedDataType<WorldVariables> TYPE = new SavedDataType<>(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, DATA_NAME), () -> {
+			CompoundTag legacy = legacyData(Platform.INSTANCE.currentServer(), DATA_NAME);
+			return legacy != null ? load(legacy, null) : new WorldVariables();
+		}, CompoundTag.CODEC.xmap(tag -> load(tag, null), data -> data.save(new CompoundTag(), null)), DataFixTypes.SAVED_DATA_WANDERING_TRADER);
 
 		public static WorldVariables load(CompoundTag tag, HolderLookup.Provider lookupProvider) {
 			WorldVariables data = new WorldVariables();
@@ -231,9 +235,11 @@ public class TheDeepVoidModVariables {
 
 	public static class MapVariables extends SavedData {
 		public static final String DATA_NAME = "the_deep_void_mapvars";
-		/** 1.21.5: saved data has a type with a codec (the data fixes of the random sequences touch none of its keys) */
-		public static final SavedDataType<MapVariables> TYPE = new SavedDataType<>(DATA_NAME, MapVariables::new,
-				CompoundTag.CODEC.xmap(tag -> load(tag, null), data -> data.save(new CompoundTag(), null)), DataFixTypes.SAVED_DATA_RANDOM_SEQUENCES);
+		/** 26.1: saved data is data/the_deep_void/<name>.dat of its dimension; a 1.21 world's file is read once (legacyData) */
+		public static final SavedDataType<MapVariables> TYPE = new SavedDataType<>(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, DATA_NAME), () -> {
+			CompoundTag legacy = legacyData(Platform.INSTANCE.currentServer(), DATA_NAME);
+			return legacy != null ? load(legacy, null) : new MapVariables();
+		}, CompoundTag.CODEC.xmap(tag -> load(tag, null), data -> data.save(new CompoundTag(), null)), DataFixTypes.SAVED_DATA_WANDERING_TRADER);
 		public boolean CultTemplePlaced = false;
 		public boolean pitPlaced = false;
 		public double undertakerSpawn = 24000.0;
@@ -310,6 +316,24 @@ public class TheDeepVoidModVariables {
 				return clientSide;
 			}
 		}
+	}
+
+	/** The saved data file where 1.21 kept it (the 26.1 file fix moves only vanilla's), its "data" compound */
+	@Nullable
+	static CompoundTag legacyData(@Nullable net.minecraft.server.MinecraftServer server, String name) {
+		if (server == null)
+			return null;
+		java.nio.file.Path root = server.getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT);
+		for (java.nio.file.Path file : java.util.List.of(root.resolve("data").resolve(name + ".dat"), root.resolve("dimensions/minecraft/overworld/data/minecraft").resolve(name + ".dat"))) {
+			if (java.nio.file.Files.isRegularFile(file)) {
+				try {
+					return net.minecraft.nbt.NbtIo.readCompressed(file, net.minecraft.nbt.NbtAccounter.unlimitedHeap()).getCompoundOrEmpty("data");
+				} catch (java.io.IOException e) {
+					TheDeepVoidMod.LOGGER.warn("Could not read the old saved data {}", file, e);
+				}
+			}
+		}
+		return null;
 	}
 
 	public record SavedDataSyncMessage(int dataType, SavedData data) implements CustomPacketPayload {

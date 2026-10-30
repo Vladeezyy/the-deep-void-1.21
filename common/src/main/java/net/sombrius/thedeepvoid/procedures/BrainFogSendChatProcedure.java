@@ -32,7 +32,7 @@ public class BrainFogSendChatProcedure {
 				_cancellable.setCanceled(true);
 			}
 			if (entity instanceof Player _player && !_player.level().isClientSide())
-				_player.displayClientMessage(Component.literal(("<" + entity.getDisplayName().getString() + "> " + text)), false);
+				_player.sendSystemMessage(Component.literal(("<" + entity.getDisplayName().getString() + "> " + text)));
 		}
 	}
 }

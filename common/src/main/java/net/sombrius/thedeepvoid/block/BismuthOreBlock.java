@@ -20,7 +20,7 @@ public class BismuthOreBlock extends Block implements net.sombrius.thedeepvoid.p
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

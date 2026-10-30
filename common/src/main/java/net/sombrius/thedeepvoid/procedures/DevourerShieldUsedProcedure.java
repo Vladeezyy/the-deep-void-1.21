@@ -53,7 +53,7 @@ public class DevourerShieldUsedProcedure {
 					final Vec3 _center = new Vec3(x, y, z);
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(8 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if (entityiterator instanceof LivingEntity && !entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))
+						if (entityiterator instanceof LivingEntity && !entityiterator.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))
 								&& !(entityiterator instanceof TamableAnimal _tamIsTamedBy && entity instanceof LivingEntity _livEnt ? _tamIsTamedBy.isOwnedBy(_livEnt) : false) && !(entityiterator == entity)
 								&& !(entityiterator == (entity.getVehicle()))) {
 							entityiterator.setDeltaMovement(new Vec3(((entity.getX() - entityiterator.getX()) * 0.5), ((entity.getY() - entityiterator.getY()) * 0.5), ((entity.getZ() - entityiterator.getZ()) * 0.5)));

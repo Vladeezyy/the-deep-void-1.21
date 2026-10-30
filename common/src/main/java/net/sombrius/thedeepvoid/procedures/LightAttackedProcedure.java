@@ -55,7 +55,7 @@ public class LightAttackedProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity, Entity sourceentity, double amount) {
 		if (entity == null || sourceentity == null)
 			return;
-		if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:invulnerable")))) {
+		if (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:invulnerable")))) {
 			if (event instanceof ICancellableEvent _cancellable) {
 				_cancellable.setCanceled(true);
 			}
@@ -65,7 +65,7 @@ public class LightAttackedProcedure {
 					_cancellable.setCanceled(true);
 				}
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.translatable("text.the_deep_void.port.soul_take_me_soul"), true);
+					_player.sendOverlayMessage(Component.translatable("text.the_deep_void.port.soul_take_me_soul"));
 			} else {
 				if (!entity.level().isClientSide())
 					entity.discard();

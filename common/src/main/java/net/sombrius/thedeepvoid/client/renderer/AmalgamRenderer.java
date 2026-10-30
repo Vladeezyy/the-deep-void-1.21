@@ -15,7 +15,7 @@ public class AmalgamRenderer extends MobRenderer<AmalgamEntity, PortRender.Layer
 	public AmalgamRenderer(EntityRendererProvider.Context context) {
 		super(context, new Modelamalgam_rework<>(context.bakeLayer(Modelamalgam_rework.LAYER_LOCATION)), 0f);
 		this.addLayer(PortRender.layer(this, this.getModel(), Identifier.parse("the_deep_void:textures/entities/amalgam_rework_glow.png"), RenderTypes::eyes, state -> true, true));
-		this.addLayer(PortRender.layer(this, this.getModel(), Identifier.parse("the_deep_void:textures/entities/amalgam_rework.png"), RenderTypes::entityCutoutNoCull, state -> state.layers[0], true));
+		this.addLayer(PortRender.layer(this, this.getModel(), Identifier.parse("the_deep_void:textures/entities/amalgam_rework.png"), RenderTypes::entityCutout, state -> state.layers[0], true));
 	}
 
 	@Override

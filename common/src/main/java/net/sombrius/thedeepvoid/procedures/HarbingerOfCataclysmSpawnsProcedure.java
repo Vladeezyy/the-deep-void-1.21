@@ -44,7 +44,7 @@ public class HarbingerOfCataclysmSpawnsProcedure {
 						_vars.syncPlayerVariables(entityiterator);
 					}
 					if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.translatable("text.the_deep_void.port.disc_dealing_with_the_devil_by_darren"), true);
+						_player.sendOverlayMessage(Component.translatable("text.the_deep_void.port.disc_dealing_with_the_devil_by_darren"));
 				}
 			}
 		}

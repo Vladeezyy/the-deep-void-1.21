@@ -1,19 +1,17 @@
 package net.sombrius.thedeepvoid.fabric;
 
-import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
-import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderingRegistry;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.api.ClientModInitializer;
 
 import net.minecraft.world.level.material.Fluid;
@@ -73,7 +71,9 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 		ClientEventIndex.register();
 		PortUtil.clientRegistries = () -> Minecraft.getInstance().level == null ? null : Minecraft.getInstance().level.registryAccess();
 		PortUtil.clientPlayer = () -> Minecraft.getInstance().player;
-		PortClient.fluidRenderLayer = BlockRenderLayerMap::putFluid;
+		// 26.1: block and fluid layers come from the transparency of their textures
+		PortClient.fluidRenderLayer = (fluid, layer) -> {
+		};
 		// Fabric has no enum extension: a gun pose is vanilla's ITEM pose, the transformer runs after the animation (mixin)
 		PortArmPoses.poses = name -> {
 			FabricArmPoses.lastPose = name;
@@ -88,18 +88,17 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 				EntityRendererRegistry.register(type, provider);
 			}
 		}));
-		ModBus.post(new EntityRenderersEvent.RegisterLayerDefinitions((location, definition) -> EntityModelLayerRegistry.registerModelLayer(location, definition::get)));
+		ModBus.post(new EntityRenderersEvent.RegisterLayerDefinitions((location, definition) -> ModelLayerRegistry.registerModelLayer(location, definition::get)));
 		ModBus.post(new RegisterParticleProvidersEvent(new RegisterParticleProvidersEvent.Sink() {
 			@Override
 			public <T extends ParticleOptions> void register(ParticleType<T> type, net.minecraft.client.particle.ParticleResources.SpriteParticleRegistration<T> registration) {
-				ParticleFactoryRegistry.getInstance().register(type, registration::create);
+				ParticleProviderRegistry.getInstance().register(type, registration::create);
 			}
 		}));
 		ModBus.post(new RegisterMenuScreensEvent(MenuScreens::register));
-		ModBus.post(new RegisterKeyMappingsEvent(KeyBindingHelper::registerKeyBinding));
+		ModBus.post(new RegisterKeyMappingsEvent(KeyMappingHelper::registerKeyMapping));
 		itemExtensions();
 		fluids();
-		blockRenderLayers();
 		ModBus.post(new FMLClientSetupEvent());
 		// 1.21.4: MCreator's item properties are one range select property (port.PortItemProperties)
 		RangeSelectItemModelPropertiesAccessor.idMapper().put(PortItemProperties.ID, PortItemProperties.MAP_CODEC);
@@ -113,13 +112,13 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 
 		ClientTickEvents.START_CLIENT_TICK.register(minecraft -> ModBus.post(new ClientTickEvent.Pre()));
 		ClientTickEvents.END_CLIENT_TICK.register(minecraft -> ModBus.post(new ClientTickEvent.Post()));
-		ClientTickEvents.END_WORLD_TICK.register(level -> ModBus.post(new LevelTickEvent.Post(level)));
-		ScreenEvents.AFTER_INIT.register((minecraft, screen, width, height) -> ScreenEvents.afterRender(screen)
+		ClientTickEvents.END_LEVEL_TICK.register(level -> ModBus.post(new LevelTickEvent.Post(level)));
+		ScreenEvents.AFTER_INIT.register((minecraft, screen, width, height) -> ScreenEvents.afterExtract(screen)
 				.register((s, guiGraphics, mouseX, mouseY, partialTick) -> ModBus.post(new ScreenEvent.Render.Post(s, guiGraphics))));
 		ItemTooltipCallback.EVENT.register((stack, context, type, lines) -> ModBus.post(new ItemTooltipEvent(stack, Minecraft.getInstance().player, lines, type, context)));
 		ClientEntityEvents.ENTITY_LOAD.register((entity, level) -> ModBus.post(new EntityJoinLevelEvent(entity, level)));
 		ClientEntityEvents.ENTITY_UNLOAD.register((entity, level) -> ModBus.post(new EntityLeaveLevelEvent(entity, level)));
-		WorldRenderEvents.END_MAIN.register(context -> {
+		LevelRenderEvents.END_MAIN.register(context -> {
 			if (ModBus.hasListeners(RenderFrameEvent.Post.class))
 				ModBus.post(new RenderFrameEvent.Post());
 		});
@@ -160,22 +159,6 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 		return false;
 	}
 
-	/**
-	 * NeoForge takes a block's layer from the render_type of its model; Fabric does not read it. The map comes from
-	 * the models (tools/port_resources_1_21_11.py).
-	 */
-	private static void blockRenderLayers() {
-		try (java.io.InputStream in = TheDeepVoidFabricClient.class.getResourceAsStream("/the_deep_void_render_layers.json")) {
-			if (in == null)
-				return;
-			com.google.gson.JsonObject map = com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
-			map.entrySet().forEach(entry -> net.minecraft.core.registries.BuiltInRegistries.BLOCK.getOptional(Identifier.parse(entry.getKey())).ifPresent(block -> BlockRenderLayerMap.putBlock(block,
-					"translucent".equals(entry.getValue().getAsString()) ? net.minecraft.client.renderer.chunk.ChunkSectionLayer.TRANSLUCENT : net.minecraft.client.renderer.chunk.ChunkSectionLayer.CUTOUT)));
-		} catch (java.io.IOException e) {
-			net.sombrius.thedeepvoid.TheDeepVoidMod.LOGGER.error("Block render layers", e);
-		}
-	}
-
 	/** NeoForge's fluid type client extensions of the two fluids (still and flowing textures) */
 	private static void fluids() {
 		fluid(TheDeepVoidModFluids.LIQUID_VOID.get(), TheDeepVoidModFluids.FLOWING_LIQUID_VOID.get(), "the_deep_void:block/liquid_void", "the_deep_void:block/liquid_void");
@@ -183,6 +166,7 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 	}
 
 	private static void fluid(Fluid still, Fluid flowing, String stillTexture, String flowingTexture) {
-		FluidRenderHandlerRegistry.INSTANCE.register(still, flowing, new SimpleFluidRenderHandler(Identifier.parse(stillTexture), Identifier.parse(flowingTexture)));
+		FluidRenderingRegistry.register(still, flowing, new net.minecraft.client.renderer.block.FluidModel.Unbaked(new net.minecraft.client.resources.model.sprite.Material(Identifier.parse(stillTexture)),
+				new net.minecraft.client.resources.model.sprite.Material(Identifier.parse(flowingTexture)), null, null));
 	}
 }

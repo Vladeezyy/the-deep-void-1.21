@@ -24,7 +24,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 		if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getBooleanOr("deep_void:talkingVoidBlessing", false) == true) {
 			if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 1) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line1").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line1").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -36,7 +36,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 					_datEntSetL.getEntityData().set(ChainedWeaverEntity.DATA_talking, true);
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 2) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line2").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line2").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -46,7 +46,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 				}
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 3) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line3").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line3").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -56,7 +56,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 				}
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 4) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line4").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line4").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -66,7 +66,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 				}
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 5) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line5").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line5").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -76,7 +76,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 				}
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 6) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line6").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line6").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -86,7 +86,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 				}
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 7) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line7").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line7").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -96,7 +96,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 				}
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 8) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line9").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.blessing_line9").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -113,7 +113,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 		if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getBooleanOr("deep_void:talkingVoidBlessing", false) == false) {
 			if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 1) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line1").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line1").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -125,7 +125,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 					_datEntSetL.getEntityData().set(ChainedWeaverEntity.DATA_talking, true);
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 2) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line2").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line2").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -135,7 +135,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 				}
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 3) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line3").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line3").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -145,7 +145,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 				}
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 4) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line4").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line4").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, 1);
@@ -155,7 +155,7 @@ public class ChainedWeaverRightClickedOnEntityProcedure {
 				}
 			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getDoubleOr("deep_void:discuss", 0) == 5) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line14").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.normal_line14").getString())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")), SoundSource.HOSTILE, 1, (float) 0.9);

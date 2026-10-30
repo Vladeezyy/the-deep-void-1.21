@@ -69,7 +69,7 @@ public class HivemindPlayerCountProcedure {
 						_vars.syncPlayerVariables(entityiterator);
 					}
 					if (entityiterator instanceof Player _player && !_player.level().isClientSide())
-						_player.displayClientMessage(Component.translatable("text.the_deep_void.port.disc_pitch_black_by_dark_fantasy_studio"), true);
+						_player.sendOverlayMessage(Component.translatable("text.the_deep_void.port.disc_pitch_black_by_dark_fantasy_studio"));
 				}
 			}
 		}

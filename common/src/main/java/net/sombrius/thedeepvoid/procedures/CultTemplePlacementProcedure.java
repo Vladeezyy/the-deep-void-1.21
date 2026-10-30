@@ -53,7 +53,7 @@ public class CultTemplePlacementProcedure {
 						StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "void_cult_temple"));
 						if (template != null) {
 							template.placeInWorld(_serverworld, BlockPos.containing(-8, (double) DeepVoidConfigConfiguration.HOLESTRUCTUREY.get(), -8), BlockPos.containing(-8, (double) DeepVoidConfigConfiguration.HOLESTRUCTUREY.get(), -8),
-									new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.random, 3);
+									new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.getRandom(), 3);
 						}
 					}
 					world.setBlock(BlockPos.containing(-8, (double) DeepVoidConfigConfiguration.HOLESTRUCTUREY.get() + 1, -8), Blocks.AIR.defaultBlockState(), 3);
@@ -62,7 +62,7 @@ public class CultTemplePlacementProcedure {
 						StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "cult_temple_noair3"));
 						if (template != null) {
 							template.placeInWorld(_serverworld, BlockPos.containing(-12, (double) DeepVoidConfigConfiguration.HOLESTRUCTUREY.get(), -12), BlockPos.containing(-12, (double) DeepVoidConfigConfiguration.HOLESTRUCTUREY.get(), -12),
-									new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.random, 3);
+									new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.getRandom(), 3);
 						}
 					}
 					world.setBlock(BlockPos.containing(-12, (double) DeepVoidConfigConfiguration.HOLESTRUCTUREY.get() + 1, -12), Blocks.AIR.defaultBlockState(), 3);
@@ -75,7 +75,7 @@ public class CultTemplePlacementProcedure {
 			if (world instanceof ServerLevel _serverworld) {
 				StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "weaver_sepulcher_nogates"));
 				if (template != null) {
-					template.placeInWorld(_serverworld, new BlockPos(-40, 1, -40), new BlockPos(-40, 1, -40), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.random, 3);
+					template.placeInWorld(_serverworld, new BlockPos(-40, 1, -40), new BlockPos(-40, 1, -40), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.getRandom(), 3);
 				}
 			}
 			world.setBlock(new BlockPos(-40, 1, -40), Blocks.AIR.defaultBlockState(), 3);
@@ -86,7 +86,7 @@ public class CultTemplePlacementProcedure {
 			if (world instanceof ServerLevel _serverworld) {
 				StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "the_pit_7"));
 				if (template != null) {
-					template.placeInWorld(_serverworld, new BlockPos(0, 0, 0), new BlockPos(0, 0, 0), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.random, 3);
+					template.placeInWorld(_serverworld, new BlockPos(0, 0, 0), new BlockPos(0, 0, 0), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.getRandom(), 3);
 				}
 			}
 			{

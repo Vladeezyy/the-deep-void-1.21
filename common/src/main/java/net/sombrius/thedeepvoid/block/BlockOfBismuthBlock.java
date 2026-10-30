@@ -19,7 +19,7 @@ public class BlockOfBismuthBlock extends Block implements net.sombrius.thedeepvo
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

@@ -48,7 +48,7 @@ public class VoidriumSawTrapBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 15;
 	}
 

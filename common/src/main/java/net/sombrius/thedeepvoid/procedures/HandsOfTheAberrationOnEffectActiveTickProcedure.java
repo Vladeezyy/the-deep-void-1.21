@@ -46,7 +46,7 @@ public class HandsOfTheAberrationOnEffectActiveTickProcedure {
 					if (entity instanceof LivingEntity _entity7)
 						_entity7.skipDropExperience();
 				}
-				if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
+				if (entity.getType().builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 					if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) > 0) {
 						entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)), 999);
 						if (world instanceof Level _level) {

@@ -15,7 +15,7 @@ public class DarkSteelDoorBlock extends DoorBlock {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 }

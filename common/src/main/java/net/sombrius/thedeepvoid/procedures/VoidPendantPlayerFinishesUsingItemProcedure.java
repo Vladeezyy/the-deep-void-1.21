@@ -135,7 +135,7 @@ public class VoidPendantPlayerFinishesUsingItemProcedure {
 				});
 			} else {
 				if (entity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((Component.translatable("item.the_deep_void.void_pendant.core").getString())), false);
+					_player.sendSystemMessage(Component.literal((Component.translatable("item.the_deep_void.void_pendant.core").getString())));
 			}
 		}
 	}

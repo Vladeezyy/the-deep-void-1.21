@@ -20,15 +20,7 @@ public class LiquidIchorFluidType extends FluidType {
 		return new IClientFluidTypeExtensions() {
 			private static final Identifier STILL_TEXTURE = Identifier.parse("the_deep_void:block/liquid_ichor_still"), FLOWING_TEXTURE = Identifier.parse("the_deep_void:block/liquid_ichor_flow");
 
-			@Override
-			public Identifier getStillTexture() {
-				return STILL_TEXTURE;
-			}
 
-			@Override
-			public Identifier getFlowingTexture() {
-				return FLOWING_TEXTURE;
-			}
 		};
 	}
 }

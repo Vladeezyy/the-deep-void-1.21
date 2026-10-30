@@ -190,6 +190,7 @@ def main():
         if m and 'implements GeoItem' in s:
             o = geo_armor(geo_item(o))
             o = re.sub(r'\bAnimationController (\w+) = new AnimationController<>\(', rf'AnimationController<{m.group(1)}> \1 = new AnimationController<>(', o)
+            o = re.sub(r'\bnew AnimationController<>\("', f'new {PKG}.port.GeoAnims.Controller<>("', o)
         if o != s:
             open(path, 'w', encoding='utf-8', newline='\n').write(o)
             changed += 1

@@ -20,12 +20,12 @@ import net.sombrius.thedeepvoid.port.bus.ModBus;
 /** NeoForge's RenderGuiEvent.Pre (before every HUD layer) and isVisibleInGui of the mod's effects */
 @Mixin(Gui.class)
 abstract class GuiMixin {
-	@Inject(method = "render", at = @At("HEAD"))
+	@Inject(method = "extractRenderState", at = @At("HEAD"))
 	private void deepvoid$renderPre(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 		ModBus.post(new RenderGuiEvent.Pre(guiGraphics));
 	}
 
-	@ModifyExpressionValue(method = "renderEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/effect/MobEffectInstance;showIcon()Z"))
+	@ModifyExpressionValue(method = "extractEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/effect/MobEffectInstance;showIcon()Z"))
 	private boolean deepvoid$visibleInGui(boolean showIcon, @Local MobEffectInstance instance) {
 		return showIcon && !(instance.getEffect().value() instanceof HasClientExtensions.Effect effect && !effect.clientExtensions().isVisibleInGui(instance));
 	}

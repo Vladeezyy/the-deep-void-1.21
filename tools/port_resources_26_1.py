@@ -54,12 +54,36 @@ def random_patches():
     return len(patches), placed
 
 
+def lakes():
+    """26.1: LakeFeature moves its origin by (-8, -4, -8) itself; 1.21 lakes were placed with that offset (MCreator's
+    random_offset -8), twice the offset reaches chunks outside the generation region (a crash)"""
+    lakes = set()
+    for path in glob.glob(DATA + '*/worldgen/configured_feature/*.json'):
+        if read_json(path).get('type') == 'minecraft:lake':
+            lakes.add(path.split('/data/')[1].split('/')[0] + ':' + os.path.basename(path)[:-5])
+    changed = 0
+    for path in glob.glob(DATA + '*/worldgen/placed_feature/*.json'):
+        node = read_json(path)
+        if node.get('feature') not in lakes:
+            continue
+        placement = [m for m in node.get('placement', []) if not (m.get('type') == 'minecraft:random_offset' and m.get('xz_spread') == -8 and m.get('y_spread') == 0)]
+        if placement != node.get('placement', []):
+            node['placement'] = placement
+            write_json(path, node)
+            changed += 1
+    return changed
+
+
 def dimension_types():
     changed = 0
     for path in glob.glob(DATA + '*/dimension_type/*.json'):
         node = read_json(path)
-        if 'has_ender_dragon_fight' not in node:
-            node['has_ender_dragon_fight'] = False
+        before = json.dumps(node)
+        node.setdefault('has_ender_dragon_fight', False)
+        # 26.1: the minimum light of a dimension is an attribute (black by default); vanilla's own 1.21 overworld
+        # migrated to #0a0a0a, the mod's dimensions (ambient light 0 like the overworld) get the same
+        node.setdefault('attributes', {}).setdefault('minecraft:visual/ambient_light_color', '#0a0a0a')
+        if json.dumps(node) != before:
             write_json(path, dict(sorted(node.items())))
             changed += 1
     return changed
@@ -67,7 +91,7 @@ def dimension_types():
 
 def main():
     patches, placed = random_patches()
-    print(f'random patches {patches} (placed features {placed}); dimension types {dimension_types()}')
+    print(f'random patches {patches} (placed features {placed}); lakes {lakes()}; dimension types {dimension_types()}')
 
 
 if __name__ == '__main__':

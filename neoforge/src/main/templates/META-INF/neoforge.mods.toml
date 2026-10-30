@@ -45,3 +45,6 @@ The Deep Void adds a new creepy dimension for you to explore with tons of new co
 
 [[mixins]]
 config="the_deep_void.mixins.json"
+
+[[mixins]]
+config="the_deep_void.neoforge.mixins.json"

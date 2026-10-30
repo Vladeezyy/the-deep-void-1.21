@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.sombrius.thedeepvoid.port.neo.IClientMobEffectExtensions;
 
-public class TotalBlindnessMobEffect extends MobEffect {
+public class TotalBlindnessMobEffect extends MobEffect implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Effect {
 	public TotalBlindnessMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -16777216);
 	}

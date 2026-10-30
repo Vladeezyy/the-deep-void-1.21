@@ -22,7 +22,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.procedures.SpiteArrowProjectileHitsLivingEntityProcedure;
 import net.sombrius.thedeepvoid.procedures.SpiteArrowWhileProjectileFlyingTickProcedure;
 
-@OnlyIn(value = Dist.CLIENT, _interface = ItemSupplier.class)
+@net.neoforged.api.distmarker.OnlyIn(value = net.neoforged.api.distmarker.Dist.CLIENT, _interface = ItemSupplier.class) @net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
 public class SpiteArrowEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(TheDeepVoidModItems.ARROW_OF_SPITE.get());
 
@@ -39,7 +39,7 @@ public class SpiteArrowEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public ItemStack getItem() {
 		return PROJECTILE_ITEM;
 	}

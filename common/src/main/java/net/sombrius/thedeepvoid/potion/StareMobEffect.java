@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.sombrius.thedeepvoid.port.neo.IClientMobEffectExtensions;
 
-public class StareMobEffect extends MobEffect {
+public class StareMobEffect extends MobEffect implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Effect {
 	public StareMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -1);
 	}

@@ -19,7 +19,7 @@ import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
-@OnlyIn(value = Dist.CLIENT, _interface = ItemSupplier.class)
+@net.neoforged.api.distmarker.OnlyIn(value = net.neoforged.api.distmarker.Dist.CLIENT, _interface = ItemSupplier.class) @net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
 public class KunaiEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(TheDeepVoidModItems.DARK_STEEL_KUNAI.get());
 
@@ -36,7 +36,7 @@ public class KunaiEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public ItemStack getItem() {
 		return PROJECTILE_ITEM;
 	}

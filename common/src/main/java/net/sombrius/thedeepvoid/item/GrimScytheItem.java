@@ -79,7 +79,7 @@ public class GrimScytheItem extends SwordItem {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, list, flag);
 		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : Minecraft.getInstance().player;
@@ -87,7 +87,7 @@ public class GrimScytheItem extends SwordItem {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public boolean isFoil(ItemStack itemstack) {
 		return GrimScytheHasItemGlowingEffectProcedure.execute(itemstack);
 	}

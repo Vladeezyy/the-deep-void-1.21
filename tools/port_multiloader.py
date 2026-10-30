@@ -141,6 +141,28 @@ def close_paren(s, i):
         i += 1
 
 
+def implement_owner(src, method, iface):
+    """Adds an interface to each class that declares {method} (a nested class or the top-level one)"""
+    pos = 0
+    while (i := src.find(method, pos)) >= 0:
+        pos = i + len(method)
+        decls = [m for m in re.finditer(r"^([ \t]*public (?:static )?(?:abstract )?class \w+(?:<[^>{]*>)?(?: extends [\w.<>, ?]+?)?)( implements ([^{]+?))?(\s*\{)", src[:i], re.M)]
+        # the innermost class whose braces still enclose the method
+        for m in reversed(decls):
+            depth, j = 0, m.end() - 1
+            while j < i:
+                depth += {"{": 1, "}": -1}.get(src[j], 0)
+                j += 1
+            if depth > 0:
+                if iface in (m.group(3) or ""):
+                    break
+                new = m.group(1) + (" implements " + m.group(3).strip() + ", " if m.group(2) else " implements ") + iface + m.group(4)
+                src = src[:m.start()] + new + src[m.end():]
+                pos += len(new) - (m.end() - m.start())
+                break
+    return src
+
+
 def implement(src, iface):
     """Adds an interface to the file's top-level class"""
     if iface in src:
@@ -213,6 +235,13 @@ def rewrite_code(path, src):
                  f"for (DimensionSpecialEffects dimensionSpecialEffects : {PKG}.port.PortClient.dimensionEffects())", src)
     src = src.replace("import net.neoforged.neoforge.client.DimensionSpecialEffectsManager;\n", "")
     src = src.replace("net.neoforged.neoforge.event.level.LevelEvent", f"{PKG}.port.bus.LevelEvent")
+    # items and effects with client extensions: the loaders find them through these interfaces
+    src = implement_owner(src, "public IClientItemExtensions clientExtensions()", f"{PKG}.port.neo.HasClientExtensions.Item")
+    src = implement_owner(src, "public IClientMobEffectExtensions clientExtensions()", f"{PKG}.port.neo.HasClientExtensions.Effect")
+    # client-only members: NeoForge strips @OnlyIn on a dedicated server, Fabric Loader strips @Environment
+    src = re.sub(r"(?<![.\w])@OnlyIn\(Dist\.CLIENT\)", "@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)", src)
+    src = re.sub(r"(?<![.\w])@OnlyIn\(value = Dist\.CLIENT, _interface = ([\w.]+)\.class\)",
+                 r"@net.neoforged.api.distmarker.OnlyIn(value = net.neoforged.api.distmarker.Dist.CLIENT, _interface = \1.class) @net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = \1.class)", src)
     # NeoForge fluid types live in the neoforge module
     src = re.sub(r"\(\) -> TheDeepVoidModFluidTypes\.(\w+)_TYPE\.get\(\)", lambda m: f'() -> net.sombrius.thedeepvoid.port.platform.Platform.INSTANCE.fluidType("{m.group(1).lower()}")', src)
     src = re.sub(r"import net\.sombrius\.thedeepvoid\.init\.TheDeepVoidModFluidTypes;\n", "", src)
@@ -237,7 +266,7 @@ def rewrite_code(path, src):
     return src
 
 
-SUB = re.compile(r"@SubscribeEvent(?:\(priority\s*=\s*EventPriority\.(\w+)\))?\s*\n(?:\s*@\w+(?:\([^)]*\))?\s*\n)*\s*public static void (\w+)\(\s*([\w.]+) \w+\)")
+SUB = re.compile(r"@SubscribeEvent(?:\(priority\s*=\s*EventPriority\.(\w+)\))?\s*\n(?:[ \t]*(?:@[\w.]+(?:\([^()]*(?:\([^()]*\)[^()]*)*\))?[ \t]*)+\n)*\s*public static void (\w+)\(\s*([\w.]+) \w+\)")
 
 
 def index_entries(path, src):
@@ -250,23 +279,27 @@ def index_entries(path, src):
     common, clientside, skipped = [], [], []
     # nested static classes with their own @EventBusSubscriber (MCreator's EventBusVariableHandlers)
     nested = []
-    for m in re.finditer(r"@EventBusSubscriber[^\n]*\n\s*public static class (\w+)[^{]*\{", src):
+    for m in re.finditer(r"@EventBusSubscriber([^\n]*)\n\s*public static class (\w+)[^{]*\{", src):
         depth, i = 1, m.end()
         while depth:
             depth += {"{": 1, "}": -1}.get(src[i], 0)
             i += 1
-        nested.append((m.start(), i, m.group(1)))
+        nested.append((m.start(), i, m.group(2), "CLIENT" in m.group(1)))
     for m in SUB.finditer(src):
         event = m.group(3)
         if event.split(".")[0] not in BUS_TYPES:
             skipped.append(f"{path.name}: {event}")
             continue
         owner = cls.group(1)
-        inside = [n for start, end, n in nested if start < m.start() < end]
+        inside = [(n, c) for start, end, n, c in nested if start < m.start() < end]
+        nested_client = False
         if inside:
-            owner = f"{owner}.{inside[-1]}"
+            owner = f"{owner}.{inside[-1][0]}"
+            nested_client = inside[-1][1]
         entry = (event, m.group(1) or "NORMAL", f"{pkg}.{owner}::{m.group(2)}")
-        (clientside if client else common).append(entry)
+        # a client-only method (stripped on a dedicated server) is a client listener even in a common class
+        only_client = "OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT)" in m.group(0)
+        (clientside if client or only_client or nested_client else common).append(entry)
     return common + [("__client__",) + e for e in clientside], skipped
 
 

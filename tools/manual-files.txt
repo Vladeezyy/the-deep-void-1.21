@@ -9,4 +9,5 @@ neoforge: net/sombrius/thedeepvoid/fluid/types/LiquidIchorFluidType.java
 net/sombrius/thedeepvoid/port/PortBench.java
 net/sombrius/thedeepvoid/port/DevScene.java
 neoforge: net/sombrius/thedeepvoid/port/ArmPoses.java
-neoforge: net/sombrius/thedeepvoid/port/ClientExtensionsRegistration.java
+# replaced by the loaders' own registration (port.neo.HasClientExtensions)
+drop: net/sombrius/thedeepvoid/port/ClientExtensionsRegistration.java

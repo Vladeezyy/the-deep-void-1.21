@@ -24,7 +24,7 @@ import net.sombrius.thedeepvoid.procedures.BoneBoulderProjectileHitsBlockProcedu
 import net.sombrius.thedeepvoid.procedures.BoneBoulderProjectileHitsLivingEntityProcedure;
 import net.sombrius.thedeepvoid.procedures.BoneBoulderWhileProjectileFlyingTickProcedure;
 
-@OnlyIn(value = Dist.CLIENT, _interface = ItemSupplier.class)
+@net.neoforged.api.distmarker.OnlyIn(value = net.neoforged.api.distmarker.Dist.CLIENT, _interface = ItemSupplier.class) @net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
 public class BoneBoulderEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Blocks.AIR);
 
@@ -41,7 +41,7 @@ public class BoneBoulderEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public ItemStack getItem() {
 		return PROJECTILE_ITEM;
 	}

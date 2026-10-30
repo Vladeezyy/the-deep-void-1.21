@@ -11,7 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.sombrius.thedeepvoid.port.neo.IClientMobEffectExtensions;
 import net.sombrius.thedeepvoid.procedures.ParanoiaOnEffectActiveTickProcedure;
 
-public class ParanoiaMobEffect extends MobEffect {
+public class ParanoiaMobEffect extends MobEffect implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Effect {
 	public ParanoiaMobEffect() {
 		super(MobEffectCategory.HARMFUL, -12763843);
 	}

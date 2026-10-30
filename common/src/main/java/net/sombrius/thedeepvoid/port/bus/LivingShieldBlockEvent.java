@@ -8,7 +8,7 @@ public class LivingShieldBlockEvent extends LivingEvent implements ICancellableE
 	private final DamageSource source;
 	private final float originalBlockedDamage;
 	private float blockedDamage;
-	private boolean shieldTakesDamage = true;
+	private float shieldDamage;
 	private boolean blocked;
 
 	public LivingShieldBlockEvent(LivingEntity entity, DamageSource source, float blockedDamage, boolean blocked) {
@@ -16,6 +16,7 @@ public class LivingShieldBlockEvent extends LivingEvent implements ICancellableE
 		this.source = source;
 		this.originalBlockedDamage = blockedDamage;
 		this.blockedDamage = blockedDamage;
+		this.shieldDamage = blockedDamage;
 		this.blocked = blocked;
 	}
 
@@ -35,12 +36,12 @@ public class LivingShieldBlockEvent extends LivingEvent implements ICancellableE
 		this.blockedDamage = blockedDamage;
 	}
 
-	public boolean shieldTakesDamage() {
-		return this.shieldTakesDamage;
+	public float shieldDamage() {
+		return this.shieldDamage;
 	}
 
-	public void setShieldTakesDamage(boolean shieldTakesDamage) {
-		this.shieldTakesDamage = shieldTakesDamage;
+	public void setShieldDamage(float damage) {
+		this.shieldDamage = damage;
 	}
 
 	public boolean getBlocked() {

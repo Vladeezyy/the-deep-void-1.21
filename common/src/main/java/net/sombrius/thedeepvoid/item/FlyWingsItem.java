@@ -47,7 +47,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public class FlyWingsItem extends ArmorItem implements GeoItem {
+public class FlyWingsItem extends ArmorItem implements GeoItem, net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Item {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	public String animationprocedure = "empty";
 	public static Holder<ArmorMaterial> ARMOR_MATERIAL = null;
@@ -87,7 +87,7 @@ public class FlyWingsItem extends ArmorItem implements GeoItem {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, list, flag);
 	}

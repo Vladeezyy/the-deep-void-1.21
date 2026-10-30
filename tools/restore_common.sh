@@ -7,6 +7,10 @@ base=${1:-main}
 git ls-tree -r --name-only "$base" -- src/main/java | while read -r f; do
     rel=${f#src/main/java/}
     grep -qxF "$rel" tools/manual-files.txt && continue
+    if grep -qxF "drop: $rel" tools/manual-files.txt; then
+        rm -f "common/src/main/java/$rel" "neoforge/src/main/java/$rel"
+        continue
+    fi
     if grep -qxF "neoforge: $rel" tools/manual-files.txt; then
         mkdir -p "neoforge/src/main/java/$(dirname "$rel")"
         git show "$base:$f" > "neoforge/src/main/java/$rel"

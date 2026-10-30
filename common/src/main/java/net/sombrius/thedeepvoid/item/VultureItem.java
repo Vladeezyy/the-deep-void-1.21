@@ -57,7 +57,7 @@ public abstract class VultureItem extends ArmorItem {
 		super(ARMOR_MATERIAL, type, properties);
 	}
 
-	public static class Helmet extends VultureItem {
+	public static class Helmet extends VultureItem implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Item {
 		public Helmet() {
 			super(ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(35)));
 		}
@@ -84,7 +84,7 @@ public abstract class VultureItem extends ArmorItem {
 		}
 	}
 
-	public static class Chestplate extends VultureItem {
+	public static class Chestplate extends VultureItem implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Item {
 		public Chestplate() {
 			super(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(35)));
 		}
@@ -92,7 +92,7 @@ public abstract class VultureItem extends ArmorItem {
 		public IClientItemExtensions clientExtensions() {
 			return new IClientItemExtensions() {
 				@Override
-				@OnlyIn(Dist.CLIENT)
+				@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 				public HumanoidModel getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
 					HumanoidModel armorModel = new HumanoidModel(new ModelPart(Collections.emptyList(), Map.of("body", new Modelvulture_chestplate(Minecraft.getInstance().getEntityModels().bakeLayer(Modelvulture_chestplate.LAYER_LOCATION)).Body,
 							"left_arm", new Modelvulture_chestplate(Minecraft.getInstance().getEntityModels().bakeLayer(Modelvulture_chestplate.LAYER_LOCATION)).LeftArm, "right_arm",

@@ -26,7 +26,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.procedures.BarbedArrowProjectileHitsLivingEntityProcedure;
 import net.sombrius.thedeepvoid.procedures.GoldenRotArrowHitsBlockProcedure;
 
-@OnlyIn(value = Dist.CLIENT, _interface = ItemSupplier.class)
+@net.neoforged.api.distmarker.OnlyIn(value = net.neoforged.api.distmarker.Dist.CLIENT, _interface = ItemSupplier.class) @net.fabricmc.api.EnvironmentInterface(value = net.fabricmc.api.EnvType.CLIENT, itf = ItemSupplier.class)
 public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Items.ARROW);
 
@@ -45,7 +45,7 @@ public class BarbedArrowEntity extends AbstractArrow implements ItemSupplier {
 
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	public ItemStack getItem() {
 		return PROJECTILE_ITEM;
 	}

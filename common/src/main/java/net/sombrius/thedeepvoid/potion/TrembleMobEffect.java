@@ -12,7 +12,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.client.gui.GuiGraphics;
 
-public class TrembleMobEffect extends MobEffect {
+public class TrembleMobEffect extends MobEffect implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Effect {
 	public TrembleMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -1);
 	}

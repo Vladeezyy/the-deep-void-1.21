@@ -1437,7 +1437,7 @@ public class TheDeepVoidModItems {
 	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	public static class ItemsClientSideHandler {
 		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
+		@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 		public static void clientLoad(FMLClientSetupEvent event) {
 			event.enqueueWork(() -> {
 				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), (net.minecraft.client.renderer.item.ClampedItemPropertyFunction) ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));

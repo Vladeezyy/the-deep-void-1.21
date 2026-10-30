@@ -34,7 +34,7 @@ import java.util.function.Consumer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
-public class DoubleBarrelShotgunItem extends Item implements GeoItem {
+public class DoubleBarrelShotgunItem extends Item implements GeoItem, net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Item {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	public String animationprocedure = "empty";
 	public static ItemDisplayContext transformType;

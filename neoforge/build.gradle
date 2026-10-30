@@ -44,7 +44,13 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
+repositories {
+    maven { url = 'https://maven.fabricmc.net' }
+}
+
 dependencies {
+    // Fabric Loader's @Environment in the common code (class-retention annotation)
+    compileOnly "net.fabricmc:fabric-loader:${fabric_loader_version}"
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"

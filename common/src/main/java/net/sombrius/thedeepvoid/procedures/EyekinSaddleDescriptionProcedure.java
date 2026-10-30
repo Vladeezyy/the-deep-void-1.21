@@ -14,7 +14,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 @EventBusSubscriber(value = {Dist.CLIENT})
 public class EyekinSaddleDescriptionProcedure {
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	@SubscribeEvent
 	public static void onItemTooltip(ItemTooltipEvent event) {
 		execute(event, event.getItemStack(), event.getToolTip());

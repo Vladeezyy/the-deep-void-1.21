@@ -29,7 +29,7 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class HeresyItem extends Item implements GeoItem {
+public class HeresyItem extends Item implements GeoItem, net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Item {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	public String animationprocedure = "empty";
 	public static ItemDisplayContext transformType;

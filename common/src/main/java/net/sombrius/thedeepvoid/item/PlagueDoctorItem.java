@@ -58,7 +58,7 @@ public abstract class PlagueDoctorItem extends ArmorItem {
 		super(ARMOR_MATERIAL, type, properties);
 	}
 
-	public static class Helmet extends PlagueDoctorItem {
+	public static class Helmet extends PlagueDoctorItem implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Item {
 		public Helmet() {
 			super(ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(33)).fireResistant());
 		}

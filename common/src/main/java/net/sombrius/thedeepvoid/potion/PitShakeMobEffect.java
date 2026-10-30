@@ -10,7 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.sombrius.thedeepvoid.port.neo.IClientMobEffectExtensions;
 import net.sombrius.thedeepvoid.procedures.PitShakeOnEffectActiveTickProcedure;
 
-public class PitShakeMobEffect extends MobEffect {
+public class PitShakeMobEffect extends MobEffect implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Effect {
 	public PitShakeMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -1);
 	}

@@ -33,7 +33,7 @@ import java.util.List;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class ModifiedWeaponDescriptionsProcedure {
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	@SubscribeEvent
 	public static void onItemTooltip(ItemTooltipEvent event) {
 		execute(event, event.getEntity(), event.getItemStack(), event.getToolTip());

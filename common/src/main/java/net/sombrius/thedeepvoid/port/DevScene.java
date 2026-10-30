@@ -33,6 +33,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.Minecraft;
@@ -199,6 +200,13 @@ public final class DevScene {
 		if (!ENABLED)
 			return;
 		Minecraft mc = Minecraft.getInstance();
+		// a fresh run folder opens the accessibility onboarding first
+		if (mc.screen instanceof AccessibilityOnboardingScreen) {
+			mc.options.onboardAccessibility = false;
+			mc.options.save();
+			mc.setScreen(new TitleScreen());
+			return;
+		}
 		if (!opened && mc.screen instanceof TitleScreen) {
 			opened = true;
 			if (mc.getLevelSource().levelExists(WORLD)) {

@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.sombrius.thedeepvoid.port.neo.IClientMobEffectExtensions;
 
-public class LurkerHeadNearMobEffect extends MobEffect {
+public class LurkerHeadNearMobEffect extends MobEffect implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Effect {
 	public LurkerHeadNearMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -13685208);
 	}

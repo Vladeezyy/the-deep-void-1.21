@@ -36,7 +36,7 @@ repositories {
     maven {
         name = 'JEI'
         url = 'https://maven.blamejared.com/'
-        content { includeGroup('mezz.jei') }
+        content { includeGroupByRegex('mezz\\.jei.*|net\\.mezzdev.*') }
     }
 }
 

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.sombrius.thedeepvoid.port.neo.IClientMobEffectExtensions;
 import net.sombrius.thedeepvoid.procedures.DistractedOnEffectActiveTickProcedure;
 
-public class DistractedMobEffect extends MobEffect {
+public class DistractedMobEffect extends MobEffect implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Effect {
 	public DistractedMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -11852011);
 	}

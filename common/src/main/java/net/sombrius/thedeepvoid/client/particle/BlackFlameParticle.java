@@ -11,7 +11,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.sombrius.thedeepvoid.port.bus.Dist;
 import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 public class BlackFlameParticle extends TextureSheetParticle {
 	public static BlackFlameParticleProvider provider(SpriteSet spriteSet) {
 		return new BlackFlameParticleProvider(spriteSet);

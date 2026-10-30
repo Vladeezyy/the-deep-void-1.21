@@ -97,7 +97,7 @@ public class LightBlueCandelabraBlock extends Block implements SimpleWaterlogged
 		return super.updateShape(state, facing, facingState, world, currentPos, facingPos);
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 	@Override
 	public void animateTick(BlockState blockstate, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(blockstate, world, pos, random);

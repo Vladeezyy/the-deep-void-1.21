@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.sombrius.thedeepvoid.port.neo.IClientMobEffectExtensions;
 
-public class PowerfulShotMobEffect extends MobEffect {
+public class PowerfulShotMobEffect extends MobEffect implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Effect {
 	public PowerfulShotMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -5148928);
 	}

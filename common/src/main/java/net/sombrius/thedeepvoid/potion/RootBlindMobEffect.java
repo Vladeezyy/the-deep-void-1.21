@@ -15,7 +15,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.sombrius.thedeepvoid.port.neo.IClientMobEffectExtensions;
 import net.sombrius.thedeepvoid.procedures.RootBlindOnEffectActiveTickProcedure;
 
-public class RootBlindMobEffect extends MobEffect implements PortUtil.EffectRemovedListener {
+public class RootBlindMobEffect extends MobEffect implements PortUtil.EffectRemovedListener, net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Effect {
 	public RootBlindMobEffect() {
 		super(MobEffectCategory.HARMFUL, -13290701);
 	}

@@ -1,6 +1,6 @@
 # The Deep Void — port log
 
-Port of **The Deep Void v1.99.3.1** (Sombrius / TroupeMaster, MIT, made with MCreator) to NeoForge.
+Port of **The Deep Void v1.99.3.1** (Sombrius / TroupeMaster, MIT, made with MCreator) to NeoForge and Fabric.
 Targets: Minecraft 1.21.1 first, then every 26.x release (26.1.x, 26.2, 26.3).
 
 ## Sources
@@ -125,6 +125,45 @@ and after runs were alternated twice (`tools/bench_table.py`). Apple M4, JDK 21,
     for an empty slot, holders cached per registry.
   - `EntityAnimationFactory` ran ~110 `instanceof` on every entity of the world every tick → only the mod's classes.
 - Left as in 1.20.1: what the remaining ~25 handlers cost (each a few µs of attribute, item and variable checks).
+
+## NeoForge + Fabric (1.21.1, 2026-10-30)
+
+`common` (the MCreator code, compiled against vanilla through NeoForm), `neoforge`, `fabric`; the build logic is in
+`buildSrc` (MultiLoader layout). The split is repeatable from the NeoForge-only sources:
+`tools/restore_common.sh` (the originals of `main`, minus the hand-ported files of `tools/manual-files.txt`) and then
+`tools/port_multiloader.py` (idempotent).
+
+- **Events**: NeoForge's event classes with NeoForge's names and methods in `port/bus`; the script points the imports
+  there and generates `EventIndex` / `ClientEventIndex` from the `@SubscribeEvent` methods (a method or nested class with
+  `Dist.CLIENT` is a client listener). NeoForge forwards its events (`TheDeepVoidNeoForge`, `...Client`); Fabric posts
+  Fabric API events and mixins at the place NeoForge fires each event (`fabric/mixin`: damage after the invulnerability
+  checks, death in `die`, fall, heal, effect removal / expiry, item use start / stop / finish, experience drop, mob
+  target, dimension travel, block placement, XP change, entity tick, brewing).
+- **NeoForge API** the code uses outside events, with NeoForge's names in `port/neo`: item handlers (`IItemHandler`,
+  `ItemStackHandler`, `SlotItemHandler`, `InvWrapper`, `SidedInvWrapper`, `ComponentItemHandler`; `PortCaps` answers
+  `getCapability(Capabilities.ItemHandler.*)`, NeoForge also registers them as real capabilities), `ModConfigSpec`
+  (the same `config/Deep Void Config.toml` on both loaders), `IBrewingRecipe`, `DeferredSoundType`, `BaseFlowingFluid`,
+  payloads (`IPayloadContext`, `PacketDistributor` → `Platform`), client item / effect extensions.
+- **NeoForge-only overrides** (no `@Override` in common, NeoForge calls them): `onDestroyedByPlayer` and `onEntitySwing`
+  (Fabric: mixins through `PortBlockHooks` / `PortItemHooks`), sky / clouds / weather of the dimension effects (Fabric:
+  `LevelRenderer` mixin), `getFlammability` (Fabric: `FlammableBlockRegistry`), `canSustainPlant` (Fabric: the soils are
+  in `minecraft:dirt`), `getEnchantPowerBonus` (Fabric: the ancient bookshelf is an enchantment power provider, worth 1
+  as every bookshelf instead of 3). Without a Fabric counterpart: `canConnectRedstone`, `getBeaconColorMultiplier`,
+  `getBlockPathType`, `canDrownInFluidType`, the stack-aware `getCraftingRemainingItem`.
+- `@OnlyIn(Dist.CLIENT)` stays NeoForge's annotation and gets Fabric's `@Environment(EnvType.CLIENT)` next to it: both
+  loaders strip those members on a dedicated server (MCreator code in them uses client classes). NeoForge types of
+  NeoForge-only overrides (`TriState`, `FluidType`) are stubs in `common/src/stubs`; the Fabric jar ships them (the JVM
+  resolves them when it verifies those methods).
+- **Fabric data**: player variables and NeoForge's persistent data are data attachments (same ids); the NeoForge biome
+  modifiers are read from the jar (`FabricBiomeModifiers`); NeoForge's `neoforge:poison` damage type and its tags ship
+  with the Fabric jar.
+- Fabric arm poses: no enum extension, so the guns use vanilla's ITEM pose and their transformer runs after
+  `HumanoidModel.setupAnim`; GeckoLib wings go through GeckoLib's armor path (`prepForRender` with the buffer source).
+- Tick handler cost after the split (bench scene, µs per player tick, server / client): NeoForge 101–107 / 56–57 in the
+  overworld, 188–200 / 83–130 in the Deep Void, 119–161 / 61–77 with the stalkers; Fabric 55–60 / 76–79, 137 / 102,
+  45–73 / 54–72 (the Fabric mixins post straight on the mod's bus). Sync packets 0–20 per second on both.
+- Checked: dev server (both), production server (NeoForge 21.1.259 with the jar, Fabric `prodServer`), the dev scene
+  (biomes, mobs) and the items scene (guns, armor models, wings) with matching screenshots on both loaders.
 
 ## Known, unchanged from 1.20.1
 

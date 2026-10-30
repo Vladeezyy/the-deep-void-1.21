@@ -9,6 +9,7 @@ python3 -I tools/port_1_21_11.py
 python3 -I tools/port_dv_1_21_11.py
 python3 -I tools/port_geckolib5.py
 python3 -I tools/port_dv_geckolib5.py
+python3 -I tools/port_dv_render_1_21_11.py
 src=build/mc-sources-1.21.11
 if [ ! -d "$src" ]; then
     jar=$(ls common/build/moddev/artifacts/vanilla-1.21.11-*-sources.jar | head -1)

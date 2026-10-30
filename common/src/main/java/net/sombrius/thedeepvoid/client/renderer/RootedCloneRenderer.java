@@ -1,35 +1,34 @@
-
 package net.sombrius.thedeepvoid.client.renderer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.sombrius.thedeepvoid.entity.RootedCloneEntity;
-import net.sombrius.thedeepvoid.entity.layer.RootedCloneLayer;
-import net.sombrius.thedeepvoid.entity.model.RootedCloneModel;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.base.RenderPassInfo;
+import software.bernie.geckolib.renderer.base.BoneSnapshots;
+import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import net.minecraft.resources.Identifier;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
-public class RootedCloneRenderer extends GeoEntityRenderer<RootedCloneEntity> {
+import net.sombrius.thedeepvoid.entity.model.RootedCloneModel;
+import net.sombrius.thedeepvoid.entity.layer.RootedCloneLayer;
+import net.sombrius.thedeepvoid.entity.RootedCloneEntity;
+
+public class RootedCloneRenderer<R extends LivingEntityRenderState & GeoRenderState> extends GeoEntityRenderer<RootedCloneEntity, R> {
 	public RootedCloneRenderer(EntityRendererProvider.Context renderManager) {
 		super(renderManager, new RootedCloneModel());
 		this.shadowRadius = 0f;
-		this.addRenderLayer(new RootedCloneLayer(this));
+		withRenderLayer(new RootedCloneLayer<>(this));
 	}
 
 	@Override
-	public RenderType getRenderType(RootedCloneEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
-		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	public RenderType getRenderType(R renderState, Identifier texture) {
+		return RenderTypes.entityTranslucent(texture);
 	}
 
 	@Override
-	public void preRender(PoseStack poseStack, RootedCloneEntity entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
-		float scale = 1f;
-		this.scaleHeight = scale;
-		this.scaleWidth = scale;
-		super.preRender(poseStack, entity, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, color);
+	public void adjustModelBonesForRender(RenderPassInfo<R> renderPassInfo, BoneSnapshots snapshots) {
+		DefaultAnimations.hardcodedHeadRotation(renderPassInfo, snapshots, "head");
 	}
 }

@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.advancements.AdvancementHolder;
@@ -9,7 +10,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -40,9 +41,9 @@ public class FalseHydraDiesProcedure {
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_scream")), SoundSource.HOSTILE, 3, (float) 0.8);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_scream")), SoundSource.HOSTILE, 3, (float) 0.8);
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_scream")), SoundSource.HOSTILE, 3, (float) 0.8, false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_scream")), SoundSource.HOSTILE, 3, (float) 0.8, false);
 				}
 			}
 			TheDeepVoidMod.queueServerWork(60, () -> {
@@ -57,9 +58,9 @@ public class FalseHydraDiesProcedure {
 								ItemHandlerHelper.giveItemToPlayer(_player, _setstack);
 							}
 							if (!(entityiterator instanceof ServerPlayer _plr6 && _plr6.level() instanceof ServerLevel
-									&& _plr6.getAdvancements().getOrStartProgress(_plr6.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:copycat"))).isDone())) {
+									&& _plr6.getAdvancements().getOrStartProgress(_plr6.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:copycat"))).isDone())) {
 								if (entityiterator instanceof ServerPlayer _player) {
-									AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:copycat"));
+									AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:copycat"));
 									if (_adv != null) {
 										AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 										if (!_ap.isDone()) {
@@ -82,11 +83,11 @@ public class FalseHydraDiesProcedure {
 				}
 			});
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"stopsound @a record the_deep_void:slaughter");
 			TheDeepVoidMod.queueServerWork(20, () -> {
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"stopsound @a record the_deep_void:slaughter");
 			});
 		}

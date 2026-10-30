@@ -2,14 +2,14 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.sombrius.thedeepvoid.entity.WeaverOfSoulsBossEntity;
@@ -27,11 +27,11 @@ public class WeaverSpawnHandWallProcedure {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
 							_level.playSound(null,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.sculk_shrieker.shriek")), SoundSource.HOSTILE, 4, (float) 0.8);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.sculk_shrieker.shriek")), SoundSource.HOSTILE, 4, (float) 0.8);
 						} else {
-							_level.playLocalSound((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.sculk_shrieker.shriek")), SoundSource.HOSTILE, 4, (float) 0.8, false);
+							_level.playLocalSound((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.sculk_shrieker.shriek")), SoundSource.HOSTILE, 4, (float) 0.8, false);
 						}
 					}
 					if (entity instanceof WeaverOfSoulsBossEntity _datEntSetI)
@@ -39,88 +39,88 @@ public class WeaverSpawnHandWallProcedure {
 					if ((entity instanceof WeaverOfSoulsBossEntity _datEntI ? _datEntI.getEntityData().get(WeaverOfSoulsBossEntity.DATA_randomNumber) : 0) == 1) {
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 2, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 2, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 4, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 4, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 6, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 6, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 8, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 8, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 10, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 10, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 12, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 12, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 14, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 14, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 16, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 16, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 18, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 18, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") + 20, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) + 20, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
@@ -129,88 +129,88 @@ public class WeaverSpawnHandWallProcedure {
 					if ((entity instanceof WeaverOfSoulsBossEntity _datEntI ? _datEntI.getEntityData().get(WeaverOfSoulsBossEntity.DATA_randomNumber) : 0) == 2) {
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 2, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 2, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 4, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 4, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 6, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 6, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 8, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 8, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 10, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 10, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 12, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 12, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 14, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 14, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 16, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 16, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 18, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 18, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX") - 20, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0) - 20, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
@@ -219,88 +219,88 @@ public class WeaverSpawnHandWallProcedure {
 					if ((entity instanceof WeaverOfSoulsBossEntity _datEntI ? _datEntI.getEntityData().get(WeaverOfSoulsBossEntity.DATA_randomNumber) : 0) == 3) {
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 2),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 2),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 4),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 4),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 6),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 6),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 8),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 8),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 10),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 10),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 12),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 12),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 14),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 14),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 16),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 16),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 18),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 18),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") + 20),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) + 20),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
@@ -309,88 +309,88 @@ public class WeaverSpawnHandWallProcedure {
 					if ((entity instanceof WeaverOfSoulsBossEntity _datEntI ? _datEntI.getEntityData().get(WeaverOfSoulsBossEntity.DATA_randomNumber) : 0) == 4) {
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ")),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0)),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 2),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 2),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 4),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 4),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 6),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 6),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 8),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 8),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 10),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 10),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 12),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 12),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 14),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 14),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 16),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 16),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 18),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 18),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
 						}
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.SHADOW_HAND.get().spawn(_level,
-									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:startingZ") - 20),
-									MobSpawnType.MOB_SUMMONED);
+									BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:startingZ", 0) - 20),
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}

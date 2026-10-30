@@ -34,7 +34,7 @@ public class WeaverOfSoulsAttacksPlayerProcedure {
 		if (entity instanceof Player && sourceentity instanceof WeaverOfSoulsBossEntity) {
 			if ((entity instanceof LivingEntity _entUseItem2 ? _entUseItem2.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown((entity instanceof LivingEntity _entUseItem4 ? _entUseItem4.getUseItem() : ItemStack.EMPTY).getItem(), 160);
+					_player.getCooldowns().addCooldown((entity instanceof LivingEntity _entUseItem4 ? _entUseItem4.getUseItem() : ItemStack.EMPTY), 160);
 				{
 					ItemStack _ist = (entity instanceof LivingEntity _entUseItem8 ? _entUseItem8.getUseItem() : ItemStack.EMPTY);
 					PortUtil.hurtAndBreak(_ist, (int) Math.ceil(((entity instanceof LivingEntity _entUseItem6 ? _entUseItem6.getUseItem() : ItemStack.EMPTY).getMaxDamage() * 25) / 100), null);

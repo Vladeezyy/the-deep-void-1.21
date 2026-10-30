@@ -3,12 +3,12 @@ package net.sombrius.thedeepvoid.procedures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
@@ -24,9 +24,9 @@ public class HugeEyeVineTickProcedure {
 				world.setBlock(BlockPos.containing(x, y - 1, z), TheDeepVoidModBlocks.HUGE_EYE_VINE_STEM.get().defaultBlockState(), 3);
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.grow")), SoundSource.BLOCKS, 1, 1);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.grow")), SoundSource.BLOCKS, 1, 1);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.grow")), SoundSource.BLOCKS, 1, 1, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.grow")), SoundSource.BLOCKS, 1, 1, false);
 					}
 				}
 			} else {
@@ -38,7 +38,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -52,7 +52,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -66,7 +66,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -80,7 +80,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -94,7 +94,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -105,9 +105,9 @@ public class HugeEyeVineTickProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else if (Math.random() < 0.16) {
@@ -118,7 +118,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -132,7 +132,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -146,7 +146,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -160,7 +160,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -174,7 +174,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -185,9 +185,9 @@ public class HugeEyeVineTickProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else if (Math.random() < 0.16) {
@@ -198,7 +198,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -212,7 +212,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -226,7 +226,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -240,7 +240,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -254,7 +254,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -265,9 +265,9 @@ public class HugeEyeVineTickProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else if (Math.random() < 0.16) {
@@ -278,7 +278,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -292,7 +292,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -306,7 +306,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -320,7 +320,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -334,7 +334,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -345,9 +345,9 @@ public class HugeEyeVineTickProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else if (Math.random() < 0.16) {
@@ -358,7 +358,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -372,7 +372,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -386,7 +386,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -400,7 +400,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -414,7 +414,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -425,9 +425,9 @@ public class HugeEyeVineTickProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else {
@@ -438,7 +438,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -452,7 +452,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -466,7 +466,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -480,7 +480,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -494,7 +494,7 @@ public class HugeEyeVineTickProcedure {
 							BlockPos _pos = BlockPos.containing(x, y - 1, z);
 							BlockState _bs = world.getBlockState(_pos);
 							Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-							if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+							if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 								world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 							} else {
 								_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -505,9 +505,9 @@ public class HugeEyeVineTickProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				}

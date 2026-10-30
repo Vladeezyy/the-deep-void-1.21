@@ -15,11 +15,11 @@ import net.sombrius.thedeepvoid.procedures.CinnabarCrateBlockDestroyedByPlayerPr
 
 public class CinnabarCrateBlock extends Block implements net.sombrius.thedeepvoid.port.PortBlockHooks.DestroyedByPlayer {
 	public CinnabarCrateBlock() {
-		super(BlockBehaviour.Properties.of().ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.BONE_BLOCK).strength(0.2f, 16f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.BONE_BLOCK).strength(0.2f, 16f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

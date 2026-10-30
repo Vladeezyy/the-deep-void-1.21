@@ -9,14 +9,14 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModJeiPlugin;
 
 public class TreasureBagJeiTypeRecipeCategory implements IRecipeCategory<TreasureBagJeiTypeRecipe> {
-	public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath("the_deep_void", "treasure_bag_jei_type");
-	public final static ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/screens/treasure_bag_jei.png");
+	public final static Identifier UID = Identifier.fromNamespaceAndPath("the_deep_void", "treasure_bag_jei_type");
+	public final static Identifier TEXTURE = Identifier.fromNamespaceAndPath("the_deep_void", "textures/screens/treasure_bag_jei.png");
 	private final IDrawable background;
 	private final IDrawable icon;
 
@@ -26,7 +26,7 @@ public class TreasureBagJeiTypeRecipeCategory implements IRecipeCategory<Treasur
 	}
 
 	@Override
-	public mezz.jei.api.recipe.RecipeType<TreasureBagJeiTypeRecipe> getRecipeType() {
+	public mezz.jei.api.recipe.types.IRecipeType<TreasureBagJeiTypeRecipe> getRecipeType() {
 		return TheDeepVoidModJeiPlugin.TreasureBagJeiType_Type;
 	}
 
@@ -36,8 +36,18 @@ public class TreasureBagJeiTypeRecipeCategory implements IRecipeCategory<Treasur
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return this.background;
+	public int getWidth() {
+		return this.background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return this.background.getHeight();
+	}
+
+	@Override
+	public void draw(TreasureBagJeiTypeRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		this.background.draw(guiGraphics);
 	}
 
 	@Override

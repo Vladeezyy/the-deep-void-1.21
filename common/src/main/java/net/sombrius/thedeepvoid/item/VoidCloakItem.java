@@ -1,15 +1,18 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import java.util.Map;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.ArmorMaterial;
 import java.util.EnumMap;
 import java.util.List;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -19,33 +22,19 @@ import net.sombrius.thedeepvoid.port.platform.RegistryEntry;
 import net.sombrius.thedeepvoid.port.bus.RegisterEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public abstract class VoidCloakItem extends ArmorItem {
-	public static Holder<ArmorMaterial> ARMOR_MATERIAL = null;
+@EventBusSubscriber
+public abstract class VoidCloakItem extends Item {
+	public static final ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial(25, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 2, ArmorType.HELMET, 0, ArmorType.BODY, 2), 15, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(Identifier.parse("item.armor.equip_leather"))), 0.4f, 0f, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/refined_onyx")),
+			ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath("the_deep_void", "void_cloak")));
 
-	@SubscribeEvent
-	public static void registerArmorMaterial(RegisterEvent event) {
-		event.register(Registries.ARMOR_MATERIAL, registerHelper -> {
-			ArmorMaterial armorMaterial = new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-				map.put(ArmorItem.Type.BOOTS, 0);
-				map.put(ArmorItem.Type.LEGGINGS, 0);
-				map.put(ArmorItem.Type.CHESTPLATE, 2);
-				map.put(ArmorItem.Type.HELMET, 0);
-				map.put(ArmorItem.Type.BODY, 2);
-			}), 15, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(ResourceLocation.parse("item.armor.equip_leather"))), () -> Ingredient.of(new ItemStack(TheDeepVoidModItems.REFINED_ONYX.get())),
-					List.of(new ArmorMaterial.Layer(ResourceLocation.parse("the_deep_void:void_cloak_"))), 0.4f, 0f);
-			registerHelper.register(ResourceLocation.parse("the_deep_void:void_cloak"), armorMaterial);
-			ARMOR_MATERIAL = BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(armorMaterial);
-		});
-	}
 
-	public VoidCloakItem(ArmorItem.Type type, Item.Properties properties) {
-		super(ARMOR_MATERIAL, type, properties);
+	public VoidCloakItem(ArmorType type, Item.Properties properties) {
+		super(properties.humanoidArmor(ARMOR_MATERIAL, type));
 	}
 
 	public static class Chestplate extends VoidCloakItem {
 		public Chestplate() {
-			super(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(25)));
+			super(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
 		}
 	}
 }

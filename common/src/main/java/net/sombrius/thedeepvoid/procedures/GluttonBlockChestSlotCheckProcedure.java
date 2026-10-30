@@ -49,7 +49,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 						public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 							BlockEntity blockEntity = world.getBlockEntity(pos);
 							if (blockEntity != null)
-								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 							return -1;
 						}
 					}.getValue(world, BlockPos.containing(x, y, z), "slot"))) != 0 && !((new Object() {
@@ -65,14 +65,14 @@ public class GluttonBlockChestSlotCheckProcedure {
 						public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 							BlockEntity blockEntity = world.getBlockEntity(pos);
 							if (blockEntity != null)
-								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 							return -1;
 						}
 					}.getValue(world, BlockPos.containing(x, y, z), "slot")))).getItem() == (entityiterator instanceof ItemEntity _itemEnt ? _itemEnt.getItem() : ItemStack.EMPTY).getItem()) && new Object() {
 						public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 							BlockEntity blockEntity = world.getBlockEntity(pos);
 							if (blockEntity != null)
-								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 							return -1;
 						}
 					}.getValue(world, BlockPos.containing(x, y, z), "slot") < (new Object() {
@@ -106,7 +106,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 									public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 										BlockEntity blockEntity = world.getBlockEntity(pos);
 										if (blockEntity != null)
-											return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+											return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 										return -1;
 									}
 								}.getValue(world, BlockPos.containing(x, y, z), "slot") + 1));
@@ -127,7 +127,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 						public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 							BlockEntity blockEntity = world.getBlockEntity(pos);
 							if (blockEntity != null)
-								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 							return -1;
 						}
 					}.getValue(world, BlockPos.containing(x, y, z), "slot"))) + (entityiterator instanceof ItemEntity _itemEnt ? _itemEnt.getItem() : ItemStack.EMPTY).getCount() > 64) {
@@ -135,7 +135,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 							public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 								BlockEntity blockEntity = world.getBlockEntity(pos);
 								if (blockEntity != null)
-									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 								return -1;
 							}
 						}.getValue(world, BlockPos.containing(x, y, z), "slot") + 1 < (new Object() {
@@ -169,7 +169,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 										public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 											BlockEntity blockEntity = world.getBlockEntity(pos);
 											if (blockEntity != null)
-												return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+												return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 											return -1;
 										}
 									}.getValue(world, BlockPos.containing(x, y, z), "slot") + 1));
@@ -190,7 +190,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 							public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 								BlockEntity blockEntity = world.getBlockEntity(pos);
 								if (blockEntity != null)
-									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 								return -1;
 							}
 						}.getValue(world, BlockPos.containing(x, y, z), "slot"))) != 0 && !((new Object() {
@@ -206,14 +206,14 @@ public class GluttonBlockChestSlotCheckProcedure {
 							public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 								BlockEntity blockEntity = world.getBlockEntity(pos);
 								if (blockEntity != null)
-									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 								return -1;
 							}
 						}.getValue(world, BlockPos.containing(x, y, z), "slot")))).getItem() == (entityiterator instanceof ItemEntity _itemEnt ? _itemEnt.getItem() : ItemStack.EMPTY).getItem()) && new Object() {
 							public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 								BlockEntity blockEntity = world.getBlockEntity(pos);
 								if (blockEntity != null)
-									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 								return -1;
 							}
 						}.getValue(world, BlockPos.containing(x, y, z), "slot") < (new Object() {
@@ -247,7 +247,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 										public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 											BlockEntity blockEntity = world.getBlockEntity(pos);
 											if (blockEntity != null)
-												return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+												return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 											return -1;
 										}
 									}.getValue(world, BlockPos.containing(x, y, z), "slot") + 1));
@@ -260,7 +260,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 						public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 							BlockEntity blockEntity = world.getBlockEntity(pos);
 							if (blockEntity != null)
-								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 							return -1;
 						}
 					}.getValue(world, BlockPos.containing(x, y, z), "slot") < (new Object() {
@@ -300,7 +300,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 								public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 									BlockEntity blockEntity = world.getBlockEntity(pos);
 									if (blockEntity != null)
-										return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+										return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 									return -1;
 								}
 							}.getValue(world, BlockPos.containing(x, y, z), "slot"))) + (entityiterator instanceof ItemEntity _itemEnt ? _itemEnt.getItem() : ItemStack.EMPTY).getCount()));
@@ -308,7 +308,7 @@ public class GluttonBlockChestSlotCheckProcedure {
 								public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 									BlockEntity blockEntity = world.getBlockEntity(pos);
 									if (blockEntity != null)
-										return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+										return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 									return -1;
 								}
 							}.getValue(world, BlockPos.containing(x, y, z), "slot")), _setstack);

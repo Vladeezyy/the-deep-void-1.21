@@ -29,7 +29,7 @@ public class SulfurFlareShotTickProcedure {
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));
+							_entity.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 100, 0));
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 							_entity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
 					}

@@ -1,22 +1,23 @@
 package net.sombrius.thedeepvoid.item.model;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.sombrius.thedeepvoid.item.ApostasyItem;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 public class ApostasyItemModel extends GeoModel<ApostasyItem> {
 	@Override
-	public ResourceLocation getAnimationResource(ApostasyItem animatable) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "animations/apostasyarms.animation.json");
+	public Identifier getAnimationResource(ApostasyItem animatable) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/apostasyarms.animation.json");
 	}
 
 	@Override
-	public ResourceLocation getModelResource(ApostasyItem animatable) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "geo/apostasyarms.geo.json");
+	public Identifier getModelResource(GeoRenderState renderState) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/apostasyarms.geo.json");
 	}
 
 	@Override
-	public ResourceLocation getTextureResource(ApostasyItem animatable) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/item/apostasynew.png");
+	public Identifier getTextureResource(GeoRenderState renderState) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "textures/item/apostasynew.png");
 	}
 }

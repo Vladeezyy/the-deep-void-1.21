@@ -15,11 +15,11 @@ import net.sombrius.thedeepvoid.procedures.BlockOfBonePileEntityWalksOnTheBlockP
 
 public class BlockOfRottenBonePileBlock extends Block {
 	public BlockOfRottenBonePileBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_GRAY).sound(SoundType.BONE_BLOCK).strength(0.8f, 8f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_GRAY).sound(SoundType.BONE_BLOCK).strength(0.8f, 8f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

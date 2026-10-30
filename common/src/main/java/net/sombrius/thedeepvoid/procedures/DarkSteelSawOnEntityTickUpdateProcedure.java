@@ -8,7 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
@@ -49,7 +49,7 @@ public class DarkSteelSawOnEntityTickUpdateProcedure {
 				}
 			}.getDirection(BlockPos.containing(x, y - 1, z))) == Direction.NORTH) {
 				entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(x, y, (-2)));
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("fast") == true) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("fast", false) == true) {
 					entity.setDeltaMovement(new Vec3(0, 0, (-0.65)));
 				} else {
 					TheDeepVoidMod.queueServerWork(1, () -> {
@@ -70,7 +70,7 @@ public class DarkSteelSawOnEntityTickUpdateProcedure {
 				}
 			}.getDirection(BlockPos.containing(x, y - 1, z))) == Direction.SOUTH) {
 				entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(x, y, 2));
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("fast") == true) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("fast", false) == true) {
 					entity.setDeltaMovement(new Vec3(0, 0, 0.65));
 				} else {
 					TheDeepVoidMod.queueServerWork(1, () -> {
@@ -91,7 +91,7 @@ public class DarkSteelSawOnEntityTickUpdateProcedure {
 				}
 			}.getDirection(BlockPos.containing(x, y - 1, z))) == Direction.WEST) {
 				entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((-2), y, z));
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("fast") == true) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("fast", false) == true) {
 					entity.setDeltaMovement(new Vec3((-0.65), 0, 0));
 				} else {
 					TheDeepVoidMod.queueServerWork(1, () -> {
@@ -112,7 +112,7 @@ public class DarkSteelSawOnEntityTickUpdateProcedure {
 				}
 			}.getDirection(BlockPos.containing(x, y - 1, z))) == Direction.EAST) {
 				entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(2, y, z));
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("fast") == true) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("fast", false) == true) {
 					entity.setDeltaMovement(new Vec3(0.65, 0, 0));
 				} else {
 					TheDeepVoidMod.queueServerWork(1, () -> {
@@ -133,14 +133,14 @@ public class DarkSteelSawOnEntityTickUpdateProcedure {
 			List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(2 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 			for (Entity entityiterator : _entfound) {
 				if (entityiterator instanceof LivingEntity && !(entityiterator instanceof DarkSteelSawEntity) && !(entityiterator == entity)) {
-					entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC)),
-							(float) (entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:trap_vulnerable"))) ? 11 : 6));
+					entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)),
+							(float) (entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 11 : 6));
 					if (Math.random() < 0.4) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_use")), SoundSource.HOSTILE, (float) 0.4, (float) 1.4);
+								_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_use")), SoundSource.HOSTILE, (float) 0.4, (float) 1.4);
 							} else {
-								_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_use")), SoundSource.HOSTILE, (float) 0.4, (float) 1.4, false);
+								_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_use")), SoundSource.HOSTILE, (float) 0.4, (float) 1.4, false);
 							}
 						}
 					}
@@ -174,9 +174,9 @@ public class DarkSteelSawOnEntityTickUpdateProcedure {
 		if (Math.random() < 0.1) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_use")), SoundSource.HOSTILE, (float) 0.4, (float) 0.8);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_use")), SoundSource.HOSTILE, (float) 0.4, (float) 0.8);
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_use")), SoundSource.HOSTILE, (float) 0.4, (float) 0.8, false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_use")), SoundSource.HOSTILE, (float) 0.4, (float) 0.8, false);
 				}
 			}
 		}

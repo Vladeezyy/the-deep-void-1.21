@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.procedures.PlagueOnEffectActiveTickProcedure;
 import net.sombrius.thedeepvoid.procedures.PlagueActiveTickConditionProcedure;
 
@@ -14,9 +15,9 @@ public class PlagueMobEffect extends MobEffect {
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier) {
 		PlagueOnEffectActiveTickProcedure.execute(entity.level(), entity, amplifier);
-		return super.applyEffectTick(entity, amplifier);
+		return super.applyEffectTick(level, entity, amplifier);
 	}
 
 	@Override

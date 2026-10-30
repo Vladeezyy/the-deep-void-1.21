@@ -54,7 +54,7 @@ public class SulfurTntEntityOnEntityTickUpdateProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof LivingEntity && !(entityiterator instanceof SulfurTntEntityEntity)) {
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 260, 1));
+								_entity.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 260, 1));
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 								_entity.addEffect(new MobEffectInstance(MobEffects.POISON, 260, 1));
 						}

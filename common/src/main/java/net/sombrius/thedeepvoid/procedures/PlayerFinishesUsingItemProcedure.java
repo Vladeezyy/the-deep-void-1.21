@@ -4,7 +4,7 @@ import net.sombrius.thedeepvoid.port.PortUtil;
 
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
@@ -12,7 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
@@ -45,7 +45,7 @@ public class PlayerFinishesUsingItemProcedure {
 	private static void execute(@Nullable Event event, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if ((itemstack.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("minecraft:enchantable/bow"))) || itemstack.getItem() instanceof BowItem || itemstack.getItem() instanceof CrossbowItem)
+		if ((itemstack.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.parse("minecraft:enchantable/bow"))) || itemstack.getItem() instanceof BowItem || itemstack.getItem() instanceof CrossbowItem)
 				&& ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ARROW_OF_SPITE.get()
 						|| (entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ARROW_OF_SPITE.get())) {
 			if (!(new Object() {
@@ -53,8 +53,8 @@ public class PlayerFinishesUsingItemProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
@@ -86,7 +86,7 @@ public class PlayerFinishesUsingItemProcedure {
 					}
 				}
 			}
-		} else if ((itemstack.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("minecraft:enchantable/bow"))) || itemstack.getItem() instanceof BowItem || itemstack.getItem() instanceof CrossbowItem)
+		} else if ((itemstack.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.parse("minecraft:enchantable/bow"))) || itemstack.getItem() instanceof BowItem || itemstack.getItem() instanceof CrossbowItem)
 				&& ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ARROW_OF_ICHOR_PELLETS.get()
 						|| (entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ARROW_OF_ICHOR_PELLETS.get())) {
 			if (!(new Object() {
@@ -94,8 +94,8 @@ public class PlayerFinishesUsingItemProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}

@@ -7,15 +7,15 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
@@ -33,8 +33,8 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class SpawnUndertakerInDeepVoidProcedure {
-	private static final TagKey<Biome> BIOME_TAG_UNDERTAKER_CANNOT_SPAWN = TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:undertaker_cannot_spawn"));
-	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+	private static final TagKey<Biome> BIOME_TAG_UNDERTAKER_CANNOT_SPAWN = TagKey.create(Registries.BIOME, Identifier.parse("the_deep_void:undertaker_cannot_spawn"));
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -53,10 +53,10 @@ public class SpawnUndertakerInDeepVoidProcedure {
 		double rndY = 0;
 		double rndZ = 0;
 		if (DeepVoidConfigConfiguration.SPAWNUNDERTAKER.get() == true) {
-			if (TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn > 0 && world.getLevelData().getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) == true) {
+			if (TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn > 0 && net.sombrius.thedeepvoid.port.PortUtil.rule(world, net.minecraft.world.level.gamerules.GameRules.SPAWN_MOBS) == true) {
 				TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn = TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn - 1 / (world.players().size() <= 0 ? 1 : world.players().size());
 				TheDeepVoidModVariables.MapVariables.get(world).setDirty(); // only the server reads it: saved, not sent every tick
-			} else if (TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn <= 0 && world.getLevelData().getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) == true
+			} else if (TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn <= 0 && net.sombrius.thedeepvoid.port.PortUtil.rule(world, net.minecraft.world.level.gamerules.GameRules.SPAWN_MOBS) == true
 					&& !(entity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(TheDeepVoidModMobEffects.WEAVER_CURSE.holder())) && !(entity instanceof LivingEntity _livEnt6 && _livEnt6.hasEffect(TheDeepVoidModMobEffects.CALL_OF_THE_VOID.holder()))
 					&& (entity.level().dimension()) == DIM_DEEP_VOID) {
 				TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn = (double) DeepVoidConfigConfiguration.UNDERTAKERSPAWNTIMER.get();
@@ -72,7 +72,7 @@ public class SpawnUndertakerInDeepVoidProcedure {
 								&& !(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3(rndX, rndY, rndZ), 96, 96, 96)).isEmpty())
 								&& !world.getBiome(BlockPos.containing(rndX, rndY, rndZ)).is(BIOME_TAG_UNDERTAKER_CANNOT_SPAWN)) {
 							if (world instanceof ServerLevel _serverLevel) {
-								Entity entityinstance = TheDeepVoidModEntities.UNDERTAKER.get().create(_serverLevel, null, BlockPos.containing(rndX, rndY, rndZ), MobSpawnType.MOB_SUMMONED, false, false);
+								Entity entityinstance = TheDeepVoidModEntities.UNDERTAKER.get().create(_serverLevel, null, BlockPos.containing(rndX, rndY, rndZ), EntitySpawnReason.MOB_SUMMONED, false, false);
 								if (entityinstance != null) {
 									entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 									if (entityinstance instanceof UndertakerEntity _datEntSetI)

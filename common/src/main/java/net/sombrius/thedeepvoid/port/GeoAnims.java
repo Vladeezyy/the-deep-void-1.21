@@ -35,9 +35,15 @@ public final class GeoAnims {
 		return controller.getCurrentRawAnimation() == null || controller.hasAnimationFinished();
 	}
 
-	/** GeckoLib 4's {@code net.sombrius.thedeepvoid.port.GeoAnims.partialTick(event)} */
+	/** GeckoLib 4's {@code getPartialTick()} of the animation state */
 	public static float partialTick(AnimationTest<?> test) {
 		return test.renderState().getOrDefaultGeckolibData(software.bernie.geckolib.constant.DataTickets.PARTIAL_TICK, 0f);
+	}
+
+	/** GeckoLib 4 item renderers told the item their display context; GeckoLib 5 has it in the render state */
+	public static boolean firstPerson(AnimationTest<?> test) {
+		net.minecraft.world.item.ItemDisplayContext context = test.getData(software.bernie.geckolib.constant.DataTickets.ITEM_RENDER_PERSPECTIVE);
+		return context != null && context.firstPerson();
 	}
 
 	public static <T extends GeoAnimatable> PlayState procedure(AnimationTest<T> test, String animation, Consumer<String> setAnimation) {

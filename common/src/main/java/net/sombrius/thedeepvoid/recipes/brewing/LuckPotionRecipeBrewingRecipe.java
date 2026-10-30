@@ -23,12 +23,12 @@ public class LuckPotionRecipeBrewingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean isInput(ItemStack input) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModItems.FISHY_POTION.get())).test(input);
+		return Ingredient.of(TheDeepVoidModItems.FISHY_POTION.get()).test(input);
 	}
 
 	@Override
 	public boolean isIngredient(ItemStack ingredient) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModItems.BLESSED_PEARL.get())).test(ingredient);
+		return Ingredient.of(TheDeepVoidModItems.BLESSED_PEARL.get()).test(ingredient);
 	}
 
 	@Override

@@ -18,7 +18,7 @@ import net.sombrius.thedeepvoid.port.bus.Dist;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class TheDeepVoidModScreens {
 	@SubscribeEvent
 	public static void clientLoad(RegisterMenuScreensEvent event) {

@@ -16,7 +16,7 @@ public class PrimordialCrawlerShootUpProcedure {
 			((PrimordialBoneCrawlerEntity) entity).setAnimation("animation.primordialCrawler_shoot");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 70, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 70, 99, false, false));
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 			_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 70, 99, false, false));
 		TheDeepVoidMod.queueServerWork(25, () -> {

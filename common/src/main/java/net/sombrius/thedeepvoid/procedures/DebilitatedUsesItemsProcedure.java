@@ -36,11 +36,11 @@ public class DebilitatedUsesItemsProcedure {
 			return;
 		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(TheDeepVoidModMobEffects.DEBILITATED.holder())) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 30);
+				_player.getCooldowns().addCooldown(itemstack, 30);
 		}
 		if (entity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(TheDeepVoidModMobEffects.TERROR.holder())) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 160);
+				_player.getCooldowns().addCooldown(itemstack, 160);
 			if (itemstack.getItem() instanceof BowItem || itemstack.getItem() instanceof CrossbowItem) {
 				if (event instanceof ICancellableEvent _cancellable) {
 					_cancellable.setCanceled(true);

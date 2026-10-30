@@ -24,7 +24,7 @@ public class ExecutionerBashProcedure {
 			((ExecutionerEntity) entity).setAnimation("animation.executioner_bash");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 99, false, false));
 		TheDeepVoidMod.queueServerWork(20, () -> {
 			if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 				entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() + 1.6),

@@ -1,13 +1,14 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import javax.annotation.Nullable;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -16,7 +17,7 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -35,11 +36,13 @@ import net.sombrius.thedeepvoid.procedures.MadCultistLookAroundConditionProcedur
 import net.sombrius.thedeepvoid.procedures.MadCultistOnEntityTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.MadCultistOnInitialEntitySpawnProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
+
+import net.sombrius.thedeepvoid.port.GeoAnims;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.state.AnimationTest;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -54,7 +57,6 @@ public class MadCultistEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<Boolean> DATA_blocking = SynchedEntityData.defineId(MadCultistEntity.class, EntityDataSerializers.BOOLEAN);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
-	private boolean lastloop;
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
@@ -128,23 +130,23 @@ public class MadCultistEntity extends Monster implements GeoEntity {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.hurt"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.death"));
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData livingdata) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata);
 		MadCultistOnInitialEntitySpawnProcedure.execute(this);
 		return retval;
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putString("Texture", this.getTexture());
 		compound.putInt("DataattackChance", this.entityData.get(DATA_attackChance));
@@ -155,20 +157,20 @@ public class MadCultistEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Texture"))
-			this.setTexture(compound.getString("Texture"));
-		if (compound.contains("DataattackChance"))
-			this.entityData.set(DATA_attackChance, compound.getInt("DataattackChance"));
-		if (compound.contains("Dataaggressive"))
-			this.entityData.set(DATA_aggressive, compound.getBoolean("Dataaggressive"));
-		if (compound.contains("Datapatrol"))
-			this.entityData.set(DATA_patrol, compound.getBoolean("Datapatrol"));
-		if (compound.contains("Dataattacking"))
-			this.entityData.set(DATA_attacking, compound.getBoolean("Dataattacking"));
-		if (compound.contains("Datablocking"))
-			this.entityData.set(DATA_blocking, compound.getBoolean("Datablocking"));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Texture"))
+			this.setTexture(compound.getStringOr("Texture", ""));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataattackChance"))
+			this.entityData.set(DATA_attackChance, compound.getIntOr("DataattackChance", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Dataaggressive"))
+			this.entityData.set(DATA_aggressive, compound.getBooleanOr("Dataaggressive", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datapatrol"))
+			this.entityData.set(DATA_patrol, compound.getBooleanOr("Datapatrol", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Dataattacking"))
+			this.entityData.set(DATA_attacking, compound.getBooleanOr("Dataattacking", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datablocking"))
+			this.entityData.set(DATA_blocking, compound.getBooleanOr("Datablocking", false));
 	}
 
 	@Override
@@ -198,9 +200,9 @@ public class MadCultistEntity extends Monster implements GeoEntity {
 		return builder;
 	}
 
-	private PlayState movementPredicate(AnimationState event) {
+	private PlayState movementPredicate(AnimationTest<MadCultistEntity> event) {
 		if (this.animationprocedure.equals("empty")) {
-			if ((event.isMoving() || !(event.getLimbSwingAmount() > -0.15F && event.getLimbSwingAmount() < 0.15F))
+			if ((event.isMoving() || !(this.walkAnimation.speed() > -0.15F && this.walkAnimation.speed() < 0.15F))
 
 					&& !this.isAggressive()) {
 				return event.setAndContinue(RawAnimation.begin().thenLoop("animation.madCultist_walk"));
@@ -215,21 +217,8 @@ public class MadCultistEntity extends Monster implements GeoEntity {
 
 	String prevAnim = "empty";
 
-	private PlayState procedurePredicate(AnimationState event) {
-		if (!animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
-			if (!this.animationprocedure.equals(prevAnim))
-				event.getController().forceAnimationReset();
-			event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
-			if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
-				this.animationprocedure = "empty";
-				event.getController().forceAnimationReset();
-			}
-		} else if (animationprocedure.equals("empty")) {
-			prevAnim = "empty";
-			return PlayState.STOP;
-		}
-		prevAnim = this.animationprocedure;
-		return PlayState.CONTINUE;
+	private PlayState procedurePredicate(AnimationTest<MadCultistEntity> event) {
+		return GeoAnims.procedure(event, this.animationprocedure, animation -> this.animationprocedure = animation);
 	}
 
 	@Override
@@ -237,7 +226,8 @@ public class MadCultistEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(MadCultistEntity.RemovalReason.KILLED);
-			this.dropExperience(null);
+			if (this.level() instanceof ServerLevel _serverLevel)
+				this.dropExperience(_serverLevel, null);
 		}
 	}
 
@@ -251,8 +241,8 @@ public class MadCultistEntity extends Monster implements GeoEntity {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>(this, "movement", 4, this::movementPredicate));
-		data.add(new AnimationController<>(this, "procedure", 4, this::procedurePredicate));
+		data.add(new AnimationController<>("movement", 4, this::movementPredicate));
+		data.add(new AnimationController<>("procedure", 4, this::procedurePredicate));
 	}
 
 	@Override

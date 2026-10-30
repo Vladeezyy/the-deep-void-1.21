@@ -20,7 +20,7 @@ import net.sombrius.thedeepvoid.procedures.GloomWitnessSaplingOnBoneMealSuccessP
 
 public class GloomWitnessSaplingBlock extends FlowerBlock implements BonemealableBlock {
 	public GloomWitnessSaplingBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 100, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.NETHER_WART).instabreak().noCollission().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 100, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.NETHER_WART).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override

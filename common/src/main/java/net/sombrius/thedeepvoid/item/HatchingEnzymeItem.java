@@ -15,14 +15,14 @@ import net.sombrius.thedeepvoid.procedures.HatchingEnzymeDescriptionProcedure;
 
 public class HatchingEnzymeItem extends Item {
 	public HatchingEnzymeItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON));
 	}
 
 	@Override
 	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
-	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, context, list, flag);
+	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+		super.appendHoverText(itemstack, context, tooltipDisplay, list, flag);
 		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : Minecraft.getInstance().player;
-		list.add(Component.literal(HatchingEnzymeDescriptionProcedure.execute()));
+		list.accept(Component.literal(HatchingEnzymeDescriptionProcedure.execute()));
 	}
 }

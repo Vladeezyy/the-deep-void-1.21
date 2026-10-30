@@ -12,7 +12,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 public class CookedBloatfishItem extends Item {
 	public CookedBloatfishItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(5).saturationModifier(0.4f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(5).saturationModifier(0.4f).build()));
 	}
 
 	@Override

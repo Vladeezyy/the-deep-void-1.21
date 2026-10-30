@@ -6,7 +6,7 @@ import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
@@ -52,16 +52,16 @@ public class StalkerOnInitialEntitySpawnProcedure {
 				_datEntSetI.getEntityData().set(StalkerEntity.DATA_heartbeat, 0);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.warden.heartbeat")), SoundSource.HOSTILE, 3, 1);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.warden.heartbeat")), SoundSource.HOSTILE, 3, 1);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.warden.heartbeat")), SoundSource.HOSTILE, 3, 1, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.warden.heartbeat")), SoundSource.HOSTILE, 3, 1, false);
 				}
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")), SoundSource.HOSTILE, 3, 1);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")), SoundSource.HOSTILE, 3, 1);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")), SoundSource.HOSTILE, 3, 1, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")), SoundSource.HOSTILE, 3, 1, false);
 				}
 			}
 			{
@@ -88,7 +88,7 @@ public class StalkerOnInitialEntitySpawnProcedure {
 		if ((world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() == TheDeepVoidModBlocks.BLOCK_OF_BONE_PILE.get() || (world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() == TheDeepVoidModBlocks.MOSSY_BONE_PILE.get()
 				|| (world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() == TheDeepVoidModBlocks.BLOCK_OF_SKULL_PILE.get()) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 0, false, false));
 		}
 		if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 			if ((entity instanceof StalkerEntity _datEntI ? _datEntI.getEntityData().get(StalkerEntity.DATA_voidCallCooldown) : 0) >= 500) {
@@ -147,7 +147,7 @@ public class StalkerOnInitialEntitySpawnProcedure {
 				((StalkerEntity) entity).setAnimation("animation.stalker_crouchFast");
 			}
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 1, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 1, false, false));
 			if ((entity instanceof StalkerEntity _datEntL85 && _datEntL85.getEntityData().get(StalkerEntity.DATA_crouching)) == false) {
 				if (entity instanceof StalkerEntity _datEntSetL)
 					_datEntSetL.getEntityData().set(StalkerEntity.DATA_crouching, true);
@@ -169,11 +169,11 @@ public class StalkerOnInitialEntitySpawnProcedure {
 				((StalkerEntity) entity).setAnimation("animation.stalker_hide");
 			}
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 99, false, false));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 99, false, false));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 99, false, false));
 			TheDeepVoidMod.queueServerWork(35, () -> {
 				if (!entity.level().isClientSide())
 					entity.discard();
@@ -218,24 +218,24 @@ public class StalkerOnInitialEntitySpawnProcedure {
 			if (world
 					.getBiome(BlockPos.containing((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(),
 							(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ()))
-					.is(TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:stalker_safe"))) && (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() >= 40) {
+					.is(TagKey.create(Registries.BIOME, Identifier.parse("the_deep_void:stalker_safe"))) && (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() >= 40) {
 				if (entity instanceof StalkerEntity) {
 					((StalkerEntity) entity).setAnimation("animation.stalker_hide");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 99, false, false));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 99, false, false));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 99, false, false));
 				if ((entity instanceof StalkerEntity _datEntL167 && _datEntL167.getEntityData().get(StalkerEntity.DATA_soundAngry)) == false) {
 					if (entity instanceof StalkerEntity _datEntSetL)
 						_datEntSetL.getEntityData().set(StalkerEntity.DATA_soundAngry, true);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stalker_ambient")), SoundSource.HOSTILE, 8, (float) 0.6);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stalker_ambient")), SoundSource.HOSTILE, 8, (float) 0.6);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stalker_ambient")), SoundSource.HOSTILE, 8, (float) 0.6, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stalker_ambient")), SoundSource.HOSTILE, 8, (float) 0.6, false);
 						}
 					}
 				}

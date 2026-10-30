@@ -9,7 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
@@ -48,9 +48,9 @@ public class PlayerAttacksOverseerFollowsProcedure {
 						for (Entity entityiterator : _entfound) {
 							if (entityiterator instanceof BuiltOverseerPillarEntity) {
 								if ((entityiterator instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null) == sourceentity) {
-									if (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getBoolean("deep_void:overseerSit") == false) {
+									if (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getBooleanOr("deep_void:overseerSit", false) == false) {
 										if (world instanceof ServerLevel _level) {
-											Entity entityToSpawn = TheDeepVoidModEntities.BUILT_OVERSEER.get().spawn(_level, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), MobSpawnType.MOB_SUMMONED);
+											Entity entityToSpawn = TheDeepVoidModEntities.BUILT_OVERSEER.get().spawn(_level, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), EntitySpawnReason.MOB_SUMMONED);
 											if (entityToSpawn != null) {
 												entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 											}

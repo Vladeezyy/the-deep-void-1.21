@@ -6,6 +6,6 @@ import net.minecraft.world.item.Rarity;
 
 public class VoidriumAlloyItem extends Item {
 	public VoidriumAlloyItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.RARE));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.RARE));
 	}
 }

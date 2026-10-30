@@ -12,7 +12,7 @@ public class RedFlareShotProjectileHitsLivingEntityProcedure {
 			return;
 		if (entity instanceof StalkerEntity) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 1));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1));
 		} else {

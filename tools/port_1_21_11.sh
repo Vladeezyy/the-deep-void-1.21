@@ -16,4 +16,6 @@ if [ ! -d "$src" ]; then
     mkdir -p "$src" && (cd "$src" && unzip -q -o "$OLDPWD/$jar")
 fi
 find common/src/main/java -name '*.java' -print0 | xargs -0 python3 -I tools/fix_moved_imports.py "$src" | grep -v '^$' | sort | uniq -c | sort -rn | head -20 || true
+# the Deep Void rules once more: some match only after the GeckoLib and render rules (crafting remainders...)
+python3 -I tools/port_dv_1_21_11.py
 python3 -I tools/port_multiloader.py | grep -v "^not indexed" || true

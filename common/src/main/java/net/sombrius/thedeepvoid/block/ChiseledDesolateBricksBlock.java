@@ -16,11 +16,11 @@ import net.sombrius.thedeepvoid.procedures.DesolateSoilEntityWalksOnBlockProcedu
 
 public class ChiseledDesolateBricksBlock extends Block {
 	public ChiseledDesolateBricksBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.SOUL_SOIL).strength(1.5f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.SOUL_SOIL).strength(1.5f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

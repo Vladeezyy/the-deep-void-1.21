@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.BoneLoafEatingProcedure;
 
 public class BoneLoafItem extends Item {
 	public BoneLoafItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(3).saturationModifier(0.4f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(3).saturationModifier(0.4f).alwaysEdible().build()));
 	}
 
 	@Override

@@ -31,15 +31,15 @@ public class BlackHoleDescriptionProcedure {
 		if (tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.BLACK_HOLE.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A77" + Component.translatable("item.the_deep_void.black_hole.desc").getString())));
 			} else {
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.weapon_tooltip.show").getString())));
 			}
-			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("ammo") > 0) {
+			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("ammo", 0) > 0) {
 				tooltip.add(Component.literal(""));
 				tooltip.add(Component.literal(("\u00A77" + Component.translatable("item.minecraft.arrow").getString() + " [x"
-						+ new java.text.DecimalFormat("##").format(itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("ammo")) + "]")));
+						+ new java.text.DecimalFormat("##").format(itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("ammo", 0)) + "]")));
 			}
 		}
 	}

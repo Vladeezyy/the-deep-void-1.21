@@ -45,7 +45,7 @@ public class PlayerLooksAtStalkerProcedure {
 								&& !world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 28, 28, 28), e -> true).isEmpty() == false) {
 							if (!(entity instanceof LivingEntity _livEnt12 && _livEnt12.hasEffect(MobEffects.BLINDNESS)) && !(entity instanceof LivingEntity _livEnt13 && _livEnt13.hasEffect(MobEffects.DARKNESS))) {
 								if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-									_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 99, false, false));
+									_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 99, false, false));
 								if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 									_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.STARE.holder(), 5, 0, false, false));
 							}

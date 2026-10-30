@@ -12,11 +12,11 @@ import net.minecraft.world.level.material.MapColor;
 
 public class HardFleshBlockBlock extends Block {
 	public HardFleshBlockBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.CRIMSON_HYPHAE).sound(SoundType.PACKED_MUD).strength(10f, 8f).friction(0.7f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.CRIMSON_HYPHAE).sound(SoundType.PACKED_MUD).strength(10f, 8f).friction(0.7f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 }

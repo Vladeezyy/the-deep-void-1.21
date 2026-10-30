@@ -31,7 +31,7 @@ public class FishyPotionRecipeBrewingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean isIngredient(ItemStack ingredient) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModItems.VOIDFISH.get())).test(ingredient);
+		return Ingredient.of(TheDeepVoidModItems.VOIDFISH.get()).test(ingredient);
 	}
 
 	@Override

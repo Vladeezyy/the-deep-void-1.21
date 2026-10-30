@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -18,15 +18,15 @@ import net.sombrius.thedeepvoid.procedures.LavenditeOreBlockDestroyedByPlayerPro
 
 public class LavenditeOreBlock extends Block implements net.sombrius.thedeepvoid.port.PortBlockHooks.DestroyedByPlayer {
 	public LavenditeOreBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE)
-				.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.amethyst_block.break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.amethyst_block.step")),
-						() -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.amethyst_block.place")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.deepslate.hit")),
-						() -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.deepslate.fall"))))
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE)
+				.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.amethyst_block.break")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.amethyst_block.step")),
+						() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.amethyst_block.place")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.deepslate.hit")),
+						() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.deepslate.fall"))))
 				.strength(2f, 4f).requiresCorrectToolForDrops());
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

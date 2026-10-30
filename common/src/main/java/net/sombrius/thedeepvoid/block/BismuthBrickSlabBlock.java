@@ -14,7 +14,7 @@ import net.sombrius.thedeepvoid.procedures.OnyxOreBlockDestroyedByPlayerProcedur
 
 public class BismuthBrickSlabBlock extends SlabBlock implements net.sombrius.thedeepvoid.port.PortBlockHooks.DestroyedByPlayer {
 	public BismuthBrickSlabBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.AMETHYST).strength(2f, 3f).requiresCorrectToolForDrops().dynamicShape());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.AMETHYST).strength(2f, 3f).requiresCorrectToolForDrops().dynamicShape());
 	}
 
 	public boolean onDestroyedByPlayer(BlockState blockstate, Level world, BlockPos pos, Player entity, boolean willHarvest, FluidState fluid) {

@@ -1,11 +1,11 @@
 package net.sombrius.thedeepvoid.utils;
 
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
-import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.cache.model.GeoBone;
 
 public class AnimUtils {
 	public static void renderPartOverBone(ModelPart model, GeoBone bone, PoseStack stack, VertexConsumer buffer, int packedLightIn, int packedOverlayIn, float alpha) {
@@ -14,11 +14,11 @@ public class AnimUtils {
 
 	public static void renderPartOverBone(ModelPart model, GeoBone bone, PoseStack stack, VertexConsumer buffer, int packedLightIn, int packedOverlayIn, float r, float g, float b, float a) {
 		setupModelFromBone(model, bone);
-		model.render(stack, buffer, packedLightIn, packedOverlayIn, FastColor.ARGB32.colorFromFloat(a, r, g, b));
+		model.render(stack, buffer, packedLightIn, packedOverlayIn, ARGB.colorFromFloat(a, r, g, b));
 	}
 
 	public static void setupModelFromBone(ModelPart model, GeoBone bone) {
-		model.setPos(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
+		model.setPos(bone.pivotX(), bone.pivotY(), bone.pivotZ());
 		model.xRot = 0.0f;
 		model.yRot = 0.0f;
 		model.zRot = 0.0f;

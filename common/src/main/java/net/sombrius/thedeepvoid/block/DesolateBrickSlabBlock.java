@@ -16,7 +16,7 @@ import net.sombrius.thedeepvoid.procedures.DesolateSoilEntityWalksOnBlockProcedu
 
 public class DesolateBrickSlabBlock extends SlabBlock {
 	public DesolateBrickSlabBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.SOUL_SOIL).strength(1.5f).dynamicShape());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.SOUL_SOIL).strength(1.5f).dynamicShape());
 	}
 
 	public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction direction, BlockState plant) {

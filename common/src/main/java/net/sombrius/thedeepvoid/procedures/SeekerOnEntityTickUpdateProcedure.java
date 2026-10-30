@@ -27,8 +27,8 @@ public class SeekerOnEntityTickUpdateProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
@@ -41,8 +41,8 @@ public class SeekerOnEntityTickUpdateProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 					}
 					return false;
 				}
@@ -59,7 +59,7 @@ public class SeekerOnEntityTickUpdateProcedure {
 					_entity.setTarget(_ent);
 			}
 		}
-		if (!(!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 8, 8, 8), e -> true).isEmpty()) && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:out") == false) {
+		if (!(!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 8, 8, 8), e -> true).isEmpty()) && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:out", false) == false) {
 			if (entity instanceof SeekerEntity) {
 				((SeekerEntity) entity).setAnimation("animation.seeker_hidden");
 			}
@@ -69,8 +69,8 @@ public class SeekerOnEntityTickUpdateProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
@@ -83,8 +83,8 @@ public class SeekerOnEntityTickUpdateProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 					}
 					return false;
 				}
@@ -93,7 +93,7 @@ public class SeekerOnEntityTickUpdateProcedure {
 					return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 				}
 			}.compareDistOf(x, y, z)).findFirst().orElse(null))))) {
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:out") == false) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:out", false) == false) {
 					if (entity instanceof SeekerEntity) {
 						((SeekerEntity) entity).setAnimation("empty");
 					}
@@ -105,7 +105,7 @@ public class SeekerOnEntityTickUpdateProcedure {
 			}
 		}
 		TheDeepVoidMod.queueServerWork(500, () -> {
-			entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC)), 999);
+			entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)), 999);
 		});
 	}
 }

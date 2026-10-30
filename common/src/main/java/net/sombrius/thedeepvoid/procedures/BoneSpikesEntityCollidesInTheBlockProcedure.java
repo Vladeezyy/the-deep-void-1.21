@@ -1,7 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -17,11 +17,11 @@ public class BoneSpikesEntityCollidesInTheBlockProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof LivingEntity && !(entity instanceof MaskedHunterEntity)) {
-			entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC)),
-					(float) (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:trap_vulnerable"))) ? 10 : 2));
+			entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)),
+					(float) (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 10 : 2));
 			if (Math.random() < 0.02) {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.ROT.holder(), 80, (int) (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:trap_vulnerable"))) ? 1 : 0)));
+					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.ROT.holder(), 80, (int) (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:trap_vulnerable"))) ? 1 : 0)));
 			}
 		}
 	}

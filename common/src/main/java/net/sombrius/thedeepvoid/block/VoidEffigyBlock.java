@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -25,26 +26,24 @@ import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 import net.sombrius.thedeepvoid.procedures.VoidEffigyDescriptionProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidEffigyRedstoneOnProcedure;
 
-public class VoidEffigyBlock extends Block {
+public class VoidEffigyBlock extends Block implements net.sombrius.thedeepvoid.port.PortBlockItem.Tooltip {
 	public VoidEffigyBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.BASALT).strength(2f, 999f).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.BASALT).strength(2f, 999f).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
 	}
 
-	@Override
 	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
-	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, context, list, flag);
+	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : Minecraft.getInstance().player;
-		list.add(Component.literal(VoidEffigyDescriptionProcedure.execute()));
+		list.accept(Component.literal(VoidEffigyDescriptionProcedure.execute()));
 	}
 
 	@Override
-	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+	public boolean propagatesSkylightDown(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 0;
 	}
 
@@ -63,8 +62,9 @@ public class VoidEffigyBlock extends Block {
 	}
 
 	@Override
-	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean moving) {
-		super.neighborChanged(blockstate, world, pos, neighborBlock, fromPos, moving);
+	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, @Nullable net.minecraft.world.level.redstone.Orientation orientation, boolean moving) {
+		super.neighborChanged(blockstate, world, pos, neighborBlock, orientation, moving);
+		BlockPos fromPos = pos;
 		if (world.getBestNeighborSignal(pos) > 0) {
 			VoidEffigyRedstoneOnProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
 		}

@@ -6,7 +6,7 @@ import net.minecraft.world.item.component.CustomData;
 
 public class VoidriumBulwarkRightclickedProcedure {
 	public static void execute(ItemStack itemstack) {
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:parryTime") <= 0) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:parryTime", 0) <= 0) {
 			{
 				final String _tagName = "deep_void:parryTime";
 				final double _tagValue = 7;

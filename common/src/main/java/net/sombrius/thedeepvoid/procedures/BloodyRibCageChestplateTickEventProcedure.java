@@ -12,9 +12,9 @@ public class BloodyRibCageChestplateTickEventProcedure {
 			if (entity instanceof LivingEntity _entity)
 				_entity.removeEffect(MobEffects.POISON);
 		}
-		if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MobEffects.CONFUSION)) {
+		if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MobEffects.NAUSEA)) {
 			if (entity instanceof LivingEntity _entity)
-				_entity.removeEffect(MobEffects.CONFUSION);
+				_entity.removeEffect(MobEffects.NAUSEA);
 		}
 	}
 }

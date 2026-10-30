@@ -16,13 +16,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class AshPileBlock extends FlowerBlock {
 	public AshPileBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 100,
-				BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).sound(SoundType.SOUL_SOIL).strength(0.2f, 0f).noCollission().replaceable().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 100,
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_BLACK).sound(SoundType.SOUL_SOIL).strength(0.2f, 0f).noCollision().replaceable().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 offset = state.getOffset(world, pos);
+		Vec3 offset = state.getOffset(pos);
 		return box(0, 0, 0, 16, 1, 16).move(offset.x, offset.y, offset.z);
 	}
 

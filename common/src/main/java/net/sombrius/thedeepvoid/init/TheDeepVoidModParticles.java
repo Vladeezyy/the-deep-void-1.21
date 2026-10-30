@@ -58,7 +58,7 @@ import net.sombrius.thedeepvoid.client.particle.VoidMatterResidueParticle;
 import net.sombrius.thedeepvoid.client.particle.VoidriumSmokeParticle;
 import net.sombrius.thedeepvoid.client.particle.XpSmokeParticle;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class TheDeepVoidModParticles {
 	@SubscribeEvent
 	public static void registerParticles(RegisterParticleProvidersEvent event) {

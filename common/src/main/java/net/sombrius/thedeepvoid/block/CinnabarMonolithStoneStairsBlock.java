@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class CinnabarMonolithStoneStairsBlock extends StairBlock {
 	public CinnabarMonolithStoneStairsBlock() {
-		super(Blocks.AIR.defaultBlockState(), BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHER_BRICKS).strength(5f, 8f).requiresCorrectToolForDrops().dynamicShape());
+		super(Blocks.AIR.defaultBlockState(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHER_BRICKS).strength(5f, 8f).requiresCorrectToolForDrops().dynamicShape());
 	}
 
 	@Override

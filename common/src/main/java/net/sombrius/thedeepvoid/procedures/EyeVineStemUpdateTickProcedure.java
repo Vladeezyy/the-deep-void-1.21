@@ -7,7 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.BlockPos;
 
 public class EyeVineStemUpdateTickProcedure {
@@ -17,9 +17,9 @@ public class EyeVineStemUpdateTickProcedure {
 				world.setBlock(BlockPos.containing(x, y - 1, z), TheDeepVoidModBlocks.EYE_VINE_STEM.get().defaultBlockState(), 3);
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.grow")), SoundSource.BLOCKS, 1, 1);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.grow")), SoundSource.BLOCKS, 1, 1);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.grow")), SoundSource.BLOCKS, 1, 1, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.grow")), SoundSource.BLOCKS, 1, 1, false);
 					}
 				}
 			} else {
@@ -27,54 +27,54 @@ public class EyeVineStemUpdateTickProcedure {
 					world.setBlock(BlockPos.containing(x, y - 1, z), TheDeepVoidModBlocks.GREEN_EYE_VINE.get().defaultBlockState(), 3);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else if (Math.random() < 0.16) {
 					world.setBlock(BlockPos.containing(x, y - 1, z), TheDeepVoidModBlocks.BROWN_EYE_VINE.get().defaultBlockState(), 3);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else if (Math.random() < 0.16) {
 					world.setBlock(BlockPos.containing(x, y - 1, z), TheDeepVoidModBlocks.RED_EYE_VINE.get().defaultBlockState(), 3);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else if (Math.random() < 0.16) {
 					world.setBlock(BlockPos.containing(x, y - 1, z), TheDeepVoidModBlocks.PURPLE_EYE_VINE.get().defaultBlockState(), 3);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else if (Math.random() < 0.16) {
 					world.setBlock(BlockPos.containing(x, y - 1, z), TheDeepVoidModBlocks.YELLOW_EYE_VINE.get().defaultBlockState(), 3);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				} else {
 					world.setBlock(BlockPos.containing(x, y - 1, z), TheDeepVoidModBlocks.EYE_VINE.get().defaultBlockState(), 3);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 				}

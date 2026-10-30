@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -48,28 +48,28 @@ public class CallOfTheVoidDigProcedure {
 		double yPos = 0;
 		double zPos = 0;
 		if (TheDeepVoidModVariables.of(entity).playerCallOfTheVoid == true) {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:digTime") < 190) {
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:digCooldown") >= 10) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:digTime", 0) < 190) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:digCooldown", 0) >= 10) {
 					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digCooldown", 0);
-					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digTime", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:digTime") + 10));
-					if (!(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10)).isEmpty()) && !PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig"))), 350, 350, 350))
+					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digTime", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:digTime", 0) + 10));
+					if (!(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10)).isEmpty()) && !PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0))), 350, 350, 350))
 							.isEmpty()) {
-						if (world.getBlockState(BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig") - 1, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")))
+						if (world.getBlockState(BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0) - 1, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)))
 								.canOcclude()) {
-							world.levelEvent(2001, BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")),
+							world.levelEvent(2001, BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)),
 									Block.getId((world.getBlockState(
-											BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig") - 1, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig"))))));
+											BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0) - 1, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0))))));
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")),
-											BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.gravel.hit")), SoundSource.AMBIENT, 1, 1);
+									_level.playSound(null, BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)),
+											BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.gravel.hit")), SoundSource.AMBIENT, 1, 1);
 								} else {
-									_level.playLocalSound((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")),
-											BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.gravel.hit")), SoundSource.AMBIENT, 1, 1, false);
+									_level.playLocalSound((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)),
+											BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.gravel.hit")), SoundSource.AMBIENT, 1, 1, false);
 								}
 							}
 						}
-					} else if (!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10)).isEmpty() || !(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig"))), 350, 350, 350))
+					} else if (!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10)).isEmpty() || !(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0))), 350, 350, 350))
 							.isEmpty())) {
 						{
 							TheDeepVoidModVariables.PlayerVariables _vars = TheDeepVoidModVariables.of(entity);
@@ -80,11 +80,11 @@ public class CallOfTheVoidDigProcedure {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digTime", 0);
 					}
 				} else {
-					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digCooldown", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:digCooldown") + 1));
+					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digCooldown", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:digCooldown", 0) + 1));
 				}
 			}
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:digTime") >= 190) {
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:digCooldown") >= 10) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:digTime", 0) >= 190) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:digCooldown", 0) >= 10) {
 					{
 						TheDeepVoidModVariables.PlayerVariables _vars = TheDeepVoidModVariables.of(entity);
 						_vars.playerCallOfTheVoid = false;
@@ -92,33 +92,33 @@ public class CallOfTheVoidDigProcedure {
 					}
 					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digCooldown", 0);
 					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digTime", 0);
-					if (!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig"))), 350, 350, 350))
+					if (!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0))), 350, 350, 350))
 							.isEmpty()) {
 						if (!(!PortEntities.find(world, StalkerEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 10, 10, 10)).isEmpty())
 								&& !world
 										.getEntitiesOfClass(Player.class,
-												AABB.ofSize(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig"))), 25,
+												AABB.ofSize(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0))), 25,
 														25, 25),
 												e -> true)
 										.isEmpty()
-								&& world.getBlockState(BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig") - 1, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")))
+								&& world.getBlockState(BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0) - 1, net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)))
 										.canOcclude()) {
 							{
 								Entity _ent = ((Entity) PortEntities.find(world, StalkerEntity.class, AABB.ofSize(
-										new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig"))), 350, 350, 350))
+										new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0))), 350, 350, 350))
 										.stream().sorted(new Object() {
 											Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 												return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 											}
-										}.compareDistOf((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")))).findFirst()
+										}.compareDistOf((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)))).findFirst()
 										.orElse(null));
-								_ent.teleportTo((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig") + 1), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")));
+								_ent.teleportTo((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0) + 1), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)));
 								if (_ent instanceof ServerPlayer _serverPlayer)
-									_serverPlayer.connection.teleport((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig") + 1), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")),
+									_serverPlayer.connection.teleport((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0) + 1), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)),
 											_ent.getYRot(), _ent.getXRot());
 							}
 							{
-								final Vec3 _center = new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")));
+								final Vec3 _center = new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)));
 								List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(15 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 								for (Entity entityiterator : _entfound) {
 									if (entityiterator instanceof StalkerEntity) {
@@ -126,9 +126,9 @@ public class CallOfTheVoidDigProcedure {
 											((StalkerEntity) entityiterator).setAnimation("animation.stalker_digOut");
 										}
 										if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-											_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 99, false, false));
+											_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 80, 99, false, false));
 										if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-											_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 80, 99, false, false));
+											_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 80, 99, false, false));
 										if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 											_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 99, false, false));
 									}
@@ -145,17 +145,17 @@ public class CallOfTheVoidDigProcedure {
 							}
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")),
-											BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stalker_emerges_new")), SoundSource.NEUTRAL, 2, 1);
+									_level.playSound(null, BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)),
+											BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stalker_emerges_new")), SoundSource.NEUTRAL, 2, 1);
 								} else {
-									_level.playLocalSound((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:xDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:yDig")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:zDig")),
-											BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stalker_emerges_new")), SoundSource.NEUTRAL, 2, 1, false);
+									_level.playLocalSound((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:xDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:yDig", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:zDig", 0)),
+											BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stalker_emerges_new")), SoundSource.NEUTRAL, 2, 1, false);
 								}
 							}
 						}
 					}
 				} else {
-					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digCooldown", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:digCooldown") + 1));
+					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:digCooldown", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:digCooldown", 0) + 1));
 				}
 			}
 		}

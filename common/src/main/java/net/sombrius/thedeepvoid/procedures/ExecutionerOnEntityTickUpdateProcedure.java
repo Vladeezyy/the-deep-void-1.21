@@ -54,14 +54,14 @@ public class ExecutionerOnEntityTickUpdateProcedure {
 					((ExecutionerEntity) entity).setAnimation("animation.executioner_stunned");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 99));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 99));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 5, 99));
 			}
 		}
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 2) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 0, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 20, 0, false, false));
 		}
 		if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null) && (entity instanceof ExecutionerEntity _datEntL30 && _datEntL30.getEntityData().get(ExecutionerEntity.DATA_asleep)) == true) {
 			if (entity instanceof ExecutionerEntity _datEntSetL)

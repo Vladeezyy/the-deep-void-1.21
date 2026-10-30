@@ -7,6 +7,6 @@ import net.minecraft.world.item.Rarity;
 
 public class BloodfinItem extends Item {
 	public BloodfinItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(2f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(2f).build()));
 	}
 }

@@ -17,7 +17,7 @@ public class SoulOrbOnEntityTickUpdateProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:pickedUp") == true) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:pickedUp", false) == true) {
 			if (!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 8, 8, 8), e -> true).isEmpty()) {
 				{
 					final Vec3 _center = new Vec3(x, y, z);
@@ -25,7 +25,7 @@ public class SoulOrbOnEntityTickUpdateProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof Player) {
 							if (TheDeepVoidModVariables.of(entityiterator).hasSoulOrb == true) {
-								if ((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("deep_void:owner")).equals(entityiterator.getDisplayName().getString())) {
+								if ((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("deep_void:owner", "")).equals(entityiterator.getDisplayName().getString())) {
 									{
 										Entity _ent = entity;
 										_ent.teleportTo((entityiterator.getX()), (entityiterator.getY() + 2.5), (entityiterator.getZ()));
@@ -34,7 +34,7 @@ public class SoulOrbOnEntityTickUpdateProcedure {
 									}
 								}
 							} else {
-								entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.PLAYER_ATTACK), entityiterator), 1);
+								entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.PLAYER_ATTACK), entityiterator), 1);
 							}
 						}
 					}

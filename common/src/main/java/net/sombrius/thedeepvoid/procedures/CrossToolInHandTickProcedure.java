@@ -1,6 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.UUID;
 import net.minecraft.world.entity.Entity;
@@ -16,24 +16,24 @@ public class CrossToolInHandTickProcedure {
 	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614")) != null)) {
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"))))
+		if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).getModifier(Identifier.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614")) != null)) {
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).addTransientModifier(
-						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"), ((double) DeepVoidConfigConfiguration.PENITENTCROSSREACHADDITION.get()), AttributeModifier.Operation.ADD_VALUE)));
+						(new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"), ((double) DeepVoidConfigConfiguration.PENITENTCROSSREACHADDITION.get()), AttributeModifier.Operation.ADD_VALUE)));
 		}
-		if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a")) != null)) {
+		if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getModifier(Identifier.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a")) != null)) {
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK)
-					.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a"))))
+					.hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK)
-						.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a"), 1.3, AttributeModifier.Operation.ADD_VALUE)));
+						.addTransientModifier((new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a"), 1.3, AttributeModifier.Operation.ADD_VALUE)));
 		}
 		TheDeepVoidMod.queueServerWork(20, () -> {
 			if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PENITENT_CROSS.get())) {
-				if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614")) != null) {
-					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"));
+				if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).getModifier(Identifier.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614")) != null) {
+					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ENTITY_INTERACTION_RANGE).removeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "25077204-40c9-4acd-ae7d-9f396bbbd614"));
 				}
-				if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a")) != null) {
-					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a"));
+				if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).getModifier(Identifier.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a")) != null) {
+					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_KNOCKBACK).removeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "cd21e4b9-a572-464f-b715-eb4e5081851a"));
 				}
 			}
 		});

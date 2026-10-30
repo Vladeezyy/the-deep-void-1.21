@@ -8,7 +8,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
@@ -33,7 +33,7 @@ public class RootedOnEntityTickUpdateProcedure {
 								(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ())).canOcclude())) {
 							if (world instanceof ServerLevel _level) {
 								Entity entityToSpawn = TheDeepVoidModEntities.ROOTED_CLONE.get().spawn(_level, BlockPos.containing((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX() + 2,
-										(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ()), MobSpawnType.MOB_SUMMONED);
+										(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ()), EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}
@@ -48,7 +48,7 @@ public class RootedOnEntityTickUpdateProcedure {
 								(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ() + 2)).canOcclude())) {
 							if (world instanceof ServerLevel _level) {
 								Entity entityToSpawn = TheDeepVoidModEntities.ROOTED_CLONE.get().spawn(_level, BlockPos.containing((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX(),
-										(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ() + 2), MobSpawnType.MOB_SUMMONED);
+										(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ() + 2), EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}
@@ -64,7 +64,7 @@ public class RootedOnEntityTickUpdateProcedure {
 								(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ())).canOcclude())) {
 							if (world instanceof ServerLevel _level) {
 								Entity entityToSpawn = TheDeepVoidModEntities.ROOTED_CLONE.get().spawn(_level, BlockPos.containing((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX() - 2,
-										(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ()), MobSpawnType.MOB_SUMMONED);
+										(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ()), EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}
@@ -79,7 +79,7 @@ public class RootedOnEntityTickUpdateProcedure {
 								(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ() - 2)).canOcclude())) {
 							if (world instanceof ServerLevel _level) {
 								Entity entityToSpawn = TheDeepVoidModEntities.ROOTED_CLONE.get().spawn(_level, BlockPos.containing((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX(),
-										(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ() - 2), MobSpawnType.MOB_SUMMONED);
+										(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY(), (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ() - 2), EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}

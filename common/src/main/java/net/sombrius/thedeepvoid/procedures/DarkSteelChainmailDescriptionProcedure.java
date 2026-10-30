@@ -38,14 +38,14 @@ public class DarkSteelChainmailDescriptionProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.DARK_STEEL_CHAINMAIL_ARMOR_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.DARK_STEEL_CHAINMAIL_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.DARK_STEEL_CHAINMAIL_ARMOR_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.lavendite.when_attacked").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.dark_steel_chainmail.desc").getString())));
 				} else {
 					tooltip.add(Component.literal((Component.translatable("armors.the_deep_void.press_shift").getString())));
 				}
 			} else {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.lavendite.when_attacked").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.dark_steel_chainmail.desc").getString())));
 				} else {

@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.advancements.AdvancementHolder;
@@ -11,7 +12,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -47,18 +48,18 @@ public class ApostleOfCatastropheDiesProcedure {
 					_level.sendParticles(ParticleTypes.SCULK_SOUL, (entity.getX()), (entity.getY() + 1), (entity.getZ()), 40, 0.2, 1, 0.2, 0.25);
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fleshy_explosion")), SoundSource.HOSTILE, 2, (float) 0.9);
+						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fleshy_explosion")), SoundSource.HOSTILE, 2, (float) 0.9);
 					} else {
-						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fleshy_explosion")), SoundSource.HOSTILE, 2, (float) 0.9, false);
+						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fleshy_explosion")), SoundSource.HOSTILE, 2, (float) 0.9, false);
 					}
 				}
 				for (int index0 = 0; index0 < 8; index0++) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:soul_unleash")), SoundSource.HOSTILE, 2,
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:soul_unleash")), SoundSource.HOSTILE, 2,
 									(float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2));
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:soul_unleash")), SoundSource.HOSTILE, 2,
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:soul_unleash")), SoundSource.HOSTILE, 2,
 									(float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2), false);
 						}
 					}
@@ -76,9 +77,9 @@ public class ApostleOfCatastropheDiesProcedure {
 								ItemHandlerHelper.giveItemToPlayer(_player, _setstack);
 							}
 							if (!(entityiterator instanceof ServerPlayer _plr22 && _plr22.level() instanceof ServerLevel
-									&& _plr22.getAdvancements().getOrStartProgress(_plr22.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:unholy_psalmody"))).isDone())) {
+									&& _plr22.getAdvancements().getOrStartProgress(_plr22.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:unholy_psalmody"))).isDone())) {
 								if (entityiterator instanceof ServerPlayer _player) {
-									AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:unholy_psalmody"));
+									AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:unholy_psalmody"));
 									if (_adv != null) {
 										AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 										if (!_ap.isDone()) {
@@ -93,17 +94,17 @@ public class ApostleOfCatastropheDiesProcedure {
 				}
 			});
 			TheDeepVoidMod.queueServerWork(140, () -> {
-				world.setBlock(BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("forgeX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("forgeY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("forgeZ")),
+				world.setBlock(BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("forgeX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("forgeY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("forgeZ", 0)),
 						TheDeepVoidModBlocks.SOUL_FORGE.get().defaultBlockState(), 3);
 				if (world instanceof ServerLevel _level)
-					_level.sendParticles(ParticleTypes.SCULK_SOUL, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("forgeX")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("forgeY")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("forgeZ")), 20, 0.4, 0.4, 0.4, 0.1);
+					_level.sendParticles(ParticleTypes.SCULK_SOUL, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("forgeX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("forgeY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("forgeZ", 0)), 20, 0.4, 0.4, 0.4, 0.1);
 			});
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"stopsound @a record the_deep_void:chainsaw");
 			TheDeepVoidMod.queueServerWork(20, () -> {
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"stopsound @a record the_deep_void:chainsaw");
 			});
 		}

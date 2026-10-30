@@ -30,7 +30,7 @@ public class WeaverMaskRegenerateProcedure {
 			return;
 		if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.WEAVER_MASK_HELMET.get()
 				|| (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HARVESTER_MASK_HELMET.get()) {
-			if (!(entity instanceof LivingEntity _livEnt4 && _livEnt4.hasEffect(TheDeepVoidModMobEffects.GOLDEN_BLOOD.holder())) && !(entity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(MobEffects.HEAL))
+			if (!(entity instanceof LivingEntity _livEnt4 && _livEnt4.hasEffect(TheDeepVoidModMobEffects.GOLDEN_BLOOD.holder())) && !(entity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(MobEffects.INSTANT_HEALTH))
 					&& !(entity instanceof LivingEntity _livEnt6 && _livEnt6.hasEffect(MobEffects.REGENERATION))) {
 				if (event instanceof ICancellableEvent _cancellable) {
 					_cancellable.setCanceled(true);
@@ -40,7 +40,7 @@ public class WeaverMaskRegenerateProcedure {
 				&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_CHESTPLATE.get()
 				&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_LEGGINGS.get()
 				&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_BOOTS.get()) {
-			if (!(entity instanceof LivingEntity _livEnt15 && _livEnt15.hasEffect(TheDeepVoidModMobEffects.GOLDEN_BLOOD.holder())) && !(entity instanceof LivingEntity _livEnt16 && _livEnt16.hasEffect(MobEffects.HEAL))
+			if (!(entity instanceof LivingEntity _livEnt15 && _livEnt15.hasEffect(TheDeepVoidModMobEffects.GOLDEN_BLOOD.holder())) && !(entity instanceof LivingEntity _livEnt16 && _livEnt16.hasEffect(MobEffects.INSTANT_HEALTH))
 					&& !(entity instanceof LivingEntity _livEnt17 && _livEnt17.hasEffect(MobEffects.REGENERATION))) {
 				if (event instanceof ICancellableEvent _cancellable) {
 					_cancellable.setCanceled(true);

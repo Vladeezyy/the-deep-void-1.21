@@ -11,11 +11,11 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class PolishedLavenditeBlockBlock extends Block {
 	public PolishedLavenditeBlockBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.AMETHYST).strength(1.8f, 3f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.AMETHYST).strength(1.8f, 3f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 }

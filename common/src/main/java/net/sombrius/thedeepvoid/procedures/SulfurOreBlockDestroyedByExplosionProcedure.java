@@ -24,7 +24,7 @@ public class SulfurOreBlockDestroyedByExplosionProcedure {
 			for (Entity entityiterator : _entfound) {
 				if (entityiterator instanceof LivingEntity) {
 					if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+						_entity.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 200, 0));
 					if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 						_entity.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0));
 				}

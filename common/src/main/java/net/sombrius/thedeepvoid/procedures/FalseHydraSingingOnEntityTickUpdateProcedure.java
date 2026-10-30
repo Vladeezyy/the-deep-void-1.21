@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import java.util.Comparator;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
@@ -9,12 +10,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -41,10 +42,10 @@ public class FalseHydraSingingOnEntityTickUpdateProcedure {
 		}
 		if ((entity instanceof FalseHydraSingingEntity _datEntI ? _datEntI.getEntityData().get(FalseHydraSingingEntity.DATA_timer) : 0) >= (double) DeepVoidConfigConfiguration.HYDRASINGINGDESPAWNTIMER.get()) {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"stopsound @a hostile the_deep_void:false_hydra_sing");
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"stopsound @a hostile the_deep_void:false_hydra_sing_distorted");
 			if (!entity.level().isClientSide())
 				entity.discard();
@@ -59,9 +60,9 @@ public class FalseHydraSingingOnEntityTickUpdateProcedure {
 						_datEntSetI.getEntityData().set(FalseHydraSingingEntity.DATA_sing, 720);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_sing_distorted")), SoundSource.HOSTILE, 4, 1);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_sing_distorted")), SoundSource.HOSTILE, 4, 1);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_sing_distorted")), SoundSource.HOSTILE, 4, 1, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_sing_distorted")), SoundSource.HOSTILE, 4, 1, false);
 						}
 					}
 				} else {
@@ -69,9 +70,9 @@ public class FalseHydraSingingOnEntityTickUpdateProcedure {
 						_datEntSetI.getEntityData().set(FalseHydraSingingEntity.DATA_sing, 820);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_sing")), SoundSource.HOSTILE, 4, 1);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_sing")), SoundSource.HOSTILE, 4, 1);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_sing")), SoundSource.HOSTILE, 4, 1, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_sing")), SoundSource.HOSTILE, 4, 1, false);
 						}
 					}
 				}
@@ -81,16 +82,16 @@ public class FalseHydraSingingOnEntityTickUpdateProcedure {
 			}
 		} else if (!(world.getNearestPlayer(entity, 30) == null)) {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"stopsound @a hostile the_deep_void:false_hydra_sing");
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"stopsound @a hostile the_deep_void:false_hydra_sing_distorted");
 			if (TheDeepVoidModVariables.MapVariables.get(world).spawnHydra >= (double) DeepVoidConfigConfiguration.SPAWNHYDRAREQUIREDENCOUNTER.get()) {
 				TheDeepVoidModVariables.MapVariables.get(world).spawnHydra = 0;
 				TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}
@@ -115,16 +116,16 @@ public class FalseHydraSingingOnEntityTickUpdateProcedure {
 					if ((entity instanceof FalseHydraSingingEntity _datEntL38 && _datEntL38.getEntityData().get(FalseHydraSingingEntity.DATA_despawn)) == false) {
 						if (entity instanceof FalseHydraSingingEntity _datEntSetL)
 							_datEntSetL.getEntityData().set(FalseHydraSingingEntity.DATA_despawn, true);
-						if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"))) {
+						if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"))) {
 							TheDeepVoidModVariables.MapVariables.get(world).spawnHydra = TheDeepVoidModVariables.MapVariables.get(world).spawnHydra + 1;
 							TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
 						}
 						TheDeepVoidMod.queueServerWork(1, () -> {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_slide")), SoundSource.HOSTILE, 3, 1);
+									_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_slide")), SoundSource.HOSTILE, 3, 1);
 								} else {
-									_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_slide")), SoundSource.HOSTILE, 3, 1, false);
+									_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_slide")), SoundSource.HOSTILE, 3, 1, false);
 								}
 							}
 						});

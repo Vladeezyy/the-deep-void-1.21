@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.procedures.IchorBurnOnEffectActiveTickProcedure;
 import net.sombrius.thedeepvoid.procedures.IchorBurnActiveTickConditionProcedure;
 
@@ -14,9 +15,9 @@ public class IchorBurnMobEffect extends MobEffect {
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier) {
 		IchorBurnOnEffectActiveTickProcedure.execute(entity.level(), entity, amplifier);
-		return super.applyEffectTick(entity, amplifier);
+		return super.applyEffectTick(level, entity, amplifier);
 	}
 
 	@Override

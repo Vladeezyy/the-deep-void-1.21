@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.advancements.AdvancementHolder;
 
 import java.util.Comparator;
@@ -9,7 +10,7 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -46,9 +47,9 @@ public class HarbingerOfCataclysmDiesProcedure {
 								ItemHandlerHelper.giveItemToPlayer(_player, _setstack);
 							}
 							if (!(entityiterator instanceof ServerPlayer _plr5 && _plr5.level() instanceof ServerLevel
-									&& _plr5.getAdvancements().getOrStartProgress(_plr5.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:unholy_psalmody"))).isDone())) {
+									&& _plr5.getAdvancements().getOrStartProgress(_plr5.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:unholy_psalmody"))).isDone())) {
 								if (entityiterator instanceof ServerPlayer _player) {
-									AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:unholy_psalmody"));
+									AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:unholy_psalmody"));
 									AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 									if (!_ap.isDone()) {
 										for (String criteria : _ap.getRemainingCriteria())
@@ -61,11 +62,11 @@ public class HarbingerOfCataclysmDiesProcedure {
 				}
 			});
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"stopsound @a record the_deep_void:dealing_with_the_devil");
 			TheDeepVoidMod.queueServerWork(20, () -> {
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"stopsound @a record the_deep_void:dealing_with_the_devil");
 			});
 		}

@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.sombrius.thedeepvoid.procedures.AmbrosiaWithdrawalEffectExpiresProcedure;
@@ -21,9 +22,9 @@ public class AmbrosiaWithdrawalMobEffect extends MobEffect implements PortUtil.E
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier) {
 		AmbrosiaWithdrawalOnEffectActiveTickProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
-		return super.applyEffectTick(entity, amplifier);
+		return super.applyEffectTick(level, entity, amplifier);
 	}
 
 	@Override

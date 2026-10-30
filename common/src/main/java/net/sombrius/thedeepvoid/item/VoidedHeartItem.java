@@ -1,8 +1,8 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,22 +12,23 @@ import net.sombrius.thedeepvoid.procedures.VoidedHeartRightclickedProcedure;
 
 public class VoidedHeartItem extends Item {
 	public VoidedHeartItem() {
-		super(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.RARE));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).fireResistant().rarity(Rarity.RARE));
 	}
 
-	@Override
-	public boolean hasCraftingRemainingItem() {
-		return true;
-	}
-
-	public ItemStack getCraftingRemainingItem(ItemStack itemstack) {
+	/** NeoForge IItemExtension */
+	public ItemStack getCraftingRemainder(ItemStack itemstack) {
 		return new ItemStack(this);
 	}
 
+	/** Fabric FabricItem */
+	public ItemStack getRecipeRemainder(ItemStack itemstack) {
+		return getCraftingRemainder(itemstack);
+	}
+
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
-		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		VoidedHeartRightclickedProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, ar.getObject());
+	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+		InteractionResult ar = super.use(world, entity, hand);
+		VoidedHeartRightclickedProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, entity.getItemInHand(hand));
 		return ar;
 	}
 }

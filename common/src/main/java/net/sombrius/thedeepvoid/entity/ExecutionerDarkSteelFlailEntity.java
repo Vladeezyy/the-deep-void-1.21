@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.port.bus.RegisterSpawnPlacementsEvent;
 
 import net.minecraft.world.level.Explosion;
@@ -11,7 +12,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -23,8 +24,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.AbstractThrownPotion;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
@@ -64,16 +65,16 @@ public class ExecutionerDarkSteelFlailEntity extends Monster {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty"));
 	}
 
 	@Override
-	public boolean hurt(DamageSource damagesource, float amount) {
+	public boolean hurtServer(ServerLevel level, DamageSource damagesource, float amount) {
 		double x = this.getX();
 		double y = this.getY();
 		double z = this.getZ();
@@ -89,7 +90,7 @@ public class ExecutionerDarkSteelFlailEntity extends Monster {
 			return false;
 		if (damagesource.getDirectEntity() instanceof Player)
 			return false;
-		if (damagesource.getDirectEntity() instanceof ThrownPotion || damagesource.getDirectEntity() instanceof AreaEffectCloud)
+		if (damagesource.getDirectEntity() instanceof AbstractThrownPotion || damagesource.getDirectEntity() instanceof AreaEffectCloud)
 			return false;
 		if (damagesource.is(DamageTypes.FALL))
 			return false;
@@ -109,7 +110,7 @@ public class ExecutionerDarkSteelFlailEntity extends Monster {
 			return false;
 		if (damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL))
 			return false;
-		return super.hurt(damagesource, amount);
+		return super.hurtServer(level, damagesource, amount);
 	}
 
 	@Override
@@ -129,7 +130,7 @@ public class ExecutionerDarkSteelFlailEntity extends Monster {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putBoolean("Dataretract", this.entityData.get(DATA_retract));
 		compound.putInt("Datadespawn", this.entityData.get(DATA_despawn));
@@ -137,14 +138,14 @@ public class ExecutionerDarkSteelFlailEntity extends Monster {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Dataretract"))
-			this.entityData.set(DATA_retract, compound.getBoolean("Dataretract"));
-		if (compound.contains("Datadespawn"))
-			this.entityData.set(DATA_despawn, compound.getInt("Datadespawn"));
-		if (compound.contains("Datastun"))
-			this.entityData.set(DATA_stun, compound.getBoolean("Datastun"));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Dataretract"))
+			this.entityData.set(DATA_retract, compound.getBooleanOr("Dataretract", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datadespawn"))
+			this.entityData.set(DATA_despawn, compound.getIntOr("Datadespawn", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datastun"))
+			this.entityData.set(DATA_stun, compound.getBooleanOr("Datastun", false));
 	}
 
 	@Override
@@ -159,7 +160,7 @@ public class ExecutionerDarkSteelFlailEntity extends Monster {
 	}
 
 	@Override
-	public boolean canBeCollidedWith() {
+	public boolean canBeCollidedWith(@javax.annotation.Nullable net.minecraft.world.entity.Entity other) {
 		Entity entity = this;
 		Level world = entity.level();
 		double x = entity.getX();

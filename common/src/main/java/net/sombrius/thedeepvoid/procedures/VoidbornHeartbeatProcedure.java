@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.commands.CommandSource;
@@ -27,9 +28,9 @@ public class VoidbornHeartbeatProcedure {
 						if (entityiterator instanceof Player) {
 							{
 								Entity _ent = entityiterator;
-								if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-									_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-											4, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
+								if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+									_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
+											LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
 								}
 							}
 						}
@@ -50,9 +51,9 @@ public class VoidbornHeartbeatProcedure {
 						if (entityiterator instanceof Player) {
 							{
 								Entity _ent = entityiterator;
-								if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-									_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-											4, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
+								if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+									_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
+											LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
 								}
 							}
 						}
@@ -73,9 +74,9 @@ public class VoidbornHeartbeatProcedure {
 						if (entityiterator instanceof Player) {
 							{
 								Entity _ent = entityiterator;
-								if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-									_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-											4, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
+								if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+									_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
+											LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
 								}
 							}
 						}
@@ -96,9 +97,9 @@ public class VoidbornHeartbeatProcedure {
 						if (entityiterator instanceof Player) {
 							{
 								Entity _ent = entityiterator;
-								if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-									_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-											4, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
+								if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+									_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
+											LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
 								}
 							}
 						}
@@ -119,9 +120,9 @@ public class VoidbornHeartbeatProcedure {
 						if (entityiterator instanceof Player) {
 							{
 								Entity _ent = entityiterator;
-								if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-									_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-											4, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
+								if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+									_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
+											LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
 								}
 							}
 						}
@@ -142,9 +143,9 @@ public class VoidbornHeartbeatProcedure {
 						if (entityiterator instanceof Player) {
 							{
 								Entity _ent = entityiterator;
-								if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-									_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-											4, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
+								if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+									_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
+											LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
 								}
 							}
 						}

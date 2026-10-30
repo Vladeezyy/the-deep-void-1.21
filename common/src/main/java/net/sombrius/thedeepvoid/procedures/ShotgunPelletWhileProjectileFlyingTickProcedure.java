@@ -13,7 +13,7 @@ public class ShotgunPelletWhileProjectileFlyingTickProcedure {
 		if (immediatesourceentity == null)
 			return;
 		for (int index0 = 0; index0 < Mth.nextInt(RandomSource.create(), 1, 3); index0++) {
-			world.addParticle((new DustParticleOptions(new Vector3f(78 / 255.0F, 9 / 255.0F, 9 / 255.0F), 1)), (x + Mth.nextDouble(RandomSource.create(), -0.06, 0.06)), y, (z + Mth.nextDouble(RandomSource.create(), -0.06, 0.06)), 0, 0, 0);
+			world.addParticle((new DustParticleOptions(net.minecraft.util.ARGB.colorFromFloat(1f, 78 / 255.0F, 9 / 255.0F, 9 / 255.0F), 1)), (x + Mth.nextDouble(RandomSource.create(), -0.06, 0.06)), y, (z + Mth.nextDouble(RandomSource.create(), -0.06, 0.06)), 0, 0, 0);
 		}
 		if (!immediatesourceentity.isNoGravity()) {
 			immediatesourceentity.setNoGravity(true);

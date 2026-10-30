@@ -1,12 +1,13 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -72,16 +73,16 @@ public class MimicEntity extends Monster {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.hurt"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.death"));
 	}
 
 	@Override
-	public boolean hurt(DamageSource damagesource, float amount) {
+	public boolean hurtServer(ServerLevel level, DamageSource damagesource, float amount) {
 		double x = this.getX();
 		double y = this.getY();
 		double z = this.getZ();
@@ -91,7 +92,7 @@ public class MimicEntity extends Monster {
 		Entity immediatesourceentity = damagesource.getDirectEntity();
 		if (!MimicEntityIsHurtProcedure.execute(world, x, y, z, entity, sourceentity))
 			return false;
-		return super.hurt(damagesource, amount);
+		return super.hurtServer(level, damagesource, amount);
 	}
 
 	@Override
@@ -101,16 +102,16 @@ public class MimicEntity extends Monster {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putBoolean("DatacanMove", this.entityData.get(DATA_canMove));
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("DatacanMove"))
-			this.entityData.set(DATA_canMove, compound.getBoolean("DatacanMove"));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatacanMove"))
+			this.entityData.set(DATA_canMove, compound.getBooleanOr("DatacanMove", false));
 	}
 
 	@Override

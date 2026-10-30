@@ -6,6 +6,6 @@ import net.minecraft.world.item.component.CustomData;
 
 public class RotTonguePropertyValueProviderProcedure {
 	public static double execute(ItemStack itemstack) {
-		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("block");
+		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("block", 0);
 	}
 }

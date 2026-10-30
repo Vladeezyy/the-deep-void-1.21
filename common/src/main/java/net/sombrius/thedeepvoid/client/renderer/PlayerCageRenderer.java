@@ -1,40 +1,46 @@
 
 package net.sombrius.thedeepvoid.client.renderer;
 
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.sombrius.thedeepvoid.client.model.Modelplayer_cage;
 import net.sombrius.thedeepvoid.entity.PlayerCageEntity;
 
-public class PlayerCageRenderer extends MobRenderer<PlayerCageEntity, Modelplayer_cage<PlayerCageEntity>> {
+public class PlayerCageRenderer extends MobRenderer<PlayerCageEntity, LivingEntityRenderState, Modelplayer_cage<LivingEntityRenderState>> {
 	public PlayerCageRenderer(EntityRendererProvider.Context context) {
 		super(context, new Modelplayer_cage(context.bakeLayer(Modelplayer_cage.LAYER_LOCATION)), 0f);
-		this.addLayer(new RenderLayer<PlayerCageEntity, Modelplayer_cage<PlayerCageEntity>>(this) {
-			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/player_cage.png");
+		this.addLayer(new RenderLayer<LivingEntityRenderState, Modelplayer_cage<LivingEntityRenderState>>(this) {
+			final Identifier LAYER_TEXTURE = Identifier.parse("the_deep_void:textures/entities/player_cage.png");
+			final Modelplayer_cage<LivingEntityRenderState> layerModel = new Modelplayer_cage<>(context.bakeLayer(Modelplayer_cage.LAYER_LOCATION));
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, PlayerCageEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-				VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
-				EntityModel model = new Modelplayer_cage(Minecraft.getInstance().getEntityModels().bakeLayer(Modelplayer_cage.LAYER_LOCATION));
-				this.getParentModel().copyPropertiesTo(model);
-				model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-				model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-				model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, -1);
+			public void submit(PoseStack poseStack, SubmitNodeCollector collector, int light, LivingEntityRenderState state, float yRot, float xRot) {
+				this.layerModel.setupAnim(state);
+				collector.submitModel(this.layerModel, state, poseStack, RenderTypes.entityCutoutNoCull(LAYER_TEXTURE), light, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor, null);
 			}
 		});
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(PlayerCageEntity entity) {
-		return ResourceLocation.parse("the_deep_void:textures/entities/player_cage.png");
+	public LivingEntityRenderState createRenderState() {
+		return new LivingEntityRenderState();
+	}
+
+	@Override
+	public Identifier getTextureLocation(LivingEntityRenderState state) {
+		return Identifier.parse("the_deep_void:textures/entities/player_cage.png");
 	}
 }

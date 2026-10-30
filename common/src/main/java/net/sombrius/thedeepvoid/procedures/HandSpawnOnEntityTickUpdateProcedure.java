@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -18,10 +18,10 @@ public class HandSpawnOnEntityTickUpdateProcedure {
 		if (entity == null)
 			return;
 		if (!(!world.getEntitiesOfClass(ShadowHandEntity.class, AABB.ofSize(new Vec3(x, (y + 0.5), z), 0.5, 0.5, 0.5), e -> true).isEmpty())) {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("spawn") >= 60) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("spawn", 0) >= 60) {
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("spawn", 0);
 				if (world instanceof ServerLevel _serverLevel) {
-					Entity entityinstance = TheDeepVoidModEntities.SHADOW_HAND.get().create(_serverLevel, null, BlockPos.containing(x, y + 0.5, z), MobSpawnType.MOB_SUMMONED, false, false);
+					Entity entityinstance = TheDeepVoidModEntities.SHADOW_HAND.get().create(_serverLevel, null, BlockPos.containing(x, y + 0.5, z), EntitySpawnReason.MOB_SUMMONED, false, false);
 					if (entityinstance != null) {
 						entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 						if (entityinstance instanceof ShadowHandEntity) {
@@ -35,7 +35,7 @@ public class HandSpawnOnEntityTickUpdateProcedure {
 				if (!entity.level().isClientSide())
 					entity.discard();
 			} else {
-				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("spawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("spawn") + 1));
+				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("spawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("spawn", 0) + 1));
 			}
 		}
 	}

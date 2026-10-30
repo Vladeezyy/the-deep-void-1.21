@@ -15,7 +15,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 
 public class TendrilsBlock extends FlowerBlock {
 	public TendrilsBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 100, BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).sound(SoundType.SCULK_VEIN).instabreak().noCollission().replaceable().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 100, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.NETHER).sound(SoundType.SCULK_VEIN).instabreak().noCollision().replaceable().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override

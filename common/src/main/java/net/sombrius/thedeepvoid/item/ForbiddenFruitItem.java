@@ -15,7 +15,7 @@ import net.sombrius.thedeepvoid.procedures.ForbiddenFruitPlayerFinishesUsingItem
 
 public class ForbiddenFruitItem extends Item {
 	public ForbiddenFruitItem() {
-		super(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(5).saturationModifier(1f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(5).saturationModifier(1f).build()));
 	}
 
 	@Override

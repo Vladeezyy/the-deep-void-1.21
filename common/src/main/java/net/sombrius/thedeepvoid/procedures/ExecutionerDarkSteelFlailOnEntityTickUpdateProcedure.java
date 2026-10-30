@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -42,9 +42,9 @@ public class ExecutionerDarkSteelFlailOnEntityTickUpdateProcedure {
 				_datEntSetL.getEntityData().set(ExecutionerDarkSteelFlailEntity.DATA_retract, true);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05));
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
 				}
 			}
 			if (!world.isEmptyBlock(BlockPos.containing(x, y - 1, z))) {
@@ -67,9 +67,9 @@ public class ExecutionerDarkSteelFlailOnEntityTickUpdateProcedure {
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(6 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof LivingEntity && !(entityiterator == entity) && entityiterator.onGround() && !(entityiterator instanceof FlailExecutionerEntity) && !(entityiterator instanceof ExecutionerEntity)) {
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:boss_attack"))), entity),
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:boss_attack"))), entity),
 								(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
-						if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:boss")))) {
+						if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 							entityiterator.setDeltaMovement(new Vec3((entityiterator.getDeltaMovement().x()), 0.6, (entityiterator.getDeltaMovement().z())));
 						}
 					}

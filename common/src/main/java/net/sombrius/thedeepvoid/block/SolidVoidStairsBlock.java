@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class SolidVoidStairsBlock extends StairBlock {
 	public SolidVoidStairsBlock() {
-		super(Blocks.AIR.defaultBlockState(), BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(1f).requiresCorrectToolForDrops().dynamicShape());
+		super(Blocks.AIR.defaultBlockState(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(1f).requiresCorrectToolForDrops().dynamicShape());
 	}
 
 	@Override

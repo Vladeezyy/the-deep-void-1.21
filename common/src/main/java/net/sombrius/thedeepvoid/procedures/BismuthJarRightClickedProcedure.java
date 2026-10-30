@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -18,10 +18,10 @@ public class BismuthJarRightClickedProcedure {
 	public static void execute(LevelAccessor world, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("xp") == 0) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("xp", 0) == 0) {
 			if ((entity instanceof Player _plr ? _plr.experienceLevel : 0) >= 25) {
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), 20);
+					_player.getCooldowns().addCooldown(itemstack, 20);
 				{
 					final String _tagName = "xp";
 					final double _tagValue = 25;
@@ -31,17 +31,17 @@ public class BismuthJarRightClickedProcedure {
 					_player.giveExperienceLevels(-(25));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.bottle.fill_dragonbreath")), SoundSource.PLAYERS, (float) 0.4,
+						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.bottle.fill_dragonbreath")), SoundSource.PLAYERS, (float) 0.4,
 								(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 					} else {
-						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.bottle.fill_dragonbreath")), SoundSource.PLAYERS, (float) 0.4,
+						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.bottle.fill_dragonbreath")), SoundSource.PLAYERS, (float) 0.4,
 								(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 					}
 				}
 			} else {
 				if ((entity instanceof Player _plr ? _plr.experienceLevel : 0) > 0) {
 					if (entity instanceof Player _player)
-						_player.getCooldowns().addCooldown(itemstack.getItem(), 20);
+						_player.getCooldowns().addCooldown(itemstack, 20);
 					{
 						final String _tagName = "xp";
 						final double _tagValue = (entity instanceof Player _plr ? _plr.experienceLevel : 0);
@@ -51,10 +51,10 @@ public class BismuthJarRightClickedProcedure {
 						_player.giveExperienceLevels(-(entity instanceof Player _plr ? _plr.experienceLevel : 0));
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.bottle.fill_dragonbreath")), SoundSource.PLAYERS, (float) 0.4,
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.bottle.fill_dragonbreath")), SoundSource.PLAYERS, (float) 0.4,
 									(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.bottle.fill_dragonbreath")), SoundSource.PLAYERS, (float) 0.4,
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.bottle.fill_dragonbreath")), SoundSource.PLAYERS, (float) 0.4,
 									(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 						}
 					}
@@ -62,9 +62,9 @@ public class BismuthJarRightClickedProcedure {
 			}
 		} else {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 20);
+				_player.getCooldowns().addCooldown(itemstack, 20);
 			if (entity instanceof Player _player)
-				_player.giveExperienceLevels((int) itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("xp"));
+				_player.giveExperienceLevels((int) itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("xp", 0));
 			{
 				final String _tagName = "xp";
 				final double _tagValue = 0;
@@ -72,10 +72,10 @@ public class BismuthJarRightClickedProcedure {
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.levelup")), SoundSource.PLAYERS, (float) 0.4,
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.levelup")), SoundSource.PLAYERS, (float) 0.4,
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.levelup")), SoundSource.PLAYERS, (float) 0.4,
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.levelup")), SoundSource.PLAYERS, (float) 0.4,
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 				}
 			}

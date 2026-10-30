@@ -15,7 +15,7 @@ public class GiantShadowHandOnEntityTickUpdateProcedure {
 			return;
 		entity.setDeltaMovement(new Vec3(0, 10, 0));
 		TheDeepVoidMod.queueServerWork(250, () -> {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("despawn") == false) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("despawn", false) == false) {
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("despawn", true);
 				if (entity instanceof GiantShadowHandEntity) {
 					((GiantShadowHandEntity) entity).setAnimation("animation.giantShadowHand_despawn");
@@ -24,7 +24,7 @@ public class GiantShadowHandOnEntityTickUpdateProcedure {
 					_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20, 99, false, false));
 			}
 		});
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("despawn") == true) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("despawn", false) == true) {
 			TheDeepVoidMod.queueServerWork(20, () -> {
 				if (!entity.level().isClientSide())
 					entity.discard();

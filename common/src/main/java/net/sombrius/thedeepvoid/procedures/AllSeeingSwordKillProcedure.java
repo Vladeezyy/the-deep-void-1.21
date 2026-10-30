@@ -36,13 +36,13 @@ public class AllSeeingSwordKillProcedure {
 					if ((sourceentity instanceof Player _plr ? _plr.getAttackStrengthScale(0) : 0) >= 0.848) {
 						{
 							TheDeepVoidModVariables.PlayerVariables _vars = TheDeepVoidModVariables.of(sourceentity);
-							_vars.hasteAllSeeing = sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.DIG_SPEED) ? _livEnt.getEffect(MobEffects.DIG_SPEED).getAmplifier() : 0;
+							_vars.hasteAllSeeing = sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.HASTE) ? _livEnt.getEffect(MobEffects.HASTE).getAmplifier() : 0;
 							_vars.syncPlayerVariables(sourceentity);
 						}
 						if (sourceentity instanceof LivingEntity _entity)
-							_entity.removeEffect(MobEffects.DIG_SPEED);
+							_entity.removeEffect(MobEffects.HASTE);
 						if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 40, (int) (TheDeepVoidModVariables.of(sourceentity).hasteAllSeeing + 1), false, false));
+							_entity.addEffect(new MobEffectInstance(MobEffects.HASTE, 40, (int) (TheDeepVoidModVariables.of(sourceentity).hasteAllSeeing + 1), false, false));
 					}
 				}
 			}
@@ -51,13 +51,13 @@ public class AllSeeingSwordKillProcedure {
 					if ((sourceentity instanceof Player _plr ? _plr.getAttackStrengthScale(0) : 0) >= 0.848) {
 						{
 							TheDeepVoidModVariables.PlayerVariables _vars = TheDeepVoidModVariables.of(sourceentity);
-							_vars.hasteAllSeeing = sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.DIG_SPEED) ? _livEnt.getEffect(MobEffects.DIG_SPEED).getAmplifier() : 0;
+							_vars.hasteAllSeeing = sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.HASTE) ? _livEnt.getEffect(MobEffects.HASTE).getAmplifier() : 0;
 							_vars.syncPlayerVariables(sourceentity);
 						}
 						if (sourceentity instanceof LivingEntity _entity)
-							_entity.removeEffect(MobEffects.DIG_SPEED);
+							_entity.removeEffect(MobEffects.HASTE);
 						if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 55, (int) (TheDeepVoidModVariables.of(sourceentity).hasteAllSeeing + 1), false, false));
+							_entity.addEffect(new MobEffectInstance(MobEffects.HASTE, 55, (int) (TheDeepVoidModVariables.of(sourceentity).hasteAllSeeing + 1), false, false));
 					}
 				}
 			}

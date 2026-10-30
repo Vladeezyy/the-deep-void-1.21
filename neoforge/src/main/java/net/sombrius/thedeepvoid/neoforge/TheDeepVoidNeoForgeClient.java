@@ -12,7 +12,6 @@ import net.neoforged.neoforge.client.event.RenderFrameEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.RegisterDimensionSpecialEffectsEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -93,7 +92,6 @@ public final class TheDeepVoidNeoForgeClient {
 				})));
 		modBus.addListener((RegisterMenuScreensEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterMenuScreensEvent(event::register)));
 		modBus.addListener((RegisterKeyMappingsEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterKeyMappingsEvent(event::register)));
-		modBus.addListener((RegisterDimensionSpecialEffectsEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterDimensionSpecialEffectsEvent(event::register)));
 		modBus.addListener(TheDeepVoidNeoForgeClient::registerClientExtensions);
 
 		IEventBus bus = NeoForge.EVENT_BUS;
@@ -114,16 +112,7 @@ public final class TheDeepVoidNeoForgeClient {
 			event.setGreen(ours.getGreen());
 			event.setBlue(ours.getBlue());
 		});
-		bus.addListener((ViewportEvent.RenderFog event) -> {
-			var ours = new net.sombrius.thedeepvoid.port.bus.ViewportEvent.RenderFog(event.getMode(), event.getCamera(), event.getPartialTick(), event.getNearPlaneDistance(),
-					event.getFarPlaneDistance(), event.getFogShape());
-			if (ModBus.post(ours)) {
-				event.setNearPlaneDistance(ours.getNearPlaneDistance());
-				event.setFarPlaneDistance(ours.getFarPlaneDistance());
-				event.setFogShape(ours.getFogShape());
-				event.setCanceled(true);
-			}
-		});
+		bus.addListener((ViewportEvent.RenderFog event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ViewportEvent.RenderFog(event.getCamera(), event.getPartialTick(), event.getType(), event.getFogData())));
 	}
 
 	/** The mod's item and effect extensions (port.neo) as NeoForge's, and the fluid types' own */

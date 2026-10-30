@@ -7,14 +7,14 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 @JeiPlugin
 public class TheDeepVoidModJeiInformation implements IModPlugin {
 	@Override
-	public ResourceLocation getPluginUid() {
-		return ResourceLocation.parse("the_deep_void:information");
+	public Identifier getPluginUid() {
+		return Identifier.parse("the_deep_void:information");
 	}
 
 	@Override

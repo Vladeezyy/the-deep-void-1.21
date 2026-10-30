@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.sombrius.thedeepvoid.entity.BigEyeEntity;
 import net.sombrius.thedeepvoid.entity.CrossEyesEntity;
@@ -19,7 +19,7 @@ public class DamnedOnInitialEntitySpawnProcedure {
 		if (entity instanceof DamnedEntity) {
 			if (Math.random() < 0.2) {
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.CROSS_EYES.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.CROSS_EYES.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}
@@ -28,7 +28,7 @@ public class DamnedOnInitialEntitySpawnProcedure {
 					entity.discard();
 			} else if (Math.random() < 0.2) {
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.BIG_EYE.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.BIG_EYE.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}
@@ -37,7 +37,7 @@ public class DamnedOnInitialEntitySpawnProcedure {
 					entity.discard();
 			} else if (Math.random() < 0.2) {
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.MULTIPLE_EYES.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.MULTIPLE_EYES.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}
@@ -46,7 +46,7 @@ public class DamnedOnInitialEntitySpawnProcedure {
 					entity.discard();
 			} else if (Math.random() < 0.2) {
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.FOUR_EYES.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.FOUR_EYES.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}

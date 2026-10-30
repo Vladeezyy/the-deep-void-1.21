@@ -4,7 +4,7 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.sombrius.thedeepvoid.port.bus.PlayerTickEvent;
 import net.sombrius.thedeepvoid.port.bus.Event;
@@ -14,7 +14,7 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class PlayerIsInThePitProcedure {
-	private static final ResourceKey<Level> DIM_THE_PIT = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:the_pit"));
+	private static final ResourceKey<Level> DIM_THE_PIT = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:the_pit"));
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {

@@ -2,14 +2,14 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
@@ -32,14 +32,14 @@ public class BrainFogOnEffectActiveTickProcedure {
 			if ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder()).getDuration() : 0) == 1) {
 				BrainFogEffectExpiresProcedure.execute(world, x, y, z, entity);
 			}
-			if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:misted_remnants")) && !(!world.getEntitiesOfClass(FalseHydraEntity.class, AABB.ofSize(new Vec3(x, y, z), 64, 64, 64), e -> true).isEmpty())
+			if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:misted_remnants")) && !(!world.getEntitiesOfClass(FalseHydraEntity.class, AABB.ofSize(new Vec3(x, y, z), 64, 64, 64), e -> true).isEmpty())
 					|| new Object() {
 						public boolean checkGamemode(Entity _ent) {
 							if (_ent instanceof ServerPlayer _serverPlayer) {
 								return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 							} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-								return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-										&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+								return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+										&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 							}
 							return false;
 						}
@@ -53,8 +53,8 @@ public class BrainFogOnEffectActiveTickProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
@@ -62,44 +62,44 @@ public class BrainFogOnEffectActiveTickProcedure {
 				if (entity instanceof LivingEntity _entity)
 					_entity.removeEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder());
 			}
-			if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:misted_remnants")) && !(!world.getEntitiesOfClass(FalseHydraEntity.class, AABB.ofSize(new Vec3(x, y, z), 240, 240, 240), e -> true).isEmpty())
+			if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:misted_remnants")) && !(!world.getEntitiesOfClass(FalseHydraEntity.class, AABB.ofSize(new Vec3(x, y, z), 240, 240, 240), e -> true).isEmpty())
 					&& !(!world.getEntitiesOfClass(FalseHydraSingingEntity.class, AABB.ofSize(new Vec3(x, y, z), 240, 240, 240), e -> true).isEmpty())
 					&& (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder()).getAmplifier() : 0) >= 4
 					&& DeepVoidConfigConfiguration.FALSEHYDRAFROMBRAINFOG.get() == true) {
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("spawnHydraSing") >= 600) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("spawnHydraSing", 0) >= 600) {
 					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("spawnHydraSing", 0);
 					rnd = Mth.nextInt(RandomSource.create(), 1, 4);
 					if (rnd == 1) {
-						if (world.getBiome(BlockPos.containing(x + 60, y, z)).is(ResourceLocation.parse("the_deep_void:misted_remnants"))) {
+						if (world.getBiome(BlockPos.containing(x + 60, y, z)).is(Identifier.parse("the_deep_void:misted_remnants"))) {
 							if (world instanceof ServerLevel _level) {
-								Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA_SINGING.get().spawn(_level, BlockPos.containing(x + 60, y, z), MobSpawnType.MOB_SUMMONED);
+								Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA_SINGING.get().spawn(_level, BlockPos.containing(x + 60, y, z), EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}
 							}
 						}
 					} else if (rnd == 2) {
-						if (world.getBiome(BlockPos.containing(x - 60, y, z)).is(ResourceLocation.parse("the_deep_void:misted_remnants"))) {
+						if (world.getBiome(BlockPos.containing(x - 60, y, z)).is(Identifier.parse("the_deep_void:misted_remnants"))) {
 							if (world instanceof ServerLevel _level) {
-								Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA_SINGING.get().spawn(_level, BlockPos.containing(x - 60, y, z), MobSpawnType.MOB_SUMMONED);
+								Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA_SINGING.get().spawn(_level, BlockPos.containing(x - 60, y, z), EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}
 							}
 						}
 					} else if (rnd == 3) {
-						if (world.getBiome(BlockPos.containing(x, y, z + 60)).is(ResourceLocation.parse("the_deep_void:misted_remnants"))) {
+						if (world.getBiome(BlockPos.containing(x, y, z + 60)).is(Identifier.parse("the_deep_void:misted_remnants"))) {
 							if (world instanceof ServerLevel _level) {
-								Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA_SINGING.get().spawn(_level, BlockPos.containing(x, y, z + 60), MobSpawnType.MOB_SUMMONED);
+								Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA_SINGING.get().spawn(_level, BlockPos.containing(x, y, z + 60), EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}
 							}
 						}
 					} else if (rnd == 4) {
-						if (world.getBiome(BlockPos.containing(x, y, z - 60)).is(ResourceLocation.parse("the_deep_void:misted_remnants"))) {
+						if (world.getBiome(BlockPos.containing(x, y, z - 60)).is(Identifier.parse("the_deep_void:misted_remnants"))) {
 							if (world instanceof ServerLevel _level) {
-								Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA_SINGING.get().spawn(_level, BlockPos.containing(x, y, z - 60), MobSpawnType.MOB_SUMMONED);
+								Entity entityToSpawn = TheDeepVoidModEntities.FALSE_HYDRA_SINGING.get().spawn(_level, BlockPos.containing(x, y, z - 60), EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}
@@ -107,7 +107,7 @@ public class BrainFogOnEffectActiveTickProcedure {
 						}
 					}
 				} else {
-					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("spawnHydraSing", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("spawnHydraSing") + 1));
+					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("spawnHydraSing", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("spawnHydraSing", 0) + 1));
 				}
 			}
 		}

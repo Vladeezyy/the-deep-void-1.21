@@ -1,68 +1,38 @@
-
 package net.sombrius.thedeepvoid.client.renderer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
+
 import net.sombrius.thedeepvoid.client.model.Modeldark_steel_flail;
 import net.sombrius.thedeepvoid.entity.DarkSteelFlailEntity;
+import net.sombrius.thedeepvoid.port.PortRender;
 import net.sombrius.thedeepvoid.procedures.DarkSteelFlailDisplayCondition2Procedure;
 import net.sombrius.thedeepvoid.procedures.DarkSteelFlailDisplayConditionProcedure;
 
-public class DarkSteelFlailRenderer extends MobRenderer<DarkSteelFlailEntity, Modeldark_steel_flail<DarkSteelFlailEntity>> {
+/** 1.21.11: the display conditions of the layers are computed with the render state */
+public class DarkSteelFlailRenderer extends MobRenderer<DarkSteelFlailEntity, PortRender.LayerState, Modeldark_steel_flail<PortRender.LayerState>> {
 	public DarkSteelFlailRenderer(EntityRendererProvider.Context context) {
-		super(context, new Modeldark_steel_flail(context.bakeLayer(Modeldark_steel_flail.LAYER_LOCATION)), 0f);
-		this.addLayer(new RenderLayer<DarkSteelFlailEntity, Modeldark_steel_flail<DarkSteelFlailEntity>>(this) {
-			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/remflail.png");
-
-			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, DarkSteelFlailEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-				Level world = entity.level();
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				if (DarkSteelFlailDisplayConditionProcedure.execute(entity)) {
-					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
-					EntityModel model = new Modeldark_steel_flail(Minecraft.getInstance().getEntityModels().bakeLayer(Modeldark_steel_flail.LAYER_LOCATION));
-					this.getParentModel().copyPropertiesTo(model);
-					model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, -1);
-				}
-			}
-		});
-		this.addLayer(new RenderLayer<DarkSteelFlailEntity, Modeldark_steel_flail<DarkSteelFlailEntity>>(this) {
-			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("the_deep_void:textures/entities/flail.png");
-
-			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, DarkSteelFlailEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-				Level world = entity.level();
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				if (DarkSteelFlailDisplayCondition2Procedure.execute(entity)) {
-					VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
-					EntityModel model = new Modeldark_steel_flail(Minecraft.getInstance().getEntityModels().bakeLayer(Modeldark_steel_flail.LAYER_LOCATION));
-					this.getParentModel().copyPropertiesTo(model);
-					model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-					model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-					model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, -1);
-				}
-			}
-		});
+		super(context, new Modeldark_steel_flail<>(context.bakeLayer(Modeldark_steel_flail.LAYER_LOCATION)), 0f);
+		this.addLayer(PortRender.layer(this, this.getModel(), Identifier.parse("the_deep_void:textures/entities/remflail.png"), RenderTypes::entityCutoutNoCull, state -> state.layers[0], false));
+		this.addLayer(PortRender.layer(this, this.getModel(), Identifier.parse("the_deep_void:textures/entities/flail.png"), RenderTypes::entityCutoutNoCull, state -> state.layers[1], false));
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(DarkSteelFlailEntity entity) {
-		return ResourceLocation.parse("the_deep_void:textures/entities/flail.png");
+	public PortRender.LayerState createRenderState() {
+		return new PortRender.LayerState();
+	}
+
+	@Override
+	public void extractRenderState(DarkSteelFlailEntity entity, PortRender.LayerState state, float partialTick) {
+		super.extractRenderState(entity, state, partialTick);
+		state.layers[0] = DarkSteelFlailDisplayConditionProcedure.execute(entity);
+		state.layers[1] = DarkSteelFlailDisplayCondition2Procedure.execute(entity);
+	}
+
+	@Override
+	public Identifier getTextureLocation(PortRender.LayerState state) {
+		return Identifier.parse("the_deep_void:textures/entities/flail.png");
 	}
 }

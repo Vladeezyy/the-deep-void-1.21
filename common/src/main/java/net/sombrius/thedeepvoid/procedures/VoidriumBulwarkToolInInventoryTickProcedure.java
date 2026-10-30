@@ -6,10 +6,10 @@ import net.minecraft.world.item.component.CustomData;
 
 public class VoidriumBulwarkToolInInventoryTickProcedure {
 	public static void execute(ItemStack itemstack) {
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:parryTime") > 0) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:parryTime", 0) > 0) {
 			{
 				final String _tagName = "deep_void:parryTime";
-				final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:parryTime") - 1);
+				final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:parryTime", 0) - 1);
 				CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 			}
 		}

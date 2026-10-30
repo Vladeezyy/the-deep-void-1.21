@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -67,7 +67,7 @@ public class FlailExecutionerOnEntityTickUpdateProcedure {
 		}
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 2) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 0, false, false));
 		}
 		if ((entity instanceof FlailExecutionerEntity _datEntI ? _datEntI.getEntityData().get(FlailExecutionerEntity.DATA_stun) : 0) > 0) {
 			if ((entity instanceof FlailExecutionerEntity _datEntL27 && _datEntL27.getEntityData().get(FlailExecutionerEntity.DATA_stunned)) == false) {
@@ -81,15 +81,15 @@ public class FlailExecutionerOnEntityTickUpdateProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.ravager.stunned")), SoundSource.HOSTILE, 2, (float) 0.8);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.ravager.stunned")), SoundSource.HOSTILE, 2, (float) 0.8);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.ravager.stunned")), SoundSource.HOSTILE, 2, (float) 0.8, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.ravager.stunned")), SoundSource.HOSTILE, 2, (float) 0.8, false);
 					}
 				}
-				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK)), 10);
+				entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK)), 10);
 			}
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 99, false, false));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 5, 99, false, false));
 			if (entity instanceof FlailExecutionerEntity _datEntSetI)

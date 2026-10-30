@@ -20,11 +20,11 @@ import net.sombrius.thedeepvoid.procedures.BlockOfBonePileOnBoneMealSuccessProce
 
 public class RottenMossBlock extends Block implements BonemealableBlock {
 	public RottenMossBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.MOSS).strength(0.2f, 0.5f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.MOSS).strength(0.2f, 0.5f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

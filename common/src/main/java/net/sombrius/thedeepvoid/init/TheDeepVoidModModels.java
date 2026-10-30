@@ -86,7 +86,7 @@ import net.sombrius.thedeepvoid.client.model.Modelwanderer;
 import net.sombrius.thedeepvoid.client.model.Modelweaver;
 import net.sombrius.thedeepvoid.client.model.Modelxray;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
+@EventBusSubscriber(value = {Dist.CLIENT})
 public class TheDeepVoidModModels {
 	@SubscribeEvent
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

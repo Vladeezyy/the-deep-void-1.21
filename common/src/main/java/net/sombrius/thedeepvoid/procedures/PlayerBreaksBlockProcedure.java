@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -36,10 +36,10 @@ public class PlayerBreaksBlockProcedure {
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(x + Mth.nextDouble(RandomSource.create(), -10, 10), y + Mth.nextDouble(RandomSource.create(), -10, 10), z + Mth.nextDouble(RandomSource.create(), -10, 10)),
-								BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.deepslate.break")), SoundSource.BLOCKS, 3, 1);
+								BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.deepslate.break")), SoundSource.BLOCKS, 3, 1);
 					} else {
 						_level.playLocalSound((x + Mth.nextDouble(RandomSource.create(), -10, 10)), (y + Mth.nextDouble(RandomSource.create(), -10, 10)), (z + Mth.nextDouble(RandomSource.create(), -10, 10)),
-								BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.deepslate.break")), SoundSource.BLOCKS, 3, 1, false);
+								BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.deepslate.break")), SoundSource.BLOCKS, 3, 1, false);
 					}
 				}
 			}

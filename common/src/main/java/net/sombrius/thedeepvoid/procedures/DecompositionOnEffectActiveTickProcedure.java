@@ -14,7 +14,7 @@ public class DecompositionOnEffectActiveTickProcedure {
 		if (entity == null)
 			return;
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) > (20 * (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)) / 100) {
-			entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC)), (float) (amplifier + 1.5));
+			entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MAGIC)), (float) (amplifier + 1.5));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 5, 2, false, false));
 		}

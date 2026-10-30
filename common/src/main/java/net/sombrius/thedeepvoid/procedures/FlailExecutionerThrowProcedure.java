@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,7 +10,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
@@ -34,7 +34,7 @@ public class FlailExecutionerThrowProcedure {
 			((FlailExecutionerEntity) entity).setAnimation("animation.flail_throw");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 35, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 35, 99, false, false));
 		TheDeepVoidMod.queueServerWork(22, () -> {
 			if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 				if (entity instanceof FlailExecutionerEntity _datEntSetL)
@@ -43,14 +43,14 @@ public class FlailExecutionerThrowProcedure {
 						((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ())));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.snowball.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
+						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.snowball.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
 					} else {
-						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.snowball.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
+						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.snowball.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
 					}
 				}
 				if (world instanceof ServerLevel _serverLevel) {
 					Entity entityinstance = TheDeepVoidModEntities.EXECUTIONER_DARK_STEEL_FLAIL.get().create(_serverLevel, null,
-							BlockPos.containing(entity.getX() + entity.getLookAngle().x * 1, entity.getY() + 1.5, entity.getZ() + entity.getLookAngle().z * 1), MobSpawnType.MOB_SUMMONED, false, false);
+							BlockPos.containing(entity.getX() + entity.getLookAngle().x * 1, entity.getY() + 1.5, entity.getZ() + entity.getLookAngle().z * 1), EntitySpawnReason.MOB_SUMMONED, false, false);
 					if (entityinstance != null) {
 						entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 						entityinstance.setDeltaMovement(new Vec3((((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX() - entity.getX()) * 0.15),

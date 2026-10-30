@@ -9,6 +9,6 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class SmoothAncientDeepslateButtonBlock extends ButtonBlock {
 	public SmoothAncientDeepslateButtonBlock() {
-		super(BlockSetType.STONE, 20, BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE_TILES).strength(4.5f, 7.5f).requiresCorrectToolForDrops().dynamicShape());
+		super(BlockSetType.STONE, 20, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE_TILES).strength(4.5f, 7.5f).requiresCorrectToolForDrops().dynamicShape());
 	}
 }

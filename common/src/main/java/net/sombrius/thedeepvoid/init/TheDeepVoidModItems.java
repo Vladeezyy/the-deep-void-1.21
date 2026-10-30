@@ -4,6 +4,7 @@
  */
 package net.sombrius.thedeepvoid.init;
 
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.ItemStack;
 
 import net.sombrius.thedeepvoid.port.bus.RegisterCapabilitiesEvent;
@@ -418,11 +419,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.Identifier;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class TheDeepVoidModItems {
 	public static final Registrar<Item> REGISTRY = Registrar.create(Registries.ITEM, TheDeepVoidMod.MODID);
 	public static final RegistryEntry<Item, Item> BLOCK_OF_BONE_PILE = block(TheDeepVoidModBlocks.BLOCK_OF_BONE_PILE);
@@ -544,7 +543,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> DEVOURER_TENDRIL = REGISTRY.register("devourer_tendril", () -> new DevourerTendrilItem());
 	public static final RegistryEntry<Item, Item> DEVOURER_SHIELD = REGISTRY.register("devourer_shield", () -> new DevourerShieldItem());
 	public static final RegistryEntry<Item, Item> CHASMS_MUSIC_DISC = REGISTRY.register("chasms_music_disc", () -> new ChasmsMusicDiscItem());
-	public static final RegistryEntry<Item, Item> AMALGAM_SPAWN_EGG = REGISTRY.register("amalgam_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.AMALGAM.get(), -13234674, -5396066, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> AMALGAM_SPAWN_EGG = REGISTRY.register("amalgam_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.AMALGAM.get())));
 	public static final RegistryEntry<Item, Item> VOID_ROOTS = block(TheDeepVoidModBlocks.VOID_ROOTS);
 	public static final RegistryEntry<Item, Item> VOID_ROSE = block(TheDeepVoidModBlocks.VOID_ROSE);
 	public static final RegistryEntry<Item, Item> VOID_FERN = block(TheDeepVoidModBlocks.VOID_FERN);
@@ -676,7 +675,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> SEER = block(TheDeepVoidModBlocks.SEER);
 	public static final RegistryEntry<Item, Item> CINNABAR = REGISTRY.register("cinnabar", () -> new CinnabarItem());
 	public static final RegistryEntry<Item, Item> REFINED_CINNABAR = REGISTRY.register("refined_cinnabar", () -> new RefinedCinnabarItem());
-	public static final RegistryEntry<Item, Item> OVERSEER_PILLAR_SPAWN_EGG = REGISTRY.register("overseer_pillar_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.OVERSEER_PILLAR.get(), -15460839, -14216943, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> OVERSEER_PILLAR_SPAWN_EGG = REGISTRY.register("overseer_pillar_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.OVERSEER_PILLAR.get())));
 	public static final RegistryEntry<Item, Item> CINNABAR_ORE = block(TheDeepVoidModBlocks.CINNABAR_ORE);
 	public static final RegistryEntry<Item, Item> MONOLITHIC_STONE_STAIRS = block(TheDeepVoidModBlocks.MONOLITHIC_STONE_STAIRS);
 	public static final RegistryEntry<Item, Item> MONOLITHIC_STONE_SLAB = block(TheDeepVoidModBlocks.MONOLITHIC_STONE_SLAB);
@@ -849,53 +848,53 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> REFINED_ONYX_SLAB = block(TheDeepVoidModBlocks.REFINED_ONYX_SLAB);
 	public static final RegistryEntry<Item, Item> CRUEL_STILETTO = REGISTRY.register("cruel_stiletto", () -> new CruelStilettoItem());
 	public static final RegistryEntry<Item, Item> SHADESTORM = REGISTRY.register("shadestorm", () -> new ShadestormItem());
-	public static final RegistryEntry<Item, Item> MOURNER_SPAWN_EGG = REGISTRY.register("mourner_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.MOURNER.get(), -16777216, -14408668, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> BONE_CRAWLER_SPAWN_EGG = REGISTRY.register("bone_crawler_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.BONE_CRAWLER.get(), -14474721, -10724523, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> FOOL_EATER_SPAWN_EGG = REGISTRY.register("fool_eater_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.FOOL_EATER.get(), -15790835, -13298925, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> LURKER_SPAWN_EGG = REGISTRY.register("lurker_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.LURKER.get(), -13685463, -11712192, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> STALKER_SPAWN_EGG = REGISTRY.register("stalker_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.STALKER.get(), -15132648, -13752280, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> ABDUCTOR_SPAWN_EGG = REGISTRY.register("abductor_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.ABDUCTOR.get(), -13882324, -15790321, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> VOID_DWELLER_SPAWN_EGG = REGISTRY.register("void_dweller_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.VOID_DWELLER.get(), -15132123, -12829636, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> LICKER_SPAWN_EGG = REGISTRY.register("licker_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.LICKER.get(), -14934235, -12517376, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> FLESH_CUBE_SPAWN_EGG = REGISTRY.register("flesh_cube_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.FLESH_CUBE.get(), -13887207, -13096920, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> SPORE_SPEWER_SPAWN_EGG = REGISTRY.register("spore_spewer_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.SPORE_SPEWER.get(), -14151407, -11450067, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> WANDERER_SPAWN_EGG = REGISTRY.register("wanderer_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.WANDERER.get(), -11908798, -15395563, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> GRAVEKEEPER_SPAWN_EGG = REGISTRY.register("gravekeeper_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.GRAVEKEEPER.get(), -12303809, -14408927, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> GOO_SPITTER_SPAWN_EGG = REGISTRY.register("goo_spitter_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.GOO_SPITTER.get(), -14474721, -10724523, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> ROAMER_SPAWN_EGG = REGISTRY.register("roamer_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.ROAMER.get(), -11448500, -16777216, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> MOURNER_SPAWN_EGG = REGISTRY.register("mourner_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.MOURNER.get())));
+	public static final RegistryEntry<Item, Item> BONE_CRAWLER_SPAWN_EGG = REGISTRY.register("bone_crawler_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.BONE_CRAWLER.get())));
+	public static final RegistryEntry<Item, Item> FOOL_EATER_SPAWN_EGG = REGISTRY.register("fool_eater_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.FOOL_EATER.get())));
+	public static final RegistryEntry<Item, Item> LURKER_SPAWN_EGG = REGISTRY.register("lurker_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.LURKER.get())));
+	public static final RegistryEntry<Item, Item> STALKER_SPAWN_EGG = REGISTRY.register("stalker_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.STALKER.get())));
+	public static final RegistryEntry<Item, Item> ABDUCTOR_SPAWN_EGG = REGISTRY.register("abductor_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.ABDUCTOR.get())));
+	public static final RegistryEntry<Item, Item> VOID_DWELLER_SPAWN_EGG = REGISTRY.register("void_dweller_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.VOID_DWELLER.get())));
+	public static final RegistryEntry<Item, Item> LICKER_SPAWN_EGG = REGISTRY.register("licker_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.LICKER.get())));
+	public static final RegistryEntry<Item, Item> FLESH_CUBE_SPAWN_EGG = REGISTRY.register("flesh_cube_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.FLESH_CUBE.get())));
+	public static final RegistryEntry<Item, Item> SPORE_SPEWER_SPAWN_EGG = REGISTRY.register("spore_spewer_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.SPORE_SPEWER.get())));
+	public static final RegistryEntry<Item, Item> WANDERER_SPAWN_EGG = REGISTRY.register("wanderer_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.WANDERER.get())));
+	public static final RegistryEntry<Item, Item> GRAVEKEEPER_SPAWN_EGG = REGISTRY.register("gravekeeper_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.GRAVEKEEPER.get())));
+	public static final RegistryEntry<Item, Item> GOO_SPITTER_SPAWN_EGG = REGISTRY.register("goo_spitter_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.GOO_SPITTER.get())));
+	public static final RegistryEntry<Item, Item> ROAMER_SPAWN_EGG = REGISTRY.register("roamer_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.ROAMER.get())));
 	public static final RegistryEntry<Item, Item> ENDLESS_QUIVER = REGISTRY.register("endless_quiver", () -> new EndlessQuiverItem());
-	public static final RegistryEntry<Item, Item> MOTHER_BONE_CRAWLER_SPAWN_EGG = REGISTRY.register("mother_bone_crawler_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.MOTHER_BONE_CRAWLER.get(), -14145757, -5786461, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> ALPHA_BONE_CRAWLER_SPAWN_EGG = REGISTRY.register("alpha_bone_crawler_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.ALPHA_BONE_CRAWLER.get(), -15593201, -13224397, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> BABY_BONE_CRAWLER_SPAWN_EGG = REGISTRY.register("baby_bone_crawler_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.BABY_BONE_CRAWLER.get(), -10790830, -7698308, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> ROTTEN_CORPSE_SPAWN_EGG = REGISTRY.register("rotten_corpse_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.ROTTEN_CORPSE.get(), -6513508, -11711422, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> ROTTEN_CULT_MEMBER_SPAWN_EGG = REGISTRY.register("rotten_cult_member_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.ROTTEN_CULT_MEMBER.get(), -6513508, -16053493, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> EYEKIN_SPAWN_EGG = REGISTRY.register("eyekin_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.EYEKIN.get(), -10551296, -11099436, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> SWARMER_SPAWN_EGG = REGISTRY.register("swarmer_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.SWARMER.get(), -10019812, -14271126, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> DEATH_MAW_SPAWN_EGG = REGISTRY.register("death_maw_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.DEATH_MAW.get(), -15987700, -13684945, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> BEHOLDER_SPAWN_EGG = REGISTRY.register("beholder_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.BEHOLDER.get(), -13955570, -3357500, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> EVERHUNGER_SPAWN_EGG = REGISTRY.register("everhunger_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.EVERHUNGER.get(), -13890034, -6779263, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> DEATH_VULTURE_SPAWN_EGG = REGISTRY.register("death_vulture_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.DEATH_VULTURE.get(), -15329770, -4342877, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> DEVOURER_SPAWN_EGG = REGISTRY.register("devourer_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.DEVOURER.get(), -15268603, -7455170, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> ROOTED_SPAWN_EGG = REGISTRY.register("rooted_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.ROOTED.get(), -14474718, -8421505, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> SCARECROW_SPAWN_EGG = REGISTRY.register("scarecrow_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.SCARECROW.get(), -13697024, -3816264, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> OVERSEER_BIG_PILLAR_SPAWN_EGG = REGISTRY.register("overseer_big_pillar_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.OVERSEER_BIG_PILLAR.get(), -15460839, -14216943, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> MOTHER_BONE_CRAWLER_SPAWN_EGG = REGISTRY.register("mother_bone_crawler_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.MOTHER_BONE_CRAWLER.get())));
+	public static final RegistryEntry<Item, Item> ALPHA_BONE_CRAWLER_SPAWN_EGG = REGISTRY.register("alpha_bone_crawler_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.ALPHA_BONE_CRAWLER.get())));
+	public static final RegistryEntry<Item, Item> BABY_BONE_CRAWLER_SPAWN_EGG = REGISTRY.register("baby_bone_crawler_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.BABY_BONE_CRAWLER.get())));
+	public static final RegistryEntry<Item, Item> ROTTEN_CORPSE_SPAWN_EGG = REGISTRY.register("rotten_corpse_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.ROTTEN_CORPSE.get())));
+	public static final RegistryEntry<Item, Item> ROTTEN_CULT_MEMBER_SPAWN_EGG = REGISTRY.register("rotten_cult_member_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.ROTTEN_CULT_MEMBER.get())));
+	public static final RegistryEntry<Item, Item> EYEKIN_SPAWN_EGG = REGISTRY.register("eyekin_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.EYEKIN.get())));
+	public static final RegistryEntry<Item, Item> SWARMER_SPAWN_EGG = REGISTRY.register("swarmer_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.SWARMER.get())));
+	public static final RegistryEntry<Item, Item> DEATH_MAW_SPAWN_EGG = REGISTRY.register("death_maw_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.DEATH_MAW.get())));
+	public static final RegistryEntry<Item, Item> BEHOLDER_SPAWN_EGG = REGISTRY.register("beholder_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.BEHOLDER.get())));
+	public static final RegistryEntry<Item, Item> EVERHUNGER_SPAWN_EGG = REGISTRY.register("everhunger_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.EVERHUNGER.get())));
+	public static final RegistryEntry<Item, Item> DEATH_VULTURE_SPAWN_EGG = REGISTRY.register("death_vulture_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.DEATH_VULTURE.get())));
+	public static final RegistryEntry<Item, Item> DEVOURER_SPAWN_EGG = REGISTRY.register("devourer_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.DEVOURER.get())));
+	public static final RegistryEntry<Item, Item> ROOTED_SPAWN_EGG = REGISTRY.register("rooted_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.ROOTED.get())));
+	public static final RegistryEntry<Item, Item> SCARECROW_SPAWN_EGG = REGISTRY.register("scarecrow_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.SCARECROW.get())));
+	public static final RegistryEntry<Item, Item> OVERSEER_BIG_PILLAR_SPAWN_EGG = REGISTRY.register("overseer_big_pillar_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.OVERSEER_BIG_PILLAR.get())));
 	public static final RegistryEntry<Item, Item> BONE_LOAF = REGISTRY.register("bone_loaf", () -> new BoneLoafItem());
 	public static final RegistryEntry<Item, Item> ROTTEN_DELIGHT = REGISTRY.register("rotten_delight", () -> new RottenDelightItem());
 	public static final RegistryEntry<Item, Item> CREEP_O_METER = REGISTRY.register("creep_o_meter", () -> new CreepOMeterItem());
-	public static final RegistryEntry<Item, Item> CENTIGAZE_SPAWN_EGG = REGISTRY.register("centigaze_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.CENTIGAZE.get(), -16382190, -14475466, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> CENTIGAZE_SPAWN_EGG = REGISTRY.register("centigaze_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.CENTIGAZE.get())));
 	public static final RegistryEntry<Item, Item> DESOLATE_SOIL_ACTIVE = block(TheDeepVoidModBlocks.DESOLATE_SOIL_ACTIVE);
 	public static final RegistryEntry<Item, Item> SOUL_CLEAVER = REGISTRY.register("soul_cleaver", () -> new SoulCleaverItem());
 	public static final RegistryEntry<Item, Item> WEAVER_LEGGINGS_LEGGINGS = REGISTRY.register("weaver_leggings_leggings", () -> new WeaverLeggingsItem.Leggings());
 	public static final RegistryEntry<Item, Item> WEAVER_BOOTS_BOOTS = REGISTRY.register("weaver_boots_boots", () -> new WeaverBootsItem.Boots());
-	public static final RegistryEntry<Item, Item> WATCHING_STALKER_SPAWN_EGG = REGISTRY.register("watching_stalker_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.WATCHING_STALKER.get(), -16777216, -16777216, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> WATCHING_STALKER_SPAWN_EGG = REGISTRY.register("watching_stalker_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.WATCHING_STALKER.get())));
 	public static final RegistryEntry<Item, Item> VOID_MIRROR = REGISTRY.register("void_mirror", () -> new VoidMirrorItem());
 	public static final RegistryEntry<Item, Item> DARKMARE = REGISTRY.register("darkmare", () -> new DarkmareItem());
-	public static final RegistryEntry<Item, Item> HAND_SPAWN_SPAWN_EGG = REGISTRY.register("hand_spawn_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.HAND_SPAWN.get(), -16760499, -16777216, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> DAMNED_SPAWN_EGG = REGISTRY.register("damned_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.DAMNED.get(), -15396334, -1, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> HAND_SPAWN_SPAWN_EGG = REGISTRY.register("hand_spawn_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.HAND_SPAWN.get())));
+	public static final RegistryEntry<Item, Item> DAMNED_SPAWN_EGG = REGISTRY.register("damned_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.DAMNED.get())));
 	public static final RegistryEntry<Item, Item> SOUL_ORB_PILLAR = block(TheDeepVoidModBlocks.SOUL_ORB_PILLAR);
-	public static final RegistryEntry<Item, Item> SOUL_ORB_SPAWN_EGG = REGISTRY.register("soul_orb_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.SOUL_ORB.get(), -16743782, -12590593, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> SOUL_ORB_SPAWN_EGG = REGISTRY.register("soul_orb_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.SOUL_ORB.get())));
 	public static final RegistryEntry<Item, Item> SOUL_CONTAINER = block(TheDeepVoidModBlocks.SOUL_CONTAINER);
-	public static final RegistryEntry<Item, Item> CHAINED_WEAVER_SPAWN_EGG = REGISTRY.register("chained_weaver_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.CHAINED_WEAVER.get(), -12036769, -15786978, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> CHAINED_WEAVER_SPAWN_EGG = REGISTRY.register("chained_weaver_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.CHAINED_WEAVER.get())));
 	public static final RegistryEntry<Item, Item> HEXED_DOLL = REGISTRY.register("hexed_doll", () -> new HexedDollItem());
 	public static final RegistryEntry<Item, Item> WEAVER_OF_SOULS_TREASURE_BAG = REGISTRY.register("weaver_of_souls_treasure_bag", () -> new WeaverOfSoulsTreasureBagItem());
 	public static final RegistryEntry<Item, Item> VOODOO_DOLL = REGISTRY.register("voodoo_doll", () -> new VoodooDollItem());
@@ -927,7 +926,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> WITHER_NEEDLE = REGISTRY.register("wither_needle", () -> new WitherNeedleItem());
 	public static final RegistryEntry<Item, Item> SATURATION_NEEDLE = REGISTRY.register("saturation_needle", () -> new SaturationNeedleItem());
 	public static final RegistryEntry<Item, Item> JUDGEMENT = REGISTRY.register("judgement", () -> new JudgementItem());
-	public static final RegistryEntry<Item, Item> FORSAKEN_SPAWN_EGG = REGISTRY.register("forsaken_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.FORSAKEN.get(), -14014174, -1, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> FORSAKEN_SPAWN_EGG = REGISTRY.register("forsaken_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.FORSAKEN.get())));
 	public static final RegistryEntry<Item, Item> ELYTRA_PIECE = REGISTRY.register("elytra_piece", () -> new ElytraPieceItem());
 	public static final RegistryEntry<Item, Item> VOIDRIUM_BULWARK = REGISTRY.register("voidrium_bulwark", () -> new VoidriumBulwarkItem());
 	public static final RegistryEntry<Item, Item> ROTTEN_MOSS_ACTIVE = block(TheDeepVoidModBlocks.ROTTEN_MOSS_ACTIVE);
@@ -935,7 +934,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> BIG_SMOKE_VENT_CORNER = block(TheDeepVoidModBlocks.BIG_SMOKE_VENT_CORNER);
 	public static final RegistryEntry<Item, Item> VENT_STONE = block(TheDeepVoidModBlocks.VENT_STONE);
 	public static final RegistryEntry<Item, Item> CORPSE_PILE = block(TheDeepVoidModBlocks.CORPSE_PILE);
-	public static final RegistryEntry<Item, Item> SEEKER_SPAWN_EGG = REGISTRY.register("seeker_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.SEEKER.get(), -16777216, -1, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> SEEKER_SPAWN_EGG = REGISTRY.register("seeker_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.SEEKER.get())));
 	public static final RegistryEntry<Item, Item> BIG_TOOTH = block(TheDeepVoidModBlocks.BIG_TOOTH);
 	public static final RegistryEntry<Item, Item> SOUL_FORGE = block(TheDeepVoidModBlocks.SOUL_FORGE);
 	public static final RegistryEntry<Item, Item> SOUL_FUSED_INGOT = REGISTRY.register("soul_fused_ingot", () -> new SoulFusedIngotItem());
@@ -943,7 +942,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> APOSTLE_OF_CATASTROPHE_TREASURE_BAG = REGISTRY.register("apostle_of_catastrophe_treasure_bag", () -> new ApostleOfCatastropheTreasureBagItem());
 	public static final RegistryEntry<Item, Item> RED_GATE = block(TheDeepVoidModBlocks.RED_GATE);
 	public static final RegistryEntry<Item, Item> RED_GATE_NON_SOLID = block(TheDeepVoidModBlocks.RED_GATE_NON_SOLID);
-	public static final RegistryEntry<Item, Item> IDLING_APOSTLE_SPAWN_EGG = REGISTRY.register("idling_apostle_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.IDLING_APOSTLE.get(), -15597568, -8427264, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> IDLING_APOSTLE_SPAWN_EGG = REGISTRY.register("idling_apostle_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.IDLING_APOSTLE.get())));
 	public static final RegistryEntry<Item, Item> BLOCK_OF_SOUL_FUSED_INGOTS = block(TheDeepVoidModBlocks.BLOCK_OF_SOUL_FUSED_INGOTS);
 	public static final RegistryEntry<Item, Item> VOID_GROWTH = block(TheDeepVoidModBlocks.VOID_GROWTH);
 	public static final RegistryEntry<Item, Item> HERESY = REGISTRY.register("heresy", () -> new HeresyItem());
@@ -960,12 +959,12 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> FLESHY_OLD_BONE_BLOCK = block(TheDeepVoidModBlocks.FLESHY_OLD_BONE_BLOCK);
 	public static final RegistryEntry<Item, Item> EYE_TENDONS = block(TheDeepVoidModBlocks.EYE_TENDONS);
 	public static final RegistryEntry<Item, Item> MISANTHROPIC_HIVEMIND_SPAWN_EGG = REGISTRY.register("misanthropic_hivemind_spawn_egg",
-			() -> new SpawnEggItem(TheDeepVoidModEntities.MISANTHROPIC_HIVEMIND.get(), -14613243, -9614774, new Item.Properties()));
+			() -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.MISANTHROPIC_HIVEMIND.get())));
 	public static final RegistryEntry<Item, Item> PITCH_BLACK = REGISTRY.register("pitch_black", () -> new PitchBlackItem());
 	public static final RegistryEntry<Item, Item> MISANTHROPIC_HIVEMIND_TREASURE_BAG = REGISTRY.register("misanthropic_hivemind_treasure_bag", () -> new MisanthropicHivemindTreasureBagItem());
-	public static final RegistryEntry<Item, Item> FLESH_FANGS_SPAWN_EGG = REGISTRY.register("flesh_fangs_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.FLESH_FANGS.get(), -15073280, -11185078, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> GORE_EXPECTORATOR_SPAWN_EGG = REGISTRY.register("gore_expectorator_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.GORE_EXPECTORATOR.get(), -12514806, -6119536, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> HIVE_BRAIN_SPAWN_EGG = REGISTRY.register("hive_brain_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.HIVE_BRAIN.get(), -13301238, -8894889, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> FLESH_FANGS_SPAWN_EGG = REGISTRY.register("flesh_fangs_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.FLESH_FANGS.get())));
+	public static final RegistryEntry<Item, Item> GORE_EXPECTORATOR_SPAWN_EGG = REGISTRY.register("gore_expectorator_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.GORE_EXPECTORATOR.get())));
+	public static final RegistryEntry<Item, Item> HIVE_BRAIN_SPAWN_EGG = REGISTRY.register("hive_brain_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.HIVE_BRAIN.get())));
 	public static final RegistryEntry<Item, Item> FLESH_BONE = REGISTRY.register("flesh_bone", () -> new FleshBoneItem());
 	public static final RegistryEntry<Item, Item> ANIMOSITY = REGISTRY.register("animosity", () -> new AnimosityItem());
 	public static final RegistryEntry<Item, Item> ANIMOSITY_HIDDEN = REGISTRY.register("animosity_hidden", () -> new AnimosityHiddenItem());
@@ -977,16 +976,16 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> PURPLE_EYE_VINE = block(TheDeepVoidModBlocks.PURPLE_EYE_VINE);
 	public static final RegistryEntry<Item, Item> BIG_BROWN_EYE = block(TheDeepVoidModBlocks.BIG_BROWN_EYE);
 	public static final RegistryEntry<Item, Item> BIG_PURPLE_EYE = block(TheDeepVoidModBlocks.BIG_PURPLE_EYE);
-	public static final RegistryEntry<Item, SoulWingsItem> SOUL_WINGS_CHESTPLATE = REGISTRY.register("soul_wings_chestplate", () -> new SoulWingsItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().fireResistant()));
-	public static final RegistryEntry<Item, SoulWingsFlyItem> SOUL_WINGS_FLY_CHESTPLATE = REGISTRY.register("soul_wings_fly_chestplate", () -> new SoulWingsFlyItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().fireResistant()));
+	public static final RegistryEntry<Item, SoulWingsItem> SOUL_WINGS_CHESTPLATE = REGISTRY.register("soul_wings_chestplate", () -> new SoulWingsItem(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant()));
+	public static final RegistryEntry<Item, SoulWingsFlyItem> SOUL_WINGS_FLY_CHESTPLATE = REGISTRY.register("soul_wings_fly_chestplate", () -> new SoulWingsFlyItem(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant()));
 	public static final RegistryEntry<Item, Item> PRIMORDIAL_CRAWLER_TREASURE_BAG = REGISTRY.register("primordial_crawler_treasure_bag", () -> new PrimordialCrawlerTreasureBagItem());
 	public static final RegistryEntry<Item, Item> THE_HAUNT = REGISTRY.register("the_haunt", () -> new TheHauntItem());
 	public static final RegistryEntry<Item, Item> SLEEPING_PRIMORDIAL_CRAWLER_SPAWN_EGG = REGISTRY.register("sleeping_primordial_crawler_spawn_egg",
-			() -> new SpawnEggItem(TheDeepVoidModEntities.SLEEPING_PRIMORDIAL_CRAWLER.get(), -14211554, -5134205, new Item.Properties()));
+			() -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.SLEEPING_PRIMORDIAL_CRAWLER.get())));
 	public static final RegistryEntry<Item, Item> GRIM_LICKER_HOOK = REGISTRY.register("grim_licker_hook", () -> new GrimLickerHookItem());
 	public static final RegistryEntry<Item, Item> VENGEFUL_LICKER_HOOK = REGISTRY.register("vengeful_licker_hook", () -> new VengefulLickerHookItem());
 	public static final RegistryEntry<Item, Item> BONE_CRAWLER_MOLT_PIECE = REGISTRY.register("bone_crawler_molt_piece", () -> new BoneCrawlerMoltPieceItem());
-	public static final RegistryEntry<Item, Item> PRESERVER_SPAWN_EGG = REGISTRY.register("preserver_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.PRESERVER.get(), -15269117, -4080225, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> PRESERVER_SPAWN_EGG = REGISTRY.register("preserver_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.PRESERVER.get())));
 	public static final RegistryEntry<Item, Item> VOID_BLOSSOM = block(TheDeepVoidModBlocks.VOID_BLOSSOM);
 	public static final RegistryEntry<Item, Item> CRAWLER_ROYALTY_HELMET = REGISTRY.register("crawler_royalty_helmet", () -> new CrawlerRoyaltyItem.Helmet());
 	public static final RegistryEntry<Item, Item> CRAWLER_ROYALTY_CHESTPLATE = REGISTRY.register("crawler_royalty_chestplate", () -> new CrawlerRoyaltyItem.Chestplate());
@@ -995,22 +994,22 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> LURKER_SHRINE = block(TheDeepVoidModBlocks.LURKER_SHRINE);
 	public static final RegistryEntry<Item, Item> CALL_UPON_THE_HIVE = REGISTRY.register("call_upon_the_hive", () -> new CallUponTheHiveItem());
 	public static final RegistryEntry<Item, Item> GIANT_BONE_CRAWLER_EGG_SPAWN_EGG = REGISTRY.register("giant_bone_crawler_egg_spawn_egg",
-			() -> new SpawnEggItem(TheDeepVoidModEntities.GIANT_BONE_CRAWLER_EGG.get(), -9736085, -3154225, new Item.Properties()));
+			() -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.GIANT_BONE_CRAWLER_EGG.get())));
 	public static final RegistryEntry<Item, Item> POLISHED_LAVENDITE_BLOCK = block(TheDeepVoidModBlocks.POLISHED_LAVENDITE_BLOCK);
 	public static final RegistryEntry<Item, Item> POLISHED_LAVENDITE_STAIRS = block(TheDeepVoidModBlocks.POLISHED_LAVENDITE_STAIRS);
 	public static final RegistryEntry<Item, Item> POLISHED_LAVENDITE_SLAB = block(TheDeepVoidModBlocks.POLISHED_LAVENDITE_SLAB);
 	public static final RegistryEntry<Item, Item> VOID_STEM = block(TheDeepVoidModBlocks.VOID_STEM);
-	public static final RegistryEntry<Item, Item> VOID_TENTACLE_SPAWN_EGG = REGISTRY.register("void_tentacle_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.VOID_TENTACLE.get(), -16777216, -15132391, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> VOID_TENTACLE_SPAWN_EGG = REGISTRY.register("void_tentacle_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.VOID_TENTACLE.get())));
 	public static final RegistryEntry<Item, Item> NECRONOMICON = REGISTRY.register("necronomicon", () -> new NecronomiconItem());
 	public static final RegistryEntry<Item, Item> ANCIENT_POT_BLOCK = block(TheDeepVoidModBlocks.ANCIENT_POT_BLOCK);
 	public static final RegistryEntry<Item, Item> ANCIENT_POT = block(TheDeepVoidModBlocks.ANCIENT_POT);
 	public static final RegistryEntry<Item, Item> ANCIENT_URNS = block(TheDeepVoidModBlocks.ANCIENT_URNS);
 	public static final RegistryEntry<Item, Item> ANCIENT_URNS_GENERATE = block(TheDeepVoidModBlocks.ANCIENT_URNS_GENERATE);
 	public static final RegistryEntry<Item, Item> CRUMBLING_MONOLITHIC_STONE = block(TheDeepVoidModBlocks.CRUMBLING_MONOLITHIC_STONE);
-	public static final RegistryEntry<Item, Item> MASKED_HUNTER_SPAWN_EGG = REGISTRY.register("masked_hunter_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.MASKED_HUNTER.get(), -15592942, -14606306, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> BONE_CAGE_SPAWN_EGG = REGISTRY.register("bone_cage_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.BONE_CAGE.get(), -12106178, -13412304, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> MASKED_HUNTER_SPAWN_EGG = REGISTRY.register("masked_hunter_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.MASKED_HUNTER.get())));
+	public static final RegistryEntry<Item, Item> BONE_CAGE_SPAWN_EGG = REGISTRY.register("bone_cage_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.BONE_CAGE.get())));
 	public static final RegistryEntry<Item, Item> BONE_SPIKES = block(TheDeepVoidModBlocks.BONE_SPIKES);
-	public static final RegistryEntry<Item, Item> GIANT_BONE_SPIKE_SPAWN_EGG = REGISTRY.register("giant_bone_spike_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.GIANT_BONE_SPIKE.get(), -15396077, -10461869, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> GIANT_BONE_SPIKE_SPAWN_EGG = REGISTRY.register("giant_bone_spike_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.GIANT_BONE_SPIKE.get())));
 	public static final RegistryEntry<Item, Item> HUNTER_HIDE = REGISTRY.register("hunter_hide", () -> new HunterHideItem());
 	public static final RegistryEntry<Item, Item> HUNTERS_HELMET = REGISTRY.register("hunters_helmet", () -> new HuntersItem.Helmet());
 	public static final RegistryEntry<Item, Item> HUNTERS_CHESTPLATE = REGISTRY.register("hunters_chestplate", () -> new HuntersItem.Chestplate());
@@ -1018,13 +1017,13 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> HUNTERS_BOOTS = REGISTRY.register("hunters_boots", () -> new HuntersItem.Boots());
 	public static final RegistryEntry<Item, Item> TWISTING_SPINE = block(TheDeepVoidModBlocks.TWISTING_SPINE);
 	public static final RegistryEntry<Item, Item> FAKE_TORCH = block(TheDeepVoidModBlocks.FAKE_TORCH);
-	public static final RegistryEntry<Item, Item> MIMIC_SPAWN_EGG = REGISTRY.register("mimic_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.MIMIC.get(), -15395563, -16711423, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> MIMIC_SPAWN_EGG = REGISTRY.register("mimic_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.MIMIC.get())));
 	public static final RegistryEntry<Item, Item> MISTED_HEART = REGISTRY.register("misted_heart", () -> new MistedHeartItem());
 	public static final RegistryEntry<Item, Item> MISTED_BONE = REGISTRY.register("misted_bone", () -> new MistedBoneItem());
 	public static final RegistryEntry<Item, Item> MISTED_REMAINS = block(TheDeepVoidModBlocks.MISTED_REMAINS);
 	public static final RegistryEntry<Item, Item> BLOCK_OF_MISTED_BONE_PILE = block(TheDeepVoidModBlocks.BLOCK_OF_MISTED_BONE_PILE);
-	public static final RegistryEntry<Item, Item> SAW_THROWER_SPAWN_EGG = REGISTRY.register("saw_thrower_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.SAW_THROWER.get(), -14155005, -2698561, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> SKULL_SMASHER_SPAWN_EGG = REGISTRY.register("skull_smasher_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.SKULL_SMASHER.get(), -12187897, -7501189, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> SAW_THROWER_SPAWN_EGG = REGISTRY.register("saw_thrower_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.SAW_THROWER.get())));
+	public static final RegistryEntry<Item, Item> SKULL_SMASHER_SPAWN_EGG = REGISTRY.register("skull_smasher_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.SKULL_SMASHER.get())));
 	public static final RegistryEntry<Item, Item> WATCHER_ON = block(TheDeepVoidModBlocks.WATCHER_ON);
 	public static final RegistryEntry<Item, Item> WATCHER = block(TheDeepVoidModBlocks.WATCHER);
 	public static final RegistryEntry<Item, Item> HEART_OF_THE_MIND = block(TheDeepVoidModBlocks.HEART_OF_THE_MIND);
@@ -1038,7 +1037,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> SOLID_AMBROSIA = block(TheDeepVoidModBlocks.SOLID_AMBROSIA);
 	public static final RegistryEntry<Item, Item> PACKED_FLESH = block(TheDeepVoidModBlocks.PACKED_FLESH);
 	public static final RegistryEntry<Item, Item> BLOCK_OF_HARD_FLESH = block(TheDeepVoidModBlocks.BLOCK_OF_HARD_FLESH);
-	public static final RegistryEntry<Item, Item> BOG_WALKER_SPAWN_EGG = REGISTRY.register("bog_walker_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.BOG_WALKER.get(), -16777216, -15527149, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> BOG_WALKER_SPAWN_EGG = REGISTRY.register("bog_walker_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.BOG_WALKER.get())));
 	public static final RegistryEntry<Item, Item> HEAD_OF_THE_HIVEMIND = block(TheDeepVoidModBlocks.HEAD_OF_THE_HIVEMIND);
 	public static final RegistryEntry<Item, Item> HEAD_OF_THE_PRIMORDIAL_CRAWLER = block(TheDeepVoidModBlocks.HEAD_OF_THE_PRIMORDIAL_CRAWLER);
 	public static final RegistryEntry<Item, Item> HEAD_OF_THE_APOSTLE = block(TheDeepVoidModBlocks.HEAD_OF_THE_APOSTLE);
@@ -1049,14 +1048,14 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> OLD_CORPSE_IN_A_CAGE = block(TheDeepVoidModBlocks.OLD_CORPSE_IN_A_CAGE);
 	public static final RegistryEntry<Item, Item> ROTTING_CORPSE_IN_A_CAGE = block(TheDeepVoidModBlocks.ROTTING_CORPSE_IN_A_CAGE);
 	public static final RegistryEntry<Item, Item> PRIMORDIAL_BONE_CRAWLER_SPAWN_EGG = REGISTRY.register("primordial_bone_crawler_spawn_egg",
-			() -> new SpawnEggItem(TheDeepVoidModEntities.PRIMORDIAL_BONE_CRAWLER.get(), -13751001, -6843256, new Item.Properties()));
+			() -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.PRIMORDIAL_BONE_CRAWLER.get())));
 	public static final RegistryEntry<Item, Item> SMITHING_TEMPLATE_BISMUTH = REGISTRY.register("smithing_template_bismuth", () -> new SmithingTemplateBismuthItem());
 	public static final RegistryEntry<Item, Item> SMITHING_TEMPLATE_HARD_FLESH = REGISTRY.register("smithing_template_hard_flesh", () -> new SmithingTemplateHardFleshItem());
 	public static final RegistryEntry<Item, Item> SMITHING_TEMPLATE_SOUL = REGISTRY.register("smithing_template_soul", () -> new SmithingTemplateSoulItem());
 	public static final RegistryEntry<Item, Item> APOSTASY = REGISTRY.register("apostasy", () -> new ApostasyItem());
 	public static final RegistryEntry<Item, Item> THE_BONK = REGISTRY.register("the_bonk", () -> new TheBonkItem());
-	public static final RegistryEntry<Item, Item> PENITENT_SPAWN_EGG = REGISTRY.register("penitent_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.PENITENT.get(), -14671840, -11251898, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> GAOLER_SPAWN_EGG = REGISTRY.register("gaoler_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.GAOLER.get(), -14671840, -10993101, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> PENITENT_SPAWN_EGG = REGISTRY.register("penitent_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.PENITENT.get())));
+	public static final RegistryEntry<Item, Item> GAOLER_SPAWN_EGG = REGISTRY.register("gaoler_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.GAOLER.get())));
 	public static final RegistryEntry<Item, Item> CRACKED_ANCIENT_DEEPSLATE_BRICKS = block(TheDeepVoidModBlocks.CRACKED_ANCIENT_DEEPSLATE_BRICKS);
 	public static final RegistryEntry<Item, Item> ROTTEN_ANCIENT_DEEPSLATE_BRICKS = block(TheDeepVoidModBlocks.ROTTEN_ANCIENT_DEEPSLATE_BRICKS);
 	public static final RegistryEntry<Item, Item> ROTTEN_ANCIENT_DEEPSLATE_BRICK_STAIRS = block(TheDeepVoidModBlocks.ROTTEN_ANCIENT_DEEPSLATE_BRICK_STAIRS);
@@ -1069,7 +1068,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> GREATER_EXPERIENCE_BOTTLE = REGISTRY.register("greater_experience_bottle", () -> new GreaterExperienceBottleItem());
 	public static final RegistryEntry<Item, Item> TRAP_BONE_SPIKES = block(TheDeepVoidModBlocks.TRAP_BONE_SPIKES);
 	public static final RegistryEntry<Item, Item> ANCIENT_DEEPSLATE_SPIKE_TRAP = block(TheDeepVoidModBlocks.ANCIENT_DEEPSLATE_SPIKE_TRAP);
-	public static final RegistryEntry<Item, Item> PRISONER_SPAWN_EGG = REGISTRY.register("prisoner_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.PRISONER.get(), -15066598, -7501969, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> PRISONER_SPAWN_EGG = REGISTRY.register("prisoner_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.PRISONER.get())));
 	public static final RegistryEntry<Item, Item> PENITENT_IN_A_CAGE = block(TheDeepVoidModBlocks.PENITENT_IN_A_CAGE);
 	public static final RegistryEntry<Item, Item> DARK_STEEL_BARS = block(TheDeepVoidModBlocks.DARK_STEEL_BARS);
 	public static final RegistryEntry<Item, Item> CANDELABRA = block(TheDeepVoidModBlocks.CANDELABRA);
@@ -1095,7 +1094,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> SMOOTH_ANCIENT_DEEPSLATE_PRESSURE_PLATE = block(TheDeepVoidModBlocks.SMOOTH_ANCIENT_DEEPSLATE_PRESSURE_PLATE);
 	public static final RegistryEntry<Item, Item> VOIDRIUM_SAW_TRAP = block(TheDeepVoidModBlocks.VOIDRIUM_SAW_TRAP);
 	public static final RegistryEntry<Item, Item> SMOOTH_ANCIENT_DEEPSLATE_BUTTON = block(TheDeepVoidModBlocks.SMOOTH_ANCIENT_DEEPSLATE_BUTTON);
-	public static final RegistryEntry<Item, Item> PRISON_GUARD_SPAWN_EGG = REGISTRY.register("prison_guard_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.PRISON_GUARD.get(), -14408668, -9080994, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> PRISON_GUARD_SPAWN_EGG = REGISTRY.register("prison_guard_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.PRISON_GUARD.get())));
 	public static final RegistryEntry<Item, Item> ENTITY_IMMOBILIZER = REGISTRY.register("entity_immobilizer", () -> new EntityImmobilizerItem());
 	public static final RegistryEntry<Item, Item> ENTITY_TURNER = REGISTRY.register("entity_turner", () -> new EntityTurnerItem());
 	public static final RegistryEntry<Item, Item> CANDLESTICK = block(TheDeepVoidModBlocks.CANDLESTICK);
@@ -1115,19 +1114,19 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> RED_CANDLESTICK = block(TheDeepVoidModBlocks.RED_CANDLESTICK);
 	public static final RegistryEntry<Item, Item> WHITE_CANDLESTICK = block(TheDeepVoidModBlocks.WHITE_CANDLESTICK);
 	public static final RegistryEntry<Item, Item> YELLOW_CANDLESTICK = block(TheDeepVoidModBlocks.YELLOW_CANDLESTICK);
-	public static final RegistryEntry<Item, Item> SHANK_PRISONER_SPAWN_EGG = REGISTRY.register("shank_prisoner_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.SHANK_PRISONER.get(), -15066598, -12500935, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> SHANK_PRISONER_SPAWN_EGG = REGISTRY.register("shank_prisoner_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.SHANK_PRISONER.get())));
 	public static final RegistryEntry<Item, Item> SHANK = REGISTRY.register("shank", () -> new ShankItem());
 	public static final RegistryEntry<Item, Item> ANCIENT_DEEPSLATE_DART_TRAP = block(TheDeepVoidModBlocks.ANCIENT_DEEPSLATE_DART_TRAP);
 	public static final RegistryEntry<Item, Item> ANCIENT_GUN_PART = REGISTRY.register("ancient_gun_part", () -> new AncientGunPartItem());
 	public static final RegistryEntry<Item, Item> VOID_MATTER_GREATSWORD = REGISTRY.register("void_matter_greatsword", () -> new VoidMatterGreatswordItem());
 	public static final RegistryEntry<Item, Item> RUSTY_CLAWS = REGISTRY.register("rusty_claws", () -> new RustyClawsItem());
-	public static final RegistryEntry<Item, Item> HIVE_WATCHER_SPAWN_EGG = REGISTRY.register("hive_watcher_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.HIVE_WATCHER.get(), -10941942, -9728, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> HIVE_WATCHER_SPAWN_EGG = REGISTRY.register("hive_watcher_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.HIVE_WATCHER.get())));
 	public static final RegistryEntry<Item, Item> BOTTLE_OF_AMBROSIA = REGISTRY.register("bottle_of_ambrosia", () -> new BottleOfAmbrosiaItem());
 	public static final RegistryEntry<Item, Item> AMBROSIAL_FLESH_BLOCK = block(TheDeepVoidModBlocks.AMBROSIAL_FLESH_BLOCK);
 	public static final RegistryEntry<Item, Item> AMBROSIA_STRANDS = block(TheDeepVoidModBlocks.AMBROSIA_STRANDS);
 	public static final RegistryEntry<Item, Item> CONNECTED_AMBROSIA_STRANDS = block(TheDeepVoidModBlocks.CONNECTED_AMBROSIA_STRANDS);
 	public static final RegistryEntry<Item, Item> BLOCK_OF_VISCERA = block(TheDeepVoidModBlocks.BLOCK_OF_VISCERA);
-	public static final RegistryEntry<Item, Item> EYE_OF_THE_WATCHER_SPAWN_EGG = REGISTRY.register("eye_of_the_watcher_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.EYE_OF_THE_WATCHER.get(), -13301238, -1786880, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> EYE_OF_THE_WATCHER_SPAWN_EGG = REGISTRY.register("eye_of_the_watcher_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.EYE_OF_THE_WATCHER.get())));
 	public static final RegistryEntry<Item, Item> HIVE_WATCHER_TREASURE_BAG = REGISTRY.register("hive_watcher_treasure_bag", () -> new HiveWatcherTreasureBagItem());
 	public static final RegistryEntry<Item, Item> AMBROSIAL_FLESH_CHUNK = REGISTRY.register("ambrosial_flesh_chunk", () -> new AmbrosialFleshChunkItem());
 	public static final RegistryEntry<Item, Item> BLOOD_LANTERN = block(TheDeepVoidModBlocks.BLOOD_LANTERN);
@@ -1155,7 +1154,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> DARK_STEEL_ONYX_BOOTS = REGISTRY.register("dark_steel_onyx_boots", () -> new DarkSteelOnyxItem.Boots());
 	public static final RegistryEntry<Item, Item> SMITHING_TEMPLATE_DARK_STEEL = REGISTRY.register("smithing_template_dark_steel", () -> new SmithingTemplateDarkSteelItem());
 	public static final RegistryEntry<Item, Item> MISANTHROPY = REGISTRY.register("misanthropy", () -> new MisanthropyItem());
-	public static final RegistryEntry<Item, Item> FLESH_WORM_SPAWN_EGG = REGISTRY.register("flesh_worm_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.FLESH_WORM.get(), -13893632, -11590877, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> FLESH_WORM_SPAWN_EGG = REGISTRY.register("flesh_worm_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.FLESH_WORM.get())));
 	public static final RegistryEntry<Item, Item> WORM_TOOTH = REGISTRY.register("worm_tooth", () -> new WormToothItem());
 	public static final RegistryEntry<Item, Item> ICHOR_STRIDER_BOOTS = REGISTRY.register("ichor_strider_boots", () -> new IchorStriderItem.Boots());
 	public static final RegistryEntry<Item, Item> THUMPER = REGISTRY.register("thumper", () -> new ThumperItem());
@@ -1190,17 +1189,17 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> GORE_ARMOR_TRIM = REGISTRY.register("gore_armor_trim", () -> new GoreArmorTrimItem());
 	public static final RegistryEntry<Item, Item> ONYX_NAGINATA = REGISTRY.register("onyx_naginata", () -> new OnyxNaginataItem());
 	public static final RegistryEntry<Item, Item> NEEDLEFISH = REGISTRY.register("needlefish", () -> new NeedlefishItem());
-	public static final RegistryEntry<Item, Item> FLESH_LAMPREY_SPAWN_EGG = REGISTRY.register("flesh_lamprey_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.FLESH_LAMPREY.get(), -13107200, -15527149, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> FLESH_LAMPREY_SPAWN_EGG = REGISTRY.register("flesh_lamprey_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.FLESH_LAMPREY.get())));
 	public static final RegistryEntry<Item, Item> LAMPREY = REGISTRY.register("lamprey", () -> new LampreyItem());
 	public static final RegistryEntry<Item, Item> COOKED_LAMPREY = REGISTRY.register("cooked_lamprey", () -> new CookedLampreyItem());
-	public static final RegistryEntry<Item, Item> MAGGOT_SPAWN_EGG = REGISTRY.register("maggot_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.MAGGOT.get(), -15790321, -13487566, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> BLACK_FLY_SPAWN_EGG = REGISTRY.register("black_fly_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.BLACK_FLY.get(), -16053493, -14869219, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> MAGGOT_SPAWN_EGG = REGISTRY.register("maggot_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.MAGGOT.get())));
+	public static final RegistryEntry<Item, Item> BLACK_FLY_SPAWN_EGG = REGISTRY.register("black_fly_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.BLACK_FLY.get())));
 	public static final RegistryEntry<Item, Item> INFESTED_BONE_CRAWLER_EGG = block(TheDeepVoidModBlocks.INFESTED_BONE_CRAWLER_EGG);
 	public static final RegistryEntry<Item, Item> INFESTED_BONE_CRAWLER_EGG_GENERATE = block(TheDeepVoidModBlocks.INFESTED_BONE_CRAWLER_EGG_GENERATE);
 	public static final RegistryEntry<Item, Item> FLY_WING_PIECE = REGISTRY.register("fly_wing_piece", () -> new FlyWingPieceItem());
 	public static final RegistryEntry<Item, Item> FLY_WING = REGISTRY.register("fly_wing", () -> new FlyWingItem());
-	public static final RegistryEntry<Item, FlyWingsItem> FLY_WINGS_CHESTPLATE = REGISTRY.register("fly_wings_chestplate", () -> new FlyWingsItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().fireResistant()));
-	public static final RegistryEntry<Item, FlyWingsFlyItem> FLY_WINGS_FLY_CHESTPLATE = REGISTRY.register("fly_wings_fly_chestplate", () -> new FlyWingsFlyItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().fireResistant()));
+	public static final RegistryEntry<Item, FlyWingsItem> FLY_WINGS_CHESTPLATE = REGISTRY.register("fly_wings_chestplate", () -> new FlyWingsItem(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant()));
+	public static final RegistryEntry<Item, FlyWingsFlyItem> FLY_WINGS_FLY_CHESTPLATE = REGISTRY.register("fly_wings_fly_chestplate", () -> new FlyWingsFlyItem(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant()));
 	public static final RegistryEntry<Item, Item> COOKED_VOID_FLY_MAGGOT = REGISTRY.register("cooked_void_fly_maggot", () -> new CookedVoidFlyMaggotItem());
 	public static final RegistryEntry<Item, Item> THE_CATCHER = REGISTRY.register("the_catcher", () -> new TheCatcherItem());
 	public static final RegistryEntry<Item, Item> SOLID_VOID = REGISTRY.register("solid_void", () -> new SolidVoidItem());
@@ -1215,7 +1214,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> SOLID_VOID_STAIRS = block(TheDeepVoidModBlocks.SOLID_VOID_STAIRS);
 	public static final RegistryEntry<Item, Item> SOLID_VOID_SLAB = block(TheDeepVoidModBlocks.SOLID_VOID_SLAB);
 	public static final RegistryEntry<Item, Item> NECROSED_SKIN_BACKPACK = REGISTRY.register("necrosed_skin_backpack", () -> new NecrosedSkinBackpackItem());
-	public static final RegistryEntry<Item, Item> VOIDBORN_SPAWN_EGG = REGISTRY.register("voidborn_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.VOIDBORN.get(), -16777216, -16777216, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> VOIDBORN_SPAWN_EGG = REGISTRY.register("voidborn_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.VOIDBORN.get())));
 	public static final RegistryEntry<Item, Item> PENITENT_CROSS = REGISTRY.register("penitent_cross", () -> new PenitentCrossItem());
 	public static final RegistryEntry<Item, Item> HUNTER_CLAWS = REGISTRY.register("hunter_claws", () -> new HunterClawsItem());
 	public static final RegistryEntry<Item, Item> DARK_STEEL_CHAIN = block(TheDeepVoidModBlocks.DARK_STEEL_CHAIN);
@@ -1248,11 +1247,11 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> CRYSTALLIZED_ICHOR = block(TheDeepVoidModBlocks.CRYSTALLIZED_ICHOR);
 	public static final RegistryEntry<Item, Item> SHARPSHOOTER = REGISTRY.register("sharpshooter", () -> new SharpshooterItem());
 	public static final RegistryEntry<Item, Item> VOID_SICKLE = REGISTRY.register("void_sickle", () -> new VoidSickleItem());
-	public static final RegistryEntry<Item, Item> GORE_LURKER_SPAWN_EGG = REGISTRY.register("gore_lurker_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.GORE_LURKER.get(), -13893632, -2699075, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> GORE_LURKER_SPAWN_EGG = REGISTRY.register("gore_lurker_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.GORE_LURKER.get())));
 	public static final RegistryEntry<Item, Item> ROTTEN_GROWTH = block(TheDeepVoidModBlocks.ROTTEN_GROWTH);
 	public static final RegistryEntry<Item, Item> PROTRUDING_MARROW = block(TheDeepVoidModBlocks.PROTRUDING_MARROW);
 	public static final RegistryEntry<Item, Item> BLOCK_OF_BONE_MARROW = block(TheDeepVoidModBlocks.BLOCK_OF_BONE_MARROW);
-	public static final RegistryEntry<Item, Item> HOLLOWED_SPAWN_EGG = REGISTRY.register("hollowed_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.HOLLOWED.get(), -14014172, -15527407, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> HOLLOWED_SPAWN_EGG = REGISTRY.register("hollowed_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.HOLLOWED.get())));
 	public static final RegistryEntry<Item, Item> BLOCK_OF_ROTTEN_BONE_MARROW = block(TheDeepVoidModBlocks.BLOCK_OF_ROTTEN_BONE_MARROW);
 	public static final RegistryEntry<Item, Item> BLOCK_OF_MARROW = block(TheDeepVoidModBlocks.BLOCK_OF_MARROW);
 	public static final RegistryEntry<Item, Item> VOID_MATTER_SCYTHE = REGISTRY.register("void_matter_scythe", () -> new VoidMatterScytheItem());
@@ -1290,7 +1289,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> ONYX_SCYTHE = REGISTRY.register("onyx_scythe", () -> new OnyxScytheItem());
 	public static final RegistryEntry<Item, Item> PLAGUEBRINGER = REGISTRY.register("plaguebringer", () -> new PlaguebringerItem());
 	public static final RegistryEntry<Item, Item> BONE_CLIMBING_PICK = REGISTRY.register("bone_climbing_pick", () -> new BoneClimbingPickItem());
-	public static final RegistryEntry<Item, Item> WEAVER_OF_SOULS_BOSS_SPAWN_EGG = REGISTRY.register("weaver_of_souls_boss_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.WEAVER_OF_SOULS_BOSS.get(), -15724528, -15786978, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> WEAVER_OF_SOULS_BOSS_SPAWN_EGG = REGISTRY.register("weaver_of_souls_boss_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.WEAVER_OF_SOULS_BOSS.get())));
 	public static final RegistryEntry<Item, Item> KNIGHTFISH = REGISTRY.register("knightfish", () -> new KnightfishItem());
 	public static final RegistryEntry<Item, Item> ROT_TONGUE = REGISTRY.register("rot_tongue", () -> new RotTongueItem());
 	public static final RegistryEntry<Item, Item> BLACK_HOLE = REGISTRY.register("black_hole", () -> new BlackHoleItem());
@@ -1304,21 +1303,21 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> BISMUTH_BOTTLE = REGISTRY.register("bismuth_bottle", () -> new BismuthBottleItem());
 	public static final RegistryEntry<Item, Item> BISMUTH_JAR = REGISTRY.register("bismuth_jar", () -> new BismuthJarItem());
 	public static final RegistryEntry<Item, Item> GRIMBERRY_ON_A_STICK = REGISTRY.register("grimberry_on_a_stick", () -> new GrimberryOnAStickItem());
-	public static final RegistryEntry<Item, Item> APOSTLE_BOSS_SPAWN_EGG = REGISTRY.register("apostle_boss_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.APOSTLE_BOSS.get(), -13762560, -11776, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> APOSTLE_BOSS_SPAWN_EGG = REGISTRY.register("apostle_boss_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.APOSTLE_BOSS.get())));
 	public static final RegistryEntry<Item, Item> TATTERED_CULT_HOOD = REGISTRY.register("tattered_cult_hood", () -> new TatteredCultHoodItem());
 	public static final RegistryEntry<Item, Item> TATTERED_CULT_TUNIC = REGISTRY.register("tattered_cult_tunic", () -> new TatteredCultTunicItem());
 	public static final RegistryEntry<Item, Item> TATTERED_CULT_LEGGINGS = REGISTRY.register("tattered_cult_leggings", () -> new TatteredCultLeggingsItem());
 	public static final RegistryEntry<Item, Item> TATTERED_CULT_BOOTS = REGISTRY.register("tattered_cult_boots", () -> new TatteredCultBootsItem());
 	public static final RegistryEntry<Item, Item> DARK_CLOTH = REGISTRY.register("dark_cloth", () -> new DarkClothItem());
 	public static final RegistryEntry<Item, Item> ESOTERIC_TOME = REGISTRY.register("esoteric_tome", () -> new EsotericTomeItem());
-	public static final RegistryEntry<Item, Item> MAD_CULTIST_SPAWN_EGG = REGISTRY.register("mad_cultist_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.MAD_CULTIST.get(), -16777216, -13434880, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> MAD_CULTIST_SPAWN_EGG = REGISTRY.register("mad_cultist_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.MAD_CULTIST.get())));
 	public static final RegistryEntry<Item, Item> CEREMONIAL_DAGGER = REGISTRY.register("ceremonial_dagger", () -> new CeremonialDaggerItem());
 	public static final RegistryEntry<Item, Item> EXECUTIONER_SWORD = REGISTRY.register("executioner_sword", () -> new ExecutionerSwordItem());
-	public static final RegistryEntry<Item, Item> EXECUTIONER_SPAWN_EGG = REGISTRY.register("executioner_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.EXECUTIONER.get(), -13290187, -9370877, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> EXECUTIONER_SPAWN_EGG = REGISTRY.register("executioner_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.EXECUTIONER.get())));
 	public static final RegistryEntry<Item, Item> DARK_STEEL_KUNAI = REGISTRY.register("dark_steel_kunai", () -> new DarkSteelKunaiItem());
 	public static final RegistryEntry<Item, Item> GLOOM_WITNESS_SAPLING = block(TheDeepVoidModBlocks.GLOOM_WITNESS_SAPLING);
 	public static final RegistryEntry<Item, Item> DOUBLE_BARREL_SHOTGUN = REGISTRY.register("double_barrel_shotgun", () -> new DoubleBarrelShotgunItem());
-	public static final RegistryEntry<Item, Item> MANIAC_SPAWN_EGG = REGISTRY.register("maniac_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.MANIAC.get(), -15461356, -11122578, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> MANIAC_SPAWN_EGG = REGISTRY.register("maniac_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.MANIAC.get())));
 	public static final RegistryEntry<Item, Item> THROWABLE_ICHOR = REGISTRY.register("throwable_ichor", () -> new ThrowableIchorItem());
 	public static final RegistryEntry<Item, Item> GUNSLINGER_HELMET = REGISTRY.register("gunslinger_helmet", () -> new GunslingerItem.Helmet());
 	public static final RegistryEntry<Item, Item> GUNSLINGER_CHESTPLATE = REGISTRY.register("gunslinger_chestplate", () -> new GunslingerItem.Chestplate());
@@ -1340,8 +1339,8 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> EXPERIENCE_ORBS = REGISTRY.register("experience_orbs", () -> new ExperienceOrbsItem());
 	public static final RegistryEntry<Item, Item> BONE_CRAWLER_FEED = REGISTRY.register("bone_crawler_feed", () -> new BoneCrawlerFeedItem());
 	public static final RegistryEntry<Item, Item> BONE_CRAWLER_CLAW = REGISTRY.register("bone_crawler_claw", () -> new BoneCrawlerClawItem());
-	public static final RegistryEntry<Item, Item> FALSE_HYDRA_SPAWN_EGG = REGISTRY.register("false_hydra_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.FALSE_HYDRA.get(), -12367015, -7169626, new Item.Properties()));
-	public static final RegistryEntry<Item, Item> FALSE_HYDRA_ARM_SPAWN_EGG = REGISTRY.register("false_hydra_arm_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.FALSE_HYDRA_ARM.get(), -7827814, -6315352, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> FALSE_HYDRA_SPAWN_EGG = REGISTRY.register("false_hydra_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.FALSE_HYDRA.get())));
+	public static final RegistryEntry<Item, Item> FALSE_HYDRA_ARM_SPAWN_EGG = REGISTRY.register("false_hydra_arm_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.FALSE_HYDRA_ARM.get())));
 	public static final RegistryEntry<Item, Item> SLAUGHTER = REGISTRY.register("slaughter", () -> new SlaughterItem());
 	public static final RegistryEntry<Item, Item> FALSE_HYDRA_TREASURE_BAG = REGISTRY.register("false_hydra_treasure_bag", () -> new FalseHydraTreasureBagItem());
 	public static final RegistryEntry<Item, Item> DISEASED_HEART_OF_THE_ABERRATION = REGISTRY.register("diseased_heart_of_the_aberration", () -> new DiseasedHeartOfTheAberrationItem());
@@ -1380,7 +1379,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> DISGUSTING_MEAL = REGISTRY.register("disgusting_meal", () -> new DisgustingMealItem());
 	public static final RegistryEntry<Item, Item> DEBILITATOR = block(TheDeepVoidModBlocks.DEBILITATOR);
 	public static final RegistryEntry<Item, Item> BALL_AND_CHAIN = REGISTRY.register("ball_and_chain", () -> new BallAndChainItem());
-	public static final RegistryEntry<Item, Item> FLAIL_EXECUTIONER_SPAWN_EGG = REGISTRY.register("flail_executioner_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.FLAIL_EXECUTIONER.get(), -13290187, -15527149, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> FLAIL_EXECUTIONER_SPAWN_EGG = REGISTRY.register("flail_executioner_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.FLAIL_EXECUTIONER.get())));
 	public static final RegistryEntry<Item, Item> DARK_STEEL_BISMUTH_NETHERITE_HELMET = REGISTRY.register("dark_steel_bismuth_netherite_helmet", () -> new DarkSteelBismuthNetheriteItem.Helmet());
 	public static final RegistryEntry<Item, Item> DARK_STEEL_BISMUTH_NETHERITE_CHESTPLATE = REGISTRY.register("dark_steel_bismuth_netherite_chestplate", () -> new DarkSteelBismuthNetheriteItem.Chestplate());
 	public static final RegistryEntry<Item, Item> DARK_STEEL_BISMUTH_NETHERITE_LEGGINGS = REGISTRY.register("dark_steel_bismuth_netherite_leggings", () -> new DarkSteelBismuthNetheriteItem.Leggings());
@@ -1400,7 +1399,7 @@ public class TheDeepVoidModItems {
 	public static final RegistryEntry<Item, Item> RETURN_PORTAL = block(TheDeepVoidModBlocks.RETURN_PORTAL);
 	public static final RegistryEntry<Item, Item> HAMMER_AND_CHISEL = REGISTRY.register("hammer_and_chisel", () -> new HammerAndChiselItem());
 	public static final RegistryEntry<Item, Item> CHISEL = REGISTRY.register("chisel", () -> new ChiselItem());
-	public static final RegistryEntry<Item, Item> UNDERTAKER_SPAWN_EGG = REGISTRY.register("undertaker_spawn_egg", () -> new SpawnEggItem(TheDeepVoidModEntities.UNDERTAKER.get(), -15066598, -13554142, new Item.Properties()));
+	public static final RegistryEntry<Item, Item> UNDERTAKER_SPAWN_EGG = REGISTRY.register("undertaker_spawn_egg", () -> new SpawnEggItem(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().spawnEgg(TheDeepVoidModEntities.UNDERTAKER.get())));
 	public static final RegistryEntry<Item, Item> COFFIN = REGISTRY.register("coffin", () -> new CoffinItem());
 	public static final RegistryEntry<Item, Item> DARK_STEEL_COIN = REGISTRY.register("dark_steel_coin", () -> new DarkSteelCoinItem());
 	public static final RegistryEntry<Item, Item> COIN_BAG = REGISTRY.register("coin_bag", () -> new CoinBagItem());
@@ -1422,11 +1421,11 @@ public class TheDeepVoidModItems {
 	// Start of user code block custom items
 	// End of user code block custom items
 	private static RegistryEntry<Item, Item> block(RegistryEntry<Block, Block> block) {
-		return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
+		return REGISTRY.register(block.getId().getPath(), () -> new net.sombrius.thedeepvoid.port.PortBlockItem(block.get(), net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().useBlockDescriptionPrefix()));
 	}
 
 	private static RegistryEntry<Item, Item> doubleBlock(RegistryEntry<Block, Block> block) {
-		return REGISTRY.register(block.getId().getPath(), () -> new DoubleHighBlockItem(block.get(), new Item.Properties()));
+		return REGISTRY.register(block.getId().getPath(), () -> new DoubleHighBlockItem(block.get(), net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().useBlockDescriptionPrefix()));
 	}
 
 	@SubscribeEvent
@@ -1434,45 +1433,41 @@ public class TheDeepVoidModItems {
 		event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) -> new NecrosedSkinBackpackInventoryCapability(stack), NECROSED_SKIN_BACKPACK.get());
 	}
 
-	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+	@EventBusSubscriber(value = Dist.CLIENT)
 	public static class ItemsClientSideHandler {
 		@SubscribeEvent
 		@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 		public static void clientLoad(FMLClientSetupEvent event) {
 			event.enqueueWork(() -> {
-				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), (net.minecraft.client.renderer.item.ClampedItemPropertyFunction) ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
-				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), (net.minecraft.client.renderer.item.ClampedItemPropertyFunction) ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
-				ItemProperties.register(ONYX_FLARE_GUN.get(), ResourceLocation.parse("the_deep_void:onyx_flare_gun_state"),
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(ONYX_FLARE_GUN.get(), Identifier.parse("the_deep_void:onyx_flare_gun_state"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) OnyxFlareGunPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), (net.minecraft.client.renderer.item.ClampedItemPropertyFunction) ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
-				ItemProperties.register(SHADESTORM.get(), ResourceLocation.parse("the_deep_void:shadestorm_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ShadestormPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), (net.minecraft.client.renderer.item.ClampedItemPropertyFunction) ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
-				ItemProperties.register(KNIVES_GLOVE.get(), ResourceLocation.parse("the_deep_void:knives_glove_knife_glove_condition"),
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(SHADESTORM.get(), Identifier.parse("the_deep_void:shadestorm_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ShadestormPropertyValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(KNIVES_GLOVE.get(), Identifier.parse("the_deep_void:knives_glove_knife_glove_condition"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) KnivesGlovePropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(BISMUTH_VIAL.get(), ResourceLocation.parse("the_deep_void:bismuth_vial_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(NERVES_OF_STEEL.get(), ResourceLocation.parse("the_deep_void:nerves_of_steel_pulling"),
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(BISMUTH_VIAL.get(), Identifier.parse("the_deep_void:bismuth_vial_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(NERVES_OF_STEEL.get(), Identifier.parse("the_deep_void:nerves_of_steel_pulling"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) NervesOfSteelPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(NERVES_OF_STEEL.get(), ResourceLocation.parse("the_deep_void:nerves_of_steel_glow"),
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(NERVES_OF_STEEL.get(), Identifier.parse("the_deep_void:nerves_of_steel_glow"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) NervesOfSteelPropertyValueProvider2Procedure.execute(itemStackToRender));
-				ItemProperties.register(BLOOD_BOW.get(), ResourceLocation.parse("the_deep_void:blood_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BloodBowPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(THE_CATCHER.get(), ResourceLocation.parse("the_deep_void:the_catcher_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) TheCatcherPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(SHARPSHOOTER.get(), ResourceLocation.parse("the_deep_void:sharpshooter_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) SharpshooterValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(VOID_BOW.get(), ResourceLocation.parse("the_deep_void:void_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) VoidBowPropertyProcedure.execute(itemStackToRender));
-				ItemProperties.register(ROT_TONGUE.get(), ResourceLocation.parse("the_deep_void:rot_tongue_blocking"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) RotTonguePropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(BLACK_HOLE.get(), ResourceLocation.parse("the_deep_void:black_hole_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BlackHolePropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(BLOODY_CHAINSAW.get(), ResourceLocation.parse("the_deep_void:bloody_chainsaw_activated"),
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(BLOOD_BOW.get(), Identifier.parse("the_deep_void:blood_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BloodBowPropertyValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(THE_CATCHER.get(), Identifier.parse("the_deep_void:the_catcher_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) TheCatcherPropertyValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(SHARPSHOOTER.get(), Identifier.parse("the_deep_void:sharpshooter_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) SharpshooterValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(VOID_BOW.get(), Identifier.parse("the_deep_void:void_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) VoidBowPropertyProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(ROT_TONGUE.get(), Identifier.parse("the_deep_void:rot_tongue_blocking"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) RotTonguePropertyValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(BLACK_HOLE.get(), Identifier.parse("the_deep_void:black_hole_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BlackHolePropertyValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(BLOODY_CHAINSAW.get(), Identifier.parse("the_deep_void:bloody_chainsaw_activated"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BloodyChainsawPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(BISMUTH_BOTTLE.get(), ResourceLocation.parse("the_deep_void:bismuth_bottle_xp"),
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(BISMUTH_BOTTLE.get(), Identifier.parse("the_deep_void:bismuth_bottle_xp"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(BISMUTH_JAR.get(), ResourceLocation.parse("the_deep_void:bismuth_jar_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(STINGER.get(), ResourceLocation.parse("the_deep_void:stinger_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) StingerPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(CLAW_SCYTHE.get(), ResourceLocation.parse("the_deep_void:claw_scythe_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ClawScythePropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(BALL_AND_CHAIN.get(), ResourceLocation.parse("the_deep_void:ball_and_chain_secret"),
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(BISMUTH_JAR.get(), Identifier.parse("the_deep_void:bismuth_jar_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(STINGER.get(), Identifier.parse("the_deep_void:stinger_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) StingerPropertyValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(CLAW_SCYTHE.get(), Identifier.parse("the_deep_void:claw_scythe_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ClawScythePropertyValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(BALL_AND_CHAIN.get(), Identifier.parse("the_deep_void:ball_and_chain_secret"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BallAndChainPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(HAMMER_AND_CHISEL.get(), ResourceLocation.parse("the_deep_void:hammer_and_chisel_state"),
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(HAMMER_AND_CHISEL.get(), Identifier.parse("the_deep_void:hammer_and_chisel_state"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) HammerAndChiselPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(HUNTER_BOW.get(), ResourceLocation.parse("the_deep_void:hunter_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) HunterBowValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(ICHOR_GREATSWORD.get(), ResourceLocation.parse("the_deep_void:ichor_greatsword_blocking"),
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(HUNTER_BOW.get(), Identifier.parse("the_deep_void:hunter_bow_pulling"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) HunterBowValueProviderProcedure.execute(itemStackToRender));
+				net.sombrius.thedeepvoid.port.PortItemProperties.register(ICHOR_GREATSWORD.get(), Identifier.parse("the_deep_void:ichor_greatsword_blocking"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) RotTonguePropertyValueProviderProcedure.execute(itemStackToRender));
 			});
 		}

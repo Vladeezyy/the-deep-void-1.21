@@ -8,6 +8,6 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class CinnabarMonolithStoneWallBlock extends WallBlock {
 	public CinnabarMonolithStoneWallBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHER_BRICKS).strength(5f, 8f).requiresCorrectToolForDrops().dynamicShape().forceSolidOn());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHER_BRICKS).strength(5f, 8f).requiresCorrectToolForDrops().dynamicShape().forceSolidOn());
 	}
 }

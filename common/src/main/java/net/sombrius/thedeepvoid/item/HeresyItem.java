@@ -1,14 +1,13 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.InteractionResult;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.function.Consumer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -21,11 +20,13 @@ import net.sombrius.thedeepvoid.port.neo.IClientItemExtensions;
 import net.sombrius.thedeepvoid.item.renderer.HeresyItemRenderer;
 import net.sombrius.thedeepvoid.procedures.HeresyRightclickedProcedure;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.state.AnimationTest;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -35,18 +36,30 @@ public class HeresyItem extends Item implements GeoItem, net.sombrius.thedeepvoi
 	public static ItemDisplayContext transformType;
 
 	public HeresyItem() {
-		super(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.COMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).fireResistant().rarity(Rarity.COMMON));
+	}
+
+	@Override
+	public boolean isPerspectiveAware() {
+		return true;
+	}
+
+	@Override
+	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+		consumer.accept(new GeoRenderProvider() {
+			private HeresyItemRenderer renderer;
+
+			@Override
+			public GeoItemRenderer<?> getGeoItemRenderer() {
+				if (this.renderer == null)
+					this.renderer = new HeresyItemRenderer();
+				return this.renderer;
+			}
+		});
 	}
 
 	public IClientItemExtensions clientExtensions() {
 		return new IClientItemExtensions() {
-			private final BlockEntityWithoutLevelRenderer renderer = new HeresyItemRenderer();
-
-			@Override
-			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-				return renderer;
-			}
-
 			private static final HumanoidModel.ArmPose HeresyPose = net.sombrius.thedeepvoid.port.PortArmPoses.pose("HERESY");
 
 			@Override
@@ -74,10 +87,10 @@ public class HeresyItem extends Item implements GeoItem, net.sombrius.thedeepvoi
 		this.transformType = type;
 	}
 
-	private PlayState idlePredicate(AnimationState event) {
-		if (this.transformType != null ? this.transformType.firstPerson() : false) {
+	private PlayState idlePredicate(AnimationTest<HeresyItem> event) {
+		if (net.sombrius.thedeepvoid.port.GeoAnims.firstPerson(event)) {
 			if (this.animationprocedure.equals("empty")) {
-				event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.heresy_idle"));
+				event.controller().setAnimation(RawAnimation.begin().thenLoop("animation.heresy_idle"));
 				return PlayState.CONTINUE;
 			}
 		}
@@ -86,15 +99,15 @@ public class HeresyItem extends Item implements GeoItem, net.sombrius.thedeepvoi
 
 	String prevAnim = "empty";
 
-	private PlayState procedurePredicate(AnimationState event) {
-		if (this.transformType != null ? this.transformType.firstPerson() : false) {
-			if (!this.animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
+	private PlayState procedurePredicate(AnimationTest<HeresyItem> event) {
+		if (net.sombrius.thedeepvoid.port.GeoAnims.firstPerson(event)) {
+			if (!this.animationprocedure.equals("empty") && net.sombrius.thedeepvoid.port.GeoAnims.stopped(event.controller()) || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
 				if (!this.animationprocedure.equals(prevAnim))
-					event.getController().forceAnimationReset();
-				event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
-				if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
+					event.controller().reset();
+				event.controller().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
+				if (net.sombrius.thedeepvoid.port.GeoAnims.stopped(event.controller())) {
 					this.animationprocedure = "empty";
-					event.getController().forceAnimationReset();
+					event.controller().reset();
 				}
 			} else if (this.animationprocedure.equals("empty")) {
 				prevAnim = "empty";
@@ -107,9 +120,9 @@ public class HeresyItem extends Item implements GeoItem, net.sombrius.thedeepvoi
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		AnimationController procedureController = new AnimationController(this, "procedureController", 0, this::procedurePredicate);
+		AnimationController<HeresyItem> procedureController = new AnimationController<>("procedureController", 0, this::procedurePredicate);
 		data.add(procedureController);
-		AnimationController idleController = new AnimationController(this, "idleController", 0, this::idlePredicate);
+		AnimationController<HeresyItem> idleController = new AnimationController<>("idleController", 0, this::idlePredicate);
 		data.add(idleController);
 	}
 
@@ -119,9 +132,9 @@ public class HeresyItem extends Item implements GeoItem, net.sombrius.thedeepvoi
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
-		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		HeresyRightclickedProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, ar.getObject());
+	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+		InteractionResult ar = super.use(world, entity, hand);
+		HeresyRightclickedProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, entity.getItemInHand(hand));
 		return ar;
 	}
 }

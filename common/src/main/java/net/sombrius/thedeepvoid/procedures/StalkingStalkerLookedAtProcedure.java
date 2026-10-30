@@ -6,7 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -26,7 +26,7 @@ import net.sombrius.thedeepvoid.entity.WatchingStalkerEntity;
 
 @EventBusSubscriber
 public class StalkingStalkerLookedAtProcedure {
-	private static final ResourceLocation BIOME_MISTED_REMNANTS = ResourceLocation.parse("the_deep_void:misted_remnants");
+	private static final Identifier BIOME_MISTED_REMNANTS = Identifier.parse("the_deep_void:misted_remnants");
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -46,7 +46,7 @@ public class StalkingStalkerLookedAtProcedure {
 				if (_ent instanceof ServerPlayer _serverPlayer) {
 					return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 				} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 				}
 				return false;
 			}
@@ -55,7 +55,7 @@ public class StalkingStalkerLookedAtProcedure {
 				if (_ent instanceof ServerPlayer _serverPlayer) {
 					return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 				} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 				}
 				return false;
 			}
@@ -72,15 +72,15 @@ public class StalkingStalkerLookedAtProcedure {
 									if (!entityiterator.level().isClientSide())
 										entityiterator.discard();
 								} else {
-									if (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getBoolean("deep_void:despawning") == false) {
+									if (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getBooleanOr("deep_void:despawning", false) == false) {
 										net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putBoolean("deep_void:despawning", true);
 										if (entityiterator instanceof WatchingStalkerEntity) {
 											((WatchingStalkerEntity) entityiterator).setAnimation("animation.stalker_hide");
 										}
 										if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-											_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 99, false, false));
+											_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 99, false, false));
 										if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-											_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 99, false, false));
+											_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 99, false, false));
 										if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 											_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 99, false, false));
 										TheDeepVoidMod.queueServerWork(35, () -> {

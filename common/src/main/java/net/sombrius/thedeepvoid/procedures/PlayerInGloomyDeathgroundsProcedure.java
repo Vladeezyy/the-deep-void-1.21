@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.sombrius.thedeepvoid.port.PortEntities;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
@@ -7,7 +8,7 @@ import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -34,12 +35,12 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class PlayerInGloomyDeathgroundsProcedure {
-	private static final ResourceLocation BIOME_CRAWLER_NEST = ResourceLocation.parse("the_deep_void:crawler_nest");
-	private static final ResourceLocation BIOME_DRIFTING_MONOLITHS = ResourceLocation.parse("the_deep_void:drifting_monoliths");
-	private static final ResourceLocation BIOME_GAOL_OF_HERETICS = ResourceLocation.parse("the_deep_void:gaol_of_heretics");
-	private static final ResourceLocation BIOME_GATHERING_GROUNDS = ResourceLocation.parse("the_deep_void:gathering_grounds");
-	private static final ResourceLocation BIOME_MISTED_REMNANTS = ResourceLocation.parse("the_deep_void:misted_remnants");
-	private static final ResourceLocation BIOME_THE_GAOL = ResourceLocation.parse("the_deep_void:the_gaol");
+	private static final Identifier BIOME_CRAWLER_NEST = Identifier.parse("the_deep_void:crawler_nest");
+	private static final Identifier BIOME_DRIFTING_MONOLITHS = Identifier.parse("the_deep_void:drifting_monoliths");
+	private static final Identifier BIOME_GAOL_OF_HERETICS = Identifier.parse("the_deep_void:gaol_of_heretics");
+	private static final Identifier BIOME_GATHERING_GROUNDS = Identifier.parse("the_deep_void:gathering_grounds");
+	private static final Identifier BIOME_MISTED_REMNANTS = Identifier.parse("the_deep_void:misted_remnants");
+	private static final Identifier BIOME_THE_GAOL = Identifier.parse("the_deep_void:the_gaol");
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -63,8 +64,8 @@ public class PlayerInGloomyDeathgroundsProcedure {
 				if (Math.random() < 0.4) {
 					{
 						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:soul_passing_by ambient @s ~ ~ ~ 10 1 0.5");
 						}
 					}
@@ -86,88 +87,88 @@ public class PlayerInGloomyDeathgroundsProcedure {
 				if (Math.random() < 0.1) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x + 10, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x + 10, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound((x + 10), y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound((x + 10), y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 					TheDeepVoidMod.queueServerWork(20, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x + 8, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+								_level.playSound(null, BlockPos.containing(x + 8, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 							} else {
-								_level.playLocalSound((x + 8), y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+								_level.playLocalSound((x + 8), y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 							}
 						}
 					});
 					TheDeepVoidMod.queueServerWork(40, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x + 6, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+								_level.playSound(null, BlockPos.containing(x + 6, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 							} else {
-								_level.playLocalSound((x + 6), y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+								_level.playLocalSound((x + 6), y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 							}
 						}
 					});
 					TheDeepVoidMod.queueServerWork(60, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x + 4, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+								_level.playSound(null, BlockPos.containing(x + 4, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 							} else {
-								_level.playLocalSound((x + 4), y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+								_level.playLocalSound((x + 4), y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 							}
 						}
 					});
 				} else if (Math.random() < 0.1) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z + 14), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z + 14), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, (z + 14), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+							_level.playLocalSound(x, y, (z + 14), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 						}
 					}
 					TheDeepVoidMod.queueServerWork(8, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x, y, z + 12), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+								_level.playSound(null, BlockPos.containing(x, y, z + 12), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 							} else {
-								_level.playLocalSound(x, y, (z + 12), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+								_level.playLocalSound(x, y, (z + 12), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 							}
 						}
 					});
 					TheDeepVoidMod.queueServerWork(18, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x, y, z + 10), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+								_level.playSound(null, BlockPos.containing(x, y, z + 10), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 							} else {
-								_level.playLocalSound(x, y, (z + 10), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+								_level.playLocalSound(x, y, (z + 10), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 							}
 						}
 					});
 					TheDeepVoidMod.queueServerWork(28, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x, y, z + 8), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+								_level.playSound(null, BlockPos.containing(x, y, z + 8), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 							} else {
-								_level.playLocalSound(x, y, (z + 8), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+								_level.playLocalSound(x, y, (z + 8), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 							}
 						}
 					});
 					TheDeepVoidMod.queueServerWork(38, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x, y, z + 6), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+								_level.playSound(null, BlockPos.containing(x, y, z + 6), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 							} else {
-								_level.playLocalSound(x, y, (z + 6), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+								_level.playLocalSound(x, y, (z + 6), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 							}
 						}
 					});
 					TheDeepVoidMod.queueServerWork(48, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x, y, z + 4), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
+								_level.playSound(null, BlockPos.containing(x, y, z + 4), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1);
 							} else {
-								_level.playLocalSound(x, y, (z + 4), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
+								_level.playLocalSound(x, y, (z + 4), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.step")), SoundSource.BLOCKS, 1, 1, false);
 							}
 						}
 					});
@@ -175,9 +176,9 @@ public class PlayerInGloomyDeathgroundsProcedure {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
 							_level.playSound(null, BlockPos.containing(x + Mth.nextInt(RandomSource.create(), -32, 32), y, z + Mth.nextInt(RandomSource.create(), -32, 32)),
-									BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_song_far")), SoundSource.HOSTILE, 2, 1);
+									BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_song_far")), SoundSource.HOSTILE, 2, 1);
 						} else {
-							_level.playLocalSound((x + Mth.nextInt(RandomSource.create(), -32, 32)), y, (z + Mth.nextInt(RandomSource.create(), -32, 32)), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_song_far")),
+							_level.playLocalSound((x + Mth.nextInt(RandomSource.create(), -32, 32)), y, (z + Mth.nextInt(RandomSource.create(), -32, 32)), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_song_far")),
 									SoundSource.HOSTILE, 2, 1, false);
 						}
 					}
@@ -194,8 +195,8 @@ public class PlayerInGloomyDeathgroundsProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
@@ -204,8 +205,8 @@ public class PlayerInGloomyDeathgroundsProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 					}
 					return false;
 				}
@@ -224,16 +225,16 @@ public class PlayerInGloomyDeathgroundsProcedure {
 				if (Math.random() < 0.5) {
 					{
 						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:stone_dragging ambient @s ~ ~ ~ 2 1 0.5");
 						}
 					}
 				} else if (Math.random() < 0.5) {
 					{
 						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:stone_impact ambient @s ~ ~ ~ 2 1 0.5");
 						}
 					}
@@ -255,16 +256,16 @@ public class PlayerInGloomyDeathgroundsProcedure {
 				if (Math.random() < 0.5) {
 					{
 						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:crawler_nest_additions ambient @s ~ ~ ~ 2 1 0.5");
 						}
 					}
 				} else if (Math.random() < 0.5) {
 					{
 						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound entity.silverfish.ambient ambient @s ~ ~ ~ 2 1 0.5");
 						}
 					}
@@ -285,8 +286,8 @@ public class PlayerInGloomyDeathgroundsProcedure {
 				}
 				{
 					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+					if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:swinging_cage ambient @s ~ ~ ~ 4 1 0.5");
 					}
 				}

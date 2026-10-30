@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -34,10 +34,10 @@ public class WeaverSetsItsAttackTargetProcedure {
 				if ((sourceentity instanceof WeaverOfSoulsBossEntity _datEntL2 && _datEntL2.getEntityData().get(WeaverOfSoulsBossEntity.DATA_screamPlayed)) == false) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(sourceentity.getX(), sourceentity.getY(), sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_scream_loud")), SoundSource.HOSTILE,
+							_level.playSound(null, BlockPos.containing(sourceentity.getX(), sourceentity.getY(), sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_scream_loud")), SoundSource.HOSTILE,
 									2, 1);
 						} else {
-							_level.playLocalSound((sourceentity.getX()), (sourceentity.getY()), (sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_scream_loud")), SoundSource.HOSTILE, 2, 1, false);
+							_level.playLocalSound((sourceentity.getX()), (sourceentity.getY()), (sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_scream_loud")), SoundSource.HOSTILE, 2, 1, false);
 						}
 					}
 					if (sourceentity instanceof WeaverOfSoulsBossEntity _datEntSetL)

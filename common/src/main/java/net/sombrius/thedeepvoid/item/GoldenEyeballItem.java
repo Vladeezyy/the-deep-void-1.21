@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.GoldenEyeballPlayerFinishesUsingItemP
 
 public class GoldenEyeballItem extends Item {
 	public GoldenEyeballItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(4).saturationModifier(1f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(4).saturationModifier(1f).alwaysEdible().build()));
 	}
 
 	@Override

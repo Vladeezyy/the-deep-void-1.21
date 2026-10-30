@@ -6,6 +6,6 @@ import net.minecraft.world.item.component.CustomData;
 
 public class BismuthVialPropertyValueProviderProcedure {
 	public static double execute(ItemStack itemstack) {
-		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("xp");
+		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("xp", 0);
 	}
 }

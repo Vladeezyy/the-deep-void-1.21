@@ -29,7 +29,7 @@ public class DoubleBarrelShotgunDescriptionProcedure {
 		if (tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.DOUBLE_BARREL_SHOTGUN.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A77" + ("" + Component.translatable("item.the_deep_void.double_barrel_shotgun.desc").getString()))));
 				tooltip.add(Component.literal(("\u00A77 " + Component.translatable("item.the_deep_void.double_barrel_shotgun.capacity").getString())));
 			} else {

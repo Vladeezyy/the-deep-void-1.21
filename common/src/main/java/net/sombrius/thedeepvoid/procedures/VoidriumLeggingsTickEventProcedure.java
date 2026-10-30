@@ -13,7 +13,7 @@ public class VoidriumLeggingsTickEventProcedure {
 			return;
 		if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y, z)) <= 2) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 0, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 20, 0, false, false));
 		}
 	}
 }

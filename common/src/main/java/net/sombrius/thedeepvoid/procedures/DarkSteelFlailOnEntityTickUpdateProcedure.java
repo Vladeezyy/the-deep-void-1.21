@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -42,9 +42,9 @@ public class DarkSteelFlailOnEntityTickUpdateProcedure {
 				_datEntSetL.getEntityData().set(DarkSteelFlailEntity.DATA_retract, true);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05));
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
 				}
 			}
 			if (!world.isEmptyBlock(BlockPos.containing(x, y - 1, z))) {
@@ -70,16 +70,16 @@ public class DarkSteelFlailOnEntityTickUpdateProcedure {
 						if (entity instanceof TamableAnimal _tamEnt ? _tamEnt.isTame() : false) {
 							if (!(entityiterator == (entity instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null))) {
 								entityiterator.hurt(
-										new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), (entity instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null)),
+										new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), (entity instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null)),
 										(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
-								if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:boss")))) {
+								if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 									entityiterator.setDeltaMovement(new Vec3((entityiterator.getDeltaMovement().x()), 0.6, (entityiterator.getDeltaMovement().z())));
 								}
 							}
 						} else {
-							entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
+							entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity),
 									(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
-							if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:boss")))) {
+							if (!entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:boss")))) {
 								entityiterator.setDeltaMovement(new Vec3((entityiterator.getDeltaMovement().x()), 0.6, (entityiterator.getDeltaMovement().z())));
 							}
 						}
@@ -124,7 +124,7 @@ public class DarkSteelFlailOnEntityTickUpdateProcedure {
 						if (entity instanceof TamableAnimal _tamEnt ? _tamEnt.isTame() : false) {
 							if (!(entityiterator == (entity instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null))) {
 								entityiterator.hurt(
-										new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.PLAYER_ATTACK), (entity instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null)),
+										new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.PLAYER_ATTACK), (entity instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null)),
 										(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
 								if ((entity instanceof DarkSteelFlailEntity _datEntL84 && _datEntL84.getEntityData().get(DarkSteelFlailEntity.DATA_retract)) == false) {
 									entityiterator.setDeltaMovement(new Vec3(0, (-1), 0));
@@ -133,7 +133,7 @@ public class DarkSteelFlailOnEntityTickUpdateProcedure {
 									_datEntSetL.getEntityData().set(DarkSteelFlailEntity.DATA_hit, true);
 							}
 						} else {
-							entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
+							entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity),
 									(float) ((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue());
 							if ((entity instanceof DarkSteelFlailEntity _datEntL90 && _datEntL90.getEntityData().get(DarkSteelFlailEntity.DATA_retract)) == false) {
 								entityiterator.setDeltaMovement(new Vec3(0, (-1), 0));

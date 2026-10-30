@@ -1,35 +1,34 @@
-
 package net.sombrius.thedeepvoid.client.renderer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.sombrius.thedeepvoid.entity.CrossEyesEntity;
-import net.sombrius.thedeepvoid.entity.layer.CrossEyesLayer;
-import net.sombrius.thedeepvoid.entity.model.CrossEyesModel;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.base.RenderPassInfo;
+import software.bernie.geckolib.renderer.base.BoneSnapshots;
+import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import net.minecraft.resources.Identifier;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
-public class CrossEyesRenderer extends GeoEntityRenderer<CrossEyesEntity> {
+import net.sombrius.thedeepvoid.entity.model.CrossEyesModel;
+import net.sombrius.thedeepvoid.entity.layer.CrossEyesLayer;
+import net.sombrius.thedeepvoid.entity.CrossEyesEntity;
+
+public class CrossEyesRenderer<R extends LivingEntityRenderState & GeoRenderState> extends GeoEntityRenderer<CrossEyesEntity, R> {
 	public CrossEyesRenderer(EntityRendererProvider.Context renderManager) {
 		super(renderManager, new CrossEyesModel());
 		this.shadowRadius = 0f;
-		this.addRenderLayer(new CrossEyesLayer(this));
+		withRenderLayer(new CrossEyesLayer<>(this));
 	}
 
 	@Override
-	public RenderType getRenderType(CrossEyesEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
-		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	public RenderType getRenderType(R renderState, Identifier texture) {
+		return RenderTypes.entityTranslucent(texture);
 	}
 
 	@Override
-	public void preRender(PoseStack poseStack, CrossEyesEntity entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
-		float scale = 1f;
-		this.scaleHeight = scale;
-		this.scaleWidth = scale;
-		super.preRender(poseStack, entity, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, color);
+	public void adjustModelBonesForRender(RenderPassInfo<R> renderPassInfo, BoneSnapshots snapshots) {
+		DefaultAnimations.hardcodedHeadRotation(renderPassInfo, snapshots, "head");
 	}
 }

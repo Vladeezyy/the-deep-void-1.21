@@ -112,7 +112,7 @@ public class ItemStackHandler implements IItemHandlerModifiable {
 			if (!this.stacks.get(i).isEmpty()) {
 				CompoundTag item = new CompoundTag();
 				item.putInt("Slot", i);
-				items.add(this.stacks.get(i).save(provider, item));
+				items.add(ItemStack.CODEC.encode(this.stacks.get(i), provider.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), item).getOrThrow());
 			}
 		}
 		CompoundTag nbt = new CompoundTag();
@@ -122,13 +122,13 @@ public class ItemStackHandler implements IItemHandlerModifiable {
 	}
 
 	public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-		setSize(nbt.contains("Size", Tag.TAG_INT) ? nbt.getIntOr("Size", 0) : this.stacks.size());
-		ListTag items = nbt.getList("Items", Tag.TAG_COMPOUND);
+		setSize(nbt.getIntOr("Size", this.stacks.size()));
+		ListTag items = nbt.getListOrEmpty("Items");
 		for (int i = 0; i < items.size(); i++) {
-			CompoundTag item = items.getCompound(i);
+			CompoundTag item = items.getCompoundOrEmpty(i);
 			int slot = item.getIntOr("Slot", 0);
 			if (slot >= 0 && slot < this.stacks.size())
-				ItemStack.parse(provider, item).ifPresent(stack -> this.stacks.set(slot, stack));
+				ItemStack.CODEC.parse(provider.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), item).result().ifPresent(stack -> this.stacks.set(slot, stack));
 		}
 		onLoad();
 	}

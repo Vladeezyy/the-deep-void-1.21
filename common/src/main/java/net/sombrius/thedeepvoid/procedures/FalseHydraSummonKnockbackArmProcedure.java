@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.LevelAccessor;
@@ -34,7 +34,7 @@ public class FalseHydraSummonKnockbackArmProcedure {
 									entityiterator.level().clip(
 											new ClipContext(entityiterator.getEyePosition(1f), entityiterator.getEyePosition(1f).add(entityiterator.getViewVector(1f).scale((-2))), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entityiterator))
 											.getBlockPos().getZ()),
-									MobSpawnType.MOB_SUMMONED, false, false);
+									EntitySpawnReason.MOB_SUMMONED, false, false);
 							if (entityinstance != null) {
 								entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 								if (entityinstance instanceof FalseHydraArmEntity _datEntSetL)

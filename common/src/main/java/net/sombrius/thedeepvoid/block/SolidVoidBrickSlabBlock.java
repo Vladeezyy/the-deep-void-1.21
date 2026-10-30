@@ -8,6 +8,6 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class SolidVoidBrickSlabBlock extends SlabBlock {
 	public SolidVoidBrickSlabBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(1f).requiresCorrectToolForDrops().dynamicShape());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(1f).requiresCorrectToolForDrops().dynamicShape());
 	}
 }

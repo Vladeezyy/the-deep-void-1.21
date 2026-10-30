@@ -32,7 +32,7 @@ import net.minecraft.core.BlockPos;
 
 public class RedGateNonSolidBlock extends Block {
 	public RedGateNonSolidBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.GLASS).strength(-1, 3600000).noCollission().noOcclusion().pushReaction(PushReaction.BLOCK).isRedstoneConductor((bs, br, bp) -> false));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.GLASS).strength(-1, 3600000).noCollision().noOcclusion().pushReaction(PushReaction.BLOCK).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class RedGateNonSolidBlock extends Block {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 
@@ -51,7 +51,7 @@ public class RedGateNonSolidBlock extends Block {
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(TheDeepVoidModBlocks.RED_GATE.get());
 	}
 
@@ -76,8 +76,8 @@ public class RedGateNonSolidBlock extends Block {
 	}
 
 	@Override
-	public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity) {
-		super.entityInside(blockstate, world, pos, entity);
+	public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity, net.minecraft.world.entity.InsideBlockEffectApplier effectApplier, boolean intersects) {
+		super.entityInside(blockstate, world, pos, entity, effectApplier, intersects);
 		RedGateNonSolidEntityCollidesInTheBlockProcedure.execute(entity);
 	}
 }

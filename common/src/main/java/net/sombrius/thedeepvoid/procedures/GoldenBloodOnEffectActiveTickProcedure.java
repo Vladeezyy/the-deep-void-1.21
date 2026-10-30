@@ -12,7 +12,7 @@ public class GoldenBloodOnEffectActiveTickProcedure {
 		if (entity instanceof LivingEntity _entity)
 			_entity.removeEffect(MobEffects.POISON);
 		if (entity instanceof LivingEntity _entity)
-			_entity.removeEffect(MobEffects.CONFUSION);
+			_entity.removeEffect(MobEffects.NAUSEA);
 		if (entity instanceof LivingEntity _entity)
 			_entity.removeEffect(MobEffects.WITHER);
 		if (entity instanceof LivingEntity _entity)
@@ -24,7 +24,7 @@ public class GoldenBloodOnEffectActiveTickProcedure {
 		if (entity instanceof LivingEntity _entity)
 			_entity.removeEffect(MobEffects.HUNGER);
 		if (entity instanceof LivingEntity _entity)
-			_entity.removeEffect(MobEffects.DIG_SLOWDOWN);
+			_entity.removeEffect(MobEffects.MINING_FATIGUE);
 		if (entity instanceof LivingEntity _entity)
 			_entity.removeEffect(MobEffects.WEAKNESS);
 	}

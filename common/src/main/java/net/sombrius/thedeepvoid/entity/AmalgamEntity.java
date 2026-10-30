@@ -1,13 +1,14 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -62,45 +63,45 @@ public class AmalgamEntity extends Monster {
 
 	@Override
 	public SoundEvent getAmbientSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_ambient"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_ambient"));
 	}
 
 	@Override
 	public void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_step")), 0.15f, 1);
+		this.playSound(BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_step")), 0.15f, 1);
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.wet_grass.hit"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.wet_grass.hit"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.death"));
 	}
 
 	@Override
-	public boolean hurt(DamageSource damagesource, float amount) {
+	public boolean hurtServer(ServerLevel level, DamageSource damagesource, float amount) {
 		if (damagesource.is(DamageTypes.FALL))
 			return false;
-		return super.hurt(damagesource, amount);
+		return super.hurtServer(level, damagesource, amount);
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putInt("Dataroar", this.entityData.get(DATA_roar));
 		compound.putInt("Datastep", this.entityData.get(DATA_step));
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Dataroar"))
-			this.entityData.set(DATA_roar, compound.getInt("Dataroar"));
-		if (compound.contains("Datastep"))
-			this.entityData.set(DATA_step, compound.getInt("Datastep"));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Dataroar"))
+			this.entityData.set(DATA_roar, compound.getIntOr("Dataroar", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datastep"))
+			this.entityData.set(DATA_step, compound.getIntOr("Datastep", 0));
 	}
 
 	@Override

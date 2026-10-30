@@ -10,7 +10,7 @@ public class DoomingCoffinTickProcedure {
 		if (entity instanceof DoomingCoffinEntity _datEntSetI)
 			_datEntSetI.getEntityData().set(DoomingCoffinEntity.DATA_despawn, (int) ((entity instanceof DoomingCoffinEntity _datEntI ? _datEntI.getEntityData().get(DoomingCoffinEntity.DATA_despawn) : 0) + 1));
 		if ((entity instanceof DoomingCoffinEntity _datEntI ? _datEntI.getEntityData().get(DoomingCoffinEntity.DATA_despawn) : 0) == 200) {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:despawning") == false) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:despawning", false) == false) {
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("deep_void:despawning", true);
 				if (entity instanceof DoomingCoffinEntity) {
 					((DoomingCoffinEntity) entity).setAnimation("animation.coffin_despawn");

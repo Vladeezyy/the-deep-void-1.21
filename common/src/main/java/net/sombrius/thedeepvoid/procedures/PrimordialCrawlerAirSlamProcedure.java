@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
@@ -25,9 +25,9 @@ public class PrimordialCrawlerAirSlamProcedure {
 				_datEntSetL.getEntityData().set(PrimordialBoneCrawlerEntity.DATA_fly, true);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_flying")), SoundSource.HOSTILE, 2, 1);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_flying")), SoundSource.HOSTILE, 2, 1);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_flying")), SoundSource.HOSTILE, 2, 1, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_flying")), SoundSource.HOSTILE, 2, 1, false);
 				}
 			}
 		});
@@ -41,9 +41,9 @@ public class PrimordialCrawlerAirSlamProcedure {
 		TheDeepVoidMod.queueServerWork(68, () -> {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:mother_crawler_ambient")), SoundSource.HOSTILE, 2, (float) 0.4);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:mother_crawler_ambient")), SoundSource.HOSTILE, 2, (float) 0.4);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:mother_crawler_ambient")), SoundSource.HOSTILE, 2, (float) 0.4, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:mother_crawler_ambient")), SoundSource.HOSTILE, 2, (float) 0.4, false);
 				}
 			}
 		});
@@ -52,9 +52,9 @@ public class PrimordialCrawlerAirSlamProcedure {
 				_datEntSetL.getEntityData().set(PrimordialBoneCrawlerEntity.DATA_airSlam, true);
 			if (entity instanceof PrimordialBoneCrawlerEntity _datEntSetL)
 				_datEntSetL.getEntityData().set(PrimordialBoneCrawlerEntity.DATA_fly, false);
-			entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("airX")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("airY")), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("airZ"))));
+			entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("airX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("airY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("airZ", 0))));
 			entity.setDeltaMovement(
-					new Vec3(((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("airX") - entity.getX()) * 0.4), ((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("airY") - entity.getY()) * 0.4), ((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("airZ") - entity.getZ()) * 0.4)));
+					new Vec3(((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("airX", 0) - entity.getX()) * 0.4), ((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("airY", 0) - entity.getY()) * 0.4), ((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("airZ", 0) - entity.getZ()) * 0.4)));
 		});
 	}
 }

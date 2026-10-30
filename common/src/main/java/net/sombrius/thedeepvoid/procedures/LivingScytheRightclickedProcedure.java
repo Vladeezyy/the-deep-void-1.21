@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -23,7 +23,7 @@ public class LivingScytheRightclickedProcedure {
 			return;
 		if (entity.onGround()) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 140);
+				_player.getCooldowns().addCooldown(itemstack, 140);
 			LivingScytheSlashProcedure.execute(world, x, y, z, entity);
 			{
 				final Vec3 _center = new Vec3(
@@ -37,7 +37,7 @@ public class LivingScytheRightclickedProcedure {
 						if (entityiterator instanceof LivingEntity _mobEffectContext) {
 							for (MobEffectInstance mobeffectiterator : _mobEffectContext.getActiveEffects()) {
 								entityiterator.hurt(
-										new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:void_sickness"))), entity),
+										new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:void_sickness"))), entity),
 										(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * 0.5));
 								if (entity instanceof LivingEntity _entity)
 									_entity.setHealth((float) ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) + 0.5));

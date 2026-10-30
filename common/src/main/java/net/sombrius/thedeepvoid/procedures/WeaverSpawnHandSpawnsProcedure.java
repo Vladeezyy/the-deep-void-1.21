@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.LevelAccessor;
@@ -25,8 +25,8 @@ public class WeaverSpawnHandSpawnsProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
@@ -39,8 +39,8 @@ public class WeaverSpawnHandSpawnsProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 					}
 					return false;
 				}
@@ -103,7 +103,7 @@ public class WeaverSpawnHandSpawnsProcedure {
 														return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 													}
 												}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)).getZ()),
-										MobSpawnType.MOB_SUMMONED);
+										EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}
@@ -140,7 +140,7 @@ public class WeaverSpawnHandSpawnsProcedure {
 															return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 														}
 													}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)).getZ()),
-											MobSpawnType.MOB_SUMMONED);
+											EntitySpawnReason.MOB_SUMMONED);
 									if (entityToSpawn != null) {
 										entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 									}
@@ -178,7 +178,7 @@ public class WeaverSpawnHandSpawnsProcedure {
 															return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 														}
 													}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)).getZ()),
-											MobSpawnType.MOB_SUMMONED);
+											EntitySpawnReason.MOB_SUMMONED);
 									if (entityToSpawn != null) {
 										entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 									}
@@ -216,7 +216,7 @@ public class WeaverSpawnHandSpawnsProcedure {
 															return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 														}
 													}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)).getZ() - 1),
-											MobSpawnType.MOB_SUMMONED);
+											EntitySpawnReason.MOB_SUMMONED);
 									if (entityToSpawn != null) {
 										entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 									}
@@ -254,7 +254,7 @@ public class WeaverSpawnHandSpawnsProcedure {
 															return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 														}
 													}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)).getZ() + 1),
-											MobSpawnType.MOB_SUMMONED);
+											EntitySpawnReason.MOB_SUMMONED);
 									if (entityToSpawn != null) {
 										entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 									}
@@ -292,7 +292,7 @@ public class WeaverSpawnHandSpawnsProcedure {
 															return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 														}
 													}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)).getZ() + 1),
-											MobSpawnType.MOB_SUMMONED);
+											EntitySpawnReason.MOB_SUMMONED);
 									if (entityToSpawn != null) {
 										entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 									}
@@ -330,7 +330,7 @@ public class WeaverSpawnHandSpawnsProcedure {
 															return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 														}
 													}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)).getZ() - 1),
-											MobSpawnType.MOB_SUMMONED);
+											EntitySpawnReason.MOB_SUMMONED);
 									if (entityToSpawn != null) {
 										entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 									}
@@ -368,7 +368,7 @@ public class WeaverSpawnHandSpawnsProcedure {
 															return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 														}
 													}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)).getZ() - 1),
-											MobSpawnType.MOB_SUMMONED);
+											EntitySpawnReason.MOB_SUMMONED);
 									if (entityToSpawn != null) {
 										entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 									}
@@ -406,7 +406,7 @@ public class WeaverSpawnHandSpawnsProcedure {
 															return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 														}
 													}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)).getZ() + 1),
-											MobSpawnType.MOB_SUMMONED);
+											EntitySpawnReason.MOB_SUMMONED);
 									if (entityToSpawn != null) {
 										entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 									}

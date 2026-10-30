@@ -7,8 +7,8 @@ import net.minecraft.world.item.ItemStack;
 
 public class CoffinInInventoryProcedure {
 	public static void execute(ItemStack itemstack) {
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:doom") > 0) {
-			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:doomCount") >= 60) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:doom", 0) > 0) {
+			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:doomCount", 0) >= 60) {
 				{
 					final String _tagName = "deep_void:doomCount";
 					final double _tagValue = 0;
@@ -22,7 +22,7 @@ public class CoffinInInventoryProcedure {
 			} else {
 				{
 					final String _tagName = "deep_void:doomCount";
-					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:doomCount") + 1);
+					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:doomCount", 0) + 1);
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 				}
 			}

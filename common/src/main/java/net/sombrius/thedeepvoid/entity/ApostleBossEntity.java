@@ -1,13 +1,14 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import javax.annotation.Nullable;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -19,7 +20,7 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -38,11 +39,13 @@ import net.sombrius.thedeepvoid.procedures.ApostleOfCatastropheDiesProcedure;
 import net.sombrius.thedeepvoid.procedures.ApostleSpawnsProcedure;
 import net.sombrius.thedeepvoid.procedures.ApostleTickUpdateProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
+
+import net.sombrius.thedeepvoid.port.GeoAnims;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.state.AnimationTest;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -75,7 +78,6 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<Integer> DATA_shieldIsUsed = SynchedEntityData.defineId(ApostleBossEntity.class, EntityDataSerializers.INT);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
-	private boolean lastloop;
 	private long lastSwing;
 	public String animationprocedure = "empty";
 	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.RED, ServerBossEvent.BossBarOverlay.NOTCHED_6);
@@ -147,16 +149,16 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.hurt"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.death"));
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float amount) {
+	public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
 		if (source.is(DamageTypes.FALL))
 			return false;
 		if (source.is(DamageTypes.CACTUS))
@@ -165,7 +167,7 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 			return false;
 		if (source.is(DamageTypes.FALLING_ANVIL))
 			return false;
-		return super.hurt(source, amount);
+		return super.hurtServer(level, source, amount);
 	}
 
 	@Override
@@ -175,14 +177,14 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData livingdata) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata);
 		ApostleSpawnsProcedure.execute(world, this.getX(), this.getY(), this.getZ(), this);
 		return retval;
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putString("Texture", this.getTexture());
 		compound.putBoolean("Datadying", this.entityData.get(DATA_dying));
@@ -211,56 +213,56 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Texture"))
-			this.setTexture(compound.getString("Texture"));
-		if (compound.contains("Datadying"))
-			this.entityData.set(DATA_dying, compound.getBoolean("Datadying"));
-		if (compound.contains("DataattackChance"))
-			this.entityData.set(DATA_attackChance, compound.getInt("DataattackChance"));
-		if (compound.contains("DatalaughChance"))
-			this.entityData.set(DATA_laughChance, compound.getInt("DatalaughChance"));
-		if (compound.contains("Datarandom"))
-			this.entityData.set(DATA_random, compound.getInt("Datarandom"));
-		if (compound.contains("DatadoingAttack"))
-			this.entityData.set(DATA_doingAttack, compound.getBoolean("DatadoingAttack"));
-		if (compound.contains("DatarunGrab"))
-			this.entityData.set(DATA_runGrab, compound.getBoolean("DatarunGrab"));
-		if (compound.contains("DatagrabbedPlayer"))
-			this.entityData.set(DATA_grabbedPlayer, compound.getBoolean("DatagrabbedPlayer"));
-		if (compound.contains("DatajumpGrab"))
-			this.entityData.set(DATA_jumpGrab, compound.getBoolean("DatajumpGrab"));
-		if (compound.contains("DataupMotion"))
-			this.entityData.set(DATA_upMotion, compound.getBoolean("DataupMotion"));
-		if (compound.contains("DatadownMotion"))
-			this.entityData.set(DATA_downMotion, compound.getBoolean("DatadownMotion"));
-		if (compound.contains("DatacanDoGrab"))
-			this.entityData.set(DATA_canDoGrab, compound.getBoolean("DatacanDoGrab"));
-		if (compound.contains("Datataunt"))
-			this.entityData.set(DATA_taunt, compound.getInt("Datataunt"));
-		if (compound.contains("Dataspinning"))
-			this.entityData.set(DATA_spinning, compound.getBoolean("Dataspinning"));
-		if (compound.contains("Datafog"))
-			this.entityData.set(DATA_fog, compound.getBoolean("Datafog"));
-		if (compound.contains("DatathrowPlayer"))
-			this.entityData.set(DATA_throwPlayer, compound.getBoolean("DatathrowPlayer"));
-		if (compound.contains("DatapiercedPlayer"))
-			this.entityData.set(DATA_piercedPlayer, compound.getBoolean("DatapiercedPlayer"));
-		if (compound.contains("DatatpTries"))
-			this.entityData.set(DATA_tpTries, compound.getInt("DatatpTries"));
-		if (compound.contains("DataxPos"))
-			this.entityData.set(DATA_xPos, compound.getInt("DataxPos"));
-		if (compound.contains("DatayPos"))
-			this.entityData.set(DATA_yPos, compound.getInt("DatayPos"));
-		if (compound.contains("DatazPos"))
-			this.entityData.set(DATA_zPos, compound.getInt("DatazPos"));
-		if (compound.contains("DatateleportCount"))
-			this.entityData.set(DATA_teleportCount, compound.getInt("DatateleportCount"));
-		if (compound.contains("DatateleportCooldown"))
-			this.entityData.set(DATA_teleportCooldown, compound.getInt("DatateleportCooldown"));
-		if (compound.contains("DatashieldIsUsed"))
-			this.entityData.set(DATA_shieldIsUsed, compound.getInt("DatashieldIsUsed"));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Texture"))
+			this.setTexture(compound.getStringOr("Texture", ""));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datadying"))
+			this.entityData.set(DATA_dying, compound.getBooleanOr("Datadying", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataattackChance"))
+			this.entityData.set(DATA_attackChance, compound.getIntOr("DataattackChance", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatalaughChance"))
+			this.entityData.set(DATA_laughChance, compound.getIntOr("DatalaughChance", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datarandom"))
+			this.entityData.set(DATA_random, compound.getIntOr("Datarandom", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatadoingAttack"))
+			this.entityData.set(DATA_doingAttack, compound.getBooleanOr("DatadoingAttack", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatarunGrab"))
+			this.entityData.set(DATA_runGrab, compound.getBooleanOr("DatarunGrab", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatagrabbedPlayer"))
+			this.entityData.set(DATA_grabbedPlayer, compound.getBooleanOr("DatagrabbedPlayer", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatajumpGrab"))
+			this.entityData.set(DATA_jumpGrab, compound.getBooleanOr("DatajumpGrab", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataupMotion"))
+			this.entityData.set(DATA_upMotion, compound.getBooleanOr("DataupMotion", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatadownMotion"))
+			this.entityData.set(DATA_downMotion, compound.getBooleanOr("DatadownMotion", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatacanDoGrab"))
+			this.entityData.set(DATA_canDoGrab, compound.getBooleanOr("DatacanDoGrab", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datataunt"))
+			this.entityData.set(DATA_taunt, compound.getIntOr("Datataunt", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Dataspinning"))
+			this.entityData.set(DATA_spinning, compound.getBooleanOr("Dataspinning", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datafog"))
+			this.entityData.set(DATA_fog, compound.getBooleanOr("Datafog", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatathrowPlayer"))
+			this.entityData.set(DATA_throwPlayer, compound.getBooleanOr("DatathrowPlayer", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatapiercedPlayer"))
+			this.entityData.set(DATA_piercedPlayer, compound.getBooleanOr("DatapiercedPlayer", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatatpTries"))
+			this.entityData.set(DATA_tpTries, compound.getIntOr("DatatpTries", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataxPos"))
+			this.entityData.set(DATA_xPos, compound.getIntOr("DataxPos", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatayPos"))
+			this.entityData.set(DATA_yPos, compound.getIntOr("DatayPos", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatazPos"))
+			this.entityData.set(DATA_zPos, compound.getIntOr("DatazPos", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatateleportCount"))
+			this.entityData.set(DATA_teleportCount, compound.getIntOr("DatateleportCount", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatateleportCooldown"))
+			this.entityData.set(DATA_teleportCooldown, compound.getIntOr("DatateleportCooldown", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatashieldIsUsed"))
+			this.entityData.set(DATA_shieldIsUsed, compound.getIntOr("DatashieldIsUsed", 0));
 	}
 
 	@Override
@@ -295,7 +297,7 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public boolean canChangeDimensions(Level from, Level to) {
+	public boolean canTeleport(Level from, Level to) {
 		return false;
 	}
 
@@ -312,8 +314,8 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public void customServerAiStep() {
-		super.customServerAiStep();
+	public void customServerAiStep(ServerLevel level) {
+		super.customServerAiStep(level);
 		this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
 	}
 
@@ -332,9 +334,9 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 		return builder;
 	}
 
-	private PlayState movementPredicate(AnimationState event) {
+	private PlayState movementPredicate(AnimationTest<ApostleBossEntity> event) {
 		if (this.animationprocedure.equals("empty")) {
-			if ((event.isMoving() || !(event.getLimbSwingAmount() > -0.15F && event.getLimbSwingAmount() < 0.15F))
+			if ((event.isMoving() || !(this.walkAnimation.speed() > -0.15F && this.walkAnimation.speed() < 0.15F))
 
 			) {
 				return event.setAndContinue(RawAnimation.begin().thenLoop("animation.apostle_walk"));
@@ -349,21 +351,8 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 
 	String prevAnim = "empty";
 
-	private PlayState procedurePredicate(AnimationState event) {
-		if (!animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
-			if (!this.animationprocedure.equals(prevAnim))
-				event.getController().forceAnimationReset();
-			event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
-			if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
-				this.animationprocedure = "empty";
-				event.getController().forceAnimationReset();
-			}
-		} else if (animationprocedure.equals("empty")) {
-			prevAnim = "empty";
-			return PlayState.STOP;
-		}
-		prevAnim = this.animationprocedure;
-		return PlayState.CONTINUE;
+	private PlayState procedurePredicate(AnimationTest<ApostleBossEntity> event) {
+		return GeoAnims.procedure(event, this.animationprocedure, animation -> this.animationprocedure = animation);
 	}
 
 	@Override
@@ -371,7 +360,8 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 60) {
 			this.remove(ApostleBossEntity.RemovalReason.KILLED);
-			this.dropExperience(null);
+			if (this.level() instanceof ServerLevel _serverLevel)
+				this.dropExperience(_serverLevel, null);
 		}
 	}
 
@@ -385,8 +375,8 @@ public class ApostleBossEntity extends Monster implements GeoEntity {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>(this, "movement", 4, this::movementPredicate));
-		data.add(new AnimationController<>(this, "procedure", 4, this::procedurePredicate));
+		data.add(new AnimationController<>("movement", 4, this::movementPredicate));
+		data.add(new AnimationController<>("procedure", 4, this::procedurePredicate));
 	}
 
 	@Override

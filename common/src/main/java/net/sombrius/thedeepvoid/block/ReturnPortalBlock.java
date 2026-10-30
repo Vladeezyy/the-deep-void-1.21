@@ -25,7 +25,7 @@ import net.sombrius.thedeepvoid.procedures.ReturnPortalEntityCollidesInTheBlockP
 
 public class ReturnPortalBlock extends Block {
 	public ReturnPortalBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.GLASS).strength(-1, 3600000).lightLevel(s -> 5).noCollission().noOcclusion().pushReaction(PushReaction.BLOCK)
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.GLASS).strength(-1, 3600000).lightLevel(s -> 5).noCollision().noOcclusion().pushReaction(PushReaction.BLOCK)
 				.isRedstoneConductor((bs, br, bp) -> false));
 	}
 
@@ -35,12 +35,12 @@ public class ReturnPortalBlock extends Block {
 	}
 
 	@Override
-	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+	public boolean propagatesSkylightDown(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 0;
 	}
 
@@ -50,13 +50,13 @@ public class ReturnPortalBlock extends Block {
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(Blocks.AIR);
 	}
 
 	@Override
-	public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity) {
-		super.entityInside(blockstate, world, pos, entity);
+	public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity, net.minecraft.world.entity.InsideBlockEffectApplier effectApplier, boolean intersects) {
+		super.entityInside(blockstate, world, pos, entity, effectApplier, intersects);
 		ReturnPortalEntityCollidesInTheBlockProcedure.execute(world, entity);
 	}
 }

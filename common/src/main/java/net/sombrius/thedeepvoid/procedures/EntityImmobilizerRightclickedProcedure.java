@@ -10,17 +10,17 @@ public class EntityImmobilizerRightclickedProcedure {
 	public static void execute(Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("glow") == false) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("glow", false) == false) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 5);
+				_player.getCooldowns().addCooldown(itemstack, 5);
 			{
 				final String _tagName = "glow";
 				final boolean _tagValue = true;
 				CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putBoolean(_tagName, _tagValue));
 			}
-		} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("glow") == true) {
+		} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("glow", false) == true) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 5);
+				_player.getCooldowns().addCooldown(itemstack, 5);
 			{
 				final String _tagName = "glow";
 				final boolean _tagValue = false;

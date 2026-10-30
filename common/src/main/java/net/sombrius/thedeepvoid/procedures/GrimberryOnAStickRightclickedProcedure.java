@@ -14,7 +14,7 @@ public class GrimberryOnAStickRightclickedProcedure {
 	public static void execute(Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("sprint") <= 0) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("sprint", 0) <= 0) {
 			{
 				ItemStack _ist = itemstack;
 				PortUtil.hurtAndBreak(_ist, 1, null);

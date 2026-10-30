@@ -1,7 +1,7 @@
 package net.sombrius.thedeepvoid.port.neo;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.effect.MobEffectInstance;
 
 /** NeoForge's client mob effect extensions, the methods the mod overrides (client only) */
@@ -14,7 +14,7 @@ public interface IClientMobEffectExtensions {
 		return true;
 	}
 
-	default boolean renderInventoryText(MobEffectInstance instance, EffectRenderingInventoryScreen<?> screen, GuiGraphics guiGraphics, int x, int y, int blitOffset) {
+	default boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int x, int y, int blitOffset) {
 		return false;
 	}
 }

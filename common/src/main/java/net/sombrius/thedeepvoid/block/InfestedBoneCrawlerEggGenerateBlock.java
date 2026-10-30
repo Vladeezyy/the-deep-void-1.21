@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -27,22 +27,22 @@ import net.sombrius.thedeepvoid.procedures.InfestedCrawlerEggWalkOnBlockProcedur
 
 public class InfestedBoneCrawlerEggGenerateBlock extends FlowerBlock implements net.sombrius.thedeepvoid.port.PortBlockHooks.DestroyedByPlayer {
 	public InfestedBoneCrawlerEggGenerateBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 100,
-				BlockBehaviour.Properties.of().mapColor(MapColor.GLOW_LICHEN).randomTicks()
-						.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.turtle.egg_break")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.stone.step")),
-								() -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.stone.place")), () -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.turtle.egg_crack")),
-								() -> BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.stone.fall"))))
+		super(MobEffects.SPEED, 100,
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.GLOW_LICHEN).randomTicks()
+						.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.turtle.egg_break")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.stone.step")),
+								() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.stone.place")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.turtle.egg_crack")),
+								() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.stone.fall"))))
 						.strength(0f, 1f).noOcclusion().dynamicShape().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 offset = state.getOffset(world, pos);
+		Vec3 offset = state.getOffset(pos);
 		return box(3, 0, 3, 13, 16, 13).move(offset.x, offset.y, offset.z);
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(TheDeepVoidModBlocks.INFESTED_BONE_CRAWLER_EGG.get());
 	}
 

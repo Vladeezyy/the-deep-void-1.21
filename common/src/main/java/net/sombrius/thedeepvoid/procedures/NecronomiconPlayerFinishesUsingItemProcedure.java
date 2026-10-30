@@ -6,14 +6,14 @@ import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,17 +32,17 @@ public class NecronomiconPlayerFinishesUsingItemProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof Player _player)
-			_player.getCooldowns().addCooldown(TheDeepVoidModItems.NECRONOMICON.get(), 200);
+			_player.getCooldowns().addCooldown(new ItemStack(TheDeepVoidModItems.NECRONOMICON.get()), 200);
 		{
 			ItemStack _ist = itemstack;
 			PortUtil.hurtAndBreak(_ist, 1, null);
 		}
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.evoker.prepare_attack")), SoundSource.PLAYERS, 1,
+				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.evoker.prepare_attack")), SoundSource.PLAYERS, 1,
 						(float) Mth.nextDouble(RandomSource.create(), 0.5, 0.6));
 			} else {
-				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.evoker.prepare_attack")), SoundSource.PLAYERS, 1,
+				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.evoker.prepare_attack")), SoundSource.PLAYERS, 1,
 						(float) Mth.nextDouble(RandomSource.create(), 0.5, 0.6), false);
 			}
 		}
@@ -57,7 +57,7 @@ public class NecronomiconPlayerFinishesUsingItemProcedure {
 							|| world.getBlockState(BlockPos.containing(entityiterator.getX(), entityiterator.getY() - 2, entityiterator.getZ())).canOcclude()) {
 						TheDeepVoidMod.queueServerWork(Mth.nextInt(RandomSource.create(), 0, 20), () -> {
 							if (world instanceof ServerLevel _level) {
-								Entity entityToSpawn = TheDeepVoidModEntities.SUMMONED_HIVE_FANGS.get().spawn(_level, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), MobSpawnType.MOB_SUMMONED);
+								Entity entityToSpawn = TheDeepVoidModEntities.SUMMONED_HIVE_FANGS.get().spawn(_level, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), EntitySpawnReason.MOB_SUMMONED);
 								if (entityToSpawn != null) {
 									entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 								}

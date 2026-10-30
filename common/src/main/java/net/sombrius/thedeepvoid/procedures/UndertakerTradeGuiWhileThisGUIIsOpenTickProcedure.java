@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -28,20 +28,20 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 				Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 					return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 				}
-			}.compareDistOf(x, y, z)).findFirst().orElse(null)).getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("undertakerUuid"))) {
+			}.compareDistOf(x, y, z)).findFirst().orElse(null)).getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("undertakerUuid", ""))) {
 				if ((entity instanceof Player _plrSlotItem && _plrSlotItem.containerMenu instanceof Supplier _splr && _splr.get() instanceof Map _slt ? ((Slot) _slt.get(2)).getItem() : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem()) {
 					if (entity instanceof Player _player && _player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
 						ItemStack _setstack = new ItemStack(
-								BuiltInRegistries.ITEM.get(ResourceLocation.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
+								BuiltInRegistries.ITEM.getValue(Identifier.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 									}
-								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getString("firstTrade"))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
+								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getStringOr("firstTrade", ""))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
 						_setstack.setCount((int) net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("firstTradeQut"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("firstTradeQut", 0));
 						((Slot) _slots.get(2)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -49,16 +49,16 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 				if ((entity instanceof Player _plrSlotItem && _plrSlotItem.containerMenu instanceof Supplier _splr && _splr.get() instanceof Map _slt ? ((Slot) _slt.get(3)).getItem() : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem()) {
 					if (entity instanceof Player _player && _player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
 						ItemStack _setstack = new ItemStack(
-								BuiltInRegistries.ITEM.get(ResourceLocation.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
+								BuiltInRegistries.ITEM.getValue(Identifier.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 									}
-								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getString("secondTrade"))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
+								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getStringOr("secondTrade", ""))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
 						_setstack.setCount((int) net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("secondTradeQut"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("secondTradeQut", 0));
 						((Slot) _slots.get(3)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -66,16 +66,16 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 				if ((entity instanceof Player _plrSlotItem && _plrSlotItem.containerMenu instanceof Supplier _splr && _splr.get() instanceof Map _slt ? ((Slot) _slt.get(4)).getItem() : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem()) {
 					if (entity instanceof Player _player && _player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
 						ItemStack _setstack = new ItemStack(
-								BuiltInRegistries.ITEM.get(ResourceLocation.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
+								BuiltInRegistries.ITEM.getValue(Identifier.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 									}
-								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getString("thirdTrade"))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
+								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getStringOr("thirdTrade", ""))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
 						_setstack.setCount((int) net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("thirdTradeQut"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("thirdTradeQut", 0));
 						((Slot) _slots.get(4)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -83,16 +83,16 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 				if ((entity instanceof Player _plrSlotItem && _plrSlotItem.containerMenu instanceof Supplier _splr && _splr.get() instanceof Map _slt ? ((Slot) _slt.get(5)).getItem() : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem()) {
 					if (entity instanceof Player _player && _player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
 						ItemStack _setstack = new ItemStack(
-								BuiltInRegistries.ITEM.get(ResourceLocation.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
+								BuiltInRegistries.ITEM.getValue(Identifier.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 									}
-								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getString("fourthTrade"))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
+								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getStringOr("fourthTrade", ""))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
 						_setstack.setCount((int) net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("fourthTradeQut"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("fourthTradeQut", 0));
 						((Slot) _slots.get(5)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -100,16 +100,16 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 				if ((entity instanceof Player _plrSlotItem && _plrSlotItem.containerMenu instanceof Supplier _splr && _splr.get() instanceof Map _slt ? ((Slot) _slt.get(10)).getItem() : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem()) {
 					if (entity instanceof Player _player && _player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
 						ItemStack _setstack = new ItemStack(
-								BuiltInRegistries.ITEM.get(ResourceLocation.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
+								BuiltInRegistries.ITEM.getValue(Identifier.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 									}
-								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getString("potionTrade"))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
+								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getStringOr("potionTrade", ""))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
 						_setstack.setCount((int) net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("potionTradeQut"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("potionTradeQut", 0));
 						((Slot) _slots.get(10)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -117,16 +117,16 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 				if ((entity instanceof Player _plrSlotItem && _plrSlotItem.containerMenu instanceof Supplier _splr && _splr.get() instanceof Map _slt ? ((Slot) _slt.get(12)).getItem() : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem()) {
 					if (entity instanceof Player _player && _player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
 						ItemStack _setstack = new ItemStack(
-								BuiltInRegistries.ITEM.get(ResourceLocation.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
+								BuiltInRegistries.ITEM.getValue(Identifier.parse(((net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 									}
-								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getString("conversion"))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
+								}.compareDistOf(x, y, z)).findFirst().orElse(null))).getStringOr("conversion", ""))).toLowerCase(java.util.Locale.ENGLISH)))).copy();
 						_setstack.setCount((int) net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(UndertakerEntity.class, AABB.ofSize(new Vec3(x, y, z), 24, 24, 24), e -> true).stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("conversionQut"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("conversionQut", 0));
 						((Slot) _slots.get(12)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -139,7 +139,7 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("firstTradePrice"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("firstTradePrice", 0));
 						((Slot) _slots.get(6)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -152,7 +152,7 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("secondTradePrice"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("secondTradePrice", 0));
 						((Slot) _slots.get(7)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -165,7 +165,7 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("thirdTradePrice"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("thirdTradePrice", 0));
 						((Slot) _slots.get(8)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -178,7 +178,7 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("fourthTradePrice"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("fourthTradePrice", 0));
 						((Slot) _slots.get(9)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -191,7 +191,7 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("potionTradePrice"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("potionTradePrice", 0));
 						((Slot) _slots.get(11)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -204,7 +204,7 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 							}
-						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDouble("conversionPrice"));
+						}.compareDistOf(x, y, z)).findFirst().orElse(null))).getDoubleOr("conversionPrice", 0));
 						((Slot) _slots.get(13)).set(_setstack);
 						_player.containerMenu.broadcastChanges();
 					}
@@ -214,9 +214,9 @@ public class UndertakerTradeGuiWhileThisGUIIsOpenTickProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("undertakerUuid"))) {
+					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("undertakerUuid", ""))) {
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 99, false, false));
+							_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 99, false, false));
 					}
 				}
 			}

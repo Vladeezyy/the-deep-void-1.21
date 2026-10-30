@@ -1,22 +1,23 @@
 package net.sombrius.thedeepvoid.item.model;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.sombrius.thedeepvoid.item.DoubleBarrelShotgunItem;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 public class DoubleBarrelShotgunItemModel extends GeoModel<DoubleBarrelShotgunItem> {
 	@Override
-	public ResourceLocation getAnimationResource(DoubleBarrelShotgunItem animatable) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "animations/spitearms.animation.json");
+	public Identifier getAnimationResource(DoubleBarrelShotgunItem animatable) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/spitearms.animation.json");
 	}
 
 	@Override
-	public ResourceLocation getModelResource(DoubleBarrelShotgunItem animatable) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "geo/spitearms.geo.json");
+	public Identifier getModelResource(GeoRenderState renderState) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/spitearms.geo.json");
 	}
 
 	@Override
-	public ResourceLocation getTextureResource(DoubleBarrelShotgunItem animatable) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/item/strife.png");
+	public Identifier getTextureResource(GeoRenderState renderState) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "textures/item/strife.png");
 	}
 }

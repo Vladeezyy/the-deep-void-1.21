@@ -6,6 +6,6 @@ import net.minecraft.world.item.component.CustomData;
 
 public class NervesOfSteelPropertyValueProvider2Procedure {
 	public static double execute(ItemStack itemstack) {
-		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("glow");
+		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("glow", 0);
 	}
 }

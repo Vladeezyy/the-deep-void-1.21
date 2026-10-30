@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,7 +21,7 @@ public class BabyBoneCrawlerDigInBoneProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if ((world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:natural_bone_block")))
+		if ((world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:natural_bone_block")))
 				&& !(!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 10, 10, 10), e -> true).isEmpty())
 				&& (entity instanceof BabyBoneCrawlerEntity _datEntL3 && _datEntL3.getEntityData().get(BabyBoneCrawlerEntity.DATA_dig)) == false) {
 			if (entity instanceof BabyBoneCrawlerEntity _datEntSetL)
@@ -35,7 +35,7 @@ public class BabyBoneCrawlerDigInBoneProcedure {
 						_entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, (int) Double.POSITIVE_INFINITY, 0, false, false));
 				}
 			});
-		} else if ((world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:natural_bone_block")))
+		} else if ((world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:natural_bone_block")))
 				&& !world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 10, 10, 10), e -> true).isEmpty()
 				&& (entity instanceof BabyBoneCrawlerEntity _datEntL12 && _datEntL12.getEntityData().get(BabyBoneCrawlerEntity.DATA_dig)) == true) {
 			if (entity instanceof BabyBoneCrawlerEntity _datEntSetL)

@@ -9,7 +9,8 @@
     "ServerLevelEntityCallbacksMixin"
   ],
   "client": [
-    "ClientLevelEntityCallbacksMixin"
+    "ClientLevelEntityCallbacksMixin",
+    "SkyRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

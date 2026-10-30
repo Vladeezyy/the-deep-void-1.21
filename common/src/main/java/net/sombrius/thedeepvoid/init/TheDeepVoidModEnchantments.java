@@ -4,7 +4,7 @@
 package net.sombrius.thedeepvoid.init;
 
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
 
@@ -28,6 +28,6 @@ public class TheDeepVoidModEnchantments {
 	public static final ResourceKey<Enchantment> VOID_VISION = key("void_vision");
 
 	private static ResourceKey<Enchantment> key(String name) {
-		return ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, name));
+		return ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, name));
 	}
 }

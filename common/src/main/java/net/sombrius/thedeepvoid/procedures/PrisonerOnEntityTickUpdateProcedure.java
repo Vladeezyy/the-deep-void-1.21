@@ -25,7 +25,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
 
@@ -49,15 +49,15 @@ public class PrisonerOnEntityTickUpdateProcedure {
 						((PrisonerEntity) entity).setAnimation("animation.prisoner_attack");
 					}
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 99, false, false));
+						_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 99, false, false));
 					TheDeepVoidMod.queueServerWork(15, () -> {
 						if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) > 0) {
 							entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * 0.8), 0.2, (Math.cos(Math.toRadians(entity.getYRot())) * 0.8)));
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chain.place")), SoundSource.HOSTILE, 1, (float) Mth.nextDouble(RandomSource.create(), 0.7, 1));
+									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chain.place")), SoundSource.HOSTILE, 1, (float) Mth.nextDouble(RandomSource.create(), 0.7, 1));
 								} else {
-									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chain.place")), SoundSource.HOSTILE, 1, (float) Mth.nextDouble(RandomSource.create(), 0.7, 1), false);
+									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chain.place")), SoundSource.HOSTILE, 1, (float) Mth.nextDouble(RandomSource.create(), 0.7, 1), false);
 								}
 							}
 						}
@@ -71,22 +71,22 @@ public class PrisonerOnEntityTickUpdateProcedure {
 									if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
 										if ((entityiterator instanceof LivingEntity _entUseItem23 ? _entUseItem23.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 											if (entityiterator instanceof Player _player)
-												_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem25 ? _entUseItem25.getUseItem() : ItemStack.EMPTY).getItem(), 10);
+												_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem25 ? _entUseItem25.getUseItem() : ItemStack.EMPTY), 10);
 											{
 												ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem27 ? _entUseItem27.getUseItem() : ItemStack.EMPTY);
 												PortUtil.hurtAndBreak(_ist, 8, null);
 											}
 											if (world instanceof Level _level) {
 												if (!_level.isClientSide()) {
-													_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1);
+													_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1);
 												} else {
-													_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1, false);
+													_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1, false);
 												}
 											}
 										} else {
-											entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), 5);
+											entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), 5);
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-												_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 1, false, false));
+												_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 1, false, false));
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 												_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 30, 0, false, false));
 										}
@@ -100,13 +100,13 @@ public class PrisonerOnEntityTickUpdateProcedure {
 						((PrisonerEntity) entity).setAnimation("animation.prisoner_ram");
 					}
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 15, 99, false, false));
+						_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 15, 99, false, false));
 					TheDeepVoidMod.queueServerWork(15, () -> {
 						if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) > 0) {
 							if (entity instanceof PrisonerEntity _datEntSetL)
 								_datEntSetL.getEntityData().set(PrisonerEntity.DATA_ram, true);
 							if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 25, 3, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 25, 3, false, false));
 							if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 								if (entity instanceof Mob _entity)
 									_entity.getNavigation().moveTo(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY()),
@@ -119,7 +119,7 @@ public class PrisonerOnEntityTickUpdateProcedure {
 							if (entity instanceof PrisonerEntity _datEntSetL)
 								_datEntSetL.getEntityData().set(PrisonerEntity.DATA_ram, false);
 							if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 99, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 99, false, false));
 							{
 								final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 								List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(5 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
@@ -127,22 +127,22 @@ public class PrisonerOnEntityTickUpdateProcedure {
 									if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
 										if ((entityiterator instanceof LivingEntity _entUseItem59 ? _entUseItem59.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 											if (entityiterator instanceof Player _player)
-												_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem61 ? _entUseItem61.getUseItem() : ItemStack.EMPTY).getItem(), 10);
+												_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem61 ? _entUseItem61.getUseItem() : ItemStack.EMPTY), 10);
 											{
 												ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem63 ? _entUseItem63.getUseItem() : ItemStack.EMPTY);
 												PortUtil.hurtAndBreak(_ist, 10, null);
 											}
 											if (world instanceof Level _level) {
 												if (!_level.isClientSide()) {
-													_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1);
+													_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1);
 												} else {
-													_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1, false);
+													_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1, false);
 												}
 											}
 										} else {
-											entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), 4);
+											entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), 4);
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-												_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 1, false, false));
+												_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 1, false, false));
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 												_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 30, 0, false, false));
 										}
@@ -166,20 +166,20 @@ public class PrisonerOnEntityTickUpdateProcedure {
 					if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
 						if ((entityiterator instanceof LivingEntity _entUseItem81 ? _entUseItem81.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 							if (entityiterator instanceof Player _player)
-								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem83 ? _entUseItem83.getUseItem() : ItemStack.EMPTY).getItem(), 10);
+								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem83 ? _entUseItem83.getUseItem() : ItemStack.EMPTY), 10);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem85 ? _entUseItem85.getUseItem() : ItemStack.EMPTY);
 								PortUtil.hurtAndBreak(_ist, 1, null);
 							}
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1);
+									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1);
 								} else {
-									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1, false);
+									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1, false);
 								}
 							}
 						} else {
-							entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), 3);
+							entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), 3);
 							if (!(entityiterator instanceof LivingEntity _livEnt90 && _livEnt90.hasEffect(TheDeepVoidModMobEffects.BROKEN_ARMOR.holder()))
 									&& !(entityiterator instanceof LivingEntity _livEnt91 && _livEnt91.hasEffect(TheDeepVoidModMobEffects.DEBILITATED.holder()))) {
 								if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())

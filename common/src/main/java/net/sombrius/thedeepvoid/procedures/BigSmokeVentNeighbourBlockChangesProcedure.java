@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
@@ -19,7 +19,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x, y, z);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -33,7 +33,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x, y, z + 1);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -47,7 +47,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x + 1, y, z);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -61,7 +61,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x + 1, y, z + 1);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -77,7 +77,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x, y, z);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -91,7 +91,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x, y, z - 1);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -105,7 +105,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x - 1, y, z);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -119,7 +119,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x - 1, y, z - 1);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -135,7 +135,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x, y, z);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -149,7 +149,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x, y, z - 1);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -163,7 +163,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x + 1, y, z);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -177,7 +177,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x + 1, y, z - 1);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -193,7 +193,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x, y, z);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -207,7 +207,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x, y, z + 1);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -221,7 +221,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x - 1, y, z);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -235,7 +235,7 @@ public class BigSmokeVentNeighbourBlockChangesProcedure {
 				BlockPos _pos = BlockPos.containing(x - 1, y, z + 1);
 				BlockState _bs = world.getBlockState(_pos);
 				Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+				if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 					world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 				} else {
 					_property = _bs.getBlock().getStateDefinition().getProperty("axis");

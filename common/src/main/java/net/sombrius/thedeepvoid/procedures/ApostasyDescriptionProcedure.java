@@ -29,7 +29,7 @@ public class ApostasyDescriptionProcedure {
 		if (tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.APOSTASY.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.apostasy.descr").getString())));
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.apostasy.capacity").getString())));
 			} else {

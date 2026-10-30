@@ -17,12 +17,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class TwistingSpineBlock extends SugarCaneBlock {
 	public TwistingSpineBlock() {
-		super(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).randomTicks().sound(SoundType.BONE_BLOCK).strength(0.8f, 1f).noCollission().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_LIGHT_GRAY).randomTicks().sound(SoundType.BONE_BLOCK).strength(0.8f, 1f).noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 offset = state.getOffset(world, pos);
+		Vec3 offset = state.getOffset(pos);
 		return box(6, 0, 6, 10, 16, 10).move(offset.x, offset.y, offset.z);
 	}
 

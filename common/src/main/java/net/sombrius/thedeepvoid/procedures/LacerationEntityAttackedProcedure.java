@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import javax.annotation.Nullable;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,15 +37,15 @@ public class LacerationEntityAttackedProcedure {
 				&& ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLESH_GLOVE.get()
 						|| (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.EVERHUNGRY_FLESH_GLOVE.get()
 						|| (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ADAPTIVE_CLAW.get())) {
-			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:laceration", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:laceration")
+			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:laceration", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:laceration", 0)
 					+ (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.LACERATION.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.LACERATION.holder()).getAmplifier() : 0) + 1));
-			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:void_energy")))) {
+			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:void_energy")))) {
 				if (event instanceof ICancellableEvent _cancellable) {
 					_cancellable.setCanceled(true);
 				}
-				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:void_energy"))), sourceentity),
-						(float) (amount + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:laceration") / 2));
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:laceration") >= 20
+				entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:void_energy"))), sourceentity),
+						(float) (amount + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:laceration", 0) / 2));
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:laceration", 0) >= 20
 						+ (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.LACERATION.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.LACERATION.holder()).getAmplifier() : 0)) {
 					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:laceration", 0);
 				}

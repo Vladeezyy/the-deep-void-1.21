@@ -12,7 +12,7 @@ public class HammerAndChiselItemInHandTickProcedure {
 		if (entity == null)
 			return;
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem()
-				&& (entity instanceof Player _plrCldRem4 ? _plrCldRem4.getCooldowns().getCooldownPercent(itemstack.getItem(), 0f) * 100 : 0) <= 0) {
+				&& (entity instanceof Player _plrCldRem4 ? _plrCldRem4.getCooldowns().getCooldownPercent(itemstack, 0f) * 100 : 0) <= 0) {
 			if (entity instanceof LivingEntity _entity) {
 				ItemStack _setstack = new ItemStack(TheDeepVoidModItems.CHISEL.get()).copy();
 				_setstack.setCount(1);

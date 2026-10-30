@@ -38,7 +38,7 @@ public class AllSeeingArmorTickProcedure {
 									if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 										_entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 0, false, false));
 									if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-										_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 0, false, false));
+										_entity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 100, 0, false, false));
 								}
 							}
 						}

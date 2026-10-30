@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -48,10 +48,10 @@ public class DeathVultureTickUpdateProcedure {
 								if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 									if (world instanceof Level _level) {
 										if (!_level.isClientSide()) {
-											_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:death_vulture_ambient")), SoundSource.HOSTILE,
+											_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:death_vulture_ambient")), SoundSource.HOSTILE,
 													(float) 1.2, (float) Mth.nextDouble(RandomSource.create(), 1.3, 1.7));
 										} else {
-											_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:death_vulture_ambient")), SoundSource.HOSTILE, (float) 1.2,
+											_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:death_vulture_ambient")), SoundSource.HOSTILE, (float) 1.2,
 													(float) Mth.nextDouble(RandomSource.create(), 1.3, 1.7), false);
 										}
 									}
@@ -92,14 +92,14 @@ public class DeathVultureTickUpdateProcedure {
 				}
 				if (!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 25, 25, 25), e -> true).isEmpty() && !(!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 6, 6, 6), e -> true).isEmpty())) {
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 5, false, false));
+						_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 5, false, false));
 				} else if (!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 6, 6, 6), e -> true).isEmpty() && !(new Object() {
 					public boolean checkGamemode(Entity _ent) {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -112,8 +112,8 @@ public class DeathVultureTickUpdateProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 						}
 						return false;
 					}
@@ -126,7 +126,7 @@ public class DeathVultureTickUpdateProcedure {
 						if (entity instanceof DeathVultureEntity _datEntSetL)
 							_datEntSetL.getEntityData().set(DeathVultureEntity.DATA_attack, true);
 						if (entity instanceof LivingEntity _entity)
-							_entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+							_entity.removeEffect(MobEffects.SLOWNESS);
 						if (entity instanceof DeathVultureEntity _datEntSetI)
 							_datEntSetI.getEntityData().set(DeathVultureEntity.DATA_dash, 55);
 						{
@@ -145,9 +145,9 @@ public class DeathVultureTickUpdateProcedure {
 		}
 		if ((world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() == TheDeepVoidModBlocks.BLOCK_OF_BONE_PILE.get() || (world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() == TheDeepVoidModBlocks.MOSSY_BONE_PILE.get()
 				|| (world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() == TheDeepVoidModBlocks.BLOCK_OF_SKULL_PILE.get()) {
-			if (!(entity instanceof LivingEntity _livEnt68 && _livEnt68.hasEffect(MobEffects.MOVEMENT_SLOWDOWN))) {
+			if (!(entity instanceof LivingEntity _livEnt68 && _livEnt68.hasEffect(MobEffects.SLOWNESS))) {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 0, false, false));
 			}
 		}
 	}

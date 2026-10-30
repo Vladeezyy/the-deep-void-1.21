@@ -6,7 +6,7 @@ public class AbyssalMarkOnEffectActiveTickProcedure {
 	public static void execute(Entity entity, double amplifier) {
 		if (entity == null)
 			return;
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("abyssalMarkLevel") != amplifier) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("abyssalMarkLevel", 0) != amplifier) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("abyssalMarkLevel", amplifier);
 		}
 	}

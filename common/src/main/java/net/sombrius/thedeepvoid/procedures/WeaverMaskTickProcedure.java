@@ -25,9 +25,9 @@ public class WeaverMaskTickProcedure {
 				for (Entity entityiterator : _entfound) {
 					if ((entityiterator instanceof BuiltOverseerEntity || entityiterator instanceof BuiltBigOverseerEntity) && (entityiterator instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null) == entity) {
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 80, 1, false, false));
+							_entity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 80, 1, false, false));
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 80, 0, false, false));
+							_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 80, 0, false, false));
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 							_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 80, 0, false, false));
 					}

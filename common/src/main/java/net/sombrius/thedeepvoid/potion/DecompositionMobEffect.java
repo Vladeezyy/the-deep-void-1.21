@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.procedures.DecompositionOnEffectActiveTickProcedure;
 
 import net.minecraft.world.entity.LivingEntity;
@@ -13,9 +14,9 @@ public class DecompositionMobEffect extends MobEffect {
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier) {
 		DecompositionOnEffectActiveTickProcedure.execute(entity.level(), entity, amplifier);
-		return super.applyEffectTick(entity, amplifier);
+		return super.applyEffectTick(level, entity, amplifier);
 	}
 
 	@Override

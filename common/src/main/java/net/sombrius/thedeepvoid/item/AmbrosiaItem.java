@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.AmbrosiaPlayerFinishesUsingItemProced
 
 public class AmbrosiaItem extends Item {
 	public AmbrosiaItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(8).saturationModifier(0.5f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(8).saturationModifier(0.5f).alwaysEdible().build()));
 	}
 
 	@Override

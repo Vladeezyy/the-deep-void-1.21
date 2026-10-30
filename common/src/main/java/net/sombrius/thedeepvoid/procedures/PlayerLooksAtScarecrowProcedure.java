@@ -28,7 +28,7 @@ public class PlayerLooksAtScarecrowProcedure {
 				if (_ent instanceof ServerPlayer _serverPlayer) {
 					return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 				} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 				}
 				return false;
 			}
@@ -37,7 +37,7 @@ public class PlayerLooksAtScarecrowProcedure {
 				if (_ent instanceof ServerPlayer _serverPlayer) {
 					return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 				} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 				}
 				return false;
 			}
@@ -54,7 +54,7 @@ public class PlayerLooksAtScarecrowProcedure {
 									if (!world.getEntitiesOfClass(ScarecrowEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 28, 28, 28), e -> true).isEmpty()) {
 										if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 											_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.FIXATION.holder(), 5, 0, false, false));
-										net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putDouble("deep_void:crowCall", (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getDouble("deep_void:crowCall") + 1));
+										net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putDouble("deep_void:crowCall", (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getDoubleOr("deep_void:crowCall", 0) + 1));
 									}
 								}
 							}

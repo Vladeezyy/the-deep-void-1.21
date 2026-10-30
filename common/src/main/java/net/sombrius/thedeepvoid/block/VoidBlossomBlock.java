@@ -19,11 +19,11 @@ import net.sombrius.thedeepvoid.procedures.VoidBlossomOnBoneMealSuccessProcedure
 
 public class VoidBlossomBlock extends Block implements BonemealableBlock {
 	public VoidBlossomBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.TERRACOTTA_BLACK).sound(SoundType.DEEPSLATE).strength(3f, 6f).requiresCorrectToolForDrops());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.TERRACOTTA_BLACK).sound(SoundType.DEEPSLATE).strength(3f, 6f).requiresCorrectToolForDrops());
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

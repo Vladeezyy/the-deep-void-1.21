@@ -29,7 +29,7 @@ public class HeresyDescriptionProcedure {
 		if (tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.HERESY.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.heresy.descr").getString())));
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.heresy.capacity").getString())));
 			} else {

@@ -14,7 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class EyeballSoupItem extends Item {
 	public EyeballSoupItem() {
-		super(new Item.Properties().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(6).saturationModifier(1.1f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(6).saturationModifier(1.1f).build()));
 	}
 
 	@Override

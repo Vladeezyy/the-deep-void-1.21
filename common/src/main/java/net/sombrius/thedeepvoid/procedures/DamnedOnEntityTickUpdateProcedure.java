@@ -39,10 +39,10 @@ public class DamnedOnEntityTickUpdateProcedure {
 					}
 				}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ())));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 0, false, false));
 			} else {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 99, false, false));
 			}
 		}
 	}

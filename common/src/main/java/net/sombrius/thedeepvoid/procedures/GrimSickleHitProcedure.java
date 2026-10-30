@@ -16,7 +16,7 @@ public class GrimSickleHitProcedure {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.ROT.holder(), 140, 0));
 			if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 80, 1));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 80, 1));
 		}
 	}
 }

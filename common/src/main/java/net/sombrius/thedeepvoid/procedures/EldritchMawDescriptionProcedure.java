@@ -29,7 +29,7 @@ public class EldritchMawDescriptionProcedure {
 		if (tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.ELDRITCH_MAW.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.eldritch_maw.descr").getString())));
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.eldritch_maw.capacity").getString())));
 			} else {

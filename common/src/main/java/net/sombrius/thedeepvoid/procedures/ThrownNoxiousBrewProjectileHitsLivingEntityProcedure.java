@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -16,7 +16,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -52,13 +52,13 @@ public class ThrownNoxiousBrewProjectileHitsLivingEntityProcedure {
 		if (immediatesourceentity instanceof ThrownNoxiousBrewEntity) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.shulker_bullet.hit")), SoundSource.PLAYERS, 1, 1);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.shulker_bullet.hit")), SoundSource.PLAYERS, 1, 1);
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.shulker_bullet.hit")), SoundSource.PLAYERS, 1, 1, false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.shulker_bullet.hit")), SoundSource.PLAYERS, 1, 1, false);
 				}
 			}
 			if (entity instanceof UndertakerEntity) {
-				if (!(entity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(MobEffects.MOVEMENT_SLOWDOWN))) {
+				if (!(entity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(MobEffects.SLOWNESS))) {
 					if (entity instanceof Mob) {
 						try {
 							((Mob) entity).setTarget(null);
@@ -77,12 +77,12 @@ public class ThrownNoxiousBrewProjectileHitsLivingEntityProcedure {
 						}
 					} else {
 						if (world instanceof ServerLevel _serverLevel) {
-							Entity entityinstance = TheDeepVoidModEntities.UNDERTAKER.get().create(_serverLevel, null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), MobSpawnType.MOB_SUMMONED, false, false);
+							Entity entityinstance = TheDeepVoidModEntities.UNDERTAKER.get().create(_serverLevel, null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), EntitySpawnReason.MOB_SUMMONED, false, false);
 							if (entityinstance != null) {
 								entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 								if (entityinstance instanceof UndertakerEntity _datEntSetL)
 									_datEntSetL.getEntityData().set(UndertakerEntity.DATA_talkedTo, true);
-								if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("conversionQut") == 0) {
+								if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("conversionQut", 0) == 0) {
 									net.sombrius.thedeepvoid.port.PortUtil.data(entityinstance).putBoolean("noConversion", true);
 								}
 								entityinstance.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((sourceentity.getX()), (sourceentity.getY() + 1.5), (sourceentity.getZ())));
@@ -98,7 +98,7 @@ public class ThrownNoxiousBrewProjectileHitsLivingEntityProcedure {
 				}
 			} else {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+					_entity.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 200, 0));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0));
 			}

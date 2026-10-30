@@ -1,12 +1,19 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import java.util.Map;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import javax.annotation.Nullable;
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.port.platform.RegistryEntry;
 import net.minecraft.core.registries.Registries;
 import net.sombrius.thedeepvoid.port.bus.EventBusSubscriber;
 import net.minecraft.core.Holder;
 import java.util.EnumMap;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.sombrius.thedeepvoid.port.bus.RegisterEvent;
 import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
 import java.util.List;
@@ -20,55 +27,41 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import com.google.common.collect.Iterables;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public abstract class AllSeeingItem extends ArmorItem {
-	public static Holder<ArmorMaterial> ARMOR_MATERIAL = null;
+@EventBusSubscriber
+public abstract class AllSeeingItem extends Item {
+	public static final ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial(0, Map.of(ArmorType.BOOTS, 3, ArmorType.LEGGINGS, 6, ArmorType.CHESTPLATE, 6, ArmorType.HELMET, 3, ArmorType.BODY, 6), 10, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(Identifier.parse("block.basalt.break"))), 0.5f, 0f, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/refined_cinnabar")),
+			ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath("the_deep_void", "all_seeing")));
 
-	@SubscribeEvent
-	public static void registerArmorMaterial(RegisterEvent event) {
-		event.register(Registries.ARMOR_MATERIAL, registerHelper -> {
-			ArmorMaterial armorMaterial = new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-				map.put(ArmorItem.Type.BOOTS, 3);
-				map.put(ArmorItem.Type.LEGGINGS, 6);
-				map.put(ArmorItem.Type.CHESTPLATE, 6);
-				map.put(ArmorItem.Type.HELMET, 3);
-				map.put(ArmorItem.Type.BODY, 6);
-			}), 10, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(ResourceLocation.parse("block.basalt.break"))), () -> Ingredient.of(new ItemStack(TheDeepVoidModItems.REFINED_CINNABAR.get())),
-					List.of(new ArmorMaterial.Layer(ResourceLocation.parse("the_deep_void:ancient_"))), 0.5f, 0f);
-			registerHelper.register(ResourceLocation.parse("the_deep_void:all_seeing"), armorMaterial);
-			ARMOR_MATERIAL = BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(armorMaterial);
-		});
-	}
 
-	public AllSeeingItem(ArmorItem.Type type, Item.Properties properties) {
-		super(ARMOR_MATERIAL, type, properties);
+	public AllSeeingItem(ArmorType type, Item.Properties properties) {
+		super(properties.humanoidArmor(ARMOR_MATERIAL, type));
 	}
 
 	public static class Helmet extends AllSeeingItem {
 		public Helmet() {
-			super(ArmorItem.Type.HELMET, new Item.Properties().durability(220));
+			super(ArmorType.HELMET, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(220));
 		}
 	}
 
 	public static class Chestplate extends AllSeeingItem {
 		public Chestplate() {
-			super(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(320));
+			super(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(320));
 		}
 
 		@Override
-		public void inventoryTick(ItemStack itemstack, Level world, Entity entity, int slot, boolean selected) {
-			super.inventoryTick(itemstack, world, entity, slot, selected);
-			if (entity instanceof Player player && Iterables.contains(player.getArmorSlots(), itemstack)) {
+		public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+			super.inventoryTick(itemstack, world, entity, equipmentSlot);
+			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {
 				AllSeeingFullArmorProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
 			}
 		}
@@ -76,13 +69,13 @@ public abstract class AllSeeingItem extends ArmorItem {
 
 	public static class Leggings extends AllSeeingItem {
 		public Leggings() {
-			super(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(300));
+			super(ArmorType.LEGGINGS, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(300));
 		}
 	}
 
 	public static class Boots extends AllSeeingItem {
 		public Boots() {
-			super(ArmorItem.Type.BOOTS, new Item.Properties().durability(260));
+			super(ArmorType.BOOTS, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(260));
 		}
 	}
 }

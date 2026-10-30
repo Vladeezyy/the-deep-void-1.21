@@ -21,7 +21,6 @@ public final class EventIndex {
 		ModBus.add(EntityTickEvent.Pre.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.procedures.StalkerBreaksBlocksProcedure::onEntityTick, net.sombrius.thedeepvoid.procedures.StalkerBreaksBlocksProcedure.class);
 		ModBus.add(EntityTravelToDimensionEvent.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.procedures.DeepVoidPlayerEntersDimensionProcedure::onEntityTravelToDimension, net.sombrius.thedeepvoid.procedures.DeepVoidPlayerEntersDimensionProcedure.class);
 		ModBus.add(FMLCommonSetupEvent.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.init.TheDeepVoidModCompostableItems::addComposterItems, net.sombrius.thedeepvoid.init.TheDeepVoidModCompostableItems.class);
-		ModBus.add(FMLCommonSetupEvent.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.init.TheDeepVoidModGameRules::registerGameRules, net.sombrius.thedeepvoid.init.TheDeepVoidModGameRules.class);
 		ModBus.add(FMLCommonSetupEvent.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.item.extension.SulfurTntDispensedItemExtension::init, net.sombrius.thedeepvoid.item.extension.SulfurTntDispensedItemExtension.class);
 		ModBus.add(FMLConstructModEvent.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.init.TheDeepVoidModConfigs::register, net.sombrius.thedeepvoid.init.TheDeepVoidModConfigs.class);
 		ModBus.add(FurnaceFuelBurnTimeEvent.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.init.TheDeepVoidModFuels::furnaceFuelBurnTimeEvent, net.sombrius.thedeepvoid.init.TheDeepVoidModFuels.class);

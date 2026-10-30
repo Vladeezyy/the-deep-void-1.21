@@ -6,13 +6,13 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.BlockPos;
 
 public class GrimHookHitsEntityProcedure {
@@ -20,7 +20,7 @@ public class GrimHookHitsEntityProcedure {
 		if (entity == null || sourceentity == null)
 			return;
 		if (world instanceof ServerLevel _serverLevel) {
-			Entity entityinstance = TheDeepVoidModEntities.HOOK_END.get().create(_serverLevel, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
+			Entity entityinstance = TheDeepVoidModEntities.HOOK_END.get().create(_serverLevel, null, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED, false, false);
 			if (entityinstance != null) {
 				entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 				net.sombrius.thedeepvoid.port.PortUtil.data(entityinstance).putString("owner", (sourceentity.getStringUUID()));
@@ -32,9 +32,9 @@ public class GrimHookHitsEntityProcedure {
 		}
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.PLAYERS, 1, 1);
+				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.PLAYERS, 1, 1);
 			} else {
-				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.PLAYERS, 1, 1, false);
+				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.PLAYERS, 1, 1, false);
 			}
 		}
 	}

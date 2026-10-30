@@ -13,7 +13,7 @@ import net.sombrius.thedeepvoid.port.bus.FMLCommonSetupEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.procedures.SulfurTntDispensedOnDispenseAttemptWithResultProcedure;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class SulfurTntDispensedItemExtension {
 	@SubscribeEvent
 	public static void init(FMLCommonSetupEvent event) {

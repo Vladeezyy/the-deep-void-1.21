@@ -16,11 +16,11 @@ public class AmbrosiaCloudOnEntityTickUpdateProcedure {
 		double loop = 0;
 		double zRadius = 0;
 		double particleAmount = 0;
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("despawn") >= 100) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("despawn", 0) >= 100) {
 			if (!entity.level().isClientSide())
 				entity.discard();
 		} else {
-			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("despawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("despawn") + 1));
+			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("despawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("despawn", 0) + 1));
 		}
 		loop = 0;
 		particleAmount = 6;

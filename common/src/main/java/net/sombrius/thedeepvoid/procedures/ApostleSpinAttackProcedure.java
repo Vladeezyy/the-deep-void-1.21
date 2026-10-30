@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -27,19 +27,19 @@ public class ApostleSpinAttackProcedure {
 			((ApostleBossEntity) entity).setAnimation("animation.apostle_spin");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20, 99, false, false));
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:apostle_hysterical_laugh")), SoundSource.HOSTILE, 4, 1);
+				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:apostle_hysterical_laugh")), SoundSource.HOSTILE, 4, 1);
 			} else {
-				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:apostle_hysterical_laugh")), SoundSource.HOSTILE, 4, 1, false);
+				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:apostle_hysterical_laugh")), SoundSource.HOSTILE, 4, 1, false);
 			}
 		}
 		TheDeepVoidMod.queueServerWork(20, () -> {
 			if (entity instanceof LivingEntity _entity)
-				_entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+				_entity.removeEffect(MobEffects.SLOWNESS);
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 90, 1, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 90, 1, false, false));
 			if (entity instanceof ApostleBossEntity _datEntSetL)
 				_datEntSetL.getEntityData().set(ApostleBossEntity.DATA_spinning, true);
 		});
@@ -49,9 +49,9 @@ public class ApostleSpinAttackProcedure {
 			if (entity instanceof ApostleBossEntity _datEntSetL)
 				_datEntSetL.getEntityData().set(ApostleBossEntity.DATA_doingAttack, false);
 			if (entity instanceof LivingEntity _entity)
-				_entity.removeEffect(MobEffects.MOVEMENT_SPEED);
+				_entity.removeEffect(MobEffects.SPEED);
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 99, false, false));
 			if (Math.random() < 0.25 && !((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 				ApostlePierceHeartProcedure.execute(world, x, y, z, entity);
 			}

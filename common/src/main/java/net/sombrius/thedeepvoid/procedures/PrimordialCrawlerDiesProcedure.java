@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.advancements.AdvancementHolder;
@@ -9,12 +10,12 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -44,9 +45,9 @@ public class PrimordialCrawlerDiesProcedure {
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:mother_crawler_hurt")), SoundSource.HOSTILE, 4, (float) 0.6);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:mother_crawler_hurt")), SoundSource.HOSTILE, 4, (float) 0.6);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:mother_crawler_hurt")), SoundSource.HOSTILE, 4, (float) 0.6, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:mother_crawler_hurt")), SoundSource.HOSTILE, 4, (float) 0.6, false);
 				}
 			}
 			TheDeepVoidMod.queueServerWork(133, () -> {
@@ -61,9 +62,9 @@ public class PrimordialCrawlerDiesProcedure {
 								ItemHandlerHelper.giveItemToPlayer(_player, _setstack);
 							}
 							if (!(entityiterator instanceof ServerPlayer _plr10 && _plr10.level() instanceof ServerLevel
-									&& _plr10.getAdvancements().getOrStartProgress(_plr10.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:not_the_crawlers"))).isDone())) {
+									&& _plr10.getAdvancements().getOrStartProgress(_plr10.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:not_the_crawlers"))).isDone())) {
 								if (entityiterator instanceof ServerPlayer _player) {
-									AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:not_the_crawlers"));
+									AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:not_the_crawlers"));
 									if (_adv != null) {
 										AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 										if (!_ap.isDone()) {
@@ -78,18 +79,18 @@ public class PrimordialCrawlerDiesProcedure {
 				}
 			});
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"stopsound @a record the_deep_void:the_haunt");
 			TheDeepVoidMod.queueServerWork(20, () -> {
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"stopsound @a record the_deep_void:the_haunt");
 			});
 			TheDeepVoidMod.queueServerWork(200, () -> {
 				if (DeepVoidConfigConfiguration.SUMMONBOSSRESPAWN.get() == true) {
 					if (world instanceof ServerLevel _level) {
 						Entity entityToSpawn = TheDeepVoidModEntities.GIANT_BONE_CRAWLER_EGG.get().spawn(_level,
-								BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:eggX"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:eggY"), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:eggZ")), MobSpawnType.MOB_SUMMONED);
+								BlockPos.containing(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:eggX", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:eggY", 0), net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:eggZ", 0)), EntitySpawnReason.MOB_SUMMONED);
 						if (entityToSpawn != null) {
 							entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 						}

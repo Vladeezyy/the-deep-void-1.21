@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.port.neo;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
@@ -67,7 +68,7 @@ public abstract class BaseFlowingFluid extends FlowingFluid {
 
 	/** NeoForge asks the fluid type instead; Fabric asks the loader what the mod's fluid type says */
 	@Override
-	protected boolean canConvertToSource(Level level) {
+	protected boolean canConvertToSource(ServerLevel level) {
 		return net.sombrius.thedeepvoid.port.platform.Platform.INSTANCE.fluidConvertsToSource(this);
 	}
 

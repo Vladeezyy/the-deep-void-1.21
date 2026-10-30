@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class AncientDeepslateStairsBlock extends StairBlock {
 	public AncientDeepslateStairsBlock() {
-		super(Blocks.AIR.defaultBlockState(), BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE).strength(4.5f, 7.5f).requiresCorrectToolForDrops().dynamicShape());
+		super(Blocks.AIR.defaultBlockState(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE).strength(4.5f, 7.5f).requiresCorrectToolForDrops().dynamicShape());
 	}
 
 	@Override

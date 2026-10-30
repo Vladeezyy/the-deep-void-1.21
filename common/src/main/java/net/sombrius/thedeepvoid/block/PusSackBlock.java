@@ -21,12 +21,12 @@ import net.sombrius.thedeepvoid.procedures.PusSackMobplayerCollidesWithPlantProc
 
 public class PusSackBlock extends FlowerBlock {
 	public PusSackBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 100, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.ROOTS).instabreak().noCollission().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 100, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.ROOTS).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 offset = state.getOffset(world, pos);
+		Vec3 offset = state.getOffset(pos);
 		return box(0, 0, 0, 16, 10, 16).move(offset.x, offset.y, offset.z);
 	}
 
@@ -36,8 +36,8 @@ public class PusSackBlock extends FlowerBlock {
 
 
 	@Override
-	public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity) {
-		super.entityInside(blockstate, world, pos, entity);
+	public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity, net.minecraft.world.entity.InsideBlockEffectApplier effectApplier, boolean intersects) {
+		super.entityInside(blockstate, world, pos, entity, effectApplier, intersects);
 		PusSackMobplayerCollidesWithPlantProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ(), entity);
 	}
 }

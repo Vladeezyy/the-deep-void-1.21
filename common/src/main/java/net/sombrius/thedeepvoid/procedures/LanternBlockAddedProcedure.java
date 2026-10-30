@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -15,7 +15,7 @@ public class LanternBlockAddedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
 		if (!world.getBlockState(BlockPos.containing(x, y - 1, z)).canOcclude() && !world.getBlockState(BlockPos.containing(x, y - 1, z)).isFaceSturdy(world, BlockPos.containing(x, y - 1, z), Direction.UP)
 				&& !((world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() instanceof CrossCollisionBlock) && !((world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() instanceof WallBlock)
-				&& (world.getBlockState(BlockPos.containing(x, y + 1, z)).canOcclude() || (world.getBlockState(BlockPos.containing(x, y + 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:chains")))
+				&& (world.getBlockState(BlockPos.containing(x, y + 1, z)).canOcclude() || (world.getBlockState(BlockPos.containing(x, y + 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:chains")))
 						|| (world.getBlockState(BlockPos.containing(x, y + 1, z))).getBlock() instanceof CrossCollisionBlock || (world.getBlockState(BlockPos.containing(x, y + 1, z))).getBlock() instanceof WallBlock)) {
 			{
 				int _value = 1;
@@ -26,7 +26,7 @@ public class LanternBlockAddedProcedure {
 			}
 		} else if ((world.getBlockState(BlockPos.containing(x, y - 1, z)).canOcclude() || world.getBlockState(BlockPos.containing(x, y - 1, z)).isFaceSturdy(world, BlockPos.containing(x, y - 1, z), Direction.UP)
 				|| (world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() instanceof CrossCollisionBlock || (world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() instanceof WallBlock)
-				&& (world.getBlockState(BlockPos.containing(x, y + 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:chains")))) {
+				&& (world.getBlockState(BlockPos.containing(x, y + 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:chains")))) {
 			{
 				int _value = 1;
 				BlockPos _pos = BlockPos.containing(x, y, z);

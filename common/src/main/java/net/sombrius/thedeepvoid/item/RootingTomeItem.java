@@ -1,11 +1,11 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.InteractionResult;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -20,21 +20,21 @@ import net.sombrius.thedeepvoid.procedures.RootingTomeSpecialInformationProcedur
 
 public class RootingTomeItem extends Item {
 	public RootingTomeItem() {
-		super(new Item.Properties().durability(54).rarity(Rarity.RARE));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(54).rarity(Rarity.RARE));
 	}
 
 	@Override
 	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
-	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, context, list, flag);
+	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+		super.appendHoverText(itemstack, context, tooltipDisplay, list, flag);
 		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : Minecraft.getInstance().player;
-		list.add(Component.literal(RootingTomeSpecialInformationProcedure.execute()));
+		list.accept(Component.literal(RootingTomeSpecialInformationProcedure.execute()));
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
-		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		DisturbingRootPlayerFinishesUsingItemProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, ar.getObject());
+	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+		InteractionResult ar = super.use(world, entity, hand);
+		DisturbingRootPlayerFinishesUsingItemProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, entity.getItemInHand(hand));
 		return ar;
 	}
 }

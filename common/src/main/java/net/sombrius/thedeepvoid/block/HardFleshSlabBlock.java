@@ -7,6 +7,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class HardFleshSlabBlock extends SlabBlock {
 	public HardFleshSlabBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.PACKED_MUD).strength(10f, 8f).friction(0.7f).dynamicShape());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.PACKED_MUD).strength(10f, 8f).friction(0.7f).dynamicShape());
 	}
 }

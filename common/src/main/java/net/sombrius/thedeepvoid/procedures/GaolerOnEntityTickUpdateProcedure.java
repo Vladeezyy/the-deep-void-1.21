@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
@@ -35,7 +35,7 @@ public class GaolerOnEntityTickUpdateProcedure {
 						if (entity instanceof GaolerEntity _datEntSetI)
 							_datEntSetI.getEntityData().set(GaolerEntity.DATA_attackChance, 200);
 						if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 99, false, false));
+							_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 99, false, false));
 						if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 							_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 30, 99, false, false));
 						if (entity instanceof GaolerEntity) {
@@ -50,7 +50,7 @@ public class GaolerOnEntityTickUpdateProcedure {
 									for (Entity entityiterator : _entfound) {
 										if (entityiterator == (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null)) {
 											if (world instanceof ServerLevel _level) {
-												Entity entityToSpawn = TheDeepVoidModEntities.PLAYER_CAGE.get().spawn(_level, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), MobSpawnType.MOB_SUMMONED);
+												Entity entityToSpawn = TheDeepVoidModEntities.PLAYER_CAGE.get().spawn(_level, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), EntitySpawnReason.MOB_SUMMONED);
 												if (entityToSpawn != null) {
 													entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 												}

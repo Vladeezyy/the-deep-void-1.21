@@ -21,7 +21,7 @@ public class GiantBoneSpikeOnEntityTickUpdateProcedure {
 					_serverPlayer.connection.teleport(x, (y + 1), z, _ent.getYRot(), _ent.getXRot());
 			}
 		}
-		if (entity.isInWaterOrBubble()) {
+		if (entity.isInWater()) {
 			if (!entity.level().isClientSide())
 				entity.discard();
 		}

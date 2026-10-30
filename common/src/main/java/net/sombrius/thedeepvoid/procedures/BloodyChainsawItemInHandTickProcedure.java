@@ -10,7 +10,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
@@ -35,7 +35,7 @@ public class BloodyChainsawItemInHandTickProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("used") == true) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("used", false) == true) {
 			{
 				final Vec3 _center = new Vec3(
 						(entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(1.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getX()),
@@ -45,7 +45,7 @@ public class BloodyChainsawItemInHandTickProcedure {
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof LivingEntity && !(entityiterator instanceof TamableAnimal _tamIsTamedBy && entity instanceof LivingEntity _livEnt ? _tamIsTamedBy.isOwnedBy(_livEnt) : false) && !(entityiterator == entity)
 							&& !(entityiterator == (entity.getVehicle()))) {
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:sawed"))), entity),
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:sawed"))), entity),
 								(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * (double) DeepVoidConfigConfiguration.BLOODYCHAINSAW.get()));
 						if (!(entityiterator instanceof LivingEntity _livEnt14 && _livEnt14.hasEffect(TheDeepVoidModMobEffects.BLOOD_BOIL.holder()))) {
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -54,16 +54,16 @@ public class BloodyChainsawItemInHandTickProcedure {
 					}
 				}
 			}
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("sentientChainsawUse") < 4) {
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("sentientChainsawUse") == 0) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("sentientChainsawUse", 0) < 4) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("sentientChainsawUse", 0) == 0) {
 					{
 						final String _tagName = "state";
 						final double _tagValue = 1;
 						CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 					}
 				}
-				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("sentientChainsawUse", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("sentientChainsawUse") + 1));
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("sentientChainsawUse") == 2) {
+				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("sentientChainsawUse", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("sentientChainsawUse", 0) + 1));
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("sentientChainsawUse", 0) == 2) {
 					{
 						final String _tagName = "state";
 						final double _tagValue = 2;
@@ -80,12 +80,12 @@ public class BloodyChainsawItemInHandTickProcedure {
 									entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getY(),
 									entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos()
 											.getZ())))
-					.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("minecraft:logs")))
+					.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("minecraft:logs")))
 					|| (world.getBlockState(new BlockPos(
 							entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getX(),
 							entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getY(),
 							entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ())))
-							.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("minecraft:leaves")))) {
+							.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("minecraft:leaves")))) {
 				world.levelEvent(2001,
 						new BlockPos(entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getX(),
 								entity.level().clip(

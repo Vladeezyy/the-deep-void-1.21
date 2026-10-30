@@ -11,12 +11,7 @@ import net.sombrius.thedeepvoid.procedures.BoneCrawlerEmbryoPlayerFinishesUsingI
 
 public class BoneCrawlerEmbryoItem extends Item {
 	public BoneCrawlerEmbryoItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(1f).build()));
-	}
-
-	@Override
-	public int getEnchantmentValue() {
-		return 1;
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().enchantable(1).stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(1f).build()));
 	}
 
 	@Override

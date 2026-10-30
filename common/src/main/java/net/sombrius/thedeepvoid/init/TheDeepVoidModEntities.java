@@ -213,7 +213,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class TheDeepVoidModEntities {
 	public static final Registrar<EntityType<?>> REGISTRY = Registrar.create(Registries.ENTITY_TYPE, TheDeepVoidMod.MODID);
 	public static final RegistryEntry<EntityType<?>, EntityType<FallingCorpseEntity>> FALLING_CORPSE = register("falling_corpse", EntityType.Builder.<FallingCorpseEntity>of(FallingCorpseEntity::new, MobCategory.MONSTER)
@@ -760,7 +760,7 @@ public class TheDeepVoidModEntities {
 			.clientTrackingRange(64).updateInterval(3).fireImmune().sized(1f, 3f));
 
 	private static <T extends Entity> RegistryEntry<EntityType<?>, EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
-		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(registryname));
+		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", registryname))));
 	}
 
 	@SubscribeEvent

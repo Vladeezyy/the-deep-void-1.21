@@ -6,7 +6,7 @@ public class PainfulEffectExpiresProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:advancedPainful") == true) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:advancedPainful", false) == true) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("deep_void:advancedPainful", false);
 		}
 	}

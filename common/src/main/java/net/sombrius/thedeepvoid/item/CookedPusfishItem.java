@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.CookedPusfishPlayerFinishesUsingItemP
 
 public class CookedPusfishItem extends Item {
 	public CookedPusfishItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(7).saturationModifier(1.2f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(7).saturationModifier(1.2f).build()));
 	}
 
 	@Override

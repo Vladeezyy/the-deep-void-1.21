@@ -33,12 +33,12 @@ public class SoulHookAttacksEntityProcedure {
 		if (sourceentity == null)
 			return;
 		if (sourceentity instanceof HookEndEntity) {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getBoolean("deep_void:soul") == true) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getBooleanOr("deep_void:soul", false) == true) {
 				{
 					final Vec3 _center = new Vec3(x, y, z);
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(15 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if (!(entityiterator == sourceentity) && !(entityiterator.getDisplayName().getString()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getString("deep_void:owner"))) {
+						if (!(entityiterator == sourceentity) && !(entityiterator.getDisplayName().getString()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).getStringOr("deep_void:owner", ""))) {
 							if (!(entityiterator instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(TheDeepVoidModMobEffects.HEXED.holder()))) {
 								if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 									_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.HEXED.holder(), 80, 0));

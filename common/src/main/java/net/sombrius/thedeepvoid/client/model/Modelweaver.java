@@ -11,17 +11,17 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 // Made with Blockbench 4.12.2
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
-public class Modelweaver<T extends Entity> extends EntityModel<T> {
+public class Modelweaver<T extends net.minecraft.client.renderer.entity.state.EntityRenderState> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in
 	// the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("the_deep_void", "modelweaver"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath("the_deep_void", "modelweaver"), "main");
 	public final ModelPart Head;
 	public final ModelPart Body;
 	public final ModelPart Cape;
@@ -32,6 +32,7 @@ public class Modelweaver<T extends Entity> extends EntityModel<T> {
 	public final ModelPart RightLeg;
 
 	public Modelweaver(ModelPart root) {
+		super(root);
 		this.Head = root.getChild("Head");
 		this.Body = root.getChild("Body");
 		this.Cape = this.Body.getChild("Cape");
@@ -71,17 +72,14 @@ public class Modelweaver<T extends Entity> extends EntityModel<T> {
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
 
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		Head.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		LeftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		RightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		LeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-	}
 
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(T state) {
+		super.setupAnim(state);
+		float limbSwing = net.sombrius.thedeepvoid.port.PortRender.limbSwing(state);
+		float limbSwingAmount = net.sombrius.thedeepvoid.port.PortRender.limbSwingAmount(state);
+		float ageInTicks = state.ageInTicks;
+		float netHeadYaw = net.sombrius.thedeepvoid.port.PortRender.netHeadYaw(state);
+		float headPitch = net.sombrius.thedeepvoid.port.PortRender.headPitch(state);
 		this.LeftLeg.xRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
 		this.Head.yRot = netHeadYaw / (180F / (float) Math.PI);
 		this.Head.xRot = headPitch / (180F / (float) Math.PI);

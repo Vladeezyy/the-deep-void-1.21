@@ -1,23 +1,33 @@
 package net.sombrius.thedeepvoid.entity.model;
 
-import net.minecraft.resources.ResourceLocation;
-import net.sombrius.thedeepvoid.entity.EyeOfTheWatcherEntity;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 import software.bernie.geckolib.model.GeoModel;
+
+import net.minecraft.resources.Identifier;
+
+import net.sombrius.thedeepvoid.port.GeoTextures;
+import net.sombrius.thedeepvoid.entity.EyeOfTheWatcherEntity;
+
+import javax.annotation.Nullable;
 
 public class EyeOfTheWatcherModel extends GeoModel<EyeOfTheWatcherEntity> {
 	@Override
-	public ResourceLocation getAnimationResource(EyeOfTheWatcherEntity entity) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "animations/eyeofthewatcher.animation.json");
+	public Identifier getAnimationResource(EyeOfTheWatcherEntity entity) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/eyeofthewatcher.animation.json");
 	}
 
 	@Override
-	public ResourceLocation getModelResource(EyeOfTheWatcherEntity entity) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "geo/eyeofthewatcher.geo.json");
+	public Identifier getModelResource(GeoRenderState renderState) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/eyeofthewatcher.geo.json");
 	}
 
 	@Override
-	public ResourceLocation getTextureResource(EyeOfTheWatcherEntity entity) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/entities/" + entity.getTexture() + ".png");
+	public Identifier getTextureResource(GeoRenderState renderState) {
+		return GeoTextures.get(renderState);
 	}
 
+	@Override
+	public void addAdditionalStateData(EyeOfTheWatcherEntity entity, @Nullable Object relatedObject, GeoRenderState renderState) {
+		GeoTextures.set(renderState, entity.getTexture());
+	}
 }

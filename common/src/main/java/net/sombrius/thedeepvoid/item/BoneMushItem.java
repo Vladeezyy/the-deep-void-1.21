@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.BoneMushPlayerFinishesUsingItemProced
 
 public class BoneMushItem extends Item {
 	public BoneMushItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(0.1f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(0.1f).alwaysEdible().build()));
 	}
 
 	@Override

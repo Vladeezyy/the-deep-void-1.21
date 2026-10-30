@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -15,9 +15,9 @@ public class AncientDeepslateSpikeTrapEntityWalksOnTheBlockProcedure {
 			world.setBlock(BlockPos.containing(x, y + 1, z), TheDeepVoidModBlocks.TRAP_BONE_SPIKES.get().defaultBlockState(), 3);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.place")), SoundSource.BLOCKS, 1, (float) 1.8);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.place")), SoundSource.BLOCKS, 1, (float) 1.8);
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.place")), SoundSource.BLOCKS, 1, (float) 1.8, false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.place")), SoundSource.BLOCKS, 1, (float) 1.8, false);
 				}
 			}
 		}

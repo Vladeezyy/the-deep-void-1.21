@@ -4,7 +4,7 @@ import java.util.Comparator;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -49,9 +49,9 @@ public class WatchingStalkerOnEntityTickUpdateProcedure {
 		if (!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 8, 8, 8), e -> true).isEmpty()) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stalker_ambient")), SoundSource.HOSTILE, 2, (float) 0.8);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stalker_ambient")), SoundSource.HOSTILE, 2, (float) 0.8);
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stalker_ambient")), SoundSource.HOSTILE, 2, (float) 0.8, false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stalker_ambient")), SoundSource.HOSTILE, 2, (float) 0.8, false);
 				}
 			}
 			if (((Entity) world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 8, 8, 8), e -> true).stream().sorted(new Object() {
@@ -69,23 +69,23 @@ public class WatchingStalkerOnEntityTickUpdateProcedure {
 			if (!entity.level().isClientSide())
 				entity.discard();
 		}
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("despawning") >= 180) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("despawning", 0) >= 180) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("despawning", 40);
 			if (entity instanceof WatchingStalkerEntity) {
 				((WatchingStalkerEntity) entity).setAnimation("animation.stalker_hide");
 			}
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 99, false, false));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 99, false, false));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 99, false, false));
 			TheDeepVoidMod.queueServerWork(35, () -> {
 				if (!entity.level().isClientSide())
 					entity.discard();
 			});
 		} else {
-			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("despawning", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("despawning") + 1));
+			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("despawning", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("despawning", 0) + 1));
 		}
 	}
 }

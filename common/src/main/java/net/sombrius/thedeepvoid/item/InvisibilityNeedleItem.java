@@ -1,8 +1,8 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,13 +12,13 @@ import net.sombrius.thedeepvoid.procedures.InvisibilityNeedleRightClickProcedure
 
 public class InvisibilityNeedleItem extends Item {
 	public InvisibilityNeedleItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON));
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
-		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		InvisibilityNeedleRightClickProcedure.execute(world, entity, ar.getObject());
+	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+		InteractionResult ar = super.use(world, entity, hand);
+		InvisibilityNeedleRightClickProcedure.execute(world, entity, entity.getItemInHand(hand));
 		return ar;
 	}
 }

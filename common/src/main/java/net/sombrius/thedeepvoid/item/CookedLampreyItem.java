@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.LampreyPlayerFinishesUsingItemProcedu
 
 public class CookedLampreyItem extends Item {
 	public CookedLampreyItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(8).saturationModifier(1f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(8).saturationModifier(1f).build()));
 	}
 
 	@Override

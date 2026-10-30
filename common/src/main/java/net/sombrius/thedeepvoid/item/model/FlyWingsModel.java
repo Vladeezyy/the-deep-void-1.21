@@ -1,22 +1,23 @@
 package net.sombrius.thedeepvoid.item.model;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.sombrius.thedeepvoid.item.FlyWingsItem;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 public class FlyWingsModel extends GeoModel<FlyWingsItem> {
 	@Override
-	public ResourceLocation getAnimationResource(FlyWingsItem object) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "animations/flywings.animation.json");
+	public Identifier getAnimationResource(FlyWingsItem object) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/flywings.animation.json");
 	}
 
 	@Override
-	public ResourceLocation getModelResource(FlyWingsItem object) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "geo/flywings.geo.json");
+	public Identifier getModelResource(GeoRenderState renderState) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/flywings.geo.json");
 	}
 
 	@Override
-	public ResourceLocation getTextureResource(FlyWingsItem object) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/item/flywings.png");
+	public Identifier getTextureResource(GeoRenderState renderState) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "textures/item/flywings.png");
 	}
 }

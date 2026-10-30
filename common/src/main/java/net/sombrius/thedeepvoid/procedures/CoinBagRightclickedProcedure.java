@@ -5,7 +5,7 @@ import net.minecraft.world.item.component.CustomData;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -60,15 +60,15 @@ public class CoinBagRightclickedProcedure {
 		if (entity instanceof Player _player) {
 			ItemStack _setstack = new ItemStack(TheDeepVoidModItems.DARK_STEEL_COIN.get()).copy();
 			_setstack.setCount((int) (entity instanceof LivingEntity _livEnt16 && _livEnt16.hasEffect(MobEffects.LUCK)
-					? Math.round(itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("prize") * Mth.nextDouble(RandomSource.create(), 1, 1.5))
-					: itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("prize")));
+					? Math.round(itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("prize", 0) * Mth.nextDouble(RandomSource.create(), 1, 1.5))
+					: itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("prize", 0)));
 			ItemHandlerHelper.giveItemToPlayer(_player, _setstack);
 		}
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.bundle.drop_contents")), SoundSource.PLAYERS, (float) 0.4, 1);
+				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.bundle.drop_contents")), SoundSource.PLAYERS, (float) 0.4, 1);
 			} else {
-				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.bundle.drop_contents")), SoundSource.PLAYERS, (float) 0.4, 1, false);
+				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.bundle.drop_contents")), SoundSource.PLAYERS, (float) 0.4, 1, false);
 			}
 		}
 		if (!(new Object() {
@@ -76,7 +76,7 @@ public class CoinBagRightclickedProcedure {
 				if (_ent instanceof ServerPlayer _serverPlayer) {
 					return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 				} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 				}
 				return false;
 			}

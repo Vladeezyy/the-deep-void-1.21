@@ -10,7 +10,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -23,13 +23,13 @@ import net.sombrius.thedeepvoid.jei_recipes.TreasureBagJeiTypeRecipeCategory;
 
 @JeiPlugin
 public class TheDeepVoidModJeiPlugin implements IModPlugin {
-	public static mezz.jei.api.recipe.RecipeType<GluttonBlockJEITypeRecipe> GluttonBlockJEIType_Type = new mezz.jei.api.recipe.RecipeType<>(GluttonBlockJEITypeRecipeCategory.UID, GluttonBlockJEITypeRecipe.class);
-	public static mezz.jei.api.recipe.RecipeType<SoulForgeJEITypeRecipe> SoulForgeJEIType_Type = new mezz.jei.api.recipe.RecipeType<>(SoulForgeJEITypeRecipeCategory.UID, SoulForgeJEITypeRecipe.class);
-	public static mezz.jei.api.recipe.RecipeType<TreasureBagJeiTypeRecipe> TreasureBagJeiType_Type = new mezz.jei.api.recipe.RecipeType<>(TreasureBagJeiTypeRecipeCategory.UID, TreasureBagJeiTypeRecipe.class);
+	public static mezz.jei.api.recipe.types.IRecipeType<GluttonBlockJEITypeRecipe> GluttonBlockJEIType_Type = mezz.jei.api.recipe.types.IRecipeType.create(GluttonBlockJEITypeRecipeCategory.UID, GluttonBlockJEITypeRecipe.class);
+	public static mezz.jei.api.recipe.types.IRecipeType<SoulForgeJEITypeRecipe> SoulForgeJEIType_Type = mezz.jei.api.recipe.types.IRecipeType.create(SoulForgeJEITypeRecipeCategory.UID, SoulForgeJEITypeRecipe.class);
+	public static mezz.jei.api.recipe.types.IRecipeType<TreasureBagJeiTypeRecipe> TreasureBagJeiType_Type = mezz.jei.api.recipe.types.IRecipeType.create(TreasureBagJeiTypeRecipeCategory.UID, TreasureBagJeiTypeRecipe.class);
 
 	@Override
-	public ResourceLocation getPluginUid() {
-		return ResourceLocation.parse("the_deep_void:jei_plugin");
+	public Identifier getPluginUid() {
+		return Identifier.parse("the_deep_void:jei_plugin");
 	}
 
 	@Override
@@ -41,12 +41,11 @@ public class TheDeepVoidModJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		RecipeManager recipeManager = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
-		List<GluttonBlockJEITypeRecipe> GluttonBlockJEITypeRecipes = recipeManager.getAllRecipesFor(GluttonBlockJEITypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
+		List<GluttonBlockJEITypeRecipe> GluttonBlockJEITypeRecipes = net.sombrius.thedeepvoid.port.PortRecipeSync.recipes(GluttonBlockJEITypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
 		registration.addRecipes(GluttonBlockJEIType_Type, GluttonBlockJEITypeRecipes);
-		List<SoulForgeJEITypeRecipe> SoulForgeJEITypeRecipes = recipeManager.getAllRecipesFor(SoulForgeJEITypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
+		List<SoulForgeJEITypeRecipe> SoulForgeJEITypeRecipes = net.sombrius.thedeepvoid.port.PortRecipeSync.recipes(SoulForgeJEITypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
 		registration.addRecipes(SoulForgeJEIType_Type, SoulForgeJEITypeRecipes);
-		List<TreasureBagJeiTypeRecipe> TreasureBagJeiTypeRecipes = recipeManager.getAllRecipesFor(TreasureBagJeiTypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
+		List<TreasureBagJeiTypeRecipe> TreasureBagJeiTypeRecipes = net.sombrius.thedeepvoid.port.PortRecipeSync.recipes(TreasureBagJeiTypeRecipe.Type.INSTANCE).stream().map(RecipeHolder::value).collect(Collectors.toList());
 		registration.addRecipes(TreasureBagJeiType_Type, TreasureBagJeiTypeRecipes);
 	}
 

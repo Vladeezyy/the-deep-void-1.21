@@ -34,7 +34,7 @@ public class RotPotionRecipeBrewingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean isIngredient(ItemStack ingredient) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModItems.ROTFISH.get())).test(ingredient);
+		return Ingredient.of(TheDeepVoidModItems.ROTFISH.get()).test(ingredient);
 	}
 
 	@Override

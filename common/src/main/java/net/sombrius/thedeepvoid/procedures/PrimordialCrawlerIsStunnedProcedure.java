@@ -20,7 +20,7 @@ public class PrimordialCrawlerIsStunnedProcedure {
 					((PrimordialBoneCrawlerEntity) entity).setAnimation("animation.primordialCrawler_stun");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) Double.POSITIVE_INFINITY, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, (int) Double.POSITIVE_INFINITY, 99, false, false));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, (int) Double.POSITIVE_INFINITY, 99, false, false));
 			}
@@ -29,7 +29,7 @@ public class PrimordialCrawlerIsStunnedProcedure {
 					((PrimordialBoneCrawlerEntity) entity).setAnimation("empty");
 				}
 				if (entity instanceof LivingEntity _entity)
-					_entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+					_entity.removeEffect(MobEffects.SLOWNESS);
 				if (entity instanceof LivingEntity _entity)
 					_entity.removeEffect(MobEffects.WEAKNESS);
 			}

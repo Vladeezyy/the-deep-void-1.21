@@ -18,7 +18,7 @@ public class RootBlindOnEffectActiveTickProcedure {
 			if (world instanceof ServerLevel _level)
 				_level.sendParticles(ParticleTypes.SQUID_INK, (entity.getX()), (entity.getY()), (entity.getZ()), 2, 0.1, 0, 0.1, 0.1);
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 99, false, false));
 		}
 	}
 }

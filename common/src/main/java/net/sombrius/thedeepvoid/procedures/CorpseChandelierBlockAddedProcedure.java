@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.Blocks;
 
 public class CorpseChandelierBlockAddedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
-		if (!world.getBlockState(BlockPos.containing(x, y + 1, z)).canOcclude() && !((world.getBlockState(BlockPos.containing(x, y + 1, z))).getBlock() == Blocks.CHAIN)) {
+		if (!world.getBlockState(BlockPos.containing(x, y + 1, z)).canOcclude() && !((world.getBlockState(BlockPos.containing(x, y + 1, z))).getBlock() == Blocks.IRON_CHAIN)) {
 			{
 				BlockPos _pos = BlockPos.containing(x, y, z);
 				Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y, z), null);

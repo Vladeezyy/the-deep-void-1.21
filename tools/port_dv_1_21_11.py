@@ -83,14 +83,14 @@ def tools(s):
     if not m:
         return s
     kind = m.group(1)
-    attrs = r'(?:net\.sombrius\.thedeepvoid\.port\.PortUtil\.swordAttributes|SwordItem\.createAttributes|DiggerItem\.createAttributes)\(TOOL_TIER, ([-\d.]+f?), ([-\d.]+f?)\)'
+    attrs = r'(?:net\.sombrius\.thedeepvoid\.port\.PortUtil\.swordAttributes|(?:Sword|Digger|Pickaxe|Axe|Shovel|Hoe)Item\.createAttributes)\(TOOL_TIER, ([-\d.]+f?), ([-\d.]+f?)\)'
     if kind in TOOLS:
-        s = re.sub(r'super\(TOOL_TIER, (new Item\.Properties\(\)|' + re.escape(REGISTRAR) + r'\.itemProps\(\))\.attributes\(' + attrs + r'\)',
-                   lambda x: f'super({REGISTRAR}.itemProps().{TOOLS[kind]}(TOOL_TIER, {x.group(2)}, {x.group(3)})', s)
+        s = re.sub(r'super\(TOOL_TIER, (new Item\.Properties\(\)|' + re.escape(REGISTRAR) + r'\.itemProps\(\))((?:\.\w+\([^()]*\))*)\.attributes\(' + attrs + r'\)',
+                   lambda x: f'super({REGISTRAR}.itemProps(){x.group(2)}.{TOOLS[kind]}(TOOL_TIER, {x.group(3)}, {x.group(4)})', s)
         s = re.sub(r'(public (?:abstract )?class \w+ extends )' + kind + r'\b', r'\1Item', s)
     else:
-        s = re.sub(r'super\(TOOL_TIER, (new Item\.Properties\(\)|' + re.escape(REGISTRAR) + r'\.itemProps\(\))\.attributes\(' + attrs + r'\)',
-                   lambda x: f'super(TOOL_TIER, {x.group(2)}, {x.group(3)}, {REGISTRAR}.itemProps()', s)
+        s = re.sub(r'super\(TOOL_TIER, (new Item\.Properties\(\)|' + re.escape(REGISTRAR) + r'\.itemProps\(\))((?:\.\w+\([^()]*\))*)\.attributes\(' + attrs + r'\)',
+                   lambda x: f'super(TOOL_TIER, {x.group(3)}, {x.group(4)}, {REGISTRAR}.itemProps(){x.group(2)}', s)
     s = re.sub(r'import net\.minecraft\.world\.item\.(SwordItem|PickaxeItem|DiggerItem);\n', '', s)
     return s
 
@@ -295,6 +295,298 @@ def particles(s):
     return add_import(s, 'net.minecraft.client.particle.SingleQuadParticle')
 
 
+ARMOR_SLOTS = {'0': 'FEET', '1': 'LEGS', '2': 'CHEST', '3': 'HEAD'}
+
+
+def procs(s):
+    """MCreator procedures, entities and blocks: the smaller 1.21.2-1.21.11 API changes"""
+    # 1.21.11: command permission levels are permission sets
+    if 'new CommandSourceStack(' in s:
+        s = re.sub(r'(\(ServerLevel\) \w+(?:\.level\(\))? : null,\s*)4,', r'\1LevelBasedPermissionSet.OWNER,', s)
+        if 'LevelBasedPermissionSet.OWNER' in s:
+            s = add_import(s, 'net.minecraft.server.permissions.LevelBasedPermissionSet')
+    # 1.21.5: no sword and pickaxe classes; the item tags have the mod's tools too
+    s = re.sub(r'\.getItem\(\) instanceof SwordItem\b', '.is(net.minecraft.tags.ItemTags.SWORDS)', s)
+    s = re.sub(r'\.getItem\(\) instanceof PickaxeItem\b', '.is(net.minecraft.tags.ItemTags.PICKAXES)', s)
+    s = re.sub(r'import net\.minecraft\.world\.item\.(SwordItem|PickaxeItem|DiggerItem|TieredItem);\n', '', s)
+    # 1.21.2: Registry.get(id) is an Optional holder; getValue(id) the old lookup (calls split over lines)
+    s = re.sub(r'\b(BuiltInRegistries\.[A-Z_]+)(\s*)\.get\((\s*)(Identifier\.)', r'\1\2.getValue(\3\4', s)
+    s = re.sub(r'\b(BuiltInRegistries\.[A-Z_]+)\.getTag\(', r'\1.get(', s)
+    # 1.21.2: arrows
+    s = re.sub(r'\.inGround\b(?!\s*=[^=])', '.isInGround()', s)
+    s = re.sub(r'InteractionResult\.sidedSuccess\((?:[^()]|\([^()]*\))*\)', 'InteractionResult.SUCCESS', s)
+    s = re.sub(r'\bInteractionResult\.CONSUME_PARTIAL\b', 'InteractionResult.CONSUME', s)
+    # 1.21.2: the camera's entity
+    s = s.replace('getCamera().getEntity()', 'getCamera().entity()')
+    # 1.21.2: FastColor.ARGB32 is ARGB
+    s = s.replace('FastColor.ARGB32.', 'ARGB.').replace('import net.minecraft.util.FastColor;', 'import net.minecraft.util.ARGB;')
+    # 1.21.2: block offsets take the position only
+    s = re.sub(r'\.getOffset\((\w+), (\w+)\)', r'.getOffset(\2)', s)
+    # 1.21.2: arrows' piercing (opened by the AT), particles, spawned offspring, teleports, kills
+    s = re.sub(r'new DustParticleOptions\(new Vector3f\(([^()]*?), ([^()]*?), ([^()]*?)\), ', r'new DustParticleOptions(net.minecraft.util.ARGB.colorFromFloat(1f, \1, \2, \3), ', s)
+    s = re.sub(r'(TheDeepVoidModEntities\.\w+\.get\(\)\.create\()(\w+)\)', r'\1\2, EntitySpawnReason.BREEDING)', s)
+    s = re.sub(r'\.teleportTo\((\w+), ([^,;]+), ([^,;]+), ([^,;]+), ([^,;]+), ([^,;]+)\);', r'.teleportTo(\1, \2, \3, \4, java.util.Set.of(), \5, \6, true);', s)
+    s = re.sub(r'\b(?!super\b)(\w+)\.kill\(\);', rf'{PKG}.port.PortUtil.kill(\1);', s)
+    s = s.replace('protected void customServerAiStep() {\n\t\tsuper.customServerAiStep();', 'protected void customServerAiStep(ServerLevel level) {\n\t\tsuper.customServerAiStep(level);')
+    if 'customServerAiStep(ServerLevel' in s:
+        s = add_import(s, 'net.minecraft.server.level.ServerLevel')
+    # 1.21.2: DirectionProperty is an EnumProperty<Direction>
+    s = re.sub(r'if \(_prop instanceof EnumProperty _dp\)(\n\t+)return _bs\.getValue\(_dp\);', r'if (_prop instanceof EnumProperty _dp && _dp.getValueClass() == Direction.class)\1return (Direction) _bs.getValue(_dp);', s)
+    # 1.21.5: tooltips (the items named the context "level")
+    s = s.replace('public void appendHoverText(ItemStack itemstack, Item.TooltipContext level, List<Component> list, TooltipFlag flag) {\n\t\tsuper.appendHoverText(itemstack, level, list, flag);',
+                  'public void appendHoverText(ItemStack itemstack, Item.TooltipContext level, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {\n\t\tsuper.appendHoverText(itemstack, level, tooltipDisplay, list, flag);')
+    if 'java.util.function.Consumer<Component> list' in s:
+        s = re.sub(r'\blist\.add\(', 'list.accept(', s)
+    # 1.21.5: the armor slots are equipment slots of the entity
+    s = re.sub(r'\.getInventory\(\)\.armor\.set\(([0-3]), ', lambda m: f'.setItemSlot(net.minecraft.world.entity.EquipmentSlot.{ARMOR_SLOTS[m.group(1)]}, ', s)
+    # 1.21.2: tag ingredients take the holder set
+    s = re.sub(r'Ingredient\.of\((net\.minecraft\.tags\.TagKey\.create\(net\.minecraft\.core\.registries\.Registries\.ITEM, Identifier\.parse\("[^"]+"\)\))\)',
+               r'Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(\1))', s)
+    # 1.21.9: modifier keys are asked from the client
+    s = re.sub(r'\bScreen\.has(Alt|Shift|Control)Down\(\)', r'net.minecraft.client.Minecraft.getInstance().has\1Down()', s)
+    # 1.21.6: a server player's level is a ServerLevel
+    s = re.sub(r'\.serverLevel\(\)', '.level()', s)
+    # 1.21.11: game rules live on the server levels
+    s = re.sub(r'world\.getLevelData\(\)\.getGameRules\(\)\.get\(([\w.]+(?:\.get\(\))?)\)', rf'{PKG}.port.PortUtil.rule(world, \1)', s)
+    s = s.replace('world.getLevelData().getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)', f'{PKG}.port.PortUtil.rule(world, net.minecraft.world.level.gamerules.GameRules.SPAWN_MOBS)')
+    # NBT of a block entity through the MCreator helpers (a variable key)
+    for name, default in (('getDouble', '0'), ('getBoolean', 'false'), ('getString', '""'), ('getInt', '0')):
+        s = re.sub(r'(PortUtil\.data\(\w+\)\.)' + name + r'\((\w+)\)', r'\1' + name + r'Or(\2, ' + default + ')', s)
+    # 1.21.5: removed blocks drop their container by the block entity; the block updates the comparators
+    s = re.sub(r'\t@Override\n\tpublic void onRemove\(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving\) \{\n\t\tif \(state\.getBlock\(\) != newState\.getBlock\(\)\) \{\n'
+               r'\t\t\tBlockEntity blockEntity = world\.getBlockEntity\(pos\);\n\t\t\tif \(blockEntity instanceof \w+ be\) \{\n\t\t\t\tContainers\.dropContents\(world, pos, be\);\n'
+               r'\t\t\t\tworld\.updateNeighbourForOutputSignal\(pos, this\);\n\t\t\t\}\n\t\t\tsuper\.onRemove\(state, world, pos, newState, isMoving\);\n\t\t\}\n\t\}\n',
+               '\t@Override\n\tprotected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean isMoving) {\n\t\tContainers.updateNeighboursAfterDestroy(state, world, pos);\n\t}\n', s)
+    if 'affectNeighborsAfterRemoval(BlockState state, ServerLevel' in s:
+        s = add_import(s, 'net.minecraft.server.level.ServerLevel')
+    if 'import net.minecraft.world.item.ArmorItem;' in s and not re.search(r'\bArmorItem\b', s.replace('import net.minecraft.world.item.ArmorItem;', '')):
+        s = s.replace('import net.minecraft.world.item.ArmorItem;\n', '')
+    # JEI 27: brewing recipes have ids
+    s = re.sub(r'(brewingRecipes\.add\(factory\.createBrewingRecipe\((?:(?!"brewing_")[^;])*?)\)\);', r'\1, Identifier.fromNamespaceAndPath("the_deep_void", "brewing_" + brewingRecipes.size())));', s)
+    s = re.sub(r'\b(BuiltInRegistries\.[A-Z_]+)\.getOrCreateTag\(', r'\1.getOrThrow(', s)
+    # smaller renames and signature changes
+    s = re.sub(r'\bBlocks\.CHAIN\b', 'Blocks.IRON_CHAIN', s)
+    s = re.sub(r'\bItems\.CHAIN\b', 'Items.IRON_CHAIN', s)
+    s = re.sub(r'(addParticle|sendParticles)\(ParticleTypes\.FLASH,', r'\1(net.minecraft.core.particles.ColorParticleOption.create(ParticleTypes.FLASH, -1),', s)
+    s = s.replace('.getMainCamera().getEntity()', '.getMainCamera().entity()').replace('.getMainCamera().getPosition()', '.getMainCamera().position()')
+    s = re.sub(r'\b(\w+)\.getTimer\(\)', r'\1.getDeltaTracker()', s)
+    s = s.replace('getMinBuildHeight()', 'getMinY()').replace('getMaxBuildHeight()', 'getMaxY()')
+    s = s.replace('(EntityType<T>) entityTypeBuilder.build(registryname)', '(EntityType<T>) entityTypeBuilder.build(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", registryname)))')
+    s = s.replace('BlockEntityType.Builder.of(supplier, block.get()).build(null)', 'new BlockEntityType<>(supplier, java.util.Set.of(block.get()))')
+    s = re.sub(r'\bthis\.spawnAtLocation\(', f'{PKG}.port.PortUtil.spawnAtLocation(this, ', s)
+    s = re.sub(r'itemstack\.getItem\(\) instanceof (\w+) armor && armor\.getType\(\) == ArmorType\.(\w+)', rf'itemstack.getItem() instanceof \1 && {PKG}.port.PortUtil.armorType(itemstack) == ArmorType.\2', s)
+    s = re.sub(r'(setRenderLayer\([^;]*?), RenderType\.translucent\(\)\)', r'\1, net.minecraft.client.renderer.chunk.ChunkSectionLayer.TRANSLUCENT)', s)
+    if 'TheDeepVoidModItems {' in s:
+        s = s.replace('new BlockItem(', f'new {PKG}.port.PortBlockItem(')
+    # 1.21.5: blocks have no tooltips; the block item asks the block (port.PortBlockItem)
+    if re.search(r'public class \w+ extends Block\b', s) and 'super.appendHoverText(itemstack, context, tooltipDisplay, list, flag);' in s:
+        s = re.sub(r'\t@Override\n(\t@net\.neoforged[^\n]*\n\tpublic void appendHoverText\()', r'\1', s)
+        s = s.replace('\t\tsuper.appendHoverText(itemstack, context, tooltipDisplay, list, flag);\n', '')
+        s = re.sub(r'(public class \w+ extends Block)( implements ([\w, ]+))? \{', lambda m: m.group(1) + ' implements ' + (m.group(3) + ', ' if m.group(3) else '') + f'{PKG}.port.PortBlockItem.Tooltip {{', s, count=1)
+    if re.search(r'\bItemStack\b', s) and 'import net.minecraft.world.item.ItemStack;' not in s and 'import net.minecraft.world.item.*;' not in s and 'class ItemStack' not in s:
+        s = add_import(s, 'net.minecraft.world.item.ItemStack')
+    # 1.21.9: sprite particle registrations moved
+    s = s.replace('ParticleEngine.SpriteParticleRegistration', 'ParticleResources.SpriteParticleRegistration')
+    s = s.replace('import net.minecraft.client.particle.ParticleEngine;', 'import net.minecraft.client.particle.ParticleResources;')
+    if 'EntitySpawnReason.' in s:
+        s = add_import(s, 'net.minecraft.world.entity.EntitySpawnReason')
+    return s
+
+
+HEAD_PART = r'(new ModelPart\(Collections\.emptyList\(\), Collections\.emptyMap\(\)\)|new Model\w+\(Minecraft\.getInstance\(\)\.getEntityModels\(\)\.bakeLayer\(Model\w+\.LAYER_LOCATION\)\)\.\w+)'
+
+
+def armor_models(s):
+    """MCreator armor with Blockbench models: NeoForge 21.11's getHumanoidArmorModel(stack, layer type, original);
+    the render state poses the model (crouching, riding, young), so the model is built once; the texture override
+    moved to the client extensions"""
+    if 'public HumanoidModel getHumanoidArmorModel(' not in s:
+        return s
+    s = re.sub(r'public HumanoidModel getHumanoidArmorModel\(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel\) \{\n(\t+)HumanoidModel armorModel = (new HumanoidModel\(.*?\));\n'
+               r'\t+armorModel\.crouching = living\.isShiftKeyDown\(\);\n\t+armorModel\.riding = defaultModel\.riding;\n\t+armorModel\.young = living\.isBaby\(\);\n\t+return armorModel;',
+               lambda m: 'public net.minecraft.client.model.Model getHumanoidArmorModel(ItemStack stack, net.minecraft.client.resources.model.EquipmentClientInfo.LayerType layerType, net.minecraft.client.model.Model original) {\n'
+                         + m.group(1) + 'if (this.armorModel == null)\n' + m.group(1) + '\tthis.armorModel = ' + m.group(2) + ';\n' + m.group(1) + 'return this.armorModel;', s, flags=re.S)
+    s = re.sub(r'"head", ' + HEAD_PART, rf'"head", {PKG}.port.PortArmorModels.head(\1)', s)
+    s = re.sub(r'(\n(\t+)@Override\n(?:\t+@net\.neoforged[^\n]*\n)?\t+public net\.minecraft\.client\.model\.Model getHumanoidArmorModel)', r'\n\2private HumanoidModel<?> armorModel;\n\1', s)
+    # the texture of the piece (getArmorTexture of NeoForge's item extension in 1.21.1)
+    s = re.sub(r'(\t\t\t\};\n\t\t\}\n)\n\t\tpublic Identifier getArmorTexture\(ItemStack stack, Entity entity, EquipmentSlot slot, Object layer, boolean innerModel\) \{\n\t\t\treturn (Identifier\.parse\("[^"]+"\));\n\t\t\}\n',
+               r'\n\t\t\t\t@Override\n\t\t\t\tpublic Identifier getArmorTexture(ItemStack stack, net.minecraft.client.resources.model.EquipmentClientInfo.LayerType type, net.minecraft.client.resources.model.EquipmentClientInfo.Layer layer, Identifier _default) {\n\t\t\t\t\treturn \2;\n\t\t\t\t}\n\1', s)
+    return s
+
+
+JEI_RECIPE_METHODS = """
+	@Override
+	public boolean isSpecial() {
+		return true;
+	}
+
+	@Override
+	public net.minecraft.world.item.crafting.PlacementInfo placementInfo() {
+		return net.minecraft.world.item.crafting.PlacementInfo.NOT_PLACEABLE;
+	}
+
+	@Override
+	public net.minecraft.world.item.crafting.RecipeBookCategory recipeBookCategory() {
+		return net.minecraft.world.item.crafting.RecipeBookCategories.CRAFTING_MISC;
+	}
+"""
+
+
+def jei(s):
+    """MCreator's JEI recipe types: 1.21.2 recipes (no ingredient list or result in the interface, placement info,
+    recipe book category, no empty ingredient), JEI 27 (IRecipeType, categories draw their background), recipes
+    synced to the client (port.PortRecipeSync)"""
+    m = re.search(r'public class (\w+) implements Recipe<RecipeInput> \{', s)
+    if m:
+        cls = m.group(1)
+        s = s.replace('\t@Override\n\tpublic NonNullList<Ingredient> getIngredients()', '\tpublic NonNullList<Ingredient> getIngredients()')
+        s = s.replace('\t@Override\n\tpublic ItemStack getResultItem(', '\tpublic ItemStack getResultItem(')
+        s = re.sub(r'\t@Override\n\tpublic boolean canCraftInDimensions\(int pWidth, int pHeight\) \{\n\t\treturn true;\n\t\}\n\n', '', s)
+        s = s.replace('public RecipeType<?> getType() {', f'public RecipeType<{cls}> getType() {{')
+        s = s.replace('public RecipeSerializer<?> getSerializer() {', f'public RecipeSerializer<{cls}> getSerializer() {{')
+        if 'placementInfo()' not in s:
+            s = s.replace('\tpublic static class Type implements', JEI_RECIPE_METHODS.lstrip('\n') + '\n\tpublic static class Type implements', 1)
+        s = s.replace('Ingredient.CODEC_NONEMPTY', 'Ingredient.CODEC')
+        s = s.replace('NonNullList.of(Ingredient.EMPTY, aingredient)', 'NonNullList.of(aingredient[0], aingredient)')
+        s = s.replace('NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);\n\t\t\tinputs.replaceAll(ingredients -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));',
+                      'int size = buf.readVarInt();\n\t\t\tNonNullList<Ingredient> inputs = NonNullList.createWithCapacity(size);\n\t\t\tfor (int i = 0; i < size; i++)\n\t\t\t\tinputs.add(Ingredient.CONTENTS_STREAM_CODEC.decode(buf));')
+    if 'implements IRecipeCategory<' in s:
+        s = s.replace('public mezz.jei.api.recipe.RecipeType<', 'public mezz.jei.api.recipe.types.IRecipeType<')
+        s = re.sub(r'\t@Override\n\tpublic IDrawable getBackground\(\) \{\n\t\treturn this\.background;\n\t\}\n',
+                   '\t@Override\n\tpublic int getWidth() {\n\t\treturn this.background.getWidth();\n\t}\n\n\t@Override\n\tpublic int getHeight() {\n\t\treturn this.background.getHeight();\n\t}\n\n'
+                   '\t@Override\n\tpublic void draw(%s recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphics guiGraphics, double mouseX, double mouseY) {\n\t\tthis.background.draw(guiGraphics);\n\t}\n'
+                   % re.search(r'implements IRecipeCategory<(\w+)>', s).group(1), s)
+    if 'implements IModPlugin' in s:
+        s = re.sub(r'mezz\.jei\.api\.recipe\.RecipeType<(\w+)> (\w+) = new mezz\.jei\.api\.recipe\.RecipeType<>\(', r'mezz.jei.api.recipe.types.IRecipeType<\1> \2 = mezz.jei.api.recipe.types.IRecipeType.create(', s)
+        s = re.sub(r'\n\t\tRecipeManager recipeManager = [^\n]*;', '', s)
+        s = s.replace('recipeManager.getAllRecipesFor(', f'{PKG}.port.PortRecipeSync.recipes(')
+    return s
+
+
+REPAIR_DIR = 'common/src/main/resources/data/the_deep_void/tags/item/repair/'
+
+
+def repairable(s, name):
+    """1.21.2: an item's repair materials are a component (Properties.repairable); the materials of
+    isValidRepairItem go to an item tag the_deep_void:repair/<item>"""
+    m = re.search(r'\t@Override\n\tpublic boolean isValidRepairItem\(ItemStack itemstack, ItemStack repairitem\) \{\n\t\treturn Ingredient\s*\.of\((.*?)\)\s*\.test\(repairitem\);\n\t\}\n\n', s, re.S)
+    if not m:
+        return s
+    ids = ['the_deep_void:' + c.lower() for c in re.findall(r'TheDeepVoidMod(?:Items|Blocks)\.(\w+)\.get\(\)', m.group(1))]
+    ids += ['minecraft:' + c.lower() for c in re.findall(r'\b(?:Items|Blocks)\.(\w+)\b', m.group(1))]
+    tag = re.sub(r'(?<!^)(?=[A-Z])', '_', name.removesuffix('Item')).lower()
+    os.makedirs(REPAIR_DIR, exist_ok=True)
+    with open(REPAIR_DIR + tag + '.json', 'w') as f:
+        json.dump({'replace': False, 'values': ids}, f, indent=2)
+        f.write('\n')
+    s = s[:m.start()] + s[m.end():]
+    return s.replace(f'{REGISTRAR}.itemProps()', f'{REGISTRAR}.itemProps().repairable(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "repair/{tag}")))', 1)
+
+
+def items4(s):
+    """1.21.2-1.21.5 entity and item method changes MCreator overrides"""
+    s = s.replace('public boolean canBeCollidedWith() {', 'public boolean canBeCollidedWith(@javax.annotation.Nullable net.minecraft.world.entity.Entity other) {')
+    s = s.replace('super.canBeCollidedWith()', 'super.canBeCollidedWith(other)')
+    s = s.replace('public boolean causeFallDamage(float l, float d, DamageSource source) {', 'public boolean causeFallDamage(double l, float d, DamageSource source) {')
+    s = s.replace('public boolean canChangeDimensions(Level from, Level to) {', 'public boolean canTeleport(Level from, Level to) {')
+    s = s.replace('public void customServerAiStep() {\n\t\tsuper.customServerAiStep();', 'public void customServerAiStep(ServerLevel level) {\n\t\tsuper.customServerAiStep(level);')
+    if 'customServerAiStep(ServerLevel' in s:
+        s = add_import(s, 'net.minecraft.server.level.ServerLevel')
+    # hurtEnemy returns nothing since 1.21.2
+    pos = 0
+    while (m := re.search(r'public boolean hurtEnemy\(ItemStack (\w+), LivingEntity (\w+), LivingEntity (\w+)\) \{', s[pos:])):
+        start = pos + m.start()
+        open_brace = pos + m.end() - 1
+        close = method_body(s, open_brace)
+        body = re.sub(r'\n\t\treturn (?:true|false|retval);\n\t$', '\n\t', s[open_brace:close])
+        body = re.sub(r'\breturn (?:true|false|retval);', 'return;', body)
+        body = body.replace('boolean retval = super.hurtEnemy(', 'super.hurtEnemy(')
+        s = s[:start] + s[start:open_brace].replace('public boolean hurtEnemy', 'public void hurtEnemy') + body + s[close:]
+        pos = start + 10
+    # 1.21.2: the enchantability is an item property
+    m = re.search(r'\t@Override\n\tpublic int getEnchantmentValue\(\) \{\n\t\treturn (\d+);\n\t\}\n\n', s)
+    if m and f'{REGISTRAR}.itemProps()' in s:
+        s = s[:m.start()] + s[m.end():]
+        s = s.replace(f'{REGISTRAR}.itemProps()', f'{REGISTRAR}.itemProps().enchantable({m.group(1)})', 1)
+    # 1.21.2: the crafting remainder is stack-based on both loaders (NeoForge getCraftingRemainder, Fabric
+    # FabricItem.getRecipeRemainder); the overrides match by name, as the common code sees neither interface
+    m = re.search(r'\t@Override\n\tpublic boolean hasCraftingRemainingItem\(\) \{\n\t\treturn true;\n\t\}\n\n\tpublic ItemStack getCraftingRemainingItem\(ItemStack itemstack\) \{\n(.*?)\n\t\}\n', s, re.S)
+    if m:
+        s = s[:m.start()] + ('\t/** NeoForge IItemExtension */\n\tpublic ItemStack getCraftingRemainder(ItemStack itemstack) {\n' + m.group(1) + '\n\t}\n\n'
+                             '\t/** Fabric FabricItem */\n\tpublic ItemStack getRecipeRemainder(ItemStack itemstack) {\n\t\treturn getCraftingRemainder(itemstack);\n\t}\n') + s[m.end():]
+    # 1.21.2: fluids convert to sources on the server; 1.21.11 comparator output knows the side
+    s = s.replace('protected boolean canConvertToSource(Level level) {', 'protected boolean canConvertToSource(ServerLevel level) {')
+    if 'canConvertToSource(ServerLevel' in s:
+        s = add_import(s, 'net.minecraft.server.level.ServerLevel')
+    s = s.replace('public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos) {', 'public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos, net.minecraft.core.Direction direction) {')
+    m = re.search(r'public class (\w+Item) extends', s)
+    if m:
+        s = repairable(s, m.group(1))
+    return s
+
+
+def item_properties(s):
+    """1.21.4: item models select by item model definitions; MCreator's property procedures go to
+    port.PortItemProperties (the definitions use the_deep_void:procedure), shields use minecraft:using_item"""
+    if not re.search(r'(?<![\w.])ItemProperties\.register\(', s):
+        return s
+    s = re.sub(r'\n\t*ItemProperties\.register\(\w+\.get\(\), Identifier\.parse\("blocking"\), [^\n]*;', '', s)
+    s = re.sub(r'(?<![\w.])ItemProperties\.register\(', f'{PKG}.port.PortItemProperties.register(', s)
+    s = s.replace('import net.minecraft.client.renderer.item.ItemProperties;\n', '')
+    return s
+
+
+def screens(s):
+    """MCreator container screens: 1.21.6 GUI batching (no GL state calls, blits name their pipeline), 1.21.9 key
+    events, 1.21.11 buttons draw their contents (renderWidget is final)"""
+    if 'extends AbstractContainerScreen<' not in s:
+        return s
+    s = re.sub(r'\n\t*RenderSystem\.[^\n]*;', '', s)
+    s = s.replace('import com.mojang.blaze3d.systems.RenderSystem;\n', '')
+    s = re.sub(r'guiGraphics\.blit\((?!RenderPipelines)', 'guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ', s)
+    s = s.replace('public boolean keyPressed(int key, int b, int c) {', 'public boolean keyPressed(net.minecraft.client.input.KeyEvent event) {\n\t\tint key = event.key();')
+    s = s.replace('return super.keyPressed(key, b, c);', 'return super.keyPressed(event);')
+    s = re.sub(r'public void renderWidget\(GuiGraphics guiGraphics, int gx, int gy, float ticks\) \{(\n[^\n]*\n\t+)super\.renderWidget\(guiGraphics, gx, gy, ticks\);',
+               r'public void renderContents(GuiGraphics guiGraphics, int gx, int gy, float ticks) {\1super.renderContents(guiGraphics, gx, gy, ticks);', s)
+    if 'RenderPipelines.' in s:
+        s = add_import(s, 'net.minecraft.client.renderer.RenderPipelines')
+    return s
+
+
+def fog(s):
+    """1.21.6: no fog modes and shapes (port.bus.ViewportEvent keeps MCreator's names)"""
+    if 'import net.sombrius.thedeepvoid.port.bus.ViewportEvent;' not in s:
+        return s
+    s = s.replace('FogRenderer.FogMode.', 'ViewportEvent.FogMode.')
+    s = s.replace('import com.mojang.blaze3d.shaders.FogShape;\n', '')
+    s = re.sub(r'(?<![\w.])FogShape\b', 'ViewportEvent.FogShape', s)
+    if 'FogRenderer' not in s.replace('import net.minecraft.client.renderer.fog.FogRenderer;', ''):
+        s = s.replace('import net.minecraft.client.renderer.fog.FogRenderer;\n', '')
+    return s
+
+
+def dimensions(s):
+    """1.21.11: dimension effects are dimension type data (data/the_deep_void/dimension_type)"""
+    s = re.sub(r'\t@EventBusSubscriber\(value = Dist\.CLIENT\)\n\tpublic static class \w+SpecialEffectsHandler \{\n.*?\n\t\}\n\n?', '', s, flags=re.S)
+    s = s.replace('import net.neoforged.neoforge.client.event.RegisterDimensionSpecialEffectsEvent;\n', '')
+    for imp in ('net.minecraft.client.renderer.DimensionSpecialEffects', 'net.minecraft.world.phys.Vec3', 'net.minecraft.resources.Identifier',
+                f'{PKG}.port.bus.RegisterDimensionSpecialEffectsEvent', f'{PKG}.port.bus.Dist'):
+        rest = s.replace('import ' + imp + ';\n', '')
+        if not re.search(r'\b' + imp.rsplit('.', 1)[1] + r'\b', rest):
+            s = rest
+    return s
+
+
+def init(s):
+    # 1.21.2: a potion has a name (its registry name)
+    s = re.sub(r'REGISTRY\.register\("(\w+)",(\s*)\(\) -> new Potion\((?!")', r'REGISTRY.register("\1",\2() -> new Potion("\1", ', s)
+    # 1.21.9: key mapping categories are registered ids (key.category.the_deep_void.deep_void)
+    s = s.replace('"key.categories.deep_void"', f'{PKG}.port.PortClient.KEY_CATEGORY')
+    # 1.21.11: game rules are registry entries
+    s = re.sub(r'getGameRules\(\)\.getBoolean\(TheDeepVoidModGameRules\.(\w+)\)', r'getGameRules().get(TheDeepVoidModGameRules.\1.get())', s)
+    return s
+
+
 def port(s):
     s = s.replace('.getGameProfile().getId()', '.getGameProfile().id()')
     s = tiers(s)
@@ -307,6 +599,16 @@ def port(s):
     s = blocks(s)
     s = saves(s)
     s = particles(s)
+    s = init(s)
+    s = procs(s)
+    s = fog(s)
+    s = screens(s)
+    s = item_properties(s)
+    s = jei(s)
+    s = items4(s)
+    s = armor_models(s)
+    if 'SpecialEffectsHandler' in s:
+        s = dimensions(s)
     return s
 
 

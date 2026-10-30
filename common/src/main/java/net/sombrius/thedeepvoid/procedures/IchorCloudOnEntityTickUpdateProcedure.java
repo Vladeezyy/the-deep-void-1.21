@@ -3,14 +3,14 @@ package net.sombrius.thedeepvoid.procedures;
 import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -43,17 +43,17 @@ public class IchorCloudOnEntityTickUpdateProcedure {
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.firecharge.use")), SoundSource.HOSTILE, (float) 0.7, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.firecharge.use")), SoundSource.HOSTILE, (float) 0.7, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.firecharge.use")), SoundSource.HOSTILE, (float) 0.7, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.firecharge.use")), SoundSource.HOSTILE, (float) 0.7, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 				}
 			}
 		}
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("despawn") >= 60) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("despawn", 0) >= 60) {
 			if (!entity.level().isClientSide())
 				entity.discard();
 		} else {
-			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("despawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("despawn") + 1));
+			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("despawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("despawn", 0) + 1));
 		}
 	}
 }

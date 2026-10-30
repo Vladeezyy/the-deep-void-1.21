@@ -5,7 +5,7 @@ import net.sombrius.thedeepvoid.port.PortUtil;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -13,9 +13,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -41,7 +41,7 @@ public class MaskedHunterThrowKnivesProcedure {
 					if (entity instanceof MaskedHunterEntity _datEntSetI)
 						_datEntSetI.getEntityData().set(MaskedHunterEntity.DATA_shoot, 0);
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 9, 99, false, false));
+						_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 9, 99, false, false));
 					if (entity instanceof MaskedHunterEntity) {
 						((MaskedHunterEntity) entity).setAnimation("animation.hunterTrue_shoot");
 					}
@@ -89,9 +89,9 @@ public class MaskedHunterThrowKnivesProcedure {
 							}
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.2);
+									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.2);
 								} else {
-									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.2, false);
+									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.2, false);
 								}
 							}
 						}

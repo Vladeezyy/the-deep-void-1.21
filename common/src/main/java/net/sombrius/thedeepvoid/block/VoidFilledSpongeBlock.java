@@ -14,11 +14,11 @@ import net.sombrius.thedeepvoid.procedures.VoidFilledSpongeOnTickUpdateProcedure
 
 public class VoidFilledSpongeBlock extends Block {
 	public VoidFilledSpongeBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.GRASS).strength(0.6f).speedFactor(0.5f).jumpFactor(0.5f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.GRASS).strength(0.6f).speedFactor(0.5f).jumpFactor(0.5f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

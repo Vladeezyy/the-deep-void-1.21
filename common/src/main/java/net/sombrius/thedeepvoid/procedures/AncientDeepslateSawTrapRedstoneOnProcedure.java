@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,7 +26,7 @@ public class AncientDeepslateSawTrapRedstoneOnProcedure {
 			public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 				BlockEntity blockEntity = world.getBlockEntity(pos);
 				if (blockEntity != null)
-					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 				return -1;
 			}
 		}.getValue(world, BlockPos.containing(x, y, z), "cooldown") <= 0) {
@@ -72,7 +72,7 @@ public class AncientDeepslateSawTrapRedstoneOnProcedure {
 				}
 			}.getDirection(BlockPos.containing(x, y, z))) == Direction.NORTH) {
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.DARK_STEEL_SAW.get().spawn(_level, BlockPos.containing(x, y, z - 1), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.DARK_STEEL_SAW.get().spawn(_level, BlockPos.containing(x, y, z - 1), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}
@@ -91,7 +91,7 @@ public class AncientDeepslateSawTrapRedstoneOnProcedure {
 				}
 			}.getDirection(BlockPos.containing(x, y, z))) == Direction.SOUTH) {
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.DARK_STEEL_SAW.get().spawn(_level, BlockPos.containing(x, y, z + 1), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.DARK_STEEL_SAW.get().spawn(_level, BlockPos.containing(x, y, z + 1), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}
@@ -110,7 +110,7 @@ public class AncientDeepslateSawTrapRedstoneOnProcedure {
 				}
 			}.getDirection(BlockPos.containing(x, y, z))) == Direction.WEST) {
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.DARK_STEEL_SAW.get().spawn(_level, BlockPos.containing(x - 1, y, z), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.DARK_STEEL_SAW.get().spawn(_level, BlockPos.containing(x - 1, y, z), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}
@@ -129,7 +129,7 @@ public class AncientDeepslateSawTrapRedstoneOnProcedure {
 				}
 			}.getDirection(BlockPos.containing(x, y, z))) == Direction.EAST) {
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.DARK_STEEL_SAW.get().spawn(_level, BlockPos.containing(x + 1, y, z), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.DARK_STEEL_SAW.get().spawn(_level, BlockPos.containing(x + 1, y, z), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}

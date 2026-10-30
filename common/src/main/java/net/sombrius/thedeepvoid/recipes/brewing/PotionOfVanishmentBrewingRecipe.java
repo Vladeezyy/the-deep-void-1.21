@@ -34,7 +34,7 @@ public class PotionOfVanishmentBrewingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean isIngredient(ItemStack ingredient) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModBlocks.BLOCK_OF_MISTED_BONE_PILE.get())).test(ingredient);
+		return Ingredient.of(TheDeepVoidModBlocks.BLOCK_OF_MISTED_BONE_PILE.get()).test(ingredient);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import net.minecraft.network.chat.Component;
 
 public class VoidDaggerSpecialInformationProcedure {
 	public static String execute() {
-		if (Screen.hasShiftDown()) {
+		if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 			return Component.translatable("item.the_deep_void.void_dagger.descr").getString();
 		}
 		return Component.translatable("item.the_deep_void.weapon_tooltip.show").getString();

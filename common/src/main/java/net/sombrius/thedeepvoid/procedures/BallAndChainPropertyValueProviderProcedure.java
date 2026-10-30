@@ -7,6 +7,6 @@ import net.minecraft.world.item.ItemStack;
 
 public class BallAndChainPropertyValueProviderProcedure {
 	public static double execute(ItemStack itemstack) {
-		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("secret");
+		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("secret", 0);
 	}
 }

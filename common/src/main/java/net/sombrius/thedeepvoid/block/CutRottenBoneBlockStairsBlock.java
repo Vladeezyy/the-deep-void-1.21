@@ -11,7 +11,7 @@ import net.minecraft.world.level.material.MapColor;
 public class CutRottenBoneBlockStairsBlock extends StairBlock {
 	public CutRottenBoneBlockStairsBlock() {
 		super(Blocks.AIR.defaultBlockState(),
-				BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).sound(SoundType.BONE_BLOCK).strength(2.2f, 16f).requiresCorrectToolForDrops().dynamicShape());
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).sound(SoundType.BONE_BLOCK).strength(2.2f, 16f).requiresCorrectToolForDrops().dynamicShape());
 	}
 
 	@Override

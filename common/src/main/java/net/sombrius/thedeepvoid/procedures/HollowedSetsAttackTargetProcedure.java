@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -54,17 +54,17 @@ public class HollowedSetsAttackTargetProcedure {
 						_datEntSetI.getEntityData().set(HollowedEntity.DATA_call, 800);
 					if ((sourceentity instanceof HollowedEntity _datEntL6 && _datEntL6.getEntityData().get(HollowedEntity.DATA_called)) == false) {
 						if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 99, false, false));
+							_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 99, false, false));
 						if (sourceentity instanceof HollowedEntity) {
 							((HollowedEntity) sourceentity).setAnimation("animation.hollowed_scream");
 						}
 						TheDeepVoidMod.queueServerWork(25, () -> {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(sourceentity.getX(), sourceentity.getY(), sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hollowed_scream")),
+									_level.playSound(null, BlockPos.containing(sourceentity.getX(), sourceentity.getY(), sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hollowed_scream")),
 											SoundSource.HOSTILE, 8, (float) Mth.nextDouble(RandomSource.create(), 0.89, 1));
 								} else {
-									_level.playLocalSound((sourceentity.getX()), (sourceentity.getY()), (sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hollowed_scream")), SoundSource.HOSTILE, 8,
+									_level.playLocalSound((sourceentity.getX()), (sourceentity.getY()), (sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hollowed_scream")), SoundSource.HOSTILE, 8,
 											(float) Mth.nextDouble(RandomSource.create(), 0.89, 1), false);
 								}
 							}
@@ -78,16 +78,16 @@ public class HollowedSetsAttackTargetProcedure {
 										((HollowedEntity) entityiterator).setAnimation("animation.hollowed_scream");
 									}
 									if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-										_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 99, false, false));
+										_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 99, false, false));
 									if (entityiterator instanceof HollowedEntity _datEntSetL)
 										_datEntSetL.getEntityData().set(HollowedEntity.DATA_called, true);
 									TheDeepVoidMod.queueServerWork(45, () -> {
 										if (world instanceof Level _level) {
 											if (!_level.isClientSide()) {
 												_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()),
-														BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hollowed_responds")), SoundSource.HOSTILE, 8, (float) Mth.nextDouble(RandomSource.create(), 0.89, 1));
+														BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hollowed_responds")), SoundSource.HOSTILE, 8, (float) Mth.nextDouble(RandomSource.create(), 0.89, 1));
 											} else {
-												_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hollowed_responds")),
+												_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hollowed_responds")),
 														SoundSource.HOSTILE, 8, (float) Mth.nextDouble(RandomSource.create(), 0.89, 1), false);
 											}
 										}

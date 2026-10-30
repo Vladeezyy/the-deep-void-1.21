@@ -5,7 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.sombrius.thedeepvoid.configuration.DeepVoidConfigConfiguration;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
@@ -22,7 +22,7 @@ public class MaskedHunterOnInitialEntitySpawnProcedure {
 				posZ = entity.getZ() + Mth.nextInt(RandomSource.create(), -30, 30);
 				if (!world.getBlockState(BlockPos.containing(posX, entity.getY(), posZ)).canOcclude() && world.getBlockState(BlockPos.containing(posX, entity.getY() - 1, posZ)).canOcclude()) {
 					if (world instanceof ServerLevel _level) {
-						Entity entityToSpawn = TheDeepVoidModEntities.BONE_CAGE.get().spawn(_level, BlockPos.containing(posX, entity.getY(), posZ), MobSpawnType.MOB_SUMMONED);
+						Entity entityToSpawn = TheDeepVoidModEntities.BONE_CAGE.get().spawn(_level, BlockPos.containing(posX, entity.getY(), posZ), EntitySpawnReason.MOB_SUMMONED);
 						if (entityToSpawn != null) {
 							entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 						}

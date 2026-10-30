@@ -76,6 +76,9 @@ def living(s, kind):
     s = LAYER.sub(lambda x: layer(x, state, x.group('model') + f'<{state}>' if x.group('model') == model_cls else model_type), s)
     s = re.sub(r'public Identifier getTextureLocation\(' + entity + r' (\w+)\)', f'public Identifier getTextureLocation({state} state)', s)
     s = re.sub(r'(\n\t@Override\n\tpublic Identifier getTextureLocation)', f'\n\t@Override\n\tpublic {state} createRenderState() {{\n\t\treturn new {state}();\n\t}}\n\\1', s, count=1)
+    # constant scale, visibility and shaking: the render state replaces the entity
+    s = re.sub(r'protected void scale\(' + entity + r' entity, PoseStack poseStack, float f\) \{(\n\t\tposeStack\.scale\([^;]*\);\n\t\})', f'protected void scale({state} state, PoseStack poseStack) {{\\1', s)
+    s = re.sub(r'protected boolean (isBodyVisible|isShaking)\(' + entity + r' entity\) \{(\n\t\treturn (?:true|false);\n\t\})', f'protected boolean \\1({state} state) {{\\2', s)
     if kind == 'HumanoidMobRenderer':
         s = re.sub(r'new HumanoidArmorLayer\(this, new HumanoidModel\(context\.bakeLayer\(ModelLayers\.PLAYER_INNER_ARMOR\)\), new HumanoidModel\(context\.bakeLayer\(ModelLayers\.PLAYER_OUTER_ARMOR\)\), context\.getModelManager\(\)\)',
                    'new HumanoidArmorLayer<>(this, ArmorModelSet.bake(ModelLayers.PLAYER_ARMOR, context.getModelSet(), HumanoidModel::new), context.getEquipmentRenderer())', s)

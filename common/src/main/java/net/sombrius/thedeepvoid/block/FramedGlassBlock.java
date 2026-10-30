@@ -1,7 +1,7 @@
 
 package net.sombrius.thedeepvoid.block;
 
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,11 +18,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class FramedGlassBlock extends Block {
 	public FramedGlassBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).sound(SoundType.GLASS).strength(2f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.HAT).sound(SoundType.GLASS).strength(2f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	public Integer getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
-		return FastColor.ARGB32.colorFromFloat(1f, 0.6901960784f, 0.5450980392f, 0f);
+		return ARGB.colorFromFloat(1f, 0.6901960784f, 0.5450980392f, 0f);
 	}
 
 	@Override
@@ -31,12 +31,12 @@ public class FramedGlassBlock extends Block {
 	}
 
 	@Override
-	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+	public boolean propagatesSkylightDown(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 0;
 	}
 

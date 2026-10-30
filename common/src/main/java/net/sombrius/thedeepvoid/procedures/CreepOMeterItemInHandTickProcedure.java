@@ -14,7 +14,7 @@ public class CreepOMeterItemInHandTickProcedure {
 		if (entity == null)
 			return;
 		if (y >= 1) {
-			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("deep_void:secondFunction") == true) {
+			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("deep_void:secondFunction", false) == true) {
 				if (TheDeepVoidModVariables.of(entity).StalkerStalkCount < (double) DeepVoidConfigConfiguration.STALKERSPAWNTIMER.get() / 2) {
 					if (entity instanceof Player _player && !_player.level().isClientSide())
 						_player.displayClientMessage(Component.literal(("" + TheDeepVoidModVariables.of(entity).stalkWatcherCount)), true);

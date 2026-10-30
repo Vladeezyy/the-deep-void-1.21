@@ -13,7 +13,7 @@ import net.sombrius.thedeepvoid.procedures.PusfishPlayerFinishesUsingItemProcedu
 
 public class BloatfishItem extends Item {
 	public BloatfishItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(0.25f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(0.25f).alwaysEdible().build()));
 	}
 
 	@Override

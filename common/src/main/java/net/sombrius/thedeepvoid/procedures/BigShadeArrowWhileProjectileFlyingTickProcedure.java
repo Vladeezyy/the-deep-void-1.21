@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -24,9 +24,9 @@ public class BigShadeArrowWhileProjectileFlyingTickProcedure {
 			_level.sendParticles((SimpleParticleType) (TheDeepVoidModParticleTypes.SHADE_DROP.get()), x, y, z, 10, 0.1, 0.1, 0.1, 0.1);
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")), SoundSource.PLAYERS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.7, 1.3));
+				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")), SoundSource.PLAYERS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.7, 1.3));
 			} else {
-				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")), SoundSource.PLAYERS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.7, 1.3), false);
+				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")), SoundSource.PLAYERS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.7, 1.3), false);
 			}
 		}
 		if (immediatesourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())

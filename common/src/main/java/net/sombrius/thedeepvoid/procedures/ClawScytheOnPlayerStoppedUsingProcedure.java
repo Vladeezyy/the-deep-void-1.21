@@ -24,8 +24,8 @@ public class ClawScytheOnPlayerStoppedUsingProcedure {
 			CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 		}
 		if (entity instanceof Player _player)
-			_player.getCooldowns().addCooldown(itemstack.getItem(), 160);
+			_player.getCooldowns().addCooldown(itemstack, 160);
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 2));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 2));
 	}
 }

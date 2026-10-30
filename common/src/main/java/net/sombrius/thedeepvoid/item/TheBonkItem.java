@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.item.ToolMaterial;
 import java.util.List;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -9,8 +10,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
@@ -22,42 +21,12 @@ import net.sombrius.thedeepvoid.port.bus.ModifyDefaultComponentsEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.procedures.TheBonkLivingEntityIsHitWithToolProcedure;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public class TheBonkItem extends SwordItem {
-	private static final Tier TOOL_TIER = new Tier() {
-		@Override
-		public int getUses() {
-			return 0;
-		}
-
-		@Override
-		public float getSpeed() {
-			return 99f;
-		}
-
-		@Override
-		public float getAttackDamageBonus() {
-			return 0;
-		}
-
-		@Override
-		public TagKey<Block> getIncorrectBlocksForDrops() {
-			return BlockTags.INCORRECT_FOR_NETHERITE_TOOL;
-		}
-
-		@Override
-		public int getEnchantmentValue() {
-			return 99;
-		}
-
-		@Override
-		public Ingredient getRepairIngredient() {
-			return Ingredient.of();
-		}
-	};
+@EventBusSubscriber
+public class TheBonkItem extends Item {
+	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 0, 99f, 0f, 99, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/none")));
 
 	public TheBonkItem() {
-		super(TOOL_TIER, new Item.Properties().attributes(net.sombrius.thedeepvoid.port.PortUtil.swordAttributes(TOOL_TIER, 998f, 95f)).fireResistant());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().sword(TOOL_TIER, 998f, 95f).fireResistant());
 	}
 
 	@SubscribeEvent
@@ -66,17 +35,16 @@ public class TheBonkItem extends SwordItem {
 	}
 
 	@Override
-	public boolean hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-		boolean retval = super.hurtEnemy(itemstack, entity, sourceentity);
+	public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
+		super.hurtEnemy(itemstack, entity, sourceentity);
 		TheBonkLivingEntityIsHitWithToolProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
-		return retval;
 	}
 
 	@Override
 	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
-	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, context, list, flag);
-		list.add(Component.translatable("text.the_deep_void.port.creative_mode_only"));
-		list.add(Component.translatable("text.the_deep_void.port.removes_boss_spawns_completely_hive_s_brain"));
+	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+		super.appendHoverText(itemstack, context, tooltipDisplay, list, flag);
+		list.accept(Component.translatable("text.the_deep_void.port.creative_mode_only"));
+		list.accept(Component.translatable("text.the_deep_void.port.removes_boss_spawns_completely_hive_s_brain"));
 	}
 }

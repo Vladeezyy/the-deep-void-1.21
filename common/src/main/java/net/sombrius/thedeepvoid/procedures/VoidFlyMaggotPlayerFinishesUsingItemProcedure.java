@@ -11,9 +11,9 @@ public class VoidFlyMaggotPlayerFinishesUsingItemProcedure {
 			return;
 		if (Math.random() < 0.1) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));
+				_entity.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 100, 0));
 		}
-		if (Math.random() < 0.2 && entity instanceof LivingEntity _livEnt1 && _livEnt1.hasEffect(MobEffects.CONFUSION)) {
+		if (Math.random() < 0.2 && entity instanceof LivingEntity _livEnt1 && _livEnt1.hasEffect(MobEffects.NAUSEA)) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 50, 0));
 		}

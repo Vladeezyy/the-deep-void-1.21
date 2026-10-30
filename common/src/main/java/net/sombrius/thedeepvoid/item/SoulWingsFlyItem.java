@@ -1,25 +1,30 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import java.util.Map;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import javax.annotation.Nullable;
+import net.minecraft.server.level.ServerLevel;
 import com.google.common.collect.Iterables;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -35,77 +40,63 @@ import net.sombrius.thedeepvoid.port.bus.RegisterEvent;
 import net.sombrius.thedeepvoid.client.renderer.SoulWingsFlyArmorRenderer;
 import net.sombrius.thedeepvoid.procedures.PlayerHasSoulWingsTickProcedure;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.state.AnimationTest;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public class SoulWingsFlyItem extends ArmorItem implements GeoItem, net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Item {
+@EventBusSubscriber
+public class SoulWingsFlyItem extends Item implements GeoItem {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	public String animationprocedure = "empty";
-	public static Holder<ArmorMaterial> ARMOR_MATERIAL = null;
+	public static final ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial(0, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 5, ArmorType.HELMET, 0, ArmorType.BODY, 5), 25, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(Identifier.parse("entity.vex.ambient"))), 1f, 0f, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/none")),
+			ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath("the_deep_void", "soul_wings_fly")));
 
-	@SubscribeEvent
-	public static void registerArmorMaterial(RegisterEvent event) {
-		event.register(Registries.ARMOR_MATERIAL, registerHelper -> {
-			ArmorMaterial armorMaterial = new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-				map.put(ArmorItem.Type.BOOTS, 0);
-				map.put(ArmorItem.Type.LEGGINGS, 0);
-				map.put(ArmorItem.Type.CHESTPLATE, 5);
-				map.put(ArmorItem.Type.HELMET, 0);
-				map.put(ArmorItem.Type.BODY, 5);
-			}), 25, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(ResourceLocation.parse("entity.vex.ambient"))), () -> Ingredient.of(), List.of(new ArmorMaterial.Layer(ResourceLocation.parse("the_deep_void:soul_wings.png"))), 1f, 0f);
-			registerHelper.register(ResourceLocation.parse("the_deep_void:soul_wings_fly"), armorMaterial);
-			ARMOR_MATERIAL = BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(armorMaterial);
-		});
+
+	public SoulWingsFlyItem(ArmorType type, Item.Properties properties) {
+		super(properties.humanoidArmor(ARMOR_MATERIAL, type));
 	}
 
-	public SoulWingsFlyItem(ArmorItem.Type type, Item.Properties properties) {
-		super(ARMOR_MATERIAL, type, properties);
-	}
-
-	public IClientItemExtensions clientExtensions() {
-		return new IClientItemExtensions() {
-			private GeoArmorRenderer<?> renderer;
+	@Override
+	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+		consumer.accept(new GeoRenderProvider() {
+			private SoulWingsFlyArmorRenderer<?> renderer;
 
 			@Override
-			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+			public GeoArmorRenderer<?, ?> getGeoArmorRenderer(ItemStack itemStack, EquipmentSlot equipmentSlot) {
 				if (this.renderer == null)
-					this.renderer = new SoulWingsFlyArmorRenderer();
-				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+					this.renderer = new SoulWingsFlyArmorRenderer<>();
 				return this.renderer;
 			}
-		};
+		});
 	}
 
 	@Override
 	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
-	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, context, list, flag);
+	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+		super.appendHoverText(itemstack, context, tooltipDisplay, list, flag);
 	}
 
 	@Override
-	public void inventoryTick(ItemStack itemstack, Level world, Entity _wearer, int slot, boolean selected) {
-		super.inventoryTick(itemstack, world, _wearer, slot, selected);
-		if (_wearer instanceof Player entity && Iterables.contains(entity.getArmorSlots(), itemstack)) {
-			if (itemstack.getItem() instanceof SoulWingsFlyItem armor && armor.getType() == ArmorItem.Type.CHESTPLATE)
+	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity _wearer, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+		super.inventoryTick(itemstack, world, _wearer, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		if (_wearer instanceof Player entity && net.sombrius.thedeepvoid.port.PortUtil.wearing(entity, itemstack)) {
+			if (itemstack.getItem() instanceof SoulWingsFlyItem && net.sombrius.thedeepvoid.port.PortUtil.armorType(itemstack) == ArmorType.CHESTPLATE)
 				PlayerHasSoulWingsTickProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
 		}
 	}
 
-	private PlayState predicate(AnimationState event) {
+	private PlayState predicate(AnimationTest<SoulWingsFlyItem> event) {
 		if (this.animationprocedure.equals("empty")) {
-			event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.soulWings_flyFast"));
-			Entity entity = (Entity) event.getData(DataTickets.ENTITY);
-			if (entity instanceof ArmorStand) {
-				return PlayState.CONTINUE;
-			}
+			event.controller().setAnimation(RawAnimation.begin().thenLoop("animation.soulWings_flyFast"));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.STOP;
@@ -113,18 +104,14 @@ public class SoulWingsFlyItem extends ArmorItem implements GeoItem, net.sombrius
 
 	String prevAnim = "empty";
 
-	private PlayState procedurePredicate(AnimationState event) {
-		if (!this.animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
+	private PlayState procedurePredicate(AnimationTest<SoulWingsFlyItem> event) {
+		if (!this.animationprocedure.equals("empty") && net.sombrius.thedeepvoid.port.GeoAnims.stopped(event.controller()) || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
 			if (!this.animationprocedure.equals(prevAnim))
-				event.getController().forceAnimationReset();
-			event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
-			if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
+				event.controller().reset();
+			event.controller().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
+			if (net.sombrius.thedeepvoid.port.GeoAnims.stopped(event.controller())) {
 				this.animationprocedure = "empty";
-				event.getController().forceAnimationReset();
-			}
-			Entity entity = (Entity) event.getData(DataTickets.ENTITY);
-			if (entity instanceof ArmorStand) {
-				return PlayState.CONTINUE;
+				event.controller().reset();
 			}
 			return PlayState.CONTINUE;
 		} else if (animationprocedure.equals("empty")) {
@@ -137,8 +124,8 @@ public class SoulWingsFlyItem extends ArmorItem implements GeoItem, net.sombrius
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController(this, "controller", 5, this::predicate));
-		data.add(new AnimationController(this, "procedureController", 5, this::procedurePredicate));
+		data.add(new AnimationController<>("controller", 5, this::predicate));
+		data.add(new AnimationController<>("procedureController", 5, this::procedurePredicate));
 	}
 
 	@Override

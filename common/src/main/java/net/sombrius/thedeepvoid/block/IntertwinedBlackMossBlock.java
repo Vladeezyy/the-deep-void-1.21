@@ -18,12 +18,12 @@ public class IntertwinedBlackMossBlock extends Block {
 	public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
 	public IntertwinedBlackMossBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.CORAL_BLOCK).strength(0.6f, 5f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.CORAL_BLOCK).strength(0.6f, 5f));
 		this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.Y));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

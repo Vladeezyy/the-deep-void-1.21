@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -18,7 +18,7 @@ public class BrainFogEffectExpiresProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:misted_remnants"))
+		if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:misted_remnants"))
 				&& (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder()).getAmplifier() : 0) < 4) {
 			if ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder()).getAmplifier() : 0) == 3) {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -30,10 +30,10 @@ public class BrainFogEffectExpiresProcedure {
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:quiet_slow_whisper")), SoundSource.NEUTRAL, (float) 0.1,
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:quiet_slow_whisper")), SoundSource.NEUTRAL, (float) 0.1,
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:quiet_slow_whisper")), SoundSource.NEUTRAL, (float) 0.1,
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:quiet_slow_whisper")), SoundSource.NEUTRAL, (float) 0.1,
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 				}
 			}

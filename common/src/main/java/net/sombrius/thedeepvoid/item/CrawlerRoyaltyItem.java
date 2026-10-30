@@ -1,18 +1,23 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import java.util.Map;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import javax.annotation.Nullable;
+import net.minecraft.server.level.ServerLevel;
 import com.google.common.collect.Iterables;
 import java.util.EnumMap;
 import java.util.List;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -24,45 +29,33 @@ import net.sombrius.thedeepvoid.port.bus.RegisterEvent;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.procedures.CrawlerRoyaltyFullArmorProcedure;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public abstract class CrawlerRoyaltyItem extends ArmorItem {
-	public static Holder<ArmorMaterial> ARMOR_MATERIAL = null;
+@EventBusSubscriber
+public abstract class CrawlerRoyaltyItem extends Item {
+	public static final ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial(65, Map.of(ArmorType.BOOTS, 4, ArmorType.LEGGINGS, 7, ArmorType.CHESTPLATE, 8, ArmorType.HELMET, 5, ArmorType.BODY, 8), 32, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(Identifier.parse("the_deep_void:primordial_crawler_ambient"))), 1.8f, 0.15f, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/bone_crawler_molt_piece")),
+			ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath("the_deep_void", "crawler_royalty")));
 
-	@SubscribeEvent
-	public static void registerArmorMaterial(RegisterEvent event) {
-		event.register(Registries.ARMOR_MATERIAL, registerHelper -> {
-			ArmorMaterial armorMaterial = new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-				map.put(ArmorItem.Type.BOOTS, 4);
-				map.put(ArmorItem.Type.LEGGINGS, 7);
-				map.put(ArmorItem.Type.CHESTPLATE, 8);
-				map.put(ArmorItem.Type.HELMET, 5);
-				map.put(ArmorItem.Type.BODY, 8);
-			}), 32, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(ResourceLocation.parse("the_deep_void:primordial_crawler_ambient"))), () -> Ingredient.of(new ItemStack(TheDeepVoidModItems.BONE_CRAWLER_MOLT_PIECE.get())),
-					List.of(new ArmorMaterial.Layer(ResourceLocation.parse("the_deep_void:royalty_"))), 1.8f, 0.15f);
-			registerHelper.register(ResourceLocation.parse("the_deep_void:crawler_royalty"), armorMaterial);
-			ARMOR_MATERIAL = BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(armorMaterial);
-		});
-	}
 
-	public CrawlerRoyaltyItem(ArmorItem.Type type, Item.Properties properties) {
-		super(ARMOR_MATERIAL, type, properties);
+	public CrawlerRoyaltyItem(ArmorType type, Item.Properties properties) {
+		super(properties.humanoidArmor(ARMOR_MATERIAL, type));
 	}
 
 	public static class Helmet extends CrawlerRoyaltyItem {
 		public Helmet() {
-			super(ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(65)).fireResistant());
+			super(ArmorType.HELMET, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
 		}
 	}
 
 	public static class Chestplate extends CrawlerRoyaltyItem {
 		public Chestplate() {
-			super(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(65)).fireResistant());
+			super(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
 		}
 
 		@Override
-		public void inventoryTick(ItemStack itemstack, Level world, Entity entity, int slot, boolean selected) {
-			super.inventoryTick(itemstack, world, entity, slot, selected);
-			if (entity instanceof Player player && Iterables.contains(player.getArmorSlots(), itemstack)) {
+		public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+			super.inventoryTick(itemstack, world, entity, equipmentSlot);
+			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {
 				CrawlerRoyaltyFullArmorProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
 			}
 		}
@@ -70,13 +63,13 @@ public abstract class CrawlerRoyaltyItem extends ArmorItem {
 
 	public static class Leggings extends CrawlerRoyaltyItem {
 		public Leggings() {
-			super(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(65)).fireResistant());
+			super(ArmorType.LEGGINGS, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
 		}
 	}
 
 	public static class Boots extends CrawlerRoyaltyItem {
 		public Boots() {
-			super(ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(65)).fireResistant());
+			super(ArmorType.BOOTS, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
 		}
 	}
 }

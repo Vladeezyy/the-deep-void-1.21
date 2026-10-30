@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
@@ -13,7 +13,7 @@ public class LightEntityIsHurtProcedure {
 		if (entity == null || sourceentity == null)
 			return false;
 		if (DeepVoidConfigConfiguration.DESTROYLIGHTSOURCES.get() == true) {
-			if (sourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:can_break_light")))) {
+			if (sourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:can_break_light")))) {
 				if (!entity.level().isClientSide())
 					entity.discard();
 				if (world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 0.45, entity.getZ())).getLightEmission() > 0) {
@@ -23,7 +23,7 @@ public class LightEntityIsHurtProcedure {
 					world.destroyBlock(BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), false);
 				}
 				return true;
-			} else if (sourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:damneds")))) {
+			} else if (sourceentity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:damneds")))) {
 				if (!entity.level().isClientSide())
 					entity.discard();
 				if (!sourceentity.level().isClientSide())

@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -22,14 +22,14 @@ public class AbductorEntityIsHurtProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, Entity sourceentity) {
 		if (entity == null || sourceentity == null)
 			return;
-		if (!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 8, 8, 8), e -> true).isEmpty() == false || net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("enraged") == true) {
+		if (!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 8, 8, 8), e -> true).isEmpty() == false || net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("enraged", false) == true) {
 			if (!(sourceentity == null)) {
 				if (Math.random() < 0.1) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.sculk_shrieker.shriek")), SoundSource.HOSTILE, (float) 1.4, (float) 0.2);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.sculk_shrieker.shriek")), SoundSource.HOSTILE, (float) 1.4, (float) 0.2);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.sculk_shrieker.shriek")), SoundSource.HOSTILE, (float) 1.4, (float) 0.2, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.sculk_shrieker.shriek")), SoundSource.HOSTILE, (float) 1.4, (float) 0.2, false);
 						}
 					}
 					if (world instanceof ServerLevel _level)
@@ -38,9 +38,9 @@ public class AbductorEntityIsHurtProcedure {
 						if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 							_entity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 80, 0));
 						if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 140, 3));
+							_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 140, 3));
 						if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 140, 0));
+							_entity.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 140, 0));
 						if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 							_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.FIXATION.holder(), 140, 0));
 					});

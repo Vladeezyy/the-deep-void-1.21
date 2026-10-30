@@ -11,7 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -22,7 +22,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
@@ -42,8 +42,8 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class PlayerInDarknessNearTheStalkerProcedure {
-	private static final TagKey<Block> BLOCK_TAG_LIGHT_CANNOT_REACH = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:light_cannot_reach"));
-	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+	private static final TagKey<Block> BLOCK_TAG_LIGHT_CANNOT_REACH = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:light_cannot_reach"));
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -63,8 +63,8 @@ public class PlayerInDarknessNearTheStalkerProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
@@ -73,8 +73,8 @@ public class PlayerInDarknessNearTheStalkerProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 					}
 					return false;
 				}
@@ -98,9 +98,9 @@ public class PlayerInDarknessNearTheStalkerProcedure {
 												((WatchingStalkerEntity) entityiterator).setAnimation("animation.stalker_hide");
 											}
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-												_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 45, 99, false, false));
+												_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 45, 99, false, false));
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-												_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 45, 99, false, false));
+												_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 45, 99, false, false));
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 												_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 45, 99, false, false));
 											TheDeepVoidMod.queueServerWork(35, () -> {
@@ -117,7 +117,7 @@ public class PlayerInDarknessNearTheStalkerProcedure {
 									TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
 									if (world instanceof ServerLevel _level) {
 										Entity entityToSpawn = TheDeepVoidModEntities.STALKER.get().spawn(_level,
-												BlockPos.containing(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, entity.getY(), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ), MobSpawnType.MOB_SUMMONED);
+												BlockPos.containing(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, entity.getY(), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ), EntitySpawnReason.MOB_SUMMONED);
 										if (entityToSpawn != null) {
 											entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 										}
@@ -125,10 +125,10 @@ public class PlayerInDarknessNearTheStalkerProcedure {
 									if (world instanceof Level _level) {
 										if (!_level.isClientSide()) {
 											_level.playSound(null, BlockPos.containing(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, entity.getY(), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ),
-													BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stalker_emerges_new")), SoundSource.HOSTILE, 8, 1);
+													BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stalker_emerges_new")), SoundSource.HOSTILE, 8, 1);
 										} else {
 											_level.playLocalSound(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, (entity.getY()), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ,
-													BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stalker_emerges_new")), SoundSource.HOSTILE, 8, 1, false);
+													BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stalker_emerges_new")), SoundSource.HOSTILE, 8, 1, false);
 										}
 									}
 									{
@@ -140,9 +140,9 @@ public class PlayerInDarknessNearTheStalkerProcedure {
 												((StalkerEntity) entityiterator).setAnimation("animation.stalker_digOut");
 											}
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-												_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 75, 99, false, false));
+												_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 75, 99, false, false));
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-												_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 75, 99, false, false));
+												_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 75, 99, false, false));
 											if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 												_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 75, 99, false, false));
 										}

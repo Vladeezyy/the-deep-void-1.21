@@ -14,11 +14,11 @@ public class IchorFlareShotWhileProjectileFlyingTickProcedure {
 			return;
 		if (world instanceof ServerLevel _level)
 			_level.sendParticles((SimpleParticleType) (TheDeepVoidModParticleTypes.ICHOR_SMOKE.get()), x, y, z, Mth.nextInt(RandomSource.create(), 1, 2), 0, 0.08, 0, 0.1);
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDouble("despawn") >= 100) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDoubleOr("despawn", 0) >= 100) {
 			if (!immediatesourceentity.level().isClientSide())
 				immediatesourceentity.discard();
 		} else {
-			net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).putDouble("despawn", (net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDouble("despawn") + 1));
+			net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).putDouble("despawn", (net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDoubleOr("despawn", 0) + 1));
 		}
 	}
 }

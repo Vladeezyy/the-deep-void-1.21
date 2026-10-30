@@ -32,7 +32,6 @@ public class GluttonBlockJEITypeRecipe implements Recipe<RecipeInput> {
 		return false;
 	}
 
-	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		return recipeItems;
 	}
@@ -42,24 +41,33 @@ public class GluttonBlockJEITypeRecipe implements Recipe<RecipeInput> {
 		return output;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int pWidth, int pHeight) {
-		return true;
-	}
-
-	@Override
 	public ItemStack getResultItem(HolderLookup.Provider provider) {
 		return output.copy();
 	}
 
 	@Override
-	public RecipeType<?> getType() {
+	public RecipeType<GluttonBlockJEITypeRecipe> getType() {
 		return Type.INSTANCE;
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<GluttonBlockJEITypeRecipe> getSerializer() {
 		return Serializer.INSTANCE;
+	}
+
+	@Override
+	public boolean isSpecial() {
+		return true;
+	}
+
+	@Override
+	public net.minecraft.world.item.crafting.PlacementInfo placementInfo() {
+		return net.minecraft.world.item.crafting.PlacementInfo.NOT_PLACEABLE;
+	}
+
+	@Override
+	public net.minecraft.world.item.crafting.RecipeBookCategory recipeBookCategory() {
+		return net.minecraft.world.item.crafting.RecipeBookCategories.CRAFTING_MISC;
 	}
 
 	public static class Type implements RecipeType<GluttonBlockJEITypeRecipe> {
@@ -73,12 +81,12 @@ public class GluttonBlockJEITypeRecipe implements Recipe<RecipeInput> {
 	public static class Serializer implements RecipeSerializer<GluttonBlockJEITypeRecipe> {
 		public static final Serializer INSTANCE = new Serializer();
 		private static final MapCodec<GluttonBlockJEITypeRecipe> CODEC = RecordCodecBuilder
-				.mapCodec(builder -> builder.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter(recipe -> recipe.output), Ingredient.CODEC_NONEMPTY.listOf().fieldOf("ingredients").flatXmap(ingredients -> {
+				.mapCodec(builder -> builder.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter(recipe -> recipe.output), Ingredient.CODEC.listOf().fieldOf("ingredients").flatXmap(ingredients -> {
 					Ingredient[] aingredient = ingredients.toArray(Ingredient[]::new); // Skip the empty check and create the array.
 					if (aingredient.length == 0) {
 						return DataResult.error(() -> "No ingredients found in custom recipe");
 					} else {
-						return DataResult.success(NonNullList.of(Ingredient.EMPTY, aingredient));
+						return DataResult.success(NonNullList.of(aingredient[0], aingredient));
 					}
 				}, DataResult::success).forGetter(recipe -> recipe.recipeItems)).apply(builder, GluttonBlockJEITypeRecipe::new));
 		public static final StreamCodec<RegistryFriendlyByteBuf, GluttonBlockJEITypeRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
@@ -94,8 +102,10 @@ public class GluttonBlockJEITypeRecipe implements Recipe<RecipeInput> {
 		}
 
 		private static GluttonBlockJEITypeRecipe fromNetwork(RegistryFriendlyByteBuf buf) {
-			NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
-			inputs.replaceAll(ingredients -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
+			int size = buf.readVarInt();
+			NonNullList<Ingredient> inputs = NonNullList.createWithCapacity(size);
+			for (int i = 0; i < size; i++)
+				inputs.add(Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
 			return new GluttonBlockJEITypeRecipe(ItemStack.STREAM_CODEC.decode(buf), inputs);
 		}
 

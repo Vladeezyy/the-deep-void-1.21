@@ -1,16 +1,19 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.port.bus.RegisterSpawnPlacementsEvent;
 
 import software.bernie.geckolib.util.GeckoLibUtil;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.state.AnimationTest;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.GeoEntity;
+
+import net.sombrius.thedeepvoid.port.GeoAnims;
 
 import net.sombrius.thedeepvoid.procedures.ChainedWeaverSolidBoundingBoxConditionProcedure;
 import net.sombrius.thedeepvoid.procedures.ChainedWeaverRightClickedOnEntityProcedure;
@@ -21,8 +24,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.entity.projectile.ThrownPotion;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.AbstractThrownPotion;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -39,7 +42,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -59,7 +62,6 @@ public class ChainedWeaverEntity extends PathfinderMob implements GeoEntity {
 	public static final EntityDataAccessor<Integer> DATA_messageCount = SynchedEntityData.defineId(ChainedWeaverEntity.class, EntityDataSerializers.INT);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
-	private boolean lastloop;
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
@@ -100,7 +102,7 @@ public class ChainedWeaverEntity extends PathfinderMob implements GeoEntity {
 	}
 
 	@Override
-	public boolean canBeCollidedWith() {
+	public boolean canBeCollidedWith(@javax.annotation.Nullable net.minecraft.world.entity.Entity other) {
 		Entity entity = this;
 		Level world = entity.level();
 		double x = entity.getX();
@@ -124,26 +126,26 @@ public class ChainedWeaverEntity extends PathfinderMob implements GeoEntity {
 
 	@Override
 	public SoundEvent getAmbientSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient"));
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_hurt"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.death"));
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float amount) {
+	public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
 		if (source.is(DamageTypes.IN_FIRE))
 			return false;
 		if (source.getDirectEntity() instanceof AbstractArrow)
 			return false;
-		if (source.getDirectEntity() instanceof ThrownPotion || source.getDirectEntity() instanceof AreaEffectCloud)
+		if (source.getDirectEntity() instanceof AbstractThrownPotion || source.getDirectEntity() instanceof AreaEffectCloud)
 			return false;
 		if (source.is(DamageTypes.FALL))
 			return false;
@@ -165,11 +167,11 @@ public class ChainedWeaverEntity extends PathfinderMob implements GeoEntity {
 			return false;
 		if (source.is(DamageTypes.WITHER_SKULL))
 			return false;
-		return super.hurt(source, amount);
+		return super.hurtServer(level, source, amount);
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putString("Texture", this.getTexture());
 		compound.putBoolean("Datafree", this.entityData.get(DATA_free));
@@ -181,28 +183,28 @@ public class ChainedWeaverEntity extends PathfinderMob implements GeoEntity {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Texture"))
-			this.setTexture(compound.getString("Texture"));
-		if (compound.contains("Datafree"))
-			this.entityData.set(DATA_free, compound.getBoolean("Datafree"));
-		if (compound.contains("DatachainBreak"))
-			this.entityData.set(DATA_chainBreak, compound.getInt("DatachainBreak"));
-		if (compound.contains("DataplayingAnimation"))
-			this.entityData.set(DATA_playingAnimation, compound.getBoolean("DataplayingAnimation"));
-		if (compound.contains("Datamessage"))
-			this.entityData.set(DATA_message, compound.getBoolean("Datamessage"));
-		if (compound.contains("Datatalking"))
-			this.entityData.set(DATA_talking, compound.getBoolean("Datatalking"));
-		if (compound.contains("DatamessageCount"))
-			this.entityData.set(DATA_messageCount, compound.getInt("DatamessageCount"));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Texture"))
+			this.setTexture(compound.getStringOr("Texture", ""));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datafree"))
+			this.entityData.set(DATA_free, compound.getBooleanOr("Datafree", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatachainBreak"))
+			this.entityData.set(DATA_chainBreak, compound.getIntOr("DatachainBreak", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataplayingAnimation"))
+			this.entityData.set(DATA_playingAnimation, compound.getBooleanOr("DataplayingAnimation", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datamessage"))
+			this.entityData.set(DATA_message, compound.getBooleanOr("Datamessage", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datatalking"))
+			this.entityData.set(DATA_talking, compound.getBooleanOr("Datatalking", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatamessageCount"))
+			this.entityData.set(DATA_messageCount, compound.getIntOr("DatamessageCount", 0));
 	}
 
 	@Override
 	public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 		ItemStack itemstack = sourceentity.getItemInHand(hand);
-		InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+		InteractionResult retval = InteractionResult.SUCCESS;
 		super.mobInteract(sourceentity, hand);
 		double x = this.getX();
 		double y = this.getY();
@@ -247,7 +249,7 @@ public class ChainedWeaverEntity extends PathfinderMob implements GeoEntity {
 		return builder;
 	}
 
-	private PlayState movementPredicate(AnimationState event) {
+	private PlayState movementPredicate(AnimationTest<ChainedWeaverEntity> event) {
 		if (this.animationprocedure.equals("empty")) {
 			return event.setAndContinue(RawAnimation.begin().thenLoop("animation.chainedWeaver_idle"));
 		}
@@ -256,21 +258,8 @@ public class ChainedWeaverEntity extends PathfinderMob implements GeoEntity {
 
 	String prevAnim = "empty";
 
-	private PlayState procedurePredicate(AnimationState event) {
-		if (!animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
-			if (!this.animationprocedure.equals(prevAnim))
-				event.getController().forceAnimationReset();
-			event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
-			if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
-				this.animationprocedure = "empty";
-				event.getController().forceAnimationReset();
-			}
-		} else if (animationprocedure.equals("empty")) {
-			prevAnim = "empty";
-			return PlayState.STOP;
-		}
-		prevAnim = this.animationprocedure;
-		return PlayState.CONTINUE;
+	private PlayState procedurePredicate(AnimationTest<ChainedWeaverEntity> event) {
+		return GeoAnims.procedure(event, this.animationprocedure, animation -> this.animationprocedure = animation);
 	}
 
 	@Override
@@ -278,7 +267,8 @@ public class ChainedWeaverEntity extends PathfinderMob implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(ChainedWeaverEntity.RemovalReason.KILLED);
-			this.dropExperience(null);
+			if (this.level() instanceof ServerLevel _serverLevel)
+				this.dropExperience(_serverLevel, null);
 		}
 	}
 
@@ -292,8 +282,8 @@ public class ChainedWeaverEntity extends PathfinderMob implements GeoEntity {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>(this, "movement", 4, this::movementPredicate));
-		data.add(new AnimationController<>(this, "procedure", 4, this::procedurePredicate));
+		data.add(new AnimationController<>("movement", 4, this::movementPredicate));
+		data.add(new AnimationController<>("procedure", 4, this::procedurePredicate));
 	}
 
 	@Override

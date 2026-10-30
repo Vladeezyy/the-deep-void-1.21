@@ -12,7 +12,7 @@ public class AncientDeepslateSawTrapOnTickUpdateProcedure {
 			public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 				BlockEntity blockEntity = world.getBlockEntity(pos);
 				if (blockEntity != null)
-					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 				return -1;
 			}
 		}.getValue(world, BlockPos.containing(x, y, z), "cooldown") > 0) {
@@ -25,7 +25,7 @@ public class AncientDeepslateSawTrapOnTickUpdateProcedure {
 						public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 							BlockEntity blockEntity = world.getBlockEntity(pos);
 							if (blockEntity != null)
-								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 							return -1;
 						}
 					}.getValue(world, BlockPos.containing(x, y, z), "cooldown")) - 1));

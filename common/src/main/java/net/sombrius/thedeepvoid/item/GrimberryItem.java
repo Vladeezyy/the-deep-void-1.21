@@ -10,7 +10,7 @@ import net.minecraft.world.item.Rarity;
 
 public class GrimberryItem extends Item {
 	public GrimberryItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(3).saturationModifier(0.25f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(3).saturationModifier(0.25f).build()));
 	}
 
 	@Override

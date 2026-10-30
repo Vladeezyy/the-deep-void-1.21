@@ -4,7 +4,7 @@ import net.minecraft.world.entity.EntityType;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -19,8 +19,8 @@ import net.sombrius.thedeepvoid.configuration.DeepVoidConfigConfiguration;
 
 @EventBusSubscriber
 public class StalkerBreaksBlocksProcedure {
-	private static final TagKey<Block> BLOCK_TAG_BREAKABLE = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:breakable"));
-	private static final TagKey<EntityType<?>> ENTITY_TAG_CAN_BREAK_BLOCKS = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:can_break_blocks"));
+	private static final TagKey<Block> BLOCK_TAG_BREAKABLE = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:breakable"));
+	private static final TagKey<EntityType<?>> ENTITY_TAG_CAN_BREAK_BLOCKS = TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:can_break_blocks"));
 
 	@SubscribeEvent
 	public static void onEntityTick(EntityTickEvent.Pre event) {
@@ -37,7 +37,7 @@ public class StalkerBreaksBlocksProcedure {
 		if (DeepVoidConfigConfiguration.STALKERBREAKSBLOCKS.get() == true) {
 			if (entity.getType().is(ENTITY_TAG_CAN_BREAK_BLOCKS)) {
 				if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
-					if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:break_block") >= 10) {
+					if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:break_block", 0) >= 10) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:break_block", 0);
 						if ((world.getBlockState(BlockPos.containing(entity.getX() + 1, entity.getY(), entity.getZ()))).is(BLOCK_TAG_BREAKABLE)) {
 							{
@@ -152,7 +152,7 @@ public class StalkerBreaksBlocksProcedure {
 							}
 						}
 					} else {
-						net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:break_block", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:break_block") + 1));
+						net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:break_block", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:break_block", 0) + 1));
 					}
 				}
 			}

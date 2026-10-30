@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -37,7 +37,7 @@ public class PitShakeOnEffectActiveTickProcedure {
 					double distanceSq = (xi * xi) / (double) (horizontalRadiusSphere * horizontalRadiusSphere) + (i * i) / (double) (verticalRadiusSphere * verticalRadiusSphere)
 							+ (zi * zi) / (double) (horizontalRadiusSphere * horizontalRadiusSphere);
 					if (distanceSq <= 1.0) {
-						if ((world.getBlockState(BlockPos.containing(x + xi, y + i, z + zi))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:spawn_particles_pit")))
+						if ((world.getBlockState(BlockPos.containing(x + xi, y + i, z + zi))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:spawn_particles_pit")))
 								&& !world.getBlockState(BlockPos.containing(x + xi, y + i - 1, z + zi)).canOcclude() && Math.random() < 0.25) {
 							world.addParticle((new BlockParticleOption(ParticleTypes.BLOCK, (world.getBlockState(BlockPos.containing(x + xi, y + i, z + zi))))), (x + xi + 0.5 + Mth.nextDouble(RandomSource.create(), -0.5, 0.5)), (y + i - 0.1),
 									(z + zi + 0.5 + Mth.nextDouble(RandomSource.create(), -0.5, 0.5)), 0, (-1.65), 0);

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -36,9 +36,9 @@ public class FalseHydraApplyDebuffProcedure {
 			_datEntSetI.getEntityData().set(FalseHydraEntity.DATA_rndEffect, Mth.nextInt(RandomSource.create(), 1, 4));
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_scream")), SoundSource.HOSTILE, 4, (float) 0.9);
+				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_scream")), SoundSource.HOSTILE, 4, (float) 0.9);
 			} else {
-				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_scream")), SoundSource.HOSTILE, 4, (float) 0.9, false);
+				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_scream")), SoundSource.HOSTILE, 4, (float) 0.9, false);
 			}
 		}
 		TheDeepVoidMod.queueServerWork(10, () -> {

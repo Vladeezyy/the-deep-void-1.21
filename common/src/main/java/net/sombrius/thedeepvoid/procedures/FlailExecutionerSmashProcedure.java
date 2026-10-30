@@ -6,7 +6,7 @@ import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -39,13 +39,13 @@ public class FlailExecutionerSmashProcedure {
 			((FlailExecutionerEntity) entity).setAnimation("animation.flail_smash");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 55, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 55, 99, false, false));
 		TheDeepVoidMod.queueServerWork(25, () -> {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:rot_knight_swing_strong")), SoundSource.HOSTILE, 2, (float) 0.5);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:rot_knight_swing_strong")), SoundSource.HOSTILE, 2, (float) 0.5);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:rot_knight_swing_strong")), SoundSource.HOSTILE, 2, (float) 0.5, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:rot_knight_swing_strong")), SoundSource.HOSTILE, 2, (float) 0.5, false);
 				}
 			}
 		});
@@ -62,7 +62,7 @@ public class FlailExecutionerSmashProcedure {
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(4 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:boss_attack"))), entity), 9);
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:boss_attack"))), entity), 9);
 					}
 				}
 			}
@@ -73,13 +73,13 @@ public class FlailExecutionerSmashProcedure {
 									entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getX(),
 									entity.getY(),
 									entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()),
-							BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) 0.9);
+							BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) 0.9);
 				} else {
 					_level.playLocalSound(
 							(entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getX()),
 							(entity.getY()),
 							(entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()),
-							BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) 0.9, false);
+							BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flail_impact")), SoundSource.HOSTILE, 2, (float) 0.9, false);
 				}
 			}
 			int horizontalRadiusSquare = (int) 3 - 1;

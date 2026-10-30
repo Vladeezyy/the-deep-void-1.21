@@ -9,7 +9,7 @@ import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
 import net.sombrius.thedeepvoid.port.bus.EventBusSubscriber;
 import net.sombrius.thedeepvoid.port.bus.FMLCommonSetupEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class TheDeepVoidModCompostableItems {
 	@SubscribeEvent
 	public static void addComposterItems(FMLCommonSetupEvent event) {

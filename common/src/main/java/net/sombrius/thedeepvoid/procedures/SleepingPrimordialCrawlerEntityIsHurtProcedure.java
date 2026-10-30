@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 
@@ -14,7 +14,7 @@ public class SleepingPrimordialCrawlerEntityIsHurtProcedure {
 		if (!entity.level().isClientSide())
 			entity.discard();
 		if (world instanceof ServerLevel _level) {
-			Entity entityToSpawn = TheDeepVoidModEntities.PRIMORDIAL_BONE_CRAWLER.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+			Entity entityToSpawn = TheDeepVoidModEntities.PRIMORDIAL_BONE_CRAWLER.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
 			if (entityToSpawn != null) {
 				entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 			}

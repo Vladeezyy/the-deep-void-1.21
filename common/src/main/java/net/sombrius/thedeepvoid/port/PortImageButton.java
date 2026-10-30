@@ -5,7 +5,7 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.GuiGraphics;
 
-import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.renderer.RenderPipelines;
 
 /** The 1.20 ImageButton (one texture, hovered / disabled states stacked vertically), which 1.21 replaced by sprites. */
 public class PortImageButton extends ImageButton {
@@ -27,13 +27,12 @@ public class PortImageButton extends ImageButton {
 	}
 
 	@Override
-	public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+	public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 		int v = this.yTexStart;
 		if (!this.isActive())
 			v += this.yDiffTex * 2;
 		else if (this.isHoveredOrFocused())
 			v += this.yDiffTex;
-		RenderSystem.enableDepthTest();
-		guiGraphics.blit(this.texture, this.getX(), this.getY(), (float) this.xTexStart, (float) v, this.width, this.height, this.textureWidth, this.textureHeight);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.texture, this.getX(), this.getY(), (float) this.xTexStart, (float) v, this.width, this.height, this.textureWidth, this.textureHeight);
 	}
 }

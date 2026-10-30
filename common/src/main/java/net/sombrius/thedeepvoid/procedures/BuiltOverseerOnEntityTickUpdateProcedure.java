@@ -7,7 +7,7 @@ public class BuiltOverseerOnEntityTickUpdateProcedure {
 		if (entity == null)
 			return;
 		if (entity.isVehicle()) {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:overseerSaddle") == false) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:overseerSaddle", false) == false) {
 				if (!((entity.getFirstPassenger()) == null)) {
 					(entity.getFirstPassenger()).stopRiding();
 				}

@@ -1,23 +1,33 @@
 package net.sombrius.thedeepvoid.entity.model;
 
-import net.minecraft.resources.ResourceLocation;
-import net.sombrius.thedeepvoid.entity.DevourerEntity;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 import software.bernie.geckolib.model.GeoModel;
+
+import net.minecraft.resources.Identifier;
+
+import net.sombrius.thedeepvoid.port.GeoTextures;
+import net.sombrius.thedeepvoid.entity.DevourerEntity;
+
+import javax.annotation.Nullable;
 
 public class DevourerModel extends GeoModel<DevourerEntity> {
 	@Override
-	public ResourceLocation getAnimationResource(DevourerEntity entity) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "animations/devourer.animation.json");
+	public Identifier getAnimationResource(DevourerEntity entity) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/devourer.animation.json");
 	}
 
 	@Override
-	public ResourceLocation getModelResource(DevourerEntity entity) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "geo/devourer.geo.json");
+	public Identifier getModelResource(GeoRenderState renderState) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/devourer.geo.json");
 	}
 
 	@Override
-	public ResourceLocation getTextureResource(DevourerEntity entity) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/entities/" + entity.getTexture() + ".png");
+	public Identifier getTextureResource(GeoRenderState renderState) {
+		return GeoTextures.get(renderState);
 	}
 
+	@Override
+	public void addAdditionalStateData(DevourerEntity entity, @Nullable Object relatedObject, GeoRenderState renderState) {
+		GeoTextures.set(renderState, entity.getTexture());
+	}
 }

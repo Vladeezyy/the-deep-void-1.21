@@ -8,7 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -40,18 +40,18 @@ public class TheHarvestRightclickedProcedure {
 		double randomXX = 0;
 		double randomYY = 0;
 		double randomZZ = 0;
-		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(TheDeepVoidModMobEffects.HEXED.holder()) && itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("slash") < 5) {
+		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(TheDeepVoidModMobEffects.HEXED.holder()) && itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("slash", 0) < 5) {
 			{
 				final String _tagName = "slash";
-				final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("slash") + 1);
+				final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("slash", 0) + 1);
 				CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 			}
 		}
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:soul_seeker_slash")), SoundSource.PLAYERS, (float) 1.8, (float) 0.9);
+				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:soul_seeker_slash")), SoundSource.PLAYERS, (float) 1.8, (float) 0.9);
 			} else {
-				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:soul_seeker_slash")), SoundSource.PLAYERS, (float) 1.8, (float) 0.9, false);
+				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:soul_seeker_slash")), SoundSource.PLAYERS, (float) 1.8, (float) 0.9, false);
 			}
 		}
 		{
@@ -59,7 +59,7 @@ public class TheHarvestRightclickedProcedure {
 			List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(8 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 			for (Entity entityiterator : _entfound) {
 				if (entityiterator instanceof LivingEntity && !(entityiterator == sourceentity)) {
-					entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:void_energy"))), sourceentity),
+					entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:void_energy"))), sourceentity),
 							(float) (double) DeepVoidConfigConfiguration.THEHARVEST.get());
 					if ((entityiterator instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.HEXED.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.HEXED.holder()).getAmplifier() : 0) < 6) {
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -70,8 +70,8 @@ public class TheHarvestRightclickedProcedure {
 						if (entityiterator instanceof LivingEntity _entity)
 							_entity.removeEffect(TheDeepVoidModMobEffects.HEXED.holder());
 						entityiterator.hurt(
-								new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:void_energy"))), sourceentity),
-								(float) Math.ceil(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:hexedBuildUp") / 14));
+								new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:void_energy"))), sourceentity),
+								(float) Math.ceil(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:hexedBuildUp", 0) / 14));
 					}
 				}
 			}

@@ -20,11 +20,11 @@ import net.sombrius.thedeepvoid.procedures.RottenGrassPlantDestroyedByPlayerProc
 
 public class CanopyRottenGrassBlock extends DoublePlantBlock implements net.sombrius.thedeepvoid.port.PortBlockHooks.DestroyedByPlayer {
 	public CanopyRottenGrassBlock() {
-		super(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).sound(SoundType.ROOTS).strength(0.5f, 0f).noCollission().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_GRAY).sound(SoundType.ROOTS).strength(0.5f, 0f).noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(TheDeepVoidModBlocks.ROTTEN_GRASS.get());
 	}
 

@@ -4,7 +4,7 @@ import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -12,7 +12,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -48,10 +48,10 @@ public class PrimordialCrawlerDuringShootingProcedure {
 		}
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_spit")), SoundSource.HOSTILE, 4,
+				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_spit")), SoundSource.HOSTILE, 4,
 						(float) Mth.nextDouble(RandomSource.create(), 0.8, 1));
 			} else {
-				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_spit")), SoundSource.HOSTILE, 4,
+				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_spit")), SoundSource.HOSTILE, 4,
 						(float) Mth.nextDouble(RandomSource.create(), 0.8, 1), false);
 			}
 		}
@@ -59,7 +59,7 @@ public class PrimordialCrawlerDuringShootingProcedure {
 			if (entity instanceof PrimordialBoneCrawlerEntity _datEntSetI)
 				_datEntSetI.getEntityData().set(PrimordialBoneCrawlerEntity.DATA_shooting, 0);
 			if (entity instanceof LivingEntity _entity)
-				_entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+				_entity.removeEffect(MobEffects.SLOWNESS);
 			if (entity instanceof LivingEntity _entity)
 				_entity.removeEffect(MobEffects.WEAKNESS);
 			if (entity instanceof PrimordialBoneCrawlerEntity _datEntSetI)

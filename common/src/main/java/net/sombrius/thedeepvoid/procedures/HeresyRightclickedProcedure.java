@@ -24,7 +24,7 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -34,7 +34,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.BlockPos;
 
@@ -43,9 +43,9 @@ public class HeresyRightclickedProcedure {
 		if (entity == null)
 			return;
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
-			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:rounds") > 0) {
+			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:rounds", 0) > 0) {
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), (int) (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.MARKSMAN) != 0 ? 45 : 25));
+					_player.getCooldowns().addCooldown(itemstack, (int) (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.MARKSMAN) != 0 ? 45 : 25));
 				if (itemstack.getItem() instanceof HeresyItem)
 					{
 						final String _tagName = "geckoAnim";
@@ -53,13 +53,13 @@ public class HeresyRightclickedProcedure {
 						CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putString(_tagName, _tagValue));
 					}
 				if (world instanceof Level)
-					((Level) world).playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:heresy_shoot")), SoundSource.PLAYERS, 3, 1, false);
+					((Level) world).playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:heresy_shoot")), SoundSource.PLAYERS, 3, 1, false);
 				TheDeepVoidMod.queueServerWork(12, () -> {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:heresy_lever")), SoundSource.PLAYERS, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:heresy_lever")), SoundSource.PLAYERS, 1, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:heresy_lever")), SoundSource.PLAYERS, 1, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:heresy_lever")), SoundSource.PLAYERS, 1, 1, false);
 						}
 					}
 				});
@@ -67,16 +67,16 @@ public class HeresyRightclickedProcedure {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
 							_level.playSound(null, BlockPos.containing(x + Mth.nextInt(RandomSource.create(), -1, 1), y, z + Mth.nextInt(RandomSource.create(), -1, 1)),
-									BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:heresy_shell_fall")), SoundSource.PLAYERS, 1, 1);
+									BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:heresy_shell_fall")), SoundSource.PLAYERS, 1, 1);
 						} else {
-							_level.playLocalSound((x + Mth.nextInt(RandomSource.create(), -1, 1)), y, (z + Mth.nextInt(RandomSource.create(), -1, 1)), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:heresy_shell_fall")),
+							_level.playLocalSound((x + Mth.nextInt(RandomSource.create(), -1, 1)), y, (z + Mth.nextInt(RandomSource.create(), -1, 1)), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:heresy_shell_fall")),
 									SoundSource.PLAYERS, 1, 1, false);
 						}
 					}
 				});
-				if (entity.isShiftKeyDown() && itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:rounds") == 7) {
+				if (entity.isShiftKeyDown() && itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:rounds", 0) == 7) {
 					for (int index0 = 0; index0 < 7; index0++) {
-						if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("deep_void:goldBlood") == true) {
+						if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("deep_void:goldBlood", false) == true) {
 							{
 								Entity _shootFrom = entity;
 								Level projectileLevel = _shootFrom.level();
@@ -128,7 +128,7 @@ public class HeresyRightclickedProcedure {
 						CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 					}
 				} else {
-					if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("deep_void:goldBlood") == true) {
+					if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("deep_void:goldBlood", false) == true) {
 						{
 							Entity _shootFrom = entity;
 							Level projectileLevel = _shootFrom.level();
@@ -171,9 +171,9 @@ public class HeresyRightclickedProcedure {
 							}
 						}
 					}
-					if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:rounds") == 7) {
+					if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:rounds", 0) == 7) {
 						for (int index1 = 0; index1 < 4; index1++) {
-							if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("deep_void:goldBlood") == true) {
+							if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("deep_void:goldBlood", false) == true) {
 								{
 									Entity _shootFrom = entity;
 									Level projectileLevel = _shootFrom.level();
@@ -223,13 +223,13 @@ public class HeresyRightclickedProcedure {
 					}
 					{
 						final String _tagName = "deep_void:rounds";
-						final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:rounds") - 1);
+						final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:rounds", 0) - 1);
 						CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 					}
 				}
-			} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:rounds") <= 0) {
+			} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:rounds", 0) <= 0) {
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), 25);
+					_player.getCooldowns().addCooldown(itemstack, 25);
 				if (itemstack.getItem() instanceof HeresyItem)
 					{
 						final String _tagName = "geckoAnim";
@@ -249,7 +249,7 @@ public class HeresyRightclickedProcedure {
 					}
 				}
 				TheDeepVoidMod.queueServerWork(10, () -> {
-					if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:rounds") == -1) {
+					if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:rounds", 0) == -1) {
 						if (entity instanceof LivingEntity _entity)
 							_entity.setHealth((float) Math.ceil((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) - ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1)
 									* ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GUNSLINGER_HELMET.get()
@@ -268,16 +268,16 @@ public class HeresyRightclickedProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.PLAYERS, 1, (float) 0.8);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.PLAYERS, 1, (float) 0.8);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.PLAYERS, 1, (float) 0.8, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.PLAYERS, 1, (float) 0.8, false);
 						}
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stab")), SoundSource.PLAYERS, 1, (float) 0.8);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stab")), SoundSource.PLAYERS, 1, (float) 0.8);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:stab")), SoundSource.PLAYERS, 1, (float) 0.8, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:stab")), SoundSource.PLAYERS, 1, (float) 0.8, false);
 						}
 					}
 					if (world instanceof ServerLevel _level)

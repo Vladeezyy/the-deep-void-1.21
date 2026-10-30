@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.potion;
 
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.sombrius.thedeepvoid.procedures.DebilitatedEffectExpiresProcedure;
@@ -21,9 +22,9 @@ public class DebilitatedMobEffect extends MobEffect implements PortUtil.EffectRe
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier) {
 		DebilitatedEffectStartedappliedProcedure.execute(entity);
-		return super.applyEffectTick(entity, amplifier);
+		return super.applyEffectTick(level, entity, amplifier);
 	}
 
 	@Override

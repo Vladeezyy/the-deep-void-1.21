@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 import net.sombrius.thedeepvoid.configuration.DeepVoidConfigConfiguration;
@@ -27,7 +27,7 @@ public class FleshWormSpikesProcedure {
 		}
 		TheDeepVoidMod.queueServerWork(30, () -> {
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = TheDeepVoidModEntities.SPAWN_BONE_SPIKES.get().spawn(_level, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), MobSpawnType.MOB_SUMMONED);
+				Entity entityToSpawn = TheDeepVoidModEntities.SPAWN_BONE_SPIKES.get().spawn(_level, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}

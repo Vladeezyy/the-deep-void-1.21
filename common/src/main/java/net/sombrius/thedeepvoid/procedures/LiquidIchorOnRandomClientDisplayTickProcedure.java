@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -17,19 +17,19 @@ public class LiquidIchorOnRandomClientDisplayTickProcedure {
 		if (Math.random() < 0.0025) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.firecharge.use")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.firecharge.use")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.05));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.firecharge.use")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.firecharge.use")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.05), false);
 				}
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.lava.pop")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.lava.pop")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.05));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.lava.pop")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.lava.pop")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.05), false);
 				}
 			}
@@ -45,10 +45,10 @@ public class LiquidIchorOnRandomClientDisplayTickProcedure {
 		if (Math.random() < 0.006) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.lava.ambient")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.lava.ambient")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.05));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.lava.ambient")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.lava.ambient")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.05), false);
 				}
 			}
@@ -56,10 +56,10 @@ public class LiquidIchorOnRandomClientDisplayTickProcedure {
 		if (Math.random() < 0.002) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.lava.pop")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.lava.pop")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.05));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.lava.pop")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.lava.pop")), SoundSource.BLOCKS, (float) Mth.nextDouble(RandomSource.create(), 0.2, 0.4),
 							(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.05), false);
 				}
 			}

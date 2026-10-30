@@ -19,7 +19,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ROTTEN_BONE_ARMOR_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ROTTEN_BONE_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ROTTEN_BONE_ARMOR_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(" "));
 					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.makes_the_wearer_invisible_when_in_this"));
@@ -34,7 +34,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ONYX_ARMOR_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ONYX_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ONYX_ARMOR_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.attacks_get_repeated_with_half_the_damage"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_see_in_darkness"));
@@ -49,7 +49,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_ROTTEN_BONE_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.makes_the_wearer_invisible_when_in_this"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness_or_when_under_the"));
@@ -67,7 +67,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.LAVENDITE_ARMOR_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.LAVENDITE_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.LAVENDITE_ARMOR_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.deflects_any_projectile"));
 				} else {
@@ -81,7 +81,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_LAVENDITE_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_LAVENDITE_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_LAVENDITE_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.deflects_any_projectile_back_at_the_shooter"));
 				} else {
@@ -95,7 +95,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BISMUTH_NETHERITE_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.xp_heals_the_wearer"));
 				} else {
@@ -104,7 +104,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_HELMET.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_HELMET.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_see_in_darkness"));
 			} else {
@@ -121,7 +121,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_LEGGINGS.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_can_run_faster"));
 			} else {
@@ -138,7 +138,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_BOOTS.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.negates_fall_damage"));
 			} else {
@@ -155,7 +155,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_CHESTPLATE.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.when_at_half_health"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_is_granted_resistance_and_strength"));
 			} else {
@@ -177,7 +177,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.attacks_get_repeated_with_half_the_damage"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
@@ -190,7 +190,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOID_CLOAK_CHESTPLATE.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_phase_through_walls"));
 			} else {
@@ -203,7 +203,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLESH_ARMOR_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLESH_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLESH_ARMOR_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.the_armor_becomes_more_resilient_and_heavier"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
@@ -219,7 +219,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ALL_SEEING_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ALL_SEEING_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ALL_SEEING_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn_2"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.any_player_around_the_wearer_will_glow"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_entity_targets_the_wearer"));
@@ -238,7 +238,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.immunity_to_rot"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_becomes_invisible_faster_and_more"));
@@ -250,7 +250,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.GRIM_CRAWLER_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.CRAWLER_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.CRAWLER_ROYALTY_CHESTPLATE.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_can_slow_fall"));
 			} else {
@@ -272,7 +272,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_CRAWLER_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_CRAWLER_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_CRAWLER_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.immunity_to_rot"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_becomes_invisible_faster_and_more"));
@@ -291,7 +291,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_ROYALTY_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_ROYALTY_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_ROYALTY_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.immunity_to_rot"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_becomes_invisible_faster_and_more"));
@@ -310,7 +310,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CULT_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CULT_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CULT_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.grants_void_s_blessing"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_runs_faster"));
@@ -323,7 +323,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_MASK_HELMET.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.built_overseers_around_the_wearer_are_empowered"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_can_no_longer_heal_naturally"));
@@ -334,7 +334,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_ROBE_CHESTPLATE.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.when_attacking"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.each_4_hit_the_wearer_is_teleported"));
 			} else {
@@ -342,7 +342,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_LEGGINGS_LEGGINGS.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.when_attacked"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_has_a_chance_to_dodge"));
 			} else {
@@ -350,7 +350,7 @@ public class ArmorTooltipsProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_BOOTS_BOOTS.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.on_no_gravity_key_pressed"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.allows_the_wearer_to_walk_on_air"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
@@ -365,7 +365,7 @@ public class ArmorTooltipsProcedure {
 				&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.WEAVER_BOOTS_BOOTS.get()) {
 			if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_MASK_HELMET.get() || itemstack.getItem() == TheDeepVoidModItems.WEAVER_ROBE_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.WEAVER_LEGGINGS_LEGGINGS.get()
 					|| itemstack.getItem() == TheDeepVoidModItems.WEAVER_BOOTS_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.full_armor"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.slowly_withers_away_the_soul_of_nearby"));
 				}
@@ -377,7 +377,7 @@ public class ArmorTooltipsProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.when_in_darkness"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.attacks_get_repeated_with_a_bit_more"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));

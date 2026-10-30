@@ -10,6 +10,6 @@ import net.minecraft.world.level.material.MapColor;
 
 public class RottenFenceGateBlock extends FenceGateBlock {
 	public RottenFenceGateBlock() {
-		super(WoodType.OAK, BlockBehaviour.Properties.of().ignitedByLava().instrument(NoteBlockInstrument.BASS).mapColor(MapColor.COLOR_GRAY).sound(SoundType.BASALT).strength(2.2f, 16f).dynamicShape().forceSolidOn());
+		super(WoodType.OAK, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().ignitedByLava().instrument(NoteBlockInstrument.BASS).mapColor(MapColor.COLOR_GRAY).sound(SoundType.BASALT).strength(2.2f, 16f).dynamicShape().forceSolidOn());
 	}
 }

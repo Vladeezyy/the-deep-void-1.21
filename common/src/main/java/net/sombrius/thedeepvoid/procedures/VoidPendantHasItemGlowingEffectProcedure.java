@@ -6,7 +6,7 @@ import net.minecraft.world.item.component.CustomData;
 
 public class VoidPendantHasItemGlowingEffectProcedure {
 	public static boolean execute(ItemStack itemstack) {
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("linked") == true) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("linked", false) == true) {
 			return true;
 		}
 		return false;

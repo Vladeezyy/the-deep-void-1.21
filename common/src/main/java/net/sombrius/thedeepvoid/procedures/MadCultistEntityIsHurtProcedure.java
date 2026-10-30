@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -44,15 +44,15 @@ public class MadCultistEntityIsHurtProcedure {
 					_datEntSetL.getEntityData().set(MadCultistEntity.DATA_blocking, false);
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.anvil.place")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.anvil.place")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.anvil.place")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.anvil.place")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 				if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 1));
 				if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 1));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 1));
 				if (entity instanceof MadCultistEntity) {
 					((MadCultistEntity) entity).setAnimation("empty");
 				}
@@ -60,9 +60,9 @@ public class MadCultistEntityIsHurtProcedure {
 					((MadCultistEntity) entity).setAnimation("animation.madCultist_blockSuccess");
 				}
 				if (entity instanceof LivingEntity _entity)
-					_entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+					_entity.removeEffect(MobEffects.SLOWNESS);
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 99, false, false));
 				TheDeepVoidMod.queueServerWork(10, () -> {
 					if (entity instanceof MadCultistEntity _datEntSetL)
 						_datEntSetL.getEntityData().set(MadCultistEntity.DATA_attacking, false);

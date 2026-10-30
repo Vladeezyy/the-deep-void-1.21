@@ -1,12 +1,12 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.InteractionResult;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -19,12 +19,12 @@ import net.sombrius.thedeepvoid.world.inventory.NecrosedSkinBackpackGUIMenu;
 
 public class NecrosedSkinBackpackItem extends Item {
 	public NecrosedSkinBackpackItem() {
-		super(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).rarity(Rarity.COMMON));
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
-		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
+	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+		InteractionResult ar = super.use(world, entity, hand);
 		if (entity instanceof ServerPlayer serverPlayer) {
 			net.sombrius.thedeepvoid.port.platform.Platform.INSTANCE.openMenu(serverPlayer, new MenuProvider() {
 				@Override

@@ -6,7 +6,7 @@ import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -137,19 +137,19 @@ public class VanishEffectStartedappliedProcedure {
 				(entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).shrink(1);
 			}
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR)
-					.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"))))
+					.hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).addTransientModifier(
-						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"), TheDeepVoidModVariables.of(entity).saveArmorPoint, AttributeModifier.Operation.ADD_VALUE)));
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"))))
+						(new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"), TheDeepVoidModVariables.of(entity).saveArmorPoint, AttributeModifier.Operation.ADD_VALUE)));
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).addTransientModifier(
-						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"), TheDeepVoidModVariables.of(entity).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)));
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"))))
+						(new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"), TheDeepVoidModVariables.of(entity).saveArmorToughness, AttributeModifier.Operation.ADD_VALUE)));
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).addTransientModifier(
-						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), TheDeepVoidModVariables.of(entity).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)));
+						(new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"), TheDeepVoidModVariables.of(entity).saveKnockbackResistance, AttributeModifier.Operation.ADD_VALUE)));
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.STEP_HEIGHT)
-					.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf"))))
+					.hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.STEP_HEIGHT).addTransientModifier(
-						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf"), TheDeepVoidModVariables.of(entity).saveStepHeight, AttributeModifier.Operation.ADD_VALUE)));
+						(new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf"), TheDeepVoidModVariables.of(entity).saveStepHeight, AttributeModifier.Operation.ADD_VALUE)));
 		}
 		if (world instanceof ServerLevel _level)
 			_level.sendParticles(ParticleTypes.POOF, x, (y + 0.5), z, 40, 0.1, 0.1, 0.1, 0.1);
@@ -174,9 +174,9 @@ public class VanishEffectStartedappliedProcedure {
 		}
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.shulker_bullet.hit")), SoundSource.PLAYERS, 1, (float) 0.8);
+				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.shulker_bullet.hit")), SoundSource.PLAYERS, 1, (float) 0.8);
 			} else {
-				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.shulker_bullet.hit")), SoundSource.PLAYERS, 1, (float) 0.8, false);
+				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.shulker_bullet.hit")), SoundSource.PLAYERS, 1, (float) 0.8, false);
 			}
 		}
 	}

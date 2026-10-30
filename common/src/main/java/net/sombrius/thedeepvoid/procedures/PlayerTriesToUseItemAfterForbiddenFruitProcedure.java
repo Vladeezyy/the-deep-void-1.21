@@ -29,7 +29,7 @@ public class PlayerTriesToUseItemAfterForbiddenFruitProcedure {
 	private static void execute(@Nullable Event event, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (itemstack.has(DataComponents.FOOD) && !(itemstack.getItem() == TheDeepVoidModItems.FORBIDDEN_FRUIT.get()) && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("tastedForbiddenFruit") == true) {
+		if (itemstack.has(DataComponents.FOOD) && !(itemstack.getItem() == TheDeepVoidModItems.FORBIDDEN_FRUIT.get()) && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("tastedForbiddenFruit", false) == true) {
 			if (event instanceof ICancellableEvent _cancellable) {
 				_cancellable.setCanceled(true);
 			}

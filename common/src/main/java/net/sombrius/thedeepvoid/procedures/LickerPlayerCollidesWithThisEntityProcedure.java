@@ -5,7 +5,7 @@ import net.sombrius.thedeepvoid.port.PortUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -33,8 +33,8 @@ public class LickerPlayerCollidesWithThisEntityProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -43,8 +43,8 @@ public class LickerPlayerCollidesWithThisEntityProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 						}
 						return false;
 					}
@@ -59,8 +59,8 @@ public class LickerPlayerCollidesWithThisEntityProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -69,26 +69,26 @@ public class LickerPlayerCollidesWithThisEntityProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 						}
 						return false;
 					}
 				}.checkGamemode(sourceentity)) && (entity instanceof LickerEntity _datEntL15 && _datEntL15.getEntityData().get(LickerEntity.DATA_stunned)) == false && (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) > 0
 				&& !entity.isVehicle()) {
 			if ((sourceentity instanceof LivingEntity _entUseItem18 ? _entUseItem18.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
-				if ((sourceentity instanceof Player _plrCldRem21 ? _plrCldRem21.getCooldowns().getCooldownPercent((sourceentity instanceof LivingEntity _entUseItem20 ? _entUseItem20.getUseItem() : ItemStack.EMPTY).getItem(), 0f) * 100 : 0) <= 0) {
+				if ((sourceentity instanceof Player _plrCldRem21 ? _plrCldRem21.getCooldowns().getCooldownPercent((sourceentity instanceof LivingEntity _entUseItem20 ? _entUseItem20.getUseItem() : ItemStack.EMPTY), 0f) * 100 : 0) <= 0) {
 					if (sourceentity instanceof Player _player)
-						_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem22 ? _entUseItem22.getUseItem() : ItemStack.EMPTY).getItem(), 20);
+						_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem22 ? _entUseItem22.getUseItem() : ItemStack.EMPTY), 20);
 					{
 						ItemStack _ist = (sourceentity instanceof LivingEntity _entUseItem24 ? _entUseItem24.getUseItem() : ItemStack.EMPTY);
 						PortUtil.hurtAndBreak(_ist, 1, null);
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(sourceentity.getX(), sourceentity.getY(), sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1);
+							_level.playSound(null, BlockPos.containing(sourceentity.getX(), sourceentity.getY(), sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1);
 						} else {
-							_level.playLocalSound((sourceentity.getX()), (sourceentity.getY()), (sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1, false);
+							_level.playLocalSound((sourceentity.getX()), (sourceentity.getY()), (sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.block")), SoundSource.PLAYERS, 1, 1, false);
 						}
 					}
 				}

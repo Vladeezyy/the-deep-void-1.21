@@ -1,6 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.UUID;
 import javax.annotation.Nullable;
@@ -47,23 +47,23 @@ public class PlayerKillsEntityWithMaskProcedure {
 					_vars.healthMask = sourceentity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1;
 					_vars.syncPlayerVariables(sourceentity);
 				}
-				((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"));
-				if (!(((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"))))
-					((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"),
+				((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"));
+				if (!(((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"))))
+					((LivingEntity) sourceentity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier((new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"),
 							(4 * TheDeepVoidModVariables.of(sourceentity).healthBoostLevel), AttributeModifier.Operation.ADD_VALUE)));
 				if (sourceentity instanceof LivingEntity _entity)
 					_entity.setHealth((float) TheDeepVoidModVariables.of(sourceentity).healthMask);
 			} else {
 				if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 160, 0, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 160, 0, false, false));
 				if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 160, 1, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 160, 1, false, false));
 				if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 160, 1, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.HASTE, 160, 1, false, false));
 			}
 		}
 		if (TheDeepVoidModVariables.of(entity).healthBoostLevel > 0) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"));
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b"));
 			{
 				TheDeepVoidModVariables.PlayerVariables _vars = TheDeepVoidModVariables.of(entity);
 				_vars.healthBoostLevel = 0;

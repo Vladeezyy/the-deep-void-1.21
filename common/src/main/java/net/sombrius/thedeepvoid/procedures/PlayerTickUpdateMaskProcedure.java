@@ -1,6 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.UUID;
 import javax.annotation.Nullable;
@@ -17,7 +17,7 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class PlayerTickUpdateMaskProcedure {
-	private static final ResourceLocation ID_A2A1826B_7829_42ED_986E_984EBF45427B = ResourceLocation.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b");
+	private static final Identifier ID_A2A1826B_7829_42ED_986E_984EBF45427B = Identifier.fromNamespaceAndPath("the_deep_void", "a2a1826b-7829-42ed-986e-984ebf45427b");
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -42,19 +42,19 @@ public class PlayerTickUpdateMaskProcedure {
 			}
 		}
 		if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_HELMET.get())
-				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("bloodstoneEquipHelmet") == true) {
+				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("bloodstoneEquipHelmet", false) == true) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("bloodstoneEquipHelmet", false);
 		}
 		if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_CHESTPLATE.get())
-				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("bloodstoneEquipChest") == true) {
+				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("bloodstoneEquipChest", false) == true) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("bloodstoneEquipChest", false);
 		}
 		if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_LEGGINGS.get())
-				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("bloodstoneEquipLeggings") == true) {
+				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("bloodstoneEquipLeggings", false) == true) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("bloodstoneEquipLeggings", false);
 		}
 		if (!((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODSTONE_ARMOR_BOOTS.get())
-				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("bloodstoneEquipBoots") == true) {
+				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("bloodstoneEquipBoots", false) == true) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("bloodstoneEquipBoots", false);
 		}
 	}

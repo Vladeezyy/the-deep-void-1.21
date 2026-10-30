@@ -9,13 +9,12 @@ import net.sombrius.thedeepvoid.procedures.MistedHeartLivingEntityIsHitWithItemP
 
 public class MistedHeartItem extends Item {
 	public MistedHeartItem() {
-		super(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON));
 	}
 
 	@Override
-	public boolean hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-		boolean retval = super.hurtEnemy(itemstack, entity, sourceentity);
+	public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
+		super.hurtEnemy(itemstack, entity, sourceentity);
 		MistedHeartLivingEntityIsHitWithItemProcedure.execute(entity, sourceentity);
-		return retval;
 	}
 }

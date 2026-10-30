@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.golem.IronGolem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
@@ -42,10 +42,10 @@ public class PlayerIsWearingGrimArmorProcedure {
 				}
 				if (TheDeepVoidModVariables.of(entity).darkness_absorption >= 100) {
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5, 0));
+						_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 5, 0));
 				} else if (TheDeepVoidModVariables.of(entity).darkness_absorption >= 200) {
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5, 1));
+						_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 5, 1));
 				}
 			} else {
 				{
@@ -90,9 +90,9 @@ public class PlayerIsWearingGrimArmorProcedure {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.VOID_BLESSING.holder(), 60, 0, false, false));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 2, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 2, false, false));
 			if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y, z)) > 0) {
-				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:void_energy")))), 1);
+				entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:void_energy")))), 1);
 			}
 		}
 		if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRAWLER_HELMET.get()
@@ -108,9 +108,9 @@ public class PlayerIsWearingGrimArmorProcedure {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 5, 0, false, false));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5, 0, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 5, 0, false, false));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 3, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 3, false, false));
 			}
 		}
 		if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIM_CRAWLER_HELMET.get()
@@ -126,9 +126,9 @@ public class PlayerIsWearingGrimArmorProcedure {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 5, 0, false, false));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5, 0, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 5, 0, false, false));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 5, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 5, false, false));
 			}
 			if (TheDeepVoidModVariables.of(entity).armorToggle == false) {
 				if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y, z)) == 0) {
@@ -150,9 +150,9 @@ public class PlayerIsWearingGrimArmorProcedure {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 5, 0, false, false));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5, 1, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 5, 1, false, false));
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 5, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 5, false, false));
 			}
 			if (TheDeepVoidModVariables.of(entity).armorToggle == false) {
 				if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y, z)) == 0) {
@@ -170,9 +170,9 @@ public class PlayerIsWearingGrimArmorProcedure {
 						if (entityiterator instanceof BuiltOverseerEntity) {
 							if ((entityiterator instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null) == entity) {
 								if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-									_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 80, 1, false, false));
+									_entity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 80, 1, false, false));
 								if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-									_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 80, 0, false, false));
+									_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 80, 0, false, false));
 								if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 									_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 80, 0, false, false));
 							}

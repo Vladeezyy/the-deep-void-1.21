@@ -12,11 +12,11 @@ import net.sombrius.thedeepvoid.procedures.UmbriumOreAdditionalHarvestConditionP
 
 public class BlockOfVoidriumAlloyBlock extends Block {
 	public BlockOfVoidriumAlloyBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.NETHERITE_BLOCK).strength(25f, 6f).requiresCorrectToolForDrops());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.NETHERITE_BLOCK).strength(25f, 6f).requiresCorrectToolForDrops());
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

@@ -10,11 +10,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockOfCinnabarBlock extends Block {
 	public BlockOfCinnabarBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(4f, 8f).requiresCorrectToolForDrops());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.METAL).strength(4f, 8f).requiresCorrectToolForDrops());
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 }

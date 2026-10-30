@@ -1,13 +1,14 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import javax.annotation.Nullable;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -19,7 +20,7 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -40,11 +41,13 @@ import net.sombrius.thedeepvoid.procedures.FalseHydraOnEntityTickUpdateProcedure
 import net.sombrius.thedeepvoid.procedures.FalseHydraPlayerCollidesWithThisEntityProcedure;
 import net.sombrius.thedeepvoid.procedures.FalseHydraPlayerCountProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
+
+import net.sombrius.thedeepvoid.port.GeoAnims;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.state.AnimationTest;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -61,7 +64,6 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<Integer> DATA_baseHealth = SynchedEntityData.defineId(FalseHydraEntity.class, EntityDataSerializers.INT);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
-	private boolean lastloop;
 	private long lastSwing;
 	public String animationprocedure = "empty";
 	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.WHITE, ServerBossEvent.BossBarOverlay.NOTCHED_6);
@@ -117,16 +119,16 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.hurt"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.death"));
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float amount) {
+	public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
 		FalseHydraEntityIsHurtProcedure.execute(this, source.getEntity());
 		Entity immediatesourceentity = source.getDirectEntity();
 		if (source.is(DamageTypes.IN_FIRE))
@@ -143,7 +145,7 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 			return false;
 		if (source.is(DamageTypes.WITHER) || source.is(DamageTypes.WITHER_SKULL))
 			return false;
-		return super.hurt(source, amount);
+		return super.hurtServer(level, source, amount);
 	}
 
 	@Override
@@ -163,14 +165,14 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData livingdata) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata);
 		FalseHydraPlayerCountProcedure.execute(world, this.getX(), this.getY(), this.getZ(), this);
 		return retval;
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putString("Texture", this.getTexture());
 		compound.putInt("DataattackChance", this.entityData.get(DATA_attackChance));
@@ -183,24 +185,24 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Texture"))
-			this.setTexture(compound.getString("Texture"));
-		if (compound.contains("DataattackChance"))
-			this.entityData.set(DATA_attackChance, compound.getInt("DataattackChance"));
-		if (compound.contains("DatarndEffect"))
-			this.entityData.set(DATA_rndEffect, compound.getInt("DatarndEffect"));
-		if (compound.contains("Datavolley"))
-			this.entityData.set(DATA_volley, compound.getBoolean("Datavolley"));
-		if (compound.contains("Datadying"))
-			this.entityData.set(DATA_dying, compound.getBoolean("Datadying"));
-		if (compound.contains("Datalaugh"))
-			this.entityData.set(DATA_laugh, compound.getInt("Datalaugh"));
-		if (compound.contains("DataplayerCount"))
-			this.entityData.set(DATA_playerCount, compound.getInt("DataplayerCount"));
-		if (compound.contains("DatabaseHealth"))
-			this.entityData.set(DATA_baseHealth, compound.getInt("DatabaseHealth"));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Texture"))
+			this.setTexture(compound.getStringOr("Texture", ""));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataattackChance"))
+			this.entityData.set(DATA_attackChance, compound.getIntOr("DataattackChance", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatarndEffect"))
+			this.entityData.set(DATA_rndEffect, compound.getIntOr("DatarndEffect", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datavolley"))
+			this.entityData.set(DATA_volley, compound.getBooleanOr("Datavolley", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datadying"))
+			this.entityData.set(DATA_dying, compound.getBooleanOr("Datadying", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datalaugh"))
+			this.entityData.set(DATA_laugh, compound.getIntOr("Datalaugh", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataplayerCount"))
+			this.entityData.set(DATA_playerCount, compound.getIntOr("DataplayerCount", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatabaseHealth"))
+			this.entityData.set(DATA_baseHealth, compound.getIntOr("DatabaseHealth", 0));
 	}
 
 	@Override
@@ -222,7 +224,7 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public boolean canChangeDimensions(Level from, Level to) {
+	public boolean canTeleport(Level from, Level to) {
 		return false;
 	}
 
@@ -239,8 +241,8 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public void customServerAiStep() {
-		super.customServerAiStep();
+	public void customServerAiStep(ServerLevel level) {
+		super.customServerAiStep(level);
 		this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
 	}
 
@@ -259,7 +261,7 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 		return builder;
 	}
 
-	private PlayState movementPredicate(AnimationState event) {
+	private PlayState movementPredicate(AnimationTest<FalseHydraEntity> event) {
 		if (this.animationprocedure.equals("empty")) {
 			if (this.isDeadOrDying()) {
 				return event.setAndContinue(RawAnimation.begin().thenPlay("animation.falseHydra_death"));
@@ -271,21 +273,8 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 
 	String prevAnim = "empty";
 
-	private PlayState procedurePredicate(AnimationState event) {
-		if (!animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
-			if (!this.animationprocedure.equals(prevAnim))
-				event.getController().forceAnimationReset();
-			event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
-			if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
-				this.animationprocedure = "empty";
-				event.getController().forceAnimationReset();
-			}
-		} else if (animationprocedure.equals("empty")) {
-			prevAnim = "empty";
-			return PlayState.STOP;
-		}
-		prevAnim = this.animationprocedure;
-		return PlayState.CONTINUE;
+	private PlayState procedurePredicate(AnimationTest<FalseHydraEntity> event) {
+		return GeoAnims.procedure(event, this.animationprocedure, animation -> this.animationprocedure = animation);
 	}
 
 	@Override
@@ -293,7 +282,8 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 60) {
 			this.remove(FalseHydraEntity.RemovalReason.KILLED);
-			this.dropExperience(null);
+			if (this.level() instanceof ServerLevel _serverLevel)
+				this.dropExperience(_serverLevel, null);
 		}
 	}
 
@@ -307,8 +297,8 @@ public class FalseHydraEntity extends Monster implements GeoEntity {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>(this, "movement", 4, this::movementPredicate));
-		data.add(new AnimationController<>(this, "procedure", 4, this::procedurePredicate));
+		data.add(new AnimationController<>("movement", 4, this::movementPredicate));
+		data.add(new AnimationController<>("procedure", 4, this::procedurePredicate));
 	}
 
 	@Override

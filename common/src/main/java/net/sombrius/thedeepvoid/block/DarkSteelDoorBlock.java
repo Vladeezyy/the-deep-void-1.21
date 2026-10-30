@@ -11,11 +11,11 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class DarkSteelDoorBlock extends DoorBlock {
 	public DarkSteelDoorBlock() {
-		super(BlockSetType.IRON, BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(20f, 1200f).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false).dynamicShape());
+		super(BlockSetType.IRON, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.METAL).strength(20f, 1200f).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false).dynamicShape());
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 0;
 	}
 }

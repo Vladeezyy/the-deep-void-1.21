@@ -6,12 +6,12 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -53,8 +53,8 @@ public class OverseerSummonProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -64,7 +64,7 @@ public class OverseerSummonProcedure {
 				world.destroyBlock(BlockPos.containing(x, y, z), false);
 				world.destroyBlock(BlockPos.containing(x, y - 1, z), false);
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.BUILT_OVERSEER.get().spawn(_level, BlockPos.containing(x, y - 1, z), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.BUILT_OVERSEER.get().spawn(_level, BlockPos.containing(x, y - 1, z), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}
@@ -78,9 +78,9 @@ public class OverseerSummonProcedure {
 						_toTame.tame(_owner);
 				}
 				if ((entity instanceof ServerPlayer _plr17 && _plr17.level() instanceof ServerLevel
-						&& _plr17.getAdvancements().getOrStartProgress(_plr17.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:its_alive"))).isDone()) == false) {
+						&& _plr17.getAdvancements().getOrStartProgress(_plr17.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:its_alive"))).isDone()) == false) {
 					if (entity instanceof ServerPlayer _player) {
-						AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:its_alive"));
+						AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:its_alive"));
 						if (_adv != null) {
 							AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 							if (!_ap.isDone()) {
@@ -100,8 +100,8 @@ public class OverseerSummonProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -112,7 +112,7 @@ public class OverseerSummonProcedure {
 				world.destroyBlock(BlockPos.containing(x, y - 1, z), false);
 				world.destroyBlock(BlockPos.containing(x, y + 1, z), false);
 				if (world instanceof ServerLevel _level) {
-					Entity entityToSpawn = TheDeepVoidModEntities.BUILT_BIG_OVERSEER.get().spawn(_level, BlockPos.containing(x, y - 1, z), MobSpawnType.MOB_SUMMONED);
+					Entity entityToSpawn = TheDeepVoidModEntities.BUILT_BIG_OVERSEER.get().spawn(_level, BlockPos.containing(x, y - 1, z), EntitySpawnReason.MOB_SUMMONED);
 					if (entityToSpawn != null) {
 						entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 					}
@@ -126,9 +126,9 @@ public class OverseerSummonProcedure {
 						_toTame.tame(_owner);
 				}
 				if ((entity instanceof ServerPlayer _plr37 && _plr37.level() instanceof ServerLevel
-						&& _plr37.getAdvancements().getOrStartProgress(_plr37.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:its_alive"))).isDone()) == false) {
+						&& _plr37.getAdvancements().getOrStartProgress(_plr37.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:its_alive"))).isDone()) == false) {
 					if (entity instanceof ServerPlayer _player) {
-						AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:its_alive"));
+						AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:its_alive"));
 						if (_adv != null) {
 							AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 							if (!_ap.isDone()) {

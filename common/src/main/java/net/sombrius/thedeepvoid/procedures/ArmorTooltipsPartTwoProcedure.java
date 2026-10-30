@@ -14,7 +14,7 @@ public class ArmorTooltipsPartTwoProcedure {
 		if (entity == null || tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.HARVESTER_MASK_HELMET.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.counts_toward_the_full_set"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.the_wearer_is_immune_to_hexed"));
@@ -35,14 +35,14 @@ public class ArmorTooltipsPartTwoProcedure {
 					|| (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.WEAVER_ROBE_CHESTPLATE.get()
 					|| (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.WEAVER_LEGGINGS_LEGGINGS.get()
 					|| (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.WEAVER_BOOTS_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.translatable("text.the_deep_void.port.full_armor"));
 					tooltip.add(Component.translatable("text.the_deep_void.port.slowly_withers_away_the_soul_of_nearby"));
 				}
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.SOUL_WINGS_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.SOUL_WINGS_FLY_CHESTPLATE.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.on_armor_ability_key_pressed"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.fly_vertically_rapidly_but_with_bad_horizontal"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.sneak_while_flying_to_fly_straight_upward"));
@@ -53,7 +53,7 @@ public class ArmorTooltipsPartTwoProcedure {
 			}
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.BLOODY_RIB_CAGE_CHESTPLATE.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.translatable("text.the_deep_void.port.when_worn"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.fleshkin_won_t_attack_the_wearer"));
 				tooltip.add(Component.translatable("text.the_deep_void.port.grants_immunity_to_poison_and_nausea"));

@@ -10,7 +10,7 @@ import net.minecraft.world.item.Rarity;
 
 public class CookedRotfishItem extends Item {
 	public CookedRotfishItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(1.5f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(1.5f).build()));
 	}
 
 	@Override

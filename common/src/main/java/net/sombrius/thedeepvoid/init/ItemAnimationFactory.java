@@ -40,7 +40,7 @@ public class ItemAnimationFactory {
 		ItemStack offhandItem = event.getEntity().getOffhandItem().copy();
 		if (mainhandItem.getItem() instanceof GeoItem || offhandItem.getItem() instanceof GeoItem) {
 			if (mainhandItem.getItem() instanceof HeresyItem animatable) {
-				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getMainHandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -49,7 +49,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (offhandItem.getItem() instanceof HeresyItem animatable) {
-				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getOffhandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -58,7 +58,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (mainhandItem.getItem() instanceof ApostasyItem animatable) {
-				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getMainHandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -67,7 +67,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (offhandItem.getItem() instanceof ApostasyItem animatable) {
-				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getOffhandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -76,7 +76,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (mainhandItem.getItem() instanceof MisanthropyItem animatable) {
-				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getMainHandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -85,7 +85,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (offhandItem.getItem() instanceof MisanthropyItem animatable) {
-				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getOffhandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -94,7 +94,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (mainhandItem.getItem() instanceof EldritchMawItem animatable) {
-				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getMainHandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -103,7 +103,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (offhandItem.getItem() instanceof EldritchMawItem animatable) {
-				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getOffhandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -112,7 +112,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (mainhandItem.getItem() instanceof PerilItem animatable) {
-				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getMainHandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -121,7 +121,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (offhandItem.getItem() instanceof PerilItem animatable) {
-				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getOffhandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -130,7 +130,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (mainhandItem.getItem() instanceof DoubleBarrelShotgunItem animatable) {
-				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getMainHandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -139,7 +139,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (offhandItem.getItem() instanceof DoubleBarrelShotgunItem animatable) {
-				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					CustomData.update(DataComponents.CUSTOM_DATA, event.getEntity().getOffhandItem(), tag -> tag.putString("geckoAnim", ""));
 					if (event.getEntity().level().isClientSide()) {
@@ -148,7 +148,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (mainhandItem.getItem() instanceof PerilOffHandItem animatable) {
-				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = mainhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					{
 						final String _tagName = "geckoAnim";
@@ -161,7 +161,7 @@ public class ItemAnimationFactory {
 				}
 			}
 			if (offhandItem.getItem() instanceof PerilOffHandItem animatable) {
-				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getString("geckoAnim");
+				animation = offhandItem.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getStringOr("geckoAnim", "");
 				if (!animation.isEmpty()) {
 					{
 						final String _tagName = "geckoAnim";

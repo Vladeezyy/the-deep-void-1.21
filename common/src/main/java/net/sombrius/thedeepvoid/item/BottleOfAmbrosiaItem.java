@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -8,27 +9,27 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.sombrius.thedeepvoid.procedures.BottleOfAmbrosiaPlayerFinishesUsingItemProcedure;
 
 public class BottleOfAmbrosiaItem extends Item {
 	public BottleOfAmbrosiaItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(0.4f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(0.4f).alwaysEdible().build()));
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack itemstack) {
-		return UseAnim.DRINK;
+	public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+		return ItemUseAnimation.DRINK;
 	}
 
-	@Override
-	public boolean hasCraftingRemainingItem() {
-		return true;
-	}
-
-	public ItemStack getCraftingRemainingItem(ItemStack itemstack) {
+	/** NeoForge IItemExtension */
+	public ItemStack getCraftingRemainder(ItemStack itemstack) {
 		return new ItemStack(Items.GLASS_BOTTLE);
+	}
+
+	/** Fabric FabricItem */
+	public ItemStack getRecipeRemainder(ItemStack itemstack) {
+		return getCraftingRemainder(itemstack);
 	}
 
 	@Override

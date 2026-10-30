@@ -1,26 +1,20 @@
 package net.sombrius.thedeepvoid.entity.layer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.renderer.layer.builtin.TextureLayerGeoLayer;
+import software.bernie.geckolib.renderer.base.GeoRenderer;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
+
+import net.minecraft.resources.Identifier;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+
 import net.sombrius.thedeepvoid.entity.ForsakenEntity;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class ForsakenLayer extends GeoRenderLayer<ForsakenEntity> {
-	private static final ResourceLocation LAYER = ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/entities/forsaken_glow.png");
+/** The glowing eyes: the layer texture drawn again with the eyes render type (full bright). */
+public class ForsakenLayer<R extends LivingEntityRenderState & GeoRenderState> extends TextureLayerGeoLayer<ForsakenEntity, Void, R> {
+	private static final Identifier LAYER = Identifier.fromNamespaceAndPath("the_deep_void", "textures/entities/forsaken_glow.png");
 
-	public ForsakenLayer(GeoRenderer<ForsakenEntity> entityRenderer) {
-		super(entityRenderer);
-	}
-
-	@Override
-	public void render(PoseStack poseStack, ForsakenEntity animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-		RenderType glowRenderType = RenderType.eyes(LAYER);
-		getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, glowRenderType, bufferSource.getBuffer(glowRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY, -1);
+	public ForsakenLayer(GeoRenderer<ForsakenEntity, Void, R> entityRenderer) {
+		super(entityRenderer, LAYER, RenderTypes::eyes);
 	}
 }

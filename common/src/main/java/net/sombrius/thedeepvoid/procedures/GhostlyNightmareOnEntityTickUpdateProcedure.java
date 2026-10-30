@@ -28,7 +28,7 @@ public class GhostlyNightmareOnEntityTickUpdateProcedure {
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 							_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0, false, false));
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, false));
+							_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 0, false, false));
 					}
 				}
 			}

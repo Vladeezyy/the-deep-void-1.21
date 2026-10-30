@@ -16,8 +16,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.Arrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
@@ -25,7 +25,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.BlockPos;
 
 public class BlackHoleRightClickProcedure {
@@ -34,7 +34,7 @@ public class BlackHoleRightClickProcedure {
 			return;
 		if (!entity.isShiftKeyDown()) {
 			if (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.DIMENSIONAL_BURST) != 0) {
-				if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("ammo") < (double) DeepVoidConfigConfiguration.BLACKHOLESTORELIMIT.get()) {
+				if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("ammo", 0) < (double) DeepVoidConfigConfiguration.BLACKHOLESTORELIMIT.get()) {
 					{
 						final String _tagName = "loading";
 						final boolean _tagValue = true;
@@ -48,13 +48,13 @@ public class BlackHoleRightClickProcedure {
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putBoolean(_tagName, _tagValue));
 				}
 			}
-		} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("ammo") > 0) {
+		} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("ammo", 0) > 0) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 1);
+				_player.getCooldowns().addCooldown(itemstack, 1);
 			if (entity instanceof LivingEntity _entity)
 				_entity.stopUsingItem();
 			if (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.DIMENSIONAL_BURST) != 0) {
-				for (int index0 = 0; index0 < (int) itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("ammo"); index0++) {
+				for (int index0 = 0; index0 < (int) itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("ammo", 0); index0++) {
 					{
 						Entity _shootFrom = entity;
 						Level projectileLevel = _shootFrom.level();
@@ -78,10 +78,10 @@ public class BlackHoleRightClickProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9,
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9,
 									(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9,
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9,
 									(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 						}
 					}
@@ -94,7 +94,7 @@ public class BlackHoleRightClickProcedure {
 			} else {
 				{
 					final String _tagName = "ammo";
-					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("ammo") - 1);
+					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("ammo", 0) - 1);
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 				}
 				{
@@ -120,9 +120,9 @@ public class BlackHoleRightClickProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9, 1);
+						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9, 1);
 					} else {
-						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9, 1, false);
+						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9, 1, false);
 					}
 				}
 				if (PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.QUICK_TRIGGER) != 0) {
@@ -149,9 +149,9 @@ public class BlackHoleRightClickProcedure {
 						}
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9, 1);
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9, 1);
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9, 1, false);
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.crossbow.shoot")), SoundSource.PLAYERS, (float) 0.9, 1, false);
 							}
 						}
 					});

@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -13,7 +13,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -37,8 +37,8 @@ public class TamedBoneCrawlerRightClickedProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -47,9 +47,9 @@ public class TamedBoneCrawlerRightClickedProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 				if (world instanceof ServerLevel _level)
@@ -64,9 +64,9 @@ public class TamedBoneCrawlerRightClickedProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.eat")), SoundSource.HOSTILE, 1, (float) 1.6);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.eat")), SoundSource.HOSTILE, 1, (float) 1.6);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.eat")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.eat")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 						}
 					}
 				}
@@ -77,8 +77,8 @@ public class TamedBoneCrawlerRightClickedProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -87,9 +87,9 @@ public class TamedBoneCrawlerRightClickedProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 				if (world instanceof ServerLevel _level)
@@ -105,9 +105,9 @@ public class TamedBoneCrawlerRightClickedProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.eat")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.eat")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.eat")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.eat")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 				return InteractionResult.SUCCESS;
@@ -117,8 +117,8 @@ public class TamedBoneCrawlerRightClickedProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -127,9 +127,9 @@ public class TamedBoneCrawlerRightClickedProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 				if (entity instanceof BoneCrawlerEntity _datEntSetI)
@@ -141,13 +141,13 @@ public class TamedBoneCrawlerRightClickedProcedure {
 				if ((entity instanceof BoneCrawlerEntity _datEntI ? _datEntI.getEntityData().get(BoneCrawlerEntity.DATA_growthMother) : 0) >= 128) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8, false);
 						}
 					}
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.MOTHER_BONE_CRAWLER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
+						Entity entityinstance = TheDeepVoidModEntities.MOTHER_BONE_CRAWLER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 							if (entityinstance instanceof TamableAnimal _toTame && sourceentity instanceof Player _owner)
@@ -173,8 +173,8 @@ public class TamedBoneCrawlerRightClickedProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -183,9 +183,9 @@ public class TamedBoneCrawlerRightClickedProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 				if (entity instanceof BoneCrawlerEntity _datEntSetI)
@@ -197,13 +197,13 @@ public class TamedBoneCrawlerRightClickedProcedure {
 				if ((entity instanceof BoneCrawlerEntity _datEntI ? _datEntI.getEntityData().get(BoneCrawlerEntity.DATA_growthAlpha) : 0) >= 128) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8, false);
 						}
 					}
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.ALPHA_BONE_CRAWLER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
+						Entity entityinstance = TheDeepVoidModEntities.ALPHA_BONE_CRAWLER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 							if (entityinstance instanceof TamableAnimal _toTame && sourceentity instanceof Player _owner)
@@ -229,8 +229,8 @@ public class TamedBoneCrawlerRightClickedProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -239,9 +239,9 @@ public class TamedBoneCrawlerRightClickedProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 				if (entity instanceof BoneCrawlerEntity _datEntSetI)
@@ -253,13 +253,13 @@ public class TamedBoneCrawlerRightClickedProcedure {
 				if ((entity instanceof BoneCrawlerEntity _datEntI ? _datEntI.getEntityData().get(BoneCrawlerEntity.DATA_growthSpitter) : 0) >= 64) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 0.8, false);
 						}
 					}
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.GOO_SPITTER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
+						Entity entityinstance = TheDeepVoidModEntities.GOO_SPITTER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 							if (entityinstance instanceof TamableAnimal _toTame && sourceentity instanceof Player _owner)

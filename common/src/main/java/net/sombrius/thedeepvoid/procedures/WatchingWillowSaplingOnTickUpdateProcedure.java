@@ -1,7 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Mirror;
@@ -16,7 +16,7 @@ public class WatchingWillowSaplingOnTickUpdateProcedure {
 					&& !world.getBlockState(BlockPos.containing(x, y + 1, z)).canOcclude() && !world.getBlockState(BlockPos.containing(x + 1, y, z)).canOcclude() && !world.getBlockState(BlockPos.containing(x, y, z + 1)).canOcclude()
 					&& !world.getBlockState(BlockPos.containing(x - 1, y, z)).canOcclude() && !world.getBlockState(BlockPos.containing(x, y, z - 1)).canOcclude()) {
 				if (world instanceof ServerLevel _serverworld) {
-					StructureTemplate template = _serverworld.getStructureManager().getOrCreate(ResourceLocation.fromNamespaceAndPath("the_deep_void", "watching_willow1_void"));
+					StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "watching_willow1_void"));
 					if (template != null) {
 						template.placeInWorld(_serverworld, BlockPos.containing(x - 5, y, z - 5), BlockPos.containing(x - 5, y, z - 5), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false),
 								_serverworld.random, 3);

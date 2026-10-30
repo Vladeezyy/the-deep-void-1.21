@@ -34,7 +34,7 @@ import net.sombrius.thedeepvoid.port.platform.Registrar;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.Block;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class TheDeepVoidModBlockEntities {
 	public static final Registrar<BlockEntityType<?>> REGISTRY = Registrar.create(Registries.BLOCK_ENTITY_TYPE, TheDeepVoidMod.MODID);
 	public static final RegistryEntry<BlockEntityType<?>, BlockEntityType<?>> GLUTTON_BLOCK = register("glutton_block", TheDeepVoidModBlocks.GLUTTON_BLOCK, GluttonBlockBlockEntity::new);
@@ -53,7 +53,7 @@ public class TheDeepVoidModBlockEntities {
 	public static final RegistryEntry<BlockEntityType<?>, BlockEntityType<?>> DUNGEON_DARK_STEEL_BARS_ACTIVE = register("dungeon_dark_steel_bars_active", TheDeepVoidModBlocks.DUNGEON_DARK_STEEL_BARS_ACTIVE, DungeonDarkSteelBarsActiveBlockEntity::new);
 
 	private static RegistryEntry<BlockEntityType<?>, BlockEntityType<?>> register(String registryname, RegistryEntry<Block, Block> block, BlockEntityType.BlockEntitySupplier<?> supplier) {
-		return REGISTRY.register(registryname, () -> BlockEntityType.Builder.of(supplier, block.get()).build(null));
+		return REGISTRY.register(registryname, () -> new BlockEntityType<>(supplier, java.util.Set.of(block.get())));
 	}
 
 	@SubscribeEvent

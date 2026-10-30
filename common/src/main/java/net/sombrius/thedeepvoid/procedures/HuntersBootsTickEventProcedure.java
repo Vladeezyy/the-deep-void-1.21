@@ -9,7 +9,7 @@ public class HuntersBootsTickEventProcedure {
 	public static void execute(Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("doubleJump") == true) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("doubleJump", false) == true) {
 			if (entity.onGround()) {
 				{
 					final String _tagName = "doubleJump";

@@ -12,11 +12,11 @@ import net.minecraft.world.level.material.MapColor;
 
 public class LivingGloomVinesBlock extends Block {
 	public LivingGloomVinesBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_BLUE).sound(SoundType.TWISTING_VINES).strength(0.5f, 1f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_BLUE).sound(SoundType.TWISTING_VINES).strength(0.5f, 1f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 }

@@ -6,6 +6,9 @@ import net.sombrius.thedeepvoid.port.bus.EventBusSubscriber;
 import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
 
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.saveddata.SavedDataType;
+import net.minecraft.util.datafix.DataFixTypes;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
@@ -13,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.codec.StreamCodec;
@@ -31,7 +34,7 @@ import net.sombrius.thedeepvoid.port.neo.IPayloadContext;
 
 public class TheDeepVoidModVariables {
 	/** The id of the player variables attachment (NeoForge and Fabric), as in 1.99.3.1 */
-	public static final ResourceLocation PLAYER_VARIABLES_ID = ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "player_variables");
+	public static final Identifier PLAYER_VARIABLES_ID = Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, "player_variables");
 
 	/** The player variables of an entity (NeoForge's {@code getData(PLAYER_VARIABLES)}) */
 	public static PlayerVariables of(Entity entity) {
@@ -190,6 +193,9 @@ public class TheDeepVoidModVariables {
 
 	public static class WorldVariables extends SavedData {
 		public static final String DATA_NAME = "the_deep_void_worldvars";
+		/** 1.21.5: saved data has a type with a codec (the data fixes of the random sequences touch none of its keys) */
+		public static final SavedDataType<WorldVariables> TYPE = new SavedDataType<>(DATA_NAME, WorldVariables::new,
+				CompoundTag.CODEC.xmap(tag -> load(tag, null), data -> data.save(new CompoundTag(), null)), DataFixTypes.SAVED_DATA_RANDOM_SEQUENCES);
 
 		public static WorldVariables load(CompoundTag tag, HolderLookup.Provider lookupProvider) {
 			WorldVariables data = new WorldVariables();
@@ -200,7 +206,6 @@ public class TheDeepVoidModVariables {
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 		}
 
-		@Override
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			return nbt;
 		}
@@ -217,7 +222,7 @@ public class TheDeepVoidModVariables {
 
 		public static WorldVariables get(LevelAccessor world) {
 			if (world instanceof ServerLevel level) {
-				return level.getDataStorage().computeIfAbsent(new SavedData.Factory<>(WorldVariables::new, WorldVariables::load, null), DATA_NAME);
+				return level.getDataStorage().computeIfAbsent(TYPE);
 			} else {
 				return clientSide;
 			}
@@ -226,6 +231,9 @@ public class TheDeepVoidModVariables {
 
 	public static class MapVariables extends SavedData {
 		public static final String DATA_NAME = "the_deep_void_mapvars";
+		/** 1.21.5: saved data has a type with a codec (the data fixes of the random sequences touch none of its keys) */
+		public static final SavedDataType<MapVariables> TYPE = new SavedDataType<>(DATA_NAME, MapVariables::new,
+				CompoundTag.CODEC.xmap(tag -> load(tag, null), data -> data.save(new CompoundTag(), null)), DataFixTypes.SAVED_DATA_RANDOM_SEQUENCES);
 		public boolean CultTemplePlaced = false;
 		public boolean pitPlaced = false;
 		public double undertakerSpawn = 24000.0;
@@ -249,24 +257,23 @@ public class TheDeepVoidModVariables {
 		}
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
-			CultTemplePlaced = nbt.getBoolean("CultTemplePlaced");
-			pitPlaced = nbt.getBoolean("pitPlaced");
-			undertakerSpawn = nbt.getDouble("undertakerSpawn");
-			undertakerKilled = nbt.getBoolean("undertakerKilled");
-			StalkerDespawned = nbt.getBoolean("StalkerDespawned");
-			breathingHillsAmbience = nbt.getDouble("breathingHillsAmbience");
-			breathingHillsHeart = nbt.getDouble("breathingHillsHeart");
-			WeaverTemplePlaced = nbt.getBoolean("WeaverTemplePlaced");
-			stalkerSpawnX = nbt.getDouble("stalkerSpawnX");
-			stalkerSpawnZ = nbt.getDouble("stalkerSpawnZ");
-			overwritten = nbt.getBoolean("overwritten");
-			surfaceOverwritten = nbt.getBoolean("surfaceOverwritten");
-			hunterSpawnCooldown = nbt.getDouble("hunterSpawnCooldown");
-			spawnHydra = nbt.getDouble("spawnHydra");
-			hydraKilled = nbt.getBoolean("hydraKilled");
+			CultTemplePlaced = nbt.getBooleanOr("CultTemplePlaced", false);
+			pitPlaced = nbt.getBooleanOr("pitPlaced", false);
+			undertakerSpawn = nbt.getDoubleOr("undertakerSpawn", 0);
+			undertakerKilled = nbt.getBooleanOr("undertakerKilled", false);
+			StalkerDespawned = nbt.getBooleanOr("StalkerDespawned", false);
+			breathingHillsAmbience = nbt.getDoubleOr("breathingHillsAmbience", 0);
+			breathingHillsHeart = nbt.getDoubleOr("breathingHillsHeart", 0);
+			WeaverTemplePlaced = nbt.getBooleanOr("WeaverTemplePlaced", false);
+			stalkerSpawnX = nbt.getDoubleOr("stalkerSpawnX", 0);
+			stalkerSpawnZ = nbt.getDoubleOr("stalkerSpawnZ", 0);
+			overwritten = nbt.getBooleanOr("overwritten", false);
+			surfaceOverwritten = nbt.getBooleanOr("surfaceOverwritten", false);
+			hunterSpawnCooldown = nbt.getDoubleOr("hunterSpawnCooldown", 0);
+			spawnHydra = nbt.getDoubleOr("spawnHydra", 0);
+			hydraKilled = nbt.getBooleanOr("hydraKilled", false);
 		}
 
-		@Override
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nbt.putBoolean("CultTemplePlaced", CultTemplePlaced);
 			nbt.putBoolean("pitPlaced", pitPlaced);
@@ -298,7 +305,7 @@ public class TheDeepVoidModVariables {
 
 		public static MapVariables get(LevelAccessor world) {
 			if (world instanceof ServerLevelAccessor serverLevelAcc) {
-				return serverLevelAcc.getLevel().getServer().getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(new SavedData.Factory<>(MapVariables::new, MapVariables::load, null), DATA_NAME);
+				return serverLevelAcc.getLevel().getServer().getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(TYPE);
 			} else {
 				return clientSide;
 			}
@@ -306,11 +313,11 @@ public class TheDeepVoidModVariables {
 	}
 
 	public record SavedDataSyncMessage(int dataType, SavedData data) implements CustomPacketPayload {
-		public static final Type<SavedDataSyncMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "saved_data_sync"));
+		public static final Type<SavedDataSyncMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, "saved_data_sync"));
 		public static final StreamCodec<RegistryFriendlyByteBuf, SavedDataSyncMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, SavedDataSyncMessage message) -> {
 			buffer.writeInt(message.dataType);
 			if (message.data != null)
-				buffer.writeNbt(message.data.save(new CompoundTag(), buffer.registryAccess()));
+				buffer.writeNbt(write(message.data, buffer.registryAccess()));
 		}, (RegistryFriendlyByteBuf buffer) -> {
 			int dataType = buffer.readInt();
 			CompoundTag nbt = buffer.readNbt();
@@ -325,6 +332,13 @@ public class TheDeepVoidModVariables {
 			return new SavedDataSyncMessage(dataType, data);
 		});
 
+		/** 1.21.5: SavedData has no save(CompoundTag, Provider) any more (codecs); the mod's two kinds keep theirs */
+		private static CompoundTag write(SavedData data, HolderLookup.Provider provider) {
+			if (data instanceof MapVariables mapVariables)
+				return mapVariables.save(new CompoundTag(), provider);
+			return ((WorldVariables) data).save(new CompoundTag(), provider);
+		}
+
 		@Override
 		public Type<SavedDataSyncMessage> type() {
 			return TYPE;
@@ -334,9 +348,9 @@ public class TheDeepVoidModVariables {
 			if (context.flow() == PacketFlow.CLIENTBOUND && message.data != null) {
 				context.enqueueWork(() -> {
 					if (message.dataType == 0)
-						MapVariables.clientSide.read(message.data.save(new CompoundTag(), context.player().registryAccess()), context.player().registryAccess());
+						MapVariables.clientSide.read(write(message.data, context.player().registryAccess()), context.player().registryAccess());
 					else
-						WorldVariables.clientSide.read(message.data.save(new CompoundTag(), context.player().registryAccess()), context.player().registryAccess());
+						WorldVariables.clientSide.read(write(message.data, context.player().registryAccess()), context.player().registryAccess());
 				}).exceptionally(e -> {
 					context.connection().disconnect(Component.literal(e.getMessage()));
 					return null;
@@ -510,10 +524,10 @@ public class TheDeepVoidModVariables {
 			nbt.putDouble("hiveCallZ", hiveCallZ);
 			nbt.putDouble("hunterArmorAbility", hunterArmorAbility);
 			nbt.putDouble("mistedRemnantAmbience", mistedRemnantAmbience);
-			nbt.put("saveArmor3", saveArmor3.saveOptional(lookupProvider));
-			nbt.put("saveArmor2", saveArmor2.saveOptional(lookupProvider));
-			nbt.put("saveArmor1", saveArmor1.saveOptional(lookupProvider));
-			nbt.put("saveArmor0", saveArmor0.saveOptional(lookupProvider));
+			nbt.put("saveArmor3", ItemStack.OPTIONAL_CODEC.encodeStart(lookupProvider.createSerializationContext(NbtOps.INSTANCE), saveArmor3).getOrThrow());
+			nbt.put("saveArmor2", ItemStack.OPTIONAL_CODEC.encodeStart(lookupProvider.createSerializationContext(NbtOps.INSTANCE), saveArmor2).getOrThrow());
+			nbt.put("saveArmor1", ItemStack.OPTIONAL_CODEC.encodeStart(lookupProvider.createSerializationContext(NbtOps.INSTANCE), saveArmor1).getOrThrow());
+			nbt.put("saveArmor0", ItemStack.OPTIONAL_CODEC.encodeStart(lookupProvider.createSerializationContext(NbtOps.INSTANCE), saveArmor0).getOrThrow());
 			nbt.putDouble("saveArmorPoint", saveArmorPoint);
 			nbt.putDouble("gaol_ambience", gaol_ambience);
 			nbt.putBoolean("noHit", noHit);
@@ -539,99 +553,99 @@ public class TheDeepVoidModVariables {
 		}
 
 		public void deserializeNBT(HolderLookup.Provider lookupProvider, CompoundTag nbt) {
-			StalkerCount = nbt.getDouble("StalkerCount");
-			ForgottenValleyAmbientSound = nbt.getDouble("ForgottenValleyAmbientSound");
-			StalkerSpawn = nbt.getBoolean("StalkerSpawn");
-			StalkerCountFinish = nbt.getBoolean("StalkerCountFinish");
-			playerX = nbt.getDouble("playerX");
-			playerY = nbt.getDouble("playerY");
-			playerZ = nbt.getDouble("playerZ");
-			RottenArmorAbility = nbt.getDouble("RottenArmorAbility");
-			hallucinate = nbt.getDouble("hallucinate");
-			StalkerStalkCount = nbt.getDouble("StalkerStalkCount");
-			VoidCaveAmbientSound = nbt.getDouble("VoidCaveAmbientSound");
-			VoidCloakAbility = nbt.getDouble("VoidCloakAbility");
-			InCreative = nbt.getBoolean("InCreative");
-			InAdventure = nbt.getBoolean("InAdventure");
-			cave_tremble = nbt.getDouble("cave_tremble");
-			darkness_absorption = nbt.getDouble("darkness_absorption");
-			seek_light = nbt.getBoolean("seek_light");
-			playerCallOfTheVoid = nbt.getBoolean("playerCallOfTheVoid");
-			hallucinating = nbt.getBoolean("hallucinating");
-			deathgrounds_ambience = nbt.getDouble("deathgrounds_ambience");
-			flesh_roar = nbt.getDouble("flesh_roar");
-			armorToggle = nbt.getBoolean("armorToggle");
-			monolithAmbience = nbt.getDouble("monolithAmbience");
-			hasteAllSeeing = nbt.getDouble("hasteAllSeeing");
-			allseeingArmor = nbt.getDouble("allseeingArmor");
-			hallucinateX = nbt.getDouble("hallucinateX");
-			hallucinateY = nbt.getDouble("hallucinateY");
-			hallucinateZ = nbt.getDouble("hallucinateZ");
-			soundHallX = nbt.getDouble("soundHallX");
-			soundHallY = nbt.getDouble("soundHallY");
-			soundHallZ = nbt.getDouble("soundHallZ");
-			hallucinateHurt = nbt.getDouble("hallucinateHurt");
-			nestAmbience = nbt.getDouble("nestAmbience");
-			InSurvival = nbt.getBoolean("InSurvival");
-			darknessDamageBuildUp = nbt.getDouble("darknessDamageBuildUp");
-			motherCallOutCooldown = nbt.getDouble("motherCallOutCooldown");
-			motherlyCallCooldown = nbt.getDouble("motherlyCallCooldown");
-			FallSound = nbt.getBoolean("FallSound");
-			healthBoostLevel = nbt.getDouble("healthBoostLevel");
-			healthMask = nbt.getDouble("healthMask");
-			grimRottenArmorAttack = nbt.getBoolean("grimRottenArmorAttack");
-			SendToHell = nbt.getBoolean("SendToHell");
-			naturalTeleport = nbt.getBoolean("naturalTeleport");
-			weaverBoots = nbt.getDouble("weaverBoots");
-			randomStalkerValue = nbt.getDouble("randomStalkerValue");
-			stalkingCount = nbt.getDouble("stalkingCount");
-			stalkWatcherCount = nbt.getDouble("stalkWatcherCount");
-			noGravity = nbt.getBoolean("noGravity");
-			heartbeatIndicator = nbt.getDouble("heartbeatIndicator");
-			hasSoulOrb = nbt.getBoolean("hasSoulOrb");
-			teleportToVoid = nbt.getBoolean("teleportToVoid");
-			weaverRobeCooldown = nbt.getDouble("weaverRobeCooldown");
-			gatheringAmbience = nbt.getDouble("gatheringAmbience");
-			attackedByAnimosity = nbt.getBoolean("attackedByAnimosity");
-			eyekinCooldown = nbt.getDouble("eyekinCooldown");
-			eyekinDash = nbt.getDouble("eyekinDash");
-			wingFlapSound = nbt.getDouble("wingFlapSound");
-			hookX = nbt.getDouble("hookX");
-			hookY = nbt.getDouble("hookY");
-			hookZ = nbt.getDouble("hookZ");
-			hooked = nbt.getBoolean("hooked");
-			voidriumTeleport = nbt.getDouble("voidriumTeleport");
-			noEscape = nbt.getBoolean("noEscape");
-			hiveCallX = nbt.getDouble("hiveCallX");
-			hiveCallY = nbt.getDouble("hiveCallY");
-			hiveCallZ = nbt.getDouble("hiveCallZ");
-			hunterArmorAbility = nbt.getDouble("hunterArmorAbility");
-			mistedRemnantAmbience = nbt.getDouble("mistedRemnantAmbience");
-			saveArmor3 = ItemStack.parseOptional(lookupProvider, nbt.getCompound("saveArmor3"));
-			saveArmor2 = ItemStack.parseOptional(lookupProvider, nbt.getCompound("saveArmor2"));
-			saveArmor1 = ItemStack.parseOptional(lookupProvider, nbt.getCompound("saveArmor1"));
-			saveArmor0 = ItemStack.parseOptional(lookupProvider, nbt.getCompound("saveArmor0"));
-			saveArmorPoint = nbt.getDouble("saveArmorPoint");
-			gaol_ambience = nbt.getDouble("gaol_ambience");
-			noHit = nbt.getBoolean("noHit");
-			MusicTick = nbt.getDouble("MusicTick");
-			MusicWait = nbt.getDouble("MusicWait");
-			MusicLock = nbt.getBoolean("MusicLock");
-			MusicReplace = nbt.getBoolean("MusicReplace");
-			MusicPlay = nbt.getString("MusicPlay");
-			sendToPurgatory = nbt.getBoolean("sendToPurgatory");
-			playMusicPit = nbt.getBoolean("playMusicPit");
-			pitShowText = nbt.getBoolean("pitShowText");
-			remnantsFog = nbt.getDouble("remnantsFog");
-			remnantsColor = nbt.getDouble("remnantsColor");
-			receivedWikiBook = nbt.getBoolean("receivedWikiBook");
-			saveArmorToughness = nbt.getDouble("saveArmorToughness");
-			saveKnockbackResistance = nbt.getDouble("saveKnockbackResistance");
-			saveStepHeight = nbt.getDouble("saveStepHeight");
-			parasitizedType = nbt.getDouble("parasitizedType");
-			vultureArmorAbility = nbt.getDouble("vultureArmorAbility");
-			gunslingerArmorAbility = nbt.getDouble("gunslingerArmorAbility");
-			sentientArmorAbility = nbt.getDouble("sentientArmorAbility");
+			StalkerCount = nbt.getDoubleOr("StalkerCount", 0);
+			ForgottenValleyAmbientSound = nbt.getDoubleOr("ForgottenValleyAmbientSound", 0);
+			StalkerSpawn = nbt.getBooleanOr("StalkerSpawn", false);
+			StalkerCountFinish = nbt.getBooleanOr("StalkerCountFinish", false);
+			playerX = nbt.getDoubleOr("playerX", 0);
+			playerY = nbt.getDoubleOr("playerY", 0);
+			playerZ = nbt.getDoubleOr("playerZ", 0);
+			RottenArmorAbility = nbt.getDoubleOr("RottenArmorAbility", 0);
+			hallucinate = nbt.getDoubleOr("hallucinate", 0);
+			StalkerStalkCount = nbt.getDoubleOr("StalkerStalkCount", 0);
+			VoidCaveAmbientSound = nbt.getDoubleOr("VoidCaveAmbientSound", 0);
+			VoidCloakAbility = nbt.getDoubleOr("VoidCloakAbility", 0);
+			InCreative = nbt.getBooleanOr("InCreative", false);
+			InAdventure = nbt.getBooleanOr("InAdventure", false);
+			cave_tremble = nbt.getDoubleOr("cave_tremble", 0);
+			darkness_absorption = nbt.getDoubleOr("darkness_absorption", 0);
+			seek_light = nbt.getBooleanOr("seek_light", false);
+			playerCallOfTheVoid = nbt.getBooleanOr("playerCallOfTheVoid", false);
+			hallucinating = nbt.getBooleanOr("hallucinating", false);
+			deathgrounds_ambience = nbt.getDoubleOr("deathgrounds_ambience", 0);
+			flesh_roar = nbt.getDoubleOr("flesh_roar", 0);
+			armorToggle = nbt.getBooleanOr("armorToggle", false);
+			monolithAmbience = nbt.getDoubleOr("monolithAmbience", 0);
+			hasteAllSeeing = nbt.getDoubleOr("hasteAllSeeing", 0);
+			allseeingArmor = nbt.getDoubleOr("allseeingArmor", 0);
+			hallucinateX = nbt.getDoubleOr("hallucinateX", 0);
+			hallucinateY = nbt.getDoubleOr("hallucinateY", 0);
+			hallucinateZ = nbt.getDoubleOr("hallucinateZ", 0);
+			soundHallX = nbt.getDoubleOr("soundHallX", 0);
+			soundHallY = nbt.getDoubleOr("soundHallY", 0);
+			soundHallZ = nbt.getDoubleOr("soundHallZ", 0);
+			hallucinateHurt = nbt.getDoubleOr("hallucinateHurt", 0);
+			nestAmbience = nbt.getDoubleOr("nestAmbience", 0);
+			InSurvival = nbt.getBooleanOr("InSurvival", false);
+			darknessDamageBuildUp = nbt.getDoubleOr("darknessDamageBuildUp", 0);
+			motherCallOutCooldown = nbt.getDoubleOr("motherCallOutCooldown", 0);
+			motherlyCallCooldown = nbt.getDoubleOr("motherlyCallCooldown", 0);
+			FallSound = nbt.getBooleanOr("FallSound", false);
+			healthBoostLevel = nbt.getDoubleOr("healthBoostLevel", 0);
+			healthMask = nbt.getDoubleOr("healthMask", 0);
+			grimRottenArmorAttack = nbt.getBooleanOr("grimRottenArmorAttack", false);
+			SendToHell = nbt.getBooleanOr("SendToHell", false);
+			naturalTeleport = nbt.getBooleanOr("naturalTeleport", false);
+			weaverBoots = nbt.getDoubleOr("weaverBoots", 0);
+			randomStalkerValue = nbt.getDoubleOr("randomStalkerValue", 0);
+			stalkingCount = nbt.getDoubleOr("stalkingCount", 0);
+			stalkWatcherCount = nbt.getDoubleOr("stalkWatcherCount", 0);
+			noGravity = nbt.getBooleanOr("noGravity", false);
+			heartbeatIndicator = nbt.getDoubleOr("heartbeatIndicator", 0);
+			hasSoulOrb = nbt.getBooleanOr("hasSoulOrb", false);
+			teleportToVoid = nbt.getBooleanOr("teleportToVoid", false);
+			weaverRobeCooldown = nbt.getDoubleOr("weaverRobeCooldown", 0);
+			gatheringAmbience = nbt.getDoubleOr("gatheringAmbience", 0);
+			attackedByAnimosity = nbt.getBooleanOr("attackedByAnimosity", false);
+			eyekinCooldown = nbt.getDoubleOr("eyekinCooldown", 0);
+			eyekinDash = nbt.getDoubleOr("eyekinDash", 0);
+			wingFlapSound = nbt.getDoubleOr("wingFlapSound", 0);
+			hookX = nbt.getDoubleOr("hookX", 0);
+			hookY = nbt.getDoubleOr("hookY", 0);
+			hookZ = nbt.getDoubleOr("hookZ", 0);
+			hooked = nbt.getBooleanOr("hooked", false);
+			voidriumTeleport = nbt.getDoubleOr("voidriumTeleport", 0);
+			noEscape = nbt.getBooleanOr("noEscape", false);
+			hiveCallX = nbt.getDoubleOr("hiveCallX", 0);
+			hiveCallY = nbt.getDoubleOr("hiveCallY", 0);
+			hiveCallZ = nbt.getDoubleOr("hiveCallZ", 0);
+			hunterArmorAbility = nbt.getDoubleOr("hunterArmorAbility", 0);
+			mistedRemnantAmbience = nbt.getDoubleOr("mistedRemnantAmbience", 0);
+			saveArmor3 = nbt.get("saveArmor3") == null ? ItemStack.EMPTY : ItemStack.OPTIONAL_CODEC.parse(lookupProvider.createSerializationContext(NbtOps.INSTANCE), nbt.get("saveArmor3")).result().orElse(ItemStack.EMPTY);
+			saveArmor2 = nbt.get("saveArmor2") == null ? ItemStack.EMPTY : ItemStack.OPTIONAL_CODEC.parse(lookupProvider.createSerializationContext(NbtOps.INSTANCE), nbt.get("saveArmor2")).result().orElse(ItemStack.EMPTY);
+			saveArmor1 = nbt.get("saveArmor1") == null ? ItemStack.EMPTY : ItemStack.OPTIONAL_CODEC.parse(lookupProvider.createSerializationContext(NbtOps.INSTANCE), nbt.get("saveArmor1")).result().orElse(ItemStack.EMPTY);
+			saveArmor0 = nbt.get("saveArmor0") == null ? ItemStack.EMPTY : ItemStack.OPTIONAL_CODEC.parse(lookupProvider.createSerializationContext(NbtOps.INSTANCE), nbt.get("saveArmor0")).result().orElse(ItemStack.EMPTY);
+			saveArmorPoint = nbt.getDoubleOr("saveArmorPoint", 0);
+			gaol_ambience = nbt.getDoubleOr("gaol_ambience", 0);
+			noHit = nbt.getBooleanOr("noHit", false);
+			MusicTick = nbt.getDoubleOr("MusicTick", 0);
+			MusicWait = nbt.getDoubleOr("MusicWait", 0);
+			MusicLock = nbt.getBooleanOr("MusicLock", false);
+			MusicReplace = nbt.getBooleanOr("MusicReplace", false);
+			MusicPlay = nbt.getStringOr("MusicPlay", "");
+			sendToPurgatory = nbt.getBooleanOr("sendToPurgatory", false);
+			playMusicPit = nbt.getBooleanOr("playMusicPit", false);
+			pitShowText = nbt.getBooleanOr("pitShowText", false);
+			remnantsFog = nbt.getDoubleOr("remnantsFog", 0);
+			remnantsColor = nbt.getDoubleOr("remnantsColor", 0);
+			receivedWikiBook = nbt.getBooleanOr("receivedWikiBook", false);
+			saveArmorToughness = nbt.getDoubleOr("saveArmorToughness", 0);
+			saveKnockbackResistance = nbt.getDoubleOr("saveKnockbackResistance", 0);
+			saveStepHeight = nbt.getDoubleOr("saveStepHeight", 0);
+			parasitizedType = nbt.getDoubleOr("parasitizedType", 0);
+			vultureArmorAbility = nbt.getDoubleOr("vultureArmorAbility", 0);
+			gunslingerArmorAbility = nbt.getDoubleOr("gunslingerArmorAbility", 0);
+			sentientArmorAbility = nbt.getDoubleOr("sentientArmorAbility", 0);
 		}
 
 		public void syncPlayerVariables(Entity entity) {
@@ -643,7 +657,7 @@ public class TheDeepVoidModVariables {
 	}
 
 	public record PlayerVariablesSyncMessage(PlayerVariables data) implements CustomPacketPayload {
-		public static final Type<PlayerVariablesSyncMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "player_variables_sync"));
+		public static final Type<PlayerVariablesSyncMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, "player_variables_sync"));
 		public static final StreamCodec<RegistryFriendlyByteBuf, PlayerVariablesSyncMessage> STREAM_CODEC = StreamCodec
 				.of((RegistryFriendlyByteBuf buffer, PlayerVariablesSyncMessage message) -> buffer.writeNbt(message.data().serializeNBT(buffer.registryAccess())), (RegistryFriendlyByteBuf buffer) -> {
 					PlayerVariablesSyncMessage message = new PlayerVariablesSyncMessage(new PlayerVariables());

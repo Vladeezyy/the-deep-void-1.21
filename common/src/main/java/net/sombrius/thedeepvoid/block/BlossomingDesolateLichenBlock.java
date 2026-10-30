@@ -22,17 +22,17 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 
 public class BlossomingDesolateLichenBlock extends FlowerBlock {
 	public BlossomingDesolateLichenBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 100, BlockBehaviour.Properties.of().mapColor(MapColor.WARPED_STEM).sound(SoundType.ROOTS).instabreak().noCollission().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 100, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.WARPED_STEM).sound(SoundType.ROOTS).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 offset = state.getOffset(world, pos);
+		Vec3 offset = state.getOffset(pos);
 		return Shapes.or(box(0, 0, 0, 16, 1, 16), box(9, 1, 10, 12, 4, 13), box(6, 1, 2, 9, 4, 5), box(11, 1, 8, 13, 3, 10), box(2, 1, 6, 4, 3, 8)).move(offset.x, offset.y, offset.z);
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(TheDeepVoidModBlocks.DESOLATE_LICHEN.get());
 	}
 

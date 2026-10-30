@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.AmbrosialCureFinishUsingProcedure;
 
 public class AmbrosialCureItem extends Item {
 	public AmbrosialCureItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(0.2f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(0.2f).alwaysEdible().build()));
 	}
 
 	@Override

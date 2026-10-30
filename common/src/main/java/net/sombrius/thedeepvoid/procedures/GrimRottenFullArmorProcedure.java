@@ -30,10 +30,10 @@ public class GrimRottenFullArmorProcedure {
 				}
 				if (TheDeepVoidModVariables.of(entity).darkness_absorption >= 100) {
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5, 0));
+						_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 5, 0));
 				} else if (TheDeepVoidModVariables.of(entity).darkness_absorption >= 200) {
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5, 1));
+						_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 5, 1));
 				}
 			} else {
 				{

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -29,10 +29,10 @@ public class AmalgamOnEntityTickUpdateProcedure {
 				_datEntSetI.getEntityData().set(AmalgamEntity.DATA_roar, 0);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_ambient")), SoundSource.HOSTILE, 4,
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_ambient")), SoundSource.HOSTILE, 4,
 							(float) Mth.nextDouble(RandomSource.create(), 0.8, 1));
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_ambient")), SoundSource.HOSTILE, 4,
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_ambient")), SoundSource.HOSTILE, 4,
 							(float) Mth.nextDouble(RandomSource.create(), 0.8, 1), false);
 				}
 			}
@@ -44,13 +44,13 @@ public class AmalgamOnEntityTickUpdateProcedure {
 			if ((entity instanceof AmalgamEntity _datEntI ? _datEntI.getEntityData().get(AmalgamEntity.DATA_step) : 0) >= 5) {
 				if (entity instanceof AmalgamEntity _datEntSetI)
 					_datEntSetI.getEntityData().set(AmalgamEntity.DATA_step, 0);
-				if (!(entity instanceof LivingEntity _livEnt13 && _livEnt13.hasEffect(MobEffects.MOVEMENT_SLOWDOWN))) {
+				if (!(entity instanceof LivingEntity _livEnt13 && _livEnt13.hasEffect(MobEffects.SLOWNESS))) {
 					if (!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 30, 30, 30), e -> true).isEmpty()) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 4, 1);
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 4, 1);
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 4, 1, false);
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 4, 1, false);
 							}
 						}
 						{

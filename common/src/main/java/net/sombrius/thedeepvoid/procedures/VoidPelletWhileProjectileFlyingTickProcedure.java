@@ -15,7 +15,7 @@ public class VoidPelletWhileProjectileFlyingTickProcedure {
 		immediatesourceentity.setNoGravity(true);
 		if (world instanceof ServerLevel _level)
 			_level.sendParticles((SimpleParticleType) (TheDeepVoidModParticleTypes.DARK_TEAR.get()), x, y, z, 2, 0.01, (-0.01), 0.01, 0.1);
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getBoolean("shot") == false) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getBooleanOr("shot", false) == false) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).putBoolean("shot", true);
 			if (world instanceof ServerLevel _level)
 				_level.sendParticles(ParticleTypes.SQUID_INK, x, y, z, 5, 0.1, (-0.1), 0.1, 0.1);

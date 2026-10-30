@@ -8,7 +8,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -33,11 +33,11 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
 
 @EventBusSubscriber
 public class BoneWalkerOnBootsProcedure {
-	private static final ResourceLocation ID_17F680A8_8450_45E4_9EC0_26712E00F05C = ResourceLocation.fromNamespaceAndPath("the_deep_void", "17f680a8-8450-45e4-9ec0-26712e00f05c");
-	private static final ResourceLocation ID_9618D7A9_FB3B_497D_8FAA_4E8AEE6459AE = ResourceLocation.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae");
+	private static final Identifier ID_17F680A8_8450_45E4_9EC0_26712E00F05C = Identifier.fromNamespaceAndPath("the_deep_void", "17f680a8-8450-45e4-9ec0-26712e00f05c");
+	private static final Identifier ID_9618D7A9_FB3B_497D_8FAA_4E8AEE6459AE = Identifier.fromNamespaceAndPath("the_deep_void", "9618d7a9-fb3b-497d-8faa-4e8aee6459ae");
 
-	private static final TagKey<Block> BLOCK_TAG_FLESH_BLOCKS = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:flesh_blocks"));
-	private static final TagKey<Block> BLOCK_TAG_NATURAL_BONE_BLOCK = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:natural_bone_block"));
+	private static final TagKey<Block> BLOCK_TAG_FLESH_BLOCKS = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:flesh_blocks"));
+	private static final TagKey<Block> BLOCK_TAG_NATURAL_BONE_BLOCK = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:natural_bone_block"));
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -82,8 +82,8 @@ public class BoneWalkerOnBootsProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
@@ -92,14 +92,14 @@ public class BoneWalkerOnBootsProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 					}
 					return false;
 				}
 			}.checkGamemode(entity))) {
 				TheDeepVoidMod.queueServerWork(5, () -> {
-					if (entity.getX() != net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("boneWalkerPlayerX") || entity.getZ() != net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("boneWalkerPlayerZ")) {
+					if (entity.getX() != net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("boneWalkerPlayerX", 0) || entity.getZ() != net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("boneWalkerPlayerZ", 0)) {
 						{
 							ItemStack _ist = (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY);
 							PortUtil.hurtAndBreak(_ist, 1, null);

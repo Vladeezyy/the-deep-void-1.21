@@ -13,9 +13,9 @@ public class AnimosityRightclickedProcedure {
 			return;
 		ItemStack data = ItemStack.EMPTY;
 		if (entity instanceof Player _player)
-			_player.getCooldowns().addCooldown(TheDeepVoidModItems.ANIMOSITY.get(), 40);
+			_player.getCooldowns().addCooldown(new ItemStack(TheDeepVoidModItems.ANIMOSITY.get()), 40);
 		if (entity instanceof Player _player)
-			_player.getCooldowns().addCooldown(TheDeepVoidModItems.ANIMOSITY_HIDDEN.get(), 40);
+			_player.getCooldowns().addCooldown(new ItemStack(TheDeepVoidModItems.ANIMOSITY_HIDDEN.get()), 40);
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 			data = (itemstack.copy());
 			if (entity instanceof LivingEntity _entity) {

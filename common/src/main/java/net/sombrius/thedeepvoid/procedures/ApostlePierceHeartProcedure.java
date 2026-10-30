@@ -7,7 +7,7 @@ import java.util.List;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -41,13 +41,13 @@ public class ApostlePierceHeartProcedure {
 		}
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:apostle_laugh")), SoundSource.HOSTILE, 4, (float) 0.8);
+				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:apostle_laugh")), SoundSource.HOSTILE, 4, (float) 0.8);
 			} else {
-				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:apostle_laugh")), SoundSource.HOSTILE, 4, (float) 0.8, false);
+				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:apostle_laugh")), SoundSource.HOSTILE, 4, (float) 0.8, false);
 			}
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 99, false, false));
 		TheDeepVoidMod.queueServerWork(18, () -> {
 			if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 				entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() + 1.6),
@@ -61,9 +61,9 @@ public class ApostlePierceHeartProcedure {
 									: 1.15))));
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.6);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.6);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.6, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.6, false);
 				}
 			}
 		});
@@ -75,7 +75,7 @@ public class ApostlePierceHeartProcedure {
 					if (entityiterator instanceof Player) {
 						if ((entityiterator instanceof LivingEntity _entUseItem32 ? _entUseItem32.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 							if (entityiterator instanceof Player _player)
-								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem34 ? _entUseItem34.getUseItem() : ItemStack.EMPTY).getItem(), 100);
+								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem34 ? _entUseItem34.getUseItem() : ItemStack.EMPTY), 100);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem36 ? _entUseItem36.getUseItem() : ItemStack.EMPTY);
 								PortUtil.hurtAndBreak(_ist, 15, null);
@@ -84,10 +84,10 @@ public class ApostlePierceHeartProcedure {
 								_entity.stopUsingItem();
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")), SoundSource.PLAYERS,
+									_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.break")), SoundSource.PLAYERS,
 											(float) 0.4, 1);
 								} else {
-									_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")), SoundSource.PLAYERS, (float) 0.4, 1,
+									_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.break")), SoundSource.PLAYERS, (float) 0.4, 1,
 											false);
 								}
 							}
@@ -114,7 +114,7 @@ public class ApostlePierceHeartProcedure {
 				if (entity instanceof ApostleBossEntity _datEntSetL)
 					_datEntSetL.getEntityData().set(ApostleBossEntity.DATA_doingAttack, false);
 				if (entity instanceof LivingEntity _entity)
-					_entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+					_entity.removeEffect(MobEffects.SLOWNESS);
 			}
 		});
 		TheDeepVoidMod.queueServerWork(55, () -> {
@@ -123,11 +123,11 @@ public class ApostlePierceHeartProcedure {
 					final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(16 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getBoolean("piercedByApostle") == true) {
+						if (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getBooleanOr("piercedByApostle", false) == true) {
 							net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putBoolean("piercedByApostle", false);
 							entityiterator.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * 1.2), 0.4, (Math.cos(Math.toRadians(entity.getYRot())) * 1.2)));
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));
+								_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 1));
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 								_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0));
 						}

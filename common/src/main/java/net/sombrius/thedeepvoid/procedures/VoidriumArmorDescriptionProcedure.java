@@ -33,7 +33,7 @@ public class VoidriumArmorDescriptionProcedure {
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_HELMET.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_HELMET.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.voidrium.when_darkness").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.voidrium_helmet.in_darkness").getString())));
 			} else {
@@ -42,7 +42,7 @@ public class VoidriumArmorDescriptionProcedure {
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_CHESTPLATE.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.voidrium_chestplate.when_half_health").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.voidrium_chestplate.half_health").getString())));
 			} else {
@@ -51,7 +51,7 @@ public class VoidriumArmorDescriptionProcedure {
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_LEGGINGS.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.voidrium.when_darkness").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.voidrium_leggings.in_darkness").getString())));
 			} else {
@@ -60,7 +60,7 @@ public class VoidriumArmorDescriptionProcedure {
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_BOOTS.get() || itemstack.getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.when_worn").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.voidrium_boots.worn").getString())));
 			} else {
@@ -73,7 +73,7 @@ public class VoidriumArmorDescriptionProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOIDRIUM_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.voidrium.when_darkness").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.voidrium.in_darkness").getString())));
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.key_press").getString())));
@@ -82,7 +82,7 @@ public class VoidriumArmorDescriptionProcedure {
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.voidrium.attacked").getString())));
 				}
 			} else {
-				if (Screen.hasAltDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasAltDown()) {
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.voidrium.when_darkness").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.voidrium.in_darkness").getString())));
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.key_press").getString())));
@@ -100,7 +100,7 @@ public class VoidriumArmorDescriptionProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SACRED_VOIDRIUM_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.voidrium.when_darkness").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.soul_voidrium.in_darkness").getString())));
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.key_press").getString())));
@@ -110,7 +110,7 @@ public class VoidriumArmorDescriptionProcedure {
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.soul_voidrium.attacked").getString())));
 				}
 			} else {
-				if (Screen.hasAltDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasAltDown()) {
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.voidrium.when_darkness").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.soul_voidrium.in_darkness").getString())));
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.key_press").getString())));

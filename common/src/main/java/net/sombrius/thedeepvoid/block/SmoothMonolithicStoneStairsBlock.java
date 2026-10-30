@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class SmoothMonolithicStoneStairsBlock extends StairBlock {
 	public SmoothMonolithicStoneStairsBlock() {
-		super(Blocks.AIR.defaultBlockState(), BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(5f, 8f).requiresCorrectToolForDrops().dynamicShape());
+		super(Blocks.AIR.defaultBlockState(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(5f, 8f).requiresCorrectToolForDrops().dynamicShape());
 	}
 
 	@Override

@@ -1,11 +1,9 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import com.mojang.blaze3d.shaders.FogShape;
 import java.util.Comparator;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
@@ -29,7 +27,7 @@ public class HivemindStomachFogProcedure {
 		}
 	}
 
-	public static void setShape(FogShape shape) {
+	public static void setShape(ViewportEvent.FogShape shape) {
 		provider.setFogShape(shape);
 		if (!provider.isCanceled()) {
 			provider.setCanceled(true);
@@ -39,9 +37,9 @@ public class HivemindStomachFogProcedure {
 	@SubscribeEvent
 	public static void renderFog(ViewportEvent.RenderFog event) {
 		provider = event;
-		if (provider.getMode() == FogRenderer.FogMode.FOG_TERRAIN) {
+		if (provider.getMode() == ViewportEvent.FogMode.FOG_TERRAIN) {
 			ClientLevel level = Minecraft.getInstance().level;
-			Entity entity = provider.getCamera().getEntity();
+			Entity entity = provider.getCamera().entity();
 			if (level != null && entity != null) {
 				Vec3 pos = entity.getPosition((float) provider.getPartialTick());
 				execute(provider, level, entity);
@@ -62,7 +60,7 @@ public class HivemindStomachFogProcedure {
 					return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 				}
 			}.compareDistOf((entity.getX()), (entity.getY() + 1), (entity.getZ()))).findFirst().orElse(null)) instanceof MisanthropicHivemindEntity _datEntL8 && _datEntL8.getEntityData().get(MisanthropicHivemindEntity.DATA_digesting)) == true) {
-				setShape(FogShape.SPHERE);
+				setShape(ViewportEvent.FogShape.SPHERE);
 				setDistance(0, 4);
 			}
 		}

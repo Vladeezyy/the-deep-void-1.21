@@ -11,7 +11,7 @@ public class RotTonguePlayerFinishesUsingItemProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof Player _player)
-			_player.getCooldowns().addCooldown(itemstack.getItem(), 20);
+			_player.getCooldowns().addCooldown(itemstack, 20);
 		{
 			final String _tagName = "block";
 			final double _tagValue = 0;

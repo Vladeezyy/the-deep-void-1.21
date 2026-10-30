@@ -15,7 +15,7 @@ import net.sombrius.thedeepvoid.procedures.PlaceSepulcherCommandExecutedProcedur
 public class PlaceSepulcherCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("placesepulcher").requires(s -> s.hasPermission(4)).executes(arguments -> {
+		event.getDispatcher().register(Commands.literal("placesepulcher").requires(Commands.hasPermission(Commands.LEVEL_OWNERS)).executes(arguments -> {
 			Level world = arguments.getSource().getLevel();
 			double x = arguments.getSource().getPosition().x();
 			double y = arguments.getSource().getPosition().y();

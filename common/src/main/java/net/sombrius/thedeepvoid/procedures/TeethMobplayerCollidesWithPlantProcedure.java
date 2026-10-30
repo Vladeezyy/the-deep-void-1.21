@@ -1,7 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -17,8 +17,8 @@ public class TeethMobplayerCollidesWithPlantProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof LivingEntity && !((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.BLOODY_RIB_CAGE_CHESTPLATE.get())
-				&& !entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:fleshkin"))) && (entity instanceof LivingEntity _livEnt ? _livEnt.hurtTime : 0) <= 0) {
-			entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC)), 2);
+				&& !entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:fleshkin"))) && (entity instanceof LivingEntity _livEnt ? _livEnt.hurtTime : 0) <= 0) {
+			entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)), 2);
 		}
 	}
 }

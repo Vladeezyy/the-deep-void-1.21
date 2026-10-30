@@ -13,7 +13,7 @@ public class ManiacEntityIsHurtProcedure {
 			return;
 		if (sourceentity instanceof DeathVultureEntity || sourceentity instanceof FoolEaterEntity) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 80, 39, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 80, 39, false, false));
 		}
 	}
 }

@@ -41,7 +41,7 @@ public class BlackFlyOnEntityTickUpdateProcedure {
 				((BlackFlyEntity) entity).setAnimation("animation.voidFly_land");
 			}
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 99, false, false));
 			if ((entity instanceof BlackFlyEntity _datEntL43 && _datEntL43.getEntityData().get(BlackFlyEntity.DATA_noAgro)) == false) {
 				if (entity instanceof BlackFlyEntity _datEntSetL)
 					_datEntSetL.getEntityData().set(BlackFlyEntity.DATA_noAgro, true);

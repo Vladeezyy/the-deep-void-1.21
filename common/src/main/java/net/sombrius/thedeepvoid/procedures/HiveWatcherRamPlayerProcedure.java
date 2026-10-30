@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -28,20 +28,20 @@ public class HiveWatcherRamPlayerProcedure {
 				animatable.setTexture("hivewatcher");
 		}
 		net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("speedBuildUpTarget",
-				(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("speedBuildUpTarget") + ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 1.4 ? 0.025 : 0.015)));
-		net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("stopRamming", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("stopRamming") + 1));
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("playerIsIn") == 1) {
-			entity.setDeltaMovement(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("speedBuildUpTarget")), 0, 0));
-		} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("playerIsIn") == 2) {
-			entity.setDeltaMovement(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("speedBuildUpTarget") * (-1)), 0, 0));
-		} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("playerIsIn") == 3) {
-			entity.setDeltaMovement(new Vec3(0, 0, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("speedBuildUpTarget"))));
-		} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("playerIsIn") == 4) {
-			entity.setDeltaMovement(new Vec3(0, 0, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("speedBuildUpTarget") * (-1))));
+				(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("speedBuildUpTarget", 0) + ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 1.4 ? 0.025 : 0.015)));
+		net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("stopRamming", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("stopRamming", 0) + 1));
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("playerIsIn", 0) == 1) {
+			entity.setDeltaMovement(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("speedBuildUpTarget", 0)), 0, 0));
+		} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("playerIsIn", 0) == 2) {
+			entity.setDeltaMovement(new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("speedBuildUpTarget", 0) * (-1)), 0, 0));
+		} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("playerIsIn", 0) == 3) {
+			entity.setDeltaMovement(new Vec3(0, 0, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("speedBuildUpTarget", 0))));
+		} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("playerIsIn", 0) == 4) {
+			entity.setDeltaMovement(new Vec3(0, 0, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("speedBuildUpTarget", 0) * (-1))));
 		}
 		if ((world.getBlockFloorHeight(BlockPos.containing(entity.getX() + 3, entity.getY(), entity.getZ())) > 0 || world.getBlockFloorHeight(BlockPos.containing(entity.getX() - 3, entity.getY(), entity.getZ())) > 0
 				|| world.getBlockFloorHeight(BlockPos.containing(entity.getX(), entity.getY(), entity.getZ() + 3)) > 0 || world.getBlockFloorHeight(BlockPos.containing(entity.getX(), entity.getY(), entity.getZ() - 3)) > 0)
-				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("speedBuildUpTarget") >= 0.5 || net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("stopRamming") >= 60) {
+				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("speedBuildUpTarget", 0) >= 0.5 || net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("stopRamming", 0) >= 60) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("foundPlayer", false);
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("playerIsIn", 0);
 			if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 2) {
@@ -55,9 +55,9 @@ public class HiveWatcherRamPlayerProcedure {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("stopRamming", 0);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, (float) 0.9);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, (float) 0.9);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, (float) 0.9, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, (float) 0.9, false);
 				}
 			}
 			{

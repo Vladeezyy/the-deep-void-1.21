@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.AABB;
@@ -18,8 +18,8 @@ public class WatcherOnOnTickUpdateProcedure {
 		if ((new Object() {
 			public Direction getDirection(BlockState _bs) {
 				Property<?> _prop = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_prop instanceof DirectionProperty _dp)
-					return _bs.getValue(_dp);
+				if (_prop instanceof EnumProperty _dp && _dp.getValueClass() == Direction.class)
+					return (Direction) _bs.getValue(_dp);
 				_prop = _bs.getBlock().getStateDefinition().getProperty("axis");
 				return _prop instanceof EnumProperty _ep && _ep.getPossibleValues().toArray()[0] instanceof Direction.Axis ? Direction.fromAxisAndDirection((Direction.Axis) _bs.getValue(_ep), Direction.AxisDirection.POSITIVE) : Direction.NORTH;
 			}
@@ -30,7 +30,7 @@ public class WatcherOnOnTickUpdateProcedure {
 					public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 						BlockEntity blockEntity = world.getBlockEntity(pos);
 						if (blockEntity != null)
-							return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+							return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 						return false;
 					}
 				}.getValue(world, BlockPos.containing(x, y, z), "sees")) == false) {
@@ -50,7 +50,7 @@ public class WatcherOnOnTickUpdateProcedure {
 				public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 					BlockEntity blockEntity = world.getBlockEntity(pos);
 					if (blockEntity != null)
-						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 					return false;
 				}
 			}.getValue(world, BlockPos.containing(x, y, z), "sees")) == true) {
@@ -70,8 +70,8 @@ public class WatcherOnOnTickUpdateProcedure {
 		if ((new Object() {
 			public Direction getDirection(BlockState _bs) {
 				Property<?> _prop = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_prop instanceof DirectionProperty _dp)
-					return _bs.getValue(_dp);
+				if (_prop instanceof EnumProperty _dp && _dp.getValueClass() == Direction.class)
+					return (Direction) _bs.getValue(_dp);
 				_prop = _bs.getBlock().getStateDefinition().getProperty("axis");
 				return _prop instanceof EnumProperty _ep && _ep.getPossibleValues().toArray()[0] instanceof Direction.Axis ? Direction.fromAxisAndDirection((Direction.Axis) _bs.getValue(_ep), Direction.AxisDirection.POSITIVE) : Direction.NORTH;
 			}
@@ -82,7 +82,7 @@ public class WatcherOnOnTickUpdateProcedure {
 					public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 						BlockEntity blockEntity = world.getBlockEntity(pos);
 						if (blockEntity != null)
-							return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+							return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 						return false;
 					}
 				}.getValue(world, BlockPos.containing(x, y, z), "sees")) == false) {
@@ -102,7 +102,7 @@ public class WatcherOnOnTickUpdateProcedure {
 				public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 					BlockEntity blockEntity = world.getBlockEntity(pos);
 					if (blockEntity != null)
-						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 					return false;
 				}
 			}.getValue(world, BlockPos.containing(x, y, z), "sees")) == true) {
@@ -122,8 +122,8 @@ public class WatcherOnOnTickUpdateProcedure {
 		if ((new Object() {
 			public Direction getDirection(BlockState _bs) {
 				Property<?> _prop = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_prop instanceof DirectionProperty _dp)
-					return _bs.getValue(_dp);
+				if (_prop instanceof EnumProperty _dp && _dp.getValueClass() == Direction.class)
+					return (Direction) _bs.getValue(_dp);
 				_prop = _bs.getBlock().getStateDefinition().getProperty("axis");
 				return _prop instanceof EnumProperty _ep && _ep.getPossibleValues().toArray()[0] instanceof Direction.Axis ? Direction.fromAxisAndDirection((Direction.Axis) _bs.getValue(_ep), Direction.AxisDirection.POSITIVE) : Direction.NORTH;
 			}
@@ -134,7 +134,7 @@ public class WatcherOnOnTickUpdateProcedure {
 					public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 						BlockEntity blockEntity = world.getBlockEntity(pos);
 						if (blockEntity != null)
-							return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+							return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 						return false;
 					}
 				}.getValue(world, BlockPos.containing(x, y, z), "sees")) == false) {
@@ -154,7 +154,7 @@ public class WatcherOnOnTickUpdateProcedure {
 				public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 					BlockEntity blockEntity = world.getBlockEntity(pos);
 					if (blockEntity != null)
-						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 					return false;
 				}
 			}.getValue(world, BlockPos.containing(x, y, z), "sees")) == true) {
@@ -174,8 +174,8 @@ public class WatcherOnOnTickUpdateProcedure {
 		if ((new Object() {
 			public Direction getDirection(BlockState _bs) {
 				Property<?> _prop = _bs.getBlock().getStateDefinition().getProperty("facing");
-				if (_prop instanceof DirectionProperty _dp)
-					return _bs.getValue(_dp);
+				if (_prop instanceof EnumProperty _dp && _dp.getValueClass() == Direction.class)
+					return (Direction) _bs.getValue(_dp);
 				_prop = _bs.getBlock().getStateDefinition().getProperty("axis");
 				return _prop instanceof EnumProperty _ep && _ep.getPossibleValues().toArray()[0] instanceof Direction.Axis ? Direction.fromAxisAndDirection((Direction.Axis) _bs.getValue(_ep), Direction.AxisDirection.POSITIVE) : Direction.NORTH;
 			}
@@ -186,7 +186,7 @@ public class WatcherOnOnTickUpdateProcedure {
 					public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 						BlockEntity blockEntity = world.getBlockEntity(pos);
 						if (blockEntity != null)
-							return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+							return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 						return false;
 					}
 				}.getValue(world, BlockPos.containing(x, y, z), "sees")) == false) {
@@ -206,7 +206,7 @@ public class WatcherOnOnTickUpdateProcedure {
 				public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 					BlockEntity blockEntity = world.getBlockEntity(pos);
 					if (blockEntity != null)
-						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 					return false;
 				}
 			}.getValue(world, BlockPos.containing(x, y, z), "sees")) == true) {

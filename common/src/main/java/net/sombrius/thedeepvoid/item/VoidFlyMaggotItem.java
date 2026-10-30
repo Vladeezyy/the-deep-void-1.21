@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.VoidFlyMaggotPlayerFinishesUsingItemP
 
 public class VoidFlyMaggotItem extends Item {
 	public VoidFlyMaggotItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(0.5f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(0.5f).alwaysEdible().build()));
 	}
 
 	@Override

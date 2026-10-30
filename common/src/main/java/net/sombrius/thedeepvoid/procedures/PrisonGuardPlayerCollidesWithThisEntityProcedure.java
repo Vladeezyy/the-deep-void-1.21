@@ -16,13 +16,13 @@ public class PrisonGuardPlayerCollidesWithThisEntityProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
 			}.checkGamemode(sourceentity) && sourceentity.isShiftKeyDown()) {
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("disableWander") == false) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("disableWander", false) == false) {
 					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("disableWander", true);
 				}
 			}

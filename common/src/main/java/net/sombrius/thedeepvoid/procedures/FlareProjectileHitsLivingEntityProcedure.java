@@ -12,7 +12,7 @@ public class FlareProjectileHitsLivingEntityProcedure {
 			return;
 		if (entity instanceof StalkerEntity) {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 140, 3));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 140, 3));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 140, 2));
 		}

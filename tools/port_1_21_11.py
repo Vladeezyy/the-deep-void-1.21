@@ -96,9 +96,6 @@ def block_entity(s):
     s = s.replace('public void saveAdditional(CompoundTag compound, HolderLookup.Provider lookupProvider) {\n\t\tsuper.saveAdditional(compound, lookupProvider);',
                   'public void saveAdditional(ValueOutput compound) {\n\t\tsuper.saveAdditional(compound);')
     s = s.replace('ContainerHelper.saveAllItems(compound, this.stacks, lookupProvider);', 'ContainerHelper.saveAllItems(compound, this.stacks);')
-    s = s.replace('\tprivate final SidedInvWrapper handler = new SidedInvWrapper(this, null);\n', '')
-    s = re.sub(r'\n\n\tpublic SidedInvWrapper getItemHandler\(\) \{\n\t\treturn handler;\n\t\}', '', s)
-    s = s.replace('import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;\n', '')
     s = add_import(s, 'net.minecraft.world.level.storage.ValueInput')
     s = add_import(s, 'net.minecraft.world.level.storage.ValueOutput')
     return s
@@ -109,8 +106,7 @@ def blocks(s):
     level / pos parameters."""
     if not re.search(r'public class \w+ extends (Block|DoorBlock)\b', s):
         return s
-    s = re.sub(r'public (\w+Block)\(\) \{\n(\t\tsuper\([^;]*?)BlockBehaviour\.Properties\.of\(\)',
-               r'public \1(BlockBehaviour.Properties properties) {\n\2properties', s)
+    # (The Deep Void: the blocks keep their no-argument constructors; Registrar.blockProps() carries the id)
     s = s.replace('.noCollission()', '.noCollision()')
     s = s.replace('public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos)', 'public boolean propagatesSkylightDown(BlockState state)')
     s = s.replace('public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos)', 'public int getLightBlock(BlockState state)')

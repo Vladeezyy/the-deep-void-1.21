@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
@@ -17,9 +17,9 @@ import net.sombrius.thedeepvoid.TheDeepVoidMod;
 import net.sombrius.thedeepvoid.procedures.ArmorAbilityOnKeyPressedProcedure;
 import net.sombrius.thedeepvoid.procedures.ArmorAbilityOnKeyReleasedProcedure;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public record ArmorAbilityMessage(int eventType, int pressedms) implements CustomPacketPayload {
-	public static final Type<ArmorAbilityMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "key_armor_ability"));
+	public static final Type<ArmorAbilityMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, "key_armor_ability"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, ArmorAbilityMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, ArmorAbilityMessage message) -> {
 		buffer.writeInt(message.eventType);
 		buffer.writeInt(message.pressedms);

@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,7 +47,7 @@ public class ThePitFogColorProcedure {
 	public static void computeFogColor(ViewportEvent.ComputeFogColor event) {
 		provider = event;
 		ClientLevel level = Minecraft.getInstance().level;
-		Entity entity = provider.getCamera().getEntity();
+		Entity entity = provider.getCamera().entity();
 		if (level != null && entity != null) {
 			Vec3 entPos = entity.getPosition((float) provider.getPartialTick());
 			execute(provider, level.dimension(), entity);
@@ -61,7 +61,7 @@ public class ThePitFogColorProcedure {
 	private static void execute(@Nullable Event event, ResourceKey<Level> dimension, Entity entity) {
 		if (dimension == null || entity == null)
 			return;
-		if (dimension == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:the_pit"))) {
+		if (dimension == ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:the_pit"))) {
 			setColor(255 << 24 | 0 << 16 | 0 << 8 | 0);
 		}
 		if (entity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(TheDeepVoidModMobEffects.TOTAL_BLINDNESS.holder())) {

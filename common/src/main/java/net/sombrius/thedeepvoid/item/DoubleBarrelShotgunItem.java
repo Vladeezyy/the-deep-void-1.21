@@ -1,15 +1,18 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.InteractionResult;
 
 import software.bernie.geckolib.util.GeckoLibUtil;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.state.AnimationTest;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 import net.sombrius.thedeepvoid.procedures.DoubleBarrelShotgunRightClickProcedure;
 import net.sombrius.thedeepvoid.item.renderer.DoubleBarrelShotgunItemRenderer;
@@ -24,9 +27,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.model.HumanoidModel;
 
@@ -40,18 +41,30 @@ public class DoubleBarrelShotgunItem extends Item implements GeoItem, net.sombri
 	public static ItemDisplayContext transformType;
 
 	public DoubleBarrelShotgunItem() {
-		super(new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.COMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).fireResistant().rarity(Rarity.COMMON));
+	}
+
+	@Override
+	public boolean isPerspectiveAware() {
+		return true;
+	}
+
+	@Override
+	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+		consumer.accept(new GeoRenderProvider() {
+			private DoubleBarrelShotgunItemRenderer renderer;
+
+			@Override
+			public GeoItemRenderer<?> getGeoItemRenderer() {
+				if (this.renderer == null)
+					this.renderer = new DoubleBarrelShotgunItemRenderer();
+				return this.renderer;
+			}
+		});
 	}
 
 	public IClientItemExtensions clientExtensions() {
 		return new IClientItemExtensions() {
-			private final BlockEntityWithoutLevelRenderer renderer = new DoubleBarrelShotgunItemRenderer();
-
-			@Override
-			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-				return renderer;
-			}
-
 			private static final HumanoidModel.ArmPose DoubleBarrelShotgunPose = net.sombrius.thedeepvoid.port.PortArmPoses.pose("DOUBLE_BARREL_SHOTGUN");
 
 			@Override
@@ -79,10 +92,10 @@ public class DoubleBarrelShotgunItem extends Item implements GeoItem, net.sombri
 		this.transformType = type;
 	}
 
-	private PlayState idlePredicate(AnimationState event) {
-		if (this.transformType != null ? this.transformType.firstPerson() : false) {
+	private PlayState idlePredicate(AnimationTest<DoubleBarrelShotgunItem> event) {
+		if (net.sombrius.thedeepvoid.port.GeoAnims.firstPerson(event)) {
 			if (this.animationprocedure.equals("empty")) {
-				event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.strife_idle"));
+				event.controller().setAnimation(RawAnimation.begin().thenLoop("animation.strife_idle"));
 				return PlayState.CONTINUE;
 			}
 		}
@@ -91,15 +104,15 @@ public class DoubleBarrelShotgunItem extends Item implements GeoItem, net.sombri
 
 	String prevAnim = "empty";
 
-	private PlayState procedurePredicate(AnimationState event) {
-		if (this.transformType != null ? this.transformType.firstPerson() : false) {
-			if (!this.animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
+	private PlayState procedurePredicate(AnimationTest<DoubleBarrelShotgunItem> event) {
+		if (net.sombrius.thedeepvoid.port.GeoAnims.firstPerson(event)) {
+			if (!this.animationprocedure.equals("empty") && net.sombrius.thedeepvoid.port.GeoAnims.stopped(event.controller()) || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
 				if (!this.animationprocedure.equals(prevAnim))
-					event.getController().forceAnimationReset();
-				event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
-				if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
+					event.controller().reset();
+				event.controller().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
+				if (net.sombrius.thedeepvoid.port.GeoAnims.stopped(event.controller())) {
 					this.animationprocedure = "empty";
-					event.getController().forceAnimationReset();
+					event.controller().reset();
 				}
 			} else if (this.animationprocedure.equals("empty")) {
 				prevAnim = "empty";
@@ -112,9 +125,9 @@ public class DoubleBarrelShotgunItem extends Item implements GeoItem, net.sombri
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		AnimationController procedureController = new AnimationController(this, "procedureController", 0, this::procedurePredicate);
+		AnimationController<DoubleBarrelShotgunItem> procedureController = new AnimationController<>("procedureController", 0, this::procedurePredicate);
 		data.add(procedureController);
-		AnimationController idleController = new AnimationController(this, "idleController", 0, this::idlePredicate);
+		AnimationController<DoubleBarrelShotgunItem> idleController = new AnimationController<>("idleController", 0, this::idlePredicate);
 		data.add(idleController);
 	}
 
@@ -124,9 +137,9 @@ public class DoubleBarrelShotgunItem extends Item implements GeoItem, net.sombri
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
-		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		ItemStack itemstack = ar.getObject();
+	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+		InteractionResult ar = super.use(world, entity, hand);
+		ItemStack itemstack = entity.getItemInHand(hand);
 		double x = entity.getX();
 		double y = entity.getY();
 		double z = entity.getZ();

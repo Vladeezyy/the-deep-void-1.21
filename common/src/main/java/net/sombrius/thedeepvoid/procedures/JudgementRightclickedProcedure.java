@@ -8,7 +8,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -40,7 +40,7 @@ public class JudgementRightclickedProcedure {
 						entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(6)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()))
 				.canOcclude()) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 300);
+				_player.getCooldowns().addCooldown(itemstack, 300);
 			if (world instanceof ServerLevel _level)
 				_level.sendParticles(ParticleTypes.SCULK_SOUL, (entity.getX()), (entity.getY()), (entity.getZ()), 15, 0.1, 1, 0.1, 0.1);
 			{
@@ -53,16 +53,16 @@ public class JudgementRightclickedProcedure {
 					if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.dragon_fireball.explode")),
+								_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.dragon_fireball.explode")),
 										SoundSource.HOSTILE, 2, (float) 0.8);
 							} else {
-								_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.dragon_fireball.explode")), SoundSource.HOSTILE, 2,
+								_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.dragon_fireball.explode")), SoundSource.HOSTILE, 2,
 										(float) 0.8, false);
 							}
 						}
 						if (world instanceof ServerLevel _level)
 							_level.sendParticles((SimpleParticleType) (TheDeepVoidModParticleTypes.FLAME_OF_SPITE.get()), (entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), 20, 0.1, 2, 0.1, 0.1);
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:void_energy"))), entity),
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:void_energy"))), entity),
 								(float) Math.floor((entityiterator instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) / 5));
 					}
 				}
@@ -83,7 +83,7 @@ public class JudgementRightclickedProcedure {
 				_level.sendParticles(ParticleTypes.SCULK_SOUL, (entity.getX()), (entity.getY()), (entity.getZ()), 15, 0.1, 1, 0.1, 0.1);
 		} else {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 5);
+				_player.getCooldowns().addCooldown(itemstack, 5);
 		}
 	}
 }

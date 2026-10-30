@@ -7,7 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -25,7 +25,7 @@ public class EyekinOnEntityTickUpdateProcedure {
 					_datEntSetI.getEntityData().set(EyekinEntity.DATA_flyChance, 0);
 				if (Math.random() < 0.1) {
 					if (world instanceof ServerLevel _level) {
-						Entity entityToSpawn = TheDeepVoidModEntities.EYEKIN_FLYING.get().spawn(_level, BlockPos.containing(x, y + 1, z), MobSpawnType.MOB_SUMMONED);
+						Entity entityToSpawn = TheDeepVoidModEntities.EYEKIN_FLYING.get().spawn(_level, BlockPos.containing(x, y + 1, z), EntitySpawnReason.MOB_SUMMONED);
 						if (entityToSpawn != null) {
 							entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 						}

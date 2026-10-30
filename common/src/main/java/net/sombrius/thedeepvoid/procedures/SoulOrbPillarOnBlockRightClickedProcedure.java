@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -30,7 +30,7 @@ public class SoulOrbPillarOnBlockRightClickedProcedure {
 				public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 					BlockEntity blockEntity = world.getBlockEntity(pos);
 					if (blockEntity != null)
-						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+						return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 					return false;
 				}
 			}.getValue(world, BlockPos.containing(x, y, z), "deep_void:receiveOrb")) == true) {
@@ -48,10 +48,10 @@ public class SoulOrbPillarOnBlockRightClickedProcedure {
 									for (int index0 = 0; index0 < 10; index0++) {
 										if (world instanceof Level _level) {
 											if (!_level.isClientSide()) {
-												_level.playSound(null, BlockPos.containing(x, y + 1, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")), SoundSource.BLOCKS, 2,
+												_level.playSound(null, BlockPos.containing(x, y + 1, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")), SoundSource.BLOCKS, 2,
 														(float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2));
 											} else {
-												_level.playLocalSound(x, (y + 1), z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")), SoundSource.BLOCKS, 2, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2),
+												_level.playLocalSound(x, (y + 1), z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")), SoundSource.BLOCKS, 2, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2),
 														false);
 											}
 										}
@@ -60,7 +60,7 @@ public class SoulOrbPillarOnBlockRightClickedProcedure {
 										public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 											BlockEntity blockEntity = world.getBlockEntity(pos);
 											if (blockEntity != null)
-												return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+												return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 											return false;
 										}
 									}.getValue(world, BlockPos.containing(x, y, z), "deep_void:startStun")) == false) {
@@ -82,7 +82,7 @@ public class SoulOrbPillarOnBlockRightClickedProcedure {
 						public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 							BlockEntity blockEntity = world.getBlockEntity(pos);
 							if (blockEntity != null)
-								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 							return false;
 						}
 					}.getValue(world, BlockPos.containing(x, y, z), "deep_void:startStun")) == true) {
@@ -109,20 +109,20 @@ public class SoulOrbPillarOnBlockRightClickedProcedure {
 										for (int index1 = 0; index1 < 15; index1++) {
 											if (world instanceof Level _level) {
 												if (!_level.isClientSide()) {
-													_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")),
+													_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")),
 															SoundSource.HOSTILE, 4, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2));
 												} else {
-													_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")), SoundSource.HOSTILE,
+													_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")), SoundSource.HOSTILE,
 															4, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2), false);
 												}
 											}
 										}
 										if (world instanceof Level _level) {
 											if (!_level.isClientSide()) {
-												_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.ravager.stunned")),
+												_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.ravager.stunned")),
 														SoundSource.HOSTILE, 4, (float) 0.8);
 											} else {
-												_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.ravager.stunned")), SoundSource.HOSTILE,
+												_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.ravager.stunned")), SoundSource.HOSTILE,
 														4, (float) 0.8, false);
 											}
 										}

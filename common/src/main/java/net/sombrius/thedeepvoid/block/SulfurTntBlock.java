@@ -1,6 +1,8 @@
 
 package net.sombrius.thedeepvoid.block;
 
+import javax.annotation.Nullable;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -16,11 +18,11 @@ import net.sombrius.thedeepvoid.procedures.SulfurTntRedstoneProcedure;
 
 public class SulfurTntBlock extends Block {
 	public SulfurTntBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.GRASS).instabreak());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.GRASS).instabreak());
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 
@@ -29,8 +31,9 @@ public class SulfurTntBlock extends Block {
 	}
 
 	@Override
-	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean moving) {
-		super.neighborChanged(blockstate, world, pos, neighborBlock, fromPos, moving);
+	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, @Nullable net.minecraft.world.level.redstone.Orientation orientation, boolean moving) {
+		super.neighborChanged(blockstate, world, pos, neighborBlock, orientation, moving);
+		BlockPos fromPos = pos;
 		if (world.getBestNeighborSignal(pos) > 0) {
 			SulfurTntRedstoneProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
 		}
@@ -38,7 +41,7 @@ public class SulfurTntBlock extends Block {
 	}
 
 	@Override
-	public void wasExploded(Level world, BlockPos pos, Explosion e) {
+	public void wasExploded(ServerLevel world, BlockPos pos, Explosion e) {
 		super.wasExploded(world, pos, e);
 		SulfurTntBlockDestroyedByExplosionProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
 	}

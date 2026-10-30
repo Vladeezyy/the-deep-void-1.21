@@ -1,14 +1,12 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import com.mojang.blaze3d.shaders.FogShape;
 import java.util.Comparator;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,7 +34,7 @@ public class ApostleFogProcedure {
 		}
 	}
 
-	public static void setShape(FogShape shape) {
+	public static void setShape(ViewportEvent.FogShape shape) {
 		provider.setFogShape(shape);
 		if (!provider.isCanceled()) {
 			provider.setCanceled(true);
@@ -46,9 +44,9 @@ public class ApostleFogProcedure {
 	@SubscribeEvent
 	public static void renderFog(ViewportEvent.RenderFog event) {
 		provider = event;
-		if (provider.getMode() == FogRenderer.FogMode.FOG_TERRAIN) {
+		if (provider.getMode() == ViewportEvent.FogMode.FOG_TERRAIN) {
 			ClientLevel level = Minecraft.getInstance().level;
-			Entity entity = provider.getCamera().getEntity();
+			Entity entity = provider.getCamera().entity();
 			if (level != null && entity != null) {
 				Vec3 pos = entity.getPosition((float) provider.getPartialTick());
 				execute(provider, level, entity);
@@ -76,7 +74,7 @@ public class ApostleFogProcedure {
 						}
 					}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)) instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / (double) DeepVoidConfigConfiguration.APOSTLESECONDPHASE.get()) {
 				setDistance(3, 18);
-				setShape(FogShape.SPHERE);
+				setShape(ViewportEvent.FogShape.SPHERE);
 				if ((((Entity) world.getEntitiesOfClass(ApostleBossEntity.class, AABB.ofSize(new Vec3((entity.getX()), (entity.getY()), (entity.getZ())), 40, 40, 40), e -> true).stream().sorted(new Object() {
 					Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 						return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
@@ -90,9 +88,9 @@ public class ApostleFogProcedure {
 						_datEntSetL.getEntityData().set(ApostleBossEntity.DATA_fog, true);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fog_appear")), SoundSource.HOSTILE, 4, 1);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fog_appear")), SoundSource.HOSTILE, 4, 1);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fog_appear")), SoundSource.HOSTILE, 4, 1, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fog_appear")), SoundSource.HOSTILE, 4, 1, false);
 						}
 					}
 				}

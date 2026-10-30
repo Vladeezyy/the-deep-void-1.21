@@ -19,12 +19,12 @@ public class StrengthNeedleRecipeBrewingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean isInput(ItemStack input) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModItems.BONE_NEEDLE.get())).test(input);
+		return Ingredient.of(TheDeepVoidModItems.BONE_NEEDLE.get()).test(input);
 	}
 
 	@Override
 	public boolean isIngredient(ItemStack ingredient) {
-		return Ingredient.of(new ItemStack(Items.BLAZE_POWDER)).test(ingredient);
+		return Ingredient.of(Items.BLAZE_POWDER).test(ingredient);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.port;
 
+import net.minecraft.world.level.LevelAccessor;
+
 import net.minecraft.world.item.equipment.ArmorType;
 
 import net.minecraft.server.MinecraftServer;
@@ -77,6 +79,23 @@ public final class PortUtil {
 	}
 
 	/** 1.20's armor slot check (the stack is worn in an armor slot) */
+	/** 1.21.2: entities are killed on the server ({@code kill()} on a client entity did nothing useful) */
+	public static void kill(Entity entity) {
+		if (entity.level() instanceof ServerLevel level)
+			entity.kill(level);
+	}
+
+	/** 1.21.2: entities drop items on the server only */
+	public static void spawnAtLocation(Entity entity, ItemStack stack) {
+		if (entity.level() instanceof ServerLevel level)
+			entity.spawnAtLocation(level, stack);
+	}
+
+	/** 1.21.11: game rules belong to the server levels (false on the client, as the rule is not known there) */
+	public static boolean rule(net.minecraft.world.level.LevelAccessor world, net.minecraft.world.level.gamerules.GameRule<Boolean> rule) {
+		return world instanceof net.minecraft.world.level.ServerLevelAccessor level && level.getLevel().getGameRules().get(rule);
+	}
+
 	public static boolean wearing(Entity entity, ItemStack stack) {
 		if (entity instanceof LivingEntity living)
 			for (net.minecraft.world.entity.EquipmentSlot slot : net.minecraft.world.entity.EquipmentSlot.values())

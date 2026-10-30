@@ -40,7 +40,7 @@ public class FleshFangsOnEntityTickUpdateProcedure {
 			}
 		}
 		if ((entity instanceof FleshFangsEntity _datEntI ? _datEntI.getEntityData().get(FleshFangsEntity.DATA_despawn) : 0) >= 80) {
-			entity.kill();
+			net.sombrius.thedeepvoid.port.PortUtil.kill(entity);
 		} else {
 			if (entity instanceof FleshFangsEntity _datEntSetI)
 				_datEntSetI.getEntityData().set(FleshFangsEntity.DATA_despawn, (int) ((entity instanceof FleshFangsEntity _datEntI ? _datEntI.getEntityData().get(FleshFangsEntity.DATA_despawn) : 0) + 1));
@@ -54,8 +54,8 @@ public class FleshFangsOnEntityTickUpdateProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -64,8 +64,8 @@ public class FleshFangsOnEntityTickUpdateProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 						}
 						return false;
 					}
@@ -79,7 +79,7 @@ public class FleshFangsOnEntityTickUpdateProcedure {
 							if (_ent instanceof ServerPlayer _serverPlayer)
 								_serverPlayer.connection.teleport((entity.getX()), (entity.getY()), (entity.getZ()), _ent.getYRot(), _ent.getXRot());
 						}
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), (float) (double) DeepVoidConfigConfiguration.FLESHFANGSDAMAGE.get());
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), (float) (double) DeepVoidConfigConfiguration.FLESHFANGSDAMAGE.get());
 					} else if (!world.getEntitiesOfClass(FleshFangsEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 1, 1, 1), e -> true).isEmpty()
 							&& ((Entity) world.getEntitiesOfClass(FleshFangsEntity.class, AABB.ofSize(new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())), 1, 1, 1), e -> true).stream().sorted(new Object() {
 								Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
@@ -94,7 +94,7 @@ public class FleshFangsOnEntityTickUpdateProcedure {
 							if (_ent instanceof ServerPlayer _serverPlayer)
 								_serverPlayer.connection.teleport((entity.getX()), (entity.getY()), (entity.getZ()), _ent.getYRot(), _ent.getXRot());
 						}
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), (float) (double) DeepVoidConfigConfiguration.FLESHFANGSDAMAGE.get());
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), (float) (double) DeepVoidConfigConfiguration.FLESHFANGSDAMAGE.get());
 					}
 				}
 			}

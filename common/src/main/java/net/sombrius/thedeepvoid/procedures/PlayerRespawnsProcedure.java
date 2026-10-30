@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -14,7 +15,7 @@ import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -57,13 +58,13 @@ public class PlayerRespawnsProcedure {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.VOID_BLESSING.holder(), 600, 0, false, false));
 			if (entity instanceof ServerPlayer _player && !_player.level().isClientSide()) {
-				ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+				ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 				if (_player.level().dimension() == destinationType)
 					return;
-				ServerLevel nextLevel = _player.server.getLevel(destinationType);
+				ServerLevel nextLevel = _player.level().getServer().getLevel(destinationType);
 				if (nextLevel != null) {
 					_player.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
-					_player.teleportTo(nextLevel, _player.getX(), _player.getY(), _player.getZ(), _player.getYRot(), _player.getXRot());
+					_player.teleportTo(nextLevel, _player.getX(), _player.getY(), _player.getZ(), java.util.Set.of(), _player.getYRot(), _player.getXRot(), true);
 					_player.connection.send(new ClientboundPlayerAbilitiesPacket(_player.getAbilities()));
 					for (MobEffectInstance _effectinstance : _player.getActiveEffects())
 						_player.connection.send(new ClientboundUpdateMobEffectPacket(_player.getId(), _effectinstance, false));
@@ -79,15 +80,15 @@ public class PlayerRespawnsProcedure {
 				}
 				{
 					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+					if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "stopsound @s ambient minecraft:block.portal.travel");
 					}
 				}
 				{
 					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+					if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:wind_falling player @s ~ ~ ~ 10 1 1");
 					}
 				}
@@ -107,24 +108,24 @@ public class PlayerRespawnsProcedure {
 		}
 		if (TheDeepVoidModVariables.of(entity).parasitizedType == 1) {
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				if (entityiterator instanceof LivingEntity _livEnt11 && _livEnt11.hasEffect(TheDeepVoidModMobEffects.PARASITIZED.holder()) && (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getString("parasitizedParasite")).equals(entity.getDisplayName().getString())) {
+				if (entityiterator instanceof LivingEntity _livEnt11 && _livEnt11.hasEffect(TheDeepVoidModMobEffects.PARASITIZED.holder()) && (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getStringOr("parasitizedParasite", "")).equals(entity.getDisplayName().getString())) {
 					{
 						Entity _ent = entity;
 						_ent.teleportTo((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()));
 						if (_ent instanceof ServerPlayer _serverPlayer)
 							_serverPlayer.connection.teleport((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), _ent.getYRot(), _ent.getXRot());
 					}
-					entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:parasite"))), entity),
+					entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:parasite"))), entity),
 							(float) (double) DeepVoidConfigConfiguration.FLESHPARASITETP.get());
 					if (entityiterator instanceof LivingEntity _entity)
 						_entity.removeEffect(TheDeepVoidModMobEffects.PARASITIZED.holder());
 					net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putString("parasitizedParasite", "");
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fleshy_explosion")),
+							_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fleshy_explosion")),
 									SoundSource.HOSTILE, 1, 1);
 						} else {
-							_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fleshy_explosion")), SoundSource.HOSTILE, 1, 1, false);
+							_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fleshy_explosion")), SoundSource.HOSTILE, 1, 1, false);
 						}
 					}
 				}
@@ -135,24 +136,24 @@ public class PlayerRespawnsProcedure {
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(4000 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof LivingEntity _livEnt32 && _livEnt32.hasEffect(TheDeepVoidModMobEffects.PARASITIZED.holder())
-							&& (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getString("parasitizedParasite")).equals(entity.getDisplayName().getString())) {
+							&& (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getStringOr("parasitizedParasite", "")).equals(entity.getDisplayName().getString())) {
 						{
 							Entity _ent = entity;
 							_ent.teleportTo((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()));
 							if (_ent instanceof ServerPlayer _serverPlayer)
 								_serverPlayer.connection.teleport((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), _ent.getYRot(), _ent.getXRot());
 						}
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:parasite"))), entity),
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:parasite"))), entity),
 								(float) (double) DeepVoidConfigConfiguration.FLESHPARASITETP.get());
 						if (entityiterator instanceof LivingEntity _entity)
 							_entity.removeEffect(TheDeepVoidModMobEffects.PARASITIZED.holder());
 						net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putString("parasitizedParasite", "");
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fleshy_explosion")),
+								_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fleshy_explosion")),
 										SoundSource.HOSTILE, 1, 1);
 							} else {
-								_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fleshy_explosion")), SoundSource.HOSTILE, 1, 1,
+								_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fleshy_explosion")), SoundSource.HOSTILE, 1, 1,
 										false);
 							}
 						}

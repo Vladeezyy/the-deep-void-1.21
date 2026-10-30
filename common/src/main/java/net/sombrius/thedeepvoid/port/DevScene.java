@@ -1,5 +1,6 @@
 package net.sombrius.thedeepvoid.port;
 
+import net.minecraft.world.item.ItemStack;
 import net.sombrius.thedeepvoid.port.bus.ClientTickEvent;
 import net.sombrius.thedeepvoid.port.bus.EventBusSubscriber;
 import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
@@ -76,7 +77,7 @@ public final class DevScene {
 			p.onUpdateAbilities();
 			p.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1000000, 0, false, false));
 			MinecraftServer server = p.level().getServer();
-			server.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
+			p.level().getGameRules().set(GameRules.SPAWN_MOBS, false, server);
 		}));
 		if (ITEMS) {
 			items();
@@ -124,7 +125,7 @@ public final class DevScene {
 			mc.options.simulationDistance().set(10);
 		});
 		int t = 100;
-		t = benchPhase(t, "overworld", p -> p.teleportTo(p.level().getServer().overworld(), 0.5, 200, 0.5, 0F, 20F), false);
+		t = benchPhase(t, "overworld", p -> p.teleportTo(p.level().getServer().overworld(), 0.5, 200, 0.5, java.util.Set.of(), 0F, 20F, true), false);
 		t = benchPhase(t, "deep_void", p -> go(p, "forgotten_valley"), false);
 		t = benchPhase(t, "deep_void_mobs", p -> go(p, "forgotten_valley"), true);
 		at(t, mc -> PortBench.summary());
@@ -141,13 +142,13 @@ public final class DevScene {
 		}));
 		at(t + 160, mc -> server(mc, DevScene::settle));
 		at(t + 200, mc -> server(mc, p -> {
-			ServerLevel level = p.serverLevel();
+			ServerLevel level = p.level();
 			for (Entity e : level.getEntities((Entity) null, p.getBoundingBox().inflate(128), e -> !(e instanceof Player)))
 				e.discard();
 			p.setGameMode(GameType.SURVIVAL);
 			p.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 1000000, 4, false, false));
 			p.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1000000, 0, false, false));
-			level.getServer().getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, level.getServer());
+			level.getGameRules().set(GameRules.ADVANCE_TIME, false, level.getServer());
 			level.getServer().overworld().setDayTime(6000);
 			for (int i = 0; i < 100; i++) {
 				double angle = i * 2.4, r = 8 + (i % 17);
@@ -201,8 +202,8 @@ public final class DevScene {
 	private static void items() {
 		at(45, mc -> mc.options.hideGui = true);
 		at(60, mc -> server(mc, p -> {
-			p.teleportTo(p.level().getServer().overworld(), 0.5, 120, 0.5, 0F, 0F);
-			p.serverLevel().setBlock(BlockPos.containing(0, 118, 0), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState(), 3);
+			p.teleportTo(p.level().getServer().overworld(), 0.5, 120, 0.5, java.util.Set.of(), 0F, 0F, true);
+			p.level().setBlock(BlockPos.containing(0, 118, 0), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState(), 3);
 			p.getAbilities().flying = false;
 			p.onUpdateAbilities();
 			p.level().getServer().overworld().setDayTime(6000);
@@ -255,7 +256,7 @@ public final class DevScene {
 			if (mc.getLevelSource().levelExists(WORLD)) {
 				mc.createWorldOpenFlows().openWorld(WORLD, () -> mc.setScreen(new TitleScreen()));
 			} else {
-				LevelSettings settings = new LevelSettings(WORLD, GameType.CREATIVE, false, Difficulty.NORMAL, true, new GameRules(), WorldDataConfiguration.DEFAULT);
+				LevelSettings settings = new LevelSettings(WORLD, GameType.CREATIVE, false, Difficulty.NORMAL, true, new GameRules(WorldDataConfiguration.DEFAULT.enabledFeatures()), WorldDataConfiguration.DEFAULT);
 				mc.createWorldOpenFlows().createFreshLevel(WORLD, settings, new WorldOptions(1234L, true, false), WorldPresets::createNormalWorldDimensions, new TitleScreen());
 			}
 			return;
@@ -285,21 +286,21 @@ public final class DevScene {
 		Pair<BlockPos, Holder<Biome>> found = level.findClosestBiome3d(h -> h.is(key), new BlockPos(0, 64, 0), 6400, 32, 64);
 		BlockPos pos = found == null ? new BlockPos(0, 100, 0) : found.getFirst();
 		TheDeepVoidMod.LOGGER.info("[scene] {} at {}", biome, found == null ? "nowhere" : pos);
-		player.teleportTo(level, pos.getX() + 0.5, 200, pos.getZ() + 0.5, 45.0F, 20.0F);
+		player.teleportTo(level, pos.getX() + 0.5, 200, pos.getZ() + 0.5, java.util.Set.of(), 45.0F, 20.0F, true);
 	}
 
 	/** Drops the player a few blocks above the ground under them once the chunks are there. */
 	private static void settle(ServerPlayer player) {
-		ServerLevel level = player.serverLevel();
+		ServerLevel level = player.level();
 		level.getChunk(player.getBlockX() >> 4, player.getBlockZ() >> 4); // make sure the column is generated
 		int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING, player.getBlockX(), player.getBlockZ());
-		if (y <= level.getMinBuildHeight() + 1)
+		if (y <= level.getMinY() + 1)
 			y = 100;
-		player.teleportTo(level, player.getX(), y + 8, player.getZ(), 45.0F, 25.0F);
+		player.teleportTo(level, player.getX(), y + 8, player.getZ(), java.util.Set.of(), 45.0F, 25.0F, true);
 	}
 
 	private static void mobs(ServerPlayer player) {
-		ServerLevel level = player.serverLevel();
+		ServerLevel level = player.level();
 		int i = 0;
 		for (String id : List.of("bone_crawler", "stalker", "wanderer", "abductor", "rotten_corpse", "goo_spitter")) {
 			EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
@@ -310,7 +311,7 @@ public final class DevScene {
 				mob.setNoAi(true);
 			i++;
 		}
-		player.teleportTo(level, player.getX(), player.getY(), player.getZ(), player.getYRot(), 10.0F);
+		player.teleportTo(level, player.getX(), player.getY(), player.getZ(), java.util.Set.of(), player.getYRot(), 10.0F, true);
 	}
 
 	private static void mobs2(ServerPlayer player) {
@@ -318,7 +319,7 @@ public final class DevScene {
 	}
 
 	private static void spawnRow(ServerPlayer player, List<String> ids) {
-		ServerLevel level = player.serverLevel();
+		ServerLevel level = player.level();
 		int i = 0;
 		for (String id : ids) {
 			EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
@@ -333,6 +334,6 @@ public final class DevScene {
 	}
 
 	private static void shot(Minecraft mc, String name) {
-		Screenshot.grab(mc.gameDirectory, "scene_" + name + ".png", mc.getMainRenderTarget(), c -> TheDeepVoidMod.LOGGER.info("[scene] {}", c.getString()));
+		Screenshot.grab(mc.gameDirectory, "scene_" + name + ".png", mc.getMainRenderTarget(), 1, c -> TheDeepVoidMod.LOGGER.info("[scene] {}", c.getString()));
 	}
 }

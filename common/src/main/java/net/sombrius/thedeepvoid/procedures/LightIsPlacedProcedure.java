@@ -4,12 +4,12 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
@@ -39,16 +39,16 @@ public class LightIsPlacedProcedure {
 		if (entity == null)
 			return;
 		if (DeepVoidConfigConfiguration.DESTROYLIGHTSOURCES.get() == true) {
-			if ((world instanceof Level _lvl ? _lvl.dimension() : (world instanceof WorldGenLevel _wgl ? _wgl.getLevel().dimension() : Level.OVERWORLD)) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"))) {
+			if ((world instanceof Level _lvl ? _lvl.dimension() : (world instanceof WorldGenLevel _wgl ? _wgl.getLevel().dimension() : Level.OVERWORLD)) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"))) {
 				if (entity instanceof LivingEntity) {
 					if (DeepVoidConfigConfiguration.ALLOWSOULLIGHT.get() == true) {
 						if (world.getBlockState(BlockPos.containing(x, y, z)).getLightEmission() > 0
-								&& !(world.getBlockState(BlockPos.containing(x, y, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:safe_lights")))
-								&& !(world.getBlockState(BlockPos.containing(x, y, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:soul_lights")))) {
+								&& !(world.getBlockState(BlockPos.containing(x, y, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:safe_lights")))
+								&& !(world.getBlockState(BlockPos.containing(x, y, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:soul_lights")))) {
 							if (!world.getEntitiesOfClass(LightEntity.class, AABB.ofSize(new Vec3(x, (y + 0.45), z), 0.5, 0.5, 0.5), e -> true).isEmpty() == false) {
 								if (entity instanceof LivingEntity _livEnt12 && _livEnt12.hasEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder())) {
 									if (world instanceof ServerLevel _serverLevel) {
-										Entity entityinstance = TheDeepVoidModEntities.LIGHT.get().create(_serverLevel, null, BlockPos.containing(x, y + 0.45, z), MobSpawnType.MOB_SUMMONED, false, false);
+										Entity entityinstance = TheDeepVoidModEntities.LIGHT.get().create(_serverLevel, null, BlockPos.containing(x, y + 0.45, z), EntitySpawnReason.MOB_SUMMONED, false, false);
 										if (entityinstance != null) {
 											entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 											net.sombrius.thedeepvoid.port.PortUtil.data(entityinstance).putBoolean("brainFog", true);
@@ -57,7 +57,7 @@ public class LightIsPlacedProcedure {
 									}
 								} else {
 									if (world instanceof ServerLevel _level) {
-										Entity entityToSpawn = TheDeepVoidModEntities.LIGHT.get().spawn(_level, BlockPos.containing(x, y + 0.45, z), MobSpawnType.MOB_SUMMONED);
+										Entity entityToSpawn = TheDeepVoidModEntities.LIGHT.get().spawn(_level, BlockPos.containing(x, y + 0.45, z), EntitySpawnReason.MOB_SUMMONED);
 										if (entityToSpawn != null) {
 											entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 										}
@@ -67,11 +67,11 @@ public class LightIsPlacedProcedure {
 						}
 					} else {
 						if (world.getBlockState(BlockPos.containing(x, y, z)).getLightEmission() > 0
-								&& !(world.getBlockState(BlockPos.containing(x, y, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:safe_lights")))) {
+								&& !(world.getBlockState(BlockPos.containing(x, y, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:safe_lights")))) {
 							if (!world.getEntitiesOfClass(LightEntity.class, AABB.ofSize(new Vec3(x, (y + 0.45), z), 0.5, 0.5, 0.5), e -> true).isEmpty() == false) {
 								if (entity instanceof LivingEntity _livEnt21 && _livEnt21.hasEffect(TheDeepVoidModMobEffects.BRAIN_FOG.holder())) {
 									if (world instanceof ServerLevel _serverLevel) {
-										Entity entityinstance = TheDeepVoidModEntities.LIGHT.get().create(_serverLevel, null, BlockPos.containing(x, y + 0.45, z), MobSpawnType.MOB_SUMMONED, false, false);
+										Entity entityinstance = TheDeepVoidModEntities.LIGHT.get().create(_serverLevel, null, BlockPos.containing(x, y + 0.45, z), EntitySpawnReason.MOB_SUMMONED, false, false);
 										if (entityinstance != null) {
 											entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 											net.sombrius.thedeepvoid.port.PortUtil.data(entityinstance).putBoolean("brainFog", true);
@@ -80,7 +80,7 @@ public class LightIsPlacedProcedure {
 									}
 								} else {
 									if (world instanceof ServerLevel _level) {
-										Entity entityToSpawn = TheDeepVoidModEntities.LIGHT.get().spawn(_level, BlockPos.containing(x, y + 0.45, z), MobSpawnType.MOB_SUMMONED);
+										Entity entityToSpawn = TheDeepVoidModEntities.LIGHT.get().spawn(_level, BlockPos.containing(x, y + 0.45, z), EntitySpawnReason.MOB_SUMMONED);
 										if (entityToSpawn != null) {
 											entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 										}

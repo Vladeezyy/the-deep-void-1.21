@@ -10,7 +10,7 @@ public class WatcherOnEmittedRedstonePowerProcedure {
 			public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
 				BlockEntity blockEntity = world.getBlockEntity(pos);
 				if (blockEntity != null)
-					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBoolean(tag);
+					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getBooleanOr(tag, false);
 				return false;
 			}
 		}.getValue(world, BlockPos.containing(x, y, z), "sees")) == true) {

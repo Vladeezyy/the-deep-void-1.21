@@ -170,7 +170,7 @@ import net.sombrius.thedeepvoid.client.renderer.WatchingStalkerRenderer;
 import net.sombrius.thedeepvoid.client.renderer.WeaverOfSoulsBossRenderer;
 import net.sombrius.thedeepvoid.client.renderer.XrayRenderer;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class TheDeepVoidModEntityRenderers {
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {

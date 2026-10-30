@@ -14,7 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -60,7 +60,7 @@ public class OnyxArmorProcedureProcedure {
 				for (int index0 = 0; index0 < Mth.nextInt(RandomSource.create(), 2, 4); index0++) {
 					if (world instanceof ServerLevel _level) {
 						Entity entityToSpawn = TheDeepVoidModEntities.SUMMONED_SHADOW_HAND.get().spawn(_level,
-								BlockPos.containing(sourceentity.getX() + Mth.nextInt(RandomSource.create(), -2, 2), sourceentity.getY(), sourceentity.getZ() + Mth.nextInt(RandomSource.create(), -2, 2)), MobSpawnType.MOB_SUMMONED);
+								BlockPos.containing(sourceentity.getX() + Mth.nextInt(RandomSource.create(), -2, 2), sourceentity.getY(), sourceentity.getZ() + Mth.nextInt(RandomSource.create(), -2, 2)), EntitySpawnReason.MOB_SUMMONED);
 						if (entityToSpawn != null) {
 							entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 						}

@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -43,7 +43,7 @@ public class PlayerKillsStalkerOrNightmareProcedure {
 		if (sourceentity instanceof Player) {
 			if (entity instanceof StalkerEntity || entity instanceof VoidbornEntity) {
 				if (sourceentity instanceof ServerPlayer _player) {
-					AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:hunter"));
+					AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:hunter"));
 					if (_adv != null) {
 						AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 						if (!_ap.isDone()) {
@@ -55,7 +55,7 @@ public class PlayerKillsStalkerOrNightmareProcedure {
 			}
 			if (entity instanceof StalkerEntity && (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.STALKER_SCYTHE_CLAW.get()) {
 				if (sourceentity instanceof ServerPlayer _player) {
-					AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:watch_it_punk"));
+					AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:watch_it_punk"));
 					if (_adv != null) {
 						AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 						if (!_ap.isDone()) {
@@ -69,7 +69,7 @@ public class PlayerKillsStalkerOrNightmareProcedure {
 					|| (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SHADESTORM.get()
 					|| (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOID_MATTER_GREATSWORD.get())) {
 				if (sourceentity instanceof ServerPlayer _player) {
-					AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:watch_it_punk"));
+					AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:watch_it_punk"));
 					if (_adv != null) {
 						AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 						if (!_ap.isDone()) {
@@ -79,12 +79,12 @@ public class PlayerKillsStalkerOrNightmareProcedure {
 					}
 				}
 			}
-			if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("the_deep_void:voidling")))
+			if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("the_deep_void:voidling")))
 					&& PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), TheDeepVoidModEnchantments.RADIANCE) != 0
 					&& !(sourceentity instanceof ServerPlayer _plr21 && _plr21.level() instanceof ServerLevel
-							&& _plr21.getAdvancements().getOrStartProgress(_plr21.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:fight_the_sun"))).isDone())) {
+							&& _plr21.getAdvancements().getOrStartProgress(_plr21.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:fight_the_sun"))).isDone())) {
 				if (sourceentity instanceof ServerPlayer _player) {
-					AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:fight_the_sun"));
+					AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:fight_the_sun"));
 					if (_adv != null) {
 						AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 						if (!_ap.isDone()) {

@@ -6,7 +6,7 @@ import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -16,7 +16,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -50,22 +50,22 @@ public class ManiacOnEntityTickUpdateProcedure {
 					((ManiacEntity) entity).setAnimation("animation.maniac_reload");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 50, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 50, 99, false, false));
 				TheDeepVoidMod.queueServerWork(7, () -> {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_release")), SoundSource.HOSTILE, (float) 0.6, 1);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_release")), SoundSource.HOSTILE, (float) 0.6, 1);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_release")), SoundSource.HOSTILE, (float) 0.6, 1, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_release")), SoundSource.HOSTILE, (float) 0.6, 1, false);
 						}
 					}
 				});
 				TheDeepVoidMod.queueServerWork(12, () -> {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_open")), SoundSource.HOSTILE, (float) 0.6, 1);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_open")), SoundSource.HOSTILE, (float) 0.6, 1);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_open")), SoundSource.HOSTILE, (float) 0.6, 1, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_open")), SoundSource.HOSTILE, (float) 0.6, 1, false);
 						}
 					}
 					if (world instanceof ServerLevel _level)
@@ -75,28 +75,28 @@ public class ManiacOnEntityTickUpdateProcedure {
 				TheDeepVoidMod.queueServerWork(27, () -> {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_insert")), SoundSource.HOSTILE, (float) 0.6, 1);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_insert")), SoundSource.HOSTILE, (float) 0.6, 1);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_insert")), SoundSource.HOSTILE, (float) 0.6, 1, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_insert")), SoundSource.HOSTILE, (float) 0.6, 1, false);
 						}
 					}
 				});
 				TheDeepVoidMod.queueServerWork(32, () -> {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_insert")), SoundSource.HOSTILE, (float) 0.6, 1);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_insert")), SoundSource.HOSTILE, (float) 0.6, 1);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_insert")), SoundSource.HOSTILE, (float) 0.6, 1, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_insert")), SoundSource.HOSTILE, (float) 0.6, 1, false);
 						}
 					}
 				});
 				TheDeepVoidMod.queueServerWork(40, () -> {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_open")), SoundSource.HOSTILE, (float) 0.6,
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_open")), SoundSource.HOSTILE, (float) 0.6,
 									(float) 0.98);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_open")), SoundSource.HOSTILE, (float) 0.6, (float) 0.98, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_open")), SoundSource.HOSTILE, (float) 0.6, (float) 0.98, false);
 						}
 					}
 				});
@@ -114,15 +114,15 @@ public class ManiacOnEntityTickUpdateProcedure {
 					((ManiacEntity) entity).setAnimation("animation.maniac_shoot");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 35, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 35, 99, false, false));
 				TheDeepVoidMod.queueServerWork(14, () -> {
 					for (int index0 = 0; index0 < 2; index0++) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_trigger")), SoundSource.HOSTILE, 3,
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_trigger")), SoundSource.HOSTILE, 3,
 										(float) Mth.nextDouble(RandomSource.create(), 0.97, 1.03));
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_trigger")), SoundSource.HOSTILE, 3,
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_trigger")), SoundSource.HOSTILE, 3,
 										(float) Mth.nextDouble(RandomSource.create(), 0.97, 1.03), false);
 							}
 						}
@@ -136,10 +136,10 @@ public class ManiacOnEntityTickUpdateProcedure {
 						}
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_shoot")), SoundSource.HOSTILE, 4,
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_shoot")), SoundSource.HOSTILE, 4,
 										(float) Mth.nextDouble(RandomSource.create(), 0.99, 1.01));
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:double_barrel_shoot")), SoundSource.HOSTILE, 4,
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:double_barrel_shoot")), SoundSource.HOSTILE, 4,
 										(float) Mth.nextDouble(RandomSource.create(), 0.99, 1.01), false);
 							}
 						}

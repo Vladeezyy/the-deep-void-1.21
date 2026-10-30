@@ -11,7 +11,7 @@ public class MiniatureCofferRightclickedProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof Player _player)
-			_player.getCooldowns().addCooldown(itemstack.getItem(), 10);
+			_player.getCooldowns().addCooldown(itemstack, 10);
 		TheDeepVoidModVariables.MapVariables.get(world).undertakerSpawn = 60;
 		TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
 	}

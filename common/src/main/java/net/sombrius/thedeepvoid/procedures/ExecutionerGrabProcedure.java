@@ -7,7 +7,7 @@ import java.util.List;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -40,7 +40,7 @@ public class ExecutionerGrabProcedure {
 			((ExecutionerEntity) entity).setAnimation("animation.executioner_grab");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 99, false, false));
 		TheDeepVoidMod.queueServerWork(20, () -> {
 			if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 				entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() + 1.6),
@@ -51,9 +51,9 @@ public class ExecutionerGrabProcedure {
 							(Math.cos(Math.toRadians(entity.getYRot())) * ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 2 ? 1 : 0.8))));
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.6);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.6);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.6, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.6, false);
 				}
 			}
 		});
@@ -65,7 +65,7 @@ public class ExecutionerGrabProcedure {
 					if (entityiterator instanceof Player) {
 						if ((entityiterator instanceof LivingEntity _entUseItem29 ? _entUseItem29.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 							if (entityiterator instanceof Player _player)
-								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem31 ? _entUseItem31.getUseItem() : ItemStack.EMPTY).getItem(), 100);
+								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem31 ? _entUseItem31.getUseItem() : ItemStack.EMPTY), 100);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem33 ? _entUseItem33.getUseItem() : ItemStack.EMPTY);
 								PortUtil.hurtAndBreak(_ist, 10, null);
@@ -74,10 +74,10 @@ public class ExecutionerGrabProcedure {
 								_entity.stopUsingItem();
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.wither.break_block")),
+									_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.wither.break_block")),
 											SoundSource.PLAYERS, (float) 0.4, 1);
 								} else {
-									_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.wither.break_block")), SoundSource.PLAYERS,
+									_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.wither.break_block")), SoundSource.PLAYERS,
 											(float) 0.4, 1, false);
 								}
 							}
@@ -104,7 +104,7 @@ public class ExecutionerGrabProcedure {
 				if (entity instanceof ExecutionerEntity _datEntSetL)
 					_datEntSetL.getEntityData().set(ExecutionerEntity.DATA_attacking, false);
 				if (entity instanceof LivingEntity _entity)
-					_entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+					_entity.removeEffect(MobEffects.SLOWNESS);
 			}
 		});
 		TheDeepVoidMod.queueServerWork(90, () -> {
@@ -112,10 +112,10 @@ public class ExecutionerGrabProcedure {
 				final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(16 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getBoolean("grabbedByExecutioner") == true) {
+					if (net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).getBooleanOr("grabbedByExecutioner", false) == true) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putBoolean("grabbedByExecutioner", false);
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));
+							_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 1));
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 							_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0));
 					}

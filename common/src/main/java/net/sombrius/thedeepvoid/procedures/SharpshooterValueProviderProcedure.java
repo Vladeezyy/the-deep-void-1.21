@@ -7,6 +7,6 @@ import net.minecraft.world.item.ItemStack;
 
 public class SharpshooterValueProviderProcedure {
 	public static double execute(ItemStack itemstack) {
-		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("pulling") / 22;
+		return itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("pulling", 0) / 22;
 	}
 }

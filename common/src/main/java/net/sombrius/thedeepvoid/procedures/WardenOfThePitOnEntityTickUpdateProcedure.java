@@ -4,7 +4,7 @@ import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -27,7 +27,7 @@ public class WardenOfThePitOnEntityTickUpdateProcedure {
 		if (entity == null)
 			return;
 		if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("setLook") == false) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("setLook", false) == false) {
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("setLook", true);
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("xPos", ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()));
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("zPos", ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ()));
@@ -43,10 +43,10 @@ public class WardenOfThePitOnEntityTickUpdateProcedure {
 						_datEntSetI.getEntityData().set(WardenOfThePitEntity.DATA_playSound, 4);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 10,
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 10,
 									(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 10,
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 10,
 									(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 						}
 					}
@@ -55,10 +55,10 @@ public class WardenOfThePitOnEntityTickUpdateProcedure {
 					if (Math.random() < 0.35) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.wither.break_block")), SoundSource.HOSTILE, 10,
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.wither.break_block")), SoundSource.HOSTILE, 10,
 										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1));
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.wither.break_block")), SoundSource.HOSTILE, 10,
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.wither.break_block")), SoundSource.HOSTILE, 10,
 										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1), false);
 							}
 						}
@@ -91,10 +91,10 @@ public class WardenOfThePitOnEntityTickUpdateProcedure {
 						_datEntSetI.getEntityData().set(WardenOfThePitEntity.DATA_playSound, 4);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 10,
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 10,
 									(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 10,
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:amalgam_step")), SoundSource.HOSTILE, 10,
 									(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 						}
 					}
@@ -106,7 +106,7 @@ public class WardenOfThePitOnEntityTickUpdateProcedure {
 				}
 				if (entity.getY() <= 8) {
 					(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null)
-							.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:effigy")))), 999);
+							.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:effigy")))), 999);
 					if (!entity.level().isClientSide())
 						entity.discard();
 				}

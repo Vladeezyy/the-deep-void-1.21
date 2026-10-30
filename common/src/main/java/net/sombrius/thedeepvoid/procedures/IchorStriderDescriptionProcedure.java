@@ -30,7 +30,7 @@ public class IchorStriderDescriptionProcedure {
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.ICHOR_STRIDER_BOOTS.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.all_seeing.when_worn").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.ichor_strider.worn").getString())));
 			} else {

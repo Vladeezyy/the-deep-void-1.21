@@ -7,7 +7,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -29,8 +29,8 @@ public class ClawScytheItemInHandTickProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("clicked") == true && (entity instanceof Player _plr ? _plr.getFoodData().getFoodLevel() : 0) > 6) {
-			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("state") > 8) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("clicked", false) == true && (entity instanceof Player _plr ? _plr.getFoodData().getFoodLevel() : 0) > 6) {
+			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("state", 0) > 8) {
 				{
 					final String _tagName = "state";
 					final double _tagValue = 1;
@@ -39,11 +39,11 @@ public class ClawScytheItemInHandTickProcedure {
 			} else {
 				{
 					final String _tagName = "state";
-					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("state") + 1);
+					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("state", 0) + 1);
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 				}
 			}
-			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("sound") >= 8) {
+			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("sound", 0) >= 8) {
 				{
 					final String _tagName = "sound";
 					final double _tagValue = 0;
@@ -51,15 +51,15 @@ public class ClawScytheItemInHandTickProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.attack.sweep")), SoundSource.PLAYERS, (float) 1.5, (float) 0.4);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.attack.sweep")), SoundSource.PLAYERS, (float) 1.5, (float) 0.4);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.attack.sweep")), SoundSource.PLAYERS, (float) 1.5, (float) 0.4, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.attack.sweep")), SoundSource.PLAYERS, (float) 1.5, (float) 0.4, false);
 					}
 				}
 			} else {
 				{
 					final String _tagName = "sound";
-					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("sound") + 1);
+					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("sound", 0) + 1);
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 				}
 			}
@@ -68,7 +68,7 @@ public class ClawScytheItemInHandTickProcedure {
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(6 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.PLAYER_ATTACK), entity),
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.PLAYER_ATTACK), entity),
 								(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * 1.2));
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 							_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 60, 0));
@@ -79,12 +79,12 @@ public class ClawScytheItemInHandTickProcedure {
 					}
 				}
 			}
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("grabbedByApostle") == false && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("piercedByApostle") == false && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("grabbedByExecutioner") == false
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("grabbedByApostle", false) == false && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("piercedByApostle", false) == false && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("grabbedByExecutioner", false) == false
 					&& !(entity instanceof LivingEntity _livEnt35 && _livEnt35.hasEffect(TheDeepVoidModMobEffects.BULLSEYE.holder())) && !(entity instanceof LivingEntity _livEnt36 && _livEnt36.hasEffect(TheDeepVoidModMobEffects.CHAINED.holder()))
 					&& !(entity instanceof LivingEntity _livEnt37 && _livEnt37.hasEffect(TheDeepVoidModMobEffects.ROOT_BLIND.holder())) && !(entity instanceof LivingEntity _livEnt38 && _livEnt38.hasEffect(TheDeepVoidModMobEffects.HEAVY.holder()))) {
 				entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * 0.3), (-0.6), (Math.cos(Math.toRadians(entity.getYRot())) * 0.3)));
 			}
-			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("food") >= 10) {
+			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("food", 0) >= 10) {
 				{
 					final String _tagName = "food";
 					final double _tagValue = 0;
@@ -95,7 +95,7 @@ public class ClawScytheItemInHandTickProcedure {
 			} else {
 				{
 					final String _tagName = "food";
-					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("food") + 1);
+					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("food", 0) + 1);
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 				}
 			}

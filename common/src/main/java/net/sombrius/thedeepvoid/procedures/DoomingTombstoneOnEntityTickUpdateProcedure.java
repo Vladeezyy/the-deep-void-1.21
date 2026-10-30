@@ -10,7 +10,7 @@ public class DoomingTombstoneOnEntityTickUpdateProcedure {
 		if (entity instanceof DoomingTombstoneEntity _datEntSetI)
 			_datEntSetI.getEntityData().set(DoomingTombstoneEntity.DATA_despawn, (int) ((entity instanceof DoomingTombstoneEntity _datEntI ? _datEntI.getEntityData().get(DoomingTombstoneEntity.DATA_despawn) : 0) + 1));
 		if ((entity instanceof DoomingTombstoneEntity _datEntI ? _datEntI.getEntityData().get(DoomingTombstoneEntity.DATA_despawn) : 0) == 200) {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:despawning") == false) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:despawning", false) == false) {
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("deep_void:despawning", true);
 				if (entity instanceof DoomingTombstoneEntity) {
 					((DoomingTombstoneEntity) entity).setAnimation("animation.tombstone_despawn");

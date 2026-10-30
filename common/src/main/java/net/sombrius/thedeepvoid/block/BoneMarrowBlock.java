@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.PushReaction;
 public class BoneMarrowBlock extends FlowerBlock {
 	public BoneMarrowBlock() {
 		super(MobEffects.BLINDNESS, 100,
-				BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).sound(SoundType.BONE_BLOCK).strength(0.2f, 0.5f).noCollission().replaceable().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_GRAY).sound(SoundType.BONE_BLOCK).strength(0.2f, 0.5f).noCollision().replaceable().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
 	}
 
 }

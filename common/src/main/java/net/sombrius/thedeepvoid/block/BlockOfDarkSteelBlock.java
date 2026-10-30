@@ -13,11 +13,11 @@ import net.sombrius.thedeepvoid.procedures.DarkSteelDepositAdditionalHarvestCond
 
 public class BlockOfDarkSteelBlock extends Block {
 	public BlockOfDarkSteelBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.METAL).strength(20f, 1200f).requiresCorrectToolForDrops());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.METAL).strength(20f, 1200f).requiresCorrectToolForDrops());
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

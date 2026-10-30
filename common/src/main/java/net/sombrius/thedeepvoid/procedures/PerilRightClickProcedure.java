@@ -23,7 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -37,7 +37,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -51,18 +51,18 @@ public class PerilRightClickProcedure {
 			return;
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 			if (!(PortUtil.enchantmentLevel(itemstack, TheDeepVoidModEnchantments.AKIMBO) != 0)) {
-				if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("shot") > 0 && (entity instanceof Player _plrCldRem8 ? _plrCldRem8.getCooldowns().getCooldownPercent(itemstack.getItem(), 0f) * 100 : 0) <= 0) {
+				if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("shot", 0) > 0 && (entity instanceof Player _plrCldRem8 ? _plrCldRem8.getCooldowns().getCooldownPercent(itemstack, 0f) * 100 : 0) <= 0) {
 					if (entity.isShiftKeyDown()) {
 						if (entity instanceof Player _player)
-							_player.getCooldowns().addCooldown(itemstack.getItem(), 60);
-						if (Math.random() < 1 / itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("selfShot")) {
+							_player.getCooldowns().addCooldown(itemstack, 60);
+						if (Math.random() < 1 / itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("selfShot", 0)) {
 							{
 								final String _tagName = "shootSelf";
 								final boolean _tagValue = true;
 								CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putBoolean(_tagName, _tagValue));
 							}
 						}
-						if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("shootSelf") == true) {
+						if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("shootSelf", false) == true) {
 							if ((entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 								if (itemstack.getItem() instanceof PerilItem)
 									{
@@ -79,7 +79,7 @@ public class PerilRightClickProcedure {
 									}
 							}
 							if (world instanceof Level)
-								((Level) world).playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1, 1, false);
+								((Level) world).playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1, 1, false);
 						} else {
 							if ((entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 								if (itemstack.getItem() instanceof PerilItem)
@@ -97,15 +97,15 @@ public class PerilRightClickProcedure {
 									}
 							}
 							if (world instanceof Level)
-								((Level) world).playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1, 1, false);
+								((Level) world).playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1, 1, false);
 							{
 								final String _tagName = "selfShot";
-								final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("selfShot") - 1);
+								final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("selfShot", 0) - 1);
 								CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 							}
 						}
 						TheDeepVoidMod.queueServerWork(45, () -> {
-							if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("shootSelf") == true) {
+							if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("shootSelf", false) == true) {
 								{
 									final String _tagName = "shootSelf";
 									final boolean _tagValue = false;
@@ -121,35 +121,35 @@ public class PerilRightClickProcedure {
 									final double _tagValue = 6;
 									CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 								}
-								entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:suicide")))),
+								entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:suicide")))),
 										(float) (double) DeepVoidConfigConfiguration.PERILSELFDAMAGE.get());
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1,
+										_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1,
 												1);
 									} else {
-										_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1, 1, false);
+										_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1, 1, false);
 									}
 								}
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_shoot_new")), SoundSource.PLAYERS, 1, 1);
+										_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_shoot_new")), SoundSource.PLAYERS, 1, 1);
 									} else {
-										_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_shoot_new")), SoundSource.PLAYERS, 1, 1, false);
+										_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_shoot_new")), SoundSource.PLAYERS, 1, 1, false);
 									}
 								}
 								{
 									final String _tagName = "shot";
-									final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("shot") - 1);
+									final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("shot", 0) - 1);
 									CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 								}
 								if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= 0) {
 									if (world instanceof Level _level) {
 										if (!_level.isClientSide()) {
-											_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fleshy_explosion")), SoundSource.PLAYERS,
+											_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fleshy_explosion")), SoundSource.PLAYERS,
 													1, 1);
 										} else {
-											_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:fleshy_explosion")), SoundSource.PLAYERS, 1, 1, false);
+											_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:fleshy_explosion")), SoundSource.PLAYERS, 1, 1, false);
 										}
 									}
 									if (world instanceof ServerLevel _level)
@@ -160,21 +160,21 @@ public class PerilRightClickProcedure {
 							} else {
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1,
+										_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1,
 												1);
 									} else {
-										_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1, 1, false);
+										_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1, 1, false);
 									}
 								}
 								{
 									final String _tagName = "adrenaline";
-									final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("adrenaline") + 1);
+									final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("adrenaline", 0) + 1);
 									CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 								}
-								if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("adrenaline") >= 5 && !(entity instanceof ServerPlayer _plr92 && _plr92.level() instanceof ServerLevel
-										&& _plr92.getAdvancements().getOrStartProgress(_plr92.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:i_cant_stop_winning"))).isDone())) {
+								if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("adrenaline", 0) >= 5 && !(entity instanceof ServerPlayer _plr92 && _plr92.level() instanceof ServerLevel
+										&& _plr92.getAdvancements().getOrStartProgress(_plr92.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:i_cant_stop_winning"))).isDone())) {
 									if (entity instanceof ServerPlayer _player) {
-										AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:i_cant_stop_winning"));
+										AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:i_cant_stop_winning"));
 										AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 										if (!_ap.isDone()) {
 											for (String criteria : _ap.getRemainingCriteria())
@@ -186,10 +186,10 @@ public class PerilRightClickProcedure {
 						});
 					} else {
 						if (entity instanceof Player _player)
-							_player.getCooldowns().addCooldown(itemstack.getItem(), 25);
+							_player.getCooldowns().addCooldown(itemstack, 25);
 						{
 							final String _tagName = "shot";
-							final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("shot") - 1);
+							final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("shot", 0) - 1);
 							CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 						}
 						if (itemstack.getItem() instanceof PerilItem)
@@ -213,7 +213,7 @@ public class PerilRightClickProcedure {
 										return entityToSpawn;
 									}
 								}.getArrow(projectileLevel, entity,
-										(float) ((double) DeepVoidConfigConfiguration.PERIL.get() * (1 + itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("adrenaline") * (double) DeepVoidConfigConfiguration.PERILDAMAGEMULTIPLIER.get())), 0, (byte) 5);
+										(float) ((double) DeepVoidConfigConfiguration.PERIL.get() * (1 + itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("adrenaline", 0) * (double) DeepVoidConfigConfiguration.PERILDAMAGEMULTIPLIER.get())), 0, (byte) 5);
 								_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
 								_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, 3, 0);
 								projectileLevel.addFreshEntity(_entityToSpawn);
@@ -230,22 +230,22 @@ public class PerilRightClickProcedure {
 							CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 						}
 						if (world instanceof Level)
-							((Level) world).playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1, 1, false);
+							((Level) world).playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_hammer_hit")), SoundSource.PLAYERS, 1, 1, false);
 						if (world instanceof Level)
-							((Level) world).playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_shoot_new")), SoundSource.PLAYERS, 1, 1, false);
+							((Level) world).playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_shoot_new")), SoundSource.PLAYERS, 1, 1, false);
 						TheDeepVoidMod.queueServerWork(17, () -> {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cocking")), SoundSource.PLAYERS, 1, 1);
+									_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cocking")), SoundSource.PLAYERS, 1, 1);
 								} else {
-									_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cocking")), SoundSource.PLAYERS, 1, 1, false);
+									_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cocking")), SoundSource.PLAYERS, 1, 1, false);
 								}
 							}
 						});
 					}
-				} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("shot") <= 0) {
+				} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("shot", 0) <= 0) {
 					if (entity instanceof Player _player)
-						_player.getCooldowns().addCooldown(itemstack.getItem(), 50);
+						_player.getCooldowns().addCooldown(itemstack, 50);
 					{
 						final String _tagName = "shot";
 						final double _tagValue = 6;
@@ -282,14 +282,14 @@ public class PerilRightClickProcedure {
 							}
 					}
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 50, 4, false, false));
+						_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 50, 4, false, false));
 					TheDeepVoidMod.queueServerWork(10, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1,
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1,
 										Mth.nextInt(RandomSource.create(), 1, (int) 1.1));
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1,
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1,
 										Mth.nextInt(RandomSource.create(), 1, (int) 1.1), false);
 							}
 						}
@@ -297,23 +297,23 @@ public class PerilRightClickProcedure {
 					TheDeepVoidMod.queueServerWork(25, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.PLAYERS, 1,
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.PLAYERS, 1,
 										(float) Mth.nextDouble(RandomSource.create(), 0.8, 0.9));
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.PLAYERS, 1,
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.PLAYERS, 1,
 										(float) Mth.nextDouble(RandomSource.create(), 0.8, 0.9), false);
 							}
 						}
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flesh")), SoundSource.PLAYERS, 1,
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flesh")), SoundSource.PLAYERS, 1,
 										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1));
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:flesh")), SoundSource.PLAYERS, 1,
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flesh")), SoundSource.PLAYERS, 1,
 										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1), false);
 							}
 						}
-						entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC)),
+						entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MAGIC)),
 								(float) ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GUNSLINGER_HELMET.get()
 										&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GUNSLINGER_CHESTPLATE.get()
 										&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GUNSLINGER_LEGGINGS.get()
@@ -322,10 +322,10 @@ public class PerilRightClickProcedure {
 					TheDeepVoidMod.queueServerWork(38, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1,
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1,
 										Mth.nextInt(RandomSource.create(), (int) 0.9, 1));
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1,
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cylinder")), SoundSource.PLAYERS, 1,
 										Mth.nextInt(RandomSource.create(), (int) 0.9, 1), false);
 							}
 						}
@@ -333,9 +333,9 @@ public class PerilRightClickProcedure {
 					TheDeepVoidMod.queueServerWork(45, () -> {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cocking")), SoundSource.PLAYERS, 1, 1);
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cocking")), SoundSource.PLAYERS, 1, 1);
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:peril_cocking")), SoundSource.PLAYERS, 1, 1, false);
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:peril_cocking")), SoundSource.PLAYERS, 1, 1, false);
 							}
 						}
 					});

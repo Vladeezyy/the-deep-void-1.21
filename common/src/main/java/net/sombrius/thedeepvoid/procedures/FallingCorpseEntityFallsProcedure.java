@@ -5,7 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.sombrius.thedeepvoid.configuration.DeepVoidConfigConfiguration;
@@ -27,16 +27,16 @@ public class FallingCorpseEntityFallsProcedure {
 			return;
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.big_fall")), SoundSource.NEUTRAL, (float) 1.5, 1);
+				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.big_fall")), SoundSource.NEUTRAL, (float) 1.5, 1);
 			} else {
-				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.big_fall")), SoundSource.NEUTRAL, (float) 1.5, 1, false);
+				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.big_fall")), SoundSource.NEUTRAL, (float) 1.5, 1, false);
 			}
 		}
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.break")), SoundSource.NEUTRAL, (float) 1.2, 1);
+				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.break")), SoundSource.NEUTRAL, (float) 1.2, 1);
 			} else {
-				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.bone_block.break")), SoundSource.NEUTRAL, (float) 1.2, 1, false);
+				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.bone_block.break")), SoundSource.NEUTRAL, (float) 1.2, 1, false);
 			}
 		}
 		if (world instanceof ServerLevel _level)
@@ -46,7 +46,7 @@ public class FallingCorpseEntityFallsProcedure {
 		if (!entity.level().isClientSide())
 			entity.discard();
 		if (DeepVoidConfigConfiguration.PLACECORPSEONIMPACT.get() == true) {
-			if ((world.getBlockState(BlockPos.containing(x, y, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:replaceable_corpse")))) {
+			if ((world.getBlockState(BlockPos.containing(x, y, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:replaceable_corpse")))) {
 				world.setBlock(BlockPos.containing(x, y, z), TheDeepVoidModBlocks.CORPSE_PILE.get().defaultBlockState(), 3);
 			} else if ((world.getBlockState(BlockPos.containing(x, y - 1, z))).getBlock() == TheDeepVoidModBlocks.CORPSE_PILE.get()) {
 				world.setBlock(BlockPos.containing(x, y - 1, z), TheDeepVoidModBlocks.BLOCK_OF_SKULL_PILE.get().defaultBlockState(), 3);
@@ -58,7 +58,7 @@ public class FallingCorpseEntityFallsProcedure {
 						BlockPos _pos = BlockPos.containing(x, y, z);
 						BlockState _bs = world.getBlockState(_pos);
 						Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-						if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+						if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 							world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 						} else {
 							_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -72,7 +72,7 @@ public class FallingCorpseEntityFallsProcedure {
 						BlockPos _pos = BlockPos.containing(x, y, z);
 						BlockState _bs = world.getBlockState(_pos);
 						Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-						if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+						if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 							world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 						} else {
 							_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -86,7 +86,7 @@ public class FallingCorpseEntityFallsProcedure {
 						BlockPos _pos = BlockPos.containing(x, y, z);
 						BlockState _bs = world.getBlockState(_pos);
 						Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-						if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+						if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 							world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 						} else {
 							_property = _bs.getBlock().getStateDefinition().getProperty("axis");
@@ -100,7 +100,7 @@ public class FallingCorpseEntityFallsProcedure {
 						BlockPos _pos = BlockPos.containing(x, y, z);
 						BlockState _bs = world.getBlockState(_pos);
 						Property<?> _property = _bs.getBlock().getStateDefinition().getProperty("facing");
-						if (_property instanceof DirectionProperty _dp && _dp.getPossibleValues().contains(_dir)) {
+						if (_property instanceof EnumProperty _dp && _dp.getPossibleValues().contains(_dir)) {
 							world.setBlock(_pos, _bs.setValue(_dp, _dir), 3);
 						} else {
 							_property = _bs.getBlock().getStateDefinition().getProperty("axis");

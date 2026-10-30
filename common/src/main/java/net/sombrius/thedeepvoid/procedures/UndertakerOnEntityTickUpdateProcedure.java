@@ -16,7 +16,7 @@ public class UndertakerOnEntityTickUpdateProcedure {
 			return;
 		boolean success = false;
 		UndertakerAttacksProcedure.execute(world, entity);
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("noConversion") == true && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("conversionQut") != 0) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("noConversion", false) == true && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("conversionQut", 0) != 0) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("conversionQut", 0);
 		}
 		if ((entity instanceof UndertakerEntity _datEntI ? _datEntI.getEntityData().get(UndertakerEntity.DATA_despawn) : 0) > 0) {
@@ -42,9 +42,9 @@ public class UndertakerOnEntityTickUpdateProcedure {
 					_datEntSetI.getEntityData().set(UndertakerEntity.DATA_despawn, 4000);
 			}
 		}
-		if ((entity instanceof UndertakerEntity _datEntL12 && _datEntL12.getEntityData().get(UndertakerEntity.DATA_empty)) == false && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("firstTradeQut") == 0
-				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("secondTradeQut") == 0 && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("thirdTradeQut") == 0 && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("fourthTradeQut") == 0
-				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("potionTradeQut") == 0) {
+		if ((entity instanceof UndertakerEntity _datEntL12 && _datEntL12.getEntityData().get(UndertakerEntity.DATA_empty)) == false && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("firstTradeQut", 0) == 0
+				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("secondTradeQut", 0) == 0 && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("thirdTradeQut", 0) == 0 && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("fourthTradeQut", 0) == 0
+				&& net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("potionTradeQut", 0) == 0) {
 			if (entity instanceof UndertakerEntity _datEntSetL)
 				_datEntSetL.getEntityData().set(UndertakerEntity.DATA_empty, true);
 		}

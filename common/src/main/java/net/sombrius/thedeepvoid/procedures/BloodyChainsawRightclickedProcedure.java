@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -34,9 +34,9 @@ public class BloodyChainsawRightclickedProcedure {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("sentientChainsawUse", 0);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_loop")), SoundSource.PLAYERS, (float) 0.6, 1);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_loop")), SoundSource.PLAYERS, (float) 0.6, 1);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_loop")), SoundSource.PLAYERS, (float) 0.6, 1, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_loop")), SoundSource.PLAYERS, (float) 0.6, 1, false);
 				}
 			}
 			if (!world.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(
@@ -140,7 +140,7 @@ public class BloodyChainsawRightclickedProcedure {
 																					entity))
 																			.getBlockPos().getZ())))
 															.findFirst().orElse(null)).getZ()),
-									BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_impact")), SoundSource.PLAYERS, (float) 0.6, 1);
+									BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_impact")), SoundSource.PLAYERS, (float) 0.6, 1);
 						} else {
 							_level.playLocalSound(
 									(((Entity) world
@@ -218,7 +218,7 @@ public class BloodyChainsawRightclickedProcedure {
 													(entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(1.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity))
 															.getBlockPos().getZ())))
 											.findFirst().orElse(null)).getZ()),
-									BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_impact")), SoundSource.PLAYERS, (float) 0.6, 1, false);
+									BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_impact")), SoundSource.PLAYERS, (float) 0.6, 1, false);
 						}
 					}
 				}
@@ -231,7 +231,7 @@ public class BloodyChainsawRightclickedProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof LivingEntity && !(entityiterator instanceof TamableAnimal _tamIsTamedBy && entity instanceof LivingEntity _livEnt ? _tamIsTamedBy.isOwnedBy(_livEnt) : false) && !(entityiterator == entity)
 								&& !(entityiterator == (entity.getVehicle()))) {
-							entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.PLAYER_ATTACK), entity),
+							entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.PLAYER_ATTACK), entity),
 									(float) (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).getValue() * 1.5));
 						}
 					}

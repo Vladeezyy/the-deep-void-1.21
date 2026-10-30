@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -55,16 +55,16 @@ public class SoulOrbEntity extends PathfinderMob {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty"));
 	}
 
 	@Override
-	public boolean causeFallDamage(float l, float d, DamageSource source) {
+	public boolean causeFallDamage(double l, float d, DamageSource source) {
 		return false;
 	}
 
@@ -77,7 +77,7 @@ public class SoulOrbEntity extends PathfinderMob {
 	@Override
 	public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 		ItemStack itemstack = sourceentity.getItemInHand(hand);
-		InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+		InteractionResult retval = InteractionResult.SUCCESS;
 		super.mobInteract(sourceentity, hand);
 		double x = this.getX();
 		double y = this.getY();

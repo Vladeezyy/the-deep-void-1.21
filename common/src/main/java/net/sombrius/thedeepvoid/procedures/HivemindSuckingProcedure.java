@@ -26,7 +26,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
@@ -60,8 +60,8 @@ public class HivemindSuckingProcedure {
 											if (_ent instanceof ServerPlayer _serverPlayer) {
 												return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 											} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-												return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-														&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+												return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+														&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 											}
 											return false;
 										}
@@ -70,8 +70,8 @@ public class HivemindSuckingProcedure {
 											if (_ent instanceof ServerPlayer _serverPlayer) {
 												return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 											} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-												return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-														&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+												return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+														&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 											}
 											return false;
 										}
@@ -79,10 +79,10 @@ public class HivemindSuckingProcedure {
 								entityiterator.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * 1), 1, (Math.cos(Math.toRadians(entity.getYRot())) * 1)));
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_spit")),
+										_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_spit")),
 												SoundSource.HOSTILE, (float) 1.5, (float) 0.6);
 									} else {
-										_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_spit")), SoundSource.HOSTILE, (float) 1.5,
+										_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_spit")), SoundSource.HOSTILE, (float) 1.5,
 												(float) 0.6, false);
 									}
 								}
@@ -97,9 +97,9 @@ public class HivemindSuckingProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hivemind_prepare_suck")), SoundSource.HOSTILE, (float) 2.5, 1);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hivemind_prepare_suck")), SoundSource.HOSTILE, (float) 2.5, 1);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hivemind_prepare_suck")), SoundSource.HOSTILE, (float) 2.5, 1, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hivemind_prepare_suck")), SoundSource.HOSTILE, (float) 2.5, 1, false);
 					}
 				}
 			} else if ((entity instanceof MisanthropicHivemindEntity _datEntI ? _datEntI.getEntityData().get(MisanthropicHivemindEntity.DATA_sucking) : 0) <= 100
@@ -107,9 +107,9 @@ public class HivemindSuckingProcedure {
 				if ((entity instanceof MisanthropicHivemindEntity _datEntI ? _datEntI.getEntityData().get(MisanthropicHivemindEntity.DATA_sucking) : 0) == 100) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hivemind_suck")), SoundSource.HOSTILE, (float) 2.5, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hivemind_suck")), SoundSource.HOSTILE, (float) 2.5, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hivemind_suck")), SoundSource.HOSTILE, (float) 2.5, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hivemind_suck")), SoundSource.HOSTILE, (float) 2.5, 1, false);
 						}
 					}
 				}
@@ -127,8 +127,8 @@ public class HivemindSuckingProcedure {
 											if (_ent instanceof ServerPlayer _serverPlayer) {
 												return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 											} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-												return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-														&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+												return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+														&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 											}
 											return false;
 										}
@@ -137,8 +137,8 @@ public class HivemindSuckingProcedure {
 											if (_ent instanceof ServerPlayer _serverPlayer) {
 												return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 											} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-												return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-														&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+												return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+														&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 											}
 											return false;
 										}
@@ -164,8 +164,8 @@ public class HivemindSuckingProcedure {
 										if (_ent instanceof ServerPlayer _serverPlayer) {
 											return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 										} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-											return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-													&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+											return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+													&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 										}
 										return false;
 									}
@@ -174,8 +174,8 @@ public class HivemindSuckingProcedure {
 										if (_ent instanceof ServerPlayer _serverPlayer) {
 											return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 										} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-											return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-													&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+											return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+													&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 										}
 										return false;
 									}
@@ -193,7 +193,7 @@ public class HivemindSuckingProcedure {
 								if (_ent instanceof ServerPlayer _serverPlayer)
 									_serverPlayer.connection.teleport((entity.getX()), (entity.getY() - 1), (entity.getZ()), _ent.getYRot(), _ent.getXRot());
 							}
-							entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:digested"))), entity),
+							entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:digested"))), entity),
 									(float) (double) DeepVoidConfigConfiguration.HIVEMINDDAMAGEDIGEST.get());
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 								_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 5, 99, false, false));
@@ -208,10 +208,10 @@ public class HivemindSuckingProcedure {
 							if (Math.random() < 0.25) {
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.extinguish_fire")),
+										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.extinguish_fire")),
 												SoundSource.HOSTILE, (float) 0.2, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 									} else {
-										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.extinguish_fire")),
+										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.extinguish_fire")),
 												SoundSource.HOSTILE, (float) 0.2, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 									}
 								}

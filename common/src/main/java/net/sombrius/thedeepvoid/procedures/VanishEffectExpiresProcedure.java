@@ -1,6 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.UUID;
 import net.minecraft.server.level.ServerLevel;
@@ -17,23 +17,23 @@ public class VanishEffectExpiresProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"));
+		if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).getModifier(Identifier.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).removeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "0a6a7610-463a-4982-8c09-23fbbb6a4da7"));
 		}
-		if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"));
+		if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).getModifier(Identifier.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).removeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "ce3747e9-226d-4519-840d-0a19834844da"));
 		}
-		if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"));
+		if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).getModifier(Identifier.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE).removeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "dc4b4a93-4a76-44f9-8ecf-9dad1cbe411e"));
 		}
-		if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.STEP_HEIGHT).getModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf")) != null) {
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.STEP_HEIGHT).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf"));
+		if (((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.STEP_HEIGHT).getModifier(Identifier.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf")) != null) {
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.STEP_HEIGHT).removeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "13df1bf1-3b0d-4965-b15f-6403e84af6cf"));
 		}
 		if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem()) {
 			{
 				Entity _entity = entity;
 				if (_entity instanceof Player _player) {
-					_player.getInventory().armor.set(3, TheDeepVoidModVariables.of(entity).saveArmor3);
+					_player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD, TheDeepVoidModVariables.of(entity).saveArmor3);
 					_player.getInventory().setChanged();
 				} else if (_entity instanceof LivingEntity _living) {
 					_living.setItemSlot(EquipmentSlot.HEAD, TheDeepVoidModVariables.of(entity).saveArmor3);
@@ -61,7 +61,7 @@ public class VanishEffectExpiresProcedure {
 			{
 				Entity _entity = entity;
 				if (_entity instanceof Player _player) {
-					_player.getInventory().armor.set(2, TheDeepVoidModVariables.of(entity).saveArmor2);
+					_player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST, TheDeepVoidModVariables.of(entity).saveArmor2);
 					_player.getInventory().setChanged();
 				} else if (_entity instanceof LivingEntity _living) {
 					_living.setItemSlot(EquipmentSlot.CHEST, TheDeepVoidModVariables.of(entity).saveArmor2);
@@ -89,7 +89,7 @@ public class VanishEffectExpiresProcedure {
 			{
 				Entity _entity = entity;
 				if (_entity instanceof Player _player) {
-					_player.getInventory().armor.set(1, TheDeepVoidModVariables.of(entity).saveArmor1);
+					_player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.LEGS, TheDeepVoidModVariables.of(entity).saveArmor1);
 					_player.getInventory().setChanged();
 				} else if (_entity instanceof LivingEntity _living) {
 					_living.setItemSlot(EquipmentSlot.LEGS, TheDeepVoidModVariables.of(entity).saveArmor1);
@@ -117,7 +117,7 @@ public class VanishEffectExpiresProcedure {
 			{
 				Entity _entity = entity;
 				if (_entity instanceof Player _player) {
-					_player.getInventory().armor.set(0, TheDeepVoidModVariables.of(entity).saveArmor0);
+					_player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.FEET, TheDeepVoidModVariables.of(entity).saveArmor0);
 					_player.getInventory().setChanged();
 				} else if (_entity instanceof LivingEntity _living) {
 					_living.setItemSlot(EquipmentSlot.FEET, TheDeepVoidModVariables.of(entity).saveArmor0);

@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -60,8 +60,8 @@ public class ScarecrowOnEntityTickUpdateProcedure {
 							if (_ent instanceof ServerPlayer _serverPlayer) {
 								return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 							} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-								return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-										&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+								return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+										&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 							}
 							return false;
 						}
@@ -70,8 +70,8 @@ public class ScarecrowOnEntityTickUpdateProcedure {
 							if (_ent instanceof ServerPlayer _serverPlayer) {
 								return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 							} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-								return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-										&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+								return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+										&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 							}
 							return false;
 						}
@@ -92,10 +92,10 @@ public class ScarecrowOnEntityTickUpdateProcedure {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
 					_level.playSound(null, BlockPos.containing(x + Mth.nextInt(RandomSource.create(), -15, 15), y + Mth.nextInt(RandomSource.create(), -2, 2), z + Mth.nextInt(RandomSource.create(), -15, 15)),
-							BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:crow_call")), SoundSource.AMBIENT, 2, (float) Mth.nextDouble(RandomSource.create(), 1, 1.1));
+							BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:crow_call")), SoundSource.AMBIENT, 2, (float) Mth.nextDouble(RandomSource.create(), 1, 1.1));
 				} else {
 					_level.playLocalSound((x + Mth.nextInt(RandomSource.create(), -15, 15)), (y + Mth.nextInt(RandomSource.create(), -2, 2)), (z + Mth.nextInt(RandomSource.create(), -15, 15)),
-							BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:crow_call")), SoundSource.AMBIENT, 2, (float) Mth.nextDouble(RandomSource.create(), 1, 1.1), false);
+							BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:crow_call")), SoundSource.AMBIENT, 2, (float) Mth.nextDouble(RandomSource.create(), 1, 1.1), false);
 				}
 			}
 		}

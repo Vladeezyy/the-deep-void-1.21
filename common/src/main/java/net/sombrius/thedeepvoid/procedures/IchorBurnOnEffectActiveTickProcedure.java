@@ -10,6 +10,6 @@ public class IchorBurnOnEffectActiveTickProcedure {
 	public static void execute(LevelAccessor world, Entity entity, double amplifier) {
 		if (entity == null)
 			return;
-		entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.ON_FIRE)), (float) (1.25 + amplifier));
+		entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.ON_FIRE)), (float) (1.25 + amplifier));
 	}
 }

@@ -16,7 +16,7 @@ public class AcidSpitProjectileHitsLivingEntityProcedure {
 				_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.STICKY.holder(), 60, 0));
 		} else {
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 0));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 80, 0));
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 			_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 0));

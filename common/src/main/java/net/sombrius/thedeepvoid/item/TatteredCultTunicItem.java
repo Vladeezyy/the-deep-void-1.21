@@ -6,6 +6,6 @@ import net.minecraft.world.item.Rarity;
 
 public class TatteredCultTunicItem extends Item {
 	public TatteredCultTunicItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON));
 	}
 }

@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.RottenDelightEatingProcedure;
 
 public class RottenDelightItem extends Item {
 	public RottenDelightItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(5).saturationModifier(0.6f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(5).saturationModifier(0.6f).alwaysEdible().build()));
 	}
 
 	@Override

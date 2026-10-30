@@ -6,6 +6,6 @@ import net.minecraft.world.item.Rarity;
 
 public class RoughVoidriumItem extends Item {
 	public RoughVoidriumItem() {
-		super(new Item.Properties().stacksTo(64).fireResistant().rarity(Rarity.RARE));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).fireResistant().rarity(Rarity.RARE));
 	}
 }

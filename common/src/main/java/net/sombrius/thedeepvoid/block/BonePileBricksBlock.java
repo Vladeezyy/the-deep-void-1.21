@@ -10,11 +10,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BonePileBricksBlock extends Block {
 	public BonePileBricksBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.BONE_BLOCK).strength(0.8f, 8f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.BONE_BLOCK).strength(0.8f, 8f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 }

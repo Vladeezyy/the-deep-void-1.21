@@ -59,7 +59,7 @@ public class UndertakerItemTakenFromSlotProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("undertakerUuid"))) {
+					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("undertakerUuid", ""))) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putDouble("firstTradeQut", 0);
 					}
 				}
@@ -105,7 +105,7 @@ public class UndertakerItemTakenFromSlotProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("undertakerUuid"))) {
+					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("undertakerUuid", ""))) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putDouble("secondTradeQut", 0);
 					}
 				}
@@ -151,7 +151,7 @@ public class UndertakerItemTakenFromSlotProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("undertakerUuid"))) {
+					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("undertakerUuid", ""))) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putDouble("thirdTradeQut", 0);
 					}
 				}
@@ -197,7 +197,7 @@ public class UndertakerItemTakenFromSlotProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("undertakerUuid"))) {
+					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("undertakerUuid", ""))) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putDouble("fourthTradeQut", 0);
 					}
 				}
@@ -243,7 +243,7 @@ public class UndertakerItemTakenFromSlotProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("undertakerUuid"))) {
+					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("undertakerUuid", ""))) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putDouble("potionTradeQut", 0);
 					}
 				}
@@ -289,7 +289,7 @@ public class UndertakerItemTakenFromSlotProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(24 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("undertakerUuid"))) {
+					if (entityiterator instanceof UndertakerEntity && (entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("undertakerUuid", ""))) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putDouble("conversionQut", 0);
 					}
 				}

@@ -59,7 +59,7 @@ public class ArmorAbilityOnKeyPressedProcedure {
 					&& !(entity instanceof LivingEntity _livEnt60 && _livEnt60.hasEffect(TheDeepVoidModMobEffects.WEAVER_CURSE.holder()))) {
 				ArmorAbilitySoulWingsProcedure.execute(entity);
 			} else if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLY_WINGS_CHESTPLATE.get() && (entity instanceof Player _plrCldRem64
-					? _plrCldRem64.getCooldowns().getCooldownPercent((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem(), 0f) * 100
+					? _plrCldRem64.getCooldowns().getCooldownPercent((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY), 0f) * 100
 					: 0) <= 0 && !(entity instanceof LivingEntity _livEnt65 && _livEnt65.hasEffect(TheDeepVoidModMobEffects.WEAVER_CURSE.holder()))) {
 				ArmorAbilityFlyWingsDeployProcedure.execute(entity);
 			} else if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLY_WINGS_FLY_CHESTPLATE.get()) {

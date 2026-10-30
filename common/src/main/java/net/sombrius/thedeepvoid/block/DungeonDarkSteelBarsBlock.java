@@ -18,11 +18,11 @@ import net.sombrius.thedeepvoid.procedures.DungeonDarkSteelBarsOnBlockRightClick
 
 public class DungeonDarkSteelBarsBlock extends IronBarsBlock {
 	public DungeonDarkSteelBarsBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(-1, 3600000).pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.METAL).strength(-1, 3600000).pushReaction(PushReaction.BLOCK));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 0;
 	}
 

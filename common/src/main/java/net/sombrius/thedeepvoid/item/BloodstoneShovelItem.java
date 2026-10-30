@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.tags.TagKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -8,45 +9,14 @@ import net.minecraft.world.level.block.Block;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 
 public class BloodstoneShovelItem extends ShovelItem {
-	private static final Tier TOOL_TIER = new Tier() {
-		@Override
-		public int getUses() {
-			return 2400;
-		}
-
-		@Override
-		public float getSpeed() {
-			return 7f;
-		}
-
-		@Override
-		public float getAttackDamageBonus() {
-			return 3.5f;
-		}
-
-		@Override
-		public TagKey<Block> getIncorrectBlocksForDrops() {
-			return BlockTags.INCORRECT_FOR_DIAMOND_TOOL;
-		}
-
-		@Override
-		public int getEnchantmentValue() {
-			return 8;
-		}
-
-		@Override
-		public Ingredient getRepairIngredient() {
-			return Ingredient.of(new ItemStack(TheDeepVoidModItems.BLOODSTONE.get()));
-		}
-	};
+	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2400, 7f, 3.5f, 8, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/bloodstone")));
 
 	public BloodstoneShovelItem() {
-		super(TOOL_TIER, new Item.Properties().attributes(ShovelItem.createAttributes(TOOL_TIER, 1, -2.8f)));
+		super(TOOL_TIER, 1, -2.8f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
 	}
 }

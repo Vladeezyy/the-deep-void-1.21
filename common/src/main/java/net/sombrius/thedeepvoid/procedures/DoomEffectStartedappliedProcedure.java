@@ -20,7 +20,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffects;
@@ -32,7 +32,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.advancements.AdvancementProgress;
@@ -46,18 +46,18 @@ public class DoomEffectStartedappliedProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 23, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 23, 99, false, false));
 		net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("doomLevel", (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.DOOM.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.DOOM.holder()).getAmplifier() : 0));
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("doomLevel") == 1) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("doomLevel", 0) == 1) {
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = TheDeepVoidModEntities.DOOMING_COFFIN.get().spawn(_level, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), MobSpawnType.MOB_SUMMONED);
+				Entity entityToSpawn = TheDeepVoidModEntities.DOOMING_COFFIN.get().spawn(_level, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}
 			}
 		} else {
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = TheDeepVoidModEntities.DOOMING_TOMBSTONE.get().spawn(_level, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), MobSpawnType.MOB_SUMMONED);
+				Entity entityToSpawn = TheDeepVoidModEntities.DOOMING_TOMBSTONE.get().spawn(_level, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}
@@ -78,42 +78,42 @@ public class DoomEffectStartedappliedProcedure {
 		for (int index0 = 0; index0 < Mth.nextInt(RandomSource.create(), 1, 10); index0++) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")), SoundSource.PLAYERS, 1,
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")), SoundSource.PLAYERS, 1,
 							(float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2));
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("particle.soul_escape")), SoundSource.PLAYERS, 1,
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("particle.soul_escape")), SoundSource.PLAYERS, 1,
 							(float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2), false);
 				}
 			}
 		}
 		TheDeepVoidMod.queueServerWork(18, () -> {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("doomLevel") == 1) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("doomLevel", 0) == 1) {
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.zombie.break_wooden_door")), SoundSource.PLAYERS, 1,
+						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.zombie.break_wooden_door")), SoundSource.PLAYERS, 1,
 								(float) Mth.nextDouble(RandomSource.create(), 0.8, 1));
 					} else {
-						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.zombie.break_wooden_door")), SoundSource.PLAYERS, 1,
+						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.zombie.break_wooden_door")), SoundSource.PLAYERS, 1,
 								(float) Mth.nextDouble(RandomSource.create(), 0.8, 1), false);
 					}
 				}
 			} else {
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:tombstone_mobhit3")), SoundSource.PLAYERS, 1,
+						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:tombstone_mobhit3")), SoundSource.PLAYERS, 1,
 								(float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2));
 					} else {
-						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:tombstone_mobhit3")), SoundSource.PLAYERS, 1,
+						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:tombstone_mobhit3")), SoundSource.PLAYERS, 1,
 								(float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2), false);
 					}
 				}
 			}
 		});
 		TheDeepVoidMod.queueServerWork(23, () -> {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("doomLevel") == 1) {
-				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC)), (float) (double) DeepVoidConfigConfiguration.COFFINDOOM.get());
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("doomLevel", 0) == 1) {
+				entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MAGIC)), (float) (double) DeepVoidConfigConfiguration.COFFINDOOM.get());
 			} else {
-				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC)), (float) (double) DeepVoidConfigConfiguration.TOMBSTONEDOOM.get());
+				entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MAGIC)), (float) (double) DeepVoidConfigConfiguration.TOMBSTONEDOOM.get());
 			}
 			if (!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 40, 40, 40), e -> true).isEmpty() && entity instanceof LivingEntity _livEnt50 && _livEnt50.getType().is(EntityTypeTags.UNDEAD)) {
 				{
@@ -122,9 +122,9 @@ public class DoomEffectStartedappliedProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator instanceof Player && (entityiterator instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.TOMBSTONE.get()
 								&& !(entityiterator instanceof ServerPlayer _plr54 && _plr54.level() instanceof ServerLevel
-										&& _plr54.getAdvancements().getOrStartProgress(_plr54.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:desecrating_the_dead"))).isDone())) {
+										&& _plr54.getAdvancements().getOrStartProgress(_plr54.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:desecrating_the_dead"))).isDone())) {
 							if (entityiterator instanceof ServerPlayer _player) {
-								AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:desecrating_the_dead"));
+								AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:desecrating_the_dead"));
 								AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 								if (!_ap.isDone()) {
 									for (String criteria : _ap.getRemainingCriteria())

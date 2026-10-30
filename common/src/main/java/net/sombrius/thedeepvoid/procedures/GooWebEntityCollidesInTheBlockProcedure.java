@@ -12,6 +12,6 @@ public class GooWebEntityCollidesInTheBlockProcedure {
 			return;
 		entity.setDeltaMovement(new Vec3(0, 0, 0));
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 9, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 9, false, false));
 	}
 }

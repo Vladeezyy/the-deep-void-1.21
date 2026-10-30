@@ -15,8 +15,8 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 
 public class AmbrosiaStrandsBlock extends FlowerBlock {
 	public AmbrosiaStrandsBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 100,
-				BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).sound(SoundType.SCULK_VEIN).instabreak().lightLevel(s -> 1).noCollission().replaceable().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 100,
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.TERRACOTTA_ORANGE).sound(SoundType.SCULK_VEIN).instabreak().lightLevel(s -> 1).noCollision().replaceable().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override

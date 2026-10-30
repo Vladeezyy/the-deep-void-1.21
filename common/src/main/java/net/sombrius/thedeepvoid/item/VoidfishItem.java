@@ -7,6 +7,6 @@ import net.minecraft.world.item.Rarity;
 
 public class VoidfishItem extends Item {
 	public VoidfishItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(0.1f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(0.1f).build()));
 	}
 }

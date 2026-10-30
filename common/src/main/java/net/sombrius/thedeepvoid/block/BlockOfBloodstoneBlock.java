@@ -10,11 +10,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockOfBloodstoneBlock extends Block {
 	public BlockOfBloodstoneBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(3.5f, 5f).requiresCorrectToolForDrops());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.METAL).strength(3.5f, 5f).requiresCorrectToolForDrops());
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 }

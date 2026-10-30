@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.BoneCrawlerMoltPiecePlayerFinishesUsi
 
 public class BoneCrawlerMoltPieceItem extends Item {
 	public BoneCrawlerMoltPieceItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(0f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.UNCOMMON).food((new FoodProperties.Builder()).nutrition(2).saturationModifier(0f).alwaysEdible().build()));
 	}
 
 	@Override

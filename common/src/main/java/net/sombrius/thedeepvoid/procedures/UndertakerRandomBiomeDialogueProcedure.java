@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -15,7 +15,7 @@ public class UndertakerRandomBiomeDialogueProcedure {
 			return;
 		double dialogue = 0;
 		double interrupt = 0;
-		if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:mourning_graveyard"))) {
+		if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:mourning_graveyard"))) {
 			dialogue = Mth.nextInt(RandomSource.create(), 1, 4);
 			if (dialogue == 1) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
@@ -30,7 +30,7 @@ public class UndertakerRandomBiomeDialogueProcedure {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
 					_player.displayClientMessage(Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.graveyard4").getString())), false);
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:filled_graveyard")) || world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:forgotten_valley"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:filled_graveyard")) || world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:forgotten_valley"))) {
 			dialogue = Mth.nextInt(RandomSource.create(), 1, 3);
 			if (dialogue == 1) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
@@ -42,7 +42,7 @@ public class UndertakerRandomBiomeDialogueProcedure {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
 					_player.displayClientMessage(Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.graveyard4").getString())), false);
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:drifting_monoliths"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:drifting_monoliths"))) {
 			dialogue = Mth.nextInt(RandomSource.create(), 1, 4);
 			if (dialogue == 1) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
@@ -61,7 +61,7 @@ public class UndertakerRandomBiomeDialogueProcedure {
 					_player.displayClientMessage(Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.driftingmonoliths4").getString())),
 							false);
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:deep_marrows"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:deep_marrows"))) {
 			dialogue = Mth.nextInt(RandomSource.create(), 1, 4);
 			if (dialogue == 1) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
@@ -76,7 +76,7 @@ public class UndertakerRandomBiomeDialogueProcedure {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
 					_player.displayClientMessage(Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.marrows4").getString())), false);
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:grim_canopy")) || world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:watching_undergrowth"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:grim_canopy")) || world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:watching_undergrowth"))) {
 			dialogue = Mth.nextInt(RandomSource.create(), 1, 4);
 			if (dialogue == 1) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
@@ -91,7 +91,7 @@ public class UndertakerRandomBiomeDialogueProcedure {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
 					_player.displayClientMessage(Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.canopy4").getString())), false);
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:windswept_hollow"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:windswept_hollow"))) {
 			dialogue = Mth.nextInt(RandomSource.create(), 1, 3);
 			if (dialogue == 1) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
@@ -103,7 +103,7 @@ public class UndertakerRandomBiomeDialogueProcedure {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())
 					_player.displayClientMessage(Component.literal(("<" + Component.translatable("entity.the_deep_void.undertaker").getString() + "> " + Component.translatable("entity.the_deep_void.undertaker.windswept3").getString())), false);
 			}
-		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:gaol_of_heretics"))) {
+		} else if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:gaol_of_heretics"))) {
 			dialogue = Mth.nextInt(RandomSource.create(), 1, 3);
 			if (dialogue == 1) {
 				if (sourceentity instanceof Player _player && !_player.level().isClientSide())

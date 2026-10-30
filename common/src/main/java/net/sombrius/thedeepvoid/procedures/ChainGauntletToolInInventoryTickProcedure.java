@@ -1,6 +1,6 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.UUID;
 import javax.annotation.Nullable;
@@ -15,7 +15,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 @EventBusSubscriber
 public class ChainGauntletToolInInventoryTickProcedure {
-	private static final ResourceLocation ID_01387B5F_4DBD_4D94_B869_7F35D57D896E = ResourceLocation.fromNamespaceAndPath("the_deep_void", "01387b5f-4dbd-4d94-b869-7f35d57d896e");
+	private static final Identifier ID_01387B5F_4DBD_4D94_B869_7F35D57D896E = Identifier.fromNamespaceAndPath("the_deep_void", "01387b5f-4dbd-4d94-b869-7f35d57d896e");
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {

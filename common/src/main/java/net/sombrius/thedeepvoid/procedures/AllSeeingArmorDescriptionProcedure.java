@@ -38,7 +38,7 @@ public class AllSeeingArmorDescriptionProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ALL_SEEING_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ALL_SEEING_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ALL_SEEING_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.all_seeing.when_worn").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.all_seeing.worn").getString())));
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.all_seeing.when_target").getString())));
@@ -50,7 +50,7 @@ public class AllSeeingArmorDescriptionProcedure {
 					tooltip.add(Component.literal((Component.translatable("armors.the_deep_void.press_shift").getString())));
 				}
 			} else {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.all_seeing.when_worn").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.all_seeing.worn").getString())));
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.all_seeing.when_target").getString())));

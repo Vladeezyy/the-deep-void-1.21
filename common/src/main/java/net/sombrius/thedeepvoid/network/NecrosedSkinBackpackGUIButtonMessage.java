@@ -7,7 +7,7 @@ import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,9 +21,9 @@ import net.sombrius.thedeepvoid.TheDeepVoidMod;
 import net.sombrius.thedeepvoid.procedures.NecrosedSkinBackpackCraftingButtonClickedProcedure;
 import net.sombrius.thedeepvoid.world.inventory.NecrosedSkinBackpackGUIMenu;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public record NecrosedSkinBackpackGUIButtonMessage(int buttonID, int x, int y, int z) implements CustomPacketPayload {
-	public static final Type<NecrosedSkinBackpackGUIButtonMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "necrosed_skin_backpack_gui_button"));
+	public static final Type<NecrosedSkinBackpackGUIButtonMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, "necrosed_skin_backpack_gui_button"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, NecrosedSkinBackpackGUIButtonMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, NecrosedSkinBackpackGUIButtonMessage message) -> {
 		buffer.writeInt(message.buttonID);
 		buffer.writeInt(message.x);

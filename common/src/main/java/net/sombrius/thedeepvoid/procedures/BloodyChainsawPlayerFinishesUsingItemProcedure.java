@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -24,7 +24,7 @@ public class BloodyChainsawPlayerFinishesUsingItemProcedure {
 			return;
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 120);
+				_player.getCooldowns().addCooldown(itemstack, 120);
 			{
 				final String _tagName = "state";
 				final double _tagValue = 0;
@@ -38,9 +38,9 @@ public class BloodyChainsawPlayerFinishesUsingItemProcedure {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("sentientChainsawUse", 0);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_break")), SoundSource.PLAYERS, (float) 0.6, 1);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_break")), SoundSource.PLAYERS, (float) 0.6, 1);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:sentient_chainsaw_break")), SoundSource.PLAYERS, (float) 0.6, 1, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:sentient_chainsaw_break")), SoundSource.PLAYERS, (float) 0.6, 1, false);
 				}
 			}
 			if (world instanceof ServerLevel _level)

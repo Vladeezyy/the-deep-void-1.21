@@ -19,7 +19,7 @@ public class ArmorAbilityOnKeyReleasedProcedure {
 			{
 				Entity _entity = entity;
 				if (_entity instanceof Player _player) {
-					_player.getInventory().armor.set(2, new ItemStack(TheDeepVoidModItems.SOUL_WINGS_CHESTPLATE.get()));
+					_player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST, new ItemStack(TheDeepVoidModItems.SOUL_WINGS_CHESTPLATE.get()));
 					_player.getInventory().setChanged();
 				} else if (_entity instanceof LivingEntity _living) {
 					_living.setItemSlot(EquipmentSlot.CHEST, new ItemStack(TheDeepVoidModItems.SOUL_WINGS_CHESTPLATE.get()));

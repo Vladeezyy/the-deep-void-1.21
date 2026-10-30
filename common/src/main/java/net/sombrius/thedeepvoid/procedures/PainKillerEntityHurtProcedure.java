@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import javax.annotation.Nullable;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -36,12 +36,12 @@ public class PainKillerEntityHurtProcedure {
 		if (damagesource == null || entity == null || sourceentity == null)
 			return;
 		if (sourceentity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(TheDeepVoidModMobEffects.DEBILITATED.holder())) {
-			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:debilitated_attack")))
+			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:debilitated_attack")))
 					&& !((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SHANK.get())) {
 				if (event instanceof ICancellableEvent _cancellable) {
 					_cancellable.setCanceled(true);
 				}
-				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:debilitated_attack"))), sourceentity),
+				entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:debilitated_attack"))), sourceentity),
 						(float) (amount * 0.3));
 			}
 		}
@@ -50,7 +50,7 @@ public class PainKillerEntityHurtProcedure {
 				_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 240,
 						(int) ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.PAIN_KILLER.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.PAIN_KILLER.holder()).getAmplifier() : 0) + 1)));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 240,
+				_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 240,
 						(int) ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.PAIN_KILLER.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.PAIN_KILLER.holder()).getAmplifier() : 0) + 1)));
 			if (entity instanceof LivingEntity _entity)
 				_entity.removeEffect(TheDeepVoidModMobEffects.PAIN_KILLER.holder());
@@ -63,12 +63,12 @@ public class PainKillerEntityHurtProcedure {
 							(int) ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.PAIN_KILLER.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.PAIN_KILLER.holder()).getAmplifier() : 0) - 1)));
 			}
 		}
-		if (entity instanceof LivingEntity _livEnt17 && _livEnt17.hasEffect(TheDeepVoidModMobEffects.TRIBUTE_TO_THE_VOID.holder()) && !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:tribute")))
+		if (entity instanceof LivingEntity _livEnt17 && _livEnt17.hasEffect(TheDeepVoidModMobEffects.TRIBUTE_TO_THE_VOID.holder()) && !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:tribute")))
 				&& sourceentity instanceof LivingEntity) {
 			if (event instanceof ICancellableEvent _cancellable) {
 				_cancellable.setCanceled(true);
 			}
-			entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:tribute"))), sourceentity), (float) (amount * 2));
+			entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:tribute"))), sourceentity), (float) (amount * 2));
 		}
 	}
 }

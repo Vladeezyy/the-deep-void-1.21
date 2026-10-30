@@ -1,11 +1,11 @@
 package net.sombrius.thedeepvoid.client.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.renderer.RenderPipelines;
 import java.util.HashMap;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -28,7 +28,7 @@ public class SoulForgeGUIScreen extends AbstractContainerScreen<SoulForgeGUIMenu
 		this.imageHeight = 166;
 	}
 
-	private static final ResourceLocation texture = ResourceLocation.parse("the_deep_void:textures/screens/soul_forge_gui.png");
+	private static final Identifier texture = Identifier.parse("the_deep_void:textures/screens/soul_forge_gui.png");
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
@@ -39,31 +39,28 @@ public class SoulForgeGUIScreen extends AbstractContainerScreen<SoulForgeGUIMenu
 
 	@Override
 	protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int gx, int gy) {
-		RenderSystem.setShaderColor(1, 1, 1, 1);
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
-		guiGraphics.blit(texture, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, texture, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
-		guiGraphics.blit(ResourceLocation.parse("the_deep_void:textures/screens/plus.png"), this.leftPos + 49, this.topPos + 45, 0, 0, 13, 13, 13, 13);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.parse("the_deep_void:textures/screens/plus.png"), this.leftPos + 49, this.topPos + 45, 0, 0, 13, 13, 13, 13);
 
-		guiGraphics.blit(ResourceLocation.parse("the_deep_void:textures/screens/arrow.png"), this.leftPos + 93, this.topPos + 40, 0, 0, 22, 22, 22, 22);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.parse("the_deep_void:textures/screens/arrow.png"), this.leftPos + 93, this.topPos + 40, 0, 0, 22, 22, 22, 22);
 
-		guiGraphics.blit(ResourceLocation.parse("the_deep_void:textures/screens/soul_hammer.png"), this.leftPos + 15, this.topPos + 7, 0, 0, 30, 30, 30, 30);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.parse("the_deep_void:textures/screens/soul_hammer.png"), this.leftPos + 15, this.topPos + 7, 0, 0, 30, 30, 30, 30);
 
-		guiGraphics.blit(ResourceLocation.parse("the_deep_void:textures/screens/soul_shard_icon.png"), this.leftPos + 25, this.topPos + 44, 0, 0, 16, 16, 16, 16);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.parse("the_deep_void:textures/screens/soul_shard_icon.png"), this.leftPos + 25, this.topPos + 44, 0, 0, 16, 16, 16, 16);
 
-		guiGraphics.blit(ResourceLocation.parse("the_deep_void:textures/screens/netherite_ingot_icon.png"), this.leftPos + 70, this.topPos + 44, 0, 0, 16, 16, 16, 16);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.parse("the_deep_void:textures/screens/netherite_ingot_icon.png"), this.leftPos + 70, this.topPos + 44, 0, 0, 16, 16, 16, 16);
 
-		RenderSystem.disableBlend();
 	}
 
 	@Override
-	public boolean keyPressed(int key, int b, int c) {
+	public boolean keyPressed(net.minecraft.client.input.KeyEvent event) {
+		int key = event.key();
 		if (key == 256) {
 			this.minecraft.player.closeContainer();
 			return true;
 		}
-		return super.keyPressed(key, b, c);
+		return super.keyPressed(event);
 	}
 
 	@Override

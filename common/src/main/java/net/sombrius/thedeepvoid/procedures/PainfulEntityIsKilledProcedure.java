@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -42,18 +42,18 @@ public class PainfulEntityIsKilledProcedure {
 			for (Entity entityiterator : _entfound) {
 				if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(TheDeepVoidModMobEffects.PAINFUL.holder()) && !(entityiterator instanceof LivingEntity _livEnt1 && _livEnt1.hasEffect(TheDeepVoidModMobEffects.PAINFUL.holder()))
 						&& entityiterator instanceof LivingEntity) {
-					if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:advancedPainful") == true) {
-						if (!(entityiterator.getDisplayName().getString()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("deep_void:painfulSharer"))) {
+					if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:advancedPainful", false) == true) {
+						if (!(entityiterator.getDisplayName().getString()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("deep_void:painfulSharer", ""))) {
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 								_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.PAINFUL.holder(), 480, 0));
 							net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putBoolean("deep_void:advancedPainful", true);
-							net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putString("deep_void:painfulSharer", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("deep_void:painfulSharer")));
+							net.sombrius.thedeepvoid.port.PortUtil.data(entityiterator).putString("deep_void:painfulSharer", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("deep_void:painfulSharer", "")));
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.respawn_anchor.set_spawn")), SoundSource.HOSTILE, 1,
+									_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.respawn_anchor.set_spawn")), SoundSource.HOSTILE, 1,
 											(float) 0.9);
 								} else {
-									_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.respawn_anchor.set_spawn")), SoundSource.HOSTILE, 1, (float) 0.9, false);
+									_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.respawn_anchor.set_spawn")), SoundSource.HOSTILE, 1, (float) 0.9, false);
 								}
 							}
 						}

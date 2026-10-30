@@ -5,7 +5,7 @@
 package net.sombrius.thedeepvoid.init;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
@@ -26,14 +26,14 @@ public class TheDeepVoidModFluids {
 	public static final RegistryEntry<Fluid, FlowingFluid> LIQUID_ICHOR = REGISTRY.register("liquid_ichor", () -> new LiquidIchorFluid.Source());
 	public static final RegistryEntry<Fluid, FlowingFluid> FLOWING_LIQUID_ICHOR = REGISTRY.register("flowing_liquid_ichor", () -> new LiquidIchorFluid.Flowing());
 
-	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+	@EventBusSubscriber(value = Dist.CLIENT)
 	public static class FluidsClientSideHandler {
 		@SubscribeEvent
 		public static void clientSetup(FMLClientSetupEvent event) {
-			net.sombrius.thedeepvoid.port.PortClient.setRenderLayer(LIQUID_VOID.get(), RenderType.translucent());
-			net.sombrius.thedeepvoid.port.PortClient.setRenderLayer(FLOWING_LIQUID_VOID.get(), RenderType.translucent());
-			net.sombrius.thedeepvoid.port.PortClient.setRenderLayer(LIQUID_ICHOR.get(), RenderType.translucent());
-			net.sombrius.thedeepvoid.port.PortClient.setRenderLayer(FLOWING_LIQUID_ICHOR.get(), RenderType.translucent());
+			net.sombrius.thedeepvoid.port.PortClient.setRenderLayer(LIQUID_VOID.get(), net.minecraft.client.renderer.chunk.ChunkSectionLayer.TRANSLUCENT);
+			net.sombrius.thedeepvoid.port.PortClient.setRenderLayer(FLOWING_LIQUID_VOID.get(), net.minecraft.client.renderer.chunk.ChunkSectionLayer.TRANSLUCENT);
+			net.sombrius.thedeepvoid.port.PortClient.setRenderLayer(LIQUID_ICHOR.get(), net.minecraft.client.renderer.chunk.ChunkSectionLayer.TRANSLUCENT);
+			net.sombrius.thedeepvoid.port.PortClient.setRenderLayer(FLOWING_LIQUID_ICHOR.get(), net.minecraft.client.renderer.chunk.ChunkSectionLayer.TRANSLUCENT);
 		}
 	}
 }

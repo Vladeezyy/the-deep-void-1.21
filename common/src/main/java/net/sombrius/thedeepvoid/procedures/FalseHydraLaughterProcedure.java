@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -20,10 +20,10 @@ public class FalseHydraLaughterProcedure {
 				_datEntSetI.getEntityData().set(FalseHydraEntity.DATA_laugh, 100);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_laughter_loop")), SoundSource.HOSTILE, 4,
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_laughter_loop")), SoundSource.HOSTILE, 4,
 							(float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:false_hydra_laughter_loop")), SoundSource.HOSTILE, 4, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:false_hydra_laughter_loop")), SoundSource.HOSTILE, 4, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
 				}
 			}
 		} else {

@@ -7,6 +7,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class AshBrickWallBlock extends WallBlock {
 	public AshBrickWallBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.SOUL_SOIL).strength(1.2f, 0f).dynamicShape().forceSolidOn());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.SOUL_SOIL).strength(1.2f, 0f).dynamicShape().forceSolidOn());
 	}
 }

@@ -1,7 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,7 +19,7 @@ public class BoneCageNaturalEntitySpawningConditionProcedure {
 				&& !(!world.getEntitiesOfClass(BoneCageEntity.class, AABB.ofSize(new Vec3(x, y, z), 60, 60, 60), e -> true).isEmpty())
 				&& !(!world.getEntitiesOfClass(BoneCageClosedEntity.class, AABB.ofSize(new Vec3(x, y, z), 60, 60, 60), e -> true).isEmpty())
 				&& !world.getEntitiesOfClass(MaskedHunterEntity.class, AABB.ofSize(new Vec3(x, y, z), 300, 300, 300), e -> true).isEmpty() && DeepVoidConfigConfiguration.SPAWNBONECAGES.get() == true && y >= 50
-				&& (world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:masked_hunter_spawnable_on")))) {
+				&& (world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:masked_hunter_spawnable_on")))) {
 			return true;
 		}
 		return false;

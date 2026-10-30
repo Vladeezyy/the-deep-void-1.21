@@ -13,7 +13,7 @@ public class TombstoneInHandTickProcedure {
 	public static void execute(Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("deep_void:jump") == true) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("deep_void:jump", false) == true) {
 			{
 				final String _tagName = "deep_void:jump";
 				final boolean _tagValue = false;
@@ -21,7 +21,7 @@ public class TombstoneInHandTickProcedure {
 			}
 			entity.setDeltaMovement(new Vec3((entity.getDeltaMovement().x()), 1, (entity.getDeltaMovement().z())));
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 3, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 3, false, false));
 		}
 	}
 }

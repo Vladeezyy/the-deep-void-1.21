@@ -17,11 +17,11 @@ import net.sombrius.thedeepvoid.procedures.BlockOfBonePileOnBoneMealSuccessProce
 
 public class BlockOfMistedBonePileBlock extends Block implements BonemealableBlock {
 	public BlockOfMistedBonePileBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHER_ORE).strength(0.8f, 8f).requiresCorrectToolForDrops().speedFactor(0.7f).jumpFactor(0.9f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHER_ORE).strength(0.8f, 8f).requiresCorrectToolForDrops().speedFactor(0.7f).jumpFactor(0.9f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

@@ -19,12 +19,12 @@ public class PoisonNeedleRecipeBrewingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean isInput(ItemStack input) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModItems.BONE_NEEDLE.get())).test(input);
+		return Ingredient.of(TheDeepVoidModItems.BONE_NEEDLE.get()).test(input);
 	}
 
 	@Override
 	public boolean isIngredient(ItemStack ingredient) {
-		return Ingredient.of(new ItemStack(Items.SPIDER_EYE)).test(ingredient);
+		return Ingredient.of(Items.SPIDER_EYE).test(ingredient);
 	}
 
 	@Override

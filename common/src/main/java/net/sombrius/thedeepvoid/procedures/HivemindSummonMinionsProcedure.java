@@ -7,7 +7,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.sombrius.thedeepvoid.entity.MisanthropicHivemindEntity;
 import net.sombrius.thedeepvoid.entity.SawThrowerEntity;
@@ -30,7 +30,7 @@ public class HivemindSummonMinionsProcedure {
 			zPos = entity.getZ() + Mth.nextInt(RandomSource.create(), -10, 10);
 			if (world.getBlockState(BlockPos.containing(xPos, yPos - 1, zPos)).canOcclude() && world.isEmptyBlock(BlockPos.containing(xPos, yPos, zPos))) {
 				if (world instanceof ServerLevel _serverLevel) {
-					Entity entityinstance = TheDeepVoidModEntities.SAW_THROWER.get().create(_serverLevel, null, BlockPos.containing(xPos, yPos, zPos), MobSpawnType.MOB_SUMMONED, false, false);
+					Entity entityinstance = TheDeepVoidModEntities.SAW_THROWER.get().create(_serverLevel, null, BlockPos.containing(xPos, yPos, zPos), EntitySpawnReason.MOB_SUMMONED, false, false);
 					if (entityinstance != null) {
 						entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 						if (entityinstance instanceof SawThrowerEntity) {
@@ -52,7 +52,7 @@ public class HivemindSummonMinionsProcedure {
 			zPos = entity.getZ() + Mth.nextInt(RandomSource.create(), -10, 10);
 			if (world.getBlockState(BlockPos.containing(xPos, yPos - 1, zPos)).canOcclude() && world.isEmptyBlock(BlockPos.containing(xPos, yPos, zPos))) {
 				if (world instanceof ServerLevel _serverLevel) {
-					Entity entityinstance = TheDeepVoidModEntities.SKULL_SMASHER.get().create(_serverLevel, null, BlockPos.containing(xPos, yPos, zPos), MobSpawnType.MOB_SUMMONED, false, false);
+					Entity entityinstance = TheDeepVoidModEntities.SKULL_SMASHER.get().create(_serverLevel, null, BlockPos.containing(xPos, yPos, zPos), EntitySpawnReason.MOB_SUMMONED, false, false);
 					if (entityinstance != null) {
 						entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 						if (entityinstance instanceof SkullSmasherEntity) {

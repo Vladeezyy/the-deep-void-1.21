@@ -79,7 +79,7 @@ public class UndertakerRightClickedOnEntityProcedure {
 				}
 			}
 			return InteractionResult.PASS;
-		} else if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null && !(entity instanceof LivingEntity _livEnt48 && _livEnt48.hasEffect(MobEffects.MOVEMENT_SLOWDOWN))
+		} else if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null && !(entity instanceof LivingEntity _livEnt48 && _livEnt48.hasEffect(MobEffects.SLOWNESS))
 				&& (entity instanceof UndertakerEntity _datEntI ? _datEntI.getEntityData().get(UndertakerEntity.DATA_talkCooldown) : 0) <= 0) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).putString("undertakerUuid", (entity.getStringUUID()));
 			if (sourceentity instanceof ServerPlayer _ent) {

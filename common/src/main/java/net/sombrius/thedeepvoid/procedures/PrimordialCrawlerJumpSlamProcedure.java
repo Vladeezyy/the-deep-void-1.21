@@ -8,7 +8,7 @@ import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -36,16 +36,16 @@ public class PrimordialCrawlerJumpSlamProcedure {
 			return;
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:mother_crawler_ambient")), SoundSource.NEUTRAL, 2, (float) 0.4);
+				_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:mother_crawler_ambient")), SoundSource.NEUTRAL, 2, (float) 0.4);
 			} else {
-				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:mother_crawler_ambient")), SoundSource.NEUTRAL, 2, (float) 0.4, false);
+				_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:mother_crawler_ambient")), SoundSource.NEUTRAL, 2, (float) 0.4, false);
 			}
 		}
 		if (entity instanceof PrimordialBoneCrawlerEntity) {
 			((PrimordialBoneCrawlerEntity) entity).setAnimation("animation.primordialCrawler_dashSlam");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 45, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 45, 99, false, false));
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 			_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 45, 99, false, false));
 		TheDeepVoidMod.queueServerWork(6, () -> {
@@ -59,9 +59,9 @@ public class PrimordialCrawlerJumpSlamProcedure {
 				_datEntSetL.getEntityData().set(PrimordialBoneCrawlerEntity.DATA_primordialCrawlerFall, true);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.snowball.throw")), SoundSource.HOSTILE, 2, (float) 0.8);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.snowball.throw")), SoundSource.HOSTILE, 2, (float) 0.8);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.snowball.throw")), SoundSource.HOSTILE, 2, (float) 0.8, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.snowball.throw")), SoundSource.HOSTILE, 2, (float) 0.8, false);
 				}
 			}
 		});
@@ -87,7 +87,7 @@ public class PrimordialCrawlerJumpSlamProcedure {
 					if (entityiterator instanceof Player && !(entityiterator == entity)) {
 						if ((entityiterator instanceof LivingEntity _entUseItem52 ? _entUseItem52.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 							if (entityiterator instanceof Player _player)
-								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem54 ? _entUseItem54.getUseItem() : ItemStack.EMPTY).getItem(), 140);
+								_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem54 ? _entUseItem54.getUseItem() : ItemStack.EMPTY), 140);
 							{
 								ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem56 ? _entUseItem56.getUseItem() : ItemStack.EMPTY);
 								PortUtil.hurtAndBreak(_ist, 20, null);
@@ -96,18 +96,18 @@ public class PrimordialCrawlerJumpSlamProcedure {
 								_entity.stopUsingItem();
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")), SoundSource.NEUTRAL, 1,
+									_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.break")), SoundSource.NEUTRAL, 1,
 											1);
 								} else {
-									_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")), SoundSource.NEUTRAL, 1, 1, false);
+									_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.break")), SoundSource.NEUTRAL, 1, 1, false);
 								}
 							}
 						} else {
-							entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity),
+							entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity),
 									(float) (double) DeepVoidConfigConfiguration.PRIMORDIALCRAWLERSLAM.get());
 							entityiterator.setDeltaMovement(new Vec3((entityiterator.getDeltaMovement().x()), 0.8, (entityiterator.getDeltaMovement().z())));
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
+								_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, 0));
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 								_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0));
 						}

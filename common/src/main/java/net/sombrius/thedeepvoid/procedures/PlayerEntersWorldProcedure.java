@@ -47,7 +47,7 @@ public class PlayerEntersWorldProcedure {
 			_vars.syncPlayerVariables(entity);
 		}
 		if (TheDeepVoidModVariables.of(entity).receivedWikiBook == false && DeepVoidConfigConfiguration.GIVEWIKIBOOK.get() == true) {
-			if (world.getLevelData().getGameRules().getBoolean(TheDeepVoidModGameRules.GIVE_WIKI_BOOK) == true) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.rule(world, TheDeepVoidModGameRules.GIVE_WIKI_BOOK.get()) == true) {
 				{
 					TheDeepVoidModVariables.PlayerVariables _vars = TheDeepVoidModVariables.of(entity);
 					_vars.receivedWikiBook = true;

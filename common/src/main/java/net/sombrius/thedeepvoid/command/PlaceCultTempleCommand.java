@@ -15,7 +15,7 @@ import net.sombrius.thedeepvoid.procedures.PlaceCultTempleCommandExecutedProcedu
 public class PlaceCultTempleCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("placeculttemple").requires(s -> s.hasPermission(4)).executes(arguments -> {
+		event.getDispatcher().register(Commands.literal("placeculttemple").requires(Commands.hasPermission(Commands.LEVEL_OWNERS)).executes(arguments -> {
 			Level world = arguments.getSource().getLevel();
 			double x = arguments.getSource().getPosition().x();
 			double y = arguments.getSource().getPosition().y();

@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -28,13 +28,13 @@ public class DarkDaggerTickProcedure {
 					0.1);
 		immediatesourceentity.setNoGravity(true);
 		TheDeepVoidMod.queueServerWork(20, () -> {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getBoolean("deep_void_played") == false) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getBooleanOr("deep_void_played", false) == false) {
 				net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).putBoolean("deep_void_played", true);
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 			}
@@ -45,9 +45,9 @@ public class DarkDaggerTickProcedure {
 					if (entityiterator instanceof Player) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).putDouble("deep_void_dis", Math
 								.sqrt(Math.pow(entityiterator.getX() - immediatesourceentity.getX(), 0.8) + Math.pow(entityiterator.getY() - immediatesourceentity.getY(), 0.8) + Math.pow(entityiterator.getZ() - immediatesourceentity.getZ(), 0.8)));
-						immediatesourceentity.setDeltaMovement(new Vec3(((entityiterator.getX() - immediatesourceentity.getX()) / net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDouble("deep_void_dis")),
-								((entityiterator.getY() - immediatesourceentity.getY()) / net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDouble("deep_void_dis")),
-								((entityiterator.getZ() - immediatesourceentity.getZ()) / net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDouble("deep_void_dis"))));
+						immediatesourceentity.setDeltaMovement(new Vec3(((entityiterator.getX() - immediatesourceentity.getX()) / net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDoubleOr("deep_void_dis", 0)),
+								((entityiterator.getY() - immediatesourceentity.getY()) / net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDoubleOr("deep_void_dis", 0)),
+								((entityiterator.getZ() - immediatesourceentity.getZ()) / net.sombrius.thedeepvoid.port.PortUtil.data(immediatesourceentity).getDoubleOr("deep_void_dis", 0))));
 					}
 				}
 			}

@@ -12,11 +12,11 @@ import net.minecraft.world.level.material.MapColor;
 
 public class CoveredSkullPileBlock extends Block {
 	public CoveredSkullPileBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.BONE_BLOCK).strength(0.8f, 8f).speedFactor(0.7f).jumpFactor(0.9f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.BONE_BLOCK).strength(0.8f, 8f).speedFactor(0.7f).jumpFactor(0.9f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 }

@@ -14,7 +14,7 @@ import net.sombrius.thedeepvoid.procedures.CrackedAncientDeepslateBrickStairsEnt
 
 public class CrackedAncientDeepslateBrickSlabBlock extends SlabBlock {
 	public CrackedAncientDeepslateBrickSlabBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE).sound(SoundType.DEEPSLATE_BRICKS).strength(4.5f, 7.5f).requiresCorrectToolForDrops().dynamicShape());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE).sound(SoundType.DEEPSLATE_BRICKS).strength(4.5f, 7.5f).requiresCorrectToolForDrops().dynamicShape());
 	}
 
 	@Override

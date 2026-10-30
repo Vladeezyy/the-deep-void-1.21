@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import java.util.Comparator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -64,7 +64,7 @@ public class BeholderOnEntityTickUpdateProcedure {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 										}
-									}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:everhunger_scream")), SoundSource.HOSTILE, 10, (float) 1.1);
+									}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:everhunger_scream")), SoundSource.HOSTILE, 10, (float) 1.1);
 								} else {
 									_level.playLocalSound((((Entity) world.getEntitiesOfClass(EverhungerEntity.class, AABB.ofSize(new Vec3(x, y, z), 400, 400, 400), e -> true).stream().sorted(new Object() {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
@@ -78,7 +78,7 @@ public class BeholderOnEntityTickUpdateProcedure {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 										}
-									}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:everhunger_scream")), SoundSource.HOSTILE, 10, (float) 1.1, false);
+									}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:everhunger_scream")), SoundSource.HOSTILE, 10, (float) 1.1, false);
 								}
 							}
 							if (world instanceof Level _level) {
@@ -95,7 +95,7 @@ public class BeholderOnEntityTickUpdateProcedure {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 										}
-									}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:everhunger_scream")), SoundSource.HOSTILE, 10, (float) 0.9);
+									}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:everhunger_scream")), SoundSource.HOSTILE, 10, (float) 0.9);
 								} else {
 									_level.playLocalSound((((Entity) world.getEntitiesOfClass(EverhungerEntity.class, AABB.ofSize(new Vec3(x, y, z), 400, 400, 400), e -> true).stream().sorted(new Object() {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
@@ -109,7 +109,7 @@ public class BeholderOnEntityTickUpdateProcedure {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 										}
-									}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:everhunger_scream")), SoundSource.HOSTILE, 10, (float) 0.9, false);
+									}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:everhunger_scream")), SoundSource.HOSTILE, 10, (float) 0.9, false);
 								}
 							}
 							net.sombrius.thedeepvoid.port.PortUtil.data(((Entity) world.getEntitiesOfClass(EverhungerEntity.class, AABB.ofSize(new Vec3(x, y, z), 400, 400, 400), e -> true).stream().sorted(new Object() {

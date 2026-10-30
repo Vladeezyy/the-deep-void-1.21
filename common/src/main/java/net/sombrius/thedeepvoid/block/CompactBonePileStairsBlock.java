@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class CompactBonePileStairsBlock extends StairBlock {
 	public CompactBonePileStairsBlock() {
-		super(Blocks.AIR.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.BONE_BLOCK).strength(0.8f, 8f).dynamicShape());
+		super(Blocks.AIR.defaultBlockState(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.BONE_BLOCK).strength(0.8f, 8f).dynamicShape());
 	}
 
 	@Override

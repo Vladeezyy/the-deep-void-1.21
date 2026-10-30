@@ -10,7 +10,7 @@ import net.minecraft.world.item.Rarity;
 
 public class KnightfishItem extends Item {
 	public KnightfishItem() {
-		super(new Item.Properties().stacksTo(64).fireResistant().rarity(Rarity.RARE).food((new FoodProperties.Builder()).nutrition(-99).saturationModifier(-99f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).fireResistant().rarity(Rarity.RARE).food((new FoodProperties.Builder()).nutrition(-99).saturationModifier(-99f).alwaysEdible().build()));
 	}
 
 	@Override

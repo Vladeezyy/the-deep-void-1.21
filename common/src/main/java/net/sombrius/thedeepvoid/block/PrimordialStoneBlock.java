@@ -16,11 +16,11 @@ import net.sombrius.thedeepvoid.procedures.PrimordialStoneEntityWalksOnTheBlockP
 
 public class PrimordialStoneBlock extends Block {
 	public PrimordialStoneBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.WARPED_HYPHAE).sound(SoundType.NETHERRACK).strength(-1, 3600000).pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.WARPED_HYPHAE).sound(SoundType.NETHERRACK).strength(-1, 3600000).pushReaction(PushReaction.BLOCK));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

@@ -6,7 +6,7 @@ import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -42,18 +42,18 @@ public class FleshWormTailProcedure {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
 					_level.playSound(null, BlockPos.containing(entity.getX() + entity.getLookAngle().x * 9, entity.getY(), entity.getZ() + entity.getLookAngle().z * 9),
-							BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, (float) 0.8);
+							BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, (float) 0.8);
 				} else {
-					_level.playLocalSound(entity.getX() + entity.getLookAngle().x * 9, (entity.getY()), entity.getZ() + entity.getLookAngle().z * 9, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_impact")),
+					_level.playLocalSound(entity.getX() + entity.getLookAngle().x * 9, (entity.getY()), entity.getZ() + entity.getLookAngle().z * 9, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_impact")),
 							SoundSource.HOSTILE, 4, (float) 0.8, false);
 				}
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX() + entity.getLookAngle().x * 9, entity.getY(), entity.getZ() + entity.getLookAngle().z * 9), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.totem.use")),
+					_level.playSound(null, BlockPos.containing(entity.getX() + entity.getLookAngle().x * 9, entity.getY(), entity.getZ() + entity.getLookAngle().z * 9), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.totem.use")),
 							SoundSource.HOSTILE, 2, (float) 0.8);
 				} else {
-					_level.playLocalSound(entity.getX() + entity.getLookAngle().x * 9, (entity.getY()), entity.getZ() + entity.getLookAngle().z * 9, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.totem.use")), SoundSource.HOSTILE, 2,
+					_level.playLocalSound(entity.getX() + entity.getLookAngle().x * 9, (entity.getY()), entity.getZ() + entity.getLookAngle().z * 9, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.totem.use")), SoundSource.HOSTILE, 2,
 							(float) 0.8, false);
 				}
 			}
@@ -62,7 +62,7 @@ public class FleshWormTailProcedure {
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(5 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), 20);
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), 20);
 					}
 				}
 			}
@@ -74,9 +74,9 @@ public class FleshWormTailProcedure {
 		TheDeepVoidMod.queueServerWork(50, () -> {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, 1);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, 1);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, 1, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, 1, false);
 				}
 			}
 			{
@@ -84,7 +84,7 @@ public class FleshWormTailProcedure {
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(6 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
-						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), 15);
+						entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), 15);
 						for (int index1 = 0; index1 < Mth.nextInt(RandomSource.create(), 4, 8); index1++) {
 							world.levelEvent(2001, BlockPos.containing(entityiterator.getX() + Mth.nextInt(RandomSource.create(), -3, 3) + 0.5, entityiterator.getY() + Mth.nextInt(RandomSource.create(), 0, 1),
 									entityiterator.getZ() + Mth.nextInt(RandomSource.create(), -3, 3) + 0.5), Block.getId((world.getBlockState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ())))));

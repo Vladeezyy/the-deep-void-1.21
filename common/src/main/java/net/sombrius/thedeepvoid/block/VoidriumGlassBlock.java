@@ -1,7 +1,7 @@
 
 package net.sombrius.thedeepvoid.block;
 
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -40,18 +40,16 @@ import net.sombrius.thedeepvoid.procedures.VoidriumGlassBlockIsPlacedByProcedure
 import net.sombrius.thedeepvoid.procedures.VoidriumGlassOnTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidriumGlassSpecialInformationProcedure;
 
-public class VoidriumGlassBlock extends Block implements EntityBlock {
+public class VoidriumGlassBlock extends Block implements EntityBlock, net.sombrius.thedeepvoid.port.PortBlockItem.Tooltip {
 	public VoidriumGlassBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).sound(SoundType.GLASS).strength(25f, 6f).lightLevel(s -> 8).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.BLOCK)
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.HAT).sound(SoundType.GLASS).strength(25f, 6f).lightLevel(s -> 8).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.BLOCK)
 				.hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
-	@Override
 	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
-	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, context, list, flag);
+	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : Minecraft.getInstance().player;
-		list.add(Component.literal(VoidriumGlassSpecialInformationProcedure.execute()));
+		list.accept(Component.literal(VoidriumGlassSpecialInformationProcedure.execute()));
 	}
 
 		public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndTintGetter world, BlockPos pos, FluidState fluidstate) {
@@ -59,7 +57,7 @@ public class VoidriumGlassBlock extends Block implements EntityBlock {
 	}
 
 	public Integer getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
-		return FastColor.ARGB32.colorFromFloat(1f, 0.8588235294f, 0.6235294118f, 0.9137254902f);
+		return ARGB.colorFromFloat(1f, 0.8588235294f, 0.6235294118f, 0.9137254902f);
 	}
 
 	@Override
@@ -68,12 +66,12 @@ public class VoidriumGlassBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+	public boolean propagatesSkylightDown(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 0;
 	}
 

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -46,9 +46,9 @@ public class TamedMotherBoneCrawlerOnEntityTickUpdateProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.chicken.egg")), SoundSource.NEUTRAL, 1, (float) 0.8);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.chicken.egg")), SoundSource.NEUTRAL, 1, (float) 0.8);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.chicken.egg")), SoundSource.NEUTRAL, 1, (float) 0.8, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.chicken.egg")), SoundSource.NEUTRAL, 1, (float) 0.8, false);
 						}
 					}
 				}
@@ -63,9 +63,9 @@ public class TamedMotherBoneCrawlerOnEntityTickUpdateProcedure {
 					if (entityiterator instanceof BoneCrawlerEntity || entityiterator instanceof AlphaBoneCrawlerEntity) {
 						if ((entityiterator instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null) == (entity instanceof TamableAnimal _tamEnt ? (Entity) _tamEnt.getOwner() : null)) {
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 5, 0, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 5, 0, false, false));
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 0, false, false));
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 								_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 5, 0, false, false));
 						}

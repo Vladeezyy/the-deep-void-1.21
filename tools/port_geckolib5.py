@@ -99,7 +99,7 @@ public class {name}<R extends LivingEntityRenderState & GeoRenderState> extends 
 
 def renderer(path, head_turn):
     s = read(path)
-    if 'GeoEntityRenderer<' not in s or 'RenderPassInfo' in s or 'getRenderType(R' in s:
+    if 'GeoEntityRenderer<' not in s or 'RenderPassInfo' in s or 'getRenderType(R renderState' in s:
         return
     cls = re.search(r'public class (\w+) extends GeoEntityRenderer<(\w+)>', s)
     name, entity = cls.group(1), cls.group(2)

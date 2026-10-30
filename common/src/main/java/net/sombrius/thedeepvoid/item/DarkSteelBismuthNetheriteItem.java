@@ -1,72 +1,61 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import java.util.Map;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.sombrius.thedeepvoid.port.platform.RegistryEntry;
 import net.minecraft.core.registries.Registries;
 import net.sombrius.thedeepvoid.port.bus.EventBusSubscriber;
 import net.minecraft.core.Holder;
 import java.util.EnumMap;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.sombrius.thedeepvoid.port.bus.RegisterEvent;
 import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
 import java.util.List;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.core.registries.BuiltInRegistries;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public abstract class DarkSteelBismuthNetheriteItem extends ArmorItem {
-	public static Holder<ArmorMaterial> ARMOR_MATERIAL = null;
+@EventBusSubscriber
+public abstract class DarkSteelBismuthNetheriteItem extends Item {
+	public static final ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial(0, Map.of(ArmorType.BOOTS, 4, ArmorType.LEGGINGS, 8, ArmorType.CHESTPLATE, 8, ArmorType.HELMET, 4, ArmorType.BODY, 8), 18, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(Identifier.parse("item.armor.equip_netherite"))), 4.8f, 0.25f, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/none")),
+			ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath("the_deep_void", "dark_steel_bismuth_netherite")));
 
-	@SubscribeEvent
-	public static void registerArmorMaterial(RegisterEvent event) {
-		event.register(Registries.ARMOR_MATERIAL, registerHelper -> {
-			ArmorMaterial armorMaterial = new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-				map.put(ArmorItem.Type.BOOTS, 4);
-				map.put(ArmorItem.Type.LEGGINGS, 8);
-				map.put(ArmorItem.Type.CHESTPLATE, 8);
-				map.put(ArmorItem.Type.HELMET, 4);
-				map.put(ArmorItem.Type.BODY, 8);
-			}), 18, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(ResourceLocation.parse("item.armor.equip_netherite"))), () -> Ingredient.of(),
-					List.of(new ArmorMaterial.Layer(ResourceLocation.parse("the_deep_void:dark_steel_netherite_"))), 4.8f, 0.25f);
-			registerHelper.register(ResourceLocation.parse("the_deep_void:dark_steel_bismuth_netherite"), armorMaterial);
-			ARMOR_MATERIAL = BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(armorMaterial);
-		});
-	}
 
-	public DarkSteelBismuthNetheriteItem(ArmorItem.Type type, Item.Properties properties) {
-		super(ARMOR_MATERIAL, type, properties);
+	public DarkSteelBismuthNetheriteItem(ArmorType type, Item.Properties properties) {
+		super(properties.humanoidArmor(ARMOR_MATERIAL, type));
 	}
 
 	public static class Helmet extends DarkSteelBismuthNetheriteItem {
 		public Helmet() {
-			super(ArmorItem.Type.HELMET, new Item.Properties().durability(572));
+			super(ArmorType.HELMET, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(572));
 		}
 	}
 
 	public static class Chestplate extends DarkSteelBismuthNetheriteItem {
 		public Chestplate() {
-			super(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(832));
+			super(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(832));
 		}
 	}
 
 	public static class Leggings extends DarkSteelBismuthNetheriteItem {
 		public Leggings() {
-			super(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(780));
+			super(ArmorType.LEGGINGS, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(780));
 		}
 	}
 
 	public static class Boots extends DarkSteelBismuthNetheriteItem {
 		public Boots() {
-			super(ArmorItem.Type.BOOTS, new Item.Properties().durability(676));
+			super(ArmorType.BOOTS, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(676));
 		}
 	}
 }

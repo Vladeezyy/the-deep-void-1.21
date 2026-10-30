@@ -29,7 +29,7 @@ public class VoidriumBulwarkDescriptionProcedure {
 		if (tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.VOIDRIUM_BULWARK.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.voidrium_bulwark.descr").getString())));
 			} else {
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.weapon_tooltip.show").getString())));

@@ -16,11 +16,11 @@ import net.sombrius.thedeepvoid.procedures.SoulContainerOnTickUpdateProcedure;
 
 public class SoulContainerBlock extends Block {
 	public SoulContainerBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(-1, 3600000).pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(-1, 3600000).pushReaction(PushReaction.BLOCK));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

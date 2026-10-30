@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class VoidlightBrickStairsBlock extends StairBlock {
 	public VoidlightBrickStairsBlock() {
-		super(Blocks.AIR.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.SHROOMLIGHT).strength(1f, 2f).lightLevel(s -> 6).dynamicShape());
+		super(Blocks.AIR.defaultBlockState(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.SHROOMLIGHT).strength(1f, 2f).lightLevel(s -> 6).dynamicShape());
 	}
 
 	@Override

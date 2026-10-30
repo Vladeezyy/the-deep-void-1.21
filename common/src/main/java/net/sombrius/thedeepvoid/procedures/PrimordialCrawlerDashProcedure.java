@@ -17,7 +17,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 
@@ -32,15 +32,15 @@ public class PrimordialCrawlerDashProcedure {
 			((PrimordialBoneCrawlerEntity) entity).setAnimation("animation.primordialCrawler_dash");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20, 99, false, false));
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 			_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20, 99, false, false));
 		TheDeepVoidMod.queueServerWork(5, () -> {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:mother_crawler_ambient")), SoundSource.HOSTILE, 5, (float) 0.7);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:mother_crawler_ambient")), SoundSource.HOSTILE, 5, (float) 0.7);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:mother_crawler_ambient")), SoundSource.HOSTILE, 5, (float) 0.7, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:mother_crawler_ambient")), SoundSource.HOSTILE, 5, (float) 0.7, false);
 				}
 			}
 		});
@@ -55,10 +55,10 @@ public class PrimordialCrawlerDashProcedure {
 					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("dashPlayerZ", ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ()));
 				}
 			}
-			entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("dashPlayerX")), y, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("dashPlayerZ"))));
+			entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("dashPlayerX", 0)), y, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("dashPlayerZ", 0))));
 		});
 		TheDeepVoidMod.queueServerWork(25, () -> {
-			entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("dashPlayerX")), y, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("dashPlayerZ"))));
+			entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("dashPlayerX", 0)), y, (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("dashPlayerZ", 0))));
 			if (entity instanceof PrimordialBoneCrawlerEntity _datEntSetL)
 				_datEntSetL.getEntityData().set(PrimordialBoneCrawlerEntity.DATA_dashing, true);
 			entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * 5), 0.15, (Math.cos(Math.toRadians(entity.getYRot())) * 5)));
@@ -66,9 +66,9 @@ public class PrimordialCrawlerDashProcedure {
 		TheDeepVoidMod.queueServerWork(45, () -> {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, 1);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, 1);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, 1, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:primordial_crawler_impact")), SoundSource.HOSTILE, 4, 1, false);
 				}
 			}
 			{

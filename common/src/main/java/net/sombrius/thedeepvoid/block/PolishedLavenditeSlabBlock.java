@@ -8,6 +8,6 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class PolishedLavenditeSlabBlock extends SlabBlock {
 	public PolishedLavenditeSlabBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.AMETHYST).strength(1.8f, 3f).dynamicShape());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.AMETHYST).strength(1.8f, 3f).dynamicShape());
 	}
 }

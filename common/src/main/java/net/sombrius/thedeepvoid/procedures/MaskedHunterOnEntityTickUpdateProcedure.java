@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -31,7 +31,7 @@ public class MaskedHunterOnEntityTickUpdateProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null) && entity.isInWaterOrBubble()) {
+		if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null) && entity.isInWater()) {
 			entity.setDeltaMovement(new Vec3((((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX() - entity.getX()) * 0.05),
 					(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() - entity.getY()) * 0.05), (((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ() - entity.getZ()) * 0.05)));
 			entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY()),
@@ -39,11 +39,11 @@ public class MaskedHunterOnEntityTickUpdateProcedure {
 		}
 		if (DeepVoidConfigConfiguration.SPAWNBONECAGES.get() == true) {
 			if (!(!world.getEntitiesOfClass(BoneCageEntity.class, AABB.ofSize(new Vec3(x, y, z), 60, 60, 60), e -> true).isEmpty())
-					&& !(!world.getEntitiesOfClass(BoneCageClosedEntity.class, AABB.ofSize(new Vec3(x, y, z), 60, 60, 60), e -> true).isEmpty()) && !entity.isInWaterOrBubble()) {
+					&& !(!world.getEntitiesOfClass(BoneCageClosedEntity.class, AABB.ofSize(new Vec3(x, y, z), 60, 60, 60), e -> true).isEmpty()) && !entity.isInWater()) {
 				MaskedHunterPlaceTrapProcedure.execute(world, x, y, z, entity);
 			}
 		}
-		if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null) && !entity.isInWaterOrBubble()) {
+		if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null) && !entity.isInWater()) {
 			MaskedHunterScreamWhileTargetProcedure.execute(world, x, y, z, entity);
 			MaskedHunterThrowKnivesProcedure.execute(world, x, y, z, entity);
 			MaskedHunterSpawnSpikesProcedure.execute(world, entity);
@@ -57,20 +57,20 @@ public class MaskedHunterOnEntityTickUpdateProcedure {
 				if ((entity instanceof MaskedHunterEntity _datEntI ? _datEntI.getEntityData().get(MaskedHunterEntity.DATA_randomScreamAmbient) : 0) == 1) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:masked_hunter_scream1")), SoundSource.HOSTILE,
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:masked_hunter_scream1")), SoundSource.HOSTILE,
 									(float) (double) DeepVoidConfigConfiguration.MASKEDHUNTERSCREAMDISTANCE.get(), (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:masked_hunter_scream1")), SoundSource.HOSTILE,
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:masked_hunter_scream1")), SoundSource.HOSTILE,
 									(float) (double) DeepVoidConfigConfiguration.MASKEDHUNTERSCREAMDISTANCE.get(), (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 						}
 					}
 					if (Math.random() < 0.8) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:crows_fly")), SoundSource.AMBIENT,
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:crows_fly")), SoundSource.AMBIENT,
 										(float) (double) DeepVoidConfigConfiguration.MASKEDHUNTERSCREAMDISTANCE.get(), (float) Mth.nextDouble(RandomSource.create(), 0.9, 1));
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:crows_fly")), SoundSource.AMBIENT,
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:crows_fly")), SoundSource.AMBIENT,
 										(float) (double) DeepVoidConfigConfiguration.MASKEDHUNTERSCREAMDISTANCE.get(), (float) Mth.nextDouble(RandomSource.create(), 0.9, 1), false);
 							}
 						}
@@ -78,20 +78,20 @@ public class MaskedHunterOnEntityTickUpdateProcedure {
 				} else if ((entity instanceof MaskedHunterEntity _datEntI ? _datEntI.getEntityData().get(MaskedHunterEntity.DATA_randomScreamAmbient) : 0) == 2) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:masked_hunter_scream2")), SoundSource.HOSTILE,
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:masked_hunter_scream2")), SoundSource.HOSTILE,
 									(float) (double) DeepVoidConfigConfiguration.MASKEDHUNTERSCREAMDISTANCE.get(), (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:masked_hunter_scream2")), SoundSource.HOSTILE,
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:masked_hunter_scream2")), SoundSource.HOSTILE,
 									(float) (double) DeepVoidConfigConfiguration.MASKEDHUNTERSCREAMDISTANCE.get(), (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
 						}
 					}
 					if (Math.random() < 0.8) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:crows_fly")), SoundSource.AMBIENT,
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:crows_fly")), SoundSource.AMBIENT,
 										(float) (double) DeepVoidConfigConfiguration.MASKEDHUNTERSCREAMDISTANCE.get(), (float) Mth.nextDouble(RandomSource.create(), 0.9, 1));
 							} else {
-								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:crows_fly")), SoundSource.AMBIENT,
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:crows_fly")), SoundSource.AMBIENT,
 										(float) (double) DeepVoidConfigConfiguration.MASKEDHUNTERSCREAMDISTANCE.get(), (float) Mth.nextDouble(RandomSource.create(), 0.9, 1), false);
 							}
 						}
@@ -118,8 +118,8 @@ public class MaskedHunterOnEntityTickUpdateProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 					}
 					return false;
 				}
@@ -132,8 +132,8 @@ public class MaskedHunterOnEntityTickUpdateProcedure {
 					if (_ent instanceof ServerPlayer _serverPlayer) {
 						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 					}
 					return false;
 				}

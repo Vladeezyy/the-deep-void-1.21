@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -19,7 +19,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
@@ -39,9 +39,9 @@ import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 
 @EventBusSubscriber
 public class StalkingStalkerSpawnsProcedure {
-	private static final TagKey<Biome> BIOME_TAG_STALKER_SAFE = TagKey.create(Registries.BIOME, ResourceLocation.parse("the_deep_void:stalker_safe"));
-	private static final TagKey<Block> BLOCK_TAG_LIGHT_CANNOT_REACH = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:light_cannot_reach"));
-	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+	private static final TagKey<Biome> BIOME_TAG_STALKER_SAFE = TagKey.create(Registries.BIOME, Identifier.parse("the_deep_void:stalker_safe"));
+	private static final TagKey<Block> BLOCK_TAG_LIGHT_CANNOT_REACH = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:light_cannot_reach"));
+	private static final ResourceKey<Level> DIM_DEEP_VOID = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -62,8 +62,8 @@ public class StalkingStalkerSpawnsProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -72,8 +72,8 @@ public class StalkingStalkerSpawnsProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 						}
 						return false;
 					}
@@ -127,7 +127,7 @@ public class StalkingStalkerSpawnsProcedure {
 											.isEmpty()) && !(!PortEntities.find(world, WatchingStalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 160, 160, 160)).isEmpty())) {
 										if (world instanceof ServerLevel _serverLevel) {
 											Entity entityinstance = TheDeepVoidModEntities.WATCHING_STALKER.get().create(_serverLevel, null,
-													BlockPos.containing(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, entity.getY(), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ), MobSpawnType.MOB_SUMMONED, false,
+													BlockPos.containing(TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnX, entity.getY(), TheDeepVoidModVariables.MapVariables.get(world).stalkerSpawnZ), EntitySpawnReason.MOB_SUMMONED, false,
 													false);
 											if (entityinstance != null) {
 												entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
@@ -135,9 +135,9 @@ public class StalkingStalkerSpawnsProcedure {
 													((WatchingStalkerEntity) entityinstance).setAnimation("animation.stalker_digOut");
 												}
 												if (entityinstance instanceof LivingEntity _entity && !_entity.level().isClientSide())
-													_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 75, 99, false, false));
+													_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 75, 99, false, false));
 												if (entityinstance instanceof LivingEntity _entity && !_entity.level().isClientSide())
-													_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 75, 99, false, false));
+													_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 75, 99, false, false));
 												if (entityinstance instanceof LivingEntity _entity && !_entity.level().isClientSide())
 													_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 75, 99, false, false));
 												_serverLevel.addFreshEntity(entityinstance);

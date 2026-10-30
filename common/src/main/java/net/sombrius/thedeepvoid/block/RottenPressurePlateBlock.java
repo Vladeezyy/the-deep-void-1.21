@@ -9,6 +9,6 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class RottenPressurePlateBlock extends PressurePlateBlock {
 	public RottenPressurePlateBlock() {
-		super(BlockSetType.OAK, BlockBehaviour.Properties.of().ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.BASALT).strength(2.2f, 16f).dynamicShape().forceSolidOn());
+		super(BlockSetType.OAK, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.BASALT).strength(2.2f, 16f).dynamicShape().forceSolidOn());
 	}
 }

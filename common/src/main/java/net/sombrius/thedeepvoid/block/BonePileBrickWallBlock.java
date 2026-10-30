@@ -7,6 +7,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BonePileBrickWallBlock extends WallBlock {
 	public BonePileBrickWallBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.BONE_BLOCK).strength(0.8f, 8f).dynamicShape().forceSolidOn());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.BONE_BLOCK).strength(0.8f, 8f).dynamicShape().forceSolidOn());
 	}
 }

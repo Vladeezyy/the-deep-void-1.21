@@ -29,7 +29,7 @@ public class MisanthropyDescriptionProcedure {
 		if (tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.MISANTHROPY.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.misanthropy.descr").getString())));
 				tooltip.add(Component.literal((Component.translatable("item.the_deep_void.misanthropy.capacity").getString())));
 			} else {

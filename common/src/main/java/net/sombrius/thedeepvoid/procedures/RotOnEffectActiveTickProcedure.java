@@ -10,6 +10,6 @@ public class RotOnEffectActiveTickProcedure {
 	public static void execute(LevelAccessor world, Entity entity, double amplifier) {
 		if (entity == null)
 			return;
-		entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC)), (float) (0.5 + 0.5 * amplifier));
+		entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MAGIC)), (float) (0.5 + 0.5 * amplifier));
 	}
 }

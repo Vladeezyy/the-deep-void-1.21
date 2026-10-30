@@ -20,7 +20,7 @@ public class ApostleGrabJumpProcedure {
 			((ApostleBossEntity) entity).setAnimation("animation.apostle_grabRun");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 50, 2, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 50, 2, false, false));
 		TheDeepVoidMod.queueServerWork(50, () -> {
 			if ((entity instanceof ApostleBossEntity _datEntL4 && _datEntL4.getEntityData().get(ApostleBossEntity.DATA_runGrab)) == true) {
 				if (entity instanceof ApostleBossEntity) {
@@ -30,7 +30,7 @@ public class ApostleGrabJumpProcedure {
 					((ApostleBossEntity) entity).setAnimation("animation.apostle_missGrab");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20, 99, false, false));
 				if (entity instanceof ApostleBossEntity _datEntSetL)
 					_datEntSetL.getEntityData().set(ApostleBossEntity.DATA_doingAttack, false);
 				if (entity instanceof ApostleBossEntity _datEntSetL)

@@ -5,14 +5,14 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -27,7 +27,7 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 5, 99, false, false));
 		if ((entity instanceof ChainedWeaverEntity _datEntL1 && _datEntL1.getEntityData().get(ChainedWeaverEntity.DATA_free)) == true) {
 			if ((entity instanceof ChainedWeaverEntity _datEntL2 && _datEntL2.getEntityData().get(ChainedWeaverEntity.DATA_playingAnimation)) == false) {
 				if (entity instanceof ChainedWeaverEntity _datEntSetL)
@@ -39,16 +39,16 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 					if (!entity.level().isClientSide())
 						entity.discard();
 					if (world instanceof ServerLevel _level) {
-						Entity entityToSpawn = TheDeepVoidModEntities.WEAVER_OF_SOULS_BOSS.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+						Entity entityToSpawn = TheDeepVoidModEntities.WEAVER_OF_SOULS_BOSS.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
 						if (entityToSpawn != null) {
 							entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 						}
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_scream")), SoundSource.HOSTILE, 4, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_scream")), SoundSource.HOSTILE, 4, 1);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_scream")), SoundSource.HOSTILE, 4, 1, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_scream")), SoundSource.HOSTILE, 4, 1, false);
 						}
 					}
 				});
@@ -58,9 +58,9 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 			if (Math.random() < 0.02) {
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chain.break")), SoundSource.HOSTILE, 4, (float) 0.8);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chain.break")), SoundSource.HOSTILE, 4, (float) 0.8);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chain.break")), SoundSource.HOSTILE, 4, (float) 0.8, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chain.break")), SoundSource.HOSTILE, 4, (float) 0.8, false);
 					}
 				}
 			}
@@ -82,10 +82,10 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient1").getString())), true);
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1);
 									} else {
-										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1, false);
 									}
 								}
@@ -94,10 +94,10 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient2").getString())), true);
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1);
 									} else {
-										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1, false);
 									}
 								}
@@ -106,10 +106,10 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient3").getString())), true);
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1);
 									} else {
-										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1, false);
 									}
 								}
@@ -118,10 +118,10 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient4").getString())), true);
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1);
 									} else {
-										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1, false);
 									}
 								}
@@ -130,10 +130,10 @@ public class ChainedWeaverOnEntityTickUpdateProcedure {
 									_player.displayClientMessage(Component.literal((Component.translatable("text.the_deep_void.weaver_of_souls.ambient1").getString())), true);
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY() + 1.4, entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1);
 									} else {
-										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:weaver_ambient")),
+										_level.playLocalSound((entityiterator.getX()), (entityiterator.getY() + 1.4), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:weaver_ambient")),
 												SoundSource.HOSTILE, (float) 0.5, 1, false);
 									}
 								}

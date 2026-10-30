@@ -1,26 +1,20 @@
 package net.sombrius.thedeepvoid.entity.layer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.renderer.layer.builtin.TextureLayerGeoLayer;
+import software.bernie.geckolib.renderer.base.GeoRenderer;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
+
+import net.minecraft.resources.Identifier;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+
 import net.sombrius.thedeepvoid.entity.ManiacEntity;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class ManiacLayer extends GeoRenderLayer<ManiacEntity> {
-	private static final ResourceLocation LAYER = ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/entities/maniac_glow.png");
+/** The glowing eyes: the layer texture drawn again with the eyes render type (full bright). */
+public class ManiacLayer<R extends LivingEntityRenderState & GeoRenderState> extends TextureLayerGeoLayer<ManiacEntity, Void, R> {
+	private static final Identifier LAYER = Identifier.fromNamespaceAndPath("the_deep_void", "textures/entities/maniac_glow.png");
 
-	public ManiacLayer(GeoRenderer<ManiacEntity> entityRenderer) {
-		super(entityRenderer);
-	}
-
-	@Override
-	public void render(PoseStack poseStack, ManiacEntity animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-		RenderType glowRenderType = RenderType.eyes(LAYER);
-		getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, glowRenderType, bufferSource.getBuffer(glowRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY, -1);
+	public ManiacLayer(GeoRenderer<ManiacEntity, Void, R> entityRenderer) {
+		super(entityRenderer, LAYER, RenderTypes::eyes);
 	}
 }

@@ -10,6 +10,6 @@ public class GiantBoneSpikePlayerCollidesWithThisEntityProcedure {
 	public static void execute(LevelAccessor world, Entity sourceentity) {
 		if (sourceentity == null)
 			return;
-		sourceentity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC)), 2);
+		sourceentity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)), 2);
 	}
 }

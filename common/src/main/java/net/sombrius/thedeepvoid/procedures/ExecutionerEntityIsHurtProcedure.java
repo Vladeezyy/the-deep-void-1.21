@@ -4,7 +4,7 @@ import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,9 +26,9 @@ public class ExecutionerEntityIsHurtProcedure {
 				_datEntSetL.getEntityData().set(ExecutionerEntity.DATA_stunned, true);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.ravager.stunned")), SoundSource.HOSTILE, 1, (float) 0.9);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.ravager.stunned")), SoundSource.HOSTILE, 1, (float) 0.9);
 				} else {
-					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.ravager.stunned")), SoundSource.HOSTILE, 1, (float) 0.9, false);
+					_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.ravager.stunned")), SoundSource.HOSTILE, 1, (float) 0.9, false);
 				}
 			}
 		}

@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,7 +28,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
@@ -58,9 +58,9 @@ public class MadCultistOnEntityTickUpdateProcedure {
 				((MadCultistEntity) entity).setAnimation("animation.madCultist_notice");
 			}
 			if (entity instanceof LivingEntity _entity)
-				_entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+				_entity.removeEffect(MobEffects.SLOWNESS);
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 99, false, false));
 		}
 		if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null) && (entity instanceof MadCultistEntity _datEntL16 && _datEntL16.getEntityData().get(MadCultistEntity.DATA_attacking)) == false
 				&& (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) > 0) {
@@ -81,13 +81,13 @@ public class MadCultistOnEntityTickUpdateProcedure {
 					((MadCultistEntity) entity).setAnimation("animation.madCultist_slash");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20, 99, false, false));
 				TheDeepVoidMod.queueServerWork(12, () -> {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:claws_slash")), SoundSource.HOSTILE, 1, (float) 1.4);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:claws_slash")), SoundSource.HOSTILE, 1, (float) 1.4);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:claws_slash")), SoundSource.HOSTILE, 1, (float) 1.4, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:claws_slash")), SoundSource.HOSTILE, 1, (float) 1.4, false);
 						}
 					}
 					{
@@ -97,7 +97,7 @@ public class MadCultistOnEntityTickUpdateProcedure {
 							if (entityiterator == (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null)) {
 								if ((entityiterator instanceof LivingEntity _entUseItem36 ? _entUseItem36.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 									if (entityiterator instanceof Player _player)
-										_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem38 ? _entUseItem38.getUseItem() : ItemStack.EMPTY).getItem(), 60);
+										_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem38 ? _entUseItem38.getUseItem() : ItemStack.EMPTY), 60);
 									{
 										ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem40 ? _entUseItem40.getUseItem() : ItemStack.EMPTY);
 										PortUtil.hurtAndBreak(_ist, 1, null);
@@ -106,17 +106,17 @@ public class MadCultistOnEntityTickUpdateProcedure {
 										_entity.stopUsingItem();
 									if (world instanceof Level _level) {
 										if (!_level.isClientSide()) {
-											_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")),
+											_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.break")),
 													SoundSource.PLAYERS, (float) 0.4, 1);
 										} else {
-											_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")), SoundSource.PLAYERS,
+											_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.break")), SoundSource.PLAYERS,
 													(float) 0.4, 1, false);
 										}
 									}
 									if (entity instanceof MadCultistEntity _datEntSetI)
 										_datEntSetI.getEntityData().set(MadCultistEntity.DATA_attackChance, 60);
 								} else {
-									entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), 8);
+									entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), 8);
 								}
 							}
 						}
@@ -136,14 +136,14 @@ public class MadCultistOnEntityTickUpdateProcedure {
 					((MadCultistEntity) entity).setAnimation("animation.madCultist_stab");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 99, false, false));
 				TheDeepVoidMod.queueServerWork(15, () -> {
 					entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * 1), 0.1, (Math.cos(Math.toRadians(entity.getYRot())) * 1)));
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.7);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.7);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.7, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.witch.throw")), SoundSource.HOSTILE, 1, (float) 0.7, false);
 						}
 					}
 				});
@@ -155,7 +155,7 @@ public class MadCultistOnEntityTickUpdateProcedure {
 							if (entityiterator == (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null)) {
 								if ((entityiterator instanceof LivingEntity _entUseItem71 ? _entUseItem71.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 									if (entityiterator instanceof Player _player)
-										_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem73 ? _entUseItem73.getUseItem() : ItemStack.EMPTY).getItem(), 60);
+										_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem73 ? _entUseItem73.getUseItem() : ItemStack.EMPTY), 60);
 									{
 										ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem75 ? _entUseItem75.getUseItem() : ItemStack.EMPTY);
 										PortUtil.hurtAndBreak(_ist, 1, null);
@@ -164,17 +164,17 @@ public class MadCultistOnEntityTickUpdateProcedure {
 										_entity.stopUsingItem();
 									if (world instanceof Level _level) {
 										if (!_level.isClientSide()) {
-											_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")),
+											_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.break")),
 													SoundSource.PLAYERS, (float) 0.4, 1);
 										} else {
-											_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")), SoundSource.PLAYERS,
+											_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.shield.break")), SoundSource.PLAYERS,
 													(float) 0.4, 1, false);
 										}
 									}
 									if (entity instanceof MadCultistEntity _datEntSetI)
 										_datEntSetI.getEntityData().set(MadCultistEntity.DATA_attackChance, 60);
 								} else {
-									entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), 8);
+									entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), 8);
 								}
 							}
 						}
@@ -196,7 +196,7 @@ public class MadCultistOnEntityTickUpdateProcedure {
 					((MadCultistEntity) entity).setAnimation("animation.madCultist_block");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 99, false, false));
 				TheDeepVoidMod.queueServerWork(30, () -> {
 					if (entity instanceof MadCultistEntity _datEntSetL)
 						_datEntSetL.getEntityData().set(MadCultistEntity.DATA_attacking, false);
@@ -213,7 +213,7 @@ public class MadCultistOnEntityTickUpdateProcedure {
 					((MadCultistEntity) entity).setAnimation("animation.madCultist_shoot");
 				}
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 99, false, false));
 				TheDeepVoidMod.queueServerWork(22, () -> {
 					if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 						entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() + 1.6),
@@ -240,9 +240,9 @@ public class MadCultistOnEntityTickUpdateProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.8);
+							_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.8);
 						} else {
-							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.8, false);
+							_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("item.trident.throw")), SoundSource.HOSTILE, 1, (float) 1.8, false);
 						}
 					}
 				});
@@ -256,10 +256,10 @@ public class MadCultistOnEntityTickUpdateProcedure {
 			if (Math.random() < 0.002) {
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:quiet_slow_whisper")), SoundSource.HOSTILE, (float) 0.4,
+						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:quiet_slow_whisper")), SoundSource.HOSTILE, (float) 0.4,
 								(float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05));
 					} else {
-						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:quiet_slow_whisper")), SoundSource.HOSTILE, (float) 0.4,
+						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:quiet_slow_whisper")), SoundSource.HOSTILE, (float) 0.4,
 								(float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
 					}
 				}

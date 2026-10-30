@@ -1,11 +1,12 @@
 package net.sombrius.thedeepvoid.procedures;
 
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
@@ -18,7 +19,7 @@ public class PlayerCageEntityDiesProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, Entity sourceentity) {
 		if (entity == null || sourceentity == null)
 			return;
-		if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:the_pit"))) {
+		if ((entity.level().dimension()) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:the_pit"))) {
 			TheDeepVoidMod.queueServerWork(48, () -> {
 				{
 					boolean _setval = true;
@@ -65,23 +66,23 @@ public class PlayerCageEntityDiesProcedure {
 					}
 					{
 						Entity _ent = sourceentity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @s times 40 50 80");
 						}
 					}
 					{
 						Entity _ent = sourceentity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @s subtitle {\"text\":\"-----------------------------------\",\"color\":\"dark_red\"}");
 						}
 					}
 					{
 						Entity _ent = sourceentity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(
-									new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(), _ent.getDisplayName(),
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(
+									new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(),
 											_ent.level().getServer(), _ent),
 									"/title @s title [\"\",{\"text\":\"Gaol\",\"obfuscated\":true,\"color\":\"dark_red\"},{\"text\":\" The Pit \",\"color\":\"dark_red\"},{\"text\":\"Gaol\",\"obfuscated\":true,\"color\":\"dark_red\"}]");
 						}

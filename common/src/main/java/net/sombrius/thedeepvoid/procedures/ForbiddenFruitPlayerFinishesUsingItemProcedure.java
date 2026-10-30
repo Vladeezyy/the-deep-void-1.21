@@ -9,7 +9,7 @@ public class ForbiddenFruitPlayerFinishesUsingItemProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("tastedForbiddenFruit") == false) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("tastedForbiddenFruit", false) == false) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("tastedForbiddenFruit", true);
 		}
 		if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder())) {

@@ -38,7 +38,7 @@ public class SentientArmorDescriptionProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SENTIENT_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SENTIENT_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.SENTIENT_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.crawler.when_worn").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.sentient.worn1").getString())));
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.key_press").getString())));
@@ -47,7 +47,7 @@ public class SentientArmorDescriptionProcedure {
 					tooltip.add(Component.literal((Component.translatable("armors.the_deep_void.press_shift").getString())));
 				}
 			} else {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.crawler.when_worn").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.sentient.worn1").getString())));
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.key_press").getString())));

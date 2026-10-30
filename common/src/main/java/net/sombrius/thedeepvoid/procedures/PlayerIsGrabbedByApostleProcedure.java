@@ -4,7 +4,7 @@ import java.util.Comparator;
 import javax.annotation.Nullable;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -37,7 +37,7 @@ public class PlayerIsGrabbedByApostleProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("grabbedByApostle") == true) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("grabbedByApostle", false) == true) {
 			if (!world.getEntitiesOfClass(ApostleBossEntity.class, AABB.ofSize(new Vec3(x, y, z), 40, 40, 40), e -> true).isEmpty()) {
 				{
 					Entity _ent = entity;
@@ -89,7 +89,7 @@ public class PlayerIsGrabbedByApostleProcedure {
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("grabbedByApostle", false);
 			}
 		}
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("piercedByApostle") == true) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("piercedByApostle", false) == true) {
 			if (!world.getEntitiesOfClass(ApostleBossEntity.class, AABB.ofSize(new Vec3(x, y, z), 40, 40, 40), e -> true).isEmpty()) {
 				{
 					Entity _ent = entity;
@@ -137,9 +137,9 @@ public class PlayerIsGrabbedByApostleProcedure {
 							}
 						}.compareDistOf(x, y, z)).findFirst().orElse(null)).getLookAngle().z * 2, _ent.getYRot(), _ent.getXRot());
 				}
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("apostlePierceHeart") <= 0) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("apostlePierceHeart", 0) <= 0) {
 					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("apostlePierceHeart", 10);
-					entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:boss_attack")))),
+					entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:boss_attack")))),
 							(float) (double) DeepVoidConfigConfiguration.APOSTLEPIERCEHEART.get());
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 						_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20, 1));
@@ -148,13 +148,13 @@ public class PlayerIsGrabbedByApostleProcedure {
 							_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.BROKEN_ARMOR.holder(), 400, 0));
 					}
 				} else {
-					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("apostlePierceHeart", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("apostlePierceHeart") - 1));
+					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("apostlePierceHeart", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("apostlePierceHeart", 0) - 1));
 				}
 			} else {
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("piercedByApostle", false);
 			}
 		}
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("grabbedByExecutioner") == true) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("grabbedByExecutioner", false) == true) {
 			if (!world.getEntitiesOfClass(ExecutionerEntity.class, AABB.ofSize(new Vec3(x, y, z), 40, 40, 40), e -> true).isEmpty()) {
 				{
 					Entity _ent = entity;
@@ -202,12 +202,12 @@ public class PlayerIsGrabbedByApostleProcedure {
 							}
 						}.compareDistOf(x, y, z)).findFirst().orElse(null)).getLookAngle().z * 2, _ent.getYRot(), _ent.getXRot());
 				}
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("executionerStab") >= 36) {
-					entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:boss_attack")))), (float) 0.52);
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("executionerStab", 0) >= 36) {
+					entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:boss_attack")))), (float) 0.52);
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 						_entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20, 1));
 				} else {
-					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("executionerStab", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("executionerStab") + 1));
+					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("executionerStab", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("executionerStab", 0) + 1));
 				}
 			} else {
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putBoolean("grabbedByExecutioner", false);

@@ -10,8 +10,8 @@ public class GrimberryPiePlayerFinishesUsingItemProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 600, 1, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.HASTE, 600, 1, false, false));
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 600, 0, false, false));
 	}
 }

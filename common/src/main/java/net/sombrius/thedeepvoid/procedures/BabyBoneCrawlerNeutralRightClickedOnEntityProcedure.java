@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -15,7 +15,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -39,8 +39,8 @@ public class BabyBoneCrawlerNeutralRightClickedOnEntityProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -49,9 +49,9 @@ public class BabyBoneCrawlerNeutralRightClickedOnEntityProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 				if (entity instanceof BabyBoneCrawlerEntity _datEntSetI)
@@ -63,13 +63,13 @@ public class BabyBoneCrawlerNeutralRightClickedOnEntityProcedure {
 				if ((entity instanceof BabyBoneCrawlerEntity _datEntI ? _datEntI.getEntityData().get(BabyBoneCrawlerEntity.DATA_growth) : 0) >= 64) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 1.4);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 1.4);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 1.4, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 1.4, false);
 						}
 					}
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.BONE_CRAWLER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
+						Entity entityinstance = TheDeepVoidModEntities.BONE_CRAWLER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 							if (entityinstance instanceof TamableAnimal _toTame && sourceentity instanceof Player _owner)
@@ -86,9 +86,9 @@ public class BabyBoneCrawlerNeutralRightClickedOnEntityProcedure {
 						}
 					}
 					if (!(sourceentity instanceof ServerPlayer _plr19 && _plr19.level() instanceof ServerLevel
-							&& _plr19.getAdvancements().getOrStartProgress(_plr19.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:miracle_of_life"))).isDone())) {
+							&& _plr19.getAdvancements().getOrStartProgress(_plr19.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:miracle_of_life"))).isDone())) {
 						if (sourceentity instanceof ServerPlayer _player) {
-							AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:miracle_of_life"));
+							AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:miracle_of_life"));
 							if (_adv != null) {
 								AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 								if (!_ap.isDone()) {
@@ -108,8 +108,8 @@ public class BabyBoneCrawlerNeutralRightClickedOnEntityProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -118,9 +118,9 @@ public class BabyBoneCrawlerNeutralRightClickedOnEntityProcedure {
 				}
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.bite")), SoundSource.HOSTILE, 1, (float) 1.6, false);
 					}
 				}
 				if (entity instanceof BabyBoneCrawlerEntity _datEntSetI)
@@ -132,13 +132,13 @@ public class BabyBoneCrawlerNeutralRightClickedOnEntityProcedure {
 				if ((entity instanceof BabyBoneCrawlerEntity _datEntI ? _datEntI.getEntityData().get(BabyBoneCrawlerEntity.DATA_growth) : 0) >= 64) {
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 1.4);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 1.4);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 1.4, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:insect_cry_1")), SoundSource.HOSTILE, 1, (float) 1.4, false);
 						}
 					}
 					if (world instanceof ServerLevel _serverLevel) {
-						Entity entityinstance = TheDeepVoidModEntities.BONE_CRAWLER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED, false, false);
+						Entity entityinstance = TheDeepVoidModEntities.BONE_CRAWLER.get().create(_serverLevel, null, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED, false, false);
 						if (entityinstance != null) {
 							entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 							if (entityinstance instanceof TamableAnimal _toTame && sourceentity instanceof Player _owner)
@@ -155,9 +155,9 @@ public class BabyBoneCrawlerNeutralRightClickedOnEntityProcedure {
 						}
 					}
 					if (!(sourceentity instanceof ServerPlayer _plr41 && _plr41.level() instanceof ServerLevel
-							&& _plr41.getAdvancements().getOrStartProgress(_plr41.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:miracle_of_life"))).isDone())) {
+							&& _plr41.getAdvancements().getOrStartProgress(_plr41.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:miracle_of_life"))).isDone())) {
 						if (sourceentity instanceof ServerPlayer _player) {
-							AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:miracle_of_life"));
+							AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:miracle_of_life"));
 							if (_adv != null) {
 								AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 								if (!_ap.isDone()) {

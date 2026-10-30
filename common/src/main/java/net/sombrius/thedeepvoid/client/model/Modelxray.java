@@ -11,19 +11,20 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 
 // Made with Blockbench 5.0.7
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
-public class Modelxray<T extends Entity> extends EntityModel<T> {
+public class Modelxray<T extends net.minecraft.client.renderer.entity.state.EntityRenderState> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in
 	// the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("the_deep_void", "modelxray"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath("the_deep_void", "modelxray"), "main");
 	public final ModelPart main;
 
 	public Modelxray(ModelPart root) {
+		super(root);
 		this.main = root.getChild("main");
 	}
 
@@ -34,11 +35,13 @@ public class Modelxray<T extends Entity> extends EntityModel<T> {
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		main.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-	}
 
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(T state) {
+		super.setupAnim(state);
+		float limbSwing = net.sombrius.thedeepvoid.port.PortRender.limbSwing(state);
+		float limbSwingAmount = net.sombrius.thedeepvoid.port.PortRender.limbSwingAmount(state);
+		float ageInTicks = state.ageInTicks;
+		float netHeadYaw = net.sombrius.thedeepvoid.port.PortRender.netHeadYaw(state);
+		float headPitch = net.sombrius.thedeepvoid.port.PortRender.headPitch(state);
 	}
 }

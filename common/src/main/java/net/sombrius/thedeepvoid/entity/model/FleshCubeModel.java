@@ -1,23 +1,33 @@
 package net.sombrius.thedeepvoid.entity.model;
 
-import net.minecraft.resources.ResourceLocation;
-import net.sombrius.thedeepvoid.entity.FleshCubeEntity;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 import software.bernie.geckolib.model.GeoModel;
+
+import net.minecraft.resources.Identifier;
+
+import net.sombrius.thedeepvoid.port.GeoTextures;
+import net.sombrius.thedeepvoid.entity.FleshCubeEntity;
+
+import javax.annotation.Nullable;
 
 public class FleshCubeModel extends GeoModel<FleshCubeEntity> {
 	@Override
-	public ResourceLocation getAnimationResource(FleshCubeEntity entity) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "animations/fleshcube.animation.json");
+	public Identifier getAnimationResource(FleshCubeEntity entity) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "animations/fleshcube.animation.json");
 	}
 
 	@Override
-	public ResourceLocation getModelResource(FleshCubeEntity entity) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "geo/fleshcube.geo.json");
+	public Identifier getModelResource(GeoRenderState renderState) {
+		return Identifier.fromNamespaceAndPath("the_deep_void", "geo/fleshcube.geo.json");
 	}
 
 	@Override
-	public ResourceLocation getTextureResource(FleshCubeEntity entity) {
-		return ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/entities/" + entity.getTexture() + ".png");
+	public Identifier getTextureResource(GeoRenderState renderState) {
+		return GeoTextures.get(renderState);
 	}
 
+	@Override
+	public void addAdditionalStateData(FleshCubeEntity entity, @Nullable Object relatedObject, GeoRenderState renderState) {
+		GeoTextures.set(renderState, entity.getTexture());
+	}
 }

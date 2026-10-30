@@ -1,13 +1,14 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -27,7 +28,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.AbstractThrownPotion;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -37,11 +38,13 @@ import net.sombrius.thedeepvoid.procedures.VoidbornEntityIsHurtProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidbornOnEntityTickUpdateProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidbornThisEntityKillsAnotherOneProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
+
+import net.sombrius.thedeepvoid.port.GeoAnims;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.state.AnimationTest;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -59,7 +62,6 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<Integer> DATA_crouching = SynchedEntityData.defineId(VoidbornEntity.class, EntityDataSerializers.INT);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
-	private boolean lastloop;
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
@@ -117,26 +119,26 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 
 	@Override
 	public void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty")), 0.15f, 1);
+		this.playSound(BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty")), 0.15f, 1);
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("intentionally_empty"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty"));
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float amount) {
+	public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
 		VoidbornEntityIsHurtProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this, source.getEntity());
 		Entity immediatesourceentity = source.getDirectEntity();
 		if (source.is(DamageTypes.IN_FIRE))
 			return false;
-		if (source.getDirectEntity() instanceof ThrownPotion || source.getDirectEntity() instanceof AreaEffectCloud || source.typeHolder().is(net.sombrius.thedeepvoid.port.PortUtil.POISON_DAMAGE))
+		if (source.getDirectEntity() instanceof AbstractThrownPotion || source.getDirectEntity() instanceof AreaEffectCloud || source.typeHolder().is(net.sombrius.thedeepvoid.port.PortUtil.POISON_DAMAGE))
 			return false;
 		if (source.is(DamageTypes.FALL))
 			return false;
@@ -154,7 +156,7 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 			return false;
 		if (source.is(DamageTypes.WITHER) || source.is(DamageTypes.WITHER_SKULL))
 			return false;
-		return super.hurt(source, amount);
+		return super.hurtServer(level, source, amount);
 	}
 
 	@Override
@@ -168,7 +170,7 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putString("Texture", this.getTexture());
 		compound.putInt("DataspawnTentacles", this.entityData.get(DATA_spawnTentacles));
@@ -182,31 +184,31 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Texture"))
-			this.setTexture(compound.getString("Texture"));
-		if (compound.contains("DataspawnTentacles"))
-			this.entityData.set(DATA_spawnTentacles, compound.getInt("DataspawnTentacles"));
-		if (compound.contains("DatahitCooldown"))
-			this.entityData.set(DATA_hitCooldown, compound.getInt("DatahitCooldown"));
-		if (compound.contains("Datahit"))
-			this.entityData.set(DATA_hit, compound.getInt("Datahit"));
-		if (compound.contains("DatacancelClose"))
-			this.entityData.set(DATA_cancelClose, compound.getBoolean("DatacancelClose"));
-		if (compound.contains("Dataheartbeat"))
-			this.entityData.set(DATA_heartbeat, compound.getInt("Dataheartbeat"));
-		if (compound.contains("Datacrouch"))
-			this.entityData.set(DATA_crouch, compound.getBoolean("Datacrouch"));
-		if (compound.contains("DatacancelCrouch"))
-			this.entityData.set(DATA_cancelCrouch, compound.getBoolean("DatacancelCrouch"));
-		if (compound.contains("Datacrouching"))
-			this.entityData.set(DATA_crouching, compound.getInt("Datacrouching"));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Texture"))
+			this.setTexture(compound.getStringOr("Texture", ""));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataspawnTentacles"))
+			this.entityData.set(DATA_spawnTentacles, compound.getIntOr("DataspawnTentacles", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatahitCooldown"))
+			this.entityData.set(DATA_hitCooldown, compound.getIntOr("DatahitCooldown", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datahit"))
+			this.entityData.set(DATA_hit, compound.getIntOr("Datahit", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatacancelClose"))
+			this.entityData.set(DATA_cancelClose, compound.getBooleanOr("DatacancelClose", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Dataheartbeat"))
+			this.entityData.set(DATA_heartbeat, compound.getIntOr("Dataheartbeat", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datacrouch"))
+			this.entityData.set(DATA_crouch, compound.getBooleanOr("Datacrouch", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatacancelCrouch"))
+			this.entityData.set(DATA_cancelCrouch, compound.getBooleanOr("DatacancelCrouch", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datacrouching"))
+			this.entityData.set(DATA_crouching, compound.getIntOr("Datacrouching", 0));
 	}
 
 	@Override
-	public void awardKillScore(Entity entity, int score, DamageSource damageSource) {
-		super.awardKillScore(entity, score, damageSource);
+	public void awardKillScore(Entity entity, DamageSource damageSource) {
+		super.awardKillScore(entity, damageSource);
 		VoidbornThisEntityKillsAnotherOneProcedure.execute(this.level(), entity, this);
 	}
 
@@ -255,9 +257,9 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 		return builder;
 	}
 
-	private PlayState movementPredicate(AnimationState event) {
+	private PlayState movementPredicate(AnimationTest<VoidbornEntity> event) {
 		if (this.animationprocedure.equals("empty")) {
-			if ((event.isMoving() || !(event.getLimbSwingAmount() > -0.15F && event.getLimbSwingAmount() < 0.15F))
+			if ((event.isMoving() || !(this.walkAnimation.speed() > -0.15F && this.walkAnimation.speed() < 0.15F))
 
 			) {
 				return event.setAndContinue(RawAnimation.begin().thenLoop("animation.caveNightmare_walk"));
@@ -267,19 +269,19 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 		return PlayState.STOP;
 	}
 
-	private PlayState attackingPredicate(AnimationState event) {
+	private PlayState attackingPredicate(AnimationTest<VoidbornEntity> event) {
 		double d1 = this.getX() - this.xOld;
 		double d0 = this.getZ() - this.zOld;
 		float velocity = (float) Math.sqrt(d1 * d1 + d0 * d0);
-		if (getAttackAnim(event.getPartialTick()) > 0f && !this.swinging) {
+		if (getAttackAnim(net.sombrius.thedeepvoid.port.GeoAnims.partialTick(event)) > 0f && !this.swinging) {
 			this.swinging = true;
 			this.lastSwing = level().getGameTime();
 		}
 		if (this.swinging && this.lastSwing + 7L <= level().getGameTime()) {
 			this.swinging = false;
 		}
-		if (this.swinging && event.getController().getAnimationState() == AnimationController.State.STOPPED) {
-			event.getController().forceAnimationReset();
+		if (this.swinging && net.sombrius.thedeepvoid.port.GeoAnims.stopped(event.controller())) {
+			event.controller().reset();
 			return event.setAndContinue(RawAnimation.begin().thenPlay("animation.caveNightmare_attack"));
 		}
 		return PlayState.CONTINUE;
@@ -287,21 +289,8 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 
 	String prevAnim = "empty";
 
-	private PlayState procedurePredicate(AnimationState event) {
-		if (!animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
-			if (!this.animationprocedure.equals(prevAnim))
-				event.getController().forceAnimationReset();
-			event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
-			if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
-				this.animationprocedure = "empty";
-				event.getController().forceAnimationReset();
-			}
-		} else if (animationprocedure.equals("empty")) {
-			prevAnim = "empty";
-			return PlayState.STOP;
-		}
-		prevAnim = this.animationprocedure;
-		return PlayState.CONTINUE;
+	private PlayState procedurePredicate(AnimationTest<VoidbornEntity> event) {
+		return GeoAnims.procedure(event, this.animationprocedure, animation -> this.animationprocedure = animation);
 	}
 
 	@Override
@@ -309,7 +298,8 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(VoidbornEntity.RemovalReason.KILLED);
-			this.dropExperience(null);
+			if (this.level() instanceof ServerLevel _serverLevel)
+				this.dropExperience(_serverLevel, null);
 		}
 	}
 
@@ -323,9 +313,9 @@ public class VoidbornEntity extends Monster implements GeoEntity {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>(this, "movement", 4, this::movementPredicate));
-		data.add(new AnimationController<>(this, "attacking", 4, this::attackingPredicate));
-		data.add(new AnimationController<>(this, "procedure", 4, this::procedurePredicate));
+		data.add(new AnimationController<>("movement", 4, this::movementPredicate));
+		data.add(new AnimationController<>("attacking", 4, this::attackingPredicate));
+		data.add(new AnimationController<>("procedure", 4, this::procedurePredicate));
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -42,13 +42,13 @@ public class HookEndTickProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(41 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("owner"))) {
+					if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("owner", ""))) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fishing_bobber.retrieve")),
+								_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fishing_bobber.retrieve")),
 										SoundSource.PLAYERS, 1, 1);
 							} else {
-								_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fishing_bobber.retrieve")), SoundSource.PLAYERS, 1, 1,
+								_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fishing_bobber.retrieve")), SoundSource.PLAYERS, 1, 1,
 										false);
 							}
 						}
@@ -58,12 +58,12 @@ public class HookEndTickProcedure {
 			if (!entity.level().isClientSide())
 				entity.discard();
 		} else {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("grim") == true) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("grim", false) == true) {
 				{
 					final Vec3 _center = new Vec3(x, y, z);
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(40 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("owner"))) {
+						if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("owner", ""))) {
 							Xo = entity.getX() - entityiterator.getX();
 							Yo = entity.getY() - entityiterator.getY();
 							Zo = entity.getZ() - entityiterator.getZ();
@@ -139,12 +139,12 @@ public class HookEndTickProcedure {
 						}
 					}
 				}
-			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("soul") == true) {
+			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("soul", false) == true) {
 				{
 					final Vec3 _center = new Vec3(x, y, z);
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(40 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("owner"))) {
+						if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("owner", ""))) {
 							Xo = entity.getX() - entityiterator.getX();
 							Yo = entity.getY() - entityiterator.getY();
 							Zo = entity.getZ() - entityiterator.getZ();
@@ -225,7 +225,7 @@ public class HookEndTickProcedure {
 					final Vec3 _center = new Vec3(x, y, z);
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(40 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 					for (Entity entityiterator : _entfound) {
-						if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("owner"))) {
+						if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("owner", ""))) {
 							Xo = entity.getX() - entityiterator.getX();
 							Yo = entity.getY() - entityiterator.getY();
 							Zo = entity.getZ() - entityiterator.getZ();
@@ -308,7 +308,7 @@ public class HookEndTickProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(40 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 				for (Entity entityiterator : _entfound) {
-					if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("owner"))) {
+					if ((entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("owner", ""))) {
 						if (entityiterator.isShiftKeyDown()) {
 							if (!entity.level().isClientSide())
 								entity.discard();
@@ -326,21 +326,21 @@ public class HookEndTickProcedure {
 					_serverPlayer.connection.teleport(((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() + 1),
 							((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ()), _ent.getYRot(), _ent.getXRot());
 			}
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("soul") == true) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("soul", false) == true) {
 				if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.ROT.holder(), 20, 1));
-				(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), (float) 0.1);
+				(entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MOB_ATTACK), entity), (float) 0.1);
 			} else {
 				if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.ROT.holder(), 20, 0));
 			}
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("soul") == true) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("soul", false) == true) {
 				if (((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= 0) {
 					{
 						final Vec3 _center = new Vec3(x, y, z);
 						List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(25 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 						for (Entity entityiterator : _entfound) {
-							if (!(entityiterator == entity) && !(entityiterator == (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null)) && !(entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getString("owner"))) {
+							if (!(entityiterator == entity) && !(entityiterator == (entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null)) && !(entityiterator.getStringUUID()).equals(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getStringOr("owner", ""))) {
 								if (entity instanceof Mob _entity && entityiterator instanceof LivingEntity _ent)
 									_entity.setTarget(_ent);
 							}
@@ -348,9 +348,9 @@ public class HookEndTickProcedure {
 					}
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.phantom.bite")), SoundSource.PLAYERS, 1, (float) 1.2);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.phantom.bite")), SoundSource.PLAYERS, 1, (float) 1.2);
 						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.phantom.bite")), SoundSource.PLAYERS, 1, (float) 1.2, false);
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.phantom.bite")), SoundSource.PLAYERS, 1, (float) 1.2, false);
 						}
 					}
 				}

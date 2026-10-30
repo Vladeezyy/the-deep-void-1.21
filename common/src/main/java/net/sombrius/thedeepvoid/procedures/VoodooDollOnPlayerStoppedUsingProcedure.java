@@ -18,7 +18,7 @@ public class VoodooDollOnPlayerStoppedUsingProcedure {
 			CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putBoolean(_tagName, _tagValue));
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, (int) Math.floor(itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("deep_void:healCount") / 25), false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, (int) Math.floor(itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("deep_void:healCount", 0) / 25), false, false));
 		{
 			final String _tagName = "deep_void:healCount";
 			final double _tagValue = 0;

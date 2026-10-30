@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
@@ -47,7 +47,7 @@ public class MistedRemnantsFogColorProcedure {
 	public static void computeFogColor(ViewportEvent.ComputeFogColor event) {
 		provider = event;
 		ClientLevel level = Minecraft.getInstance().level;
-		Entity entity = provider.getCamera().getEntity();
+		Entity entity = provider.getCamera().entity();
 		if (level != null && entity != null) {
 			Vec3 entPos = entity.getPosition((float) provider.getPartialTick());
 			execute(provider, level, entPos.x(), entPos.y(), entPos.z(), entity);
@@ -61,7 +61,7 @@ public class MistedRemnantsFogColorProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:misted_remnants")) && y > 10 && !(!world.getEntitiesOfClass(ApostleBossEntity.class, AABB.ofSize(new Vec3(x, y, z), 40, 40, 40), e -> true).isEmpty())) {
+		if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:misted_remnants")) && y > 10 && !(!world.getEntitiesOfClass(ApostleBossEntity.class, AABB.ofSize(new Vec3(x, y, z), 40, 40, 40), e -> true).isEmpty())) {
 			setColor(255 << 24 | (int) TheDeepVoidModVariables.of(entity).remnantsColor << 16
 					| (int) TheDeepVoidModVariables.of(entity).remnantsColor << 8
 					| (int) TheDeepVoidModVariables.of(entity).remnantsColor);

@@ -1,12 +1,11 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import com.mojang.blaze3d.shaders.FogShape;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
@@ -15,7 +14,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.GameType;
@@ -44,7 +43,7 @@ public class HallucinateFogProcedure {
 		}
 	}
 
-	public static void setShape(FogShape shape) {
+	public static void setShape(ViewportEvent.FogShape shape) {
 		provider.setFogShape(shape);
 		if (!provider.isCanceled()) {
 			provider.setCanceled(true);
@@ -54,9 +53,9 @@ public class HallucinateFogProcedure {
 	@SubscribeEvent
 	public static void renderFog(ViewportEvent.RenderFog event) {
 		provider = event;
-		if (provider.getMode() == FogRenderer.FogMode.FOG_TERRAIN) {
+		if (provider.getMode() == ViewportEvent.FogMode.FOG_TERRAIN) {
 			ClientLevel level = Minecraft.getInstance().level;
-			Entity entity = provider.getCamera().getEntity();
+			Entity entity = provider.getCamera().entity();
 			if (level != null && entity != null) {
 				Vec3 pos = entity.getPosition((float) provider.getPartialTick());
 				execute(provider, level, pos.x(), pos.y(), pos.z(), entity);
@@ -76,7 +75,7 @@ public class HallucinateFogProcedure {
 				if (_ent instanceof ServerPlayer _serverPlayer) {
 					return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 				} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 				}
 				return false;
 			}
@@ -85,12 +84,12 @@ public class HallucinateFogProcedure {
 				if (_ent instanceof ServerPlayer _serverPlayer) {
 					return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 				} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 				}
 				return false;
 			}
 		}.checkGamemode(entity))) {
-			setShape(FogShape.SPHERE);
+			setShape(ViewportEvent.FogShape.SPHERE);
 			if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y, z)) > 8) {
 				setDistance(10, 14);
 			} else if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y, z)) == 8) {
@@ -117,7 +116,7 @@ public class HallucinateFogProcedure {
 				setDistance(0, 1);
 				if (!(!world.getEntitiesOfClass(VoidbornEntity.class, AABB.ofSize(new Vec3(x, y, z), 200, 200, 200), e -> true).isEmpty()) && !(entity instanceof LivingEntity _livEnt29 && _livEnt29.hasEffect(TheDeepVoidModMobEffects.PAIN_KILLER.holder()))
 						&& !(entity instanceof LivingEntity _livEnt30 && _livEnt30.hasEffect(TheDeepVoidModMobEffects.VOID_BLESSING.holder()))) {
-					if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("voidbornSpawn") >= (double) DeepVoidConfigConfiguration.VOIDBORNSPAWNTIMER.get()) {
+					if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("voidbornSpawn", 0) >= (double) DeepVoidConfigConfiguration.VOIDBORNSPAWNTIMER.get()) {
 						net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("voidbornSpawn", 0);
 						if (world instanceof ServerLevel _level) {
 							Entity entityToSpawn = TheDeepVoidModEntities.VOIDBORN.get().spawn(_level,
@@ -127,7 +126,7 @@ public class HallucinateFogProcedure {
 											entity.getY(),
 											entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale((-10))), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity))
 													.getBlockPos().getZ()),
-									MobSpawnType.MOB_SUMMONED);
+									EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}
@@ -143,29 +142,29 @@ public class HallucinateFogProcedure {
 							}
 						}
 					} else {
-						net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("voidbornSpawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("voidbornSpawn") + 1));
+						net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("voidbornSpawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("voidbornSpawn", 0) + 1));
 					}
 				}
-				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("voidbornSpawn") == (double) DeepVoidConfigConfiguration.VOIDBORNSPAWNTIMER.get() / 2) {
+				if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("voidbornSpawn", 0) == (double) DeepVoidConfigConfiguration.VOIDBORNSPAWNTIMER.get() / 2) {
 					{
 						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
 						}
 					}
-				} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("voidbornSpawn") == (double) DeepVoidConfigConfiguration.VOIDBORNSPAWNTIMER.get() / 1.2) {
+				} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("voidbornSpawn", 0) == (double) DeepVoidConfigConfiguration.VOIDBORNSPAWNTIMER.get() / 1.2) {
 					{
 						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_heartbeat player @s ~ ~ ~ 1 1 1");
 						}
 					}
 				}
 			}
-			if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y, z)) > 0 && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("voidbornSpawn") > 0) {
-				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("voidbornSpawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("voidbornSpawn") - 1));
+			if (world.getMaxLocalRawBrightness(BlockPos.containing(x, y, z)) > 0 && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("voidbornSpawn", 0) > 0) {
+				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("voidbornSpawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("voidbornSpawn", 0) - 1));
 			}
 		}
 	}

@@ -22,13 +22,13 @@ import net.sombrius.thedeepvoid.procedures.AncientPotAdditionalPlacinggrowthCond
 
 public class AncientUrnsGenerateBlock extends FlowerBlock {
 	public AncientUrnsGenerateBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 0,
-				BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).sound(SoundType.DECORATED_POT).strength(0f, 1f).noOcclusion().dynamicShape().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 0,
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.PLANT).sound(SoundType.DECORATED_POT).strength(0f, 1f).noOcclusion().dynamicShape().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 offset = state.getOffset(world, pos);
+		Vec3 offset = state.getOffset(pos);
 		return Shapes.or(box(2, 0, 2, 7, 10, 7), box(8, 0, 1, 14, 12, 7), box(2, 0, 8, 9, 7, 15), box(10, 0, 8, 15, 9, 13)).move(offset.x, offset.y, offset.z);
 	}
 

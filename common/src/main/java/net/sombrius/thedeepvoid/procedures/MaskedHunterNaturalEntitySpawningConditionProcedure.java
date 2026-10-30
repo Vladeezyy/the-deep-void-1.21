@@ -1,7 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -21,7 +21,7 @@ public class MaskedHunterNaturalEntitySpawningConditionProcedure {
 						AABB.ofSize(new Vec3(x, y, z), ((double) DeepVoidConfigConfiguration.MASKEDHUNTERSPAWNRADIUS.get()), ((double) DeepVoidConfigConfiguration.MASKEDHUNTERSPAWNRADIUS.get()),
 								((double) DeepVoidConfigConfiguration.MASKEDHUNTERSPAWNRADIUS.get())),
 						e -> true).isEmpty())
-				&& DeepVoidConfigConfiguration.SPAWNMASKEDHUNTERS.get() == true && y >= 50 && (world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:masked_hunter_spawnable_on")))
+				&& DeepVoidConfigConfiguration.SPAWNMASKEDHUNTERS.get() == true && y >= 50 && (world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:masked_hunter_spawnable_on")))
 				&& TheDeepVoidModVariables.MapVariables.get(world).hunterSpawnCooldown <= 0) {
 			TheDeepVoidModVariables.MapVariables.get(world).hunterSpawnCooldown = (double) DeepVoidConfigConfiguration.MASKEDHUNTERCOOLDOWN.get();
 			TheDeepVoidModVariables.MapVariables.get(world).syncData(world);

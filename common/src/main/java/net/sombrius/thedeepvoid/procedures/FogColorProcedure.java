@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
@@ -44,7 +44,7 @@ public class FogColorProcedure {
 	public static void computeFogColor(ViewportEvent.ComputeFogColor event) {
 		provider = event;
 		ClientLevel level = Minecraft.getInstance().level;
-		Entity entity = provider.getCamera().getEntity();
+		Entity entity = provider.getCamera().entity();
 		if (level != null && entity != null) {
 			Vec3 entPos = entity.getPosition((float) provider.getPartialTick());
 			execute(provider, level, entPos.x(), entPos.y(), entPos.z());
@@ -56,10 +56,10 @@ public class FogColorProcedure {
 	}
 
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z) {
-		if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:gloomy_deathgrounds")) || world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:staring_hills"))) {
+		if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:gloomy_deathgrounds")) || world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:staring_hills"))) {
 			setColor(255 << 24 | 16 << 16 | 0 << 8 | 0);
 		}
-		if (world.getBiome(BlockPos.containing(x, y, z)).is(ResourceLocation.parse("the_deep_void:crawler_nest"))) {
+		if (world.getBiome(BlockPos.containing(x, y, z)).is(Identifier.parse("the_deep_void:crawler_nest"))) {
 			setColor(255 << 24 | 15 << 16 | 16 << 8 | 15);
 		}
 	}

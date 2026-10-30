@@ -30,7 +30,7 @@ public class SoulWingsArmorDescriptionProcedure {
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.SOUL_WINGS_CHESTPLATE.get() || itemstack.getItem() == TheDeepVoidModItems.SOUL_WINGS_FLY_CHESTPLATE.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.key_press").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.soul_wings.on_key_press1").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.soul_wings.on_key_press2").getString())));

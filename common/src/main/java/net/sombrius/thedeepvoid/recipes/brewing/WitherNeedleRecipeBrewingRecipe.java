@@ -18,12 +18,12 @@ public class WitherNeedleRecipeBrewingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean isInput(ItemStack input) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModItems.POISON_NEEDLE.get())).test(input);
+		return Ingredient.of(TheDeepVoidModItems.POISON_NEEDLE.get()).test(input);
 	}
 
 	@Override
 	public boolean isIngredient(ItemStack ingredient) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModItems.ROTTEN_BONE.get())).test(ingredient);
+		return Ingredient.of(TheDeepVoidModItems.ROTTEN_BONE.get()).test(ingredient);
 	}
 
 	@Override

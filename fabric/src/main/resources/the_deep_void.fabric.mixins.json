@@ -26,7 +26,6 @@
     "client.GuiMixin",
     "client.HumanoidModelMixin",
     "client.ItemInHandRendererMixin",
-    "client.LevelRendererMixin",
     "client.MultiPlayerGameModeMixin",
     "client.PlayerRendererMixin"
   ],

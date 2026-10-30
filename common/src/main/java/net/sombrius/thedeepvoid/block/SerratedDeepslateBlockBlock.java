@@ -12,11 +12,11 @@ import net.minecraft.world.level.material.MapColor;
 
 public class SerratedDeepslateBlockBlock extends Block {
 	public SerratedDeepslateBlockBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3f, 6f).requiresCorrectToolForDrops().speedFactor(0.6f).jumpFactor(0.6f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3f, 6f).requiresCorrectToolForDrops().speedFactor(0.6f).jumpFactor(0.6f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 }

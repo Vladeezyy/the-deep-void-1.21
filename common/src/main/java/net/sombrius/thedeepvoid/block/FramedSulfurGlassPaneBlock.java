@@ -1,7 +1,7 @@
 
 package net.sombrius.thedeepvoid.block;
 
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -14,15 +14,15 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class FramedSulfurGlassPaneBlock extends IronBarsBlock {
 	public FramedSulfurGlassPaneBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).sound(SoundType.GLASS).strength(2f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.HAT).sound(SoundType.GLASS).strength(2f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	public Integer getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
-		return FastColor.ARGB32.colorFromFloat(1f, 0.6901960784f, 0.5450980392f, 0f);
+		return ARGB.colorFromFloat(1f, 0.6901960784f, 0.5450980392f, 0f);
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 0;
 	}
 }

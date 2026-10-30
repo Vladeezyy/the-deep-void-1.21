@@ -12,7 +12,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
@@ -34,7 +34,7 @@ public class DungeonDarkSteelBarsActiveOnTickUpdateProcedure {
 			public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 				BlockEntity blockEntity = world.getBlockEntity(pos);
 				if (blockEntity != null)
-					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 				return -1;
 			}
 		}.getValue(world, BlockPos.containing(x, y, z), "spawn") < 4 && !world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 25, 25, 25), e -> true).isEmpty()
@@ -49,7 +49,7 @@ public class DungeonDarkSteelBarsActiveOnTickUpdateProcedure {
 						public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 							BlockEntity blockEntity = world.getBlockEntity(pos);
 							if (blockEntity != null)
-								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+								return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 							return -1;
 						}
 					}.getValue(world, BlockPos.containing(x, y, z), "spawn") + 1));
@@ -62,8 +62,8 @@ public class DungeonDarkSteelBarsActiveOnTickUpdateProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 						}
 						return false;
 					}
@@ -76,8 +76,8 @@ public class DungeonDarkSteelBarsActiveOnTickUpdateProcedure {
 						if (_ent instanceof ServerPlayer _serverPlayer) {
 							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.SPECTATOR;
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.SPECTATOR;
 						}
 						return false;
 					}
@@ -102,7 +102,7 @@ public class DungeonDarkSteelBarsActiveOnTickUpdateProcedure {
 											Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 												return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 											}
-										}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), MobSpawnType.MOB_SUMMONED, false, false);
+										}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), EntitySpawnReason.MOB_SUMMONED, false, false);
 								if (entityinstance != null) {
 									entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 									if (entityinstance instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -128,7 +128,7 @@ public class DungeonDarkSteelBarsActiveOnTickUpdateProcedure {
 											Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 												return Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_x, _y, _z));
 											}
-										}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), MobSpawnType.MOB_SUMMONED, false, false);
+										}.compareDistOf(x, y, z)).findFirst().orElse(null)).getZ()), EntitySpawnReason.MOB_SUMMONED, false, false);
 								if (entityinstance != null) {
 									entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
 									if (entityinstance instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -161,7 +161,7 @@ public class DungeonDarkSteelBarsActiveOnTickUpdateProcedure {
 			public double getValue(LevelAccessor world, BlockPos pos, String tag) {
 				BlockEntity blockEntity = world.getBlockEntity(pos);
 				if (blockEntity != null)
-					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDouble(tag);
+					return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getDoubleOr(tag, 0);
 				return -1;
 			}
 		}.getValue(world, BlockPos.containing(x, y, z), "spawn") >= 4 && !(!world.getEntitiesOfClass(PitPrisonerEntity.class, AABB.ofSize(new Vec3(x, y, z), 25, 25, 25), e -> true).isEmpty())

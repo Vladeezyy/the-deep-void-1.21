@@ -26,13 +26,13 @@ import net.sombrius.thedeepvoid.procedures.AncientPotPlantDestroyedByPlayerProce
 
 public class AncientPotBlock extends FlowerBlock implements net.sombrius.thedeepvoid.port.PortBlockHooks.DestroyedByPlayer {
 	public AncientPotBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 0,
-				BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).sound(SoundType.DECORATED_POT).strength(0f, 1f).noOcclusion().dynamicShape().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 0,
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.PLANT).sound(SoundType.DECORATED_POT).strength(0f, 1f).noOcclusion().dynamicShape().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 offset = state.getOffset(world, pos);
+		Vec3 offset = state.getOffset(pos);
 		return Shapes.or(box(3, 0, 3, 13, 10, 13), box(5, 10, 5, 11, 11, 11), box(4, 11, 4, 12, 12, 12)).move(offset.x, offset.y, offset.z);
 	}
 

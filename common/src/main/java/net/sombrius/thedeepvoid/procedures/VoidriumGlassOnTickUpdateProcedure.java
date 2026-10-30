@@ -27,7 +27,7 @@ public class VoidriumGlassOnTickUpdateProcedure {
 							public String getValue(LevelAccessor world, BlockPos pos, String tag) {
 								BlockEntity blockEntity = world.getBlockEntity(pos);
 								if (blockEntity != null)
-									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getString(tag);
+									return net.sombrius.thedeepvoid.port.PortUtil.data(blockEntity).getStringOr(tag, "");
 								return "";
 							}
 						}.getValue(world, BlockPos.containing(x, y, z), "deep_void:placedBy")).equals(entityiterator.getDisplayName().getString())) {

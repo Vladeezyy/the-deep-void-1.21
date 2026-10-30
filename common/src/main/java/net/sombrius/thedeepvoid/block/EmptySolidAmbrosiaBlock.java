@@ -14,11 +14,11 @@ import net.sombrius.thedeepvoid.procedures.SolidAmbrosiaOnTickUpdateProcedure;
 
 public class EmptySolidAmbrosiaBlock extends Block {
 	public EmptySolidAmbrosiaBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.FROGLIGHT).strength(1f, 4f).friction(0.7f).randomTicks());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.FROGLIGHT).strength(1f, 4f).friction(0.7f).randomTicks());
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

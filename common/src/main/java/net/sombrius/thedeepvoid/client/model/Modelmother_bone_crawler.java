@@ -11,17 +11,17 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 // Made with Blockbench 4.11.2
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
-public class Modelmother_bone_crawler<T extends Entity> extends EntityModel<T> {
+public class Modelmother_bone_crawler<T extends net.minecraft.client.renderer.entity.state.EntityRenderState> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in
 	// the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("the_deep_void", "modelmother_bone_crawler"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath("the_deep_void", "modelmother_bone_crawler"), "main");
 	public final ModelPart body;
 	public final ModelPart head;
 	public final ModelPart left_leg0;
@@ -32,6 +32,7 @@ public class Modelmother_bone_crawler<T extends Entity> extends EntityModel<T> {
 	public final ModelPart right_leg1;
 
 	public Modelmother_bone_crawler(ModelPart root) {
+		super(root);
 		this.body = root.getChild("body");
 		this.head = root.getChild("head");
 		this.left_leg0 = root.getChild("left_leg0");
@@ -125,19 +126,14 @@ public class Modelmother_bone_crawler<T extends Entity> extends EntityModel<T> {
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		left_leg0.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		right_leg0.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		left_leg2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		right_leg2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		left_leg1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		right_leg1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-	}
 
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(T state) {
+		super.setupAnim(state);
+		float limbSwing = net.sombrius.thedeepvoid.port.PortRender.limbSwing(state);
+		float limbSwingAmount = net.sombrius.thedeepvoid.port.PortRender.limbSwingAmount(state);
+		float ageInTicks = state.ageInTicks;
+		float netHeadYaw = net.sombrius.thedeepvoid.port.PortRender.netHeadYaw(state);
+		float headPitch = net.sombrius.thedeepvoid.port.PortRender.headPitch(state);
 		this.head.yRot = netHeadYaw / (180F / (float) Math.PI);
 		this.head.xRot = headPitch / (180F / (float) Math.PI);
 		this.right_leg1.zRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;

@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.BlockPos;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class LickerHookSwingProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof Player _player)
-			_player.getCooldowns().addCooldown(itemstack.getItem(), 1);
+			_player.getCooldowns().addCooldown(itemstack, 1);
 		if (!world.getEntitiesOfClass(HookEndEntity.class, AABB.ofSize(new Vec3(x, y, z), 40, 40, 40), e -> true).isEmpty()) {
 			{
 				final Vec3 _center = new Vec3(x, y, z);
@@ -32,9 +32,9 @@ public class LickerHookSwingProcedure {
 					if (entityiterator instanceof HookEndEntity) {
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fishing_bobber.retrieve")), SoundSource.PLAYERS, 1, (float) 0.9);
+								_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fishing_bobber.retrieve")), SoundSource.PLAYERS, 1, (float) 0.9);
 							} else {
-								_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fishing_bobber.retrieve")), SoundSource.PLAYERS, 1, (float) 0.9, false);
+								_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fishing_bobber.retrieve")), SoundSource.PLAYERS, 1, (float) 0.9, false);
 							}
 						}
 						entity.setDeltaMovement(new Vec3(((entityiterator.getX() - entity.getX()) * 0.2), ((entityiterator.getY() - entity.getY()) * 0.2), ((entityiterator.getZ() - entity.getZ()) * 0.2)));

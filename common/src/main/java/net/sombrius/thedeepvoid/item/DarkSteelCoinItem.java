@@ -6,6 +6,6 @@ import net.minecraft.world.item.Rarity;
 
 public class DarkSteelCoinItem extends Item {
 	public DarkSteelCoinItem() {
-		super(new Item.Properties().stacksTo(64).fireResistant().rarity(Rarity.UNCOMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).fireResistant().rarity(Rarity.UNCOMMON));
 	}
 }

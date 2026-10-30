@@ -18,11 +18,11 @@ import net.sombrius.thedeepvoid.procedures.SolidAmbrosiaOnBlockRightClickedProce
 
 public class SolidAmbrosiaBlock extends Block {
 	public SolidAmbrosiaBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.FROGLIGHT).strength(1f, 4f).friction(0.7f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.FROGLIGHT).strength(1f, 4f).friction(0.7f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

@@ -20,7 +20,7 @@ public class ServerChatEvent extends Event implements ICancellableEvent {
 	}
 
 	public String getUsername() {
-		return this.player.getGameProfile().getName();
+		return this.player.getGameProfile().name();
 	}
 
 	public String getRawText() {

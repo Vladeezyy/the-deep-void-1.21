@@ -38,7 +38,7 @@ public class FleshArmorDescriptionProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLESH_ARMOR_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLESH_ARMOR_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.FLESH_ARMOR_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.hard_flesh.when_attacked").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.hard_flesh.attacked").getString())));
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.key_press").getString())));
@@ -47,7 +47,7 @@ public class FleshArmorDescriptionProcedure {
 					tooltip.add(Component.literal((Component.translatable("armors.the_deep_void.press_shift").getString())));
 				}
 			} else {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.hard_flesh.when_attacked").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.hard_flesh.attacked").getString())));
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.key_press").getString())));

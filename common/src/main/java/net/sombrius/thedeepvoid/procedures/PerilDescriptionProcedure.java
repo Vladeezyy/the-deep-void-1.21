@@ -29,7 +29,7 @@ public class PerilDescriptionProcedure {
 		if (tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.PERIL.get()) {
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A77" + Component.translatable("item.the_deep_void.peril.desc").getString())));
 				tooltip.add(Component.literal(("\u00A77 " + Component.translatable("item.the_deep_void.peril.capacity").getString())));
 			} else {

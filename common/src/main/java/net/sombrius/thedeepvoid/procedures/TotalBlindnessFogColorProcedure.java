@@ -43,7 +43,7 @@ public class TotalBlindnessFogColorProcedure {
 	public static void computeFogColor(ViewportEvent.ComputeFogColor event) {
 		provider = event;
 		ClientLevel level = Minecraft.getInstance().level;
-		Entity entity = provider.getCamera().getEntity();
+		Entity entity = provider.getCamera().entity();
 		if (level != null && entity != null) {
 			Vec3 entPos = entity.getPosition((float) provider.getPartialTick());
 			execute(provider, entity);

@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.CinnabarRollPlayerFinishesUsingItemPr
 
 public class CinnabarRollItem extends Item {
 	public CinnabarRollItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(4).saturationModifier(0.5f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(4).saturationModifier(0.5f).build()));
 	}
 
 	@Override

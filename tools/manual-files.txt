@@ -11,3 +11,13 @@ net/sombrius/thedeepvoid/port/DevScene.java
 neoforge: net/sombrius/thedeepvoid/port/ArmPoses.java
 # replaced by the loaders' own registration (port.neo.HasClientExtensions)
 drop: net/sombrius/thedeepvoid/port/ClientExtensionsRegistration.java
+net/sombrius/thedeepvoid/init/TheDeepVoidModGameRules.java
+# 1.21.11: the sky is data and a mixin
+net/sombrius/thedeepvoid/procedures/CustomSkyDeepVoidProcedure.java
+net/sombrius/thedeepvoid/procedures/RenderSkyDeepVoidProcedure.java
+# 1.21.11: layers shown by procedures (the conditions are computed with the render state)
+net/sombrius/thedeepvoid/client/renderer/DarkSteelFlailRenderer.java
+net/sombrius/thedeepvoid/client/renderer/AmalgamRenderer.java
+net/sombrius/thedeepvoid/client/renderer/SulfurTntEntityRenderer.java
+net/sombrius/thedeepvoid/client/renderer/GhostRenderer.java
+net/sombrius/thedeepvoid/port/PortImageButton.java

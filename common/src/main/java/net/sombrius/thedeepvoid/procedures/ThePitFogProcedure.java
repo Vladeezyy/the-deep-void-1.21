@@ -1,13 +1,11 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import com.mojang.blaze3d.shaders.FogShape;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -31,7 +29,7 @@ public class ThePitFogProcedure {
 		}
 	}
 
-	public static void setShape(FogShape shape) {
+	public static void setShape(ViewportEvent.FogShape shape) {
 		provider.setFogShape(shape);
 		if (!provider.isCanceled()) {
 			provider.setCanceled(true);
@@ -41,9 +39,9 @@ public class ThePitFogProcedure {
 	@SubscribeEvent
 	public static void renderFog(ViewportEvent.RenderFog event) {
 		provider = event;
-		if (provider.getMode() == FogRenderer.FogMode.FOG_TERRAIN) {
+		if (provider.getMode() == ViewportEvent.FogMode.FOG_TERRAIN) {
 			ClientLevel level = Minecraft.getInstance().level;
-			Entity entity = provider.getCamera().getEntity();
+			Entity entity = provider.getCamera().entity();
 			if (level != null && entity != null) {
 				Vec3 pos = entity.getPosition((float) provider.getPartialTick());
 				execute(provider, level.dimension(), entity);
@@ -58,12 +56,12 @@ public class ThePitFogProcedure {
 	private static void execute(@Nullable Event event, ResourceKey<Level> dimension, Entity entity) {
 		if (dimension == null || entity == null)
 			return;
-		if (dimension == ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:the_pit"))) {
+		if (dimension == ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:the_pit"))) {
 			setDistance(24, 45);
 		}
 		if (entity instanceof LivingEntity _livEnt4 && _livEnt4.hasEffect(TheDeepVoidModMobEffects.TOTAL_BLINDNESS.holder())) {
 			setDistance(0, 1);
-			setShape(FogShape.SPHERE);
+			setShape(ViewportEvent.FogShape.SPHERE);
 		}
 	}
 }

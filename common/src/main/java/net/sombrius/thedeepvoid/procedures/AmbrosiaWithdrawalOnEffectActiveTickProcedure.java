@@ -4,7 +4,7 @@ import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -28,12 +28,12 @@ public class AmbrosiaWithdrawalOnEffectActiveTickProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof Player) {
-			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("ambrosiaWithdrawalWorse") >= 1000) {
+			if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("ambrosiaWithdrawalWorse", 0) >= 1000) {
 				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("ambrosiaWithdrawalWorse", 0);
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder(), 1200,
 							(int) ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()).getAmplifier() : 0) + 1), true, true));
-				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC)),
+				entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MAGIC)),
 						(float) ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_HELMET.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_CHESTPLATE.get()
 								&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_LEGGINGS.get()
@@ -42,20 +42,20 @@ public class AmbrosiaWithdrawalOnEffectActiveTickProcedure {
 										: (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()).getAmplifier() : 0)));
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.NEUTRAL, (float) 0.4,
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.NEUTRAL, (float) 0.4,
 								(float) Mth.nextDouble(RandomSource.create(), 0.8, 1));
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chorus_flower.death")), SoundSource.NEUTRAL, (float) 0.4, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1), false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.chorus_flower.death")), SoundSource.NEUTRAL, (float) 0.4, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1), false);
 					}
 				}
 			} else {
-				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("ambrosiaWithdrawalWorse", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("ambrosiaWithdrawalWorse") + 1));
+				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("ambrosiaWithdrawalWorse", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("ambrosiaWithdrawalWorse", 0) + 1));
 			}
 			if ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()).getAmplifier() : 0) >= 1) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
-						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "fb0a5016-7909-4a90-a092-c4cc69350155"))))
+						.hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "fb0a5016-7909-4a90-a092-c4cc69350155"))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
-							.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "fb0a5016-7909-4a90-a092-c4cc69350155"),
+							.addTransientModifier((new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "fb0a5016-7909-4a90-a092-c4cc69350155"),
 									((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_HELMET.get()
 											&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_CHESTPLATE.get()
 											&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_LEGGINGS.get()
@@ -64,9 +64,9 @@ public class AmbrosiaWithdrawalOnEffectActiveTickProcedure {
 			}
 			if ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()).getAmplifier() : 0) >= 2) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE)
-						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "c14bf296-7ab7-4d26-aa52-4ceae6e86e90"))))
+						.hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "c14bf296-7ab7-4d26-aa52-4ceae6e86e90"))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE)
-							.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "c14bf296-7ab7-4d26-aa52-4ceae6e86e90"),
+							.addTransientModifier((new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "c14bf296-7ab7-4d26-aa52-4ceae6e86e90"),
 									((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_HELMET.get()
 											&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_CHESTPLATE.get()
 											&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_LEGGINGS.get()
@@ -75,9 +75,9 @@ public class AmbrosiaWithdrawalOnEffectActiveTickProcedure {
 			}
 			if ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()).getAmplifier() : 0) >= 3) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED)
-						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "bdb91cf0-2749-4b02-89af-16ecea159b2c"))))
+						.hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "bdb91cf0-2749-4b02-89af-16ecea159b2c"))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED)
-							.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "bdb91cf0-2749-4b02-89af-16ecea159b2c"),
+							.addTransientModifier((new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "bdb91cf0-2749-4b02-89af-16ecea159b2c"),
 									((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_HELMET.get()
 											&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_CHESTPLATE.get()
 											&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_LEGGINGS.get()
@@ -86,9 +86,9 @@ public class AmbrosiaWithdrawalOnEffectActiveTickProcedure {
 			}
 			if ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()) ? _livEnt.getEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder()).getAmplifier() : 0) >= 4) {
 				if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH)
-						.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "384de875-3d99-4f37-821c-471252ee626d"))))
+						.hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "384de875-3d99-4f37-821c-471252ee626d"))))
 					((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH)
-							.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "384de875-3d99-4f37-821c-471252ee626d"),
+							.addTransientModifier((new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "384de875-3d99-4f37-821c-471252ee626d"),
 									((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_HELMET.get()
 											&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_CHESTPLATE.get()
 											&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.PLAGUE_DOCTOR_LEGGINGS.get()
@@ -96,7 +96,7 @@ public class AmbrosiaWithdrawalOnEffectActiveTickProcedure {
 									AttributeModifier.Operation.ADD_VALUE)));
 			}
 		}
-		if (entity instanceof LivingEntity _livEnt65 && _livEnt65.hasEffect(MobEffects.HEAL)) {
+		if (entity instanceof LivingEntity _livEnt65 && _livEnt65.hasEffect(MobEffects.INSTANT_HEALTH)) {
 			if (entity instanceof LivingEntity _entity)
 				_entity.removeEffect(TheDeepVoidModMobEffects.AMBROSIA_WITHDRAWAL.holder());
 		}

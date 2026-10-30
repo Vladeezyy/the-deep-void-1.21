@@ -45,8 +45,8 @@ public class StructureFeature extends Feature<StructureFeatureConfiguration> {
 		// A feature may only write into its own chunk and the neighbouring ones; clip the template to that area
 		// (1.20.1 dropped the blocks outside it as well, logging an error for each).
 		ChunkPos chunk = new ChunkPos(context.origin());
-		placeSettings.setBoundingBox(new BoundingBox(chunk.getMinBlockX() - 16, worldGenLevel.getMinBuildHeight(), chunk.getMinBlockZ() - 16, chunk.getMaxBlockX() + 16,
-				worldGenLevel.getMaxBuildHeight(), chunk.getMaxBlockZ() + 16));
+		placeSettings.setBoundingBox(new BoundingBox(chunk.getMinBlockX() - 16, worldGenLevel.getMinY(), chunk.getMinBlockZ() - 16, chunk.getMaxBlockX() + 16,
+				worldGenLevel.getMaxY(), chunk.getMaxBlockZ() + 16));
 		template.placeInWorld(worldGenLevel, placePos, placePos, placeSettings, random, 4);
 		return true;
 	}

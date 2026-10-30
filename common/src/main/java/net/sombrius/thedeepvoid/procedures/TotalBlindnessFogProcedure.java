@@ -1,10 +1,8 @@
 package net.sombrius.thedeepvoid.procedures;
 
-import com.mojang.blaze3d.shaders.FogShape;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
@@ -27,7 +25,7 @@ public class TotalBlindnessFogProcedure {
 		}
 	}
 
-	public static void setShape(FogShape shape) {
+	public static void setShape(ViewportEvent.FogShape shape) {
 		provider.setFogShape(shape);
 		if (!provider.isCanceled()) {
 			provider.setCanceled(true);
@@ -37,9 +35,9 @@ public class TotalBlindnessFogProcedure {
 	@SubscribeEvent
 	public static void renderFog(ViewportEvent.RenderFog event) {
 		provider = event;
-		if (provider.getMode() == FogRenderer.FogMode.FOG_TERRAIN) {
+		if (provider.getMode() == ViewportEvent.FogMode.FOG_TERRAIN) {
 			ClientLevel level = Minecraft.getInstance().level;
-			Entity entity = provider.getCamera().getEntity();
+			Entity entity = provider.getCamera().entity();
 			if (level != null && entity != null) {
 				Vec3 pos = entity.getPosition((float) provider.getPartialTick());
 				execute(provider, entity);
@@ -56,7 +54,7 @@ public class TotalBlindnessFogProcedure {
 			return;
 		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(TheDeepVoidModMobEffects.TOTAL_BLINDNESS.holder())) {
 			setDistance(0, 0);
-			setShape(FogShape.SPHERE);
+			setShape(ViewportEvent.FogShape.SPHERE);
 		}
 	}
 }

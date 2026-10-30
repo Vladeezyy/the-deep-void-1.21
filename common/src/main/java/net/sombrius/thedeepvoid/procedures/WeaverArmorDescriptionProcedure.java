@@ -30,7 +30,7 @@ public class WeaverArmorDescriptionProcedure {
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_MASK_HELMET.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.weaver_mask.when_worn").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.weaver_mask.worn1").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.weaver_mask.worn2").getString())));
@@ -42,7 +42,7 @@ public class WeaverArmorDescriptionProcedure {
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.HARVESTER_MASK_HELMET.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A72" + Component.translatable("armors.the_deep_void.harvest_mask.counts").getString())));
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.weaver_mask.when_worn").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.harvest_mask.worn").getString())));
@@ -57,7 +57,7 @@ public class WeaverArmorDescriptionProcedure {
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_ROBE_CHESTPLATE.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.weaver_robe.when_attack").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.weaver_robe.attack").getString())));
 			} else {
@@ -66,7 +66,7 @@ public class WeaverArmorDescriptionProcedure {
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_LEGGINGS_LEGGINGS.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.weaver_leggings.when_attack").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.weaver_leggings.attack").getString())));
 			} else {
@@ -75,7 +75,7 @@ public class WeaverArmorDescriptionProcedure {
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.WEAVER_BOOTS_BOOTS.get()) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.weaver_boots.gravity_key_press").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.weaver_boots.on_gravity_key_press").getString())));
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.key_press").getString())));

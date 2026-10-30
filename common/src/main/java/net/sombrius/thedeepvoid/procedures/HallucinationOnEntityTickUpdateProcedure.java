@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -35,10 +35,10 @@ public class HallucinationOnEntityTickUpdateProcedure {
 						if (entityiterator instanceof Player) {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hallucination_attack")),
+									_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hallucination_attack")),
 											SoundSource.NEUTRAL, 2, (float) 0.9);
 								} else {
-									_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hallucination_attack")), SoundSource.NEUTRAL,
+									_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hallucination_attack")), SoundSource.NEUTRAL,
 											2, (float) 0.9, false);
 								}
 							}
@@ -61,12 +61,12 @@ public class HallucinationOnEntityTickUpdateProcedure {
 			if (!entity.level().isClientSide())
 				entity.discard();
 		}
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:agressive") == true) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:agressive", false) == true) {
 			if (!world.getEntitiesOfClass(Player.class, AABB.ofSize(new Vec3(x, y, z), 8, 8, 8), e -> true).isEmpty()) {
 				if ((entity instanceof LivingEntity _livEnt17 && _livEnt17.hasEffect(TheDeepVoidModMobEffects.LOOKING.holder())) == true) {
-					if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("deep_void:running") == true) {
+					if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("deep_void:running", false) == true) {
 						if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 2, false, false));
+							_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 2, false, false));
 						entity.setSprinting(true);
 					}
 					if (Math.random() < 0.005) {
@@ -74,11 +74,11 @@ public class HallucinationOnEntityTickUpdateProcedure {
 					}
 				} else {
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 99, false, false));
+						_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5, 99, false, false));
 				}
 			} else {
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 2, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 5, 2, false, false));
 			}
 		}
 		if (entity.isInWall()) {

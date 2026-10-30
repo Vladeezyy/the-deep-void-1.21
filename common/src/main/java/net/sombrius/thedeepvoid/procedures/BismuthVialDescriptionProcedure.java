@@ -30,13 +30,13 @@ public class BismuthVialDescriptionProcedure {
 		if (tooltip == null)
 			return;
 		if (itemstack.getItem() == TheDeepVoidModItems.BISMUTH_VIAL.get()) {
-			tooltip.add(Component.literal((itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("xp") + "/5.0" + " XP")));
+			tooltip.add(Component.literal((itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("xp", 0) + "/5.0" + " XP")));
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.BISMUTH_BOTTLE.get()) {
-			tooltip.add(Component.literal((itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("xp") + "/15.0" + " XP")));
+			tooltip.add(Component.literal((itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("xp", 0) + "/15.0" + " XP")));
 		}
 		if (itemstack.getItem() == TheDeepVoidModItems.BISMUTH_JAR.get()) {
-			tooltip.add(Component.literal((itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("xp") + "/25.0" + " XP")));
+			tooltip.add(Component.literal((itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("xp", 0) + "/25.0" + " XP")));
 		}
 	}
 }

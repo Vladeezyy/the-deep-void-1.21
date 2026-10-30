@@ -18,7 +18,7 @@ public class MadCultistOnInitialEntitySpawnProcedure {
 				((MadCultistEntity) entity).setAnimation("animation.madCultist_pray");
 			}
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) Double.POSITIVE_INFINITY, 99, false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, (int) Double.POSITIVE_INFINITY, 99, false, false));
 		}
 	}
 }

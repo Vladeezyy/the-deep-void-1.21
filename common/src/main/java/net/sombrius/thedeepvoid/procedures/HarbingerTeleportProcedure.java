@@ -8,7 +8,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.sombrius.thedeepvoid.TheDeepVoidMod;
 import net.sombrius.thedeepvoid.entity.HarbingerOfCataclysmEntity;
@@ -27,11 +27,11 @@ public class HarbingerTeleportProcedure {
 			((HarbingerOfCataclysmEntity) entity).setAnimation("animation.harbinger_teleport");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 15, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 15, 99, false, false));
 		for (int index0 = 0; index0 < 3; index0++) {
 			if (world instanceof ServerLevel _level) {
 				Entity entityToSpawn = TheDeepVoidModEntities.HARBINGER_CLONE.get().spawn(_level,
-						BlockPos.containing(entity.getX() + Mth.nextInt(RandomSource.create(), -1, 1), entity.getY(), entity.getZ() + Mth.nextInt(RandomSource.create(), -1, 1)), MobSpawnType.MOB_SUMMONED);
+						BlockPos.containing(entity.getX() + Mth.nextInt(RandomSource.create(), -1, 1), entity.getY(), entity.getZ() + Mth.nextInt(RandomSource.create(), -1, 1)), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}

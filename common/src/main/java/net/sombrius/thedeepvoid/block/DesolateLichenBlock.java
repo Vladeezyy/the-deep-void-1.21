@@ -25,13 +25,13 @@ import net.minecraft.core.BlockPos;
 
 public class DesolateLichenBlock extends FlowerBlock implements BonemealableBlock {
 	public DesolateLichenBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 5.0f,
-				BlockBehaviour.Properties.of().mapColor(MapColor.WARPED_STEM).randomTicks().sound(SoundType.ROOTS).instabreak().noCollission().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 5.0f,
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.WARPED_STEM).randomTicks().sound(SoundType.ROOTS).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 offset = state.getOffset(world, pos);
+		Vec3 offset = state.getOffset(pos);
 		return box(0, 0, 0, 16, 1, 16).move(offset.x, offset.y, offset.z);
 	}
 

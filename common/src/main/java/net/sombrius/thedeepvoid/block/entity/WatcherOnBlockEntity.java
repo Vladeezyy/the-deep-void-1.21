@@ -1,5 +1,7 @@
 package net.sombrius.thedeepvoid.block.entity;
 
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import java.util.stream.IntStream;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
@@ -29,18 +31,18 @@ public class WatcherOnBlockEntity extends RandomizableContainerBlockEntity imple
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag compound, HolderLookup.Provider lookupProvider) {
-		super.loadAdditional(compound, lookupProvider);
+	public void loadAdditional(ValueInput compound) {
+		super.loadAdditional(compound);
 		if (!this.tryLoadLootTable(compound))
 			this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		ContainerHelper.loadAllItems(compound, this.stacks, lookupProvider);
+		ContainerHelper.loadAllItems(compound, this.stacks);
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag compound, HolderLookup.Provider lookupProvider) {
-		super.saveAdditional(compound, lookupProvider);
+	public void saveAdditional(ValueOutput compound) {
+		super.saveAdditional(compound);
 		if (!this.trySaveLootTable(compound)) {
-			ContainerHelper.saveAllItems(compound, this.stacks, lookupProvider);
+			ContainerHelper.saveAllItems(compound, this.stacks);
 		}
 	}
 

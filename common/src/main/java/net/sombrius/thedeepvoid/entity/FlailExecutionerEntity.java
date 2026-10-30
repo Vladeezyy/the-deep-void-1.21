@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.port.bus.RegisterSpawnPlacementsEvent;
 
 import net.minecraft.nbt.CompoundTag;
@@ -9,7 +10,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -26,18 +27,20 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
 import net.sombrius.thedeepvoid.procedures.FlailExecutionerOnEntityTickUpdateProcedure;
 import software.bernie.geckolib.animatable.GeoEntity;
+
+import net.sombrius.thedeepvoid.port.GeoAnims;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.state.AnimationTest;
 import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class FlailExecutionerEntity extends Monster implements GeoEntity {
@@ -52,7 +55,6 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 	public static final EntityDataAccessor<Boolean> DATA_changeTexture = SynchedEntityData.defineId(FlailExecutionerEntity.class, EntityDataSerializers.BOOLEAN);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
-	private boolean lastloop;
 	private long lastSwing;
 	public String animationprocedure = "empty";
 
@@ -110,16 +112,16 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.hurt"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.death"));
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float amount) {
+	public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
 		if (source.is(DamageTypes.IN_FIRE))
 			return false;
 		if (source.getDirectEntity() instanceof AbstractArrow)
@@ -138,11 +140,11 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 			return false;
 		if (source.is(DamageTypes.DRAGON_BREATH))
 			return false;
-		return super.hurt(source, amount);
+		return super.hurtServer(level, source, amount);
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putString("Texture", this.getTexture());
 		compound.putInt("Datastun", this.entityData.get(DATA_stun));
@@ -154,22 +156,22 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Texture"))
-			this.setTexture(compound.getString("Texture"));
-		if (compound.contains("Datastun"))
-			this.entityData.set(DATA_stun, compound.getInt("Datastun"));
-		if (compound.contains("DataattackChance"))
-			this.entityData.set(DATA_attackChance, compound.getInt("DataattackChance"));
-		if (compound.contains("DataflailThrow"))
-			this.entityData.set(DATA_flailThrow, compound.getBoolean("DataflailThrow"));
-		if (compound.contains("Dataattacking"))
-			this.entityData.set(DATA_attacking, compound.getInt("Dataattacking"));
-		if (compound.contains("Datastunned"))
-			this.entityData.set(DATA_stunned, compound.getBoolean("Datastunned"));
-		if (compound.contains("DatachangeTexture"))
-			this.entityData.set(DATA_changeTexture, compound.getBoolean("DatachangeTexture"));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Texture"))
+			this.setTexture(compound.getStringOr("Texture", ""));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datastun"))
+			this.entityData.set(DATA_stun, compound.getIntOr("Datastun", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataattackChance"))
+			this.entityData.set(DATA_attackChance, compound.getIntOr("DataattackChance", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DataflailThrow"))
+			this.entityData.set(DATA_flailThrow, compound.getBooleanOr("DataflailThrow", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Dataattacking"))
+			this.entityData.set(DATA_attacking, compound.getIntOr("Dataattacking", 0));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "Datastunned"))
+			this.entityData.set(DATA_stunned, compound.getBooleanOr("Datastunned", false));
+		if (net.sombrius.thedeepvoid.port.PortUtil.has(compound, "DatachangeTexture"))
+			this.entityData.set(DATA_changeTexture, compound.getBooleanOr("DatachangeTexture", false));
 	}
 
 	@Override
@@ -198,9 +200,9 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 		return builder;
 	}
 
-	private PlayState movementPredicate(AnimationState event) {
+	private PlayState movementPredicate(AnimationTest<FlailExecutionerEntity> event) {
 		if (this.animationprocedure.equals("empty")) {
-			if ((event.isMoving() || !(event.getLimbSwingAmount() > -0.15F && event.getLimbSwingAmount() < 0.15F))
+			if ((event.isMoving() || !(this.walkAnimation.speed() > -0.15F && this.walkAnimation.speed() < 0.15F))
 
 			) {
 				return event.setAndContinue(RawAnimation.begin().thenLoop("animation.flail_walk"));
@@ -212,21 +214,8 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 
 	String prevAnim = "empty";
 
-	private PlayState procedurePredicate(AnimationState event) {
-		if (!animationprocedure.equals("empty") && event.getController().getAnimationState() == AnimationController.State.STOPPED || (!this.animationprocedure.equals(prevAnim) && !this.animationprocedure.equals("empty"))) {
-			if (!this.animationprocedure.equals(prevAnim))
-				event.getController().forceAnimationReset();
-			event.getController().setAnimation(RawAnimation.begin().thenPlay(this.animationprocedure));
-			if (event.getController().getAnimationState() == AnimationController.State.STOPPED) {
-				this.animationprocedure = "empty";
-				event.getController().forceAnimationReset();
-			}
-		} else if (animationprocedure.equals("empty")) {
-			prevAnim = "empty";
-			return PlayState.STOP;
-		}
-		prevAnim = this.animationprocedure;
-		return PlayState.CONTINUE;
+	private PlayState procedurePredicate(AnimationTest<FlailExecutionerEntity> event) {
+		return GeoAnims.procedure(event, this.animationprocedure, animation -> this.animationprocedure = animation);
 	}
 
 	@Override
@@ -234,7 +223,8 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 		++this.deathTime;
 		if (this.deathTime == 20) {
 			this.remove(FlailExecutionerEntity.RemovalReason.KILLED);
-			this.dropExperience(null);
+			if (this.level() instanceof ServerLevel _serverLevel)
+				this.dropExperience(_serverLevel, null);
 		}
 	}
 
@@ -248,8 +238,8 @@ public class FlailExecutionerEntity extends Monster implements GeoEntity {
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-		data.add(new AnimationController<>(this, "movement", 4, this::movementPredicate));
-		data.add(new AnimationController<>(this, "procedure", 4, this::procedurePredicate));
+		data.add(new AnimationController<>("movement", 4, this::movementPredicate));
+		data.add(new AnimationController<>("procedure", 4, this::procedurePredicate));
 	}
 
 	@Override

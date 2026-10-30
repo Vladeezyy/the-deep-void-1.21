@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -43,27 +43,27 @@ public class HammerAndChiselLivingEntityIsHitWithItemProcedure {
 			return;
 		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(TheDeepVoidModMobEffects.DESTINED_TO_DIE.holder())
 				&& (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HAMMER_AND_CHISEL.get()
-				&& !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:chiseled")))) {
+				&& !damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:chiseled")))) {
 			if (entity instanceof LivingEntity _entity)
 				_entity.removeEffect(TheDeepVoidModMobEffects.DESTINED_TO_DIE.holder());
 			if (sourceentity instanceof Player _player)
-				_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem(), 1);
-			entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:chiseled"))), sourceentity),
+				_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), 1);
+			entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:chiseled"))), sourceentity),
 					(float) (amount * 2));
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hammer_and_chisel_hit")), SoundSource.PLAYERS, 1,
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hammer_and_chisel_hit")), SoundSource.PLAYERS, 1,
 							(float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:hammer_and_chisel_hit")), SoundSource.PLAYERS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:hammer_and_chisel_hit")), SoundSource.PLAYERS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.95, 1.05), false);
 				}
 			}
-			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("hammerMaxHealth", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("hammerMaxHealth") + Math.floor(amount / 2)));
-			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "4494e752-bd57-4276-b506-a958216b544b"));
+			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("hammerMaxHealth", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("hammerMaxHealth", 0) + Math.floor(amount / 2)));
+			((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).removeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "4494e752-bd57-4276-b506-a958216b544b"));
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH)
-					.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "4494e752-bd57-4276-b506-a958216b544b"))))
+					.hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "4494e752-bd57-4276-b506-a958216b544b"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).addTransientModifier(
-						(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "4494e752-bd57-4276-b506-a958216b544b"), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("hammerMaxHealth") * (-1)), AttributeModifier.Operation.ADD_VALUE)));
+						(new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "4494e752-bd57-4276-b506-a958216b544b"), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("hammerMaxHealth", 0) * (-1)), AttributeModifier.Operation.ADD_VALUE)));
 		}
 	}
 }

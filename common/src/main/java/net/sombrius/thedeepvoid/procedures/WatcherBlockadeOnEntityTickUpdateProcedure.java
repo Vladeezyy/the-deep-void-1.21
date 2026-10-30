@@ -13,10 +13,10 @@ public class WatcherBlockadeOnEntityTickUpdateProcedure {
 			return;
 		if (entity instanceof LivingEntity _entity)
 			_entity.removeAllEffects();
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("despawn") >= 300) {
-			entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC)), 999);
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("despawn", 0) >= 300) {
+			entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC)), 999);
 		} else {
-			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("despawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("despawn") + 1));
+			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("despawn", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("despawn", 0) + 1));
 		}
 	}
 }

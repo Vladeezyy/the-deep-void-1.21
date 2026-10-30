@@ -34,13 +34,13 @@ public class AllSeeingToolsBreakBlockProcedure {
 				|| (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.ALL_SEEING_HOE.get()) {
 			{
 				TheDeepVoidModVariables.PlayerVariables _vars = TheDeepVoidModVariables.of(entity);
-				_vars.hasteAllSeeing = entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.DIG_SPEED) ? _livEnt.getEffect(MobEffects.DIG_SPEED).getAmplifier() : 0;
+				_vars.hasteAllSeeing = entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.HASTE) ? _livEnt.getEffect(MobEffects.HASTE).getAmplifier() : 0;
 				_vars.syncPlayerVariables(entity);
 			}
 			if (entity instanceof LivingEntity _entity)
-				_entity.removeEffect(MobEffects.DIG_SPEED);
+				_entity.removeEffect(MobEffects.HASTE);
 			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, (int) (TheDeepVoidModVariables.of(entity).hasteAllSeeing + 1), false, false));
+				_entity.addEffect(new MobEffectInstance(MobEffects.HASTE, 20, (int) (TheDeepVoidModVariables.of(entity).hasteAllSeeing + 1), false, false));
 		}
 	}
 }

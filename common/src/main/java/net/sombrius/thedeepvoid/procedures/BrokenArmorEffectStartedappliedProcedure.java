@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -22,18 +22,18 @@ public class BrokenArmorEffectStartedappliedProcedure {
 		TheDeepVoidMod.queueServerWork(1, () -> {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.item.break")), SoundSource.PLAYERS, (float) 0.5, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2));
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.item.break")), SoundSource.PLAYERS, (float) 0.5, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2));
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.item.break")), SoundSource.PLAYERS, (float) 0.5, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2), false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.item.break")), SoundSource.PLAYERS, (float) 0.5, (float) Mth.nextDouble(RandomSource.create(), 0.8, 1.2), false);
 				}
 			}
-			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9cceef6b-390b-4032-9fad-e970a9faebbd"))))
-				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "9cceef6b-390b-4032-9fad-e970a9faebbd"),
+			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "9cceef6b-390b-4032-9fad-e970a9faebbd"))))
+				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).addTransientModifier((new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "9cceef6b-390b-4032-9fad-e970a9faebbd"),
 						(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR).getValue() * (double) DeepVoidConfigConfiguration.BROKENARMORAMPLIFIER.get() * (-1)), AttributeModifier.Operation.ADD_VALUE)));
 			if (!(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS)
-					.hasModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "746632dc-c636-4bc1-9a2f-1c5f33da9aa1"))))
+					.hasModifier(Identifier.fromNamespaceAndPath("the_deep_void", "746632dc-c636-4bc1-9a2f-1c5f33da9aa1"))))
 				((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS)
-						.addTransientModifier((new AttributeModifier(ResourceLocation.fromNamespaceAndPath("the_deep_void", "746632dc-c636-4bc1-9a2f-1c5f33da9aa1"),
+						.addTransientModifier((new AttributeModifier(Identifier.fromNamespaceAndPath("the_deep_void", "746632dc-c636-4bc1-9a2f-1c5f33da9aa1"),
 								(((LivingEntity) entity).getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS).getValue() * (double) DeepVoidConfigConfiguration.BROKENARMORAMPLIFIER.get() * (-1)),
 								AttributeModifier.Operation.ADD_VALUE)));
 		});

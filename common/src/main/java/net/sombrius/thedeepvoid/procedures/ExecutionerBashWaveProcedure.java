@@ -8,7 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -38,7 +38,7 @@ public class ExecutionerBashWaveProcedure {
 				if (entityiterator instanceof LivingEntity && !(entityiterator instanceof ExecutionerEntity)) {
 					if ((entityiterator instanceof LivingEntity _entUseItem5 ? _entUseItem5.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 						if (entityiterator instanceof Player _player)
-							_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem7 ? _entUseItem7.getUseItem() : ItemStack.EMPTY).getItem(), 100);
+							_player.getCooldowns().addCooldown((entityiterator instanceof LivingEntity _entUseItem7 ? _entUseItem7.getUseItem() : ItemStack.EMPTY), 100);
 						{
 							ItemStack _ist = (entityiterator instanceof LivingEntity _entUseItem9 ? _entUseItem9.getUseItem() : ItemStack.EMPTY);
 							PortUtil.hurtAndBreak(_ist, 10, null);
@@ -47,15 +47,15 @@ public class ExecutionerBashWaveProcedure {
 							_entity.stopUsingItem();
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.wither.break_block")),
+								_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.wither.break_block")),
 										SoundSource.PLAYERS, (float) 0.4, 1);
 							} else {
-								_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.wither.break_block")), SoundSource.PLAYERS, (float) 0.4,
+								_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.wither.break_block")), SoundSource.PLAYERS, (float) 0.4,
 										1, false);
 							}
 						}
 					}
-					entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:boss_attack"))), entity), 18);
+					entityiterator.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:boss_attack"))), entity), 18);
 					entityiterator.setDeltaMovement(new Vec3((entityiterator.getDeltaMovement().x()), 1, (entityiterator.getDeltaMovement().z())));
 					if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 						_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.BROKEN_ARMOR.holder(), 100, 0));
@@ -65,9 +65,9 @@ public class ExecutionerBashWaveProcedure {
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
 				_level.playSound(null, BlockPos.containing(entity.getX() + entity.getLookAngle().x * distance, entity.getY(), entity.getZ() + entity.getLookAngle().z * distance),
-						BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.explode")), SoundSource.HOSTILE, 1, (float) 0.8);
+						BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.explode")), SoundSource.HOSTILE, 1, (float) 0.8);
 			} else {
-				_level.playLocalSound(entity.getX() + entity.getLookAngle().x * distance, (entity.getY()), entity.getZ() + entity.getLookAngle().z * distance, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.generic.explode")),
+				_level.playLocalSound(entity.getX() + entity.getLookAngle().x * distance, (entity.getY()), entity.getZ() + entity.getLookAngle().z * distance, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.explode")),
 						SoundSource.HOSTILE, 1, (float) 0.8, false);
 			}
 		}
@@ -75,10 +75,10 @@ public class ExecutionerBashWaveProcedure {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("xPos", (Mth.nextInt(RandomSource.create(), -2, 2)));
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("zPos", (Mth.nextInt(RandomSource.create(), -2, 2)));
 			world.levelEvent(2001,
-					BlockPos.containing(entity.getX() + entity.getLookAngle().x * distance + 0.5 + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("xPos"), entity.getY(),
-							entity.getZ() + entity.getLookAngle().z * distance + 0.5 + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("zPos")),
-					Block.getId((world.getBlockState(BlockPos.containing(entity.getX() + entity.getLookAngle().x * distance + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("xPos"), entity.getY() - 1,
-							entity.getZ() + entity.getLookAngle().z * distance + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("zPos"))))));
+					BlockPos.containing(entity.getX() + entity.getLookAngle().x * distance + 0.5 + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("xPos", 0), entity.getY(),
+							entity.getZ() + entity.getLookAngle().z * distance + 0.5 + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("zPos", 0)),
+					Block.getId((world.getBlockState(BlockPos.containing(entity.getX() + entity.getLookAngle().x * distance + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("xPos", 0), entity.getY() - 1,
+							entity.getZ() + entity.getLookAngle().z * distance + net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("zPos", 0))))));
 		}
 	}
 }

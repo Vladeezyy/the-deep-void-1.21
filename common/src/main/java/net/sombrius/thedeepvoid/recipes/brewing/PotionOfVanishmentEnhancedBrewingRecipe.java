@@ -32,7 +32,7 @@ public class PotionOfVanishmentEnhancedBrewingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean isIngredient(ItemStack ingredient) {
-		return Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)).test(ingredient);
+		return Ingredient.of(Items.GLOWSTONE_DUST).test(ingredient);
 	}
 
 	@Override

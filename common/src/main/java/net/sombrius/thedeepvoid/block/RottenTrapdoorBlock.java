@@ -11,6 +11,6 @@ import net.minecraft.world.level.material.MapColor;
 public class RottenTrapdoorBlock extends TrapDoorBlock {
 	public RottenTrapdoorBlock() {
 		super(BlockSetType.OAK,
-				BlockBehaviour.Properties.of().ignitedByLava().instrument(NoteBlockInstrument.BASS).mapColor(MapColor.COLOR_GRAY).sound(SoundType.BASALT).strength(2.2f, 16f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false).dynamicShape());
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().ignitedByLava().instrument(NoteBlockInstrument.BASS).mapColor(MapColor.COLOR_GRAY).sound(SoundType.BASALT).strength(2.2f, 16f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false).dynamicShape());
 	}
 }

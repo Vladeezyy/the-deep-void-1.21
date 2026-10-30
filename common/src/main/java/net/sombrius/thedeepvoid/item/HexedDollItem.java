@@ -9,7 +9,7 @@ import net.sombrius.thedeepvoid.procedures.HexedDollRightclickedOnBlockProcedure
 
 public class HexedDollItem extends Item {
 	public HexedDollItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.RARE));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.RARE));
 	}
 
 	@Override

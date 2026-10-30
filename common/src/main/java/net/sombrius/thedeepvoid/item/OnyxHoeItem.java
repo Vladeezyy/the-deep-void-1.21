@@ -1,6 +1,7 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.tags.TagKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -9,53 +10,21 @@ import net.sombrius.thedeepvoid.procedures.BoneSwordLivingEntityIsHitWithToolPro
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.entity.LivingEntity;
 
 public class OnyxHoeItem extends HoeItem {
-	private static final Tier TOOL_TIER = new Tier() {
-		@Override
-		public int getUses() {
-			return 1561;
-		}
-
-		@Override
-		public float getSpeed() {
-			return 8f;
-		}
-
-		@Override
-		public float getAttackDamageBonus() {
-			return 0f;
-		}
-
-		@Override
-		public TagKey<Block> getIncorrectBlocksForDrops() {
-			return BlockTags.INCORRECT_FOR_DIAMOND_TOOL;
-		}
-
-		@Override
-		public int getEnchantmentValue() {
-			return 10;
-		}
-
-		@Override
-		public Ingredient getRepairIngredient() {
-			return Ingredient.of(new ItemStack(TheDeepVoidModItems.ONYX.get()));
-		}
-	};
+	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1561, 8f, 0f, 10, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/onyx")));
 
 	public OnyxHoeItem() {
-		super(TOOL_TIER, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(TOOL_TIER, 0, 0.1f)));
+		super(TOOL_TIER, 0, 0.1f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
 	}
 
 	@Override
-	public boolean hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-		boolean retval = super.hurtEnemy(itemstack, entity, sourceentity);
+	public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
+		super.hurtEnemy(itemstack, entity, sourceentity);
 		BoneSwordLivingEntityIsHitWithToolProcedure.execute(entity);
-		return retval;
 	}
 }

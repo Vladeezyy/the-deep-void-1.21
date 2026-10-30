@@ -7,7 +7,7 @@ import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,9 +21,9 @@ import net.sombrius.thedeepvoid.TheDeepVoidMod;
 import net.sombrius.thedeepvoid.procedures.UndertakerItemTakenFromSlotProcedure;
 import net.sombrius.thedeepvoid.world.inventory.UndertakerTradeGuiMenu;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public record UndertakerTradeGuiSlotMessage(int slotID, int x, int y, int z, int changeType, int meta) implements CustomPacketPayload {
-	public static final Type<UndertakerTradeGuiSlotMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "undertaker_trade_gui_slot"));
+	public static final Type<UndertakerTradeGuiSlotMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, "undertaker_trade_gui_slot"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, UndertakerTradeGuiSlotMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, UndertakerTradeGuiSlotMessage message) -> {
 		buffer.writeInt(message.slotID);
 		buffer.writeInt(message.x);

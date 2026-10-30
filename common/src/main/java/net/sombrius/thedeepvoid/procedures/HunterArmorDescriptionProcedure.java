@@ -38,7 +38,7 @@ public class HunterArmorDescriptionProcedure {
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTERS_CHESTPLATE.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTERS_LEGGINGS.get()
 					&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTERS_BOOTS.get()) {
-				if (Screen.hasShiftDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.key_press").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.hunter.on_key_press").getString())));
 					tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.hunter.jumping").getString())));
@@ -54,7 +54,7 @@ public class HunterArmorDescriptionProcedure {
 					tooltip.add(Component.literal((Component.translatable("armors.the_deep_void.press_shift").getString())));
 				}
 			} else {
-				if (Screen.hasAltDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasAltDown()) {
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.key_press").getString())));
 					tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.hunter.on_key_press").getString())));
 					tooltip.add(Component.literal(("\u00A77" + Component.translatable("armors.the_deep_void.hunter.jumping").getString())));
@@ -76,7 +76,7 @@ public class HunterArmorDescriptionProcedure {
 						&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.LEGS) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTERS_LEGGINGS.get()
 						&& (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.FEET) : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTERS_BOOTS.get())) {
 			tooltip.add(Component.literal(""));
-			if (Screen.hasShiftDown()) {
+			if (net.minecraft.client.Minecraft.getInstance().hasShiftDown()) {
 				tooltip.add(Component.literal(("\u00A76" + Component.translatable("armors.the_deep_void.hunter.sprinting").getString())));
 				tooltip.add(Component.literal((" \u00A77-" + Component.translatable("armors.the_deep_void.hunter.on_sprinting").getString())));
 			} else {

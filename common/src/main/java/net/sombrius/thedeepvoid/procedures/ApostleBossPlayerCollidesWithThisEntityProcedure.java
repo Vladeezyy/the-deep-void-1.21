@@ -4,7 +4,7 @@ import net.sombrius.thedeepvoid.port.PortUtil;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -35,14 +35,14 @@ public class ApostleBossPlayerCollidesWithThisEntityProcedure {
 			if (entity instanceof ApostleBossEntity _datEntSetL)
 				_datEntSetL.getEntityData().set(ApostleBossEntity.DATA_grabbedPlayer, true);
 			net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).putBoolean("grabbedByApostle", true);
-			sourceentity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:boss_attack"))), entity), 4);
+			sourceentity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:boss_attack"))), entity), 4);
 			if (!(sourceentity instanceof LivingEntity _livEnt8 && _livEnt8.hasEffect(TheDeepVoidModMobEffects.BROKEN_ARMOR.holder()))) {
 				if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.BROKEN_ARMOR.holder(), 400, 0));
 			}
 			if ((sourceentity instanceof LivingEntity _entUseItem10 ? _entUseItem10.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
 				if (sourceentity instanceof Player _player)
-					_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem12 ? _entUseItem12.getUseItem() : ItemStack.EMPTY).getItem(), 100);
+					_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem12 ? _entUseItem12.getUseItem() : ItemStack.EMPTY), 100);
 				{
 					ItemStack _ist = (sourceentity instanceof LivingEntity _entUseItem14 ? _entUseItem14.getUseItem() : ItemStack.EMPTY);
 					PortUtil.hurtAndBreak(_ist, 10, null);
@@ -54,7 +54,7 @@ public class ApostleBossPlayerCollidesWithThisEntityProcedure {
 				if (entity instanceof ApostleBossEntity _datEntSetL)
 					_datEntSetL.getEntityData().set(ApostleBossEntity.DATA_upMotion, true);
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 99, false, false));
+					_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20, 99, false, false));
 			});
 			TheDeepVoidMod.queueServerWork(18, () -> {
 				if (!entity.onGround()) {

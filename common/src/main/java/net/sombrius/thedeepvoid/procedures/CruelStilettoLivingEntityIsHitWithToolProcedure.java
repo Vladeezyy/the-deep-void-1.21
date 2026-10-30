@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
 
@@ -37,8 +37,8 @@ public class CruelStilettoLivingEntityIsHitWithToolProcedure {
 			return;
 		if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.CRUEL_STILETTO.get()) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(sourceentity).putDouble("voidMatterStilettoHit", 300);
-			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:backstab"))) && sourceentity.getYRot() >= entity.getYRot() - 45 && sourceentity.getYRot() <= entity.getYRot() + 45) {
-				entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("the_deep_void:backstab"))), sourceentity),
+			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:backstab"))) && sourceentity.getYRot() >= entity.getYRot() - 45 && sourceentity.getYRot() <= entity.getYRot() + 45) {
+				entity.hurt(new DamageSource(world.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("the_deep_void:backstab"))), sourceentity),
 						(float) (amount * (double) DeepVoidConfigConfiguration.CRUELSTILETTO.get()));
 			}
 		}

@@ -21,11 +21,11 @@ import net.sombrius.thedeepvoid.procedures.LavenditeOreBlockDestroyedByPlayerPro
 
 public class MistedRemainsBlock extends Block implements BonemealableBlock, net.sombrius.thedeepvoid.port.PortBlockHooks.DestroyedByPlayer {
 	public MistedRemainsBlock() {
-		super(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.NETHER_ORE).strength(0.8f, 8f).requiresCorrectToolForDrops().speedFactor(0.7f).jumpFactor(0.9f));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.NETHER_ORE).strength(0.8f, 8f).requiresCorrectToolForDrops().speedFactor(0.7f).jumpFactor(0.9f));
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state) {
 		return 15;
 	}
 

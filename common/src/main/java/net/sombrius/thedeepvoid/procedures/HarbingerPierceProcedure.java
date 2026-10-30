@@ -24,7 +24,7 @@ public class HarbingerPierceProcedure {
 			((HarbingerOfCataclysmEntity) entity).setAnimation("animation.harbinger_pierce");
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 99, false, false));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20, 99, false, false));
 		if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("dashX", ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getX()));
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("dashZ", ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getZ()));
@@ -32,7 +32,7 @@ public class HarbingerPierceProcedure {
 		TheDeepVoidMod.queueServerWork(10, () -> {
 			if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 				entity.lookAt(EntityAnchorArgument.Anchor.EYES,
-						new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("dashX")), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() + 1.5), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("dashZ"))));
+						new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("dashX", 0)), ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null).getY() + 1.5), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("dashZ", 0))));
 			}
 			if (entity instanceof HarbingerOfCataclysmEntity _datEntSetL)
 				_datEntSetL.getEntityData().set(HarbingerOfCataclysmEntity.DATA_piercing, true);

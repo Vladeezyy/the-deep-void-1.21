@@ -7,6 +7,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class RefinedOnyxSlabBlock extends SlabBlock {
 	public RefinedOnyxSlabBlock() {
-		super(BlockBehaviour.Properties.of().sound(SoundType.NETHERITE_BLOCK).strength(3f, 5f).requiresCorrectToolForDrops().dynamicShape());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.NETHERITE_BLOCK).strength(3f, 5f).requiresCorrectToolForDrops().dynamicShape());
 	}
 }

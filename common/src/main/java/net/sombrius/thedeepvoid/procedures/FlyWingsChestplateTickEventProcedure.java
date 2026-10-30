@@ -20,15 +20,15 @@ public class FlyWingsChestplateTickEventProcedure {
 		if (entity == null)
 			return;
 		ItemStack components = ItemStack.EMPTY;
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("flying") == true && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("flyWingsTouchGround") == true) {
-			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("time") > 0) {
-				if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("up") == true) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("flying", false) == true && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("flyWingsTouchGround", false) == true) {
+			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("time", 0) > 0) {
+				if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("up", false) == true) {
 					entity.setDeltaMovement(new Vec3((entity.getDeltaMovement().x()), 0.6, (entity.getDeltaMovement().z())));
-				} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("down") == true) {
+				} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("down", false) == true) {
 					entity.setDeltaMovement(new Vec3((entity.getDeltaMovement().x()), (-0.6), (entity.getDeltaMovement().z())));
-				} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("foward") == true) {
+				} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("foward", false) == true) {
 					entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * 0.6), 0, (Math.cos(Math.toRadians(entity.getYRot())) * 0.6)));
-				} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("backward") == true) {
+				} else if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("backward", false) == true) {
 					entity.setDeltaMovement(new Vec3((Math.sin(Math.toRadians(entity.getYRot() + 180)) * (-0.6)), 0, (Math.cos(Math.toRadians(entity.getYRot())) * (-0.6))));
 				} else {
 					entity.setDeltaMovement(new Vec3(0, 0, 0));
@@ -41,10 +41,10 @@ public class FlyWingsChestplateTickEventProcedure {
 				}
 				{
 					final String _tagName = "time";
-					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("time") - 1);
+					final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("time", 0) - 1);
 					CustomData.update(DataComponents.CUSTOM_DATA, itemstack, tag -> tag.putDouble(_tagName, _tagValue));
 				}
-			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBoolean("flyWingsTouchGround") == true) {
+			} else if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getBooleanOr("flyWingsTouchGround", false) == true) {
 				{
 					final String _tagName = "foward";
 					final boolean _tagValue = false;
@@ -74,7 +74,7 @@ public class FlyWingsChestplateTickEventProcedure {
 					{
 						Entity _entity = entity;
 						if (_entity instanceof Player _player) {
-							_player.getInventory().armor.set(2, new ItemStack(TheDeepVoidModItems.FLY_WINGS_CHESTPLATE.get()));
+							_player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST, new ItemStack(TheDeepVoidModItems.FLY_WINGS_CHESTPLATE.get()));
 							_player.getInventory().setChanged();
 						} else if (_entity instanceof LivingEntity _living) {
 							_living.setItemSlot(EquipmentSlot.CHEST, new ItemStack(TheDeepVoidModItems.FLY_WINGS_CHESTPLATE.get()));
@@ -82,7 +82,7 @@ public class FlyWingsChestplateTickEventProcedure {
 					}
 					(entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).applyComponents(components.getComponents());
 					if (entity instanceof Player _player)
-						_player.getCooldowns().addCooldown((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY).getItem(), 140);
+						_player.getCooldowns().addCooldown((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY), 140);
 					{
 						final String _tagName = "flying";
 						final boolean _tagValue = false;

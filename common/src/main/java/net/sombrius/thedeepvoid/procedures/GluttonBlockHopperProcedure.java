@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.procedures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
@@ -36,7 +36,7 @@ public class GluttonBlockHopperProcedure {
 					}
 					return ItemStack.EMPTY;
 				}
-			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("the_deep_void:glutton_tier1")))) {
+			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.parse("the_deep_void:glutton_tier1")))) {
 				GluttonBlockHopperItemEnterProcedure.execute(world, x, y, z, "/loot spawn ~ ~ ~ loot the_deep_void:blocks/glutton_tier_1");
 			} else if ((new Object() {
 				public ItemStack getItemStack(LevelAccessor world, BlockPos pos, int slotid) {
@@ -47,7 +47,7 @@ public class GluttonBlockHopperProcedure {
 					}
 					return ItemStack.EMPTY;
 				}
-			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("the_deep_void:glutton_tier2")))) {
+			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.parse("the_deep_void:glutton_tier2")))) {
 				GluttonBlockHopperItemEnterProcedure.execute(world, x, y, z, "/loot spawn ~ ~ ~ loot the_deep_void:blocks/glutton_tier_2");
 			} else if ((new Object() {
 				public ItemStack getItemStack(LevelAccessor world, BlockPos pos, int slotid) {
@@ -58,7 +58,7 @@ public class GluttonBlockHopperProcedure {
 					}
 					return ItemStack.EMPTY;
 				}
-			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("the_deep_void:glutton_tier3")))) {
+			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.parse("the_deep_void:glutton_tier3")))) {
 				GluttonBlockHopperItemEnterProcedure.execute(world, x, y, z, "/loot spawn ~ ~ ~ loot the_deep_void:blocks/glutton_tier_3");
 			} else if ((new Object() {
 				public ItemStack getItemStack(LevelAccessor world, BlockPos pos, int slotid) {
@@ -69,7 +69,7 @@ public class GluttonBlockHopperProcedure {
 					}
 					return ItemStack.EMPTY;
 				}
-			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("the_deep_void:glutton_desolate")))) {
+			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.parse("the_deep_void:glutton_desolate")))) {
 				GluttonBlockHopperItemEnterProcedure.execute(world, x, y, z, "/loot spawn ~ ~ ~ loot the_deep_void:blocks/glutton_desolate_soil");
 			} else if ((new Object() {
 				public ItemStack getItemStack(LevelAccessor world, BlockPos pos, int slotid) {
@@ -80,7 +80,7 @@ public class GluttonBlockHopperProcedure {
 					}
 					return ItemStack.EMPTY;
 				}
-			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("minecraft:soul_fire_base_blocks")))) {
+			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.parse("minecraft:soul_fire_base_blocks")))) {
 				GluttonBlockHopperItemEnterProcedure.execute(world, x, y, z, "/loot spawn ~ ~ ~ loot the_deep_void:blocks/glutton_soul_soil");
 			} else if ((new Object() {
 				public ItemStack getItemStack(LevelAccessor world, BlockPos pos, int slotid) {
@@ -91,7 +91,7 @@ public class GluttonBlockHopperProcedure {
 					}
 					return ItemStack.EMPTY;
 				}
-			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("the_deep_void:glutton_end")))) {
+			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.parse("the_deep_void:glutton_end")))) {
 				GluttonBlockHopperItemEnterProcedure.execute(world, x, y, z, "/loot spawn ~ ~ ~ loot the_deep_void:blocks/glutton_end");
 			} else if ((new Object() {
 				public ItemStack getItemStack(LevelAccessor world, BlockPos pos, int slotid) {
@@ -102,14 +102,14 @@ public class GluttonBlockHopperProcedure {
 					}
 					return ItemStack.EMPTY;
 				}
-			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("the_deep_void:glutton_givexp")))) {
+			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.parse("the_deep_void:glutton_givexp")))) {
 				GluttonBlockHopperItemEnterProcedure.execute(world, x, y, z, "bossLoot");
 			} else {
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.aggro")), SoundSource.BLOCKS, 1, 1);
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.aggro")), SoundSource.BLOCKS, 1, 1);
 					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.fox.aggro")), SoundSource.BLOCKS, 1, 1, false);
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.fox.aggro")), SoundSource.BLOCKS, 1, 1, false);
 					}
 				}
 				if (world instanceof ServerLevel _level) {

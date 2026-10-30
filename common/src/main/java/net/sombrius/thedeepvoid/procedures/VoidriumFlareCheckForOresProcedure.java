@@ -1,11 +1,11 @@
 package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -26,12 +26,12 @@ public class VoidriumFlareCheckForOresProcedure {
 			for (int index1 = 0; index1 < 26; index1++) {
 				sz = -13;
 				for (int index2 = 0; index2 < 26; index2++) {
-					if (((world.getBlockState(BlockPos.containing(x + sx, y + sy, z + sz))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("forge:ores")))
-							|| (world.getBlockState(BlockPos.containing(x + sx, y + sy, z + sz))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("c:ores")))
-							|| (world.getBlockState(BlockPos.containing(x + sx, y + sy, z + sz))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:ores"))))
+					if (((world.getBlockState(BlockPos.containing(x + sx, y + sy, z + sz))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("forge:ores")))
+							|| (world.getBlockState(BlockPos.containing(x + sx, y + sy, z + sz))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("c:ores")))
+							|| (world.getBlockState(BlockPos.containing(x + sx, y + sy, z + sz))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:ores"))))
 							&& !(!world.getEntitiesOfClass(XrayEntity.class, AABB.ofSize(new Vec3((x + sx), (y + sy), (z + sz)), 0.5, 0.5, 0.5), e -> true).isEmpty())) {
 						if (world instanceof ServerLevel _level) {
-							Entity entityToSpawn = TheDeepVoidModEntities.XRAY.get().spawn(_level, BlockPos.containing(x + sx, y + sy, z + sz), MobSpawnType.MOB_SUMMONED);
+							Entity entityToSpawn = TheDeepVoidModEntities.XRAY.get().spawn(_level, BlockPos.containing(x + sx, y + sy, z + sz), EntitySpawnReason.MOB_SUMMONED);
 							if (entityToSpawn != null) {
 								entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 							}

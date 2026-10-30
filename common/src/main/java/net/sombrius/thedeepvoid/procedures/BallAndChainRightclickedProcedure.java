@@ -4,12 +4,12 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -24,23 +24,23 @@ public class BallAndChainRightclickedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("flailUsed") == 0 && (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
+		if (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("flailUsed", 0) == 0 && (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack.getItem(), 10);
+				_player.getCooldowns().addCooldown(itemstack, 10);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.snowball.throw")), SoundSource.PLAYERS, 2, (float) 0.5);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.snowball.throw")), SoundSource.PLAYERS, 2, (float) 0.5);
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.snowball.throw")), SoundSource.PLAYERS, 2, (float) 0.5, false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.snowball.throw")), SoundSource.PLAYERS, 2, (float) 0.5, false);
 				}
 			}
 			net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("flailUsed", 1);
 			if (world instanceof ServerLevel _serverLevel) {
 				Entity entityinstance = TheDeepVoidModEntities.DARK_STEEL_FLAIL.get().create(_serverLevel, null,
-						BlockPos.containing(entity.getX() + entity.getLookAngle().x * 1, entity.getY() + entity.getLookAngle().y + 1.5 * 1, entity.getZ() + entity.getLookAngle().z * 1), MobSpawnType.MOB_SUMMONED, false, false);
+						BlockPos.containing(entity.getX() + entity.getLookAngle().x * 1, entity.getY() + entity.getLookAngle().y + 1.5 * 1, entity.getZ() + entity.getLookAngle().z * 1), EntitySpawnReason.MOB_SUMMONED, false, false);
 				if (entityinstance != null) {
 					entityinstance.setYRot(world.getRandom().nextFloat() * 360.0F);
-					if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("secret") == 1) {
+					if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("secret", 0) == 1) {
 						if (entityinstance instanceof DarkSteelFlailEntity _datEntSetL)
 							_datEntSetL.getEntityData().set(DarkSteelFlailEntity.DATA_secret, true);
 					}

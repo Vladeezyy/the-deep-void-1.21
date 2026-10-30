@@ -36,12 +36,12 @@ public class HarvesterMaskHitProcedure {
 					&& (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) >= (sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.ABSORPTION) ? _livEnt.getEffect(MobEffects.ABSORPTION).getAmplifier() : 0) * 2
 							+ (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1)) {
 				if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem() || sourceentity.isShiftKeyDown()) {
-					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:hexedBuildUp", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:hexedBuildUp") + Math.ceil((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:hexedBuildUp") * 60) / 100)));
+					net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:hexedBuildUp", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:hexedBuildUp", 0) + Math.ceil((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:hexedBuildUp", 0) * 60) / 100)));
 					amplifier = sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.ABSORPTION) ? _livEnt.getEffect(MobEffects.ABSORPTION).getAmplifier() : 0;
 					if (sourceentity instanceof LivingEntity _entity)
 						_entity.removeEffect(MobEffects.ABSORPTION);
 					if (sourceentity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 200, (int) (amplifier + Math.floor(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:hexedBuildUp") / 45)), false, false));
+						_entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 200, (int) (amplifier + Math.floor(net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:hexedBuildUp", 0) / 45)), false, false));
 					if (entity instanceof LivingEntity _entity)
 						_entity.removeEffect(TheDeepVoidModMobEffects.HEXED.holder());
 				}

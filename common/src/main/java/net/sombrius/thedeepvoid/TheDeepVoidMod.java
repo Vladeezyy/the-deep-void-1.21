@@ -9,6 +9,7 @@ import net.sombrius.thedeepvoid.port.bus.EventPriority;
 import net.sombrius.thedeepvoid.port.bus.EventIndex;
 import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModTabs;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModGameRules;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModSounds;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModRecipeTypes;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModPotions;
@@ -64,6 +65,7 @@ public class TheDeepVoidMod {
 		TheDeepVoidModFluids.REGISTRY.getRegistryKey();
 		TheDeepVoidModRecipeTypes.SERIALIZERS.getRegistryKey();
 		TheDeepVoidModRecipeTypes.TYPES.getRegistryKey();
+		TheDeepVoidModGameRules.REGISTRY.getRegistryKey();
 		TheDeepVoidModVariables.registerPackets();
 		EventIndex.register();
 		ModBus.add(ServerTickEvent.Post.class, EventPriority.NORMAL, TheDeepVoidMod::tick);

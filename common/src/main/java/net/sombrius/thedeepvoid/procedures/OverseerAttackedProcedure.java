@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
 import net.sombrius.thedeepvoid.port.bus.Event;
 import net.sombrius.thedeepvoid.port.bus.ICancellableEvent;
 import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
@@ -37,7 +36,7 @@ public class OverseerAttackedProcedure {
 		if (sourceentity instanceof LivingEntity) {
 			if (entity instanceof OverseerEntity || entity instanceof OverseerPillarEntity || entity instanceof BigOverseerEntity || entity instanceof OverseerBigPillarEntity || entity instanceof BuiltOverseerPillarEntity
 					|| entity instanceof BuiltBigOverseerPillarEntity) {
-				if (!((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() instanceof PickaxeItem)) {
+				if (!((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).is(net.minecraft.tags.ItemTags.PICKAXES))) {
 					if (event instanceof ICancellableEvent _cancellable) {
 						_cancellable.setCanceled(true);
 					}

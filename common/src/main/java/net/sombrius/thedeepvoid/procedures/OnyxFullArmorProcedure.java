@@ -14,7 +14,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.Advancement;
@@ -39,9 +39,9 @@ public class OnyxFullArmorProcedure {
 			}
 		}
 		if (!(entity instanceof ServerPlayer _plr19 && _plr19.level() instanceof ServerLevel
-				&& _plr19.getAdvancements().getOrStartProgress(_plr19.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:cover_me_with_onyx"))).isDone())) {
+				&& _plr19.getAdvancements().getOrStartProgress(_plr19.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:cover_me_with_onyx"))).isDone())) {
 			if (entity instanceof ServerPlayer _player) {
-				AdvancementHolder _adv = _player.server.getAdvancements().get(ResourceLocation.parse("the_deep_void:cover_me_with_onyx"));
+				AdvancementHolder _adv = _player.level().getServer().getAdvancements().get(Identifier.parse("the_deep_void:cover_me_with_onyx"));
 				AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
 				if (!_ap.isDone()) {
 					for (String criteria : _ap.getRemainingCriteria())

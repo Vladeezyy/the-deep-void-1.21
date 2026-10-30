@@ -16,8 +16,8 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 
 public class VoidFernBlock extends FlowerBlock {
 	public VoidFernBlock() {
-		super(MobEffects.MOVEMENT_SPEED, 100,
-				BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).sound(SoundType.TWISTING_VINES).strength(0.5f, 0.5f).noCollission().replaceable().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 100,
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_BLACK).sound(SoundType.TWISTING_VINES).strength(0.5f, 0.5f).noCollision().replaceable().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
 	}
 
 	@Override

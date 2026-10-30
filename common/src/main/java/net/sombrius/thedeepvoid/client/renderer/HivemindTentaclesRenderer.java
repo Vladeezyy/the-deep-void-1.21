@@ -1,38 +1,24 @@
-
 package net.sombrius.thedeepvoid.client.renderer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.sombrius.thedeepvoid.entity.HivemindTentaclesEntity;
-import net.sombrius.thedeepvoid.entity.model.HivemindTentaclesModel;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import net.minecraft.resources.Identifier;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
-public class HivemindTentaclesRenderer extends GeoEntityRenderer<HivemindTentaclesEntity> {
+import net.sombrius.thedeepvoid.entity.model.HivemindTentaclesModel;
+import net.sombrius.thedeepvoid.entity.HivemindTentaclesEntity;
+
+public class HivemindTentaclesRenderer<R extends LivingEntityRenderState & GeoRenderState> extends GeoEntityRenderer<HivemindTentaclesEntity, R> {
 	public HivemindTentaclesRenderer(EntityRendererProvider.Context renderManager) {
 		super(renderManager, new HivemindTentaclesModel());
 		this.shadowRadius = 0f;
 	}
 
 	@Override
-	public RenderType getRenderType(HivemindTentaclesEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
-		return RenderType.entityTranslucent(getTextureLocation(animatable));
-	}
-
-	@Override
-	public void preRender(PoseStack poseStack, HivemindTentaclesEntity entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
-		float scale = 1f;
-		this.scaleHeight = scale;
-		this.scaleWidth = scale;
-		super.preRender(poseStack, entity, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, color);
-	}
-
-	@Override
-	protected float getDeathMaxRotation(HivemindTentaclesEntity entityLivingBaseIn) {
-		return 0.0F;
+	public RenderType getRenderType(R renderState, Identifier texture) {
+		return RenderTypes.entityTranslucent(texture);
 	}
 }

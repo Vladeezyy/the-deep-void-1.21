@@ -18,21 +18,14 @@ import net.sombrius.thedeepvoid.procedures.DevourerShieldSpecialInformationProce
 
 public class DevourerShieldItem extends ShieldItem {
 	public DevourerShieldItem() {
-		super(new Item.Properties().durability(540).fireResistant());
-	}
-
-	@Override
-	public boolean isValidRepairItem(ItemStack itemstack, ItemStack repairitem) {
-		return Ingredient
-				.of(new ItemStack(TheDeepVoidModBlocks.FLESH_BLOCK.get()), new ItemStack(TheDeepVoidModBlocks.PUSTULENT_FLESH_BLOCK.get()), new ItemStack(TheDeepVoidModBlocks.TENDRILS.get()), new ItemStack(TheDeepVoidModItems.DEVOURER_TENDRIL.get()))
-				.test(repairitem);
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().repairable(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "repair/devourer_shield"))).durability(540).fireResistant());
 	}
 
 	@Override
 	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
-	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, context, list, flag);
+	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+		super.appendHoverText(itemstack, context, tooltipDisplay, list, flag);
 		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : Minecraft.getInstance().player;
-		list.add(Component.literal(DevourerShieldSpecialInformationProcedure.execute()));
+		list.accept(Component.literal(DevourerShieldSpecialInformationProcedure.execute()));
 	}
 }

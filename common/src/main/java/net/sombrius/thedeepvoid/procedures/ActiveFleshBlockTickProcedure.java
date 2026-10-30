@@ -1,7 +1,7 @@
 package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.LevelAccessor;
 import net.sombrius.thedeepvoid.configuration.DeepVoidConfigConfiguration;
@@ -17,8 +17,8 @@ public class ActiveFleshBlockTickProcedure {
 			}
 		}
 		if (DeepVoidConfigConfiguration.STOPACTIVEBLOCKGENERATION.get() == false) {
-			if ((world.getBlockState(BlockPos.containing(x, y + 1, z)).canOcclude() || (world.getBlockState(BlockPos.containing(x, y + 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:flesh_plants"))))
-					&& (world.getBlockState(BlockPos.containing(x, y - 1, z)).canOcclude() || (world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, ResourceLocation.parse("the_deep_void:flesh_plants"))))) {
+			if ((world.getBlockState(BlockPos.containing(x, y + 1, z)).canOcclude() || (world.getBlockState(BlockPos.containing(x, y + 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:flesh_plants"))))
+					&& (world.getBlockState(BlockPos.containing(x, y - 1, z)).canOcclude() || (world.getBlockState(BlockPos.containing(x, y - 1, z))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.parse("the_deep_void:flesh_plants"))))) {
 				if (Math.random() < 0.2) {
 					world.setBlock(BlockPos.containing(x, y, z), TheDeepVoidModBlocks.PUSTULENT_FLESH_BLOCK.get().defaultBlockState(), 3);
 				} else {

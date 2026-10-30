@@ -9,6 +9,6 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class RottenButtonBlock extends ButtonBlock {
 	public RottenButtonBlock() {
-		super(BlockSetType.OAK, 30, BlockBehaviour.Properties.of().ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.BASALT).strength(2.2f, 16f).dynamicShape());
+		super(BlockSetType.OAK, 30, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().ignitedByLava().instrument(NoteBlockInstrument.BASS).sound(SoundType.BASALT).strength(2.2f, 16f).dynamicShape());
 	}
 }

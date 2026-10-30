@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -27,7 +27,7 @@ public class SulfurTntProcedureDispenseProcedure {
 			}
 		}.getDirection(BlockPos.containing(x, y, z))) == Direction.DOWN) {
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x, y - 1, z), MobSpawnType.MOB_SUMMONED);
+				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x, y - 1, z), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}
@@ -47,7 +47,7 @@ public class SulfurTntProcedureDispenseProcedure {
 			}
 		}.getDirection(BlockPos.containing(x, y, z))) == Direction.UP) {
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x, y + 1, z), MobSpawnType.MOB_SUMMONED);
+				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x, y + 1, z), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}
@@ -67,7 +67,7 @@ public class SulfurTntProcedureDispenseProcedure {
 			}
 		}.getDirection(BlockPos.containing(x, y, z))) == Direction.EAST) {
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x + 1, y, z), MobSpawnType.MOB_SUMMONED);
+				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x + 1, y, z), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}
@@ -87,7 +87,7 @@ public class SulfurTntProcedureDispenseProcedure {
 			}
 		}.getDirection(BlockPos.containing(x, y, z))) == Direction.WEST) {
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x - 1, y, z), MobSpawnType.MOB_SUMMONED);
+				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x - 1, y, z), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}
@@ -107,7 +107,7 @@ public class SulfurTntProcedureDispenseProcedure {
 			}
 		}.getDirection(BlockPos.containing(x, y, z))) == Direction.SOUTH) {
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x, y, z + 1), MobSpawnType.MOB_SUMMONED);
+				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x, y, z + 1), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}
@@ -127,7 +127,7 @@ public class SulfurTntProcedureDispenseProcedure {
 			}
 		}.getDirection(BlockPos.containing(x, y, z))) == Direction.NORTH) {
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x, y, z - 1), MobSpawnType.MOB_SUMMONED);
+				Entity entityToSpawn = TheDeepVoidModEntities.SULFUR_TNT_ENTITY.get().spawn(_level, BlockPos.containing(x, y, z - 1), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
 				}

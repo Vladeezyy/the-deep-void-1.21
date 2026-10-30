@@ -9,14 +9,14 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModJeiPlugin;
 
 public class GluttonBlockJEITypeRecipeCategory implements IRecipeCategory<GluttonBlockJEITypeRecipe> {
-	public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath("the_deep_void", "glutton_block_jei_type");
-	public final static ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/screens/glutton_block_jei_new.png");
+	public final static Identifier UID = Identifier.fromNamespaceAndPath("the_deep_void", "glutton_block_jei_type");
+	public final static Identifier TEXTURE = Identifier.fromNamespaceAndPath("the_deep_void", "textures/screens/glutton_block_jei_new.png");
 	private final IDrawable background;
 	private final IDrawable icon;
 
@@ -26,7 +26,7 @@ public class GluttonBlockJEITypeRecipeCategory implements IRecipeCategory<Glutto
 	}
 
 	@Override
-	public mezz.jei.api.recipe.RecipeType<GluttonBlockJEITypeRecipe> getRecipeType() {
+	public mezz.jei.api.recipe.types.IRecipeType<GluttonBlockJEITypeRecipe> getRecipeType() {
 		return TheDeepVoidModJeiPlugin.GluttonBlockJEIType_Type;
 	}
 
@@ -36,8 +36,18 @@ public class GluttonBlockJEITypeRecipeCategory implements IRecipeCategory<Glutto
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return this.background;
+	public int getWidth() {
+		return this.background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return this.background.getHeight();
+	}
+
+	@Override
+	public void draw(GluttonBlockJEITypeRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		this.background.draw(guiGraphics);
 	}
 
 	@Override

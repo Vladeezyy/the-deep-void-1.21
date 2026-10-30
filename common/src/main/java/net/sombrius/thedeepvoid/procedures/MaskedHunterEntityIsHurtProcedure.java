@@ -23,11 +23,11 @@ public class MaskedHunterEntityIsHurtProcedure {
 				if (_ent instanceof ServerPlayer _serverPlayer) {
 					return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 				} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
-					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+					return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()) != null && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().id()).getGameMode() == GameType.CREATIVE;
 				}
 				return false;
 			}
-		}.checkGamemode(sourceentity)) && !entity.isInWaterOrBubble()) {
+		}.checkGamemode(sourceentity)) && !entity.isInWater()) {
 			if (!((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == null)) {
 				if ((entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null) == sourceentity) {
 					if (sourceentity.getY() > entity.getY() + 2 && sourceentity.getY() < entity.getY() + 6) {
@@ -36,7 +36,7 @@ public class MaskedHunterEntityIsHurtProcedure {
 								if (entity instanceof MaskedHunterEntity _datEntSetL)
 									_datEntSetL.getEntityData().set(MaskedHunterEntity.DATA_jumping, true);
 								if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-									_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 99, false, false));
+									_entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 99, false, false));
 								if (entity instanceof MaskedHunterEntity) {
 									((MaskedHunterEntity) entity).setAnimation("animation.hunterTrue_jump");
 								}

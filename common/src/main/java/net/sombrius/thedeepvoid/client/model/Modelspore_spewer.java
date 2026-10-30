@@ -11,17 +11,17 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 // Made with Blockbench 4.9.4
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
-public class Modelspore_spewer<T extends Entity> extends EntityModel<T> {
+public class Modelspore_spewer<T extends net.minecraft.client.renderer.entity.state.EntityRenderState> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in
 	// the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("the_deep_void", "modelspore_spewer"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath("the_deep_void", "modelspore_spewer"), "main");
 	public final ModelPart left_leg1;
 	public final ModelPart right_leg1;
 	public final ModelPart left_leg2;
@@ -30,6 +30,7 @@ public class Modelspore_spewer<T extends Entity> extends EntityModel<T> {
 	public final ModelPart head;
 
 	public Modelspore_spewer(ModelPart root) {
+		super(root);
 		this.left_leg1 = root.getChild("left_leg1");
 		this.right_leg1 = root.getChild("right_leg1");
 		this.left_leg2 = root.getChild("left_leg2");
@@ -66,17 +67,14 @@ public class Modelspore_spewer<T extends Entity> extends EntityModel<T> {
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		left_leg1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		right_leg1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		left_leg2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		right_leg2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-	}
 
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(T state) {
+		super.setupAnim(state);
+		float limbSwing = net.sombrius.thedeepvoid.port.PortRender.limbSwing(state);
+		float limbSwingAmount = net.sombrius.thedeepvoid.port.PortRender.limbSwingAmount(state);
+		float ageInTicks = state.ageInTicks;
+		float netHeadYaw = net.sombrius.thedeepvoid.port.PortRender.netHeadYaw(state);
+		float headPitch = net.sombrius.thedeepvoid.port.PortRender.headPitch(state);
 		this.right_leg1.zRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
 		this.right_leg2.zRot = Mth.cos(limbSwing * 1.0F) * 1.0F * limbSwingAmount;
 		this.left_leg1.zRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;

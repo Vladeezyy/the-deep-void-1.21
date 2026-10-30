@@ -11,6 +11,6 @@ public class HexedOnEffectActiveTickProcedure {
 			return;
 		if (world instanceof ServerLevel _level)
 			_level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, x, (y + 0.8), z, 2, 0.1, 0.2, 0.1, 0.1);
-		net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:hexedBuildUp", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("deep_void:hexedBuildUp") + 0.5 + (amplifier == 0 ? 0 : amplifier / 2)));
+		net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("deep_void:hexedBuildUp", (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("deep_void:hexedBuildUp", 0) + 0.5 + (amplifier == 0 ? 0 : amplifier / 2)));
 	}
 }

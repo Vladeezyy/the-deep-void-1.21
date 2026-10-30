@@ -19,12 +19,12 @@ public class InstantDamageNeedleRecipeBrewingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean isInput(ItemStack input) {
-		return Ingredient.of(new ItemStack(TheDeepVoidModItems.REGENERATION_NEEDLE.get())).test(input);
+		return Ingredient.of(TheDeepVoidModItems.REGENERATION_NEEDLE.get()).test(input);
 	}
 
 	@Override
 	public boolean isIngredient(ItemStack ingredient) {
-		return Ingredient.of(new ItemStack(Items.FERMENTED_SPIDER_EYE)).test(ingredient);
+		return Ingredient.of(Items.FERMENTED_SPIDER_EYE).test(ingredient);
 	}
 
 	@Override

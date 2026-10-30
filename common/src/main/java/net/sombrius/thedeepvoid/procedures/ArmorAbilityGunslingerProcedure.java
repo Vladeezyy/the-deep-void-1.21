@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.procedures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -26,9 +26,9 @@ public class ArmorAbilityGunslingerProcedure {
 				_entity.addEffect(new MobEffectInstance(TheDeepVoidModMobEffects.BULLSEYE.holder(), 50, 0));
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:nightmare_appear")), SoundSource.PLAYERS, (float) 1.5, 1);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:nightmare_appear")), SoundSource.PLAYERS, (float) 1.5, 1);
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("the_deep_void:nightmare_appear")), SoundSource.PLAYERS, (float) 1.5, 1, false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:nightmare_appear")), SoundSource.PLAYERS, (float) 1.5, 1, false);
 				}
 			}
 		}

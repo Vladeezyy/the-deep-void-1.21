@@ -11,7 +11,7 @@ import net.sombrius.thedeepvoid.procedures.GrimberryPiePlayerFinishesUsingItemPr
 
 public class GrimberryPieItem extends Item {
 	public GrimberryPieItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(8).saturationModifier(10f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(8).saturationModifier(10f).build()));
 	}
 
 	@Override

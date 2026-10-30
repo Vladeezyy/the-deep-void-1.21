@@ -1,6 +1,10 @@
 
 package net.sombrius.thedeepvoid.item;
 
+import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.InteractionResult;
+import javax.annotation.Nullable;
+import net.minecraft.server.level.ServerLevel;
 import net.sombrius.thedeepvoid.port.PortUtil;
 
 import java.util.List;
@@ -8,18 +12,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.sombrius.thedeepvoid.port.bus.Dist;
 import net.sombrius.thedeepvoid.port.bus.OnlyIn;
@@ -31,17 +33,12 @@ import net.sombrius.thedeepvoid.procedures.BloodBowRightclickedProcedure;
 
 public class BloodBowItem extends Item {
 	public BloodBowItem() {
-		super(new Item.Properties().durability(850).fireResistant().rarity(Rarity.UNCOMMON));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().enchantable(12).durability(850).fireResistant().rarity(Rarity.UNCOMMON));
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack itemstack) {
-		return UseAnim.BOW;
-	}
-
-	@Override
-	public int getEnchantmentValue() {
-		return 12;
+	public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+		return ItemUseAnimation.BOW;
 	}
 
 	@Override
@@ -51,40 +48,42 @@ public class BloodBowItem extends Item {
 
 	@Override
 	@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
-	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, context, list, flag);
+	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+		super.appendHoverText(itemstack, context, tooltipDisplay, list, flag);
 		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : Minecraft.getInstance().player;
-		list.add(Component.literal(BloodBowDescriptionProcedure.execute()));
+		list.accept(Component.literal(BloodBowDescriptionProcedure.execute()));
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
-		InteractionResultHolder<ItemStack> ar = InteractionResultHolder.fail(entity.getItemInHand(hand));
+	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+		InteractionResult ar = InteractionResult.FAIL;
 		if (entity.getAbilities().instabuild || findAmmo(entity) != ItemStack.EMPTY) {
-			ar = InteractionResultHolder.success(entity.getItemInHand(hand));
+			ar = InteractionResult.SUCCESS;
 			entity.startUsingItem(hand);
 		}
-		BloodBowRightclickedProcedure.execute(ar.getObject());
+		BloodBowRightclickedProcedure.execute(entity.getItemInHand(hand));
 		return ar;
 	}
 
 	@Override
-	public void inventoryTick(ItemStack itemstack, Level world, Entity entity, int slot, boolean selected) {
-		super.inventoryTick(itemstack, world, entity, slot, selected);
+	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		BloodBowItemInInventoryTickProcedure.execute(entity, itemstack);
 	}
 
 	@Override
-	public void releaseUsing(ItemStack itemstack, Level world, LivingEntity entity, int time) {
+	public boolean releaseUsing(ItemStack itemstack, Level world, LivingEntity entity, int time) {
 		BloodBowOnPlayerStoppedUsingProcedure.execute(world, entity, itemstack);
 		if (!world.isClientSide() && entity instanceof ServerPlayer player) {
 			float pullingPower = BowItem.getPowerForTime(this.getUseDuration(itemstack, entity) - time);
 			if (pullingPower < 0.1)
-				return;
+				return true;
 			ItemStack stack = findAmmo(player);
 			if (player.getAbilities().instabuild || stack != ItemStack.EMPTY) {
 				BloodSpikeEntity projectile = BloodSpikeEntity.shoot(world, entity, world.getRandom(), pullingPower);
-				itemstack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
+				itemstack.hurtAndBreak(1, entity, entity.getUsedItemHand().asEquipmentSlot());
 				if (player.getAbilities().instabuild) {
 					projectile.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 				} else {
@@ -96,13 +95,14 @@ public class BloodBowItem extends Item {
 				}
 			}
 		}
+		return true;
 	}
 
 	private ItemStack findAmmo(Player player) {
 		ItemStack stack = ProjectileWeaponItem.getHeldProjectile(player, e -> e.getItem() == BloodSpikeEntity.PROJECTILE_ITEM.getItem());
 		if (stack == ItemStack.EMPTY) {
-			for (int i = 0; i < player.getInventory().items.size(); i++) {
-				ItemStack teststack = player.getInventory().items.get(i);
+			for (int i = 0; i < player.getInventory().getNonEquipmentItems().size(); i++) {
+				ItemStack teststack = player.getInventory().getNonEquipmentItems().get(i);
 				if (teststack != null && teststack.getItem() == BloodSpikeEntity.PROJECTILE_ITEM.getItem()) {
 					stack = teststack;
 					break;

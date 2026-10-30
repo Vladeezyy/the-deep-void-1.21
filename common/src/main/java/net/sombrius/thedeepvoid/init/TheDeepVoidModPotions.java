@@ -18,18 +18,18 @@ import net.minecraft.world.effect.MobEffectInstance;
 
 public class TheDeepVoidModPotions {
 	public static final Registrar<Potion> REGISTRY = Registrar.create(Registries.POTION, TheDeepVoidMod.MODID);
-	public static final RegistryEntry<Potion, Potion> ROT_POTION = REGISTRY.register("rot_potion", () -> new Potion(new MobEffectInstance(TheDeepVoidModMobEffects.ROT.holder(), 460, 0, false, true)));
-	public static final RegistryEntry<Potion, Potion> VANISHMENT = REGISTRY.register("vanishment", () -> new Potion(new MobEffectInstance(TheDeepVoidModMobEffects.VANISH.holder(), 1200, 0, false, false),
-			new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 0, false, false), new MobEffectInstance(MobEffects.INVISIBILITY, 1200, 0, false, false)));
-	public static final RegistryEntry<Potion, Potion> LONG_VANISHMENT = REGISTRY.register("long_vanishment", () -> new Potion(new MobEffectInstance(TheDeepVoidModMobEffects.VANISH.holder(), 2400, 0, false, false),
-			new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 2400, 0, false, false), new MobEffectInstance(MobEffects.INVISIBILITY, 2400, 0, false, false)));
-	public static final RegistryEntry<Potion, Potion> ENHANCED_VANISHMENT = REGISTRY.register("enhanced_vanishment", () -> new Potion(new MobEffectInstance(TheDeepVoidModMobEffects.VANISH.holder(), 500, 0, false, false),
-			new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 500, 1, false, false), new MobEffectInstance(MobEffects.INVISIBILITY, 500, 0, false, false)));
-	public static final RegistryEntry<Potion, Potion> CRATE_MAGNET_POTION = REGISTRY.register("crate_magnet_potion", () -> new Potion(new MobEffectInstance(TheDeepVoidModMobEffects.CRATE_MAGNET.holder(), 3600, 0, false, true)));
-	public static final RegistryEntry<Potion, Potion> EXTENDED_CRATE_MAGNET = REGISTRY.register("extended_crate_magnet", () -> new Potion(new MobEffectInstance(TheDeepVoidModMobEffects.CRATE_MAGNET.holder(), 9600, 0, false, true)));
-	public static final RegistryEntry<Potion, Potion> AMPLIFIED_CRATE_MAGNET = REGISTRY.register("amplified_crate_magnet", () -> new Potion(new MobEffectInstance(TheDeepVoidModMobEffects.CRATE_MAGNET.holder(), 1800, 1, false, true)));
-	public static final RegistryEntry<Potion, Potion> CREATURE_REPELLENT_POTION = REGISTRY.register("creature_repellent_potion", () -> new Potion(new MobEffectInstance(TheDeepVoidModMobEffects.CREATURE_REPELLENT.holder(), 3600, 0, false, true)));
+	public static final RegistryEntry<Potion, Potion> ROT_POTION = REGISTRY.register("rot_potion", () -> new Potion("rot_potion", new MobEffectInstance(TheDeepVoidModMobEffects.ROT.holder(), 460, 0, false, true)));
+	public static final RegistryEntry<Potion, Potion> VANISHMENT = REGISTRY.register("vanishment", () -> new Potion("vanishment", new MobEffectInstance(TheDeepVoidModMobEffects.VANISH.holder(), 1200, 0, false, false),
+			new MobEffectInstance(MobEffects.SPEED, 1200, 0, false, false), new MobEffectInstance(MobEffects.INVISIBILITY, 1200, 0, false, false)));
+	public static final RegistryEntry<Potion, Potion> LONG_VANISHMENT = REGISTRY.register("long_vanishment", () -> new Potion("long_vanishment", new MobEffectInstance(TheDeepVoidModMobEffects.VANISH.holder(), 2400, 0, false, false),
+			new MobEffectInstance(MobEffects.SPEED, 2400, 0, false, false), new MobEffectInstance(MobEffects.INVISIBILITY, 2400, 0, false, false)));
+	public static final RegistryEntry<Potion, Potion> ENHANCED_VANISHMENT = REGISTRY.register("enhanced_vanishment", () -> new Potion("enhanced_vanishment", new MobEffectInstance(TheDeepVoidModMobEffects.VANISH.holder(), 500, 0, false, false),
+			new MobEffectInstance(MobEffects.SPEED, 500, 1, false, false), new MobEffectInstance(MobEffects.INVISIBILITY, 500, 0, false, false)));
+	public static final RegistryEntry<Potion, Potion> CRATE_MAGNET_POTION = REGISTRY.register("crate_magnet_potion", () -> new Potion("crate_magnet_potion", new MobEffectInstance(TheDeepVoidModMobEffects.CRATE_MAGNET.holder(), 3600, 0, false, true)));
+	public static final RegistryEntry<Potion, Potion> EXTENDED_CRATE_MAGNET = REGISTRY.register("extended_crate_magnet", () -> new Potion("extended_crate_magnet", new MobEffectInstance(TheDeepVoidModMobEffects.CRATE_MAGNET.holder(), 9600, 0, false, true)));
+	public static final RegistryEntry<Potion, Potion> AMPLIFIED_CRATE_MAGNET = REGISTRY.register("amplified_crate_magnet", () -> new Potion("amplified_crate_magnet", new MobEffectInstance(TheDeepVoidModMobEffects.CRATE_MAGNET.holder(), 1800, 1, false, true)));
+	public static final RegistryEntry<Potion, Potion> CREATURE_REPELLENT_POTION = REGISTRY.register("creature_repellent_potion", () -> new Potion("creature_repellent_potion", new MobEffectInstance(TheDeepVoidModMobEffects.CREATURE_REPELLENT.holder(), 3600, 0, false, true)));
 	public static final RegistryEntry<Potion, Potion> EXTENDED_CREATURE_REPELLENT_POTION = REGISTRY.register("extended_creature_repellent_potion",
-			() -> new Potion(new MobEffectInstance(TheDeepVoidModMobEffects.CREATURE_REPELLENT.holder(), 9600, 0, false, true)));
-	public static final RegistryEntry<Potion, Potion> BAD_LUCK = REGISTRY.register("bad_luck", () -> new Potion(new MobEffectInstance(MobEffects.UNLUCK, 6000, 0, false, true)));
+			() -> new Potion("extended_creature_repellent_potion", new MobEffectInstance(TheDeepVoidModMobEffects.CREATURE_REPELLENT.holder(), 9600, 0, false, true)));
+	public static final RegistryEntry<Potion, Potion> BAD_LUCK = REGISTRY.register("bad_luck", () -> new Potion("bad_luck", new MobEffectInstance(MobEffects.UNLUCK, 6000, 0, false, true)));
 }

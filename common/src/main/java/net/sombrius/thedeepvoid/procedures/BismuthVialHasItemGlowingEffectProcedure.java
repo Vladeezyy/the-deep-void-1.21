@@ -6,7 +6,7 @@ import net.minecraft.world.item.component.CustomData;
 
 public class BismuthVialHasItemGlowingEffectProcedure {
 	public static boolean execute(ItemStack itemstack) {
-		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDouble("xp") >= 1) {
+		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("xp", 0) >= 1) {
 			return true;
 		}
 		return false;

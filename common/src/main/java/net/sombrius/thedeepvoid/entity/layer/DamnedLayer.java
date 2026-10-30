@@ -1,26 +1,20 @@
 package net.sombrius.thedeepvoid.entity.layer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.renderer.layer.builtin.TextureLayerGeoLayer;
+import software.bernie.geckolib.renderer.base.GeoRenderer;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
+
+import net.minecraft.resources.Identifier;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+
 import net.sombrius.thedeepvoid.entity.DamnedEntity;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class DamnedLayer extends GeoRenderLayer<DamnedEntity> {
-	private static final ResourceLocation LAYER = ResourceLocation.fromNamespaceAndPath("the_deep_void", "textures/entities/eyes.png");
+/** The glowing eyes: the layer texture drawn again with the eyes render type (full bright). */
+public class DamnedLayer<R extends LivingEntityRenderState & GeoRenderState> extends TextureLayerGeoLayer<DamnedEntity, Void, R> {
+	private static final Identifier LAYER = Identifier.fromNamespaceAndPath("the_deep_void", "textures/entities/eyes.png");
 
-	public DamnedLayer(GeoRenderer<DamnedEntity> entityRenderer) {
-		super(entityRenderer);
-	}
-
-	@Override
-	public void render(PoseStack poseStack, DamnedEntity animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-		RenderType glowRenderType = RenderType.eyes(LAYER);
-		getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, glowRenderType, bufferSource.getBuffer(glowRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY, -1);
+	public DamnedLayer(GeoRenderer<DamnedEntity, Void, R> entityRenderer) {
+		super(entityRenderer, LAYER, RenderTypes::eyes);
 	}
 }

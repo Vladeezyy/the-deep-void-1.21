@@ -9,6 +9,6 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModFluids;
 
 public class LiquidVoidItem extends BucketItem {
 	public LiquidVoidItem() {
-		super(TheDeepVoidModFluids.LIQUID_VOID.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).rarity(Rarity.COMMON));
+		super(TheDeepVoidModFluids.LIQUID_VOID.get(), net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().craftRemainder(Items.BUCKET).stacksTo(1).rarity(Rarity.COMMON));
 	}
 }

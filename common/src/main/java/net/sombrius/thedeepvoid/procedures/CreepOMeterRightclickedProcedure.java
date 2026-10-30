@@ -19,9 +19,9 @@ public class CreepOMeterRightclickedProcedure {
 		if (entity == null)
 			return;
 		if (!entity.isShiftKeyDown()) {
-			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("deep_void:secondFunction") == false) {
+			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("deep_void:secondFunction", false) == false) {
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), 10);
+					_player.getCooldowns().addCooldown(itemstack, 10);
 				{
 					final String _tagName = "deep_void:secondFunction";
 					final boolean _tagValue = true;
@@ -29,7 +29,7 @@ public class CreepOMeterRightclickedProcedure {
 				}
 			} else {
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), 10);
+					_player.getCooldowns().addCooldown(itemstack, 10);
 				{
 					final String _tagName = "deep_void:secondFunction";
 					final boolean _tagValue = false;
@@ -40,7 +40,7 @@ public class CreepOMeterRightclickedProcedure {
 		if (entity.isShiftKeyDown()) {
 			if (y >= 0) {
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), 5);
+					_player.getCooldowns().addCooldown(itemstack, 5);
 				if (!world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 250, 250, 250), e -> true).isEmpty()) {
 					if ((((Entity) world.getEntitiesOfClass(StalkerEntity.class, AABB.ofSize(new Vec3(x, y, z), 250, 250, 250), e -> true).stream().sorted(new Object() {
 						Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
@@ -56,7 +56,7 @@ public class CreepOMeterRightclickedProcedure {
 				}
 			} else {
 				if (entity instanceof Player _player)
-					_player.getCooldowns().addCooldown(itemstack.getItem(), 5);
+					_player.getCooldowns().addCooldown(itemstack, 5);
 				if (entity instanceof Player _player && !_player.level().isClientSide())
 					_player.displayClientMessage(Component.literal(("" + TheDeepVoidModVariables.of(entity).darknessDamageBuildUp)), false);
 			}

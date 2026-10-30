@@ -12,6 +12,6 @@ public class CinnabarRollPlayerFinishesUsingItemProcedure {
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 			_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 120, 0));
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 240, 0));
+			_entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 240, 0));
 	}
 }

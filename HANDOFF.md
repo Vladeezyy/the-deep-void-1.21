@@ -15,7 +15,13 @@
   разбор `modding-kb/porting/multiloader/the-deep-void.md`). Разделение повторяемо: `tools/restore_common.sh` +
   `tools/port_multiloader.py`. Тесты: `LOADER=neoforge|fabric tools/servertest.sh`, `tools/scenetest.sh [-Pscene=items]`,
   `tools/bench.sh`.
-- Дальше: шаг 2 (`mc/1.21.11`).
+- `mc/1.21.11` — **шаг 2 сделан (2026-10-30, локальные коммиты, не запушено)**: NeoForge 21.11.48 + Fabric 0.141.6,
+  GeckoLib 5.4.5, JEI 27.54. Повторяемо: `tools/port_1_21_11.sh` (код) + `tools/port_resources_1_21_11.py` (ресурсы и
+  данные). Проверено: dev-серверы обоих загрузчиков, production-сервер Fabric (`:fabric:prodServer`), сцены биомов/мобов
+  и предметов на обоих загрузчиках (скриншоты в `<loader>/run/screenshots`). Не проверено: production-сервер NeoForge
+  с jar, руки GeckoLib-пушек от первого лица (сцена их не показывает и на 1.21.1), замер MSPT/FPS на 1.21.11.
+  Раздел «Minecraft 1.21.11» в `PORTLOG.md`, разбор `modding-kb/porting/mc-versions/1.21.11/the-deep-void.md`.
+- Дальше: шаг 3 (`mc/26.1.2` от `mc/1.21.11`).
 
 ## Масштаб (замерено)
 - 3108 Java-файлов, ~206 тыс. строк (MCreator), 1643 импорта GeckoLib, 36 — JEI.

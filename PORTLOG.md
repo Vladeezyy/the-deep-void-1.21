@@ -199,7 +199,11 @@ Lurker port, the Deep Void rules `tools/port_dv_1_21_11.py`, GeckoLib 5, render 
   capabilities use the transfer API (vanilla container wrappers); player variables are saved under `data` in the
   attachment (1.21.1 worlds start with fresh player variables on NeoForge).
 - **Fabric**: attribute modifiers of the items are added when the game applies them (tags and config are not ready at
-  init); gun arm poses go through the humanoid render state.
+  init); gun arm poses go through the humanoid render state (named after the item); block render layers come from a
+  map the resource script builds from the models (Fabric reads no `render_type`).
+- Checked: dev server (both), production server (Fabric `prodServer` with the jar), the dev scene (biomes, mobs) and the
+  items scene (guns in third person, Blockbench armor, GeckoLib wings) on both loaders. Not checked yet: a NeoForge
+  production server with the jar, the guns' first-person arms (the scene shows none on 1.21.1 either), MSPT / FPS.
 
 ## Known, unchanged from 1.20.1
 

@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/eye_of_the_watcher_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -13301238
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -1786880
+      }
+    ]
+  }
+}

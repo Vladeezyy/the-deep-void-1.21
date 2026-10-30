@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "the_deep_void:dark_steel_onyx"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "the_deep_void:dark_steel_onyx"
+      }
+    ]
+  }
+}

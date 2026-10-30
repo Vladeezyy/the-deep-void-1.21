@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/flesh_cube_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -13887207
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -13096920
+      }
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "the_deep_void:procedure",
+    "name": "the_deep_void:sharpshooter_pulling",
+    "entries": [
+      {
+        "threshold": 0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "the_deep_void:item/sharpshooter_0"
+        }
+      },
+      {
+        "threshold": 0.01,
+        "model": {
+          "type": "minecraft:model",
+          "model": "the_deep_void:item/sharpshooter_1"
+        }
+      },
+      {
+        "threshold": 0.75,
+        "model": {
+          "type": "minecraft:model",
+          "model": "the_deep_void:item/sharpshooter_2"
+        }
+      },
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:model",
+          "model": "the_deep_void:item/sharpshooter_3"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "the_deep_void:item/sharpshooter"
+    }
+  }
+}

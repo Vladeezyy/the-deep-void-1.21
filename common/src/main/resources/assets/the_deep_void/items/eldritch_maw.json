@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "the_deep_void:item/eldritch_maw",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

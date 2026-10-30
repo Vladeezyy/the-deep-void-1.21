@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/forsaken_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -14014174
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -1
+      }
+    ]
+  }
+}

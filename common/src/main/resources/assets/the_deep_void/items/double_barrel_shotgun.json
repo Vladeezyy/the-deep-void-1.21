@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "the_deep_void:item/double_barrel_shotgun",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

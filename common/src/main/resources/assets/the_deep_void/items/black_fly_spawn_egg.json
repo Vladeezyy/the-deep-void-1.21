@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/black_fly_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -16053493
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -14869219
+      }
+    ]
+  }
+}

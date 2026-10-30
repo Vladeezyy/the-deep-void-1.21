@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/damned_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -15396334
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -1
+      }
+    ]
+  }
+}

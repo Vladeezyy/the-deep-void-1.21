@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/masked_hunter_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -15592942
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -14606306
+      }
+    ]
+  }
+}

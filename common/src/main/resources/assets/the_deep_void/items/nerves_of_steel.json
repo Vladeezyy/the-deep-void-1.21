@@ -1,0 +1,76 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "the_deep_void:procedure",
+    "name": "the_deep_void:nerves_of_steel_glow",
+    "entries": [
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:model",
+          "model": "the_deep_void:item/nerves_of_steel_4"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:range_dispatch",
+      "property": "the_deep_void:procedure",
+      "name": "the_deep_void:nerves_of_steel_pulling",
+      "entries": [
+        {
+          "threshold": 1,
+          "model": {
+            "type": "minecraft:model",
+            "model": "the_deep_void:item/nerves_of_steel_3"
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:range_dispatch",
+        "property": "the_deep_void:procedure",
+        "name": "the_deep_void:nerves_of_steel_pulling",
+        "entries": [
+          {
+            "threshold": 0.75,
+            "model": {
+              "type": "minecraft:model",
+              "model": "the_deep_void:item/nerves_of_steel_2"
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:range_dispatch",
+          "property": "the_deep_void:procedure",
+          "name": "the_deep_void:nerves_of_steel_pulling",
+          "entries": [
+            {
+              "threshold": 0.01,
+              "model": {
+                "type": "minecraft:model",
+                "model": "the_deep_void:item/nerves_of_steel_1"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "the_deep_void:procedure",
+            "name": "the_deep_void:nerves_of_steel_pulling",
+            "entries": [
+              {
+                "threshold": 0,
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "the_deep_void:item/nerves_of_steel_0"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:model",
+              "model": "the_deep_void:item/nerves_of_steel"
+            }
+          }
+        }
+      }
+    }
+  }
+}

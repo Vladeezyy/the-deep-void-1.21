@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "the_deep_void:crawler"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "the_deep_void:crawler"
+      }
+    ]
+  }
+}

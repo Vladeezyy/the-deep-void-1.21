@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/bone_cage_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -12106178
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -13412304
+      }
+    ]
+  }
+}

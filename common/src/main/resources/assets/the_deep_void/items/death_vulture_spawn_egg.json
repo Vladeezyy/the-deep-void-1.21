@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/death_vulture_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -15329770
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -4342877
+      }
+    ]
+  }
+}

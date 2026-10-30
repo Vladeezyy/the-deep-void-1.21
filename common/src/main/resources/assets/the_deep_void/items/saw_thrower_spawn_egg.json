@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/saw_thrower_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -14155005
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -2698561
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/preserver_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -15269117
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -4080225
+      }
+    ]
+  }
+}

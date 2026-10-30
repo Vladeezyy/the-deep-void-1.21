@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/flesh_lamprey_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -13107200
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -15527149
+      }
+    ]
+  }
+}

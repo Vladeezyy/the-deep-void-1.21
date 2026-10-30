@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/flail_executioner_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -13290187
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -15527149
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/shank_prisoner_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -15066598
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -12500935
+      }
+    ]
+  }
+}

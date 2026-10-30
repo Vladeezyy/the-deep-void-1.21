@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/stalker_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -15132648
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -13752280
+      }
+    ]
+  }
+}

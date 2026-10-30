@@ -1,0 +1,20 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "the_deep_void:procedure",
+    "name": "the_deep_void:shadestorm_state",
+    "entries": [
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:model",
+          "model": "the_deep_void:item/shadestorm_0"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "the_deep_void:item/shadestorm"
+    }
+  }
+}

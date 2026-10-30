@@ -631,9 +631,11 @@ def main():
         with open(TAGS + name + '.json', 'w') as f:
             json.dump({'values': items}, f, indent=2)
             f.write('\n')
-    with open('tools/armor_assets.json', 'w') as f:
-        json.dump(dict(sorted(ARMOR_ASSETS.items())), f, indent=2)
-        f.write('\n')
+    # only the first pass (on the MCreator originals) sees the armor materials
+    if ARMOR_ASSETS:
+        with open('tools/armor_assets.json', 'w') as f:
+            json.dump(dict(sorted(ARMOR_ASSETS.items())), f, indent=2)
+            f.write('\n')
     print('changed', changed, '; repair tags', len(REPAIR_TAGS), '; armor materials', len(ARMOR_ASSETS))
 
 

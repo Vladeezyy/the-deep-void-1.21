@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/rooted_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -14474718
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -8421505
+      }
+    ]
+  }
+}

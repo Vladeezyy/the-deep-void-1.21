@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/amalgam_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -13234674
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -5396066
+      }
+    ]
+  }
+}

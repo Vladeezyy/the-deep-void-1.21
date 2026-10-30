@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/licker_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -14934235
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -12517376
+      }
+    ]
+  }
+}

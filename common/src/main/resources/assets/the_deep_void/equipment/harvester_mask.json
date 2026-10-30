@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "the_deep_void:harvester_mask"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "the_deep_void:harvester_mask"
+      }
+    ]
+  }
+}

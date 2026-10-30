@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "the_deep_void:dark_steel_bismuth_netherite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "the_deep_void:dark_steel_bismuth_netherite"
+      }
+    ]
+  }
+}

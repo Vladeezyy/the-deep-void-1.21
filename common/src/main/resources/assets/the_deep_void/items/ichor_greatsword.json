@@ -1,0 +1,27 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "the_deep_void:procedure",
+    "name": "the_deep_void:ichor_greatsword_blocking",
+    "entries": [
+      {
+        "threshold": 0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "the_deep_void:item/ichor_greatsword_0"
+        }
+      },
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:model",
+          "model": "the_deep_void:item/ichor_greatsword_1"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "the_deep_void:item/ichor_greatsword"
+    }
+  }
+}

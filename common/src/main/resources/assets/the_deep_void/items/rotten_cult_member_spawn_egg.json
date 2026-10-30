@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/rotten_cult_member_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -6513508
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -16053493
+      }
+    ]
+  }
+}

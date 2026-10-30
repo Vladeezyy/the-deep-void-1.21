@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "the_deep_void:cult"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "the_deep_void:cult"
+      }
+    ]
+  }
+}

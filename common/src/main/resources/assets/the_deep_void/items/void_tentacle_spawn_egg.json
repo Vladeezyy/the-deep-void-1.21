@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/void_tentacle_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -16777216
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -15132391
+      }
+    ]
+  }
+}

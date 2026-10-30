@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "the_deep_void:weaver_robe"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "the_deep_void:weaver_robe"
+      }
+    ]
+  }
+}

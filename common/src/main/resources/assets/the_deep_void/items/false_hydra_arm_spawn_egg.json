@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "the_deep_void:item/false_hydra_arm_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -7827814
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -6315352
+      }
+    ]
+  }
+}

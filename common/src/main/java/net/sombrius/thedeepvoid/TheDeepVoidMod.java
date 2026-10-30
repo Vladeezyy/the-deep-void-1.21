@@ -1,0 +1,97 @@
+package net.sombrius.thedeepvoid;
+
+import net.sombrius.thedeepvoid.world.features.StructureFeature;
+import net.sombrius.thedeepvoid.port.platform.Platform;
+import net.sombrius.thedeepvoid.port.neo.IPayloadHandler;
+import net.sombrius.thedeepvoid.port.bus.ServerTickEvent;
+import net.sombrius.thedeepvoid.port.bus.ModBus;
+import net.sombrius.thedeepvoid.port.bus.EventPriority;
+import net.sombrius.thedeepvoid.port.bus.EventIndex;
+import net.sombrius.thedeepvoid.network.TheDeepVoidModVariables;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModTabs;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModSounds;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModRecipeTypes;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModPotions;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModParticleTypes;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModMenus;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModFluids;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModFeatures;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModEntities;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModBlockEntities;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
+import net.minecraft.util.Tuple;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
+
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.List;
+import java.util.Collection;
+import java.util.ArrayList;
+
+/** The mod's common init; the NeoForge and Fabric entry points call {@link #init()} first (MCreator's mod constructor) */
+public class TheDeepVoidMod {
+	public static final Logger LOGGER = LogManager.getLogger(TheDeepVoidMod.class);
+	public static final String MODID = "the_deep_void";
+
+	private static boolean initialized;
+
+	public static void init() {
+		if (initialized)
+			return;
+		initialized = true;
+		// the registry classes queue their entries (Registrar) when loaded, in MCreator's order
+		TheDeepVoidModSounds.REGISTRY.getRegistryKey();
+		TheDeepVoidModBlocks.REGISTRY.getRegistryKey();
+		TheDeepVoidModBlockEntities.REGISTRY.getRegistryKey();
+		TheDeepVoidModItems.REGISTRY.getRegistryKey();
+		TheDeepVoidModEntities.REGISTRY.getRegistryKey();
+		TheDeepVoidModTabs.REGISTRY.getRegistryKey();
+		TheDeepVoidModFeatures.REGISTRY.getRegistryKey();
+		StructureFeature.REGISTRY.getRegistryKey();
+		TheDeepVoidModPotions.REGISTRY.getRegistryKey();
+		TheDeepVoidModMobEffects.REGISTRY.getRegistryKey();
+		TheDeepVoidModMenus.REGISTRY.getRegistryKey();
+		TheDeepVoidModParticleTypes.REGISTRY.getRegistryKey();
+		TheDeepVoidModFluids.REGISTRY.getRegistryKey();
+		TheDeepVoidModRecipeTypes.SERIALIZERS.getRegistryKey();
+		TheDeepVoidModRecipeTypes.TYPES.getRegistryKey();
+		TheDeepVoidModVariables.registerPackets();
+		EventIndex.register();
+		ModBus.add(ServerTickEvent.Post.class, EventPriority.NORMAL, TheDeepVoidMod::tick);
+	}
+
+	/** MCreator's bidirectional packets (the handlers check the flow); call during {@link #init()} */
+	@SuppressWarnings("unchecked")
+	public static <T extends CustomPacketPayload> void addNetworkMessage(CustomPacketPayload.Type<T> id, StreamCodec<? extends FriendlyByteBuf, T> reader, IPayloadHandler<T> handler) {
+		Platform.INSTANCE.registerPayload(id, (StreamCodec<? super RegistryFriendlyByteBuf, T>) reader, handler);
+	}
+
+	private static final Collection<Tuple<Runnable, Integer>> workQueue = new ConcurrentLinkedQueue<>();
+
+	/** Runs {@code action} after {@code tick} server ticks (only when called on the server thread, as in MCreator) */
+	public static void queueServerWork(int tick, Runnable action) {
+		MinecraftServer server = Platform.INSTANCE.currentServer();
+		if (server != null && server.isSameThread())
+			workQueue.add(new Tuple<>(action, tick));
+	}
+
+	private static void tick(ServerTickEvent.Post event) {
+		List<Tuple<Runnable, Integer>> actions = new ArrayList<>();
+		workQueue.forEach(work -> {
+			work.setB(work.getB() - 1);
+			if (work.getB() == 0)
+				actions.add(work);
+		});
+		actions.forEach(e -> e.getA().run());
+		workQueue.removeAll(actions);
+	}
+}

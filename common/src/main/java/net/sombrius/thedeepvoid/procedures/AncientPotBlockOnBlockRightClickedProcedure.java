@@ -1,0 +1,144 @@
+package net.sombrius.thedeepvoid.procedures;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.sombrius.thedeepvoid.port.neo.Capabilities;
+import net.sombrius.thedeepvoid.port.neo.IItemHandler;
+import net.sombrius.thedeepvoid.port.neo.IItemHandlerModifiable;
+import net.sombrius.thedeepvoid.init.TheDeepVoidModMobEffects;
+
+public class AncientPotBlockOnBlockRightClickedProcedure {
+	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == ItemStack.EMPTY.getItem()) && !(entity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(TheDeepVoidModMobEffects.WEAVER_CURSE.holder()))) {
+			if ((new Object() {
+				public ItemStack getItemStack(LevelAccessor world, BlockPos pos, int slotid) {
+					if (world instanceof net.minecraft.world.level.LevelAccessor _ext) {
+						IItemHandler _itemHandler = net.sombrius.thedeepvoid.port.neo.PortCaps.block(_ext, pos, null);
+						if (_itemHandler != null)
+							return _itemHandler.getStackInSlot(slotid).copy();
+					}
+					return ItemStack.EMPTY;
+				}
+			}.getItemStack(world, BlockPos.containing(x, y, z), 0)).getItem() == ItemStack.EMPTY.getItem()) {
+				if (world instanceof net.minecraft.world.level.LevelAccessor _ext && net.sombrius.thedeepvoid.port.neo.PortCaps.block(_ext, BlockPos.containing(x, y, z), null) instanceof IItemHandlerModifiable _itemHandlerModifiable) {
+					ItemStack _setstack = (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).copy();
+					_setstack.setCount(1);
+					_itemHandlerModifiable.setStackInSlot(0, _setstack);
+				}
+				if (!(new Object() {
+					public boolean checkGamemode(Entity _ent) {
+						if (_ent instanceof ServerPlayer _serverPlayer) {
+							return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
+						} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
+							return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
+									&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+						}
+						return false;
+					}
+				}.checkGamemode(entity))) {
+					(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).shrink(1);
+				}
+				if (world instanceof Level _level) {
+					if (!_level.isClientSide()) {
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.item.pickup")), SoundSource.BLOCKS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
+					} else {
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.item.pickup")), SoundSource.BLOCKS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
+					}
+				}
+				if (world instanceof ServerLevel _level)
+					_level.sendParticles(ParticleTypes.POOF, x, (y + 0.6), z, 3, 0, 0.1, 0, 0.1);
+			} else {
+				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == (new Object() {
+					public ItemStack getItemStack(LevelAccessor world, BlockPos pos, int slotid) {
+						if (world instanceof net.minecraft.world.level.LevelAccessor _ext) {
+							IItemHandler _itemHandler = net.sombrius.thedeepvoid.port.neo.PortCaps.block(_ext, pos, null);
+							if (_itemHandler != null)
+								return _itemHandler.getStackInSlot(slotid).copy();
+						}
+						return ItemStack.EMPTY;
+					}
+				}.getItemStack(world, BlockPos.containing(x, y, z), 0)).getItem() && new Object() {
+					public int getAmount(LevelAccessor world, BlockPos pos, int slotid) {
+						if (world instanceof net.minecraft.world.level.LevelAccessor _ext) {
+							IItemHandler _itemHandler = net.sombrius.thedeepvoid.port.neo.PortCaps.block(_ext, pos, null);
+							if (_itemHandler != null)
+								return _itemHandler.getStackInSlot(slotid).getCount();
+						}
+						return 0;
+					}
+				}.getAmount(world, BlockPos.containing(x, y, z), 0) < (new Object() {
+					public ItemStack getItemStack(LevelAccessor world, BlockPos pos, int slotid) {
+						if (world instanceof net.minecraft.world.level.LevelAccessor _ext) {
+							IItemHandler _itemHandler = net.sombrius.thedeepvoid.port.neo.PortCaps.block(_ext, pos, null);
+							if (_itemHandler != null)
+								return _itemHandler.getStackInSlot(slotid).copy();
+						}
+						return ItemStack.EMPTY;
+					}
+				}.getItemStack(world, BlockPos.containing(x, y, z), 0)).getMaxStackSize()) {
+					if (world instanceof net.minecraft.world.level.LevelAccessor _ext && net.sombrius.thedeepvoid.port.neo.PortCaps.block(_ext, BlockPos.containing(x, y, z), null) instanceof IItemHandlerModifiable _itemHandlerModifiable) {
+						ItemStack _setstack = (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).copy();
+						_setstack.setCount((int) (new Object() {
+							public int getAmount(LevelAccessor world, BlockPos pos, int slotid) {
+								if (world instanceof net.minecraft.world.level.LevelAccessor _ext) {
+									IItemHandler _itemHandler = net.sombrius.thedeepvoid.port.neo.PortCaps.block(_ext, pos, null);
+									if (_itemHandler != null)
+										return _itemHandler.getStackInSlot(slotid).getCount();
+								}
+								return 0;
+							}
+						}.getAmount(world, BlockPos.containing(x, y, z), 0) + 1));
+						_itemHandlerModifiable.setStackInSlot(0, _setstack);
+					}
+					if (!(new Object() {
+						public boolean checkGamemode(Entity _ent) {
+							if (_ent instanceof ServerPlayer _serverPlayer) {
+								return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
+							} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
+								return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
+										&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+							}
+							return false;
+						}
+					}.checkGamemode(entity))) {
+						(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).shrink(1);
+					}
+					if (world instanceof Level _level) {
+						if (!_level.isClientSide()) {
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.item.pickup")), SoundSource.BLOCKS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
+						} else {
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.item.pickup")), SoundSource.BLOCKS, 1, (float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
+						}
+					}
+					if (world instanceof ServerLevel _level)
+						_level.sendParticles(ParticleTypes.POOF, x, (y + 0.6), z, 3, 0, 0.1, 0, 0.1);
+				} else {
+					if (world instanceof Level _level) {
+						if (!_level.isClientSide()) {
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.decorated_pot.place")), SoundSource.BLOCKS, 1, (float) 0.9);
+						} else {
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.decorated_pot.place")), SoundSource.BLOCKS, 1, (float) 0.9, false);
+						}
+					}
+				}
+			}
+		}
+	}
+}

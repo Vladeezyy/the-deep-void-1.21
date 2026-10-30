@@ -1,0 +1,133 @@
+package net.sombrius.thedeepvoid.procedures;
+
+import net.sombrius.thedeepvoid.port.PortUtil;
+
+import net.sombrius.thedeepvoid.port.bus.ICancellableEvent;
+
+import net.sombrius.thedeepvoid.entity.FlailExecutionerEntity;
+import net.sombrius.thedeepvoid.entity.ExecutionerEntity;
+import net.sombrius.thedeepvoid.entity.ExecutionerDarkSteelFlailEntity;
+
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.sombrius.thedeepvoid.port.bus.EventBusSubscriber;
+import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
+import net.sombrius.thedeepvoid.port.bus.Event;
+import net.sombrius.thedeepvoid.port.bus.LivingIncomingDamageEvent;
+
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.Mth;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.client.Minecraft;
+
+import javax.annotation.Nullable;
+
+@EventBusSubscriber
+public class ExecutionerAttackedProcedure {
+	@SubscribeEvent
+	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
+		if (event != null && event.getEntity() != null) {
+			execute(event, event.getEntity().level(), event.getEntity(), event.getSource().getEntity());
+		}
+	}
+
+	public static void execute(LevelAccessor world, Entity entity, Entity sourceentity) {
+		execute(null, world, entity, sourceentity);
+	}
+
+	private static void execute(@Nullable Event event, LevelAccessor world, Entity entity, Entity sourceentity) {
+		if (entity == null || sourceentity == null)
+			return;
+		if (entity instanceof ExecutionerEntity && !(sourceentity instanceof ExecutionerDarkSteelFlailEntity)) {
+			if ((entity instanceof ExecutionerEntity _datEntL2 && _datEntL2.getEntityData().get(ExecutionerEntity.DATA_stunned)) == false && !(new Object() {
+				public boolean checkGamemode(Entity _ent) {
+					if (_ent instanceof ServerPlayer _serverPlayer) {
+						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
+					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+					}
+					return false;
+				}
+			}.checkGamemode(sourceentity))) {
+				if (sourceentity instanceof LivingEntity) {
+					if (sourceentity.isSprinting() && sourceentity.onGround()) {
+						sourceentity.setSprinting(false);
+						if (world instanceof Level _level) {
+							if (!_level.isClientSide()) {
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.attack.strong")), SoundSource.PLAYERS, 1,
+										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
+							} else {
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.player.attack.strong")), SoundSource.PLAYERS, 1,
+										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
+							}
+						}
+						if (world instanceof Level _level) {
+							if (!_level.isClientSide()) {
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.item.break")), SoundSource.PLAYERS, 1,
+										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
+							} else {
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("entity.item.break")), SoundSource.PLAYERS, 1,
+										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
+							}
+						}
+						if ((entity instanceof ExecutionerEntity _datEntI ? _datEntI.getEntityData().get(ExecutionerEntity.DATA_stunCooldown) : 0) >= 5
+								+ Math.ceil(PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), Enchantments.KNOCKBACK) * 1.5)) {
+							if (entity instanceof ExecutionerEntity _datEntSetI)
+								_datEntSetI.getEntityData().set(ExecutionerEntity.DATA_stunCooldown, (int) ((entity instanceof ExecutionerEntity _datEntI ? _datEntI.getEntityData().get(ExecutionerEntity.DATA_stunCooldown) : 0)
+										- (5 + Math.ceil(PortUtil.enchantmentLevel((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), Enchantments.KNOCKBACK) * 1.5))));
+						}
+					} else {
+						if (world instanceof Level _level) {
+							if (!_level.isClientSide()) {
+								_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.anvil.place")), SoundSource.HOSTILE, 1,
+										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
+							} else {
+								_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.anvil.place")), SoundSource.HOSTILE, 1,
+										(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
+							}
+						}
+					}
+				}
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
+				}
+			}
+		} else if (entity instanceof FlailExecutionerEntity && !(sourceentity instanceof ExecutionerDarkSteelFlailEntity)) {
+			if ((entity instanceof FlailExecutionerEntity _datEntL32 && _datEntL32.getEntityData().get(FlailExecutionerEntity.DATA_stunned)) == false && !(new Object() {
+				public boolean checkGamemode(Entity _ent) {
+					if (_ent instanceof ServerPlayer _serverPlayer) {
+						return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
+					} else if (_ent.level().isClientSide() && _ent instanceof Player _player) {
+						return Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
+								&& Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE;
+					}
+					return false;
+				}
+			}.checkGamemode(sourceentity))) {
+				if (world instanceof Level _level) {
+					if (!_level.isClientSide()) {
+						_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.anvil.place")), SoundSource.HOSTILE, 1,
+								(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1));
+					} else {
+						_level.playLocalSound((entity.getX()), (entity.getY()), (entity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.anvil.place")), SoundSource.HOSTILE, 1,
+								(float) Mth.nextDouble(RandomSource.create(), 0.9, 1.1), false);
+					}
+				}
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
+				}
+			}
+		}
+	}
+}

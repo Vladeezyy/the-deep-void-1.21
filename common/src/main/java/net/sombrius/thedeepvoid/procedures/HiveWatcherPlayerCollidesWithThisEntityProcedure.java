@@ -1,0 +1,49 @@
+package net.sombrius.thedeepvoid.procedures;
+
+import net.sombrius.thedeepvoid.port.PortUtil;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.sombrius.thedeepvoid.configuration.DeepVoidConfigConfiguration;
+
+public class HiveWatcherPlayerCollidesWithThisEntityProcedure {
+	public static void execute(LevelAccessor world, Entity entity, Entity sourceentity) {
+		if (entity == null || sourceentity == null)
+			return;
+		if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.hurtTime : 0) <= 0 && net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDouble("shieldCooldown") <= 0 && (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) > 0) {
+			if ((sourceentity instanceof LivingEntity _entUseItem3 ? _entUseItem3.getUseItem() : ItemStack.EMPTY).getItem() instanceof ShieldItem) {
+				if (sourceentity instanceof Player _player)
+					_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _entUseItem5 ? _entUseItem5.getUseItem() : ItemStack.EMPTY).getItem(), 60);
+				{
+					ItemStack _ist = (sourceentity instanceof LivingEntity _entUseItem7 ? _entUseItem7.getUseItem() : ItemStack.EMPTY);
+					PortUtil.hurtAndBreak(_ist, 1, null);
+				}
+				if (sourceentity instanceof LivingEntity _entity)
+					_entity.stopUsingItem();
+				if (world instanceof Level _level) {
+					if (!_level.isClientSide()) {
+						_level.playSound(null, BlockPos.containing(sourceentity.getX(), sourceentity.getY(), sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")), SoundSource.PLAYERS, 1, (float) 0.9);
+					} else {
+						_level.playLocalSound((sourceentity.getX()), (sourceentity.getY()), (sourceentity.getZ()), BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("item.shield.break")), SoundSource.PLAYERS, 1, (float) 0.9, false);
+					}
+				}
+				net.sombrius.thedeepvoid.port.PortUtil.data(entity).putDouble("shieldCooldown", 100);
+			} else {
+				sourceentity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MOB_ATTACK), entity), (float) (double) DeepVoidConfigConfiguration.HIVEWATCHERWHILEMOVING.get());
+			}
+		}
+	}
+}

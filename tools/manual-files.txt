@@ -1,0 +1,12 @@
+# common files ported by hand: tools/restore_common.sh keeps them
+net/sombrius/thedeepvoid/port/PortUtil.java
+net/sombrius/thedeepvoid/TheDeepVoidMod.java
+net/sombrius/thedeepvoid/network/TheDeepVoidModVariables.java
+# NeoForge-only MCreator files: tools/restore_common.sh puts them into the neoforge module
+neoforge: net/sombrius/thedeepvoid/init/TheDeepVoidModFluidTypes.java
+neoforge: net/sombrius/thedeepvoid/fluid/types/LiquidVoidFluidType.java
+neoforge: net/sombrius/thedeepvoid/fluid/types/LiquidIchorFluidType.java
+net/sombrius/thedeepvoid/port/PortBench.java
+net/sombrius/thedeepvoid/port/DevScene.java
+neoforge: net/sombrius/thedeepvoid/port/ArmPoses.java
+neoforge: net/sombrius/thedeepvoid/port/ClientExtensionsRegistration.java

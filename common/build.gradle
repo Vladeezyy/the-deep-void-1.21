@@ -1,0 +1,51 @@
+plugins {
+    id 'multiloader-common'
+    id 'net.neoforged.moddev'
+}
+
+neoForge {
+    neoFormVersion = neo_form_version
+    accessTransformers.from(file('accesstransformer.cfg'))
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+}
+
+// Compile-time stubs of NeoForge types that only appear in NeoForge-only overrides (NeoForge has the real ones, Fabric
+// never loads those methods); not packaged
+sourceSets {
+    stubs
+}
+
+repositories {
+    maven { url = 'https://maven.fabricmc.net' }
+}
+
+dependencies {
+    compileOnly sourceSets.stubs.output
+    // mixins live in common, both loaders ship Mixin at runtime
+    compileOnly 'net.fabricmc:sponge-mixin:0.15.4+mixin.0.8.7'
+    compileOnly "software.bernie.geckolib:geckolib-common-${minecraft_version}:${geckolib_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+}
+
+configurations {
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonResources file('src/main/resources')
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-Xmaxerrs', '100000']
+}

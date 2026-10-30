@@ -1,0 +1,27 @@
+package net.sombrius.thedeepvoid.port.bus;
+
+import net.minecraft.server.MinecraftServer;
+
+public abstract class ServerTickEvent extends Event {
+	private final MinecraftServer server;
+
+	protected ServerTickEvent(MinecraftServer server) {
+		this.server = server;
+	}
+
+	public MinecraftServer getServer() {
+		return this.server;
+	}
+
+	public static class Pre extends ServerTickEvent {
+		public Pre(MinecraftServer server) {
+			super(server);
+		}
+	}
+
+	public static class Post extends ServerTickEvent {
+		public Post(MinecraftServer server) {
+			super(server);
+		}
+	}
+}

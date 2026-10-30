@@ -14,6 +14,54 @@
     },
     {
       "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 128
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 16,
+        "min": -16,
+        "plateau": 0
+      },
+      "y_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 3,
+        "min": -3,
+        "plateau": 0
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": [
+              "the_deep_void:block_of_skull_pile",
+              "the_deep_void:block_of_bone_pile",
+              "the_deep_void:mossy_bone_pile",
+              "the_deep_void:ancient_deepslate",
+              "the_deep_void:cobbled_ancient_deepslate",
+              "minecraft:deepslate",
+              "minecraft:cobbled_deepslate"
+            ],
+            "offset": [
+              0,
+              -1,
+              0
+            ]
+          }
+        ]
+      }
     }
   ]
 }

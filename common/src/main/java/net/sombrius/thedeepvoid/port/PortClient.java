@@ -1,6 +1,6 @@
 package net.sombrius.thedeepvoid.port;
 
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.function.BiConsumer;

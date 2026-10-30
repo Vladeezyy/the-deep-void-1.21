@@ -1,10 +1,11 @@
 package net.sombrius.thedeepvoid.port;
 
+import net.minecraft.world.item.equipment.ArmorType;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceKey;
@@ -26,7 +27,7 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import net.sombrius.thedeepvoid.port.platform.Platform;
 
@@ -49,7 +50,7 @@ public final class PortUtil {
 	public static Supplier<Entity> clientPlayer = () -> null;
 
 	/** NeoForge's poison damage type ({@code neoforge:poison}; the Fabric jar ships the same damage type) */
-	public static final ResourceKey<DamageType> POISON_DAMAGE = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath("neoforge", "poison"));
+	public static final ResourceKey<DamageType> POISON_DAMAGE = ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath("neoforge", "poison"));
 
 	/** NeoForge's {@code getPersistentData()}: the entity's own saved tag, on both loaders */
 	public static CompoundTag data(Entity entity) {
@@ -69,6 +70,27 @@ public final class PortUtil {
 			return server.registryAccess().lookup(key).orElse(null);
 		RegistryAccess client = clientRegistries.get();
 		return client == null ? null : client.lookup(key).orElse(null);
+	}
+
+	/** 1.20's {@code net.sombrius.thedeepvoid.port.PortUtil.wearing(entity, stack)}: the stack is worn in an armor slot */
+	public static boolean wearing(Entity entity, ItemStack stack) {
+		if (entity instanceof LivingEntity living)
+			for (net.minecraft.world.entity.EquipmentSlot slot : net.minecraft.world.entity.EquipmentSlot.values())
+				if (slot.isArmor() && living.getItemBySlot(slot) == stack)
+					return true;
+		return false;
+	}
+
+	/** The armor type of an armor stack (1.20's {@code ArmorItem.getType()}), null if it is no humanoid armor */
+	@Nullable
+	public static net.minecraft.world.item.equipment.ArmorType armorType(ItemStack stack) {
+		net.minecraft.world.item.equipment.Equippable equippable = stack.get(net.minecraft.core.component.DataComponents.EQUIPPABLE);
+		if (equippable == null)
+			return null;
+		for (net.minecraft.world.item.equipment.ArmorType type : net.minecraft.world.item.equipment.ArmorType.values())
+			if (type.getSlot() == equippable.slot())
+				return type;
+		return null;
 	}
 
 	/** NeoForge's default {@code onDestroyedByPlayer}: removes the block (server) or sets the fluid (client) */

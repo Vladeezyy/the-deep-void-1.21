@@ -2,7 +2,7 @@ package net.sombrius.thedeepvoid.port.bus;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.function.Consumer;
 
@@ -15,11 +15,11 @@ public class RegisterEvent extends Event {
 	private final Sink sink;
 
 	public interface Sink {
-		<T> void register(ResourceKey<? extends Registry<T>> registry, ResourceLocation id, T value);
+		<T> void register(ResourceKey<? extends Registry<T>> registry, Identifier id, T value);
 	}
 
 	public interface RegisterHelper<T> {
-		void register(ResourceLocation id, T value);
+		void register(Identifier id, T value);
 	}
 
 	public RegisterEvent(ResourceKey<? extends Registry<?>> registryKey, Sink sink) {

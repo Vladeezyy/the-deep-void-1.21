@@ -13,9 +13,9 @@ import net.minecraft.world.level.WorldDataConfiguration;
 import net.minecraft.world.level.LevelSettings;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.GameType;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
@@ -25,7 +25,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.Registries;
@@ -64,7 +64,7 @@ public final class DevScene {
 	private static final boolean BENCH = "bench".equals(System.getProperty("deepvoid.scene"));
 	private static final boolean ITEMS = "items".equals(System.getProperty("deepvoid.scene"));
 	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : ITEMS ? "dv_items" : "dv_scene";
-	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("the_deep_void:deep_void"));
+	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 	private static final List<Pair<Integer, Consumer<Minecraft>>> STEPS = new ArrayList<>();
 	private static boolean opened;
 	private static int tick;
@@ -75,7 +75,7 @@ public final class DevScene {
 			p.getAbilities().flying = true;
 			p.onUpdateAbilities();
 			p.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1000000, 0, false, false));
-			MinecraftServer server = p.getServer();
+			MinecraftServer server = p.level().getServer();
 			server.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
 		}));
 		if (ITEMS) {
@@ -124,7 +124,7 @@ public final class DevScene {
 			mc.options.simulationDistance().set(10);
 		});
 		int t = 100;
-		t = benchPhase(t, "overworld", p -> p.teleportTo(p.getServer().overworld(), 0.5, 200, 0.5, 0F, 20F), false);
+		t = benchPhase(t, "overworld", p -> p.teleportTo(p.level().getServer().overworld(), 0.5, 200, 0.5, 0F, 20F), false);
 		t = benchPhase(t, "deep_void", p -> go(p, "forgotten_valley"), false);
 		t = benchPhase(t, "deep_void_mobs", p -> go(p, "forgotten_valley"), true);
 		at(t, mc -> PortBench.summary());
@@ -145,7 +145,7 @@ public final class DevScene {
 			for (Entity e : level.getEntities((Entity) null, p.getBoundingBox().inflate(128), e -> !(e instanceof Player)))
 				e.discard();
 			p.setGameMode(GameType.SURVIVAL);
-			p.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1000000, 4, false, false));
+			p.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 1000000, 4, false, false));
 			p.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1000000, 0, false, false));
 			level.getServer().getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, level.getServer());
 			level.getServer().overworld().setDayTime(6000);
@@ -157,7 +157,7 @@ public final class DevScene {
 				int i = 0;
 				for (String id : List.of("stalker", "watching_stalker", "overseer", "void_dweller")) {
 					double angle = Math.toRadians(p.getYRot() - 90 - 30 + i++ * 20); // behind the player, out of its sight
-					spawnNoAi(level, BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, id)), p.getX() + Math.cos(angle) * 12,
+					spawnNoAi(level, BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, id)), p.getX() + Math.cos(angle) * 12,
 							p.getZ() + Math.sin(angle) * 12);
 				}
 			}
@@ -188,7 +188,7 @@ public final class DevScene {
 
 	private static void spawnNoAi(ServerLevel level, EntityType<?> type, double x, double z) {
 		BlockPos pos = BlockPos.containing(x, level.getHeight(Heightmap.Types.MOTION_BLOCKING, (int) Math.floor(x), (int) Math.floor(z)), z);
-		if (type.spawn(level, pos, MobSpawnType.COMMAND) instanceof Mob mob) {
+		if (type.spawn(level, pos, EntitySpawnReason.COMMAND) instanceof Mob mob) {
 			mob.setNoAi(true);
 			mob.setPersistenceRequired();
 		}
@@ -201,11 +201,11 @@ public final class DevScene {
 	private static void items() {
 		at(45, mc -> mc.options.hideGui = true);
 		at(60, mc -> server(mc, p -> {
-			p.teleportTo(p.getServer().overworld(), 0.5, 120, 0.5, 0F, 0F);
+			p.teleportTo(p.level().getServer().overworld(), 0.5, 120, 0.5, 0F, 0F);
 			p.serverLevel().setBlock(BlockPos.containing(0, 118, 0), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState(), 3);
 			p.getAbilities().flying = false;
 			p.onUpdateAbilities();
-			p.getServer().overworld().setDayTime(6000);
+			p.level().getServer().overworld().setDayTime(6000);
 		}));
 		int t = 140;
 		for (String id : List.of("heresy", "double_barrel_shotgun", "eldritch_maw", "misanthropy")) {
@@ -231,7 +231,7 @@ public final class DevScene {
 	}
 
 	private static net.minecraft.world.item.Item item(String id) {
-		return BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
+		return BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
 	}
 
 	private static void at(int t, Consumer<Minecraft> action) {
@@ -280,8 +280,8 @@ public final class DevScene {
 	}
 
 	private static void go(ServerPlayer player, String biome) {
-		ServerLevel level = player.getServer().getLevel(DEEP_VOID);
-		ResourceKey<Biome> key = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, biome));
+		ServerLevel level = player.level().getServer().getLevel(DEEP_VOID);
+		ResourceKey<Biome> key = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, biome));
 		Pair<BlockPos, Holder<Biome>> found = level.findClosestBiome3d(h -> h.is(key), new BlockPos(0, 64, 0), 6400, 32, 64);
 		BlockPos pos = found == null ? new BlockPos(0, 100, 0) : found.getFirst();
 		TheDeepVoidMod.LOGGER.info("[scene] {} at {}", biome, found == null ? "nowhere" : pos);
@@ -302,10 +302,10 @@ public final class DevScene {
 		ServerLevel level = player.serverLevel();
 		int i = 0;
 		for (String id : List.of("bone_crawler", "stalker", "wanderer", "abductor", "rotten_corpse", "goo_spitter")) {
-			EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
+			EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
 			double angle = Math.toRadians(player.getYRot() + 90 - 50 + i * 20);
 			BlockPos pos = BlockPos.containing(player.getX() + Math.cos(angle) * 7, player.getY(), player.getZ() + Math.sin(angle) * 7);
-			Entity e = type.spawn(level, pos, MobSpawnType.COMMAND);
+			Entity e = type.spawn(level, pos, EntitySpawnReason.COMMAND);
 			if (e instanceof Mob mob)
 				mob.setNoAi(true);
 			i++;
@@ -321,11 +321,11 @@ public final class DevScene {
 		ServerLevel level = player.serverLevel();
 		int i = 0;
 		for (String id : ids) {
-			EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
+			EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
 			double angle = Math.toRadians(player.getYRot() + 90 - 50 + i * 20);
 			double x = player.getX() + Math.cos(angle) * 7, z = player.getZ() + Math.sin(angle) * 7;
 			BlockPos pos = BlockPos.containing(x, level.getHeight(Heightmap.Types.MOTION_BLOCKING, (int) x, (int) z), z);
-			Entity e = type.spawn(level, pos, MobSpawnType.COMMAND);
+			Entity e = type.spawn(level, pos, EntitySpawnReason.COMMAND);
 			if (e instanceof Mob mob)
 				mob.setNoAi(true);
 			i++;

@@ -3,7 +3,7 @@ package net.sombrius.thedeepvoid.port.bus;
 import com.mojang.blaze3d.shaders.FogShape;
 
 import net.minecraft.client.Camera;
-import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.renderer.fog.FogRenderer;
 
 public abstract class ViewportEvent extends Event {
 	private final Camera camera;

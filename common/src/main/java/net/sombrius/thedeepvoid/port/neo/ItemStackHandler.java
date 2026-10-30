@@ -122,11 +122,11 @@ public class ItemStackHandler implements IItemHandlerModifiable {
 	}
 
 	public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-		setSize(nbt.contains("Size", Tag.TAG_INT) ? nbt.getInt("Size") : this.stacks.size());
+		setSize(nbt.contains("Size", Tag.TAG_INT) ? nbt.getIntOr("Size", 0) : this.stacks.size());
 		ListTag items = nbt.getList("Items", Tag.TAG_COMPOUND);
 		for (int i = 0; i < items.size(); i++) {
 			CompoundTag item = items.getCompound(i);
-			int slot = item.getInt("Slot");
+			int slot = item.getIntOr("Slot", 0);
 			if (slot >= 0 && slot < this.stacks.size())
 				ItemStack.parse(provider, item).ifPresent(stack -> this.stacks.set(slot, stack));
 		}

@@ -1,6 +1,6 @@
 package net.sombrius.thedeepvoid.port;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.GuiGraphics;
@@ -9,14 +9,14 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 /** The 1.20 ImageButton (one texture, hovered / disabled states stacked vertically), which 1.21 replaced by sprites. */
 public class PortImageButton extends ImageButton {
-	private final ResourceLocation texture;
+	private final Identifier texture;
 	private final int xTexStart;
 	private final int yTexStart;
 	private final int yDiffTex;
 	private final int textureWidth;
 	private final int textureHeight;
 
-	public PortImageButton(int x, int y, int width, int height, int xTexStart, int yTexStart, int yDiffTex, ResourceLocation texture, int textureWidth, int textureHeight, OnPress onPress) {
+	public PortImageButton(int x, int y, int width, int height, int xTexStart, int yTexStart, int yDiffTex, Identifier texture, int textureWidth, int textureHeight, OnPress onPress) {
 		super(x, y, width, height, new WidgetSprites(texture, texture), onPress);
 		this.texture = texture;
 		this.xTexStart = xTexStart;

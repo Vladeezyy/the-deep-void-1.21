@@ -9,8 +9,13 @@
 на **Fabric и NeoForge**.
 
 ## Состояние
-- `main` — порт The Deep Void 1.99.3.1 на **NeoForge 1.21.1** (готов, см. `PORTLOG.md`, `README.md`).
-- `multiloader` — ветка этой работы; пока только этот файл, код не менялся.
+- `main` — порт The Deep Void 1.99.3.1 на **NeoForge 1.21.1** + оптимизация тиковых обработчиков (`PORTLOG.md`).
+- `multiloader` — **шаг 1 сделан (2026-10-30)**: 1.21.1 разделён на `common/` `neoforge/` `fabric/`; dev- и
+  продакшен-серверы, сцена биомов и предметов проходят на обоих загрузчиках (раздел «NeoForge + Fabric» в `PORTLOG.md`,
+  разбор `modding-kb/porting/multiloader/the-deep-void.md`). Разделение повторяемо: `tools/restore_common.sh` +
+  `tools/port_multiloader.py`. Тесты: `LOADER=neoforge|fabric tools/servertest.sh`, `tools/scenetest.sh [-Pscene=items]`,
+  `tools/bench.sh`.
+- Дальше: шаг 2 (`mc/1.21.11`).
 
 ## Масштаб (замерено)
 - 3108 Java-файлов, ~206 тыс. строк (MCreator), 1643 импорта GeckoLib, 36 — JEI.

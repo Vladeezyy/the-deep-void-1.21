@@ -13,12 +13,8 @@
             {
               "processor_type": "minecraft:block_ignore",
               "blocks": [
-                {
-                  "Name": "minecraft:structure_block"
-                },
-                {
-                  "Name": "minecraft:air"
-                }
+                "minecraft:structure_block",
+                "minecraft:air"
               ]
             }
           ]

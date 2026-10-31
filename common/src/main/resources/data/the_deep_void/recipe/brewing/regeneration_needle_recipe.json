@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "the_deep_void:absorption_needle"
+  },
+  "output": {
+    "id": "the_deep_void:regeneration_needle"
+  },
+  "reagent": {
+    "item": "minecraft:ghast_tear"
+  }
+}

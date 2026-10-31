@@ -11,7 +11,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
@@ -20,11 +19,11 @@ import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.sombrius.thedeepvoid.procedures.BismuthNetheriteSwordSpecialInformationProcedure;
 
-public class BismuthNetheriteShovelItem extends ShovelItem {
+public class BismuthNetheriteShovelItem extends Item {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2464, 12f, 0f, 20, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/netherite_ingot_refined_bismuth")));
 
 	public BismuthNetheriteShovelItem() {
-		super(TOOL_TIER, 6.5f, -3f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant().shovel(TOOL_TIER, 6.5f, -3f));
 	}
 
 	@Override

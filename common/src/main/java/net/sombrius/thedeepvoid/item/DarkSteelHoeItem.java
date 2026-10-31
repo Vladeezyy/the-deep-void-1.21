@@ -12,14 +12,13 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.entity.LivingEntity;
 
-public class DarkSteelHoeItem extends HoeItem {
+public class DarkSteelHoeItem extends Item {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2464, 12f, 0f, 8, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/dark_steel_scrap")));
 
 	public DarkSteelHoeItem() {
-		super(TOOL_TIER, 0, 0f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant().hoe(TOOL_TIER, 0, 0f));
 	}
 
 	@Override

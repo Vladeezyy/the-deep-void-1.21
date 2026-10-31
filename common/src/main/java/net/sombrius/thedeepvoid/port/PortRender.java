@@ -48,7 +48,7 @@ public final class PortRender {
 			public void submit(com.mojang.blaze3d.vertex.PoseStack poseStack, net.minecraft.client.renderer.SubmitNodeCollector collector, int light, S state, float yRot, float xRot) {
 				if (visible.test(state))
 					collector.submitModel(model, state, poseStack, type.apply(texture), light,
-							hurtOverlay ? net.minecraft.client.renderer.entity.LivingEntityRenderer.getOverlayCoords(state, 0) : net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+							hurtOverlay ? net.minecraft.client.renderer.entity.LivingEntityRenderer.getOverlayCoords(state, 0) : net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, state.outlineColor);
 			}
 		};
 	}

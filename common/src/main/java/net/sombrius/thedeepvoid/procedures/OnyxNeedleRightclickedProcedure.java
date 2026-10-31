@@ -52,7 +52,7 @@ public class OnyxNeedleRightclickedProcedure {
 		}.checkGamemode(entity))) {
 			if (entity instanceof Player _player) {
 				ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.ONYX_NEEDLE.get());
-				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 			}
 		}
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())

@@ -8,43 +8,40 @@
           "type": "minecraft:item",
           "name": "the_deep_void:simple_gun_part",
           "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:ferryman_lantern",
           "weight": 25,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:gunpowder",
           "weight": 55,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 2
             }
-          ]
+          }
         }
       ]
     },
@@ -55,43 +52,40 @@
           "type": "minecraft:item",
           "name": "the_deep_void:dark_steel_chainmail",
           "weight": 33,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 5
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 5,
+              "min": 2
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:dark_cloth",
           "weight": 33,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 6
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 6,
+              "min": 2
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:dark_steel_coin",
           "weight": 33,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 1
             }
-          ]
+          }
         }
       ]
     }

@@ -14,10 +14,7 @@ import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 import net.sombrius.thedeepvoid.port.bus.Dist;
 
 import net.minecraft.world.item.TridentItem;
-import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Entity;
@@ -44,7 +41,7 @@ public class ModifiedWeaponDescriptionsProcedure {
 	private static void execute(@Nullable Event event, Entity entity, ItemStack itemstack, List<Component> tooltip) {
 		if (entity == null || tooltip == null)
 			return;
-		if (itemstack.is(net.minecraft.tags.ItemTags.SWORDS) || itemstack.is(net.minecraft.tags.ItemTags.PICKAXES) || itemstack.getItem() instanceof AxeItem || itemstack.getItem() instanceof ShovelItem || itemstack.getItem() instanceof HoeItem
+		if (itemstack.is(net.minecraft.tags.ItemTags.SWORDS) || itemstack.is(net.minecraft.tags.ItemTags.PICKAXES) || itemstack.is(net.minecraft.tags.ItemTags.AXES) || itemstack.is(net.minecraft.tags.ItemTags.SHOVELS) || itemstack.is(net.minecraft.tags.ItemTags.HOES)
 				|| itemstack.getItem() instanceof TridentItem) {
 			if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("modification", false) == true) {
 				tooltip.add(Component.literal(""));

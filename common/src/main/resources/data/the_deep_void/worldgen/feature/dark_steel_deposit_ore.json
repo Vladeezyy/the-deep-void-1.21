@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:scattered_ore",
+  "size": 5,
+  "discard_chance_on_air_exposure": 0.4,
+  "targets": [
+    {
+      "target": {
+        "predicate_type": "block_match",
+        "block": "minecraft:deepslate"
+      },
+      "state": "the_deep_void:dark_steel_ore"
+    }
+  ]
+}

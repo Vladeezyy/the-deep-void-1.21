@@ -8,66 +8,32 @@
           "type": "minecraft:item",
           "name": "minecraft:bone",
           "weight": 100,
-          "conditions": [
-            {
-              "condition": "minecraft:inverted",
-              "term": {
-                "condition": "minecraft:match_tool",
-                "predicate": {
-                  "predicates": {
-                    "minecraft:enchantments": [
-                      {
-                        "levels": {
-                          "min": 1
-                        },
-                        "enchantments": "minecraft:silk_touch"
-                      }
-                    ]
-                  }
-                }
-              }
+          "condition": {
+            "type": "minecraft:inverted",
+            "term": "minecraft:tool/can_silk_touch"
+          },
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 4
             }
-          ],
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 4,
-                "max": 4
-              }
-            }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:covered_bone_pile",
           "weight": 100,
-          "conditions": [
-            {
-              "condition": "minecraft:match_tool",
-              "predicate": {
-                "predicates": {
-                  "minecraft:enchantments": [
-                    {
-                      "levels": {
-                        "min": 1
-                      },
-                      "enchantments": "minecraft:silk_touch"
-                    }
-                  ]
-                }
-              }
+          "condition": "minecraft:tool/can_silk_touch",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
             }
-          ],
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
+          }
         }
       ]
     }

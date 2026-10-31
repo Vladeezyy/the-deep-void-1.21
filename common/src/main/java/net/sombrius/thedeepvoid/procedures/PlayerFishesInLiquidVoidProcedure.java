@@ -93,8 +93,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 						if (world instanceof ServerLevel _level)
 							_level.getServer().getCommands()
 									.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL,
-											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "",
-											Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/flesh_crate_fishing");
+											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/flesh_crate_fishing");
 						{
 							final String _tagName = "crateChance";
 							final double _tagValue = 0;
@@ -104,8 +103,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 						if (world instanceof ServerLevel _level)
 							_level.getServer().getCommands()
 									.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL,
-											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "",
-											Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/flesh_fishing");
+											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/flesh_fishing");
 						{
 							final String _tagName = "crateChance";
 							final double _tagValue = ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("crateChance", 0) + 0.01);
@@ -141,8 +139,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 						if (world instanceof ServerLevel _level)
 							_level.getServer().getCommands()
 									.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL,
-											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "",
-											Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/nest_crate_fishing");
+											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/nest_crate_fishing");
 						{
 							final String _tagName = "crateChance";
 							final double _tagValue = 0;
@@ -152,8 +149,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 						if (world instanceof ServerLevel _level)
 							_level.getServer().getCommands()
 									.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL,
-											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "",
-											Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/nest_fishing");
+											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/nest_fishing");
 						{
 							final String _tagName = "crateChance";
 							final double _tagValue = ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("crateChance", 0) + 0.01);
@@ -178,8 +174,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 						if (world instanceof ServerLevel _level)
 							_level.getServer().getCommands()
 									.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL,
-											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "",
-											Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/void_crate_fishing");
+											new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/void_crate_fishing");
 						{
 							final String _tagName = "crateChance";
 							final double _tagValue = 0;
@@ -198,8 +193,7 @@ public class PlayerFishesInLiquidVoidProcedure {
 							if (world instanceof ServerLevel _level)
 								_level.getServer().getCommands()
 										.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL,
-												new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "",
-												Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/void_fishing");
+												new Vec3((net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodX", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodY", 0)), (net.sombrius.thedeepvoid.port.PortUtil.data(entity).getDoubleOr("rottenRodZ", 0))), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "/loot spawn ~ ~ ~ loot the_deep_void:gameplay/void_fishing");
 						}
 						{
 							final String _tagName = "crateChance";

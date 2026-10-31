@@ -33,7 +33,7 @@ public class LivingGloomStemBlock extends Block implements SimpleWaterloggedBloc
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public LivingGloomStemBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_BLUE).sound(SoundType.TWISTING_VINES).strength(0.1f, 0.5f).noCollision().noOcclusion().randomTicks().pushReaction(PushReaction.DESTROY).isRedstoneConductor((bs, br, bp) -> false));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_BLUE).sound(SoundType.TWISTING_VINES).strength(0.1f, 0.5f).noCollision().noOcclusion().randomTicks().pushReaction(PushReaction.POPPED).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}
 

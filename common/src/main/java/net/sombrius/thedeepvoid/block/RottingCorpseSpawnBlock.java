@@ -25,7 +25,7 @@ import net.sombrius.thedeepvoid.procedures.RottingCorpseSpawnOnTickUpdateProcedu
 public class RottingCorpseSpawnBlock extends FlowerBlock {
 	public RottingCorpseSpawnBlock() {
 		super(MobEffects.SPEED, 100,
-				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.TERRACOTTA_ORANGE).randomTicks().sound(SoundType.BONE_BLOCK).strength(0.6f, 1f).noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.TERRACOTTA_ORANGE).randomTicks().sound(SoundType.BONE_BLOCK).strength(0.6f, 1f).noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override

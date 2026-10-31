@@ -10,6 +10,25 @@
         "sound": "the_deep_void:lurking_monst3r_music"
       }
     },
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "the_deep_void:damned",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 2
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
     "minecraft:visual/ambient_particles": [
       {
         "particle": {
@@ -18,8 +37,8 @@
         "probability": 0.038
       }
     ],
-    "minecraft:visual/sky_color": "#000000",
     "minecraft:visual/fog_color": "#000000",
+    "minecraft:visual/sky_color": "#000000",
     "minecraft:visual/water_fog_color": "#000000"
   },
   "carvers": [],
@@ -43,23 +62,5 @@
     [],
     [],
     []
-  ],
-  "spawn_costs": {},
-  "spawners": {
-    "monster": [
-      {
-        "type": "the_deep_void:damned",
-        "weight": 2,
-        "minCount": 1,
-        "maxCount": 2
-      }
-    ],
-    "creature": [],
-    "ambient": [],
-    "axolotls": [],
-    "underground_water_creature": [],
-    "water_creature": [],
-    "water_ambient": [],
-    "misc": []
-  }
+  ]
 }

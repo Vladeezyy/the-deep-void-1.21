@@ -14,7 +14,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class ProtrudingMarrowBlock extends SugarCaneBlock {
 	public ProtrudingMarrowBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_GRAY).randomTicks().sound(SoundType.TWISTING_VINES).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_GRAY).randomTicks().sound(SoundType.TWISTING_VINES).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.POPPED));
 	}
 
 

@@ -67,23 +67,20 @@ public class PlayerCageEntityDiesProcedure {
 					{
 						Entity _ent = sourceentity;
 						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
-									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @s times 40 50 80");
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent), "/title @s times 40 50 80");
 						}
 					}
 					{
 						Entity _ent = sourceentity;
 						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
-									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @s subtitle {\"text\":\"-----------------------------------\",\"color\":\"dark_red\"}");
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent), "/title @s subtitle {\"text\":\"-----------------------------------\",\"color\":\"dark_red\"}");
 						}
 					}
 					{
 						Entity _ent = sourceentity;
 						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
 							_ent.level().getServer().getCommands().performPrefixedCommand(
-									new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(),
-											_ent.level().getServer(), _ent),
+									new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
 									"/title @s title [\"\",{\"text\":\"Gaol\",\"obfuscated\":true,\"color\":\"dark_red\"},{\"text\":\" The Pit \",\"color\":\"dark_red\"},{\"text\":\"Gaol\",\"obfuscated\":true,\"color\":\"dark_red\"}]");
 						}
 					}

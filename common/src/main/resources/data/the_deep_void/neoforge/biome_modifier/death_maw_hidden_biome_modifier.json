@@ -3,8 +3,7 @@
   "biomes": "the_deep_void:windswept_hollow",
   "spawners": {
     "type": "the_deep_void:death_maw_hidden",
-    "weight": 1,
-    "minCount": 1,
-    "maxCount": 1
+    "count": 1,
+    "weight": 1
   }
 }

@@ -61,13 +61,14 @@
       }
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": 0,
-      "y_spread": {
+      "type": "minecraft:offset",
+      "x": 0,
+      "y": {
         "type": "uniform",
         "min_inclusive": -1,
         "max_inclusive": 0
-      }
+      },
+      "z": 0
     }
   ]
 }

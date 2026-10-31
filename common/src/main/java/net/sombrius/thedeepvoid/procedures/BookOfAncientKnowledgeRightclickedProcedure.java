@@ -31,16 +31,14 @@ public class BookOfAncientKnowledgeRightclickedProcedure {
 			Entity _ent = entity;
 			if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
 				_ent.level().getServer().getCommands()
-						.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.getName().getString(),
-								_ent.getDisplayName(), _ent.level().getServer(), _ent),
+						.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
 								"/tellraw @s {\"text\":\"\u00A75\u00A7nThe Deep Void Wiki/GitHub\",\"clickEvent\":{\"action\":\"open_url\",\"value\":\"https://github.com/TroupeMaster/TheDeepVoid/wiki\"}}");
 			}
 		}
 		{
 			Entity _ent = entity;
 			if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-				_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
-						_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent),
+				_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
 						"/tellraw @s {\"text\":\"\u00A79\u00A7nThe Deep Void Discord server\",\"clickEvent\":{\"action\":\"open_url\",\"value\":\"https://discord.gg/ddBuyXGSQp\"}}");
 			}
 		}

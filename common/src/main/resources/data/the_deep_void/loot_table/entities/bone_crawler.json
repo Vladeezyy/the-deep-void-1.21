@@ -8,29 +8,27 @@
           "type": "minecraft:item",
           "name": "the_deep_void:bone_marrow",
           "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 2
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:bone",
           "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 2
             }
-          ]
+          }
         }
       ]
     }

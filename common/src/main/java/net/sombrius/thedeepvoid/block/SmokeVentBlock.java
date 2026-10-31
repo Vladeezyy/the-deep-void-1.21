@@ -28,7 +28,7 @@ public class SmokeVentBlock extends Block {
 
 	public SmokeVentBlock() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE).sound(SoundType.DEEPSLATE).strength(4.5f, 7.5f).requiresCorrectToolForDrops().noOcclusion().randomTicks()
-				.pushReaction(PushReaction.DESTROY).isRedstoneConductor((bs, br, bp) -> false));
+				.pushReaction(PushReaction.POPPED).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.Y));
 	}
 

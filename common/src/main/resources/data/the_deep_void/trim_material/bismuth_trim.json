@@ -1,7 +1,7 @@
 {
-  "asset_name": "bismuth_trim",
   "description": {
     "color": "#648DAD",
     "translate": "trim_material.the_deep_void.bismuth_trim"
-  }
+  },
+  "palette_id": "the_deep_void:trim/bismuth_trim"
 }

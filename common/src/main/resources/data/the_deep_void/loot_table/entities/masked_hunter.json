@@ -8,15 +8,14 @@
           "type": "minecraft:item",
           "name": "the_deep_void:hunter_hide",
           "weight": 100,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 8,
-                "max": 8
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 8,
+              "min": 8
             }
-          ]
+          }
         }
       ]
     }

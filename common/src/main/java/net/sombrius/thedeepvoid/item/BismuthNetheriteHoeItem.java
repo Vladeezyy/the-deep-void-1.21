@@ -17,7 +17,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.network.chat.Component;
@@ -25,11 +24,11 @@ import net.minecraft.core.BlockPos;
 
 import java.util.List;
 
-public class BismuthNetheriteHoeItem extends HoeItem {
+public class BismuthNetheriteHoeItem extends Item {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2464, 12f, 0f, 20, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/netherite_ingot_refined_bismuth")));
 
 	public BismuthNetheriteHoeItem() {
-		super(TOOL_TIER, 0, 0f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant().hoe(TOOL_TIER, 0, 0f));
 	}
 
 	@Override

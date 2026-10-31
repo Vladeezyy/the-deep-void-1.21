@@ -8,16 +8,17 @@
           "type": "minecraft:item",
           "name": "the_deep_void:grimberry",
           "weight": 100,
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 4
+                "type": "minecraft:uniform",
+                "max": 4,
+                "min": 1
               }
             },
             {
-              "function": "minecraft:apply_bonus",
+              "type": "minecraft:apply_bonus",
               "enchantment": "minecraft:fortune",
               "formula": "minecraft:ore_drops"
             }

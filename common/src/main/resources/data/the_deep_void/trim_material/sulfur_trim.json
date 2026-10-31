@@ -1,7 +1,7 @@
 {
-  "asset_name": "sulfur_trim",
   "description": {
     "color": "#C28D00",
     "translate": "trim_material.the_deep_void.sulfur_trim"
-  }
+  },
+  "palette_id": "the_deep_void:trim/sulfur_trim"
 }

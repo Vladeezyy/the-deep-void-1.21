@@ -3,283 +3,269 @@
   "pools": [
     {
       "rolls": {
-        "min": 2,
-        "max": 4
+        "type": "minecraft:uniform",
+        "max": 4,
+        "min": 2
       },
       "bonus_rolls": {
-        "min": 2,
-        "max": 4
+        "type": "minecraft:uniform",
+        "max": 4,
+        "min": 2
       },
       "entries": [
         {
           "type": "minecraft:item",
           "name": "the_deep_void:rotten_bone",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:bone_marrow",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 6
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 6,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:gunpowder",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:bone",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 12
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 12,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:rotten_flesh",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 8
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 8,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:mourner_hide",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:onyx",
           "weight": 60,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:gold_ingot",
           "weight": 60,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 6
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 6,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:diamond",
           "weight": 60,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:lavendite",
           "weight": 60,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 8
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 8,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:leather",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:black_candle",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:coal",
           "weight": 70,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 6
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 6,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:lurking_music_disc",
           "weight": 4,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:scare_armor_trim",
           "weight": 10,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 2
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:chasms_music_disc",
           "weight": 4,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:sorrow_armor_trim",
           "weight": 10,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 2
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:refined_cinnabar",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 6
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 6,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:cult_helmet",
           "weight": 4,
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 1
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 1
               }
             },
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 0,
-                "max": 24
+                "type": "minecraft:uniform",
+                "max": 24,
+                "min": 0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -289,19 +275,21 @@
           "type": "minecraft:item",
           "name": "the_deep_void:cult_chestplate",
           "weight": 4,
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 1
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 1
               }
             },
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 0,
-                "max": 24
+                "type": "minecraft:uniform",
+                "max": 24,
+                "min": 0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -311,19 +299,21 @@
           "type": "minecraft:item",
           "name": "the_deep_void:cult_leggings",
           "weight": 4,
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 1
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 1
               }
             },
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 0,
-                "max": 24
+                "type": "minecraft:uniform",
+                "max": 24,
+                "min": 0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -333,19 +323,21 @@
           "type": "minecraft:item",
           "name": "the_deep_void:cult_boots",
           "weight": 4,
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 1
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 1
               }
             },
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 0,
-                "max": 24
+                "type": "minecraft:uniform",
+                "max": 24,
+                "min": 0
               },
               "options": "#minecraft:on_random_loot"
             }
@@ -355,57 +347,53 @@
           "type": "minecraft:item",
           "name": "minecraft:skeleton_skull",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:book",
           "weight": 4,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 20,
-                "max": 40
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 40,
+              "min": 20
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:rune_of_void",
           "weight": 4,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 2
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:dark_steel_coin",
           "weight": 15,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 4,
-                "max": 12
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 12,
+              "min": 4
             }
-          ]
+          }
         }
       ]
     }

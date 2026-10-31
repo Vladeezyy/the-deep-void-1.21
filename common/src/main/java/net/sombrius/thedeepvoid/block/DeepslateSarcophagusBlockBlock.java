@@ -40,7 +40,7 @@ public class DeepslateSarcophagusBlockBlock extends Block implements SimpleWater
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public DeepslateSarcophagusBlockBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE_BRICKS).strength(4f, 8f).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.DESTROY)
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.DEEPSLATE_BRICKS).strength(4f, 8f).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.POPPED)
 				.isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
 	}

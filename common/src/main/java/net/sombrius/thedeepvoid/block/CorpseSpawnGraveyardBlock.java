@@ -28,7 +28,7 @@ import net.sombrius.thedeepvoid.procedures.CorpseSpawnPlantDestroyedByPlayerProc
 
 public class CorpseSpawnGraveyardBlock extends FlowerBlock implements net.sombrius.thedeepvoid.port.PortBlockHooks.DestroyedByPlayer {
 	public CorpseSpawnGraveyardBlock() {
-		super(MobEffects.SPEED, 100, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.SAND).sound(SoundType.BONE_BLOCK).strength(1.2f, 12f).noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 100, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.SAND).sound(SoundType.BONE_BLOCK).strength(1.2f, 12f).noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class PeepingStemBlock extends FlowerBlock {
 						.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flesh_block_step")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty")),
 								() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flesh_block_place")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty")),
 								() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty"))))
-						.instabreak().lightLevel(s -> 4).noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+						.instabreak().lightLevel(s -> 4).noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override

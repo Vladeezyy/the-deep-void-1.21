@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:netherrack_replace_blobs",
+  "target": "minecraft:deepslate",
+  "state": "the_deep_void:active_flesh_block",
+  "radius": {
+    "type": "uniform",
+    "min_inclusive": 4,
+    "max_inclusive": 12
+  }
+}

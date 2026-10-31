@@ -25,7 +25,7 @@ import net.sombrius.thedeepvoid.procedures.ReturnPortalEntityCollidesInTheBlockP
 
 public class ReturnPortalBlock extends Block {
 	public ReturnPortalBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.GLASS).strength(-1, 3600000).lightLevel(s -> 5).noCollision().noOcclusion().pushReaction(PushReaction.BLOCK)
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.GLASS).strength(-1, 3600000).lightLevel(s -> 5).noCollision().noOcclusion().pushReaction(PushReaction.IMMOVEABLE)
 				.isRedstoneConductor((bs, br, bp) -> false));
 	}
 

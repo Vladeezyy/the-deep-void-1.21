@@ -26,7 +26,7 @@ import net.minecraft.core.BlockPos;
 public class DesolateLichenBlock extends FlowerBlock implements BonemealableBlock {
 	public DesolateLichenBlock() {
 		super(MobEffects.SPEED, 5.0f,
-				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.WARPED_STEM).randomTicks().sound(SoundType.ROOTS).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.WARPED_STEM).randomTicks().sound(SoundType.ROOTS).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override
@@ -43,17 +43,17 @@ public class DesolateLichenBlock extends FlowerBlock implements BonemealableBloc
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState blockstate) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState blockstate, net.minecraft.world.level.block.BonemealSource source) {
 		return true;
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState blockstate) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState blockstate, net.minecraft.world.level.block.BonemealSource source) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState blockstate) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState blockstate, net.minecraft.world.level.block.BonemealSource source) {
 		DesolateLichenOnBoneMealSuccessProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
 	}
 }

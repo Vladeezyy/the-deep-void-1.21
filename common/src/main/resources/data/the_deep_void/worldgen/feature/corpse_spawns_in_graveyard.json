@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "the_deep_void:old_corpse",
+        "weight": 1
+      },
+      {
+        "data": "the_deep_void:old_covered_corpse",
+        "weight": 1
+      },
+      {
+        "data": "the_deep_void:old_laying_corpse",
+        "weight": 1
+      }
+    ]
+  }
+}

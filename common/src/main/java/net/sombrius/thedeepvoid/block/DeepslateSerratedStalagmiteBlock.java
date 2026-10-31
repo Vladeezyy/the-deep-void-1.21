@@ -41,7 +41,7 @@ public class DeepslateSerratedStalagmiteBlock extends Block implements SimpleWat
 
 	public DeepslateSerratedStalagmiteBlock() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3f, 6f).requiresCorrectToolForDrops().noOcclusion().randomTicks()
-				.pushReaction(PushReaction.DESTROY).isRedstoneConductor((bs, br, bp) -> false));
+				.pushReaction(PushReaction.POPPED).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.WALL).setValue(WATERLOGGED, false));
 	}
 

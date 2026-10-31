@@ -42,10 +42,10 @@ public class FalseHydraSingingOnEntityTickUpdateProcedure {
 		}
 		if ((entity instanceof FalseHydraSingingEntity _datEntI ? _datEntI.getEntityData().get(FalseHydraSingingEntity.DATA_timer) : 0) >= (double) DeepVoidConfigConfiguration.HYDRASINGINGDESPAWNTIMER.get()) {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"stopsound @a hostile the_deep_void:false_hydra_sing");
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"stopsound @a hostile the_deep_void:false_hydra_sing_distorted");
 			if (!entity.level().isClientSide())
 				entity.discard();
@@ -82,10 +82,10 @@ public class FalseHydraSingingOnEntityTickUpdateProcedure {
 			}
 		} else if (!(world.getNearestPlayer(entity, 30) == null)) {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"stopsound @a hostile the_deep_void:false_hydra_sing");
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"stopsound @a hostile the_deep_void:false_hydra_sing_distorted");
 			if (TheDeepVoidModVariables.MapVariables.get(world).spawnHydra >= (double) DeepVoidConfigConfiguration.SPAWNHYDRAREQUIREDENCOUNTER.get()) {
 				TheDeepVoidModVariables.MapVariables.get(world).spawnHydra = 0;

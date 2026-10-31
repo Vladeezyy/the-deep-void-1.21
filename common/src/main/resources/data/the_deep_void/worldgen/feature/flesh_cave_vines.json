@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "the_deep_void:eye_vine_stem",
+        "weight": 90
+      },
+      {
+        "data": "the_deep_void:huge_eye_vine_stem",
+        "weight": 10
+      }
+    ]
+  }
+}

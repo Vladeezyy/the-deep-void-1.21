@@ -32,7 +32,7 @@ import net.minecraft.core.BlockPos;
 
 public class RedGateNonSolidBlock extends Block {
 	public RedGateNonSolidBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.GLASS).strength(-1, 3600000).noCollision().noOcclusion().pushReaction(PushReaction.BLOCK).isRedstoneConductor((bs, br, bp) -> false));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.GLASS).strength(-1, 3600000).noCollision().noOcclusion().pushReaction(PushReaction.IMMOVEABLE).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	@Override

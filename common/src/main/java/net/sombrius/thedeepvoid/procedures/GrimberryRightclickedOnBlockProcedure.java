@@ -58,7 +58,7 @@ public class GrimberryRightclickedOnBlockProcedure {
 					(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).shrink(1);
 				}
 				if (entity instanceof LivingEntity _entity)
-					_entity.swing(InteractionHand.MAIN_HAND, true);
+					_entity.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 			} else if ((entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.GRIMBERRY.get()) {
 				if (!(new Object() {
 					public boolean checkGamemode(Entity _ent) {
@@ -74,7 +74,7 @@ public class GrimberryRightclickedOnBlockProcedure {
 					(entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).shrink(1);
 				}
 				if (entity instanceof LivingEntity _entity)
-					_entity.swing(InteractionHand.OFF_HAND, true);
+					_entity.swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 			}
 			world.setBlock(BlockPos.containing(x, y + 1, z), TheDeepVoidModBlocks.DESOLATE_LICHEN.get().defaultBlockState(), 3);
 			if (world instanceof Level _level) {

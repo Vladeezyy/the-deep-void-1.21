@@ -41,7 +41,7 @@ public class HunterClawsLivingEntityIsHitWithToolProcedure {
 		if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.HUNTER_CLAWS.get()) {
 			TheDeepVoidMod.queueServerWork(10, () -> {
 				if (sourceentity instanceof LivingEntity _entity)
-					_entity.swing(InteractionHand.OFF_HAND, true);
+					_entity.swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 				if (entity instanceof LivingEntity _livEnt13 && _livEnt13.hasEffect(TheDeepVoidModMobEffects.ROT.holder())) {
 					if (entity instanceof LivingEntity _entity)
 						_entity.removeEffect(TheDeepVoidModMobEffects.ROT.holder());

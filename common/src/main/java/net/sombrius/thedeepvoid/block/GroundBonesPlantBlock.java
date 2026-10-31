@@ -22,7 +22,7 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModBlocks;
 public class GroundBonesPlantBlock extends FlowerBlock {
 	public GroundBonesPlantBlock() {
 		super(MobEffects.SPEED, 100,
-				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.BONE_BLOCK).strength(0.4f, 1f).noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.BONE_BLOCK).strength(0.4f, 1f).noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override

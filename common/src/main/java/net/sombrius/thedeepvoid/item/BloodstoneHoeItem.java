@@ -11,12 +11,11 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.HoeItem;
 
-public class BloodstoneHoeItem extends HoeItem {
+public class BloodstoneHoeItem extends Item {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2400, 7f, 0f, 8, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/bloodstone")));
 
 	public BloodstoneHoeItem() {
-		super(TOOL_TIER, 0, 0.2f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().hoe(TOOL_TIER, 0, 0.2f));
 	}
 }

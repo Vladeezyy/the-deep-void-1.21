@@ -41,7 +41,7 @@ public class SoulOrbPillarBlock extends Block implements EntityBlock {
 					return 0;
 				return 0;
 			}
-		}.getLightLevel())).noOcclusion().pushReaction(PushReaction.BLOCK).isRedstoneConductor((bs, br, bp) -> false));
+		}.getLightLevel())).noOcclusion().pushReaction(PushReaction.IMMOVEABLE).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	@Override

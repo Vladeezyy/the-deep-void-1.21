@@ -434,7 +434,7 @@ public class UndertakerTradeGuiMenu extends AbstractContainerMenu implements Sup
 						continue;
 					if (j == 13)
 						continue;
-					playerIn.drop(internal.extractItem(j, internal.getStackInSlot(j).getCount(), false), false);
+					playerIn.drop(internal.extractItem(j, internal.getStackInSlot(j).getCount(), false), false, net.minecraft.util.Prediction.SERVER_ONLY);
 				}
 			} else {
 				for (int i = 0; i < internal.getSlots(); ++i) {
@@ -464,7 +464,7 @@ public class UndertakerTradeGuiMenu extends AbstractContainerMenu implements Sup
 						continue;
 					if (i == 13)
 						continue;
-					playerIn.getInventory().placeItemBackInInventory(internal.extractItem(i, internal.getStackInSlot(i).getCount(), false));
+					playerIn.getInventory().placeItemBackInInventory(internal.extractItem(i, internal.getStackInSlot(i).getCount(), false), net.minecraft.util.Prediction.SERVER_ONLY);
 				}
 			}
 		}

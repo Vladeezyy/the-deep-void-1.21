@@ -66,49 +66,49 @@ public class PlagueDoctorGloveLivingEntityIsHitWithToolProcedure {
 			if (sourceentity instanceof Player _playerHasItem ? _playerHasItem.getInventory().contains(new ItemStack(TheDeepVoidModItems.GLOWING_NEEDLE.get())) : false) {
 				if (sourceentity instanceof Player _player) {
 					ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.GLOWING_NEEDLE.get());
-					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 				}
 			}
 			if (sourceentity instanceof Player _playerHasItem ? _playerHasItem.getInventory().contains(new ItemStack(TheDeepVoidModItems.ROT_NEEDLE.get())) : false) {
 				if (sourceentity instanceof Player _player) {
 					ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.ROT_NEEDLE.get());
-					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 				}
 			}
 			if (sourceentity instanceof Player _playerHasItem ? _playerHasItem.getInventory().contains(new ItemStack(TheDeepVoidModItems.HEXED_NEEDLE.get())) : false) {
 				if (sourceentity instanceof Player _player) {
 					ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.HEXED_NEEDLE.get());
-					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 				}
 			}
 			if (sourceentity instanceof Player _playerHasItem ? _playerHasItem.getInventory().contains(new ItemStack(TheDeepVoidModItems.POISON_NEEDLE.get())) : false) {
 				if (sourceentity instanceof Player _player) {
 					ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.POISON_NEEDLE.get());
-					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 				}
 			}
 			if (sourceentity instanceof Player _playerHasItem ? _playerHasItem.getInventory().contains(new ItemStack(TheDeepVoidModItems.WITHER_NEEDLE.get())) : false) {
 				if (sourceentity instanceof Player _player) {
 					ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.WITHER_NEEDLE.get());
-					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 				}
 			}
 			if (sourceentity instanceof Player _playerHasItem ? _playerHasItem.getInventory().contains(new ItemStack(TheDeepVoidModItems.INSTANT_DAMAGE_NEEDLE.get())) : false) {
 				if (sourceentity instanceof Player _player) {
 					ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.INSTANT_DAMAGE_NEEDLE.get());
-					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 				}
 			}
 			if (sourceentity instanceof Player _playerHasItem ? _playerHasItem.getInventory().contains(new ItemStack(TheDeepVoidModItems.WEAKNESS_NEEDLE.get())) : false) {
 				if (sourceentity instanceof Player _player) {
 					ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.WEAKNESS_NEEDLE.get());
-					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 				}
 			}
 			if (sourceentity instanceof Player _playerHasItem ? _playerHasItem.getInventory().contains(new ItemStack(TheDeepVoidModItems.SLOWNESS_NEEDLE.get())) : false) {
 				if (sourceentity instanceof Player _player) {
 					ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.SLOWNESS_NEEDLE.get());
-					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+					_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 				}
 			}
 		}

@@ -3,8 +3,7 @@
   "biomes": "the_deep_void:gaol_of_heretics",
   "spawners": {
     "type": "the_deep_void:penitent",
-    "weight": 1,
-    "minCount": 1,
-    "maxCount": 1
+    "count": 1,
+    "weight": 1
   }
 }

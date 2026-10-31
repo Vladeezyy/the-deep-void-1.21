@@ -1,7 +1,7 @@
 {
-  "asset_name": "rotten_trim",
   "description": {
     "color": "#6B6A63",
     "translate": "trim_material.the_deep_void.rotten_trim"
-  }
+  },
+  "palette_id": "the_deep_void:trim/rotten_trim"
 }

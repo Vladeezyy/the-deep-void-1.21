@@ -250,13 +250,13 @@ public class VoidBagGuiMenu extends AbstractContainerMenu implements Supplier<Ma
 		if (!bound && playerIn instanceof ServerPlayer serverPlayer) {
 			if (!serverPlayer.isAlive() || serverPlayer.hasDisconnected()) {
 				for (int j = 0; j < internal.getSlots(); ++j) {
-					playerIn.drop(internal.getStackInSlot(j), false);
+					playerIn.drop(internal.getStackInSlot(j), false, net.minecraft.util.Prediction.SERVER_ONLY);
 					if (internal instanceof IItemHandlerModifiable ihm)
 						ihm.setStackInSlot(j, ItemStack.EMPTY);
 				}
 			} else {
 				for (int i = 0; i < internal.getSlots(); ++i) {
-					playerIn.getInventory().placeItemBackInInventory(internal.getStackInSlot(i));
+					playerIn.getInventory().placeItemBackInInventory(internal.getStackInSlot(i), net.minecraft.util.Prediction.SERVER_ONLY);
 					if (internal instanceof IItemHandlerModifiable ihm)
 						ihm.setStackInSlot(i, ItemStack.EMPTY);
 				}

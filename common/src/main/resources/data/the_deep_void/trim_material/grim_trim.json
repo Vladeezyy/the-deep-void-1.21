@@ -1,7 +1,7 @@
 {
-  "asset_name": "grim_trim",
   "description": {
     "color": "#93A3C8",
     "translate": "trim_material.the_deep_void.grim_trim"
-  }
+  },
+  "palette_id": "the_deep_void:trim/grim_trim"
 }

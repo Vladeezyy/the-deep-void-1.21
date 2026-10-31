@@ -3,8 +3,7 @@
   "biomes": "the_deep_void:misted_remnants",
   "spawners": {
     "type": "the_deep_void:mimic",
-    "weight": 1,
-    "minCount": 1,
-    "maxCount": 1
+    "count": 1,
+    "weight": 1
   }
 }

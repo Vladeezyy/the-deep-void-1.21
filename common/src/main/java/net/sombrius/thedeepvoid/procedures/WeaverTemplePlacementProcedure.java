@@ -23,7 +23,7 @@ public class WeaverTemplePlacementProcedure {
 			TheDeepVoidModVariables.MapVariables.get(world).WeaverTemplePlaced = true;
 			TheDeepVoidModVariables.MapVariables.get(world).syncData(world);
 			if (world instanceof ServerLevel _serverworld) {
-				StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "weaver_sepulcher_nogates"));
+				StructureTemplate template = _serverworld.getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "weaver_sepulcher_nogates"));
 				if (template != null) {
 					template.placeInWorld(_serverworld, new BlockPos(-40, 1, -40), new BlockPos(-40, 1, -40), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.getRandom(), 3);
 				}

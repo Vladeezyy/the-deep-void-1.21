@@ -11,7 +11,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class GooGrowthBlock extends DoublePlantBlock {
 	public GooGrowthBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.GLOW_LICHEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.GLOW_LICHEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED));
 	}
 
 }

@@ -166,18 +166,18 @@ abstract class LivingEntityMixin {
 		return ModBus.post(event) ? 0 : event.getDroppedExperience();
 	}
 
-	/** ItemTossEvent (1.21.4: players drop through LivingEntity's drop) */
-	@Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("RETURN"))
-	private void deepvoid$drop(ItemStack stack, boolean randomly, boolean retainOwnership, CallbackInfoReturnable<net.minecraft.world.entity.item.ItemEntity> cir) {
+	/** ItemTossEvent (1.21.4: players drop through LivingEntity's drop; 26.3: with its prediction) */
+	@Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZLnet/minecraft/util/Prediction;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("RETURN"))
+	private void deepvoid$drop(ItemStack stack, boolean thrownFromHand, net.minecraft.util.Prediction prediction, CallbackInfoReturnable<net.minecraft.world.entity.item.ItemEntity> cir) {
 		if (cir.getReturnValue() != null && deepvoid$self() instanceof Player player)
 			ModBus.post(new net.sombrius.thedeepvoid.port.bus.ItemTossEvent(cir.getReturnValue(), player));
 	}
 
 	/** NeoForge's onEntitySwing: an item may handle the swing itself */
-	@Inject(method = "swing(Lnet/minecraft/world/InteractionHand;Z)V", at = @At("HEAD"), cancellable = true)
-	private void deepvoid$swing(InteractionHand hand, boolean updateSelf, CallbackInfo ci) {
+	@Inject(method = "swing(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/component/SwingAnimation;Z)Z", at = @At("HEAD"), cancellable = true)
+	private void deepvoid$swing(InteractionHand hand, net.minecraft.world.item.component.SwingAnimation animation, boolean sendToSwingingEntity, CallbackInfoReturnable<Boolean> cir) {
 		ItemStack stack = this.getItemInHand(hand);
 		if (!stack.isEmpty() && stack.getItem() instanceof PortItemHooks.EntitySwing swing && swing.onEntitySwing(stack, deepvoid$self()))
-			ci.cancel();
+			cir.setReturnValue(false);
 	}
 }

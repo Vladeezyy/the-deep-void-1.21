@@ -17,7 +17,7 @@ import net.sombrius.thedeepvoid.procedures.CorpseBlossomOnTickUpdateProcedure;
 public class CorpseBlossomBlock extends FlowerBlock {
 	public CorpseBlossomBlock() {
 		super(MobEffects.SPEED, 100,
-				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_PINK).randomTicks().sound(SoundType.SCULK_VEIN).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_PINK).randomTicks().sound(SoundType.SCULK_VEIN).instabreak().noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED));
 	}
 
 

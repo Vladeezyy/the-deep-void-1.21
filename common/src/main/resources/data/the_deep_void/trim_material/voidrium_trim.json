@@ -1,7 +1,7 @@
 {
-  "asset_name": "voidrium_trim",
   "description": {
     "color": "#5B2B9F",
     "translate": "trim_material.the_deep_void.voidrium_trim"
-  }
+  },
+  "palette_id": "the_deep_void:trim/voidrium_trim"
 }

@@ -26,7 +26,7 @@ import net.sombrius.thedeepvoid.procedures.TeethMobplayerCollidesWithPlantProced
 
 public class TeethBlock extends FlowerBlock {
 	public TeethBlock() {
-		super(MobEffects.SPEED, 100, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.NETHER).sound(SoundType.BONE_BLOCK).strength(0.5f, 0.5f).noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+		super(MobEffects.SPEED, 100, net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.NETHER).sound(SoundType.BONE_BLOCK).strength(0.5f, 0.5f).noCollision().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class GloomWitnessSaplingOnBoneMealSuccessProcedure {
 				&& world.isEmptyBlock(BlockPos.containing(x, y + 4, z)) && world.isEmptyBlock(BlockPos.containing(x, y + 5, z)) && world.isEmptyBlock(BlockPos.containing(x + 1, y, z)) && world.isEmptyBlock(BlockPos.containing(x - 1, y, z))
 				&& world.isEmptyBlock(BlockPos.containing(x, y, z - 1)) && world.isEmptyBlock(BlockPos.containing(x, y, z + 1))) {
 			if (world instanceof ServerLevel _serverworld) {
-				StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "giant_gloom_lantern_plant"));
+				StructureTemplate template = _serverworld.getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "giant_gloom_lantern_plant"));
 				if (template != null) {
 					template.placeInWorld(_serverworld, BlockPos.containing(x - 3, y, z - 3), BlockPos.containing(x - 3, y, z - 3), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false),
 							_serverworld.getRandom(), 3);

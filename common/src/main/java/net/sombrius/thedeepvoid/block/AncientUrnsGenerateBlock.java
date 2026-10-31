@@ -23,7 +23,7 @@ import net.sombrius.thedeepvoid.procedures.AncientPotAdditionalPlacinggrowthCond
 public class AncientUrnsGenerateBlock extends FlowerBlock {
 	public AncientUrnsGenerateBlock() {
 		super(MobEffects.SPEED, 0,
-				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.PLANT).sound(SoundType.DECORATED_POT).strength(0f, 1f).noOcclusion().dynamicShape().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.PLANT).sound(SoundType.DECORATED_POT).strength(0f, 1f).noOcclusion().dynamicShape().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class OverseerPillarRenderer extends MobRenderer<OverseerPillarEntity, Li
 			@Override
 			public void submit(PoseStack poseStack, SubmitNodeCollector collector, int light, LivingEntityRenderState state, float yRot, float xRot) {
 				this.layerModel.setupAnim(state);
-				collector.submitModel(this.layerModel, state, poseStack, RenderTypes.entityCutout(LAYER_TEXTURE), light, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor, null);
+				collector.submitModel(this.layerModel, state, poseStack, RenderTypes.entityCutout(LAYER_TEXTURE), light, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor);
 			}
 		});
 	}

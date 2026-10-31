@@ -16,7 +16,7 @@ import net.sombrius.thedeepvoid.procedures.SoulContainerOnTickUpdateProcedure;
 
 public class SoulContainerBlock extends Block {
 	public SoulContainerBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(-1, 3600000).pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(-1, 3600000).pushReaction(PushReaction.IMMOVEABLE));
 	}
 
 	@Override

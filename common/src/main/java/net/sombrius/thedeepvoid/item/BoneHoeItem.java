@@ -5,7 +5,6 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -13,11 +12,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.sombrius.thedeepvoid.procedures.BoneSwordLivingEntityIsHitWithToolProcedure;
 
-public class BoneHoeItem extends HoeItem {
+public class BoneHoeItem extends Item {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 4f, 0f, 14, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/bone")));
 
 	public BoneHoeItem() {
-		super(TOOL_TIER, 0f, -2f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().hoe(TOOL_TIER, 0f, -2f));
 	}
 
 	@Override

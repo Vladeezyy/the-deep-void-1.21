@@ -15,14 +15,14 @@ public class VoidDaggerToolInInventoryTickProcedure {
 		if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.OFF_HAND_VOID_DAGGER.get())) {
 			if (entity instanceof Player _player) {
 				ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.OFF_HAND_VOID_DAGGER.get());
-				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 99, _player.inventoryMenu.getCraftSlots());
+				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 99, _player.inventoryMenu.getCraftSlots());
 			}
 		}
 		if (!((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VOID_DAGGER.get())
 				&& (entity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.OFF_HAND_VOID_DAGGER.get()) {
 			if (entity instanceof Player _player) {
 				ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.OFF_HAND_VOID_DAGGER.get());
-				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 99, _player.inventoryMenu.getCraftSlots());
+				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 99, _player.inventoryMenu.getCraftSlots());
 			}
 			if (entity instanceof LivingEntity _entity) {
 				ItemStack _setstack = new ItemStack(Blocks.AIR).copy();

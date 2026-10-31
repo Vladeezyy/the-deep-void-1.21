@@ -13,7 +13,7 @@ import net.sombrius.thedeepvoid.procedures.UmbriumOreAdditionalHarvestConditionP
 
 public class BlockOfUmbriumBlock extends Block {
 	public BlockOfUmbriumBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.NETHERITE_BLOCK).strength(25f, 6f).requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.NETHERITE_BLOCK).strength(25f, 6f).requiresCorrectToolForDrops().pushReaction(PushReaction.IMMOVEABLE));
 	}
 
 	@Override

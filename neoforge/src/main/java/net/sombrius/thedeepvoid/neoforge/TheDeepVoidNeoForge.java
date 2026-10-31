@@ -7,7 +7,6 @@ import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -30,13 +29,11 @@ import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.ServerChatEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.common.brewing.IBrewingRecipe;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -85,7 +82,8 @@ public final class TheDeepVoidNeoForge {
 				})));
 		modBus.addListener((BuildCreativeModeTabContentsEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.BuildCreativeModeTabContentsEvent(event.getTabKey(), event::accept)));
 		modBus.addListener((ModifyDefaultComponentsEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ModifyDefaultComponentsEvent((item, patch) -> event.modify(item,
-				builder -> patch.accept(new net.sombrius.thedeepvoid.port.bus.ModifyDefaultComponentsEvent.Builder() {
+				// 26.3: an initializer of the component map (with the registries and the item's key)
+				(builder, registries, key) -> patch.accept(new net.sombrius.thedeepvoid.port.bus.ModifyDefaultComponentsEvent.Builder() {
 					@Override
 					public <T> net.sombrius.thedeepvoid.port.bus.ModifyDefaultComponentsEvent.Builder set(DataComponentType<T> type, T value) {
 						builder.set(type, value);
@@ -108,22 +106,7 @@ public final class TheDeepVoidNeoForge {
 		bus.addListener((PlayerTickEvent.Post event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.PlayerTickEvent.Post(event.getEntity())));
 		bus.addListener((EntityTickEvent.Pre event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.EntityTickEvent.Pre(event.getEntity())));
 		bus.addListener((RegisterCommandsEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterCommandsEvent(event.getDispatcher(), event.getCommandSelection(), event.getBuildContext())));
-		bus.addListener((RegisterBrewingRecipesEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterBrewingRecipesEvent(recipe -> event.getBuilder().addRecipe(new IBrewingRecipe() {
-			@Override
-			public boolean isInput(ItemStack input) {
-				return recipe.isInput(input);
-			}
-
-			@Override
-			public boolean isIngredient(ItemStack ingredient) {
-				return recipe.isIngredient(ingredient);
-			}
-
-			@Override
-			public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
-				return recipe.getOutput(input, ingredient);
-			}
-		}))));
+		// 26.3: brewing recipes are data (recipe/brewing), fuel is the cooking_fuel component of the item
 		bus.addListener((LivingIncomingDamageEvent event) -> {
 			var ours = new net.sombrius.thedeepvoid.port.bus.LivingIncomingDamageEvent(event.getEntity(), event.getSource(), event.getAmount());
 			if (ModBus.post(ours))
@@ -241,11 +224,6 @@ public final class TheDeepVoidNeoForge {
 		});
 		// 1.21.2: clients get no recipes; the server sends the JEI recipe types (port.PortRecipeSync)
 		bus.addListener((net.neoforged.neoforge.event.OnDatapackSyncEvent event) -> net.sombrius.thedeepvoid.port.PortRecipeSync.TYPES.forEach(type -> event.sendRecipes(type.get())));
-		bus.addListener((FurnaceFuelBurnTimeEvent event) -> {
-			var ours = new net.sombrius.thedeepvoid.port.bus.FurnaceFuelBurnTimeEvent(event.getItemStack(), event.getBurnTime());
-			if (ModBus.post(ours))
-				event.setBurnTime(ours.getBurnTime());
-		});
 		bus.addListener((ItemAttributeModifierEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ItemAttributeModifierEvent(event.getItemStack(), event::addModifier)));
 	}
 

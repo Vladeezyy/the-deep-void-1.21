@@ -4,6 +4,7 @@
  */
 package net.sombrius.thedeepvoid.init;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.sombrius.thedeepvoid.port.platform.RegistryEntry;
@@ -18,12 +19,12 @@ import net.sombrius.thedeepvoid.world.features.RottenMossGenerateFeature;
 import net.sombrius.thedeepvoid.world.features.RottenMossGenerateNormalFeature;
 
 public class TheDeepVoidModFeatures {
-	public static final Registrar<Feature<?>> REGISTRY = Registrar.create(Registries.FEATURE, TheDeepVoidMod.MODID);
-	public static final RegistryEntry<Feature<?>, Feature<?>> ROTTEN_MOSS_GENERATE = REGISTRY.register("rotten_moss_generate", RottenMossGenerateFeature::new);
-	public static final RegistryEntry<Feature<?>, Feature<?>> FLESH_MOUTH = REGISTRY.register("flesh_mouth", FleshMouthFeature::new);
-	public static final RegistryEntry<Feature<?>, Feature<?>> FLESHY_FORMATION_UNDERGROUND = REGISTRY.register("fleshy_formation_underground", FleshyFormationUndergroundFeature::new);
-	public static final RegistryEntry<Feature<?>, Feature<?>> ROTTEN_MOSS_GENERATE_NORMAL = REGISTRY.register("rotten_moss_generate_normal", RottenMossGenerateNormalFeature::new);
-	public static final RegistryEntry<Feature<?>, Feature<?>> FLESH_BLOCK_GENERATE_NORMAL = REGISTRY.register("flesh_block_generate_normal", FleshBlockGenerateNormalFeature::new);
-	public static final RegistryEntry<Feature<?>, Feature<?>> CRUMBLING_BEDROCK_GENERATE = REGISTRY.register("crumbling_bedrock_generate", CrumblingBedrockGenerateFeature::new);
-	public static final RegistryEntry<Feature<?>, Feature<?>> HUNTERS_CABIN = REGISTRY.register("hunters_cabin", HuntersCabinFeature::new);
+	public static final Registrar<MapCodec<? extends Feature>> REGISTRY = Registrar.create(Registries.FEATURE_TYPE, TheDeepVoidMod.MODID);
+	public static final RegistryEntry<MapCodec<? extends Feature>, MapCodec<RottenMossGenerateFeature>> ROTTEN_MOSS_GENERATE = REGISTRY.register("rotten_moss_generate", () -> RottenMossGenerateFeature.CODEC);
+	public static final RegistryEntry<MapCodec<? extends Feature>, MapCodec<FleshMouthFeature>> FLESH_MOUTH = REGISTRY.register("flesh_mouth", () -> FleshMouthFeature.CODEC);
+	public static final RegistryEntry<MapCodec<? extends Feature>, MapCodec<FleshyFormationUndergroundFeature>> FLESHY_FORMATION_UNDERGROUND = REGISTRY.register("fleshy_formation_underground", () -> FleshyFormationUndergroundFeature.CODEC);
+	public static final RegistryEntry<MapCodec<? extends Feature>, MapCodec<RottenMossGenerateNormalFeature>> ROTTEN_MOSS_GENERATE_NORMAL = REGISTRY.register("rotten_moss_generate_normal", () -> RottenMossGenerateNormalFeature.CODEC);
+	public static final RegistryEntry<MapCodec<? extends Feature>, MapCodec<FleshBlockGenerateNormalFeature>> FLESH_BLOCK_GENERATE_NORMAL = REGISTRY.register("flesh_block_generate_normal", () -> FleshBlockGenerateNormalFeature.CODEC);
+	public static final RegistryEntry<MapCodec<? extends Feature>, MapCodec<CrumblingBedrockGenerateFeature>> CRUMBLING_BEDROCK_GENERATE = REGISTRY.register("crumbling_bedrock_generate", () -> CrumblingBedrockGenerateFeature.CODEC);
+	public static final RegistryEntry<MapCodec<? extends Feature>, MapCodec<HuntersCabinFeature>> HUNTERS_CABIN = REGISTRY.register("hunters_cabin", () -> HuntersCabinFeature.CODEC);
 }

@@ -19,7 +19,7 @@ public final class ItemHandlerHelper {
 			player.level().playSound(null, player.getX(), player.getY() + 0.5, player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2F,
 					((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
 		if (!stack.isEmpty())
-			player.drop(stack, false);
+			player.drop(stack, false, net.minecraft.util.Prediction.SERVER_ONLY);
 	}
 
 	public static void giveItemToPlayer(Player player, ItemStack stack, int preferredSlot) {

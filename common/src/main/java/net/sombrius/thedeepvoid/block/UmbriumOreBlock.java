@@ -18,7 +18,7 @@ import net.sombrius.thedeepvoid.procedures.UmbriumOreBlockDestroyedByPlayerProce
 
 public class UmbriumOreBlock extends Block implements net.sombrius.thedeepvoid.port.PortBlockHooks.DestroyedByPlayer {
 	public UmbriumOreBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE).sound(SoundType.DEEPSLATE).strength(15f, 6f).requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.DEEPSLATE).sound(SoundType.DEEPSLATE).strength(15f, 6f).requiresCorrectToolForDrops().pushReaction(PushReaction.IMMOVEABLE));
 	}
 
 	@Override

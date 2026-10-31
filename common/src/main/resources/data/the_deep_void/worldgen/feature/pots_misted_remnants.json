@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "the_deep_void:ancient_pot",
+        "weight": 2
+      },
+      {
+        "data": "the_deep_void:ancient_urns",
+        "weight": 1
+      }
+    ]
+  }
+}

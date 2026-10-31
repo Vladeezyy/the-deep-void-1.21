@@ -15,7 +15,7 @@ import net.sombrius.thedeepvoid.procedures.FlailExecutionerSpawnerActiveOnTickUp
 
 public class FlailExecutionerSpawnerActiveBlock extends IronBarsBlock {
 	public FlailExecutionerSpawnerActiveBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.METAL).strength(-1, 3600000).requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.METAL).strength(-1, 3600000).requiresCorrectToolForDrops().pushReaction(PushReaction.IMMOVEABLE));
 	}
 
 	@Override

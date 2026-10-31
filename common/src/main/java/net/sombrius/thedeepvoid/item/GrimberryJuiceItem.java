@@ -50,7 +50,7 @@ public class GrimberryJuiceItem extends Item {
 		} else {
 			if (entity instanceof Player player && !player.getAbilities().instabuild) {
 				if (!player.getInventory().add(retval))
-					player.drop(retval, false);
+					player.drop(retval, false, net.minecraft.util.Prediction.SERVER_ONLY);
 			}
 			return itemstack;
 		}

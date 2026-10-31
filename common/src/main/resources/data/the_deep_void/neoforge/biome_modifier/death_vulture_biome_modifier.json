@@ -6,8 +6,11 @@
   ],
   "spawners": {
     "type": "the_deep_void:death_vulture",
-    "weight": 1,
-    "minCount": 1,
-    "maxCount": 3
+    "count": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 1
+    },
+    "weight": 1
   }
 }

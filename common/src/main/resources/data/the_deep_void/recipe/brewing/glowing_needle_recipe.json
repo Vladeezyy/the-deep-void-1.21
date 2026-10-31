@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "the_deep_void:bone_needle"
+  },
+  "output": {
+    "id": "the_deep_void:glowing_needle"
+  },
+  "reagent": {
+    "item": "minecraft:glowstone_dust"
+  }
+}

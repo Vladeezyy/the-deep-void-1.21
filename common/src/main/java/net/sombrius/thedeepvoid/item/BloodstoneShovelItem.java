@@ -9,14 +9,13 @@ import net.minecraft.world.level.block.Block;
 import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 
-public class BloodstoneShovelItem extends ShovelItem {
+public class BloodstoneShovelItem extends Item {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2400, 7f, 3.5f, 8, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/bloodstone")));
 
 	public BloodstoneShovelItem() {
-		super(TOOL_TIER, 1, -2.8f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().shovel(TOOL_TIER, 1, -2.8f));
 	}
 }

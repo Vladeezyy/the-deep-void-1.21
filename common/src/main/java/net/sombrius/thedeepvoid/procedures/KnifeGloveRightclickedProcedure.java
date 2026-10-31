@@ -44,10 +44,10 @@ public class KnifeGloveRightclickedProcedure {
 			}
 			if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 				if (entity instanceof LivingEntity _entity)
-					_entity.swing(InteractionHand.MAIN_HAND, true);
+					_entity.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 			} else {
 				if (entity instanceof LivingEntity _entity)
-					_entity.swing(InteractionHand.OFF_HAND, true);
+					_entity.swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 			}
 			if (Math.random() < 0.5) {
 				{

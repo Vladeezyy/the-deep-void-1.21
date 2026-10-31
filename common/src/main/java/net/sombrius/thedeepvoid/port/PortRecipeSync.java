@@ -28,11 +28,21 @@ public final class PortRecipeSync {
 	private PortRecipeSync() {
 	}
 
+	/** 26.3: Fabric hands the received recipes over (a recipe map is made from a registry only) */
+	private static Collection<RecipeHolder<?>> received = List.of();
+
 	public static void setRecipes(RecipeMap received) {
 		recipes = received;
 	}
 
+	public static void setRecipes(Collection<RecipeHolder<?>> list) {
+		received = List.copyOf(list);
+	}
+
+	@SuppressWarnings("unchecked")
 	public static <I extends RecipeInput, T extends Recipe<I>> Collection<RecipeHolder<T>> recipes(RecipeType<T> type) {
+		if (!received.isEmpty())
+			return received.stream().filter(r -> r.value().getType() == type).map(r -> (RecipeHolder<T>) r).toList();
 		return recipes.byType(type);
 	}
 }

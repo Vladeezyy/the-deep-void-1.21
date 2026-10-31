@@ -4,6 +4,8 @@
  */
 package net.sombrius.thedeepvoid.init;
 
+import com.mojang.blaze3d.platform.InputConstants;
+
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.sombrius.thedeepvoid.port.bus.Dist;
@@ -24,11 +26,10 @@ import net.sombrius.thedeepvoid.network.WingsBackwardMessage;
 import net.sombrius.thedeepvoid.network.WingsDownMessage;
 import net.sombrius.thedeepvoid.network.WingsFowardMessage;
 import net.sombrius.thedeepvoid.network.WingsUpMessage;
-import org.lwjgl.glfw.GLFW;
 
 @EventBusSubscriber(value = {Dist.CLIENT})
 public class TheDeepVoidModKeyMappings {
-	public static final KeyMapping ARMOR_ABILITY = new KeyMapping("key.the_deep_void.armor_ability", GLFW.GLFW_KEY_UNKNOWN, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping ARMOR_ABILITY = new KeyMapping("key.the_deep_void.armor_ability", InputConstants.UNKNOWN.getValue(), net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -46,7 +47,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping ARMOR_TOGGLE = new KeyMapping("key.the_deep_void.armor_toggle", GLFW.GLFW_KEY_UNKNOWN, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping ARMOR_TOGGLE = new KeyMapping("key.the_deep_void.armor_toggle", InputConstants.UNKNOWN.getValue(), net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -59,7 +60,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping MOTHER_CALL_OUT = new KeyMapping("key.the_deep_void.mother_call_out", GLFW.GLFW_KEY_UNKNOWN, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping MOTHER_CALL_OUT = new KeyMapping("key.the_deep_void.mother_call_out", InputConstants.UNKNOWN.getValue(), net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -72,7 +73,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping WEAVER_BOOTS_NO_GRAVITY = new KeyMapping("key.the_deep_void.weaver_boots_no_gravity", GLFW.GLFW_KEY_LEFT_SHIFT, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping WEAVER_BOOTS_NO_GRAVITY = new KeyMapping("key.the_deep_void.weaver_boots_no_gravity", InputConstants.KEY_LSHIFT, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -85,7 +86,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping MOUNT_FLY = new KeyMapping("key.the_deep_void.mount_fly", GLFW.GLFW_KEY_SPACE, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping MOUNT_FLY = new KeyMapping("key.the_deep_void.mount_fly", InputConstants.KEY_SPACE, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -98,7 +99,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping MOUNT_UP = new KeyMapping("key.the_deep_void.mount_up", GLFW.GLFW_KEY_UNKNOWN, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping MOUNT_UP = new KeyMapping("key.the_deep_void.mount_up", InputConstants.UNKNOWN.getValue(), net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -116,7 +117,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping MOUNT_DOWN = new KeyMapping("key.the_deep_void.mount_down", GLFW.GLFW_KEY_UNKNOWN, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping MOUNT_DOWN = new KeyMapping("key.the_deep_void.mount_down", InputConstants.UNKNOWN.getValue(), net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -134,7 +135,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping MOUNT_DASH = new KeyMapping("key.the_deep_void.mount_dash", GLFW.GLFW_KEY_UNKNOWN, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping MOUNT_DASH = new KeyMapping("key.the_deep_void.mount_dash", InputConstants.UNKNOWN.getValue(), net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -152,7 +153,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping WINGS_FOWARD = new KeyMapping("key.the_deep_void.wings_foward", GLFW.GLFW_KEY_W, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping WINGS_FOWARD = new KeyMapping("key.the_deep_void.wings_foward", InputConstants.KEY_W, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -170,7 +171,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping WINGS_BACKWARD = new KeyMapping("key.the_deep_void.wings_backward", GLFW.GLFW_KEY_S, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping WINGS_BACKWARD = new KeyMapping("key.the_deep_void.wings_backward", InputConstants.KEY_S, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -188,7 +189,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping WINGS_UP = new KeyMapping("key.the_deep_void.wings_up", GLFW.GLFW_KEY_SPACE, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping WINGS_UP = new KeyMapping("key.the_deep_void.wings_up", InputConstants.KEY_SPACE, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -206,7 +207,7 @@ public class TheDeepVoidModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping WINGS_DOWN = new KeyMapping("key.the_deep_void.wings_down", GLFW.GLFW_KEY_LEFT_SHIFT, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
+	public static final KeyMapping WINGS_DOWN = new KeyMapping("key.the_deep_void.wings_down", InputConstants.KEY_LSHIFT, net.sombrius.thedeepvoid.port.PortClient.KEY_CATEGORY) {
 		private boolean isDownOld = false;
 
 		@Override

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "minecraft:lingering_potion",
+    "potion_contents": {
+      "potions": "minecraft:water"
+    }
+  },
+  "output": {
+    "id": "the_deep_void:fishy_potion"
+  },
+  "reagent": {
+    "item": "the_deep_void:voidfish"
+  }
+}

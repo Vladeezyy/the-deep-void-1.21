@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class AshPileBlock extends FlowerBlock {
 	public AshPileBlock() {
 		super(MobEffects.SPEED, 100,
-				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_BLACK).sound(SoundType.SOUL_SOIL).strength(0.2f, 0f).noCollision().replaceable().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_BLACK).sound(SoundType.SOUL_SOIL).strength(0.2f, 0f).noCollision().replaceable().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override

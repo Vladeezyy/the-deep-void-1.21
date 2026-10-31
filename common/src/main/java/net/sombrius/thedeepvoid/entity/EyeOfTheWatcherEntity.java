@@ -204,7 +204,6 @@ public class EyeOfTheWatcherEntity extends PathfinderMob implements GeoEntity {
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		this.updateSwingTime();
 		this.setNoGravity(true);
 	}
 

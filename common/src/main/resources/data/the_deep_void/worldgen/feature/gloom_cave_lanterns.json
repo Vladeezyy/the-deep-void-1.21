@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:block_column",
+  "allowed_placement": {
+    "type": "minecraft:matching_blocks",
+    "blocks": "minecraft:air"
+  },
+  "direction": "up",
+  "layers": [
+    {
+      "height": {
+        "type": "uniform",
+        "min_inclusive": 1,
+        "max_inclusive": 6
+      },
+      "provider": {
+        "type": "minecraft:weighted",
+        "entries": [
+          {
+            "data": "the_deep_void:desolate_stem",
+            "weight": 2
+          },
+          {
+            "data": "the_deep_void:living_gloom_stem",
+            "weight": 1
+          }
+        ]
+      }
+    }
+  ],
+  "prioritize_tip": false
+}

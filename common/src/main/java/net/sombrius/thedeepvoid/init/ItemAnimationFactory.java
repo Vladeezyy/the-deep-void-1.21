@@ -1,7 +1,6 @@
 package net.sombrius.thedeepvoid.init;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
@@ -20,7 +19,7 @@ import com.geckolib.animatable.GeoItem;
 @EventBusSubscriber
 public class ItemAnimationFactory {
 	public static void disableUseAnim(String hand) {
-		ItemInHandRenderer renderer = Minecraft.getInstance().gameRenderer.itemInHandRenderer;
+		net.minecraft.client.player.FirstPersonHandsAndItems renderer = Minecraft.getInstance().player == null ? null : Minecraft.getInstance().player.firstPersonHandsAndItems();
 		if (renderer != null) {
 			if (hand.equals("right")) {
 				renderer.mainHandHeight = 1F;

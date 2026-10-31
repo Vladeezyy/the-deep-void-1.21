@@ -23,7 +23,7 @@ import net.sombrius.thedeepvoid.procedures.LiquidIchorOnTickUpdateProcedure;
 public class LiquidIchorBlock extends LiquidBlock {
 	public LiquidIchorBlock() {
 		super(TheDeepVoidModFluids.LIQUID_ICHOR.get(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.GOLD).strength(100f).emissiveRendering(bs -> true).lightLevel(s -> 5).noCollision().noLootTable()
-				.liquid().pushReaction(PushReaction.DESTROY).sound(SoundType.EMPTY).replaceable());
+				.liquid().pushReaction(PushReaction.POPPED).sound(SoundType.EMPTY).replaceable());
 	}
 
 	@Override

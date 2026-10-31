@@ -13,8 +13,6 @@
     "LivingEntityMixin",
     "MobMixin",
     "PlayerMixin",
-    "PotionBrewingMixin",
-    "PotionSlotMixin",
     "ResultSlotMixin",
     "ServerPlayerGameModeMixin",
     "ServerPlayerMixin",

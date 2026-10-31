@@ -44,7 +44,7 @@ public class DeathVultureRightClickedOnEntityProcedure {
 		if (entity instanceof DeathVultureEntity && (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.VULTURE_MUZZLE.get()) {
 			if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= 10 && Math.random() < 0.4) {
 				if (sourceentity instanceof LivingEntity _entity)
-					_entity.swing(InteractionHand.MAIN_HAND, true);
+					_entity.swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 				if (!(new Object() {
 					public boolean checkGamemode(Entity _ent) {
 						if (_ent instanceof ServerPlayer _serverPlayer) {

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "the_deep_void:absorption_needle"
+  },
+  "output": {
+    "id": "the_deep_void:health_boost_needle"
+  },
+  "reagent": {
+    "item": "the_deep_void:cinnabar"
+  }
+}

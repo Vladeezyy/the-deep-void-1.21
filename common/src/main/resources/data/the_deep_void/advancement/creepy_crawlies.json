@@ -18,17 +18,15 @@
     "creepy_crawlies_0": {
       "trigger": "minecraft:location",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "location": {
-                "biomes": "the_deep_void:crawler_nest"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "location": {
+              "biomes": "the_deep_void:crawler_nest"
             }
           }
-        ]
+        }
       }
     }
   },

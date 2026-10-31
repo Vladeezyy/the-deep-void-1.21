@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "the_deep_void:poison_needle"
+  },
+  "output": {
+    "id": "the_deep_void:wither_needle"
+  },
+  "reagent": {
+    "item": "the_deep_void:rotten_bone"
+  }
+}

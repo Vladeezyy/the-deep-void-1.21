@@ -21,7 +21,7 @@ import net.sombrius.thedeepvoid.procedures.LiquidVoidOnTickUpdateProcedure;
 
 public class LiquidVoidBlock extends LiquidBlock {
 	public LiquidVoidBlock() {
-		super(TheDeepVoidModFluids.LIQUID_VOID.get(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_BLACK).strength(100f).noCollision().noLootTable().liquid().pushReaction(PushReaction.DESTROY).sound(SoundType.EMPTY).replaceable());
+		super(TheDeepVoidModFluids.LIQUID_VOID.get(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_BLACK).strength(100f).noCollision().noLootTable().liquid().pushReaction(PushReaction.POPPED).sound(SoundType.EMPTY).replaceable());
 	}
 
 	@Override

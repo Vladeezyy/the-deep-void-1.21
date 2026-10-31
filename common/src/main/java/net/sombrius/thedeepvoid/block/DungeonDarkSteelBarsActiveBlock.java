@@ -19,7 +19,7 @@ import net.sombrius.thedeepvoid.procedures.DungeonDarkSteelBarsActiveOnTickUpdat
 
 public class DungeonDarkSteelBarsActiveBlock extends IronBarsBlock implements EntityBlock {
 	public DungeonDarkSteelBarsActiveBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.METAL).strength(-1, 3600000).lightLevel(s -> 4).pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.METAL).strength(-1, 3600000).lightLevel(s -> 4).pushReaction(PushReaction.IMMOVEABLE));
 	}
 
 	@Override

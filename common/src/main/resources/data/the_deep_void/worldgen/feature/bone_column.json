@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block_column",
+  "allowed_placement": {
+    "type": "minecraft:matching_blocks",
+    "blocks": "minecraft:air"
+  },
+  "direction": "up",
+  "layers": [
+    {
+      "height": {
+        "type": "uniform",
+        "min_inclusive": 1,
+        "max_inclusive": 4
+      },
+      "provider": {
+        "id": "the_deep_void:block_of_bone_pile"
+      }
+    }
+  ],
+  "prioritize_tip": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:ore",
+  "size": 20,
+  "discard_chance_on_air_exposure": 0,
+  "targets": [
+    {
+      "target": {
+        "predicate_type": "block_match",
+        "block": "the_deep_void:monolithic_stone"
+      },
+      "state": "the_deep_void:cinnabar_ore"
+    }
+  ]
+}

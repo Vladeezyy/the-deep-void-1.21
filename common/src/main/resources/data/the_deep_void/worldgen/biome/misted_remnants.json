@@ -14,8 +14,8 @@
         "replace_current_music": true
       }
     },
-    "minecraft:visual/sky_color": "#000000",
     "minecraft:visual/fog_color": "#000000",
+    "minecraft:visual/sky_color": "#000000",
     "minecraft:visual/water_fog_color": "#000000"
   },
   "carvers": [],
@@ -39,16 +39,5 @@
     [],
     [],
     []
-  ],
-  "spawn_costs": {},
-  "spawners": {
-    "monster": [],
-    "creature": [],
-    "ambient": [],
-    "axolotls": [],
-    "underground_water_creature": [],
-    "water_creature": [],
-    "water_ambient": [],
-    "misc": []
-  }
+  ]
 }

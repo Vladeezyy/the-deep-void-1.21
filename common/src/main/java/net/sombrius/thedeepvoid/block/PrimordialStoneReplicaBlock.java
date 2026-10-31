@@ -12,7 +12,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class PrimordialStoneReplicaBlock extends Block {
 	public PrimordialStoneReplicaBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHERRACK).strength(70f, 1200f).requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHERRACK).strength(70f, 1200f).requiresCorrectToolForDrops().pushReaction(PushReaction.IMMOVEABLE));
 	}
 
 	@Override

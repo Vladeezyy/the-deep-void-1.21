@@ -1,6 +1,5 @@
 package net.sombrius.thedeepvoid.fabric;
 
-import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -41,7 +40,6 @@ import net.sombrius.thedeepvoid.port.bus.ServerChatEvent;
 import net.sombrius.thedeepvoid.port.bus.RegisterSpawnPlacementsEvent;
 import net.sombrius.thedeepvoid.port.bus.RegisterCommandsEvent;
 import net.sombrius.thedeepvoid.port.bus.RegisterCapabilitiesEvent;
-import net.sombrius.thedeepvoid.port.bus.RegisterBrewingRecipesEvent;
 import net.sombrius.thedeepvoid.port.bus.PlayerWakeUpEvent;
 import net.sombrius.thedeepvoid.port.bus.PlayerInteractEvent;
 import net.sombrius.thedeepvoid.port.bus.PlayerEvent;
@@ -50,7 +48,6 @@ import net.sombrius.thedeepvoid.port.bus.ModBus;
 import net.sombrius.thedeepvoid.port.bus.LevelTickEvent;
 import net.sombrius.thedeepvoid.port.bus.LevelEvent;
 import net.sombrius.thedeepvoid.port.bus.ItemAttributeModifierEvent;
-import net.sombrius.thedeepvoid.port.bus.FurnaceFuelBurnTimeEvent;
 import net.sombrius.thedeepvoid.port.bus.FMLConstructModEvent;
 import net.sombrius.thedeepvoid.port.bus.FMLCommonSetupEvent;
 import net.sombrius.thedeepvoid.port.bus.EntityLeaveLevelEvent;
@@ -82,7 +79,7 @@ public final class TheDeepVoidFabric implements ModInitializer {
 				SpawnPlacements.register(type, placement, heightmap, predicate);
 			}
 		}));
-		ModBus.post(new RegisterBrewingRecipesEvent(FabricBrewing.RECIPES::add));
+		// 26.3: brewing recipes are data (recipe/brewing); the brewing stand takes their inputs itself
 		ModBus.post(new RegisterCapabilitiesEvent());
 		FabricBiomeModifiers.register();
 		// NeoForge's tags for its poison damage, the soils (canSustainPlant) and the bookshelf (getEnchantPowerBonus)
@@ -143,16 +140,9 @@ public final class TheDeepVoidFabric implements ModInitializer {
 		ServerEntityEvents.ENTITY_UNLOAD.register((entity, level) -> ModBus.post(new EntityLeaveLevelEvent(entity, level)));
 	}
 
-	/** NeoForge's FurnaceFuelBurnTimeEvent and IBlockExtension#getFlammability for the mod's items and blocks */
+	/** NeoForge's IBlockExtension#getFlammability for the mod's blocks */
 	private static void fuelAndFlammability() {
-		// 1.21.2: fuel values are built with the registries (once per data load)
-		FuelValueEvents.BUILD.register((builder, context) -> {
-			for (var entry : TheDeepVoidModItems.REGISTRY.getEntries()) {
-				FurnaceFuelBurnTimeEvent event = new FurnaceFuelBurnTimeEvent(new ItemStack(entry.get()), -1);
-				if (ModBus.post(event))
-					builder.add(entry.get(), event.getBurnTime());
-			}
-		});
+		// 26.3: fuel is the item's cooking_fuel component (its properties)
 		for (var entry : TheDeepVoidModBlocks.REGISTRY.getEntries()) {
 			Block block = entry.get();
 			int burn = blockInt(block, "getFlammability");

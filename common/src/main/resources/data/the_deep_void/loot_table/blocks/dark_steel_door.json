@@ -3,27 +3,23 @@
   "random_sequence": "the_deep_void:blocks/dark_steel_door",
   "pools": [
     {
-      "rolls": 1.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
           "name": "the_deep_void:dark_steel_door",
-          "conditions": [
-            {
-              "block": "the_deep_void:dark_steel_door",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "half": "lower"
-              }
+          "condition": {
+            "type": "minecraft:match_block",
+            "blocks": "the_deep_void:dark_steel_door",
+            "state": {
+              "half": "lower"
             }
-          ]
+          }
         }
-      ]
+      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      }
     }
   ]
 }

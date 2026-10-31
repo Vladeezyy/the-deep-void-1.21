@@ -107,7 +107,7 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 			java.util.List<net.minecraft.world.item.crafting.RecipeHolder<?>> ours = new java.util.ArrayList<>();
 			for (var type : PortRecipeSync.TYPES)
 				ours.addAll(recipes.getAllOfType((net.minecraft.world.item.crafting.RecipeType) type.get()));
-			PortRecipeSync.setRecipes(net.minecraft.world.item.crafting.RecipeMap.create(ours));
+			PortRecipeSync.setRecipes(ours);
 		});
 
 		ClientTickEvents.START_CLIENT_TICK.register(minecraft -> ModBus.post(new ClientTickEvent.Pre()));
@@ -145,7 +145,7 @@ public final class TheDeepVoidFabricClient implements ClientModInitializer {
 					@SuppressWarnings("unchecked")
 					HumanoidModel<HumanoidRenderState> model = (HumanoidModel<HumanoidRenderState>) extensions.getHumanoidArmorModel(stack, type, contextModel);
 					Identifier texture = extensions.getArmorTexture(stack, type, null, MISSING_TEXTURE);
-					ArmorRenderer.submitTransformCopyingModel(contextModel, state, model, state, true, collector, pose, RenderTypes.armorCutoutNoCull(texture), light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+					ArmorRenderer.submitTransformCopyingModel(contextModel, state, model, state, true, collector, pose, RenderTypes.armorCutoutNoCull(texture), light, OverlayTexture.NO_OVERLAY, state.outlineColor);
 				}, item);
 		}
 	}

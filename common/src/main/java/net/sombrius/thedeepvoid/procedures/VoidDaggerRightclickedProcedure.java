@@ -42,7 +42,7 @@ public class VoidDaggerRightclickedProcedure {
 			return;
 		if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getOffhandItem() : ItemStack.EMPTY).getItem() == TheDeepVoidModItems.OFF_HAND_VOID_DAGGER.get()) {
 			if (sourceentity instanceof LivingEntity _entity)
-				_entity.swing(InteractionHand.OFF_HAND, true);
+				_entity.swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 			if (entity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(TheDeepVoidModMobEffects.COMBO.holder())) {
 				if (entity instanceof LivingEntity _entity)
 					_entity.removeEffect(TheDeepVoidModMobEffects.COMBO.holder());

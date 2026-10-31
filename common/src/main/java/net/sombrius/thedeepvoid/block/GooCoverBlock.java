@@ -28,7 +28,7 @@ public class GooCoverBlock extends FlowerBlock {
 						.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.slime_block.break")),
 								() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flesh_block_step")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("the_deep_void:flesh_block_step")),
 								() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.slime_block.hit")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.slime_block.fall"))))
-						.strength(0.2f, 0.5f).speedFactor(0.8f).jumpFactor(0.9f).noCollision().replaceable().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.DESTROY));
+						.strength(0.2f, 0.5f).speedFactor(0.8f).jumpFactor(0.9f).noCollision().replaceable().offsetType(BlockBehaviour.OffsetType.NONE).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override

@@ -42,7 +42,7 @@ public class BlueFireBlock extends Block implements SimpleWaterloggedBlock {
 				.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.fire.extinguish")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty")),
 						() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty")),
 						() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("intentionally_empty"))))
-				.instabreak().lightLevel(s -> 15).noOcclusion().pushReaction(PushReaction.DESTROY).emissiveRendering(bs -> true).isRedstoneConductor((bs, br, bp) -> false));
+				.instabreak().lightLevel(s -> 15).noOcclusion().pushReaction(PushReaction.POPPED).emissiveRendering(bs -> true).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}
 

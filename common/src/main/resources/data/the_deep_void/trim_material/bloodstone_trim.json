@@ -1,7 +1,7 @@
 {
-  "asset_name": "bloodstone_trim",
   "description": {
     "color": "#A8284E",
     "translate": "trim_material.the_deep_void.bloodstone_trim"
-  }
+  },
+  "palette_id": "the_deep_void:trim/bloodstone_trim"
 }

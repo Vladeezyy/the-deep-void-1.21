@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:delta_feature",
+  "contents": "the_deep_void:liquid_void",
+  "rim": "the_deep_void:ash_block",
+  "size": {
+    "type": "uniform",
+    "min_inclusive": 2,
+    "max_inclusive": 16
+  },
+  "rim_size": {
+    "type": "uniform",
+    "min_inclusive": 1,
+    "max_inclusive": 4
+  }
+}

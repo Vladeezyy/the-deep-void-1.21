@@ -193,7 +193,6 @@ public class SleepingPrimordialCrawlerEntity extends PathfinderMob implements Ge
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		this.updateSwingTime();
 	}
 
 	public static void init(RegisterSpawnPlacementsEvent event) {

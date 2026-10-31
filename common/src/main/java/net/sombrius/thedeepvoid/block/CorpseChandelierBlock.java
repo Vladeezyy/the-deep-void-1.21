@@ -27,7 +27,7 @@ public class CorpseChandelierBlock extends Block implements SimpleWaterloggedBlo
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public CorpseChandelierBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.LANTERN).strength(2.4f, 4f).lightLevel(s -> 12).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.DESTROY)
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.LANTERN).strength(2.4f, 4f).lightLevel(s -> 12).requiresCorrectToolForDrops().noOcclusion().pushReaction(PushReaction.POPPED)
 				.isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}

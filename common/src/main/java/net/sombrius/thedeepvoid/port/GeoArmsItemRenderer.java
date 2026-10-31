@@ -70,7 +70,7 @@ public class GeoArmsItemRenderer<T extends Item & GeoAnimatable> extends GeoItem
 	private static void submitArm(RenderPassInfo<GeoRenderState> renderPassInfo, String boneName, ModelPart arm, float x, RenderType type, int light, int color) {
 		renderPassInfo.model().getBone(boneName).ifPresent(bone -> renderPassInfo.addPerBoneRender(bone, (info, b, tasks) -> {
 			info.poseStack().translate(x, 2 * PIXEL, 0);
-			tasks.submitModelPart(arm, info.poseStack(), type, light, OverlayTexture.NO_OVERLAY, null, color, null);
+			tasks.submitModelPart(arm, info.poseStack(), type, light, OverlayTexture.NO_OVERLAY, null, color);
 		}));
 	}
 

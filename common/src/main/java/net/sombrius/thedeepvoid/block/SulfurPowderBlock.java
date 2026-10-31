@@ -18,7 +18,7 @@ import net.sombrius.thedeepvoid.procedures.SulfurPowderNeighbourBlockChangesProc
 
 public class SulfurPowderBlock extends Block {
 	public SulfurPowderBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.STONE).instabreak().noCollision().noOcclusion().pushReaction(PushReaction.DESTROY).isRedstoneConductor((bs, br, bp) -> false));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().sound(SoundType.STONE).instabreak().noCollision().noOcclusion().pushReaction(PushReaction.POPPED).isRedstoneConductor((bs, br, bp) -> false));
 	}
 
 	@Override

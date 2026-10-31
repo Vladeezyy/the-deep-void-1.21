@@ -10,8 +10,7 @@
   ],
   "spawners": {
     "type": "the_deep_void:bone_cage",
-    "weight": 4,
-    "minCount": 1,
-    "maxCount": 1
+    "count": 1,
+    "weight": 4
   }
 }

@@ -8,43 +8,40 @@
           "type": "minecraft:item",
           "name": "the_deep_void:monolithic_stone",
           "weight": 100,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:seer",
           "weight": 100,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1,
+              "min": 1
             }
-          ]
+          }
         },
         {
           "type": "minecraft:item",
           "name": "the_deep_void:cinnabar",
           "weight": 50,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 4,
+              "min": 1
             }
-          ]
+          }
         }
       ]
     }

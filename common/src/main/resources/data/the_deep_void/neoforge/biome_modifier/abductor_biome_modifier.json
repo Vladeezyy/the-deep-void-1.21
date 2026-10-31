@@ -5,8 +5,7 @@
   },
   "spawners": {
     "type": "the_deep_void:abductor",
-    "weight": 1,
-    "minCount": 1,
-    "maxCount": 1
+    "count": 1,
+    "weight": 1
   }
 }

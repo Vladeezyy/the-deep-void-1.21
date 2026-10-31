@@ -6,8 +6,7 @@
   ],
   "spawners": {
     "type": "the_deep_void:beholder",
-    "weight": 2,
-    "minCount": 1,
-    "maxCount": 1
+    "count": 1,
+    "weight": 2
   }
 }

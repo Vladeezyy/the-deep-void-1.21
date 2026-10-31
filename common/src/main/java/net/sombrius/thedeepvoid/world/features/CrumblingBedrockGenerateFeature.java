@@ -1,24 +1,30 @@
-
 package net.sombrius.thedeepvoid.world.features;
 
+import com.mojang.serialization.MapCodec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.OreFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.sombrius.thedeepvoid.procedures.CrumblingBedrockGenerateAdditionalGenerationConditionProcedure;
 
-public class CrumblingBedrockGenerateFeature extends OreFeature {
-	public CrumblingBedrockGenerateFeature() {
-		super(OreConfiguration.CODEC);
+/** 26.3: a feature is its own configuration; MCreator's condition before OreFeature's placement */
+public record CrumblingBedrockGenerateFeature(OreFeature feature) implements Feature {
+	public static final MapCodec<CrumblingBedrockGenerateFeature> CODEC = OreFeature.CODEC.xmap(CrumblingBedrockGenerateFeature::new, CrumblingBedrockGenerateFeature::feature);
+
+	@Override
+	public MapCodec<CrumblingBedrockGenerateFeature> codec() {
+		return CODEC;
 	}
 
-	public boolean place(FeaturePlaceContext<OreConfiguration> context) {
-		WorldGenLevel world = context.level();
-		int x = context.origin().getX();
-		int y = context.origin().getY();
-		int z = context.origin().getZ();
+	@Override
+	public boolean place(WorldGenLevel world, ChunkGenerator chunkGenerator, RandomSource random, BlockPos origin) {
+		int x = origin.getX();
+		int y = origin.getY();
+		int z = origin.getZ();
 		if (!CrumblingBedrockGenerateAdditionalGenerationConditionProcedure.execute())
 			return false;
-		return super.place(context);
+		return this.feature.place(world, chunkGenerator, random, origin);
 	}
 }

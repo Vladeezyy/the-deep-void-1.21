@@ -10,7 +10,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -22,11 +21,11 @@ import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 import net.sombrius.thedeepvoid.procedures.EverhungryFleshGloveToolInInventoryTickProcedure;
 import net.sombrius.thedeepvoid.procedures.FleshGloveLivingEntityIsHitWithToolProcedure;
 
-public class EverhungryFleshGloveItem extends AxeItem {
+public class EverhungryFleshGloveItem extends Item {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2031, 20f, 0f, 20, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/none")));
 
 	public EverhungryFleshGloveItem() {
-		super(TOOL_TIER, 2f, 16f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant().axe(TOOL_TIER, 2f, 16f));
 	}
 
 	@Override

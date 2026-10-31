@@ -26,7 +26,7 @@ import net.sombrius.thedeepvoid.procedures.FakeTorchOnTickUpdateProcedure;
 
 public class FakeTorchBlock extends Block {
 	public FakeTorchBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.WOOD).instabreak().lightLevel(s -> 14).noCollision().noOcclusion().randomTicks().pushReaction(PushReaction.DESTROY)
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.WOOD).instabreak().lightLevel(s -> 14).noCollision().noOcclusion().randomTicks().pushReaction(PushReaction.POPPED)
 				.emissiveRendering(bs -> true).isRedstoneConductor((bs, br, bp) -> false));
 	}
 

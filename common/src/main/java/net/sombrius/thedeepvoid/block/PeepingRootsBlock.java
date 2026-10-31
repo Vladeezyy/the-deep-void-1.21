@@ -20,7 +20,7 @@ import net.sombrius.thedeepvoid.procedures.PeepingRootsTickUpdateProcedure;
 public class PeepingRootsBlock extends FlowerBlock {
 	public PeepingRootsBlock() {
 		super(MobEffects.SPEED, 100,
-				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_GRAY).randomTicks().sound(SoundType.BASALT).strength(1.5f, 1f).noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+				net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().mapColor(MapColor.COLOR_GRAY).randomTicks().sound(SoundType.BASALT).strength(1.5f, 1f).noCollision().offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED));
 	}
 
 	@Override

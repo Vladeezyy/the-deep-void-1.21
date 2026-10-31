@@ -4,7 +4,6 @@
  */
 package net.sombrius.thedeepvoid.init;
 
-import net.minecraft.world.level.block.ComposterBlock;
 import net.sombrius.thedeepvoid.port.bus.SubscribeEvent;
 import net.sombrius.thedeepvoid.port.bus.EventBusSubscriber;
 import net.sombrius.thedeepvoid.port.bus.FMLCommonSetupEvent;
@@ -13,6 +12,6 @@ import net.sombrius.thedeepvoid.port.bus.FMLCommonSetupEvent;
 public class TheDeepVoidModCompostableItems {
 	@SubscribeEvent
 	public static void addComposterItems(FMLCommonSetupEvent event) {
-		ComposterBlock.COMPOSTABLES.put(TheDeepVoidModItems.SULFUR.get(), 1f);
+		// 26.3: compostable items have the compostable component (their properties)
 	}
 }

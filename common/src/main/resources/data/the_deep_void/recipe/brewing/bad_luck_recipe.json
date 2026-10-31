@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "the_deep_void:fishy_potion"
+  },
+  "output": {
+    "components": {
+      "minecraft:potion_contents": {
+        "potion": "the_deep_void:bad_luck"
+      }
+    },
+    "id": "minecraft:potion"
+  },
+  "reagent": {
+    "item": "the_deep_void:cursed_pearl"
+  }
+}

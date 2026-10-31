@@ -1,12 +1,9 @@
 accessWidener v2 official
 # common/accesstransformer.cfg (what NeoForge's AT and the mod's AT open)
-accessible method net/minecraft/world/level/levelgen/feature/ScatteredOreFeature <init> (Lcom/mojang/serialization/Codec;)V
-accessible method net/minecraft/world/level/levelgen/feature/TreeFeature place (Lnet/minecraft/world/level/levelgen/feature/FeaturePlaceContext;)Z
-extendable method net/minecraft/world/level/levelgen/feature/TreeFeature place (Lnet/minecraft/world/level/levelgen/feature/FeaturePlaceContext;)Z
-accessible field net/minecraft/client/renderer/ItemInHandRenderer mainHandHeight F
-accessible field net/minecraft/client/renderer/ItemInHandRenderer oMainHandHeight F
-accessible field net/minecraft/client/renderer/ItemInHandRenderer offHandHeight F
-accessible field net/minecraft/client/renderer/ItemInHandRenderer oOffHandHeight F
+accessible field net/minecraft/client/player/FirstPersonHandsAndItems mainHandHeight F
+accessible field net/minecraft/client/player/FirstPersonHandsAndItems oMainHandHeight F
+accessible field net/minecraft/client/player/FirstPersonHandsAndItems offHandHeight F
+accessible field net/minecraft/client/player/FirstPersonHandsAndItems oOffHandHeight F
 accessible method net/minecraft/world/entity/projectile/arrow/AbstractArrow setPierceLevel (B)V
 accessible class net/minecraft/client/particle/ParticleResources$SpriteParticleRegistration
 accessible class net/minecraft/client/gui/screens/MenuScreens$ScreenConstructor

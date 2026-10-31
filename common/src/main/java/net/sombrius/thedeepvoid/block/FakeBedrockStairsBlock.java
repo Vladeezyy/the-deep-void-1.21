@@ -10,7 +10,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class FakeBedrockStairsBlock extends StairBlock {
 	public FakeBedrockStairsBlock() {
-		super(Blocks.AIR.defaultBlockState(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(70f, 1200f).requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK).dynamicShape());
+		super(Blocks.AIR.defaultBlockState(), net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(70f, 1200f).requiresCorrectToolForDrops().pushReaction(PushReaction.IMMOVEABLE).dynamicShape());
 	}
 
 	@Override

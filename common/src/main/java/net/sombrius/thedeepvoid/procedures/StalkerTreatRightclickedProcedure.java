@@ -37,7 +37,7 @@ public class StalkerTreatRightclickedProcedure {
 				_player.getCooldowns().addCooldown(new ItemStack(TheDeepVoidModItems.STALKER_TREAT.get()), 60);
 			if (entity instanceof Player _player) {
 				ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.STALKER_TREAT.get());
-				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
@@ -54,7 +54,7 @@ public class StalkerTreatRightclickedProcedure {
 				_player.getCooldowns().addCooldown(new ItemStack(TheDeepVoidModItems.STALKER_TREAT.get()), 60);
 			if (entity instanceof Player _player) {
 				ItemStack _stktoremove = new ItemStack(TheDeepVoidModItems.STALKER_TREAT.get());
-				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), 1, _player.inventoryMenu.getCraftSlots());
+				_player.getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, 1, _player.inventoryMenu.getCraftSlots());
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {

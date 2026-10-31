@@ -1,0 +1,10 @@
+{
+  "type": "the_deep_void:rotten_moss_generate",
+  "target": "minecraft:deepslate",
+  "state": "the_deep_void:rotten_moss",
+  "radius": {
+    "type": "uniform",
+    "min_inclusive": 4,
+    "max_inclusive": 12
+  }
+}

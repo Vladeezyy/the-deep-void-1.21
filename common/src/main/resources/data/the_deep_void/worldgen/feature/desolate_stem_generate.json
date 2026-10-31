@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block_column",
+  "allowed_placement": {
+    "type": "minecraft:matching_blocks",
+    "blocks": "minecraft:air"
+  },
+  "direction": "up",
+  "layers": [
+    {
+      "height": {
+        "type": "uniform",
+        "min_inclusive": 2,
+        "max_inclusive": 5
+      },
+      "provider": {
+        "id": "the_deep_void:desolate_stem"
+      }
+    }
+  ],
+  "prioritize_tip": false
+}

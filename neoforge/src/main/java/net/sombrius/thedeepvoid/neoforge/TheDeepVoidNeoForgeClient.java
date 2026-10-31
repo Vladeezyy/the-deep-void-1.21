@@ -154,8 +154,11 @@ public final class TheDeepVoidNeoForgeClient {
 			}
 
 			@Override
-			public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
-				return ours.applyForgeHandTransform(poseStack, player, arm, itemInHand, partialTick, equipProcess, swingProcess);
+			public boolean applyForgeHandTransform(PoseStack poseStack, net.minecraft.client.renderer.state.level.PlayerRenderState playerState, HumanoidArm arm, ItemStack itemInHand, float partialTick,
+					float equipProcess, float swingProcess) {
+				// 26.3: a render state; in first person it is the local player's
+				LocalPlayer player = net.minecraft.client.Minecraft.getInstance().player;
+				return player != null && ours.applyForgeHandTransform(poseStack, player, arm, itemInHand, partialTick, equipProcess, swingProcess);
 			}
 
 			@Override

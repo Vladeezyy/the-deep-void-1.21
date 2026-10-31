@@ -87,8 +87,7 @@ public class PlayerDiesInPitProcedure {
 					{
 						Entity _ent = entity;
 						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
-									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:debilitated_fall master @s ~ ~ ~ 10 1 1");
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent), "playsound the_deep_void:debilitated_fall master @s ~ ~ ~ 10 1 1");
 						}
 					}
 				}
@@ -107,8 +106,7 @@ public class PlayerDiesInPitProcedure {
 				{
 					Entity _ent = entity;
 					if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
-								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "stopsound @s music the_deep_void:under_the_asylum");
+						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent), "stopsound @s music the_deep_void:under_the_asylum");
 					}
 				}
 				{
@@ -122,7 +120,7 @@ public class PlayerDiesInPitProcedure {
 					}
 				}
 				if (world instanceof ServerLevel _serverworld) {
-					StructureTemplate template = _serverworld.getStructureManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "the_pit_7_regenerate"));
+					StructureTemplate template = _serverworld.getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("the_deep_void", "the_pit_7_regenerate"));
 					if (template != null) {
 						template.placeInWorld(_serverworld, new BlockPos(0, 0, 0), new BlockPos(0, 0, 0), new StructurePlaceSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setIgnoreEntities(false), _serverworld.getRandom(), 3);
 					}
@@ -144,8 +142,7 @@ public class PlayerDiesInPitProcedure {
 				{
 					Entity _ent = entity;
 					if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER,
-								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound the_deep_void:player_put_in_cage master @s ~ ~ ~ 10 1 1");
+						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent), "playsound the_deep_void:player_put_in_cage master @s ~ ~ ~ 10 1 1");
 					}
 				}
 			}

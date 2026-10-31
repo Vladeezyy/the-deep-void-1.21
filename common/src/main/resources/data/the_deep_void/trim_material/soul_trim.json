@@ -1,7 +1,7 @@
 {
-  "asset_name": "soul_trim",
   "description": {
     "color": "#46DBF6",
     "translate": "trim_material.the_deep_void.soul_trim"
-  }
+  },
+  "palette_id": "the_deep_void:trim/soul_trim"
 }

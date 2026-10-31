@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "the_deep_void:teeth",
+        "weight": 10
+      },
+      {
+        "data": "the_deep_void:pus_sack",
+        "weight": 60
+      },
+      {
+        "data": "the_deep_void:gore_stems",
+        "weight": 15
+      },
+      {
+        "data": "the_deep_void:peeping_stem",
+        "weight": 10
+      },
+      {
+        "data": "the_deep_void:corpse_blossom",
+        "weight": 5
+      }
+    ]
+  }
+}

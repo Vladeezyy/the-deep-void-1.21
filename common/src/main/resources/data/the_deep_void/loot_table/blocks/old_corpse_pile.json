@@ -3,18 +3,18 @@
   "random_sequence": "the_deep_void:blocks/old_corpse_pile",
   "pools": [
     {
-      "rolls": 1.0,
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
           "name": "the_deep_void:old_corpse",
-          "functions": [
+          "modifier": [
             {
-              "count": 2,
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count",
+              "count": 2
             },
             {
-              "function": "minecraft:explosion_decay"
+              "type": "minecraft:explosion_decay"
             }
           ]
         }

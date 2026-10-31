@@ -12,14 +12,13 @@ import net.sombrius.thedeepvoid.init.TheDeepVoidModItems;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.entity.LivingEntity;
 
-public class OnyxHoeItem extends HoeItem {
+public class OnyxHoeItem extends Item {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1561, 8f, 0f, 10, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/onyx")));
 
 	public OnyxHoeItem() {
-		super(TOOL_TIER, 0, 0.1f, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().fireResistant().hoe(TOOL_TIER, 0, 0.1f));
 	}
 
 	@Override

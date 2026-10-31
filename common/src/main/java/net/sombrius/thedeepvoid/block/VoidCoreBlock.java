@@ -12,7 +12,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class VoidCoreBlock extends Block {
 	public VoidCoreBlock() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.LODESTONE).strength(2.5f, 10f).pushReaction(PushReaction.BLOCK));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.blockProps().instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.LODESTONE).strength(2.5f, 10f).pushReaction(PushReaction.IMMOVEABLE));
 	}
 
 	@Override

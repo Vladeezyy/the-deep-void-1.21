@@ -55,7 +55,7 @@ fight bosses with complex attack patterns for some of the strongest gear in the 
 
 ## 📦 Requirements
 
-One jar per Minecraft version and loader ([releases](../../releases)): `the-deep-void-<loader>-1.99.3.1.2+<minecraft>.jar`.
+One jar per Minecraft version and loader ([releases](../../releases)): `the-deep-void-<loader>-1.99.3.1.3+<minecraft>.jar`.
 
 - **Minecraft 1.21.1** — NeoForge 21.1.197+ or Fabric Loader 0.19.5+ with Fabric API; GeckoLib 4.9+.
 - **Minecraft 1.21.11** — NeoForge 21.11.48+ or Fabric with Fabric API; GeckoLib 5.4.5+.
@@ -151,7 +151,7 @@ The Deep Void добавляет хоррор-измерение под бедр
 <details>
 <summary><b>📦 Требования</b></summary>
 
-Один jar на версию Minecraft и загрузчик ([релизы](../../releases)): `the-deep-void-<загрузчик>-1.99.3.1.2+<minecraft>.jar`.
+Один jar на версию Minecraft и загрузчик ([релизы](../../releases)): `the-deep-void-<загрузчик>-1.99.3.1.3+<minecraft>.jar`.
 
 - **Minecraft 1.21.1** — NeoForge 21.1.197+ или Fabric Loader 0.19.5+ с Fabric API; GeckoLib 4.9+.
 - **Minecraft 1.21.11** — NeoForge 21.11.48+ или Fabric с Fabric API; GeckoLib 5.4.5+.

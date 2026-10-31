@@ -37,7 +37,11 @@
   production-сервер NeoForge 26.3.0.99 с jar (`prodtest/26.3.0.99`, `prodtest/serve.sh`), замер `tools/bench.sh 26.3`
   (MSPT/FPS в пределах шума против базы, таблица в `PORTLOG.md`). Раздел «Minecraft 26.3» в `PORTLOG.md`, разбор
   `modding-kb/porting/mc-versions/26.3/the-deep-void.md`.
-- Дальше (по задаче владельца): README и релизы на версиях.
+- **Выпуск 1.99.3.1.1 (2026-10-31)**: релизы GitHub `v1.99.3.1.1+<mc>` (NeoForge + Fabric jar из зелёного CI вершины
+  `multiloader`, `mc/1.21.11`, `mc/26.1.2`, `mc/26.2`, `mc/26.3`), репозиторий публичный, CurseForge — проект
+  **The Deep Void (Unofficial Port) 1775380** (описание — `docs/curseforge-description.md`), файлы 9379734–9379743
+  (`~/Desktop/modrinth-publish/cf_ports.py dv --tag v1.99.3.1.1+<mc> --go`). 1.21.1 выходит из `multiloader`: `main`
+  остаётся NeoForge-оригиналом для конвейеров (`tools/restore_common.sh main`).
 
 ## Масштаб (замерено)
 - 3108 Java-файлов, ~206 тыс. строк (MCreator), 1643 импорта GeckoLib, 36 — JEI.

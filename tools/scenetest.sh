@@ -12,7 +12,7 @@ case $LOADER in
 esac
 kill_dev() { pkill -f "$PROC" 2>/dev/null; }
 LOG=build-scene-$LOADER.log
-rm -rf $LOADER/run/saves/dv_scene $LOADER/run/saves/dv_items $LOG
+rm -rf $LOADER/run/saves/dv_scene $LOADER/run/saves/dv_items $LOADER/run/saves/dv_brewing $LOG
 find $LOADER/run/screenshots -name 'scene_*.png' -delete 2>/dev/null
 run_watched "$LOG" 900 ./gradlew :$LOADER:runScene --console=plain "$@"
 code=$?

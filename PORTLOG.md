@@ -267,8 +267,28 @@ shorthands) after the earlier converters.
 - Input is SDL: the key bindings without a default are `InputConstants.UNKNOWN` (0).
 - Checked: dev server (both), production server (Fabric with the jar), the world scene, the mobs and the items scene
   (guns in first person, GeckoLib armor) on both loaders. The pipeline reproduces the code from the originals
-  (`tools/restore_common.sh` now brings back the packages 26.3 removes). Not checked: a NeoForge production server,
-  MSPT / FPS, brewing in the game (the recipes load, the server reports no errors).
+  (`tools/restore_common.sh` now brings back the packages 26.3 removes).
+- Brewing in the game (`-Pscene=brewing`): every brewing recipe of the mod in its own brewing stand with blaze powder,
+  the bottles compared with the recipe outputs after the brew: 50 of 50 on both loaders.
+- Production server NeoForge 26.3.0.99 (installer, the mod's jar and GeckoLib 5.5.7, `prodtest/serve.sh`): Done in
+  1.9 s, a minute of ticks, no errors, no "Can't keep up".
+- Tick cost (`tools/bench.sh 26.3`, the bench scene of the 1.21.1 measurement: base line = the mod's tick handlers off,
+  mean of 2 windows of 200 ticks per cell; Apple M4, JDK 25, dev client):
+
+| Place | Measure | NeoForge base | NeoForge mod | Fabric base | Fabric mod |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Overworld | player tick, server / client, µs | 11 / 7 | 102 / 73 | 11 / 9 | 105 / 80 |
+| Deep Void | player tick, server / client, µs | 8 / 5 | 135 / 109 | 8 / 7 | 121 / 94 |
+| Deep Void + stalkers, overseer | player tick, server / client, µs | 3 / 2 | 79 / 69 | 2 / 2 | 119 / 98 |
+| all three | entity ticks, server, µs | 3–5 | 5–9 | 3–6 | 5–11 |
+| all three | level ticks, µs | 0.6–0.7 | 2.5–3.6 | 0.2–0.6 | 2.6–3.2 |
+| all three | MSPT, ms | 1.6–2.1 | 1.7–2.0 | 1.5–1.9 | 1.7–2.0 |
+| all three | FPS | 98 / 107 / 116 | 102 / 104 / 100 | 101 / 105 / 93 | 108 / 116 / 104 |
+
+  The handlers cost what they cost on 1.21.1 after the fixes (player tick 99 / 199 / 123 µs there); MSPT and FPS are
+  within the noise of the base line. The FPS is lower than on 1.21.1 for the base line as well (the 26.x renderer in
+  the dev client). The bench sets the inactivity frame limit to "minimized": with the default (AFK) the game drops
+  to 30 FPS a minute after the last input. Not checked: a world played with several players.
 
 ## Known, unchanged from 1.20.1
 

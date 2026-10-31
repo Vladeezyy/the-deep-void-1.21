@@ -65,7 +65,8 @@ public final class DevScene {
 			"entity.the_deep_void.undertaker.canopy1");
 	private static final boolean BENCH = "bench".equals(System.getProperty("deepvoid.scene"));
 	private static final boolean ITEMS = "items".equals(System.getProperty("deepvoid.scene"));
-	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : ITEMS ? "dv_items" : "dv_scene";
+	private static final boolean BREWING = "brewing".equals(System.getProperty("deepvoid.scene"));
+	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : ITEMS ? "dv_items" : BREWING ? "dv_brewing" : "dv_scene";
 	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 	private static final List<Pair<Integer, Consumer<Minecraft>>> STEPS = new ArrayList<>();
 	private static boolean opened;
@@ -83,6 +84,8 @@ public final class DevScene {
 		}));
 		if (ITEMS) {
 			items();
+		} else if (BREWING) {
+			brewing();
 		} else if (BENCH) {
 			PortBench.register();
 			bench();
@@ -93,6 +96,56 @@ public final class DevScene {
 		} else {
 			biomesAndMobs();
 		}
+	}
+
+	/**
+	 * 26.3: brewing recipes are data. Every brewing recipe of the mod in a real brewing stand (a row of stands with the
+	 * input, the reagent and blaze powder), then the bottles compared with the recipes' outputs: {@code [scene] brewing}.
+	 */
+	private static void brewing() {
+		List<net.minecraft.world.item.crafting.BrewingRecipe> recipes = new ArrayList<>();
+		at(60, mc -> server(mc, p -> {
+			ServerLevel level = p.level().getServer().overworld();
+			p.teleportTo(level, 0.5, 120, 0.5, java.util.Set.of(), 0F, 60F, true);
+			for (var holder : p.level().getServer().getRecipeManager().getRecipes())
+				if (holder.id().identifier().getNamespace().equals(TheDeepVoidMod.MODID) && holder.value() instanceof net.minecraft.world.item.crafting.BrewingRecipe recipe)
+					recipes.add(recipe);
+			for (int i = 0; i < recipes.size(); i++) {
+				var recipe = recipes.get(i);
+				BlockPos pos = new BlockPos(i % 10 * 2 - 9, 118, i / 10 * 2 + 3);
+				level.setBlock(pos.below(), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState(), 3);
+				level.setBlock(pos, net.minecraft.world.level.block.Blocks.BREWING_STAND.defaultBlockState(), 3);
+				if (level.getBlockEntity(pos) instanceof net.minecraft.world.level.block.entity.BrewingStandBlockEntity stand) {
+					stand.setItem(0, stack(recipe.getInput()));
+					stand.setItem(3, stack(recipe.getReagent()));
+					stand.setItem(4, new ItemStack(net.minecraft.world.item.Items.BLAZE_POWDER));
+				}
+			}
+			TheDeepVoidMod.LOGGER.info("[scene] brewing {} recipes of the mod in {} stands", recipes.size(), recipes.size());
+		}));
+		at(560, mc -> server(mc, p -> {
+			ServerLevel level = p.level().getServer().overworld();
+			int ok = 0;
+			for (int i = 0; i < recipes.size(); i++) {
+				BlockPos pos = new BlockPos(i % 10 * 2 - 9, 118, i / 10 * 2 + 3);
+				ItemStack got = level.getBlockEntity(pos) instanceof net.minecraft.world.level.block.entity.BrewingStandBlockEntity stand ? stand.getItem(0) : ItemStack.EMPTY;
+				ItemStack want = recipes.get(i).getOutput().create();
+				if (ItemStack.isSameItemSameComponents(got, want))
+					ok++;
+				else
+					TheDeepVoidMod.LOGGER.info("[scene] brewing failed: {} + {} gave {}, expected {}", stack(recipes.get(i).getInput()), stack(recipes.get(i).getReagent()), got, want);
+			}
+			TheDeepVoidMod.LOGGER.info("[scene] brewing {} of {} brewed as their recipes", ok, recipes.size());
+		}));
+		at(580, mc -> shot(mc, "brewing"));
+		at(600, Minecraft::stop);
+	}
+
+	/** A stack the potion ingredient takes: its first item, with its first potion if it names potions */
+	private static ItemStack stack(net.minecraft.world.item.crafting.PotionIngredient ingredient) {
+		net.minecraft.world.item.Item item = ingredient.ingredient().items().findFirst().orElseThrow().value();
+		var potion = ingredient.potions().flatMap(net.minecraft.core.component.predicates.PotionsPredicate::potions).flatMap(set -> set.stream().findFirst());
+		return potion.isPresent() ? net.minecraft.world.item.alchemy.PotionContents.createItemStack(item, potion.get()) : new ItemStack(item);
 	}
 
 	private static void biomesAndMobs() {
@@ -123,6 +176,8 @@ public final class DevScene {
 		at(41, mc -> {
 			mc.options.framerateLimit().set(260);
 			mc.options.enableVsync().set(false);
+			// 1.21.2+: the frame rate drops to 30 after a minute without input (AFK) unless only a minimized window is limited
+			mc.options.inactivityFpsLimit().set(net.minecraft.client.InactivityFpsLimit.MINIMIZED);
 			mc.options.renderDistance().set(12);
 			mc.options.simulationDistance().set(10);
 		});

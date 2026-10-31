@@ -30,12 +30,14 @@
   dev-серверы обоих, production-сервер Fabric, сцены мира и предметов на обоих (пушки от первого лица — теперь сцена
   включает HUD на этих кадрах). Раздел «Minecraft 26.2» в `PORTLOG.md`, разбор
   `modding-kb/porting/mc-versions/26.2/the-deep-void.md`.
-- `mc/26.3` — **сделано (2026-10-31, локально)**: NeoForge 26.3.0.99 + Fabric 0.165.0, GeckoLib 5.5.7, JEI 31.17.
+- `mc/26.3` — **сделано (2026-10-31, запушено)**: NeoForge 26.3.0.99 + Fabric 0.165.0, GeckoLib 5.5.7, JEI 31.17.
   Повторяемо: `tools/port_26_3.sh` + `tools/port_resources_26_3.py` (конвертер Rats с дополнениями, после ресурсов
   предыдущих версий). Проверено: dev-серверы обоих, production-сервер Fabric, сцены мира, мобов и предметов на обоих.
-  Не проверено: production-сервер NeoForge, зельеварка в игре, MSPT/FPS. Раздел «Minecraft 26.3» в `PORTLOG.md`, разбор
+  Затем (2026-10-31) проверено: зельеварка в игре (сцена `-Pscene=brewing`, 50 из 50 рецептов на обоих),
+  production-сервер NeoForge 26.3.0.99 с jar (`prodtest/26.3.0.99`, `prodtest/serve.sh`), замер `tools/bench.sh 26.3`
+  (MSPT/FPS в пределах шума против базы, таблица в `PORTLOG.md`). Раздел «Minecraft 26.3» в `PORTLOG.md`, разбор
   `modding-kb/porting/mc-versions/26.3/the-deep-void.md`.
-- Дальше (по задаче владельца): README и релизы на версиях, замер MSPT/FPS на 26.x.
+- Дальше (по задаче владельца): README и релизы на версиях.
 
 ## Масштаб (замерено)
 - 3108 Java-файлов, ~206 тыс. строк (MCreator), 1643 импорта GeckoLib, 36 — JEI.

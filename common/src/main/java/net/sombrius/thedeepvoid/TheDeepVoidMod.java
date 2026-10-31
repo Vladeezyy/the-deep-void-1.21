@@ -67,6 +67,24 @@ public class TheDeepVoidMod {
 		TheDeepVoidModRecipeTypes.TYPES.getRegistryKey();
 		TheDeepVoidModGameRules.REGISTRY.getRegistryKey();
 		TheDeepVoidModVariables.registerPackets();
+		// MCreator registered the key and GUI messages on FMLCommonSetupEvent; payloads are registered here, before the
+		// loaders' payload registration (1.99.3.1.1 missed them: every key press and these GUI buttons crashed)
+		net.sombrius.thedeepvoid.network.ArmorAbilityMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.ArmorToggleMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.MotherCallOutMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.MountDashMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.MountDownMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.MountFlyMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.MountUpMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.NecrosedSkinBackpackGUIButtonMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.SoulForgeGUISlotMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.UndertakerTradeGuiButtonMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.UndertakerTradeGuiSlotMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.WeaverBootsNoGravityMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.WingsBackwardMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.WingsDownMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.WingsFowardMessage.registerMessage(null);
+		net.sombrius.thedeepvoid.network.WingsUpMessage.registerMessage(null);
 		EventIndex.register();
 		ModBus.add(ServerTickEvent.Post.class, EventPriority.NORMAL, TheDeepVoidMod::tick);
 	}

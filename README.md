@@ -2,17 +2,19 @@
 
 <img src="docs/images/logo.png" width="160" alt="The Deep Void logo">
 
-# The Deep Void — NeoForge 1.21.1
+# The Deep Void — NeoForge & Fabric, Minecraft 1.21.1 – 26.3
 
 **Fall through the bedrock. Something down there has been waiting.**
 
-[![Minecraft 1.21.1](https://img.shields.io/badge/Minecraft-1.21.1-3c8527)](https://www.minecraft.net)
-[![NeoForge 21.1](https://img.shields.io/badge/NeoForge-21.1.197%2B-e0682b)](https://neoforged.net)
-[![GeckoLib 4.9](https://img.shields.io/badge/requires-GeckoLib%204.9%2B-8a2be2)](https://modrinth.com/mod/geckolib)
+[![Minecraft 1.21.1 · 1.21.11 · 26.1.2 · 26.2 · 26.3](https://img.shields.io/badge/Minecraft-1.21.1%20%C2%B7%201.21.11%20%C2%B7%2026.1.2%20%C2%B7%2026.2%20%C2%B7%2026.3-3c8527)](https://www.minecraft.net)
+[![NeoForge](https://img.shields.io/badge/NeoForge-e0682b)](https://neoforged.net)
+[![Fabric](https://img.shields.io/badge/Fabric-dbd0b4)](https://fabricmc.net)
+[![requires GeckoLib](https://img.shields.io/badge/requires-GeckoLib-8a2be2)](https://modrinth.com/mod/geckolib)
 [![License LGPL-3.0](https://img.shields.io/badge/license-LGPL--3.0-blue)](LICENSE)
 
 An unofficial port of **[The Deep Void](https://www.curseforge.com/minecraft/mc-mods/the-deep-void)** v1.99.3.1
-by **Sombrius** from Forge 1.20.1 to **NeoForge 1.21.1**, with all of its content.
+by **Sombrius** from Forge 1.20.1 to **NeoForge and Fabric** for Minecraft **1.21.1, 1.21.11, 26.1.2, 26.2 and 26.3**,
+with all of its content.
 
 </div>
 
@@ -53,8 +55,14 @@ fight bosses with complex attack patterns for some of the strongest gear in the 
 
 ## 📦 Requirements
 
-- **NeoForge 21.1.197** or newer for Minecraft **1.21.1**.
-- **[GeckoLib](https://modrinth.com/mod/geckolib)** (4.9 or newer, NeoForge 1.21.1).
+One jar per Minecraft version and loader ([releases](../../releases)): `the-deep-void-<loader>-1.99.3.1.1+<minecraft>.jar`.
+
+- **Minecraft 1.21.1** — NeoForge 21.1.197+ or Fabric Loader 0.19.5+ with Fabric API; GeckoLib 4.9+.
+- **Minecraft 1.21.11** — NeoForge 21.11.48+ or Fabric with Fabric API; GeckoLib 5.4.5+.
+- **Minecraft 26.1.2** — NeoForge 26.1.2.125+ or Fabric with Fabric API; GeckoLib 5.5.2+; Java 25.
+- **Minecraft 26.2** — NeoForge 26.2.0.93+ or Fabric with Fabric API; GeckoLib 5.5.6+; Java 25.
+- **Minecraft 26.3** — NeoForge 26.3.0.99+ or Fabric with Fabric API; GeckoLib 5.5.7+; Java 25.
+- **[GeckoLib](https://modrinth.com/mod/geckolib)** — the build for your loader and Minecraft version.
 
 Needed on both the client and the server. **JEI** is optional (custom recipe categories).
 Settings: `config/Deep Void Config.toml` (or in game with the Configured mod).
@@ -77,6 +85,13 @@ The content and the numbers are the same as in 1.20.1. Where Minecraft 1.21 work
 - Arrows of the mod's weapons keep their own knockback; the guns keep their arm poses.
 - World generation fixes: lakes of Liquid Void / Ichor no longer crash chunk generation on 1.21, big structures (giant
   skulls) are cut cleanly at the chunk border instead of spamming the log.
+- **Fabric**: the same mod on Fabric (NeoForge's events, fluids, brewing and arm poses through Fabric API and mixins).
+- **Lighter ticks**: the stalker, overseer and other per-tick checks no longer scan the world around each player every
+  tick, and the player data is synced once a tick instead of up to 8 times (measured against the mod switched off: the
+  server's tick time is within the noise).
+- **Minecraft 1.21.11 and 26.x**: GeckoLib 5, the new rendering, world generation and data formats; on 26.3 the mod's
+  potions are brewing recipes and its fuel and compost are item components. The Deep Void looks darker with night vision
+  on 26.x: that is vanilla's grey night vision.
 
 The full list (with the reasons) is in **[PORTLOG.md](PORTLOG.md)**.
 
@@ -85,7 +100,7 @@ The full list (with the reasons) is in **[PORTLOG.md](PORTLOG.md)**.
 - **The Deep Void** — made by **Sombrius** (The Deep Void Team) with MCreator ·
   [CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-deep-void) ·
   [source & wiki](https://github.com/TroupeMaster/TheDeepVoid). All the content, art, sounds and ideas are theirs.
-- **Port** to NeoForge 1.21.1 — [Vladeezyy](https://github.com/Vladeezyy).
+- **Port** to NeoForge and Fabric, Minecraft 1.21.1 – 26.3 — [Vladeezyy](https://github.com/Vladeezyy).
 - Bugs of **this port**: [issues](../../issues). Please don't report port bugs to the original author.
 
 This port: **LGPL-3.0-only** ([LICENSE](LICENSE), GPL-3.0 text in [COPYING](licenses/COPYING)), Copyright (c) 2026 Vladeezyy. The original The Deep Void is under the MIT License; its text and copyright notice are kept in [LICENSE-MIT](licenses/LICENSE-MIT). Forks and modified versions must stay open under the same license and credit the authors. Please download the mod only from the official release pages.
@@ -100,7 +115,8 @@ This port: **LGPL-3.0-only** ([LICENSE](LICENSE), GPL-3.0 text in [COPYING](lice
 **Провалитесь сквозь бедрок. Там, внизу, вас уже ждут.**
 
 Неофициальный порт мода **[The Deep Void](https://www.curseforge.com/minecraft/mc-mods/the-deep-void)** v1.99.3.1
-от **Sombrius** с Forge 1.20.1 на **NeoForge 1.21.1** — со всем содержимым.
+от **Sombrius** с Forge 1.20.1 на **NeoForge и Fabric** для Minecraft **1.21.1, 1.21.11, 26.1.2, 26.2 и 26.3** — со всем
+содержимым.
 
 <details>
 <summary><b>🕳️ О моде</b></summary>
@@ -135,8 +151,14 @@ The Deep Void добавляет хоррор-измерение под бедр
 <details>
 <summary><b>📦 Требования</b></summary>
 
-- **NeoForge 21.1.197** или новее для Minecraft **1.21.1**.
-- **[GeckoLib](https://modrinth.com/mod/geckolib)** (4.9 или новее, NeoForge 1.21.1).
+Один jar на версию Minecraft и загрузчик ([релизы](../../releases)): `the-deep-void-<загрузчик>-1.99.3.1.1+<minecraft>.jar`.
+
+- **Minecraft 1.21.1** — NeoForge 21.1.197+ или Fabric Loader 0.19.5+ с Fabric API; GeckoLib 4.9+.
+- **Minecraft 1.21.11** — NeoForge 21.11.48+ или Fabric с Fabric API; GeckoLib 5.4.5+.
+- **Minecraft 26.1.2** — NeoForge 26.1.2.125+ или Fabric с Fabric API; GeckoLib 5.5.2+; Java 25.
+- **Minecraft 26.2** — NeoForge 26.2.0.93+ или Fabric с Fabric API; GeckoLib 5.5.6+; Java 25.
+- **Minecraft 26.3** — NeoForge 26.3.0.99+ или Fabric с Fabric API; GeckoLib 5.5.7+; Java 25.
+- **[GeckoLib](https://modrinth.com/mod/geckolib)** — сборка под ваш загрузчик и версию Minecraft.
 
 Нужен и на клиенте, и на сервере. **JEI** — по желанию (свои категории рецептов).
 Настройки: `config/Deep Void Config.toml` (или в игре через мод Configured).
@@ -164,6 +186,13 @@ English · Русский · Українська · Deutsch · 简体中文 · 
 - Стрелы оружия мода сохранили свою отдачу, у пушек остались свои позы рук.
 - Исправления генерации мира: озёра Жидкой пустоты / Ихора больше не роняют генерацию чанков на 1.21, большие
   структуры (гигантские черепа) аккуратно обрезаются по границе чанка вместо сотен ошибок в логе.
+- **Fabric**: тот же мод на Fabric (события NeoForge, жидкости, зельеварение и позы рук — через Fabric API и миксины).
+- **Лёгкие тики**: проверки сталкера, надзирателя и прочие больше не обыскивают мир вокруг каждого игрока каждый тик,
+  а данные игрока синхронизируются раз в тик вместо 8 раз (замер против выключенного мода: время тика сервера — в
+  пределах шума).
+- **Minecraft 1.21.11 и 26.x**: GeckoLib 5, новый рендер, генерация мира и форматы данных; на 26.3 зелья мода —
+  рецепты зельеварки, а топливо и компост — компоненты предметов. С ночным зрением Пустота на 26.x темнее — это
+  ванильное серое ночное зрение.
 
 Полный список (с причинами) — в **[PORTLOG.md](PORTLOG.md)**.
 
@@ -175,7 +204,7 @@ English · Русский · Українська · Deutsch · 简体中文 · 
 - **The Deep Void** — автор **Sombrius** (The Deep Void Team), сделан в MCreator ·
   [CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-deep-void) ·
   [исходники и вики](https://github.com/TroupeMaster/TheDeepVoid). Всё содержимое, графика, звуки и идеи — их.
-- **Порт** на NeoForge 1.21.1 — [Vladeezyy](https://github.com/Vladeezyy).
+- **Порт** на NeoForge и Fabric, Minecraft 1.21.1 – 26.3 — [Vladeezyy](https://github.com/Vladeezyy).
 - Ошибки **этого порта** — в [issues](../../issues). Пожалуйста, не отправляйте ошибки порта автору оригинала.
 
 Этот порт: **LGPL-3.0-only** ([LICENSE](LICENSE), текст GPL-3.0 в [COPYING](licenses/COPYING)), Copyright (c) 2026 Vladeezyy. Оригинальный The Deep Void — под лицензией MIT, её текст и копирайт сохранены в [LICENSE-MIT](licenses/LICENSE-MIT). Форки и изменённые версии обязаны оставаться открытыми под той же лицензией и указывать авторов. Пожалуйста, скачивайте мод только со страниц официальных релизов.

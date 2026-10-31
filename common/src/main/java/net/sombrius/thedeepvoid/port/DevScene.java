@@ -65,6 +65,7 @@ public final class DevScene {
 			"entity.the_deep_void.undertaker.canopy1");
 	private static final boolean BENCH = "bench".equals(System.getProperty("deepvoid.scene"));
 	private static final boolean ITEMS = "items".equals(System.getProperty("deepvoid.scene"));
+	private static final boolean KEYS = "keys".equals(System.getProperty("deepvoid.scene"));
 	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : ITEMS ? "dv_items" : "dv_scene";
 	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 	private static final List<Pair<Integer, Consumer<Minecraft>>> STEPS = new ArrayList<>();
@@ -81,7 +82,10 @@ public final class DevScene {
 			MinecraftServer server = p.level().getServer();
 			p.level().getGameRules().set(GameRules.SPAWN_MOBS, false, server);
 		}));
-		if (ITEMS) {
+		if (KEYS) {
+			at(50, DevScene::pressKeys);
+			at(90, Minecraft::stop);
+		} else if (ITEMS) {
 			items();
 		} else if (BENCH) {
 			PortBench.register();
@@ -97,6 +101,7 @@ public final class DevScene {
 
 	private static void biomesAndMobs() {
 		at(45, mc -> setHudHidden(mc, true));
+		at(50, DevScene::pressKeys);
 		int t = 200;
 		for (String biome : List.of("forgotten_valley", "grim_canopy", "crawler_nest", "ashen_crags", "misted_remnants", "staring_hills", "gloomy_deathgrounds")) {
 			at(t, mc -> server(mc, p -> go(p, biome)));
@@ -247,6 +252,30 @@ public final class DevScene {
 	/** 26.1: the time of day is a clock; the time command sets it */
 	private static void command(MinecraftServer server, String command) {
 		server.getCommands().performPrefixedCommand(server.createCommandSourceStack().withSuppressedOutput(), command);
+	}
+
+	/**
+	 * Presses and releases every key of the mod as the game does (KeyMapping.setDown): each one sends its packet to the
+	 * server (1.99.3.1.1 crashed on the first press: the key packets were never registered)
+	 */
+	private static void pressKeys(Minecraft mc) {
+		List<String> failed = new ArrayList<>();
+		int pressed = 0;
+		for (java.lang.reflect.Field field : net.sombrius.thedeepvoid.init.TheDeepVoidModKeyMappings.class.getFields()) {
+			if (field.getType() != net.minecraft.client.KeyMapping.class || !java.lang.reflect.Modifier.isStatic(field.getModifiers())) {
+				continue;
+			}
+			try {
+				net.minecraft.client.KeyMapping key = (net.minecraft.client.KeyMapping) field.get(null);
+				key.setDown(true);
+				key.setDown(false);
+				pressed++;
+			} catch (Throwable e) {
+				failed.add(field.getName() + ": " + e);
+				TheDeepVoidMod.LOGGER.error("[scene] key {}", field.getName(), e);
+			}
+		}
+		TheDeepVoidMod.LOGGER.info("[scene] CHECK {} keys pressed {}, failed {}", failed.isEmpty() && pressed > 0 ? "OK" : "FAIL", pressed, failed);
 	}
 
 	private static void at(int t, Consumer<Minecraft> action) {

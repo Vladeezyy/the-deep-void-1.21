@@ -84,18 +84,13 @@ public class ApostasyItemRenderer extends GeoItemRenderer<ApostasyItem> {
 			RenderUtil.scaleMatrixForBone(stack, bone);
 			RenderUtil.translateAwayFromPivotPoint(stack, bone);
 			ResourceLocation loc = player.getSkin().texture();
-			VertexConsumer armBuilder = this.currentBuffer.getBuffer(RenderType.entitySolid(loc));
-			VertexConsumer sleeveBuilder = this.currentBuffer.getBuffer(RenderType.entityTranslucent(loc));
 			if (name.equals("RightArm")) {
 				stack.translate(-1.0f * SCALE_RECIPROCAL, 2.0f * SCALE_RECIPROCAL, 0.0f);
-				AnimUtils.renderPartOverBone(model.leftArm, bone, stack, armBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, armsAlpha);
-				AnimUtils.renderPartOverBone(model.leftSleeve, bone, stack, sleeveBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, armsAlpha);
+				AnimUtils.renderArm(model.leftArm, model.leftSleeve, bone, stack, loc, packedLightIn, armsAlpha);
 			} else if (name.equals("LeftArm")) {
 				stack.translate(1.0f * SCALE_RECIPROCAL, 2.0f * SCALE_RECIPROCAL, 0.0f);
-				AnimUtils.renderPartOverBone(model.rightArm, bone, stack, armBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, armsAlpha);
-				AnimUtils.renderPartOverBone(model.rightSleeve, bone, stack, sleeveBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, armsAlpha);
+				AnimUtils.renderArm(model.rightArm, model.rightSleeve, bone, stack, loc, packedLightIn, armsAlpha);
 			}
-			this.currentBuffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(this.animatable)));
 			stack.popPose();
 		}
 		super.renderRecursively(stack, animatable, bone, type, buffer, bufferIn, isReRender, partialTick, packedLightIn, packedOverlayIn, color);

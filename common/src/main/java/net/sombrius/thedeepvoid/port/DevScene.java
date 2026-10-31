@@ -213,11 +213,18 @@ public final class DevScene {
 			p.getServer().overworld().setDayTime(6000);
 		}));
 		int t = 140;
-		for (String id : List.of("heresy", "double_barrel_shotgun", "eldritch_maw", "misanthropy")) {
+		for (String id : List.of("heresy", "double_barrel_shotgun", "eldritch_maw", "misanthropy", "apostasy", "peril")) {
 			at(t, mc -> server(mc, p -> p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new net.minecraft.world.item.ItemStack(item(id)))));
-			at(t + 30, mc -> mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON));
+			// the hand (and the gun's arms) only draws with the HUD shown
+			at(t + 30, mc -> {
+				mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON);
+				mc.options.hideGui = false;
+			});
 			at(t + 40, mc -> shot(mc, "item_" + id + "_1"));
-			at(t + 50, mc -> mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT));
+			at(t + 50, mc -> {
+				mc.options.hideGui = true;
+				mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT);
+			});
 			at(t + 60, mc -> shot(mc, "item_" + id + "_3"));
 			t += 80;
 		}

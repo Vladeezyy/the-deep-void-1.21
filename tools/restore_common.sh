@@ -17,5 +17,7 @@ git ls-tree -r --name-only "$base" -- src/main/java | while read -r f; do
         rm -f "common/src/main/java/$rel"
         continue
     fi
+    # 26.3 drops whole packages (recipes/brewing, the feature configurations): bring the folders back too
+    mkdir -p "common/$(dirname "$f")"
     git show "$base:$f" > "common/$f"
 done

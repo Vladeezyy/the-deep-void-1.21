@@ -247,6 +247,29 @@ NeoForge 26.2.0.93, Fabric API 0.161.0, GeckoLib 5.5.6, JEI 30.48. Repeatable fr
   loaders, guns in first person (the scene shows the HUD there: a hidden HUD hides the hand as well). Not checked: a
   NeoForge production server, MSPT / FPS.
 
+## Minecraft 26.3 (branch mc/26.3, 2026-10-31)
+
+NeoForge 26.3.0.99, Fabric API 0.165.0, GeckoLib 5.5.7, JEI 31.17. Repeatable from the originals:
+`tools/port_26_3.sh` (the 26.2 pipeline, then modding-kb's `tools/port_263_input.py` and `tools/port_dv_26_3.py`);
+data: `tools/port_resources_26_3.py` (the Rats port's converter, checked against vanilla 26.2 → 26.3, plus the
+mod's enchantments, the noise settings inside its dimensions, the processors inside its jigsaw pools and 1.20 loot
+shorthands) after the earlier converters.
+
+- Features are their own configuration in 26.3: the mod's features (an MCreator condition before a vanilla tree,
+  blob, ore or the structure feature) are records around the vanilla feature, registered as feature types; the
+  configured features are `worldgen/feature`.
+- Brewing: the 30 MCreator brewing classes are 50 `minecraft:brewing` recipe files (the potion recipes once per
+  bottle, as vanilla's); the brewing stand takes their inputs (needles, the fishy potion) by itself.
+- Sulfur burns as before through its `cooking_fuel` component (`context_int_provider/cooking/time_sulfur.json`,
+  3400 ticks, shorter in the fast furnaces as vanilla's coal) and composts through its `compostable` component.
+- Tools are items with the tool properties (no axe, shovel or hoe classes); the smithing templates and the rot weapons
+  check the item tags instead.
+- Input is SDL: the key bindings without a default are `InputConstants.UNKNOWN` (0).
+- Checked: dev server (both), production server (Fabric with the jar), the world scene, the mobs and the items scene
+  (guns in first person, GeckoLib armor) on both loaders. The pipeline reproduces the code from the originals
+  (`tools/restore_common.sh` now brings back the packages 26.3 removes). Not checked: a NeoForge production server,
+  MSPT / FPS, brewing in the game (the recipes load, the server reports no errors).
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

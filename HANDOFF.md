@@ -1,60 +1,63 @@
-# HANDOFF — The Deep Void: NeoForge + Fabric, 1.21.11 и 26.x
+# HANDOFF — The Deep Void: NeoForge + Fabric, 1.21.1 – 26.3
 
 Агенту: прочитай этот файл первым. Общие правила владельца — в его глобальном `CLAUDE.md` (ответы на русском,
 коммиты от `Vladeezyy <vladeezym@gmail.com>` без AI-атрибуции, LGPL-3.0-only, 6 обязательных языков, тесты перед
-релизом, записи в `Vladeezyy/modding-kb`).
+релизом, записи в `Vladeezyy/modding-kb`). Этот файл одинаковый во всех ветках.
 
-## Задача (от владельца, 2026-10-30)
-Обновить мод до **1.21.11 и всех 26.x** (26.1.2, 26.2, 26.3 — последний релиз MC на 2026-10-30; 26.4 пока снапшоты),
-на **Fabric и NeoForge**.
+## Состояние (2026-11-03)
+Задача владельца от 2026-10-30 («1.21.11 и все 26.x, Fabric + NeoForge») **выполнена и выпущена**.
 
-## Состояние
-- `main` — порт The Deep Void 1.99.3.1 на **NeoForge 1.21.1** + оптимизация тиковых обработчиков (`PORTLOG.md`).
-- `multiloader` — **шаг 1 сделан (2026-10-30)**: 1.21.1 разделён на `common/` `neoforge/` `fabric/`; dev- и
-  продакшен-серверы, сцена биомов и предметов проходят на обоих загрузчиках (раздел «NeoForge + Fabric» в `PORTLOG.md`,
-  разбор `modding-kb/porting/multiloader/the-deep-void.md`). Разделение повторяемо: `tools/restore_common.sh` +
-  `tools/port_multiloader.py`. Тесты: `LOADER=neoforge|fabric tools/servertest.sh`, `tools/scenetest.sh [-Pscene=items]`,
-  `tools/bench.sh`.
-- Дальше: шаг 2 (`mc/1.21.11`).
+| Ветка | MC | NeoForge | Fabric API | GeckoLib | Java | Последний релиз |
+| --- | --- | --- | --- | --- | --- | --- |
+| `multiloader` | 1.21.1 | 21.1.259 (от 21.1.197) | 0.116.17 | 4.9.3 | 21 | `v1.99.3.1.3+1.21.1` |
+| `mc/1.21.11` | 1.21.11 | 21.11.48 | 0.141.6 | 5.4.5 | 21 | `v1.99.3.1.2+1.21.11` |
+| `mc/26.1.2` | 26.1.2 | 26.1.2.125 | 0.155.3 | 5.5.2 | 25 | `v1.99.3.1.2+26.1.2` |
+| `mc/26.2` | 26.2 | 26.2.0.93 | 0.161.0 | 5.5.6 | 25 | `v1.99.3.1.2+26.2` |
+| `mc/26.3` | 26.3 | 26.3.0.99 | 0.165.0 | 5.5.7 | 25 | `v1.99.3.1.2+26.3` |
 
-## Масштаб (замерено)
-- 3108 Java-файлов, ~206 тыс. строк (MCreator), 1643 импорта GeckoLib, 36 — JEI.
-- NeoForge API: ~55 типов событий в `@SubscribeEvent` (самые частые: `ItemTooltipEvent` 59, `LivingIncomingDamageEvent` 49,
-  `RegisterEvent` 35, `PlayerTickEvent.Post` 31, `RegisterBrewingRecipesEvent` 30, `FMLCommonSetupEvent` 20,
-  `LivingDeathEvent` 13, `ModifyDefaultComponentsEvent` 11, `RenderGuiEvent.Pre` 10, `ViewportEvent.*` 15).
-- Прочее NeoForge-only: `DeferredSoundType` (62), `NeoForgeMod` (44), `IBrewingRecipe` (30), item handlers /
-  `SidedInvWrapper` / `Capabilities` (~50), `FluidType` + `IClientFluidTypeExtensions` (жидкости Liquid Void / Ichor),
-  `IClientItemExtensions` (14), `IClientMobEffectExtensions` (11), `RegisterDimensionSpecialEffectsEvent` (небо),
-  арм-позы через `enumextensions.json` (`port/ArmPoses`), `ModConfigSpec`, `FakePlayerFactory`, payload-сеть (17 сообщений).
+Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven (в `gradle.properties` id версии, а не номер).
+Каждый релиз — два jar (NeoForge и Fabric) из зелёного CI (`.github/workflows/build.yml`: сборка + запуск серверов
+обоих загрузчиков на каждый push).
 
-## План (как у The Midnight Lurker — тот же MCreator-подход)
-Образец: `Vladeezyy/the-midnight-lurker-1.21` (ветки `main`, `mc/1.21.11`, `mc/26.1.2`, `mc/26.2`, `mc/26.3`; NeoForge + Fabric).
-Разбор в базе: `modding-kb/porting/multiloader/midnight-lurker.md`, `porting/mcreator.md`, `conventions/multi-version.md`.
+- **`main`** — намеренно остаётся NeoForge-оригиналом 1.21.1 (с оптимизацией тиковых обработчиков): из него
+  `tools/restore_common.sh main` берёт исходники для конвейера разделения. В `main` ничего не сливать из `multiloader`.
+  1.21.1 для игроков выходит из `multiloader`.
+- **Ветки `mc/*` не сливаются друг в друга и в `multiloader`**: каждая сделана от разделённого 1.21.1 своим конвейером.
+  Исправление, нужное на нескольких версиях, переносится в каждую ветку отдельно (как фикс клавиш 1.99.3.1.2).
+- Репозиторий публичный. CurseForge: **The Deep Void (Unofficial Port), проект 1775380**, описание —
+  `docs/curseforge-description.md`, загрузка — `~/Desktop/modrinth-publish/cf_ports.py dv --tag <тег> --go` (MacBook);
+  номера файлов — в `modding-kb/conventions/curseforge.md`.
 
-1. **Разделение на 1.21.1 (эта ветка → `main`)**: `common/` + `neoforge/` + `fabric/` по шаблону ML
-   (`build.gradle`, `settings.gradle`, `buildSrc/multiloader-*.gradle`, Loom 1.17 + ModDevGradle 2.0.148).
-   - Слой `port/` из ML (`port/bus/*` — классы событий с именами NeoForge, `LurkerBus` → своя шина,
-     `port/platform/Platform|Registrar|RegistryEntry`) переименовать в `net.sombrius.thedeepvoid.port`.
-   - `tools/port_multiloader.py` из ML адаптировать (пакет, `TheDeepVoidModVariables`, `TheDeepVoidModMobEffects`)
-     и прогнать по `common/`; он генерирует `EventIndex`/`ClientEventIndex`.
-   - Дописать классы шины и мосты (NeoForge-слушатели + Fabric API/миксины) для событий, которых нет в ML:
-     `ItemTooltipEvent`, `RegisterBrewingRecipesEvent`, `ModifyDefaultComponentsEvent`, `LivingFallEvent`,
-     `BlockEvent.*`, `LivingChangeTargetEvent`, `LivingShieldBlockEvent`, `LivingHealEvent`, `MobEffectEvent.*`,
-     `CanPlayerSleepEvent`, `PlayerXpEvent`, `ServerChatEvent`, `EntityTravelToDimensionEvent`,
-     `FurnaceFuelBurnTimeEvent`, `ItemAttributeModifierEvent`, `LevelTickEvent`, `LevelEvent.Load`,
-     `RegisterDimensionSpecialEffectsEvent`, `RegisterKeyMappingsEvent`, `RegisterClientExtensionsEvent`.
-   - Fabric-замены: жидкости без `FluidType`, зелья из `IBrewingRecipe` (`FabricBrewingRecipeRegistryBuilder`
-     или миксин), арм-позы (миксин вместо enum extension), конфиг (`ModConfigSpec` → свой или Forge Config API Port).
-   - Тесты: сервер стартует на обоих, сцена (`port/DevScene`) на обоих, prod-сервер Fabric.
-2. **`mc/1.21.11`** от `main`: скрипты ML `port_1_21_11.py`, `port_geckolib5.py`, `convert_resources_1_21_11.py`
-   (в ML они на ветках `mc/*`, `tools/`) + `modding-kb/porting/mc-versions/1.21.11.md`, `apis/geckolib.md` (GeckoLib 5).
-3. **`mc/26.1.2`, `mc/26.2`, `mc/26.3`** — цепочкой: `port_26_1.py`, `port_26_3.py`, `convert_resources_26_3.py` из ML;
-   GeckoLib 5.5 только на Modrinth Maven; сборка без маппингов (`modding-kb/build/unobfuscated-26x.md`).
-   Версии на 2026-10-30: NeoForge 26.1.2.125, 26.3.0.99; Fabric Loader 0.20.1.
-4. На каждой версии: тесты (функц., стресс, совместимость), README, GitHub Release (англ.), запись в modding-kb.
+### Ревизии порта (пятая цифра версии)
+- **1.99.3.1.1** (2026-10-31) — первый выпуск NeoForge + Fabric на всех пяти версиях.
+- **1.99.3.1.2** (2026-10-31, все версии) — клавиши мода и кнопки GUI больше не роняют игру
+  (`Payload the_deep_void:key_* may not be sent to the server`: после разделения сообщения не регистрировались).
+  Сцена `-Pscene=keys` нажимает все клавиши.
+- **1.99.3.1.3** (2026-11-01, только 1.21.1) — оружие в руке роняло игру (`IllegalStateException: Not building!`,
+  issue #1, закрыт): руки над костями пушки рисуются из своего буфера (`utils/AnimUtils`). На 1.21.11+ руки рисуются
+  через GeckoLib 5 по-другому, этого кода там нет.
 
-## Где что лежит (ПК владельца, Windows)
-- Репо: `D:\mods\the-deep-void-1.21`.
-- Клон ML со всеми ветками: `D:\mods\_ref\midnight-lurker`.
-- Исходники MC/NeoForge для сверки API: `D:\mods\_ref\mc1211src`, `mc2612src`, `mc262src`, `mc263src`, `neo2612src`.
-- На MacBook: `~/Desktop/the deep void 1.21+` (по `modding-kb/projects/index.md`); там склонировать ML заново.
+## Как работать
+- Конвейеры повторяемы от оригиналов: 1.21.1 — `tools/restore_common.sh` + `tools/port_multiloader.py`;
+  дальше в своей ветке `tools/port_1_21_11.sh` + `tools/port_resources_1_21_11.py`, `tools/port_26_1.sh` +
+  `port_resources_26_1.py`, `tools/port_26_2.sh` + `port_resources_26_2.py`, `tools/port_26_3.sh` +
+  `port_resources_26_3.py` (каждая версия запускает свои скрипты после скриптов предыдущих).
+- Тесты: `LOADER=neoforge|fabric tools/servertest.sh` (dev-сервер), `tools/scenetest.sh` (сцена мира и мобов;
+  `-Pscene=items` — пушки, броня, крылья; `-Pscene=keys`; на 26.3 `-Pscene=brewing`), `tools/bench.sh` (цена тиковых
+  обработчиков против базы), `:fabric:prodServer` (production-сервер Fabric с jar); production-сервер NeoForge — `prodtest/serve.sh`
+  (папка в `.gitignore`, в git её нет: на машине без неё поставить сервер NeoForge установщиком и положить jar сам).
+  Все автозапуски — через `tools/watchdog.sh`.
+- Описание изменений и отклонений от оригинала — `PORTLOG.md` (разделы по версиям в соответствующих ветках),
+  разборы — `modding-kb/porting/multiloader/the-deep-void.md` и `modding-kb/porting/mc-versions/<версия>/the-deep-void.md`.
+
+## Не проверено
+- Production-сервер NeoForge с jar на 1.21.11, 26.1.2, 26.2 (на 1.21.1 и 26.3 проверен).
+- Руки пушек от первого лица на 1.21.11 и 26.1.2 (на 26.2 и 26.3 сцена снимает их с HUD и проверяет).
+- MSPT/FPS на 1.21.11, 26.1.2, 26.2 (замерено на 1.21.1 и 26.3).
+- Чтение мира, обновлённого с 1.21.11 на 26.1.2 (`TheDeepVoidModVariables.legacyData`).
+- Игра в мире с несколькими игроками.
+
+## Где что лежит
+- ПК (Windows): репо `D:\mods\the-deep-void-1.21`; клон The Midnight Lurker (образец схемы) `D:\mods\_ref\midnight-lurker`;
+  исходники MC/NeoForge для сверки API `D:\mods\_ref\mc1211src`, `mc2612src`, `mc262src`, `mc263src`, `neo2612src`.
+- MacBook: `~/Desktop/the deep void 1.21+`.

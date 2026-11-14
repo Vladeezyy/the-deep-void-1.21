@@ -41,6 +41,9 @@ loom {
         server {
             server()
             runDir('run')
+            // tools/servertest.sh: the structure self-test (port/PortServerTest), -Pservertest=fresh|restart
+            if (project.findProperty('servertest'))
+                vmArg "-Ddeepvoid.servertest=${project.findProperty('servertest')}"
         }
         // tools/scenetest.sh LOADER=fabric, tools/bench.sh LOADER=fabric
         scene {

@@ -87,6 +87,8 @@ public class TheDeepVoidMod {
 		net.sombrius.thedeepvoid.network.WingsUpMessage.registerMessage(null);
 		EventIndex.register();
 		ModBus.add(ServerTickEvent.Post.class, EventPriority.NORMAL, TheDeepVoidMod::tick);
+		// tools/servertest.sh only (the deepvoid.servertest property): the structures placed on level load
+		net.sombrius.thedeepvoid.port.PortServerTest.register();
 	}
 
 	/** MCreator's bidirectional packets (the handlers check the flow); call during {@link #init()} */

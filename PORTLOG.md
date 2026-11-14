@@ -205,6 +205,24 @@ Lurker port, the Deep Void rules `tools/port_dv_1_21_11.py`, GeckoLib 5, render 
   items scene (guns in third person, Blockbench armor, GeckoLib wings) on both loaders. Not checked yet: a NeoForge
   production server with the jar, the guns' first-person arms (the scene shows none on 1.21.1 either), MSPT / FPS.
 
+## Player reports
+
+- **2026-11-13, CurseForge: no cult temple at 0 -64 0, no Weaver of Souls sepulcher** (1.99.3.1.1–1.99.3.1.3, every
+  version, both loaders; the pit in the Pit was missing too). MCreator's world load trigger
+  (`CultTemplePlacementProcedure.onWorldLoad`, `LevelEvent.Load`: the temple in the overworld, the sepulcher at
+  -40 1 -40 in the Deep Void, the pit at 0 0 0 in the Pit, once per world through the map variables) names the event
+  type fully qualified; `tools/port_multiloader.py` took `net.sombrius.thedeepvoid.port.bus.LevelEvent.Load` for a loader
+  event and left it out of `EventIndex`, so nothing called it (the 26.x pipelines also hid the "not indexed" line). The
+  generator strips the `port.bus` prefix now; `tools/check_index.py` (CI) fails on any `@SubscribeEvent` method that is
+  not on the mod's bus. Worlds made with the broken versions never set the flags, so they get the structures on their
+  next start.
+- Test: `RESTART=1 LOADER=neoforge|fabric sh tools/servertest.sh`. The dev server compares every non-air block of the
+  three templates with the world (`port/PortServerTest`, `-Pservertest`), marks one block of each, starts again on the
+  same world and checks the marks are still there (placed once). Before the fix: 6 of 2974, 0 of 11838, 0 of 101516
+  blocks, flags false; after: 2973 of 2974, 11837 of 11838, 101507 of 101516 (the block the procedure clears, a few
+  pit blocks that settle), flags true, marks kept on the restart; both loaders. The first start of a new world takes
+  ~15 s longer (the pit is 88 × 107 × 133 blocks), once, as in 1.20.1.
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

@@ -287,7 +287,9 @@ def index_entries(path, src):
             i += 1
         nested.append((m.start(), i, m.group(2), "CLIENT" in m.group(1)))
     for m in SUB.finditer(src):
-        event = m.group(3)
+        # MCreator writes some event types fully qualified (the world load trigger: LevelEvent.Load), and
+        # rewrite_code points them at port.bus; without the prefix they looked like loader events and were dropped
+        event = m.group(3).removeprefix(f"{PKG}.port.bus.")
         if event.split(".")[0] not in BUS_TYPES:
             skipped.append(f"{path.name}: {event}")
             continue

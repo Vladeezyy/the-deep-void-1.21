@@ -25,6 +25,9 @@ neoForge {
         server {
             server()
             programArgument '--nogui'
+            // tools/servertest.sh: the structure self-test (port/PortServerTest), -Pservertest=fresh|restart
+            if (project.findProperty('servertest'))
+                systemProperty 'deepvoid.servertest', project.findProperty('servertest')
         }
         // Scripted scene (port/DevScene): -Pscene=lang | bench (tools/bench.sh)
         scene {

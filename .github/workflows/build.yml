@@ -38,19 +38,26 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      # every @SubscribeEvent method of common is on the mod's bus (1.99.3.1.3 lost the world load trigger)
+      - name: Event index
+        run: python3 -I tools/check_index.py
+
       - name: Build
         run: chmod +x gradlew && ./gradlew build --console=plain
 
-      # the dev server (tools/servertest.sh) on a fresh world, NeoForge and Fabric: it has to reach "Done" with no crash
+      # the dev server (tools/servertest.sh) on a fresh world, NeoForge and Fabric: it has to reach "Done" with no crash and
+      # pass the structure self-test (port/PortServerTest: the cult temple, the Weaver's sepulcher and the pit are placed),
+      # then start again on the same world without placing them a second time
       - name: Dev server starts
         run: |
+          fail=0
           for loader in neoforge fabric; do
-            LOADER=$loader sh tools/servertest.sh
-            mv build-server-$loader.log selftest-server-$loader.log
-            # the script kills the server after "Done", so Gradle's BUILD FAILED at the end is expected
-            grep -q 'Done (' selftest-server-$loader.log
-            ! grep -qE 'Minecraft Crash Report|crash report has been saved|Failed to start|Registry loading errors|FAILED TO BIND' selftest-server-$loader.log
+            RESTART=1 LOADER=$loader sh tools/servertest.sh || fail=1
+            for log in build-server-$loader*.log; do mv "$log" "selftest-${log#build-}"; done
+            grep -q 'Done (' selftest-server-$loader.log || fail=1
+            ! grep -qE 'Minecraft Crash Report|crash report has been saved|Failed to start|Registry loading errors|FAILED TO BIND' selftest-server-$loader*.log || fail=1
           done
+          exit $fail
 
       - name: Upload test logs
         if: ${{ !cancelled() }}

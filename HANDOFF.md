@@ -4,16 +4,16 @@
 коммиты от `Vladeezyy <vladeezym@gmail.com>` без AI-атрибуции, LGPL-3.0-only, 6 обязательных языков, тесты перед
 релизом, записи в `Vladeezyy/modding-kb`). Этот файл одинаковый во всех ветках.
 
-## Состояние (2026-11-03)
+## Состояние (2026-11-14)
 Задача владельца от 2026-10-30 («1.21.11 и все 26.x, Fabric + NeoForge») **выполнена и выпущена**.
 
 | Ветка | MC | NeoForge | Fabric API | GeckoLib | Java | Последний релиз |
 | --- | --- | --- | --- | --- | --- | --- |
-| `multiloader` | 1.21.1 | 21.1.259 (от 21.1.197) | 0.116.17 | 4.9.3 | 21 | `v1.99.3.1.3+1.21.1` |
-| `mc/1.21.11` | 1.21.11 | 21.11.48 | 0.141.6 | 5.4.5 | 21 | `v1.99.3.1.2+1.21.11` |
-| `mc/26.1.2` | 26.1.2 | 26.1.2.125 | 0.155.3 | 5.5.2 | 25 | `v1.99.3.1.2+26.1.2` |
-| `mc/26.2` | 26.2 | 26.2.0.93 | 0.161.0 | 5.5.6 | 25 | `v1.99.3.1.2+26.2` |
-| `mc/26.3` | 26.3 | 26.3.0.99 | 0.165.0 | 5.5.7 | 25 | `v1.99.3.1.2+26.3` |
+| `multiloader` | 1.21.1 | 21.1.259 (от 21.1.197) | 0.116.17 | 4.9.3 | 21 | `v1.99.3.1.4+1.21.1` |
+| `mc/1.21.11` | 1.21.11 | 21.11.48 | 0.141.6 | 5.4.5 | 21 | `v1.99.3.1.4+1.21.11` |
+| `mc/26.1.2` | 26.1.2 | 26.1.2.125 | 0.155.3 | 5.5.2 | 25 | `v1.99.3.1.4+26.1.2` |
+| `mc/26.2` | 26.2 | 26.2.0.93 | 0.161.0 | 5.5.6 | 25 | `v1.99.3.1.4+26.2` |
+| `mc/26.3` | 26.3 | 26.3.0.99 | 0.165.0 | 5.5.7 | 25 | `v1.99.3.1.4+26.3` |
 
 Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven (в `gradle.properties` id версии, а не номер).
 Каждый релиз — два jar (NeoForge и Fabric) из зелёного CI (`.github/workflows/build.yml`: сборка + запуск серверов
@@ -36,6 +36,14 @@ Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven 
 - **1.99.3.1.3** (2026-11-01, только 1.21.1) — оружие в руке роняло игру (`IllegalStateException: Not building!`,
   issue #1, закрыт): руки над костями пушки рисуются из своего буфера (`utils/AnimUtils`). На 1.21.11+ руки рисуются
   через GeckoLib 5 по-другому, этого кода там нет.
+- **1.99.3.1.4** (2026-11-14, все версии): культовый храм под спавном (0 -64 0), гробница Ткача душ (-40 1 -40 в
+  `the_deep_void:deep_void`) и яма (`the_deep_void:the_pit`) не ставились при загрузке мира.
+  Причина: в MCreator триггер «World load» записан с полным именем события; `tools/port_multiloader.py` переписал его
+  на `<pkg>.port.bus.LevelEvent.Load`, а генератор EventIndex выбросил обработчик
+  `CultTemplePlacementProcedure.onWorldLoad` (по комментарию на CurseForge).
+  Исправление — в `port_multiloader.py`. `tools/check_index.py` в CI ловит любой обработчик, которого нет в шине мода.
+  Новый серверный тест `port/PortServerTest` (свойство `deepvoid.servertest`; `RESTART=1` в `tools/servertest.sh`
+  проверяет второй запуск).
 
 ## Как работать
 - Конвейеры повторяемы от оригиналов: 1.21.1 — `tools/restore_common.sh` + `tools/port_multiloader.py`;
@@ -47,6 +55,7 @@ Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven 
   обработчиков против базы), `:fabric:prodServer` (production-сервер Fabric с jar); production-сервер NeoForge — `prodtest/serve.sh`
   (папка в `.gitignore`, в git её нет: на машине без неё поставить сервер NeoForge установщиком и положить jar сам).
   Все автозапуски — через `tools/watchdog.sh`.
+- Индекс обработчиков: `tools/check_index.py` (в CI); серверный тест `port/PortServerTest` (`deepvoid.servertest`).
 - Описание изменений и отклонений от оригинала — `PORTLOG.md` (разделы по версиям в соответствующих ветках),
   разборы — `modding-kb/porting/multiloader/the-deep-void.md` и `modding-kb/porting/mc-versions/<версия>/the-deep-void.md`.
 

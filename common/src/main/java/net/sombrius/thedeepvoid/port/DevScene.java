@@ -53,7 +53,8 @@ import com.mojang.datafixers.util.Pair;
  * opens the world {@code dv_scene} (seed 1234), visits Deep Void biomes, spawns some of the mod's mobs and saves
  * {@code run/screenshots/scene_*.png}, then quits. With {@code -Pscene=lang} it only prints some of the mod's translated texts
  * to the chat and saves {@code scene_lang_<language>.png}. With {@code -Pscene=bench} it measures the tick cost of the mod's
- * tick handlers ({@link PortBench}, {@code tools/bench.sh}).
+ * tick handlers ({@link PortBench}, {@code tools/bench.sh}). With {@code -Pscene=regress} it checks fixed issues: #3 (entering
+ * or leaving the Deep Void showed the End Poem) and #2 (the mod's armor trims), {@code [scene] CHECK} lines in the log.
  */
 @EventBusSubscriber(modid = TheDeepVoidMod.MODID, value = Dist.CLIENT)
 public final class DevScene {
@@ -65,7 +66,8 @@ public final class DevScene {
 	private static final boolean BENCH = "bench".equals(System.getProperty("deepvoid.scene"));
 	private static final boolean ITEMS = "items".equals(System.getProperty("deepvoid.scene"));
 	private static final boolean KEYS = "keys".equals(System.getProperty("deepvoid.scene"));
-	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : ITEMS ? "dv_items" : "dv_scene";
+	private static final boolean REGRESS = "regress".equals(System.getProperty("deepvoid.scene"));
+	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : ITEMS ? "dv_items" : REGRESS ? "dv_regress" : "dv_scene";
 	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 	private static final List<Pair<Integer, Consumer<Minecraft>>> STEPS = new ArrayList<>();
 	private static boolean opened;
@@ -86,6 +88,8 @@ public final class DevScene {
 			at(90, Minecraft::stop);
 		} else if (ITEMS) {
 			items();
+		} else if (REGRESS) {
+			regress();
 		} else if (BENCH) {
 			PortBench.register();
 			bench();
@@ -237,6 +241,148 @@ public final class DevScene {
 		at(t + 110, Minecraft::stop);
 	}
 
+	/** Times the End Poem (WinScreen) was open at the end of a client tick. */
+	private static int credits;
+	/**
+	 * WIN_GAME packets that reached the client: the End Poem they open is replaced by the level loading screen in the same
+	 * frame in a plain client (players whose mods skip that screen watch the whole poem), so the screen alone misses it.
+	 */
+	private static final java.util.concurrent.atomic.AtomicInteger WIN_GAME_PACKETS = new java.util.concurrent.atomic.AtomicInteger();
+
+	/** One armor piece trimmed on the smithing table: the template, the material and the pattern and trim material expected. */
+	private record TrimCase(net.minecraft.world.entity.EquipmentSlot slot, String armor, String template, String addition, String pattern, String material) {
+	}
+
+	// a method: the static block that schedules the scene runs before the static fields below are set
+	private static List<List<TrimCase>> trimSets() {
+		return List.of(
+			// the mod's patterns with the mod's materials
+			List.of(new TrimCase(net.minecraft.world.entity.EquipmentSlot.HEAD, "minecraft:diamond_helmet", "the_deep_void:gore_armor_trim", "the_deep_void:onyx", "the_deep_void:gore", "the_deep_void:onyx_trim"),
+					new TrimCase(net.minecraft.world.entity.EquipmentSlot.CHEST, "minecraft:diamond_chestplate", "the_deep_void:scare_armor_trim", "the_deep_void:voidrium_gem", "the_deep_void:scare", "the_deep_void:voidrium_trim"),
+					new TrimCase(net.minecraft.world.entity.EquipmentSlot.LEGS, "minecraft:diamond_leggings", "the_deep_void:sorrow_armor_trim", "the_deep_void:bloodstone", "the_deep_void:sorrow", "the_deep_void:bloodstone_trim"),
+					new TrimCase(net.minecraft.world.entity.EquipmentSlot.FEET, "minecraft:diamond_boots", "the_deep_void:scavenger_armor_trim", "the_deep_void:cinnabar", "the_deep_void:scavenger", "the_deep_void:cinnabar_trim")),
+			// vanilla patterns with the mod's materials, the mod's patterns with vanilla materials
+			List.of(new TrimCase(net.minecraft.world.entity.EquipmentSlot.HEAD, "minecraft:diamond_helmet", "minecraft:coast_armor_trim_smithing_template", "the_deep_void:lavendite", "minecraft:coast", "the_deep_void:lavendite_trim"),
+					new TrimCase(net.minecraft.world.entity.EquipmentSlot.CHEST, "minecraft:diamond_chestplate", "minecraft:flow_armor_trim_smithing_template", "the_deep_void:soul_shard", "minecraft:flow", "the_deep_void:soul_trim"),
+					new TrimCase(net.minecraft.world.entity.EquipmentSlot.LEGS, "minecraft:diamond_leggings", "the_deep_void:gore_armor_trim", "minecraft:gold_ingot", "the_deep_void:gore", "minecraft:gold"),
+					new TrimCase(net.minecraft.world.entity.EquipmentSlot.FEET, "minecraft:diamond_boots", "minecraft:bolt_armor_trim_smithing_template", "the_deep_void:sulfur", "minecraft:bolt", "the_deep_void:sulfur_trim")));
+	}
+
+	/**
+	 * Issue #3: falling into the void and the void pendant must move the player without the End Poem (the MCreator
+	 * teleport sent WIN_GAME, which 1.21+ clients always answer with the credits). Issue #2: the mod's trim patterns and
+	 * materials on the smithing table, their armor sprites not the missing texture, {@code scene_trims_<n>.png}.
+	 */
+	private static void regress() {
+		at(45, mc -> mc.options.hideGui = true);
+		at(50, DevScene::spyPackets);
+		at(60, mc -> server(mc, p -> {
+			p.teleportTo(p.level().getServer().overworld(), 0.5, -75, 0.5, java.util.Set.of(), 0F, 0F, true);
+			net.sombrius.thedeepvoid.procedures.IfPlayerFallsInVoidProcedure.execute(p.getX(), p.getZ(), p);
+		}));
+		at(200, mc -> travelCheck(mc, "enter (falling into the void)", DEEP_VOID));
+		at(210, mc -> server(mc, p -> {
+			net.minecraft.world.item.ItemStack pendant = new net.minecraft.world.item.ItemStack(item("void_pendant"));
+			p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, pendant);
+			net.sombrius.thedeepvoid.procedures.VoidPendantPlayerFinishesUsingItemProcedure.execute(p.level(), p, pendant);
+		}));
+		at(340, mc -> travelCheck(mc, "leave (void pendant)", Level.OVERWORLD));
+		at(350, mc -> server(mc, p -> {
+			p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, net.minecraft.world.item.ItemStack.EMPTY);
+			p.teleportTo(p.level().getServer().overworld(), 0.5, 120, 0.5, java.util.Set.of(), 0F, 0F, true);
+			p.level().setBlock(BlockPos.containing(0, 118, 0), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState(), 3);
+			command(p.level().getServer(), "time set 6000");
+		}));
+		int t = 400;
+		List<List<TrimCase>> sets = trimSets();
+		for (int i = 0; i < sets.size(); i++) {
+			List<TrimCase> set = sets.get(i);
+			String name = "trims_" + (i + 1);
+			at(t, mc -> server(mc, p -> trimArmor(p, set)));
+			at(t + 30, mc -> {
+				trimSprites(mc);
+				mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT);
+			});
+			at(t + 60, mc -> shot(mc, name));
+			t += 80;
+		}
+		at(t, mc -> TheDeepVoidMod.LOGGER.info("[scene] CHECK {} End Poem: WIN_GAME packets {}, screen open {} times", WIN_GAME_PACKETS.get() == 0 && credits == 0 ? "OK" : "FAIL",
+				WIN_GAME_PACKETS.get(), credits));
+		at(t + 10, Minecraft::stop);
+	}
+
+	private static void travelCheck(Minecraft mc, String what, ResourceKey<Level> expected) {
+		boolean ok = mc.level.dimension() == expected && WIN_GAME_PACKETS.get() == 0 && credits == 0;
+		TheDeepVoidMod.LOGGER.info("[scene] CHECK {} travel {}: dimension {}, WIN_GAME packets {}, End Poem screen {} times", ok ? "OK" : "FAIL", what, mc.level.dimension().identifier(),
+				WIN_GAME_PACKETS.get(), credits);
+	}
+
+	/** Counts the WIN_GAME packets the client receives (a handler ahead of the client's packet listener). */
+	private static void spyPackets(Minecraft mc) {
+		io.netty.channel.Channel channel;
+		try { // Connection.channel() is NeoForge's; the dev run has Mojang's field names
+			java.lang.reflect.Field field = net.minecraft.network.Connection.class.getDeclaredField("channel");
+			field.setAccessible(true);
+			channel = (io.netty.channel.Channel) field.get(mc.getConnection().getConnection());
+		} catch (ReflectiveOperationException e) {
+			throw new IllegalStateException(e);
+		}
+		channel.pipeline().addBefore("packet_handler", "the_deep_void_scene_spy", new io.netty.channel.ChannelInboundHandlerAdapter() {
+			@Override
+			public void channelRead(io.netty.channel.ChannelHandlerContext ctx, Object msg) throws Exception {
+				countWinGame(msg);
+				super.channelRead(ctx, msg);
+			}
+		});
+	}
+
+	private static void countWinGame(Object packet) {
+		if (packet instanceof net.minecraft.network.protocol.game.ClientboundGameEventPacket event && event.getEvent() == net.minecraft.network.protocol.game.ClientboundGameEventPacket.WIN_GAME) {
+			TheDeepVoidMod.LOGGER.info("[scene] WIN_GAME packet received");
+			WIN_GAME_PACKETS.incrementAndGet();
+		} else if (packet instanceof net.minecraft.network.protocol.game.ClientboundBundlePacket bundle) {
+			bundle.subPackets().forEach(DevScene::countWinGame);
+		}
+	}
+
+	private static void trimArmor(ServerPlayer p, List<TrimCase> set) {
+		ServerLevel level = p.level();
+		for (TrimCase c : set) {
+			net.minecraft.world.item.ItemStack base = new net.minecraft.world.item.ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.parse(c.armor())));
+			net.minecraft.world.item.crafting.SmithingRecipeInput input = new net.minecraft.world.item.crafting.SmithingRecipeInput(
+					new net.minecraft.world.item.ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.parse(c.template()))), base,
+					new net.minecraft.world.item.ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.parse(c.addition()))));
+			net.minecraft.world.item.ItemStack out = level.getServer().getRecipeManager().getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMITHING, input, level)
+					.map(h -> h.value().assemble(input)).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+			net.minecraft.world.item.equipment.trim.ArmorTrim trim = out.get(net.minecraft.core.component.DataComponents.TRIM);
+			boolean ok = trim != null && trim.pattern().is(Identifier.parse(c.pattern())) && trim.material().is(Identifier.parse(c.material()));
+			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} smithing {} + {} + {} -> {}", ok ? "OK" : "FAIL", c.template(), c.armor(), c.addition(),
+					trim == null ? "no trim" : trim.pattern().unwrapKey().map(k -> k.identifier().toString()).orElse("?") + " / " + trim.material().unwrapKey().map(k -> k.identifier().toString()).orElse("?"));
+			p.setItemSlot(c.slot(), out.isEmpty() ? base : out);
+		}
+	}
+
+	/** The armor trim sprites the client draws for the worn armor: none may be the missing texture. */
+	private static void trimSprites(Minecraft mc) {
+		net.minecraft.client.renderer.texture.TextureAtlas atlas = mc.getAtlasManager().getAtlasOrThrow(net.minecraft.data.AtlasIds.ARMOR_TRIMS);
+		for (net.minecraft.world.entity.EquipmentSlot slot : List.of(net.minecraft.world.entity.EquipmentSlot.HEAD, net.minecraft.world.entity.EquipmentSlot.CHEST,
+				net.minecraft.world.entity.EquipmentSlot.LEGS, net.minecraft.world.entity.EquipmentSlot.FEET)) {
+			net.minecraft.world.item.ItemStack stack = mc.player.getItemBySlot(slot);
+			net.minecraft.world.item.equipment.trim.ArmorTrim trim = stack.get(net.minecraft.core.component.DataComponents.TRIM);
+			net.minecraft.world.item.equipment.Equippable equippable = stack.get(net.minecraft.core.component.DataComponents.EQUIPPABLE);
+			if (trim == null || equippable == null || equippable.assetId().isEmpty()) {
+				TheDeepVoidMod.LOGGER.info("[scene] CHECK FAIL trim sprite: {} has no trim", stack);
+				continue;
+			}
+			net.minecraft.client.resources.model.EquipmentClientInfo.LayerType layer = slot == net.minecraft.world.entity.EquipmentSlot.LEGS
+					? net.minecraft.client.resources.model.EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS
+					: net.minecraft.client.resources.model.EquipmentClientInfo.LayerType.HUMANOID;
+			Identifier id = trim.layerAssetId(layer.trimAssetPrefix(), equippable.assetId().get());
+			boolean missing = atlas.getSprite(id).contents().name().equals(net.minecraft.client.renderer.texture.MissingTextureAtlasSprite.getLocation());
+			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} trim sprite {}", missing ? "FAIL" : "OK", id);
+		}
+	}
+
 	private static net.minecraft.world.item.Item item(String id) {
 		return BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath(TheDeepVoidMod.MODID, id));
 	}
@@ -303,6 +449,11 @@ public final class DevScene {
 		mc.options.pauseOnLostFocus = false;
 		if (mc.screen instanceof PauseScreen)
 			mc.setScreen(null);
+		if (mc.screen instanceof net.minecraft.client.gui.screens.WinScreen) {
+			credits++;
+			TheDeepVoidMod.LOGGER.info("[scene] the End Poem opened at tick {}", tick);
+			mc.setScreen(null);
+		}
 		tick++;
 		for (Pair<Integer, Consumer<Minecraft>> step : STEPS) {
 			if (step.getFirst() == tick) {

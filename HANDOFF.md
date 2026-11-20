@@ -9,11 +9,11 @@
 
 | Ветка | MC | NeoForge | Fabric API | GeckoLib | Java | Последний релиз |
 | --- | --- | --- | --- | --- | --- | --- |
-| `multiloader` | 1.21.1 | 21.1.259 (от 21.1.197) | 0.116.17 | 4.9.3 | 21 | `v1.99.3.1.5+1.21.1` |
-| `mc/1.21.11` | 1.21.11 | 21.11.48 | 0.141.6 | 5.4.5 | 21 | `v1.99.3.1.5+1.21.11` |
-| `mc/26.1.2` | 26.1.2 | 26.1.2.125 | 0.155.3 | 5.5.2 | 25 | `v1.99.3.1.5+26.1.2` |
-| `mc/26.2` | 26.2 | 26.2.0.93 | 0.161.0 | 5.5.6 | 25 | `v1.99.3.1.5+26.2` |
-| `mc/26.3` | 26.3 | 26.3.0.99 | 0.165.0 | 5.5.7 | 25 | `v1.99.3.1.5+26.3` |
+| `multiloader` | 1.21.1 | 21.1.259 (от 21.1.197) | 0.116.17 | 4.9.3 | 21 | `v1.99.3.1.6+1.21.1` |
+| `mc/1.21.11` | 1.21.11 | 21.11.48 | 0.141.6 | 5.4.5 | 21 | `v1.99.3.1.6+1.21.11` |
+| `mc/26.1.2` | 26.1.2 | 26.1.2.125 | 0.155.3 | 5.5.2 | 25 | `v1.99.3.1.6+26.1.2` |
+| `mc/26.2` | 26.2 | 26.2.0.93 | 0.161.0 | 5.5.6 | 25 | `v1.99.3.1.6+26.2` |
+| `mc/26.3` | 26.3 | 26.3.0.99 | 0.165.0 | 5.5.7 | 25 | `v1.99.3.1.6+26.3` |
 
 Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven (в `gradle.properties` id версии, а не номер).
 Каждый релиз — два jar (NeoForge и Fabric) из зелёного CI (`.github/workflows/build.yml`: сборка + запуск серверов
@@ -26,7 +26,8 @@ Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven 
   Исправление, нужное на нескольких версиях, переносится в каждую ветку отдельно (как фикс клавиш 1.99.3.1.2).
 - Репозиторий публичный. CurseForge: **The Deep Void (Unofficial Port), проект 1775380**, описание —
   `docs/curseforge-description.md`, загрузка — `~/Desktop/modrinth-publish/cf_ports.py dv --tag <тег> --go` (MacBook;
-  1.99.3.1.5 загружен с Windows-ПК тем же API, скрипт-образец — в разделе The Deep Void в `conventions/curseforge.md`);
+  с Windows-ПК — `python tools/cf_upload.py <mc>... [--go]` из ветки `multiloader`: jar и changelog берёт из
+  GitHub-релиза `v<mod_version>+<mc>`, без `--go` только печатает план);
   номера файлов — в `modding-kb/conventions/curseforge.md`.
 
 ### Ревизии порта (пятая цифра версии)
@@ -52,6 +53,17 @@ Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven 
   `.png.mcmeta` с `trim_base`): `armor_trims()` в `port_resources_1_21_11.py`, `assets()` в `port_resources_26_3.py`;
   на 1.21.1 в атлас добавлены ванильные flow и bolt. Оба issue закрыты. Сцена `-Pscene=regress` проверяет оба бага
   (19 проверок, все версии и оба загрузчика).
+- **1.99.3.1.6** (2026-11-20, все версии): issue #4 (закрыт) — щиты мода (Lavendite, Eye, Devourer, Voidrium Bulwark)
+  не поднимались на 1.21.11 и 26.x: с 1.21.5 блок задаёт компонент `BLOCKS_ATTACKS`, теперь `Registrar.shieldProps()`
+  со значениями ванильного щита. Аудит кода по тому же типу поломок: с 1.21.5 `inventoryTick` идёт только на сервере,
+  а Fly/Soul Wings, Tombstone, Claw Scythe и Stinger двигают игрока на клиенте → `port/PortClientItemTick`
+  (`PortItemHooks.ClientInventoryTick`); на NeoForge 21.11+ `onEntitySwing` с `InteractionHand` (способности при
+  взмахе молчали); `SPEAR` → `TRIDENT` у Rotten Dart и Call Upon the Hive; напитки через `Consumables.defaultDrink()`;
+  `ModBus.post` останавливается после отмены, `ItemFishedEvent` отменяемый (в Deep Void шёл ещё и ванильный улов);
+  частицы 7 моделей предметов. Только 1.21.1 Fabric: NPE при крафте с Bottle of Ambrosia, Grimberry Juice, Voided
+  Heart (`getRecipeRemainder`) и модификаторы атрибутов без тегов и конфига (`mixin/ItemStackMixin`). Правила — в
+  `port_dv_1_21_11.py` (`items4`, `items5`) и `port_multiloader.py`. Сцена `-Pscene=regress`: 29 проверок на
+  1.21.11+, 26 на 1.21.1, таймлайн по тикам сервера (под нагрузкой клиент обгонял сервер на ~300 тиков).
 
 ## Как работать
 - Конвейеры повторяемы от оригиналов: 1.21.1 — `tools/restore_common.sh` + `tools/port_multiloader.py`;

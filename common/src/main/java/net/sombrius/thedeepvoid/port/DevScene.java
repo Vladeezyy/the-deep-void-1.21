@@ -53,7 +53,7 @@ import com.mojang.datafixers.util.Pair;
  * {@code run/screenshots/scene_*.png}, then quits. With {@code -Pscene=lang} it only prints some of the mod's translated texts
  * to the chat and saves {@code scene_lang_<language>.png}. With {@code -Pscene=bench} it measures the tick cost of the mod's
  * tick handlers ({@link PortBench}, {@code tools/bench.sh}). With {@code -Pscene=regress} it checks fixed issues: #3 (entering
- * or leaving the Deep Void showed the End Poem) and #2 (the mod's armor trims), {@code [scene] CHECK} lines in the log.
+ * or leaving the Deep Void showed the End Poem) and #2 (the mod's armor trims), #4 (the mod's shields block), {@code [scene] CHECK} lines in the log.
  */
 @EventBusSubscriber(modid = TheDeepVoidMod.MODID, value = Dist.CLIENT)
 public final class DevScene {
@@ -311,9 +311,56 @@ public final class DevScene {
 			at(t + 60, mc -> shot(mc, name));
 			t += 80;
 		}
+		for (String shield : List.of("lavendite_shield", "eye_shield", "devourer_shield", "voidrium_bulwark")) {
+			at(t, mc -> server(mc, p -> holdShield(p, shield)));
+			// the client releases an item in use as soon as the use key is up (Minecraft.handleKeybinds)
+			at(t + 10, mc -> {
+				mc.options.keyUse.setDown(true);
+				mc.gameMode.useItem(mc.player, net.minecraft.world.InteractionHand.OFF_HAND);
+			});
+			at(t + 25, mc -> server(mc, p -> hitShield(p, shield)));
+			at(t + 30, mc -> mc.options.keyUse.setDown(false));
+			t += 40;
+		}
+		at(t, mc -> server(mc, p -> {
+			p.stopUsingItem();
+			p.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, net.minecraft.world.item.ItemStack.EMPTY);
+			p.setGameMode(GameType.CREATIVE);
+		}));
+		t += 10;
 		at(t, mc -> TheDeepVoidMod.LOGGER.info("[scene] CHECK {} End Poem: WIN_GAME packets {}, screen open {} times", WIN_GAME_PACKETS.get() == 0 && credits == 0 ? "OK" : "FAIL",
 				WIN_GAME_PACKETS.get(), credits));
 		at(t + 10, Minecraft::stop);
+	}
+
+	/** Issue #4: the mod's shields raise from the off hand and block like the vanilla one (1.21.5+: the blocks_attacks component). */
+	private static void holdShield(ServerPlayer p, String id) {
+		p.setGameMode(GameType.SURVIVAL);
+		p.stopUsingItem();
+		p.teleportTo(p.getServer().overworld(), 0.5, 119, 0.5, 0F, 0F);
+		p.setHealth(p.getMaxHealth());
+		net.minecraft.world.item.ItemStack shield = new net.minecraft.world.item.ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, id)));
+		p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, net.minecraft.world.item.ItemStack.EMPTY);
+		p.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, shield);
+	}
+
+	/** A zombie in front hits the player; the Lavendite Shield and the Voidrium Bulwark hurt the attacker when they block. */
+	private static void hitShield(ServerPlayer p, String id) {
+		ServerLevel level = (ServerLevel) p.level();
+		boolean raised = p.isUsingItem();
+		boolean blocking = p.isBlocking();
+		net.minecraft.world.entity.monster.Zombie zombie = EntityType.ZOMBIE.spawn(level, BlockPos.containing(0.5, 119, 2.5), MobSpawnType.COMMAND);
+		zombie.setNoAi(true);
+		float health = p.getHealth();
+		float zombieHealth = zombie.getHealth();
+		p.hurt(p.damageSources().mobAttack(zombie), 4F);
+		boolean blocked = p.getHealth() >= health;
+		boolean ability = zombie.getHealth() < zombieHealth;
+		boolean needAbility = id.equals("lavendite_shield") || id.equals("voidrium_bulwark");
+		boolean ok = raised && blocking && blocked && (ability || !needAbility);
+		TheDeepVoidMod.LOGGER.info("[scene] CHECK {} shield {}: raised {}, blocking {}, damage taken {}, block ability hit the attacker {}", ok ? "OK" : "FAIL", id, raised, blocking,
+				health - p.getHealth(), ability);
+		zombie.discard();
 	}
 
 	private static void travelCheck(Minecraft mc, String what, ResourceKey<Level> expected) {

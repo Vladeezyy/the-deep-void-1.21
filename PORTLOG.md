@@ -183,6 +183,25 @@ and after runs were alternated twice (`tools/bench_table.py`). Apple M4, JDK 21,
   pit blocks that settle), flags true, marks kept on the restart; both loaders. The first start of a new world takes
   ~15 s longer (the pit is 88 × 107 × 133 blocks), once, as in 1.20.1.
 
+- **2026-11-16, issue #3: entering or leaving the Deep Void showed the End Poem** (1.99.3.1.1–1.99.3.1.4, every
+  version, both loaders). MCreator's 1.20 dimension teleport (13 places: falling into the void, the void pendant and
+  mirror, the return portal, the abductor, the join and respawn handlers) sends `WIN_GAME 0` before
+  `ServerPlayer.teleportTo`. In 1.20 that value only opened a loading screen; since 1.21 every `WIN_GAME` opens the End
+  Poem (`WinScreen`). A plain client replaces it with the level loading screen in the same frame, so it flashes at
+  most; with mods that skip the loading screen the whole poem plays. The packet is gone (`tools/port_multiloader.py`
+  drops the line from the original's code): `teleportTo` already moves the client to the new dimension.
+- **2026-11-16, issue #2: armor trims** (reported on 26.2, see that branch). On 1.21.1 the trims of the mod work;
+  only the vanilla flow and bolt patterns with the mod's materials drew the missing texture: the original's
+  `armor_trims` atlas lists the vanilla patterns up to host (1.20.1). It lists flow and bolt now.
+- Test: `LOADER=neoforge|fabric tools/scenetest.sh -Pscene=regress`. The player falls into the void and goes back
+  with the void pendant; the scene counts the `WIN_GAME` packets reaching the client (a Netty handler ahead of the
+  client's packet listener: the screen alone shows nothing in a plain client) and the End Poem screen. Then eight
+  armor pieces go through the smithing recipe (the mod's patterns with the mod's materials, vanilla coast, flow and
+  bolt with the mod's materials, the gore pattern with gold), and each trim the client draws is checked against the
+  missing texture (the `armor_trims` atlas sprite), screenshots `scene_trims_1.png` and `scene_trims_2.png`.
+  Before the fix (NeoForge): 2 `WIN_GAME` packets, flow and bolt sprites missing; after: all 19 checks OK on both
+  loaders.
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

@@ -62,7 +62,6 @@ public class IfPlayerFallsInVoidProcedure {
 							return;
 						ServerLevel nextLevel = _player.server.getLevel(destinationType);
 						if (nextLevel != null) {
-							_player.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 							_player.teleportTo(nextLevel, _player.getX(), _player.getY(), _player.getZ(), _player.getYRot(), _player.getXRot());
 							_player.connection.send(new ClientboundPlayerAbilitiesPacket(_player.getAbilities()));
 							for (MobEffectInstance _effectinstance : _player.getActiveEffects())
@@ -86,7 +85,6 @@ public class IfPlayerFallsInVoidProcedure {
 								return;
 							ServerLevel nextLevel = _player.server.getLevel(destinationType);
 							if (nextLevel != null) {
-								_player.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								_player.teleportTo(nextLevel, _player.getX(), _player.getY(), _player.getZ(), _player.getYRot(), _player.getXRot());
 								_player.connection.send(new ClientboundPlayerAbilitiesPacket(_player.getAbilities()));
 								for (MobEffectInstance _effectinstance : _player.getActiveEffects())
@@ -111,7 +109,6 @@ public class IfPlayerFallsInVoidProcedure {
 					return;
 				ServerLevel nextLevel = _player.server.getLevel(destinationType);
 				if (nextLevel != null) {
-					_player.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 					_player.teleportTo(nextLevel, _player.getX(), _player.getY(), _player.getZ(), _player.getYRot(), _player.getXRot());
 					_player.connection.send(new ClientboundPlayerAbilitiesPacket(_player.getAbilities()));
 					for (MobEffectInstance _effectinstance : _player.getActiveEffects())

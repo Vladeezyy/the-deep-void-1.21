@@ -12,7 +12,7 @@ import net.sombrius.thedeepvoid.procedures.GarumPlayerFinishesUsingItemProcedure
 
 public class GarumItem extends Item {
 	public GarumItem() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(0).saturationModifier(0f).build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(16).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(0).saturationModifier(0f).build(), net.minecraft.world.item.component.Consumables.defaultDrink().build()));
 	}
 
 	@Override

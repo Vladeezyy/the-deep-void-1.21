@@ -29,6 +29,11 @@ public class ExecutionerSwordItem extends Item implements net.sombrius.thedeepvo
 		event.modify(TheDeepVoidModItems.EXECUTIONER_SWORD.get(), builder -> builder.remove(DataComponents.MAX_DAMAGE));
 	}
 
+	/** NeoForge 21.11+ (IItemExtension): the swing hook with the hand */
+	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, net.minecraft.world.InteractionHand hand) {
+		return onEntitySwing(itemstack, entity);
+	}
+
 	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity) {
 		boolean retval = false;
 		ExecutionerSwordSwingItemProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);

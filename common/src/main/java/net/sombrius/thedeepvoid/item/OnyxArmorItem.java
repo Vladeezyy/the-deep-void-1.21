@@ -40,7 +40,7 @@ public abstract class OnyxArmorItem extends Item {
 		super(properties.humanoidArmor(ARMOR_MATERIAL, type));
 	}
 
-	public static class Helmet extends OnyxArmorItem {
+	public static class Helmet extends OnyxArmorItem implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 		public Helmet() {
 			super(ArmorType.HELMET, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
 		}
@@ -54,9 +54,19 @@ public abstract class OnyxArmorItem extends Item {
 				OnyxArmorHelmetTickEventProcedure.execute(entity);
 			}
 		}
+
+		/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+		@Override
+		public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {
+				OnyxArmorHelmetTickEventProcedure.execute(entity);
+			}
+		}
 	}
 
-	public static class Chestplate extends OnyxArmorItem {
+	public static class Chestplate extends OnyxArmorItem implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 		public Chestplate() {
 			super(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
 		}
@@ -70,9 +80,19 @@ public abstract class OnyxArmorItem extends Item {
 				OnyxFullArmorProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
 			}
 		}
+
+		/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+		@Override
+		public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {
+				OnyxFullArmorProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
+			}
+		}
 	}
 
-	public static class Leggings extends OnyxArmorItem {
+	public static class Leggings extends OnyxArmorItem implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 		public Leggings() {
 			super(ArmorType.LEGGINGS, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
 		}
@@ -86,9 +106,19 @@ public abstract class OnyxArmorItem extends Item {
 				OnyxArmorHelmetTickEventProcedure.execute(entity);
 			}
 		}
+
+		/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+		@Override
+		public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {
+				OnyxArmorHelmetTickEventProcedure.execute(entity);
+			}
+		}
 	}
 
-	public static class Boots extends OnyxArmorItem {
+	public static class Boots extends OnyxArmorItem implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 		public Boots() {
 			super(ArmorType.BOOTS, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
 		}
@@ -96,6 +126,16 @@ public abstract class OnyxArmorItem extends Item {
 		@Override
 		public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 			super.inventoryTick(itemstack, world, entity, equipmentSlot);
+			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {
+				OnyxArmorHelmetTickEventProcedure.execute(entity);
+			}
+		}
+
+		/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+		@Override
+		public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {

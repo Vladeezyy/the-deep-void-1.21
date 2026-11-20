@@ -14,7 +14,7 @@ import net.sombrius.thedeepvoid.procedures.BottleOfAmbrosiaPlayerFinishesUsingIt
 
 public class BottleOfAmbrosiaItem extends Item {
 	public BottleOfAmbrosiaItem() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(0.4f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(1).saturationModifier(0.4f).alwaysEdible().build(), net.minecraft.world.item.component.Consumables.defaultDrink().build()));
 	}
 
 	@Override

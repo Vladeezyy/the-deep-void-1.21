@@ -545,6 +545,49 @@ def items4(s):
     return s
 
 
+def items5(s):
+    """1.21.5+ item behaviour the first passes missed (the issue #4 audit)"""
+    # 1.21.11: SPEAR (1.21.1: the trident's raised arm) is the kinetic spear; the trident pose is TRIDENT
+    s = s.replace('ItemUseAnimation.SPEAR', 'ItemUseAnimation.TRIDENT')
+    # NeoForge 21.11+: IItemExtension#onEntitySwing has the hand (21.1's two-argument hook, which the items
+    # override, is gone); Fabric calls the two-argument one (PortItemHooks.EntitySwing)
+    if 'PortItemHooks.EntitySwing' in s and 'net.minecraft.world.InteractionHand hand) {\n\t\treturn onEntitySwing(' not in s:
+        m = re.search(r'\n(?:\t@Override\n)?\tpublic boolean onEntitySwing\(ItemStack \w+, LivingEntity \w+\) \{', s)
+        if m:
+            s = (s[:m.start()] + '\n\t/** NeoForge 21.11+ (IItemExtension): the swing hook with the hand */\n\tpublic boolean onEntitySwing(ItemStack itemstack, '
+                 'LivingEntity entity, net.minecraft.world.InteractionHand hand) {\n\t\treturn onEntitySwing(itemstack, entity);\n\t}\n' + s[m.start():])
+    # 1.21.2: the use sound and particles are the consumable component's (food: eating), not the use animation's
+    if 'return ItemUseAnimation.DRINK;' in s and 'Consumables.defaultDrink()' not in s:
+        s = re.sub(r'\.food\(((?:\(new FoodProperties\.Builder\(\)\))[^;]*?\.build\(\))\)', r'.food(\1, net.minecraft.world.item.component.Consumables.defaultDrink().build())', s, count=1)
+    # 1.21.5: ItemStack.inventoryTick calls the item on the server only; 1.21.1 ticked both sides and the client copy
+    # of the procedures moved the player (Fly Wings, Soul Wings, Tombstone, Claw Scythe, Stinger): the client ticks
+    # its own player's items through PortItemHooks.ClientInventoryTick (port.PortClientItemTick)
+    sig = r'\n(?:\t+@Override\n)?(\t+)public void inventoryTick\(ItemStack itemstack, ServerLevel world, Entity (\w+), @Nullable net\.minecraft\.world\.entity\.EquipmentSlot equipmentSlot\) \{'
+    found = [m for m in re.finditer(sig, s)]
+    for m in reversed(found):
+        open_brace = m.end() - 1
+        close = method_body(s, open_brace)
+        if 'public void clientInventoryTick(' in s[close:close + 400]:
+            continue
+        ind = m.group(1)
+        body = re.sub(r'\n\t+super\.inventoryTick\([^;]*\);', '', s[open_brace + 1:close], count=1)
+        method = (f'\n\n{ind}/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player\'s items here (both sides did on 1.21.1) */\n'
+                  f'{ind}@Override\n{ind}public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity {m.group(2)}, '
+                  f'@Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {{{body}}}')
+        s = s[:close + 1] + method + s[close + 1:]
+    decls = []
+    for m in re.finditer(r'public void clientInventoryTick\(', s):
+        d = list(re.finditer(r'(?m)^[\t ]*public (?:static )?(?:abstract )?(?:final )?class \w+[^{\n]*\{', s[:m.start()]))[-1]
+        if 'PortItemHooks.ClientInventoryTick' not in d.group(0) and d.span() not in decls:
+            decls.append(d.span())
+    for a, b in sorted(decls, reverse=True):
+        line = s[a:b]
+        hook = f'{PKG}.port.PortItemHooks.ClientInventoryTick'
+        line = line[:-1].rstrip() + (f', {hook} {{' if ' implements ' in line else f' implements {hook} {{')
+        s = s[:a] + line + s[b:]
+    return s
+
+
 def item_properties(s):
     """1.21.4: item models select by item model definitions; MCreator's property procedures go to
     port.PortItemProperties (the definitions use the_deep_void:procedure), shields use minecraft:using_item"""
@@ -626,6 +669,7 @@ def port(s):
     s = item_properties(s)
     s = jei(s)
     s = items4(s)
+    s = items5(s)
     s = armor_models(s)
     if 'SpecialEffectsHandler' in s:
         s = dimensions(s)

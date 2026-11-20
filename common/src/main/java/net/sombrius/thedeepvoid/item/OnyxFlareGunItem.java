@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import net.sombrius.thedeepvoid.procedures.OnyxFlareGunItemInHandTickProcedure;
 import net.sombrius.thedeepvoid.procedures.OnyxFlareGunRightclickedProcedure;
 
-public class OnyxFlareGunItem extends Item {
+public class OnyxFlareGunItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	public OnyxFlareGunItem() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(150).rarity(Rarity.COMMON));
 	}
@@ -29,6 +29,15 @@ public class OnyxFlareGunItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		if (selected)
+			OnyxFlareGunItemInHandTickProcedure.execute(itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		if (selected)

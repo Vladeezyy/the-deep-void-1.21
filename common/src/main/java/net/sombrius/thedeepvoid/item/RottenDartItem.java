@@ -25,7 +25,7 @@ public class RottenDartItem extends Item {
 
 	@Override
 	public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-		return ItemUseAnimation.SPEAR;
+		return ItemUseAnimation.TRIDENT;
 	}
 
 	@Override

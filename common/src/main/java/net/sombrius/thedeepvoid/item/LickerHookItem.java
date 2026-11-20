@@ -24,6 +24,11 @@ public class LickerHookItem extends Item implements net.sombrius.thedeepvoid.por
 		return ar;
 	}
 
+	/** NeoForge 21.11+ (IItemExtension): the swing hook with the hand */
+	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, net.minecraft.world.InteractionHand hand) {
+		return onEntitySwing(itemstack, entity);
+	}
+
 	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity) {
 		boolean retval = false;
 		LickerHookRightclickedProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity, itemstack);

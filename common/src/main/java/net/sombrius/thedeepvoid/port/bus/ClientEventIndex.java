@@ -8,6 +8,7 @@ public final class ClientEventIndex {
 	public static void register() {
 		ModBus.add(ClientTickEvent.Post.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.init.TheDeepVoidModKeyMappings.KeyEventListener::onClientTick, net.sombrius.thedeepvoid.init.TheDeepVoidModKeyMappings.KeyEventListener.class);
 		ModBus.add(ClientTickEvent.Post.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.port.DevScene::onTick, net.sombrius.thedeepvoid.port.DevScene.class);
+		ModBus.add(ClientTickEvent.Pre.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.port.PortClientItemTick::onClientTick, net.sombrius.thedeepvoid.port.PortClientItemTick.class);
 		ModBus.add(ClientTickEvent.Pre.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.procedures.PlayerForgetfulFogAppearsProcedure::updateWorldTick, net.sombrius.thedeepvoid.procedures.PlayerForgetfulFogAppearsProcedure.class);
 		ModBus.add(EntityRenderersEvent.RegisterLayerDefinitions.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.init.TheDeepVoidModModels::registerLayerDefinitions, net.sombrius.thedeepvoid.init.TheDeepVoidModModels.class);
 		ModBus.add(EntityRenderersEvent.RegisterRenderers.class, EventPriority.NORMAL, net.sombrius.thedeepvoid.init.TheDeepVoidModEntityRenderers::registerEntityRenderers, net.sombrius.thedeepvoid.init.TheDeepVoidModEntityRenderers.class);

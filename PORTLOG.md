@@ -265,6 +265,36 @@ task instead of remapJar). Repeatable from the originals: `tools/port_26_1.sh` (
   After the fix: all 19 checks OK on both loaders (the same scene on the unfixed 26.2: 2 `WIN_GAME` packets, all 8
   trim sprites missing).
 
+- **2026-11-20, issue #4: the mod's shields did not raise** (1.99.3.1.1–1.99.3.1.5, 1.21.11 and 26.x, both loaders:
+  Lavendite Shield, Eye Shield, Devourer Shield, Voidrium Bulwark). Since 1.21.5 `ShieldItem` no longer blocks by
+  itself: blocking is the `blocks_attacks` component, which vanilla gives `Items.SHIELD`. `Registrar.shieldProps()` has
+  the vanilla shield's component (90°, 0.25 s, damage 3 + 1 per point), off hand equippable and break sound;
+  `tools/port_dv_1_21_11.py` gives it to every `ShieldItem`. The block abilities (`LivingShieldBlockEvent`) run again.
+- **2026-11-20, a code audit after #4** (subagents read the port against the vanilla and loader sources; every point
+  checked by hand and by the regress scene):
+  - `port.bus.ModBus` ran every listener of a canceled event; Forge 1.20.1 and NeoForge skip the rest (MCreator's
+    `@SubscribeEvent` has `receiveCanceled = false`): it stops at the cancel now (every version, both loaders).
+  - `ItemFishedEvent` was not cancelable: fishing in the Deep Void gave the vanilla catch on top of the mod's (every
+    version, both loaders). NeoForge cancels the event, Fabric empties the hook's catch.
+  - Peril, Misanthropy, Heresy, Eldritch Maw, the double barrel shotgun and Apostasy had no particle texture.
+  - 1.21.5: `ItemStack.inventoryTick` calls the item on the server only, but the MCreator procedures ran on both sides
+    and the client's copy moved its own player: Fly Wings and Soul Wings did not fly, the Tombstone's jump, the Claw
+    Scythe's dash and the Stinger's stop did nothing. `port.PortClientItemTick` ticks the local player's items on the
+    client (`PortItemHooks.ClientInventoryTick`, `items5` in `tools/port_dv_1_21_11.py`), as 1.21.1 did.
+  - NeoForge 21.11+: `IItemExtension#onEntitySwing` has the hand; the items override 21.1's two-argument hook, which is
+    gone: the swing abilities (the three Licker Hooks, Executioner Sword, Grim and Void Sickle, Reaping Hook, Peril,
+    Void Matter Greatsword, Bloodthirsty Claws) did nothing on NeoForge. They have the three-argument overload now.
+  - 1.21.11: `UseAnim.SPEAR` (the trident's raised arm in 1.21.1) became the kinetic spear: Rotten Dart and Call Upon
+    the Hive use `TRIDENT`.
+  - 1.21.2: drinks sounded like food (the sound is the consumable component's): Bottle of Ambrosia, Fishy Potion,
+    Garum and Grimberry Juice have `Consumables.defaultDrink()`.
+- Test: `LOADER=neoforge|fabric tools/scenetest.sh -Pscene=regress`, now with the shields (each raised from the off
+  hand with the use key held, a zombie in front hits the player: before the fix 0 of 4 raised on 26.2, after it 4 of
+  4 block on every version and both loaders, the Lavendite Shield and the Voidrium Bulwark hurt the attacker), the
+  fishing cancel in the Deep Void, the scythe reach modifier on the stack, Fly Wings flight (the player rises 12 blocks in 20 ticks), the swing
+  overload, the drink component and the trident pose. The scene's timeline follows the integrated server's ticks: with two clients
+  at once the server ran ~300 ticks behind and the void pendant check failed.
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

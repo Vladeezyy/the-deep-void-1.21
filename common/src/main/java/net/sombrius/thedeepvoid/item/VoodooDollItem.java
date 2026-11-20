@@ -27,7 +27,7 @@ import net.sombrius.thedeepvoid.procedures.VoodooDollRightclickedProcedure;
 import net.sombrius.thedeepvoid.procedures.VoodooDollRightclickedRealProcedure;
 import net.sombrius.thedeepvoid.procedures.VoodooDollSpecialInformationProcedure;
 
-public class VoodooDollItem extends Item {
+public class VoodooDollItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	public VoodooDollItem() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(-4).saturationModifier(-0.4f).alwaysEdible().build()));
 	}
@@ -80,6 +80,15 @@ public class VoodooDollItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		if (selected)
+			VoodooDollRightclickedProcedure.execute(world, entity, itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		if (selected)

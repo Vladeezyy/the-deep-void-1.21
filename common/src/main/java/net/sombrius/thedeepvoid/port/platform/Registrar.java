@@ -61,6 +61,19 @@ public final class Registrar<R> {
         return new Item.Properties().setId(current(Registries.ITEM));
     }
 
+    /**
+     * Item properties of a shield. 1.21.5+: ShieldItem no longer blocks by itself, blocking is the blocks_attacks component
+     * (issue #4: the mod's shields did not raise); the values of the vanilla shield (Items.SHIELD).
+     */
+    public static Item.Properties shieldProps() {
+        return itemProps().equippableUnswappable(net.minecraft.world.entity.EquipmentSlot.OFFHAND)
+            .component(net.minecraft.core.component.DataComponents.BLOCKS_ATTACKS, new net.minecraft.world.item.component.BlocksAttacks(0.25F, 1.0F,
+                java.util.List.of(new net.minecraft.world.item.component.BlocksAttacks.DamageReduction(90.0F, java.util.Optional.empty(), 0.0F, 1.0F)),
+                new net.minecraft.world.item.component.BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F), java.util.Optional.of(net.minecraft.tags.DamageTypeTags.BYPASSES_SHIELD),
+                java.util.Optional.of(net.minecraft.sounds.SoundEvents.SHIELD_BLOCK), java.util.Optional.of(net.minecraft.sounds.SoundEvents.SHIELD_BREAK)))
+            .component(net.minecraft.core.component.DataComponents.BREAK_SOUND, net.minecraft.sounds.SoundEvents.SHIELD_BREAK);
+    }
+
     /** New block properties with the id of the block being registered */
     public static BlockBehaviour.Properties blockProps() {
         return BlockBehaviour.Properties.of().setId(current(Registries.BLOCK));

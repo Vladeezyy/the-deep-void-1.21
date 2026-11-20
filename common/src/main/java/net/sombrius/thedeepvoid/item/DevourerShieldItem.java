@@ -18,7 +18,7 @@ import net.sombrius.thedeepvoid.procedures.DevourerShieldSpecialInformationProce
 
 public class DevourerShieldItem extends ShieldItem {
 	public DevourerShieldItem() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().repairable(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "repair/devourer_shield"))).durability(540).fireResistant());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.shieldProps().repairable(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "repair/devourer_shield"))).durability(540).fireResistant());
 	}
 
 	@Override

@@ -55,11 +55,16 @@ public final class ModBus {
 		return LISTENERS.containsKey(type);
 	}
 
-	/** Runs the listeners; returns true if the event was canceled */
+	/**
+	 * Runs the listeners; returns true if the event was canceled. As on Forge 1.20.1 and NeoForge, the listeners after the
+	 * one that cancels the event do not run (MCreator's @SubscribeEvent has receiveCanceled = false).
+	 */
 	@SuppressWarnings("unchecked")
 	public static <E extends Event> boolean post(E event) {
 		for (Listener<?> listener : LISTENERS.getOrDefault(event.getClass(), NONE)) {
 			((Consumer<E>) listener.handler()).accept(event);
+			if (event.canceled())
+				return true;
 		}
 		return event.canceled();
 	}

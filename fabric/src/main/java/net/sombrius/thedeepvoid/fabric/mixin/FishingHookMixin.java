@@ -24,8 +24,9 @@ abstract class FishingHookMixin {
 	@ModifyExpressionValue(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems(Lnet/minecraft/world/level/storage/loot/LootParams;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
 	private ObjectArrayList<ItemStack> deepvoid$fished(ObjectArrayList<ItemStack> drops) {
 		Player player = this.getPlayerOwner();
-		if (player != null)
-			ModBus.post(new ItemFishedEvent(player, drops));
+		// canceled (NeoForge: the hook is discarded without its catch): no items and no experience
+		if (player != null && ModBus.post(new ItemFishedEvent(player, drops)))
+			drops.clear();
 		return drops;
 	}
 }

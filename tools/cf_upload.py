@@ -1,11 +1,12 @@
 """Uploads The Deep Void release jars (NeoForge + Fabric) of the given MC versions to CurseForge project 1775380.
 Jars and changelog come from the GitHub release v<VER>+<mc>. Dry run unless --go. Order: old MC first, Fabric before NeoForge.
-usage: python tools/cf_upload.py <mc>... [--go]  (raise VER first; the key is curseforgeToken= in ~/.gradle/gradle.properties)"""
+usage: python tools/cf_upload.py <mc>... [--go]  (VER is mod_version in gradle.properties; the key is curseforgeToken= in ~/.gradle/gradle.properties)"""
 import json, os, re, subprocess, sys, tempfile, urllib.request, uuid
 
 PROJECT = 1775380
 REPO = 'Vladeezyy/the-deep-void-1.21'
-VER = '1.99.3.1.5'
+# the release version: mod_version of this checkout (every branch has the same)
+VER = re.search(r'^mod_version=(\S+)', open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'gradle.properties'), encoding='utf-8').read(), re.M).group(1)
 MC = {'1.21.1': 11779, '1.21.11': 14406, '26.1.2': 16082, '26.2': 16498, '26.3': 17045}
 JAVA = {'1.21.1': 11135, '1.21.11': 11135}  # Java 21; 26.x: Java 25
 LOADERS = {'fabric': ('Fabric', 7499), 'neoforge': ('NeoForge', 10150)}

@@ -1,6 +1,7 @@
 {
   "parent": "the_deep_void:displaysettings/heresyarms",
   "textures": {
-    "layer0": "the_deep_void:item/heresynew"
+    "layer0": "the_deep_void:item/heresynew",
+    "particle": "the_deep_void:item/heresynew"
   }
 }

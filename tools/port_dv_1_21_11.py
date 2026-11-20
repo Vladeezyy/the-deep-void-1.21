@@ -539,6 +539,9 @@ def items4(s):
     m = re.search(r'public class (\w+Item) extends', s)
     if m:
         s = repairable(s, m.group(1))
+    # 1.21.5: a ShieldItem blocks only with the blocks_attacks component (issue #4), Registrar.shieldProps has the vanilla one
+    if re.search(r'public class \w+ extends ShieldItem', s):
+        s = s.replace(f'{REGISTRAR}.itemProps()', f'{REGISTRAR}.shieldProps()', 1)
     return s
 
 

@@ -25,7 +25,7 @@ import net.sombrius.thedeepvoid.procedures.VoidriumBulwarkToolInInventoryTickPro
 
 public class VoidriumBulwarkItem extends ShieldItem {
 	public VoidriumBulwarkItem() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().repairable(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "repair/voidrium_bulwark"))).durability(3461).fireResistant());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.shieldProps().repairable(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "repair/voidrium_bulwark"))).durability(3461).fireResistant());
 	}
 
 	@Override

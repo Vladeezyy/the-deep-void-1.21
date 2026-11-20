@@ -17,7 +17,7 @@ import net.sombrius.thedeepvoid.procedures.LavenditeShieldSpecialInformationProc
 
 public class LavenditeShieldItem extends ShieldItem {
 	public LavenditeShieldItem() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().repairable(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "repair/lavendite_shield"))).durability(540).fireResistant());
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.shieldProps().repairable(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "repair/lavendite_shield"))).durability(540).fireResistant());
 	}
 
 	@Override

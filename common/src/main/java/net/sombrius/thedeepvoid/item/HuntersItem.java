@@ -49,7 +49,7 @@ public abstract class HuntersItem extends Item {
 		super(properties.humanoidArmor(ARMOR_MATERIAL, type));
 	}
 
-	public static class Helmet extends HuntersItem implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Item {
+	public static class Helmet extends HuntersItem implements net.sombrius.thedeepvoid.port.neo.HasClientExtensions.Item, net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 		public Helmet() {
 			super(ArmorType.HELMET, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
 		}
@@ -84,6 +84,16 @@ public abstract class HuntersItem extends Item {
 				HuntersHelmetTickEventProcedure.execute(world, entity, itemstack);
 			}
 		}
+
+		/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+		@Override
+		public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {
+				HuntersHelmetTickEventProcedure.execute(world, entity, itemstack);
+			}
+		}
 	}
 
 	public static class Chestplate extends HuntersItem {
@@ -98,7 +108,7 @@ public abstract class HuntersItem extends Item {
 		}
 	}
 
-	public static class Boots extends HuntersItem {
+	public static class Boots extends HuntersItem implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 		public Boots() {
 			super(ArmorType.BOOTS, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps());
 		}
@@ -106,6 +116,16 @@ public abstract class HuntersItem extends Item {
 		@Override
 		public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 			super.inventoryTick(itemstack, world, entity, equipmentSlot);
+			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {
+				HuntersBootsTickEventProcedure.execute(entity, itemstack);
+			}
+		}
+
+		/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+		@Override
+		public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {

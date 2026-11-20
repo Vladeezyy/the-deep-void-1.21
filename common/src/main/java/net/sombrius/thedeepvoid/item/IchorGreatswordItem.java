@@ -30,7 +30,7 @@ import net.sombrius.thedeepvoid.procedures.IchorGreatswordPlayerFinishesUsingIte
 import net.sombrius.thedeepvoid.procedures.IchorGreatswordRightClickProcedure;
 import net.sombrius.thedeepvoid.procedures.RottenTongueDescriptionProcedure;
 
-public class IchorGreatswordItem extends Item {
+public class IchorGreatswordItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	public IchorGreatswordItem() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(2465).fireResistant().rarity(Rarity.COMMON).attributes(ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 8d, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.4, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
 	}
@@ -65,6 +65,15 @@ public class IchorGreatswordItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		if (selected)
+			IchorGreatswordItemInHandTickProcedure.execute(world, entity, itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		if (selected)

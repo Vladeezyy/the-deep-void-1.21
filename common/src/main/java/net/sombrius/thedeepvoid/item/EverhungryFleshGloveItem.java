@@ -22,7 +22,7 @@ import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 import net.sombrius.thedeepvoid.procedures.EverhungryFleshGloveToolInInventoryTickProcedure;
 import net.sombrius.thedeepvoid.procedures.FleshGloveLivingEntityIsHitWithToolProcedure;
 
-public class EverhungryFleshGloveItem extends AxeItem {
+public class EverhungryFleshGloveItem extends AxeItem implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2031, 20f, 0f, 20, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/none")));
 
 	public EverhungryFleshGloveItem() {
@@ -45,6 +45,14 @@ public class EverhungryFleshGloveItem extends AxeItem {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		EverhungryFleshGloveToolInInventoryTickProcedure.execute(entity, itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		EverhungryFleshGloveToolInInventoryTickProcedure.execute(entity, itemstack);

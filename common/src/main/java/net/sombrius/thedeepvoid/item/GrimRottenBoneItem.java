@@ -51,7 +51,7 @@ public abstract class GrimRottenBoneItem extends Item {
 		}
 	}
 
-	public static class Chestplate extends GrimRottenBoneItem {
+	public static class Chestplate extends GrimRottenBoneItem implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 		public Chestplate() {
 			super(ArmorType.CHESTPLATE, net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(480));
 		}
@@ -59,6 +59,16 @@ public abstract class GrimRottenBoneItem extends Item {
 		@Override
 		public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 			super.inventoryTick(itemstack, world, entity, equipmentSlot);
+			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {
+				GrimRottenFullArmorProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
+			}
+		}
+
+		/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+		@Override
+		public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 			boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 			int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 			if (entity instanceof Player player && net.sombrius.thedeepvoid.port.PortUtil.wearing(player, itemstack)) {

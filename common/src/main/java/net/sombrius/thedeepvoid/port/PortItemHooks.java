@@ -12,4 +12,12 @@ public final class PortItemHooks {
 	public interface EntitySwing {
 		boolean onEntitySwing(ItemStack itemstack, LivingEntity entity);
 	}
+
+	/**
+	 * 1.21.5+: ItemStack.inventoryTick calls the item on the server only; the client ticks its own player's items
+	 * through this ({@link PortClientItemTick}), as both sides did on 1.21.1.
+	 */
+	public interface ClientInventoryTick {
+		void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, net.minecraft.world.entity.Entity entity, @javax.annotation.Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot);
+	}
 }

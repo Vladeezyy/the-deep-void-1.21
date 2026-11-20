@@ -4,16 +4,16 @@
 коммиты от `Vladeezyy <vladeezym@gmail.com>` без AI-атрибуции, LGPL-3.0-only, 6 обязательных языков, тесты перед
 релизом, записи в `Vladeezyy/modding-kb`). Этот файл одинаковый во всех ветках.
 
-## Состояние (2026-11-14)
+## Состояние (2026-11-20)
 Задача владельца от 2026-10-30 («1.21.11 и все 26.x, Fabric + NeoForge») **выполнена и выпущена**.
 
 | Ветка | MC | NeoForge | Fabric API | GeckoLib | Java | Последний релиз |
 | --- | --- | --- | --- | --- | --- | --- |
-| `multiloader` | 1.21.1 | 21.1.259 (от 21.1.197) | 0.116.17 | 4.9.3 | 21 | `v1.99.3.1.4+1.21.1` |
-| `mc/1.21.11` | 1.21.11 | 21.11.48 | 0.141.6 | 5.4.5 | 21 | `v1.99.3.1.4+1.21.11` |
-| `mc/26.1.2` | 26.1.2 | 26.1.2.125 | 0.155.3 | 5.5.2 | 25 | `v1.99.3.1.4+26.1.2` |
-| `mc/26.2` | 26.2 | 26.2.0.93 | 0.161.0 | 5.5.6 | 25 | `v1.99.3.1.4+26.2` |
-| `mc/26.3` | 26.3 | 26.3.0.99 | 0.165.0 | 5.5.7 | 25 | `v1.99.3.1.4+26.3` |
+| `multiloader` | 1.21.1 | 21.1.259 (от 21.1.197) | 0.116.17 | 4.9.3 | 21 | `v1.99.3.1.5+1.21.1` |
+| `mc/1.21.11` | 1.21.11 | 21.11.48 | 0.141.6 | 5.4.5 | 21 | `v1.99.3.1.5+1.21.11` |
+| `mc/26.1.2` | 26.1.2 | 26.1.2.125 | 0.155.3 | 5.5.2 | 25 | `v1.99.3.1.5+26.1.2` |
+| `mc/26.2` | 26.2 | 26.2.0.93 | 0.161.0 | 5.5.6 | 25 | `v1.99.3.1.5+26.2` |
+| `mc/26.3` | 26.3 | 26.3.0.99 | 0.165.0 | 5.5.7 | 25 | `v1.99.3.1.5+26.3` |
 
 Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven (в `gradle.properties` id версии, а не номер).
 Каждый релиз — два jar (NeoForge и Fabric) из зелёного CI (`.github/workflows/build.yml`: сборка + запуск серверов
@@ -25,7 +25,8 @@ Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven 
 - **Ветки `mc/*` не сливаются друг в друга и в `multiloader`**: каждая сделана от разделённого 1.21.1 своим конвейером.
   Исправление, нужное на нескольких версиях, переносится в каждую ветку отдельно (как фикс клавиш 1.99.3.1.2).
 - Репозиторий публичный. CurseForge: **The Deep Void (Unofficial Port), проект 1775380**, описание —
-  `docs/curseforge-description.md`, загрузка — `~/Desktop/modrinth-publish/cf_ports.py dv --tag <тег> --go` (MacBook);
+  `docs/curseforge-description.md`, загрузка — `~/Desktop/modrinth-publish/cf_ports.py dv --tag <тег> --go` (MacBook;
+  1.99.3.1.5 загружен с Windows-ПК тем же API, скрипт-образец — в разделе The Deep Void в `conventions/curseforge.md`);
   номера файлов — в `modding-kb/conventions/curseforge.md`.
 
 ### Ревизии порта (пятая цифра версии)
@@ -44,6 +45,13 @@ Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven 
   Исправление — в `port_multiloader.py`. `tools/check_index.py` в CI ловит любой обработчик, которого нет в шине мода.
   Новый серверный тест `port/PortServerTest` (свойство `deepvoid.servertest`; `RESTART=1` в `tools/servertest.sh`
   проверяет второй запуск).
+- **1.99.3.1.5** (2026-11-20, все версии): issue #3 — при входе в Deep Void и выходе из него играла поэма Края
+  (шаблон телепорта MCreator 1.20 слал `WIN_GAME 0`, с 1.21 клиент отвечает на него титрами; строка удалена в 13
+  местах и правилом в `port_multiloader.py`). Issue #2 — отделка брони мода была missing texture на 1.21.11 и 26.x
+  (текстуры узоров не в `trims/entity/humanoid[_leggings]`; на 26.3 ещё палитры не в namespace `palette_id` и нет
+  `.png.mcmeta` с `trim_base`): `armor_trims()` в `port_resources_1_21_11.py`, `assets()` в `port_resources_26_3.py`;
+  на 1.21.1 в атлас добавлены ванильные flow и bolt. Оба issue закрыты. Сцена `-Pscene=regress` проверяет оба бага
+  (19 проверок, все версии и оба загрузчика).
 
 ## Как работать
 - Конвейеры повторяемы от оригиналов: 1.21.1 — `tools/restore_common.sh` + `tools/port_multiloader.py`;
@@ -51,7 +59,8 @@ Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven 
   `port_resources_26_1.py`, `tools/port_26_2.sh` + `port_resources_26_2.py`, `tools/port_26_3.sh` +
   `port_resources_26_3.py` (каждая версия запускает свои скрипты после скриптов предыдущих).
 - Тесты: `LOADER=neoforge|fabric tools/servertest.sh` (dev-сервер), `tools/scenetest.sh` (сцена мира и мобов;
-  `-Pscene=items` — пушки, броня, крылья; `-Pscene=keys`; на 26.3 `-Pscene=brewing`), `tools/bench.sh` (цена тиковых
+  `-Pscene=items` — пушки, броня, крылья; `-Pscene=keys`; `-Pscene=regress` — issues #2 и #3; на 26.3
+  `-Pscene=brewing`; на Windows ветки 26.x собирать с `-Dorg.gradle.java.home=<JDK 25>`: в `gradle.properties` путь с MacBook), `tools/bench.sh` (цена тиковых
   обработчиков против базы), `:fabric:prodServer` (production-сервер Fabric с jar); production-сервер NeoForge — `prodtest/serve.sh`
   (папка в `.gitignore`, в git её нет: на машине без неё поставить сервер NeoForge установщиком и положить jar сам).
   Все автозапуски — через `tools/watchdog.sh`.

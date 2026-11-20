@@ -308,6 +308,33 @@ shorthands) after the earlier converters.
   pit blocks that settle), flags true, marks kept on the restart; both loaders. The first start of a new world takes
   ~15 s longer (the pit is 88 × 107 × 133 blocks), once, as in 1.20.1.
 
+- **2026-11-16, issue #3: entering or leaving the Deep Void showed the End Poem** (1.99.3.1.1–1.99.3.1.4, every
+  version, both loaders). MCreator's 1.20 dimension teleport (13 places: falling into the void, the void pendant and
+  mirror, the return portal, the abductor, the join and respawn handlers) sends `WIN_GAME 0` before
+  `ServerPlayer.teleportTo`. In 1.20 that value only opened a loading screen; since 1.21 every `WIN_GAME` opens the End
+  Poem (`WinScreen`). A plain client replaces it with the level loading screen in the same frame, so it flashes at
+  most; with mods that skip the loading screen the whole poem plays. The packet is gone (`tools/port_multiloader.py`
+  drops the line from the original's code): `teleportTo` already moves the client to the new dimension.
+- **2026-11-16, issue #2: the mod's armor trims drew the missing texture** (1.99.3.1.1–1.99.3.1.4, 1.21.11 and 26.x,
+  both loaders). 1.21.4 looks for the trim textures in `textures/trims/entity/humanoid[_leggings]/<pattern>`; the
+  pipeline left the four patterns in `textures/trims/models/armor/<pattern>[_leggings]` and the `armor_trims` atlas
+  listed the old paths, so every Deep Void pattern and every trim in a Deep Void material was purple and black.
+  `tools/port_resources_1_21_11.py` moves the textures and writes the atlas: every pattern (vanilla up to bolt and the
+  mod's) with the mod's materials, the mod's patterns with the vanilla materials (resin and the darker ones too).
+  26.3 has no trim atlas (the palettes apply on the fly), and the palettes stayed under
+  `assets/minecraft/textures/palettes/trim` while `palette_id` names `the_deep_void:trim/<material>`:
+  `tools/port_resources_26_3.py` moves each palette to the namespace of its `palette_id`, and gives each pattern
+  texture the `.png.mcmeta` vanilla patterns have (`"palette": {"base_palette": "minecraft:trim_base"}`): without it a
+  pattern draws its raw greys in every material.
+- Test: `LOADER=neoforge|fabric tools/scenetest.sh -Pscene=regress`. The player falls into the void and goes back
+  with the void pendant; the scene counts the `WIN_GAME` packets reaching the client (a Netty handler ahead of the
+  client's packet listener: the screen alone shows nothing in a plain client) and the End Poem screen. Then eight
+  armor pieces go through the smithing recipe (the mod's patterns with the mod's materials, vanilla coast, flow and
+  bolt with the mod's materials, the gore pattern with gold), and each trim the client draws is checked against the
+  missing texture (the pattern texture and the palette resources on 26.3), screenshots `scene_trims_1.png` and `scene_trims_2.png`.
+  After the fix: all 19 checks OK on both loaders, the colors as on 1.21.1 (a first run without the `.png.mcmeta` passed
+  the resource checks with grey trims: the scene checks the palette metadata now).
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

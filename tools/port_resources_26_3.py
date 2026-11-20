@@ -569,19 +569,39 @@ def convert_namespace(ns_dir):
 
 
 def assets():
-    """Trim palettes: textures/trims/color_palettes/x.png -> textures/palettes/trim/x.png (palette_id mod:trim/x), the
+    """Trim palettes: textures/trims/color_palettes/x.png -> <palette_id namespace>/textures/palettes/trim/x.png, the
     armor_trims atlas is gone (armor trims use the palettes directly), the items atlas takes minecraft:trim_base"""
     res = ROOT / "common/src/main/resources/assets"
-    for ns in res.iterdir():
-        old = ns / "textures/trims/color_palettes"
-        if old.exists():
-            new = ns / "textures/palettes/trim"
-            new.mkdir(parents=True, exist_ok=True)
+    # a palette goes to the namespace of the palette_id naming it (mod:trim/x -> assets/mod/textures/palettes/trim/x.png):
+    # palettes the original kept under assets/minecraft drew the missing texture (issue #2)
+    palette_ns = {}
+    for ns in data_roots():
+        for path in ns.glob("trim_material/*.json"):
+            palette = json.loads(path.read_text(encoding="utf-8")).get("palette_id", "")
+            if ":trim/" in palette:
+                namespace, name = palette.split(":trim/", 1)
+                palette_ns[name] = namespace
+    for ns in list(res.iterdir()):
+        for old in (ns / "textures/trims/color_palettes", ns / "textures/palettes/trim"):
+            if not old.exists():
+                continue
             for png in old.glob("*.png"):
-                png.rename(new / png.name)
+                target = res / palette_ns.get(png.stem, ns.name) / "textures/palettes/trim" / png.name
+                if png != target:
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    png.replace(target)
             for d in (old, old.parent):
-                if not any(d.iterdir()):
+                if d.exists() and not any(d.iterdir()):
                     d.rmdir()
+    # a trim pattern texture is paletted only with a base palette in its .png.mcmeta (vanilla: trim_base); without
+    # one the pattern draws its raw greys in every material (issue #2)
+    for ns in res.iterdir():
+        for png in (ns / "textures/trims/entity").glob("*/*.png"):
+            meta = png.with_name(png.name + ".mcmeta")
+            obj = json.loads(meta.read_text(encoding="utf-8")) if meta.exists() else {}
+            if "palette" not in obj:
+                obj["palette"] = {"base_palette": "minecraft:trim_base"}
+                dump(meta, obj)
     atlases = res / "minecraft/atlases"
     if (atlases / "armor_trims.json").exists():
         (atlases / "armor_trims.json").unlink()

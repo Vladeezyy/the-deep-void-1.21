@@ -160,7 +160,6 @@ public class VoidMirrorRightclickedProcedure {
 							return;
 						ServerLevel nextLevel = _player.level().getServer().getLevel(destinationType);
 						if (nextLevel != null) {
-							_player.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 							_player.teleportTo(nextLevel, _player.getX(), _player.getY(), _player.getZ(), java.util.Set.of(), _player.getYRot(), _player.getXRot(), true);
 							_player.connection.send(new ClientboundPlayerAbilitiesPacket(_player.getAbilities()));
 							for (MobEffectInstance _effectinstance : _player.getActiveEffects())
@@ -189,7 +188,6 @@ public class VoidMirrorRightclickedProcedure {
 							return;
 						ServerLevel nextLevel = _player.level().getServer().getLevel(destinationType);
 						if (nextLevel != null) {
-							_player.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 							_player.teleportTo(nextLevel, _player.getX(), _player.getY(), _player.getZ(), java.util.Set.of(), _player.getYRot(), _player.getXRot(), true);
 							_player.connection.send(new ClientboundPlayerAbilitiesPacket(_player.getAbilities()));
 							for (MobEffectInstance _effectinstance : _player.getActiveEffects())

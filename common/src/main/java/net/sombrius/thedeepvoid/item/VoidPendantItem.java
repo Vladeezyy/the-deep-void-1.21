@@ -19,7 +19,7 @@ import net.sombrius.thedeepvoid.procedures.VoidPendantItemInHandTickProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidPendantPlayerFinishesUsingItemProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidPendantRightclickedOnBlockProcedure;
 
-public class VoidPendantItem extends Item {
+public class VoidPendantItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	public VoidPendantItem() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(3).rarity(Rarity.UNCOMMON));
 	}
@@ -47,6 +47,15 @@ public class VoidPendantItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		if (selected)
+			VoidPendantItemInHandTickProcedure.execute(entity, itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		if (selected)

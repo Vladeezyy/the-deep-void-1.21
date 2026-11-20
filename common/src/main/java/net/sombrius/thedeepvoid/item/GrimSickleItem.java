@@ -42,6 +42,11 @@ public class GrimSickleItem extends Item implements net.sombrius.thedeepvoid.por
 		list.accept(Component.literal(ReapingHookSpecialInformationProcedure.execute()));
 	}
 
+	/** NeoForge 21.11+ (IItemExtension): the swing hook with the hand */
+	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, net.minecraft.world.InteractionHand hand) {
+		return onEntitySwing(itemstack, entity);
+	}
+
 	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity) {
 		boolean retval = false;
 		ReapingHookEntitySwingsItemProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);

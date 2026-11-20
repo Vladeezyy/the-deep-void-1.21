@@ -23,7 +23,7 @@ import net.sombrius.thedeepvoid.procedures.VoidriumBulwarkRightclickedProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidriumBulwarkSpecialInformationProcedure;
 import net.sombrius.thedeepvoid.procedures.VoidriumBulwarkToolInInventoryTickProcedure;
 
-public class VoidriumBulwarkItem extends ShieldItem {
+public class VoidriumBulwarkItem extends ShieldItem implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	public VoidriumBulwarkItem() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.shieldProps().repairable(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "repair/voidrium_bulwark"))).durability(3461).fireResistant());
 	}
@@ -46,6 +46,14 @@ public class VoidriumBulwarkItem extends ShieldItem {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		VoidriumBulwarkToolInInventoryTickProcedure.execute(itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		VoidriumBulwarkToolInInventoryTickProcedure.execute(itemstack);

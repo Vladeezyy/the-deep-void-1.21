@@ -396,9 +396,20 @@ public final class DevScene {
 		at(t, mc -> server(mc, p -> {
 			p.stopUsingItem();
 			p.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, net.minecraft.world.item.ItemStack.EMPTY);
-			p.setGameMode(GameType.CREATIVE);
+			flyWings(p);
 		}));
-		t += 10;
+		// the client moves its own player: Fly Wings rise only with the client's inventory tick (1.21.5+)
+		at(t + 10, mc -> flyStart = mc.player.getY());
+		at(t + 30, mc -> {
+			double rise = mc.player.getY() - flyStart;
+			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} Fly Wings flight moves the player: rose {} blocks in 20 ticks", rise > 3 ? "OK" : "FAIL", String.format("%.1f", rise));
+		});
+		at(t + 35, mc -> server(mc, p -> {
+			p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST, net.minecraft.world.item.ItemStack.EMPTY);
+			p.setGameMode(GameType.CREATIVE);
+			itemHooks(p);
+		}));
+		t += 45;
 		at(t, mc -> TheDeepVoidMod.LOGGER.info("[scene] CHECK {} End Poem: WIN_GAME packets {}, screen open {} times", WIN_GAME_PACKETS.get() == 0 && credits == 0 ? "OK" : "FAIL",
 				WIN_GAME_PACKETS.get(), credits));
 		at(t + 10, Minecraft::stop);
@@ -435,6 +446,44 @@ public final class DevScene {
 	}
 
 	private static int lastServerTick = -1;
+	private static double flyStart;
+
+	/** Fly Wings (the flying form) raised and flying up, as their key packets leave them */
+	private static void flyWings(ServerPlayer p) {
+		p.teleportTo(p.level().getServer().overworld(), 0.5, 119, 0.5, java.util.Set.of(), 0F, 0F, true);
+		net.minecraft.world.item.ItemStack wings = new net.minecraft.world.item.ItemStack(item("fly_wings_fly_chestplate"));
+		net.minecraft.nbt.CompoundTag tag = new net.minecraft.nbt.CompoundTag();
+		tag.putBoolean("flying", true);
+		tag.putDouble("time", 200);
+		tag.putBoolean("up", true);
+		wings.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(tag));
+		p.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST, wings);
+		PortUtil.data(p).putBoolean("flyWingsTouchGround", true);
+		Minecraft.getInstance().execute(() -> PortUtil.data(Minecraft.getInstance().player).putBoolean("flyWingsTouchGround", true));
+	}
+
+	/** The swing hook NeoForge calls (21.11+: with the hand), the drink component, the trident pose */
+	private static void itemHooks(ServerPlayer p) {
+		boolean swing = true;
+		for (String id : List.of("licker_hook", "executioner_sword", "grim_sickle", "peril")) {
+			net.minecraft.world.item.Item it = item(id);
+			boolean hand;
+			try {
+				it.getClass().getMethod("onEntitySwing", net.minecraft.world.item.ItemStack.class, net.minecraft.world.entity.LivingEntity.class, net.minecraft.world.InteractionHand.class);
+				hand = it.getClass().getMethod("onEntitySwing", net.minecraft.world.item.ItemStack.class, net.minecraft.world.entity.LivingEntity.class, net.minecraft.world.InteractionHand.class).getDeclaringClass() == it.getClass();
+			} catch (NoSuchMethodException e) {
+				hand = false;
+			}
+			swing &= hand;
+		}
+		TheDeepVoidMod.LOGGER.info("[scene] CHECK {} swing items override onEntitySwing with the hand (NeoForge 21.11+)", swing ? "OK" : "FAIL");
+		net.minecraft.world.item.component.Consumable drink = new net.minecraft.world.item.ItemStack(item("grimberry_juice")).get(net.minecraft.core.component.DataComponents.CONSUMABLE);
+		boolean drinks = drink != null && drink.animation() == net.minecraft.world.item.ItemUseAnimation.DRINK;
+		TheDeepVoidMod.LOGGER.info("[scene] CHECK {} Grimberry Juice drinks (consumable animation {})", drinks ? "OK" : "FAIL", drink == null ? null : drink.animation());
+		net.minecraft.world.item.ItemStack dart = new net.minecraft.world.item.ItemStack(item("rotten_dart"));
+		net.minecraft.world.item.ItemUseAnimation pose = dart.getUseAnimation();
+		TheDeepVoidMod.LOGGER.info("[scene] CHECK {} Rotten Dart use pose {}", pose == net.minecraft.world.item.ItemUseAnimation.TRIDENT ? "OK" : "FAIL", pose);
+	}
 
 	private static void travelCheck(Minecraft mc, String what, ResourceKey<Level> expected) {
 		boolean ok = mc.level.dimension() == expected && WIN_GAME_PACKETS.get() == 0 && credits == 0;

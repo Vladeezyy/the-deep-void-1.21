@@ -19,7 +19,7 @@ import net.sombrius.thedeepvoid.port.bus.OnlyIn;
 import net.sombrius.thedeepvoid.procedures.EntityImmobilizerItemInInventoryTickProcedure;
 import net.sombrius.thedeepvoid.procedures.EntityImmobilizerRightclickedProcedure;
 
-public class EntityImmobilizerItem extends Item {
+public class EntityImmobilizerItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	public EntityImmobilizerItem() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).rarity(Rarity.EPIC));
 	}
@@ -43,6 +43,14 @@ public class EntityImmobilizerItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		EntityImmobilizerItemInInventoryTickProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		EntityImmobilizerItemInInventoryTickProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, itemstack);

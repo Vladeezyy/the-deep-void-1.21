@@ -24,7 +24,7 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class TombstoneItem extends Item {
+public class TombstoneItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	private static final ToolMaterial TOOL_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 0, 12f, 12f, 1, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/none")));
 
 	public TombstoneItem() {
@@ -47,6 +47,16 @@ public class TombstoneItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		if (selected)
+			TombstoneInHandTickProcedure.execute(entity, itemstack);
+		TombstoneToolInInventoryTickProcedure.execute(itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		if (selected)

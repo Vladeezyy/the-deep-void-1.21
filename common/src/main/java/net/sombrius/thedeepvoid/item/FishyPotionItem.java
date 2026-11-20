@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 
 public class FishyPotionItem extends Item {
 	public FishyPotionItem() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(0).saturationModifier(0f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(1).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(0).saturationModifier(0f).alwaysEdible().build(), net.minecraft.world.item.component.Consumables.defaultDrink().build()));
 	}
 
 	@Override

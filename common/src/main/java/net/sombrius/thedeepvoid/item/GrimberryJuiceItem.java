@@ -31,6 +31,11 @@ public class GrimberryJuiceItem extends Item {
 		return new ItemStack(Items.GLASS_BOTTLE);
 	}
 
+	/** Fabric FabricItem: the crafting remainder (its default reads the remainder field, null here) */
+	public ItemStack getRecipeRemainder(ItemStack itemstack) {
+		return getCraftingRemainingItem(itemstack);
+	}
+
 	@Override
 	public int getUseDuration(ItemStack itemstack, LivingEntity entity) {
 		return 15;

@@ -293,6 +293,18 @@ public final class DevScene {
 			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} fishing in the Deep Void cancels the vanilla catch: canceled {}", canceled ? "OK" : "FAIL", canceled);
 		}));
 		// the attribute modifiers of a tag (scythes: the_deep_void:scythes) on the stack in use (Fabric 1.21.1 had them at init only)
+		// crafting with an item that leaves a remainder (Fabric 1.21.1: FabricItem.getRecipeRemainder threw an NPE)
+		at(207, mc -> server(mc, p -> {
+			String result;
+			try {
+				var holder = p.getServer().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "ambrosia")).orElseThrow();
+				var input = net.minecraft.world.item.crafting.CraftingInput.of(1, 1, java.util.List.of(new net.minecraft.world.item.ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "bottle_of_ambrosia")))));
+				result = String.valueOf(((net.minecraft.world.item.crafting.CraftingRecipe) holder.value()).getRemainingItems(input).get(0).getItem());
+			} catch (RuntimeException e) {
+				result = e.toString();
+			}
+			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} crafting remainder of the Bottle of Ambrosia: {}", result.equals("minecraft:glass_bottle") ? "OK" : "FAIL", result);
+		}));
 		at(206, mc -> server(mc, p -> {
 			net.minecraft.world.item.ItemStack scythe = new net.minecraft.world.item.ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "grim_scythe")));
 			boolean[] reach = {false};

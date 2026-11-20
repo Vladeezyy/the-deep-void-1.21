@@ -31,6 +31,11 @@ public class BottleOfAmbrosiaItem extends Item {
 		return new ItemStack(Items.GLASS_BOTTLE);
 	}
 
+	/** Fabric FabricItem: the crafting remainder (its default reads the remainder field, null here) */
+	public ItemStack getRecipeRemainder(ItemStack itemstack) {
+		return getCraftingRemainingItem(itemstack);
+	}
+
 	@Override
 	public ItemStack finishUsingItem(ItemStack itemstack, Level world, LivingEntity entity) {
 		ItemStack retval = new ItemStack(Items.GLASS_BOTTLE);

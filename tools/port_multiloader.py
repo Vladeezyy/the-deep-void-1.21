@@ -182,6 +182,13 @@ def rewrite_code(path, src):
     # MCreator's 1.20 dimension teleport sent WIN_GAME 0 (1.20: a loading screen); 1.21+ clients answer every WIN_GAME
     # with the End Poem (issue #3), and ServerPlayer.teleportTo already moves the client to the new dimension
     src = re.sub(r"\n[ \t]*_player\.connection\.send\(new ClientboundGameEventPacket\(ClientboundGameEventPacket\.WIN_GAME, 0\)\);", "", src)
+    # Fabric 1.21.1: FabricItem.getRecipeRemainder's default reads the item's remainder field (null when the item
+    # overrides NeoForge's getCraftingRemainingItem): NPE when crafting with it. Only this branch: 1.21.11+
+    # (tools/port_dv_1_21_11.py) turns the pair into getCraftingRemainder / getRecipeRemainder itself
+    if "getRecipeRemainder(" not in src:
+        src = re.sub(r"(\n\tpublic ItemStack getCraftingRemainingItem\(ItemStack itemstack\) \{\n.*?\n\t\}\n)",
+                     r"\1\n\t/** Fabric FabricItem: the crafting remainder (its default reads the remainder field, null here) */\n"
+                     r"\tpublic ItemStack getRecipeRemainder(ItemStack itemstack) {\n\t\treturn getCraftingRemainingItem(itemstack);\n\t}\n", src, count=1, flags=re.S)
     src = re.sub(r"\bDeferredRegister<", "Registrar<", src)
     src = re.sub(r"\bDeferredRegister\.create\(", "Registrar.create(", src)
     src = re.sub(r"\bDeferredHolder<", "RegistryEntry<", src)

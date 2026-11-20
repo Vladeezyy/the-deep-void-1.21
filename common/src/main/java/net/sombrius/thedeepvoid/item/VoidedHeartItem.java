@@ -24,6 +24,11 @@ public class VoidedHeartItem extends Item {
 		return new ItemStack(this);
 	}
 
+	/** Fabric FabricItem: the crafting remainder (its default reads the remainder field, null here) */
+	public ItemStack getRecipeRemainder(ItemStack itemstack) {
+		return getCraftingRemainingItem(itemstack);
+	}
+
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
 		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);

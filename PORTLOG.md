@@ -202,6 +202,28 @@ and after runs were alternated twice (`tools/bench_table.py`). Apple M4, JDK 21,
   Before the fix (NeoForge): 2 `WIN_GAME` packets, flow and bolt sprites missing; after: all 19 checks OK on both
   loaders.
 
+- **2026-11-20, issue #4: the Lavendite Shield does not block** (reported on 1.21.11+, see those branches). On
+  1.21.1 `ShieldItem` still blocks by itself; the regress scene checks the four shields here too (all block).
+- **2026-11-20, a code audit after #4** (subagents read the port against the vanilla and loader sources; every point
+  checked by hand and by the regress scene):
+  - `port.bus.ModBus` ran every listener of a canceled event; Forge 1.20.1 and NeoForge skip the rest (MCreator's
+    `@SubscribeEvent` has `receiveCanceled = false`): it stops at the cancel now (every version, both loaders).
+  - `ItemFishedEvent` was not cancelable: fishing in the Deep Void gave the vanilla catch on top of the mod's (every
+    version, both loaders). NeoForge cancels the event, Fabric empties the hook's catch.
+  - Peril, Misanthropy, Heresy, Eldritch Maw, the double barrel shotgun and Apostasy had no particle texture.
+  - Fabric: `ItemAttributeModifierEvent` ran once at init, before the tags and the config: no scythe reach, no dark
+    steel knockback, the default naginata and Penitent Cross reach. `ItemStackMixin` asks for them when they apply,
+    as on 1.21.11+.
+  - Fabric: crafting with the Bottle of Ambrosia, Grimberry Juice or the Voided Heart threw an NPE
+    (`FabricItem.getRecipeRemainder` reads the remainder field, null when the item overrides NeoForge's
+    `getCraftingRemainingItem`); the three items have `getRecipeRemainder` (`tools/port_multiloader.py`).
+- Test: `LOADER=neoforge|fabric tools/scenetest.sh -Pscene=regress`, now with the shields (each raised from the off
+  hand with the use key held, a zombie in front hits the player: before the fix 0 of 4 raised on 26.2, after it 4 of
+  4 block on every version and both loaders, the Lavendite Shield and the Voidrium Bulwark hurt the attacker), the
+  fishing cancel in the Deep Void, the scythe reach modifier on the stack, the Bottle of Ambrosia's crafting remainder (before
+  the fix on Fabric: the NPE). The scene's timeline follows the integrated server's ticks: with two clients
+  at once the server ran ~300 ticks behind and the void pendant check failed.
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

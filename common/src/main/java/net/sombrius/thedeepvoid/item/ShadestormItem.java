@@ -29,7 +29,7 @@ import net.sombrius.thedeepvoid.entity.BigShadeArrowEntity;
 import net.sombrius.thedeepvoid.procedures.ShadestormSpecialInformationProcedure;
 import net.sombrius.thedeepvoid.procedures.ShadestormUsedProcedure;
 
-public class ShadestormItem extends Item {
+public class ShadestormItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	public ShadestormItem() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(1561).fireResistant().rarity(Rarity.COMMON));
 	}
@@ -65,6 +65,14 @@ public class ShadestormItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		ShadestormUsedProcedure.execute(world, entity, itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		ShadestormUsedProcedure.execute(world, entity, itemstack);

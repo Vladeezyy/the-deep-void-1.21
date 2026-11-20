@@ -52,7 +52,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 @EventBusSubscriber
-public class SoulWingsItem extends Item implements GeoItem {
+public class SoulWingsItem extends Item implements GeoItem, net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	public String animationprocedure = "empty";
 	public static final ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial(0, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 5, ArmorType.HELMET, 0, ArmorType.BODY, 5), 25, net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(Identifier.parse("entity.vex.ambient"))), 1f, 0f, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("the_deep_void", "tool_materials/none")),
@@ -86,6 +86,17 @@ public class SoulWingsItem extends Item implements GeoItem {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity _wearer, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, _wearer, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		if (_wearer instanceof Player entity && net.sombrius.thedeepvoid.port.PortUtil.wearing(entity, itemstack)) {
+			if (itemstack.getItem() instanceof SoulWingsItem && net.sombrius.thedeepvoid.port.PortUtil.armorType(itemstack) == ArmorType.CHESTPLATE)
+				PlayerHasSoulWingsTickProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
+		}
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity _wearer, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		if (_wearer instanceof Player entity && net.sombrius.thedeepvoid.port.PortUtil.wearing(entity, itemstack)) {

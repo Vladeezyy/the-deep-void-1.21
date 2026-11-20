@@ -35,6 +35,11 @@ public class BloodthirstyClawsItem extends Item implements net.sombrius.thedeepv
 		list.accept(Component.literal(BloodthirstyClawsDescriptionProcedure.execute()));
 	}
 
+	/** NeoForge 21.11+ (IItemExtension): the swing hook with the hand */
+	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, net.minecraft.world.InteractionHand hand) {
+		return onEntitySwing(itemstack, entity);
+	}
+
 	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity) {
 		boolean retval = false;
 		BloodthirstyClawsEntitySwingsItemProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity, itemstack);

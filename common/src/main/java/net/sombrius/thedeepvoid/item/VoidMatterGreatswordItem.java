@@ -42,6 +42,11 @@ public class VoidMatterGreatswordItem extends Item implements net.sombrius.thede
 		list.accept(Component.literal(VoidMatterGreatswordDescriptionProcedure.execute()));
 	}
 
+	/** NeoForge 21.11+ (IItemExtension): the swing hook with the hand */
+	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, net.minecraft.world.InteractionHand hand) {
+		return onEntitySwing(itemstack, entity);
+	}
+
 	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity) {
 		boolean retval = false;
 		VoidMatterGreatswordEntitySwingsItemProcedure.execute(entity.level(), entity, itemstack);

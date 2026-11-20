@@ -24,7 +24,7 @@ import net.sombrius.thedeepvoid.procedures.HunterBowInInventoryProcedure;
 import net.sombrius.thedeepvoid.procedures.HunterBowRightClickProcedure;
 import net.sombrius.thedeepvoid.procedures.HunterBowStopUsingProcedure;
 
-public class HunterBowItem extends Item {
+public class HunterBowItem extends Item implements net.sombrius.thedeepvoid.port.PortItemHooks.ClientInventoryTick {
 	public HunterBowItem() {
 		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().durability(2031).fireResistant().rarity(Rarity.COMMON));
 	}
@@ -53,6 +53,14 @@ public class HunterBowItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
+		HunterBowInInventoryProcedure.execute(entity, itemstack);
+	}
+
+	/** 1.21.5+: inventoryTick runs on the server only; the client ticks its player's items here (both sides did on 1.21.1) */
+	@Override
+	public void clientInventoryTick(ItemStack itemstack, net.minecraft.world.level.Level world, Entity entity, @Nullable net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
 		boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 		int slot = equipmentSlot == null ? -1 : equipmentSlot.getIndex();
 		HunterBowInInventoryProcedure.execute(entity, itemstack);

@@ -14,7 +14,7 @@ import net.sombrius.thedeepvoid.procedures.GrimberryJuicePlayerFinishesUsingItem
 
 public class GrimberryJuiceItem extends Item {
 	public GrimberryJuiceItem() {
-		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(4).saturationModifier(0.2f).alwaysEdible().build()));
+		super(net.sombrius.thedeepvoid.port.platform.Registrar.itemProps().stacksTo(64).rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(4).saturationModifier(0.2f).alwaysEdible().build(), net.minecraft.world.item.component.Consumables.defaultDrink().build()));
 	}
 
 	@Override

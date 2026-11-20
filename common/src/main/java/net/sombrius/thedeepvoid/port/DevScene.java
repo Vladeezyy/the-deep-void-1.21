@@ -286,6 +286,19 @@ public final class DevScene {
 			net.sombrius.thedeepvoid.procedures.IfPlayerFallsInVoidProcedure.execute(p.getX(), p.getZ(), p);
 		}));
 		at(200, mc -> travelCheck(mc, "enter (falling into the void)", DEEP_VOID));
+		// fishing in the Deep Void: the mod's catch replaces the vanilla one (the event is canceled)
+		at(205, mc -> server(mc, p -> {
+			java.util.List<net.minecraft.world.item.ItemStack> drops = new java.util.ArrayList<>(java.util.List.of(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.COD)));
+			boolean canceled = net.sombrius.thedeepvoid.port.bus.ModBus.post(new net.sombrius.thedeepvoid.port.bus.ItemFishedEvent(p, drops));
+			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} fishing in the Deep Void cancels the vanilla catch: canceled {}", canceled ? "OK" : "FAIL", canceled);
+		}));
+		// the attribute modifiers of a tag (scythes: the_deep_void:scythes) on the stack in use (Fabric 1.21.1 had them at init only)
+		at(206, mc -> server(mc, p -> {
+			net.minecraft.world.item.ItemStack scythe = new net.minecraft.world.item.ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(TheDeepVoidMod.MODID, "grim_scythe")));
+			boolean[] reach = {false};
+			scythe.forEachModifier(net.minecraft.world.entity.EquipmentSlot.MAINHAND, (attribute, modifier) -> reach[0] |= modifier.id().getPath().equals("ebf794e9-482e-4e28-81b3-2f8d23258894"));
+			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} scythe reach modifier (tag and config) on the stack: {}", reach[0] ? "OK" : "FAIL", reach[0]);
+		}));
 		at(210, mc -> server(mc, p -> {
 			net.minecraft.world.item.ItemStack pendant = new net.minecraft.world.item.ItemStack(item("void_pendant"));
 			p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, pendant);
@@ -362,6 +375,8 @@ public final class DevScene {
 				health - p.getHealth(), ability);
 		zombie.discard();
 	}
+
+	private static int lastServerTick = -1;
 
 	private static void travelCheck(Minecraft mc, String what, ResourceKey<Level> expected) {
 		boolean ok = mc.level.dimension() == expected && WIN_GAME_PACKETS.get() == 0 && credits == 0;
@@ -493,6 +508,11 @@ public final class DevScene {
 			TheDeepVoidMod.LOGGER.info("[scene] the End Poem opened at tick {}", tick);
 			mc.setScreen(null);
 		}
+		// the timeline follows the server: on a loaded machine the integrated server runs behind the client
+		int serverTicks = mc.getSingleplayerServer().getTickCount();
+		if (serverTicks == lastServerTick)
+			return;
+		lastServerTick = serverTicks;
 		tick++;
 		for (Pair<Integer, Consumer<Minecraft>> step : STEPS) {
 			if (step.getFirst() == tick) {

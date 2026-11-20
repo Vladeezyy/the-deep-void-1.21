@@ -1,6 +1,7 @@
 {
   "parent": "the_deep_void:displaysettings/apostasyarms",
   "textures": {
-    "layer0": "the_deep_void:item/apostasynew"
+    "layer0": "the_deep_void:item/apostasynew",
+    "particle": "the_deep_void:item/apostasynew"
   }
 }

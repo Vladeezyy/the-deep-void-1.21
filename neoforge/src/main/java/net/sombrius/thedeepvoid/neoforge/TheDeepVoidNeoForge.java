@@ -187,7 +187,10 @@ public final class TheDeepVoidNeoForge {
 			ModBus.post(ours);
 			event.setProblem(ours.getProblem());
 		});
-		bus.addListener((ItemFishedEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ItemFishedEvent(event.getEntity(), event.getDrops())));
+		bus.addListener((ItemFishedEvent event) -> {
+			if (ModBus.post(new net.sombrius.thedeepvoid.port.bus.ItemFishedEvent(event.getEntity(), event.getDrops())))
+				event.setCanceled(true);
+		});
 		bus.addListener((ItemTossEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ItemTossEvent(event.getEntity(), event.getPlayer())));
 		bus.addListener((ItemEntityPickupEvent.Pre event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ItemEntityPickupEvent.Pre(event.getPlayer(), event.getItemEntity())));
 		bus.addListener((PlayerInteractEvent.RightClickBlock event) -> {

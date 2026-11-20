@@ -1,6 +1,7 @@
 {
   "parent": "the_deep_void:displaysettings/perilarms",
   "textures": {
-    "layer0": "the_deep_void:item/peril"
+    "layer0": "the_deep_void:item/peril",
+    "particle": "the_deep_void:item/peril"
   }
 }

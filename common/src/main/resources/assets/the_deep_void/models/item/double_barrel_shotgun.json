@@ -1,6 +1,7 @@
 {
   "parent": "the_deep_void:displaysettings/spitearms",
   "textures": {
-    "layer0": "the_deep_void:item/strife"
+    "layer0": "the_deep_void:item/strife",
+    "particle": "the_deep_void:item/strife"
   }
 }

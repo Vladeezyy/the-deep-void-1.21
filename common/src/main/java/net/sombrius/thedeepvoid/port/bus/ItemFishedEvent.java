@@ -5,8 +5,8 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-/** A player reeled in a catch (server) */
-public class ItemFishedEvent extends PlayerEvent {
+/** A player reeled in a catch (server); canceled, the hook brings nothing */
+public class ItemFishedEvent extends PlayerEvent implements ICancellableEvent {
 	private final List<ItemStack> drops;
 
 	public ItemFishedEvent(Player player, List<ItemStack> drops) {

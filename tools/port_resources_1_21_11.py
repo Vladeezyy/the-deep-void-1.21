@@ -5,6 +5,7 @@
   GeckoLib items are geckolib:geckolib special models
 - item models: no builtin/entity parent; spawn eggs (1.21.5: no template) are two tinted layers of own textures
 - equipment assets (1.21.4) from tools/armor_assets.json, armor textures moved to textures/entity/equipment
+- armor trim textures (1.21.4) moved to textures/trims/entity/humanoid[_leggings], armor_trims atlas rewritten
 """
 import glob
 import json
@@ -418,6 +419,49 @@ def render_types():
     return changed, len(layers)
 
 
+# vanilla 1.21.11-26.2 armor_trims atlas (client jar): patterns and palettes the mod's trims combine with
+VANILLA_TRIM_PATTERNS = ['sentry', 'dune', 'coast', 'wild', 'ward', 'eye', 'vex', 'tide', 'snout', 'rib', 'spire', 'wayfinder',
+                         'shaper', 'silence', 'raiser', 'host', 'flow', 'bolt']
+VANILLA_TRIM_PALETTES = ['amethyst', 'copper', 'copper_darker', 'diamond', 'diamond_darker', 'emerald', 'gold', 'gold_darker', 'iron',
+                         'iron_darker', 'lapis', 'netherite', 'netherite_darker', 'quartz', 'redstone', 'resin']
+TRIM_LAYERS = (('', 'humanoid'), ('_leggings', 'humanoid_leggings'))
+
+
+def armor_trims():
+    """1.21.4: armor trim textures moved from textures/trims/models/armor/<p>[_leggings] to
+    textures/trims/entity/humanoid[_leggings]/<p> (the old place drew the missing texture, issue #2). The armor_trims
+    atlas gets two sources: every pattern with the mod's palettes, the mod's patterns with vanilla palettes (vanilla's
+    own atlas holds vanilla with vanilla)."""
+    old_dir = ASSETS + 'textures/trims/models/armor/'
+    moved = 0
+    for path in sorted(glob.glob(old_dir + '*.png')):
+        name = os.path.basename(path)[:-4]
+        suffix, kind = TRIM_LAYERS[1] if name.endswith('_leggings') else TRIM_LAYERS[0]
+        new = ASSETS + f'textures/trims/entity/{kind}/{name[:len(name) - len(suffix)] if suffix else name}.png'
+        os.makedirs(os.path.dirname(new), exist_ok=True)
+        os.replace(path, new)
+        moved += 1
+    for d in (old_dir, ASSETS + 'textures/trims/models/'):
+        if os.path.isdir(d) and not os.listdir(d):
+            os.rmdir(d)
+    patterns = sorted(read_json(p)['asset_id'] for p in glob.glob(DATA + '*/trim_pattern/*.json'))
+    palettes = sorted(filter(None, (read_json(p).get('asset_name') for p in glob.glob(DATA + '*/trim_material/*.json'))))
+    if not palettes:  # 26.3: palette_id, no armor_trims atlas (tools/port_resources_26_3.py)
+        return moved
+    atlas = 'common/src/main/resources/assets/minecraft/atlases/armor_trims.json'
+
+    def textures(ids):
+        return [f'{i.split(":")[0]}:trims/entity/{kind}/{i.split(":")[1]}' for i in ids for _, kind in TRIM_LAYERS]
+
+    def source(ids, names):
+        return {'type': 'minecraft:paletted_permutations', 'palette_key': 'minecraft:trims/color_palettes/trim_palette',
+                'textures': textures(ids), 'permutations': {n: f'minecraft:trims/color_palettes/{n}' for n in names}}
+
+    vanilla = [f'minecraft:{p}' for p in VANILLA_TRIM_PATTERNS]
+    write_json(atlas, {'sources': [source(vanilla + patterns, palettes), source(patterns, VANILLA_TRIM_PALETTES)]})
+    return moved
+
+
 def main():
     eggs = spawn_egg_colors()
     egg_textures()
@@ -430,6 +474,7 @@ def main():
             continue
         written += write_json(ASSETS + f'items/{item_id}.json', data)
     count, moved = equipment()
+    print('armor trim textures moved', armor_trims())
     print('render types', render_types())
     print("data files changed", convert_data(), "; GeckoLib files moved", geckolib())
     print(f'models changed {changed}; item definitions written {written}; no model: {missing}; equipment assets {count}, textures moved {moved}')

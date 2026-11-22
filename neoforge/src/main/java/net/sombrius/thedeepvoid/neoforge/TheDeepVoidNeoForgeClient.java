@@ -75,7 +75,8 @@ public final class TheDeepVoidNeoForgeClient {
 			default -> HumanoidModel.ArmPose.ITEM;
 		};
 
-		modBus.addListener((FMLClientSetupEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.FMLClientSetupEvent()));
+		// Vanilla client maps (ItemProperties, ItemBlockRenderTypes) are not thread safe: run on the main thread, not on FML's parallel worker
+		modBus.addListener((FMLClientSetupEvent event) -> event.enqueueWork(() -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.FMLClientSetupEvent())));
 		modBus.addListener((EntityRenderersEvent.RegisterRenderers event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.EntityRenderersEvent.RegisterRenderers(
 				new net.sombrius.thedeepvoid.port.bus.EntityRenderersEvent.RegisterRenderers.Sink() {
 					@Override

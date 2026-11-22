@@ -73,7 +73,8 @@ public final class TheDeepVoidNeoForge {
 						event.register(registry, id, () -> value);
 					}
 				})));
-		modBus.addListener((FMLCommonSetupEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.FMLCommonSetupEvent()));
+		// Composter, dispenser and brewing maps are not thread safe: run on the main thread, not on FML's parallel worker
+		modBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(() -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.FMLCommonSetupEvent())));
 		modBus.addListener((EntityAttributeCreationEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.EntityAttributeCreationEvent(event::put)));
 		modBus.addListener((RegisterSpawnPlacementsEvent event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.RegisterSpawnPlacementsEvent(
 				new net.sombrius.thedeepvoid.port.bus.RegisterSpawnPlacementsEvent.Sink() {

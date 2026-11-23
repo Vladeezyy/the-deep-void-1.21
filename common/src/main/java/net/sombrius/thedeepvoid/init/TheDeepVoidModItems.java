@@ -1436,17 +1436,30 @@ public class TheDeepVoidModItems {
 
 	@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	public static class ItemsClientSideHandler {
+		// the vanilla shield's "blocking" property for our shields. Another mod can put its own ItemPropertyFunction there
+		// (not a ClampedItemPropertyFunction): the cast the original made crashed the game at startup (#5). That function
+		// is kept, wrapped; without one, vanilla's
+		@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+		private static net.minecraft.client.renderer.item.ClampedItemPropertyFunction shieldBlocking() {
+			net.minecraft.client.renderer.item.ItemPropertyFunction function = ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking"));
+			if (function instanceof net.minecraft.client.renderer.item.ClampedItemPropertyFunction clamped)
+				return clamped;
+			if (function != null)
+				return function::call;
+			return (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F;
+		}
+
 		@SubscribeEvent
 		@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT) @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 		public static void clientLoad(FMLClientSetupEvent event) {
 			event.enqueueWork(() -> {
-				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), (net.minecraft.client.renderer.item.ClampedItemPropertyFunction) ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
-				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), (net.minecraft.client.renderer.item.ClampedItemPropertyFunction) ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
+				ItemProperties.register(LAVENDITE_SHIELD.get(), ResourceLocation.parse("blocking"), shieldBlocking());
+				ItemProperties.register(EYE_SHIELD.get(), ResourceLocation.parse("blocking"), shieldBlocking());
 				ItemProperties.register(ONYX_FLARE_GUN.get(), ResourceLocation.parse("the_deep_void:onyx_flare_gun_state"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) OnyxFlareGunPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), (net.minecraft.client.renderer.item.ClampedItemPropertyFunction) ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
+				ItemProperties.register(DEVOURER_SHIELD.get(), ResourceLocation.parse("blocking"), shieldBlocking());
 				ItemProperties.register(SHADESTORM.get(), ResourceLocation.parse("the_deep_void:shadestorm_state"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) ShadestormPropertyValueProviderProcedure.execute(itemStackToRender));
-				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), (net.minecraft.client.renderer.item.ClampedItemPropertyFunction) ItemProperties.getProperty(new ItemStack(Items.SHIELD), ResourceLocation.parse("blocking")));
+				ItemProperties.register(VOIDRIUM_BULWARK.get(), ResourceLocation.parse("blocking"), shieldBlocking());
 				ItemProperties.register(KNIVES_GLOVE.get(), ResourceLocation.parse("the_deep_void:knives_glove_knife_glove_condition"),
 						(itemStackToRender, clientWorld, entity, itemEntityId) -> (float) KnivesGlovePropertyValueProviderProcedure.execute(itemStackToRender));
 				ItemProperties.register(BISMUTH_VIAL.get(), ResourceLocation.parse("the_deep_void:bismuth_vial_xp"), (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) BismuthVialPropertyValueProviderProcedure.execute(itemStackToRender));

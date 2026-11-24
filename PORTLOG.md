@@ -224,6 +224,13 @@ and after runs were alternated twice (`tools/bench_table.py`). Apple M4, JDK 21,
   the fix on Fabric: the NPE). The scene's timeline follows the integrated server's ticks: with two clients
   at once the server ran ~300 ticks behind and the void pendant check failed.
 
+- Issue #5, 1.99.3.1.8 (1.21.1 only): with Shield Expansion the game crashed at startup, `ClassCastException:
+  ItemProperties$$Lambda cannot be cast to ClampedItemPropertyFunction` in `TheDeepVoidModItems.clientLoad`. The
+  original cast the vanilla shield's `blocking` property to `ClampedItemPropertyFunction` for its four shields; a mod
+  that registers a plain `ItemPropertyFunction` there breaks it. `shieldBlocking()` keeps a clamped function, wraps
+  another one, falls back to vanilla's. 1.21.11+ has item model JSON instead. In the player's log it first looked like
+  a Sodium (then Iris) crash: FML empties the ModList after any loading error.
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

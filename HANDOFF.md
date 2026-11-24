@@ -9,7 +9,7 @@
 
 | Ветка | MC | NeoForge | Fabric API | GeckoLib | Java | Последний релиз |
 | --- | --- | --- | --- | --- | --- | --- |
-| `multiloader` | 1.21.1 | 21.1.259 (от 21.1.197) | 0.116.17 | 4.9.3 | 21 | `v1.99.3.1.7+1.21.1` |
+| `multiloader` | 1.21.1 | 21.1.259 (от 21.1.197) | 0.116.17 | 4.9.3 | 21 | `v1.99.3.1.8+1.21.1` |
 | `mc/1.21.11` | 1.21.11 | 21.11.48 | 0.141.6 | 5.4.5 | 21 | `v1.99.3.1.7+1.21.11` |
 | `mc/26.1.2` | 26.1.2 | 26.1.2.125 | 0.155.3 | 5.5.2 | 25 | `v1.99.3.1.7+26.1.2` |
 | `mc/26.2` | 26.2 | 26.2.0.93 | 0.161.0 | 5.5.6 | 25 | `v1.99.3.1.7+26.2` |
@@ -70,6 +70,11 @@ Fabric Loader 0.19.5 везде. GeckoLib 5.5 для 26.x — с Modrinth Maven 
   NeoForge вызывал наши `FMLCommonSetupEvent`/`FMLClientSetupEvent` в параллельном потоке FML (`ItemProperties`,
   render layers, компост, зелья, раздатчик — ванильные HashMap). Теперь `event.enqueueWork(() -> ModBus.post(...))`.
   Гонку локально не воспроизвели (нужна огромная сборка); если краш повторится — нужен `latest.log` игрока.
+- **1.99.3.1.8** (2026-11-24, только 1.21.1; CurseForge 9790776 fabric / 9790777 neoforge): issue #5 после 1.99.3.1.7 —
+  лог игрока показал настоящую ошибку: `ClassCastException ... ClampedItemPropertyFunction` в
+  `TheDeepVoidModItems.clientLoad`. Оригинал приводил свойство `blocking` ванильного щита к Clamped; Shield Expansion
+  ставит туда обычную `ItemPropertyFunction`. Теперь `shieldBlocking()` (своё, обёртка или ванильное). Со Shield
+  Expansion в сборке не запускали; regress 26/26.
 
 ## Как работать
 - Конвейеры повторяемы от оригиналов: 1.21.1 — `tools/restore_common.sh` + `tools/port_multiloader.py`;

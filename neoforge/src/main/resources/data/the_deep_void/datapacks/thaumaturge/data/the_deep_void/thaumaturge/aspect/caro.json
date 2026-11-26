@@ -1,0 +1,9 @@
+{
+  "tag": "caro",
+  "color": 11022910,
+  "components": [
+    "thaumaturge:bestia",
+    "thaumaturge:mortuus"
+  ],
+  "texture": "the_deep_void:textures/aspects/caro.png"
+}

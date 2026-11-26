@@ -1,6 +1,7 @@
 #!/bin/sh
 # Runs port/DevScene (LOADER=neoforge|fabric) through the hang watchdog: Deep Void biomes and mobs, screenshots in
-# <loader>/run/screenshots/scene_*.png. Extra arguments go to Gradle (-Pscene=lang). Log: build-scene-<loader>.log
+# <loader>/run/screenshots/scene_*.png. Extra arguments go to Gradle (-Pscene=lang; -Pscene=thaumaturge -Pwith_thaumaturge).
+# SCENE_LANG=ru_ru sets the game language. Log: build-scene-<loader>.log
 {
 cd "$(dirname "$0")/.."
 . tools/watchdog.sh
@@ -12,7 +13,19 @@ case $LOADER in
 esac
 kill_dev() { pkill -f "$PROC" 2>/dev/null; }
 LOG=build-scene-$LOADER.log
-rm -rf $LOADER/run/saves/dv_scene $LOADER/run/saves/dv_items $LOADER/run/saves/dv_regress $LOG
+rm -rf $LOADER/run/saves/dv_scene $LOADER/run/saves/dv_items $LOADER/run/saves/dv_regress $LOADER/run/saves/dv_thaumaturge $LOG
+# -Pscene=thaumaturge (NeoForge, with -Pwith_thaumaturge): Thaumaturge shows aspects on tooltips without Shift
+mkdir -p $LOADER/run/config
+case " $* " in
+	*" -Pscene=thaumaturge "*) printf '[tooltip]
+show_aspects_by_default = true
+' > $LOADER/run/config/thaumaturge-client.toml ;;
+	*) rm -f $LOADER/run/config/thaumaturge-client.toml ;;
+esac
+# SCENE_LANG=ru_ru: the game language of the run (options.txt)
+if [ -n "$SCENE_LANG" ]; then
+	if [ -f $LOADER/run/options.txt ]; then sed -i "s/^lang:.*/lang:$SCENE_LANG/" $LOADER/run/options.txt; else echo "lang:$SCENE_LANG" > $LOADER/run/options.txt; fi
+fi
 find $LOADER/run/screenshots -name 'scene_*.png' -delete 2>/dev/null
 run_watched "$LOG" 900 ./gradlew :$LOADER:runScene --console=plain "$@"
 code=$?

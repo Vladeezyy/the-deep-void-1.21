@@ -2482,5 +2482,19 @@
   "text.the_deep_void.port.disc_monster_s_lair_by_darren_curtis": "§6§kDisc §6Monster's Lair - by Darren Curtis §6§kDisc",
   "text.the_deep_void.port.disc_pitch_black_by_dark_fantasy_studio": "§4§kDisc §4Pitch Black - by Dark Fantasy Studio §4§kDisc",
   "text.the_deep_void.port.disc_slaughter_by_dark_fantasy_studio_disc": "§7§kDisc §7Slaughter - by Dark Fantasy Studio §7§kDisc",
-  "text.the_deep_void.port.disc_the_haunt_phase_spiders_battle_by": "§7§kDisc §7The Haunt - Phase Spiders Battle - by Maskmakesmusic §7§kDisc"
+  "text.the_deep_void.port.disc_the_haunt_phase_spiders_battle_by": "§7§kDisc §7The Haunt - Phase Spiders Battle - by Maskmakesmusic §7§kDisc",
+  "aspect.the_deep_void.abyssus": "Abyssus",
+  "aspect.the_deep_void.abyssus.desc": "Abismo, The Deep Void",
+  "aspect.the_deep_void.abyssus.help": "a escuridão sem fim sob o mundo",
+  "aspect.the_deep_void.caro": "Caro",
+  "aspect.the_deep_void.caro.desc": "Carne",
+  "aspect.the_deep_void.caro.help": "carne, viva ou podre",
+  "aspect.the_deep_void.os": "Os",
+  "aspect.the_deep_void.os.desc": "Osso",
+  "aspect.the_deep_void.os.help": "ossos e tudo o que é feito deles",
+  "aspect.the_deep_void.oculus": "Oculus",
+  "aspect.the_deep_void.oculus.desc": "Olho, olhar",
+  "aspect.the_deep_void.oculus.help": "olhos que vigiam da escuridão",
+  "pack.the_deep_void.thaumaturge.title": "The Deep Void: Thaumaturge",
+  "pack.the_deep_void.thaumaturge": "Aspectos de The Deep Void para Thaumaturge: Abyssus, Caro, Os, Oculus e os aspectos dos itens e criaturas do mod"
 }

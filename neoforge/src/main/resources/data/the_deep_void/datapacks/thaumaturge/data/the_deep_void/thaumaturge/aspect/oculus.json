@@ -1,0 +1,9 @@
+{
+  "tag": "oculus",
+  "color": 13153330,
+  "components": [
+    "thaumaturge:sensus",
+    "thaumaturge:alienis"
+  ],
+  "texture": "the_deep_void:textures/aspects/oculus.png"
+}

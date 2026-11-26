@@ -65,6 +65,9 @@ One jar per Minecraft version and loader ([releases](../../releases)): `the-deep
 - **[GeckoLib](https://modrinth.com/mod/geckolib)** — the build for your loader and Minecraft version.
 
 Needed on both the client and the server. **JEI** is optional (custom recipe categories).
+**[Thaumaturge](https://www.curseforge.com/projects/1628024)** is optional (NeoForge, Minecraft 1.21.1 and
+26.1.2): with it the mod's items, blocks and mobs have aspects, with four new ones: Abyssus (the Abyss), Caro (flesh),
+Os (bone) and Oculus (the eye).
 Settings: `config/Deep Void Config.toml` (or in game with the Configured mod).
 
 ## 🌍 Languages
@@ -161,6 +164,9 @@ The Deep Void добавляет хоррор-измерение под бедр
 - **[GeckoLib](https://modrinth.com/mod/geckolib)** — сборка под ваш загрузчик и версию Minecraft.
 
 Нужен и на клиенте, и на сервере. **JEI** — по желанию (свои категории рецептов).
+**[Thaumaturge](https://www.curseforge.com/projects/1628024)** — по желанию (NeoForge, Minecraft 1.21.1 и
+26.1.2): с ним у предметов, блоков и мобов мода есть аспекты, в том числе четыре новых: Abyssus (бездна), Caro (плоть),
+Os (кость) и Oculus (глаз).
 Настройки: `config/Deep Void Config.toml` (или в игре через мод Configured).
 
 </details>

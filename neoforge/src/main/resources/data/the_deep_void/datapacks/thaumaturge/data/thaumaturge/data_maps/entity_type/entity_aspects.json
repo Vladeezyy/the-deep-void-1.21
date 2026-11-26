@@ -1,0 +1,1756 @@
+{
+  "values": {
+    "the_deep_void:lurker": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:abductor": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:motus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:devourer": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vacuos",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:summoned_devourer": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vacuos",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:seeker": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:vacuos",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:motus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:void_dweller": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 15
+      },
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:void_tentacle": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:voidborn": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 20
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:voidborn_tentacles": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:black_fly": [
+      {
+        "aspect": "thaumaturge:volatus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 3
+      },
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:harbinger_of_cataclysm": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 20
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:praecantatio",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:perditio",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:harbinger_clone": [
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:praecantatio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:bone_crawler": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:baby_bone_crawler": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:victus",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:alpha_bone_crawler": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:mother_bone_crawler": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 20
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:victus",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:primordial_bone_crawler": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 25
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:sleeping_primordial_crawler": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:giant_bone_crawler_egg": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:victus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:bone_blockade": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:giant_bone_spike": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:bone_cage": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:bone_cage_closed": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:bone_saw": [
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      },
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:machina",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:skull_smasher": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:watcher_teeth": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:marrow_roots": [
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:herba",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:amalgam": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:vitium",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:death_maw": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      },
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:death_maw_hidden": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      },
+      {
+        "aspect": "the_deep_void:abyssus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:everhunger": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:desiderium",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:false_hydra": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 20
+      },
+      {
+        "aspect": "thaumaturge:sensus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:false_hydra_arm": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:false_hydra_singing": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:sensus",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:flesh_cube": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:small_flesh_cube": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 2
+      }
+    ],
+    "the_deep_void:flesh_fangs": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 5
+      },
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:flesh_lamprey": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:aqua",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:flesh_worm": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:gore_expectorator": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:vitium",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:gore_lurker": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:grabbing_hands": [
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 5
+      },
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:hive_brain": [
+      {
+        "aspect": "thaumaturge:cognitio",
+        "amount": 15
+      },
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:hive_fangs": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 5
+      },
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:summoned_hive_fangs": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 5
+      },
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:hivemind_tentacles": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:misanthropic_hivemind": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 25
+      },
+      {
+        "aspect": "thaumaturge:cognitio",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:rotten_corpse": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:exanimis",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:falling_corpse": [
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:maggot": [
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 3
+      },
+      {
+        "aspect": "thaumaturge:victus",
+        "amount": 3
+      },
+      {
+        "aspect": "thaumaturge:perditio",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:swarmer": [
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:volatus",
+        "amount": 5
+      },
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:licker": [
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:sensus",
+        "amount": 5
+      },
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:fool_eater": [
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:beholder": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 20
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:sensus",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:eye_of_the_watcher": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 20
+      },
+      {
+        "aspect": "thaumaturge:sensus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:hive_watcher": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 20
+      },
+      {
+        "aspect": "the_deep_void:caro",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:volatus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:centigaze": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:motus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:centigaze_hidden": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:motus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:eyekin": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:rideable_eyekin": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:eyekin_flying": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:volatus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:rideable_flying_eyekin": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:volatus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:big_eye": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:cross_eyes": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:four_eyes": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:multiple_eyes": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:overseer": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:built_overseer": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:overseer_pillar": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:built_overseer_pillar": [
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 10
+      },
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:big_overseer": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:built_big_overseer": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:overseer_big_pillar": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:built_big_overseer_pillar": [
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 10
+      },
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:watcher_blockade": [
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:watching_stalker": [
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 10
+      },
+      {
+        "aspect": "the_deep_void:oculus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:stalker": [
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:shadow_hand": [
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:hand_spawn": [
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:summoned_shadow_hand": [
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:lasting_shadow_hand": [
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:giant_shadow_hand": [
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 20
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:wanderer": [
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:hollowed": [
+      {
+        "aspect": "thaumaturge:vacuos",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:damned": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:forsaken": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:mourner": [
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:roamer": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:motus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:gravekeeper": [
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:undertaker": [
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 20
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:dooming_coffin": [
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:dooming_tombstone": [
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:preserver": [
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:death_vulture": [
+      {
+        "aspect": "thaumaturge:volatus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:muzzled_death_vulture": [
+      {
+        "aspect": "thaumaturge:volatus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:soul_orb": [
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:lux",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:ghost": [
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:exanimis",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:cathedral_ghost": [
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:exanimis",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:ghostly_nightmare": [
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:sensus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:chained_weaver": [
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:praecantatio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:weaver_of_souls_boss": [
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 25
+      },
+      {
+        "aspect": "thaumaturge:praecantatio",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:warden_of_the_pit": [
+      {
+        "aspect": "thaumaturge:tenebrae",
+        "amount": 20
+      },
+      {
+        "aspect": "the_deep_void:os",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:apostle_boss": [
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 20
+      },
+      {
+        "aspect": "thaumaturge:praecantatio",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 10
+      }
+    ],
+    "the_deep_void:apostle_clone": [
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:praecantatio",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:idling_apostle": [
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:praecantatio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:rotten_cult_member": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:exanimis",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:mad_cultist": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:vitium",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:maniac": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vitium",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:sage_of_wrath": [
+      {
+        "aspect": "thaumaturge:praecantatio",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:ignis",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:executioner": [
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:flail_executioner": [
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 15
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:metallum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:masked_hunter": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:penitent": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:spiritus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:gaoler": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:metallum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:prison_guard": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:praemunio",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:metallum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:prisoner": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:pit_prisoner": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:shank_prisoner": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:saw_thrower": [
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:metallum",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:dark_steel_saw": [
+      {
+        "aspect": "thaumaturge:metallum",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:machina",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:bog_walker": [
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:aqua",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:herba",
+        "amount": 3
+      }
+    ],
+    "the_deep_void:rooted": [
+      {
+        "aspect": "thaumaturge:herba",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:rooted_clone": [
+      {
+        "aspect": "thaumaturge:herba",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:humanus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:mortuus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:scarecrow": [
+      {
+        "aspect": "thaumaturge:herba",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:sensus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:exanimis",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:spore_spewer": [
+      {
+        "aspect": "thaumaturge:herba",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:vitium",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:aer",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:goo_spitter": [
+      {
+        "aspect": "thaumaturge:aqua",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:vinculum",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:bestia",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:mimic": [
+      {
+        "aspect": "thaumaturge:alienis",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:permutatio",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:sensus",
+        "amount": 5
+      }
+    ],
+    "the_deep_void:thumper_entity": [
+      {
+        "aspect": "thaumaturge:terra",
+        "amount": 10
+      },
+      {
+        "aspect": "thaumaturge:motus",
+        "amount": 5
+      },
+      {
+        "aspect": "thaumaturge:aversio",
+        "amount": 5
+      }
+    ]
+  }
+}

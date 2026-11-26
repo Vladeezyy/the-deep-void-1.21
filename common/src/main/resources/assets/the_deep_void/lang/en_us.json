@@ -2482,5 +2482,19 @@
   "text.the_deep_void.port.when_killing_a_foe": "§7When killing a foe:",
   "text.the_deep_void.port.when_worn": "§7When worn:",
   "text.the_deep_void.port.when_worn_2": "§7When worn",
-  "text.the_deep_void.port.xp_heals_the_wearer": " §9-XP heals the wearer"
+  "text.the_deep_void.port.xp_heals_the_wearer": " §9-XP heals the wearer",
+  "aspect.the_deep_void.abyssus": "Abyssus",
+  "aspect.the_deep_void.abyssus.desc": "Abyss, The Deep Void",
+  "aspect.the_deep_void.abyssus.help": "the endless dark below the world",
+  "aspect.the_deep_void.caro": "Caro",
+  "aspect.the_deep_void.caro.desc": "Flesh, Gore",
+  "aspect.the_deep_void.caro.help": "flesh, living or rotting",
+  "aspect.the_deep_void.os": "Os",
+  "aspect.the_deep_void.os.desc": "Bone",
+  "aspect.the_deep_void.os.help": "bones and what is made of them",
+  "aspect.the_deep_void.oculus": "Oculus",
+  "aspect.the_deep_void.oculus.desc": "Eye, Gaze",
+  "aspect.the_deep_void.oculus.help": "eyes that watch from the dark",
+  "pack.the_deep_void.thaumaturge.title": "The Deep Void: Thaumaturge",
+  "pack.the_deep_void.thaumaturge": "The Deep Void aspects for Thaumaturge: Abyssus, Caro, Os, Oculus and the aspects of the mod's items and mobs"
 }

@@ -231,6 +231,27 @@ and after runs were alternated twice (`tools/bench_table.py`). Apple M4, JDK 21,
   another one, falls back to vanilla's. 1.21.11+ has item model JSON instead. In the player's log it first looked like
   a Sodium (then Iris) crash: FML empties the ModList after any loading error.
 
+## Thaumaturge compat (NeoForge 1.21.1 and 26.1.2, 2026-11-26)
+
+Asked for on CurseForge. [Thaumaturge](https://www.curseforge.com/projects/1628024) exists for NeoForge
+1.21.1 and 26.1.2 only, so the compat is in those two branches, NeoForge only, all data:
+- Four aspects of the mod (`data/the_deep_void/thaumaturge/aspect`, icons from `tools/gen_aspect_icons.py`):
+  **Abyssus** (the Abyss: Alienis + Vacuos), **Caro** (flesh: Bestia + Mortuus), **Os** (bone: Mortuus + Terra),
+  **Oculus** (the eye: Sensus + Alienis). Thaumaturge already has Vacuos (void) and Alienis (eldritch), so there is
+  no second "Void". Names in all languages are Latin as Thaumaturge's own, the meaning is translated.
+- Aspects (`thaumaturge:base_aspects`) of the 336 items that no plain recipe makes: ores, drops, plants, loot and
+  structure blocks, boss drops, needles, music discs, items crafted only from each other (block <-> item), recipes
+  that make many (the share rounds down to nothing) and the smithing-table gear (Thaumaturge gives it only its combat
+  aspect from the stats: the material's aspects are added). The rest gets its aspects from its recipes.
+- What the thaumometer reads from 128 mobs (`thaumaturge:entity_aspects`).
+- All in a built-in data pack (`data/the_deep_void/datapacks/thaumaturge`, written by `tools/gen_thaumaturge.py`),
+  added only when Thaumaturge is loaded (`neoforge/.../compat/ThaumaturgeCompat`): data map files of an unknown type
+  would make NeoForge warn without it.
+- Test: `tools/thaumtest.sh` (`WITH=1` with Thaumaturge): every item in the creative tabs (858) and every mob with a
+  spawn egg (79) has aspects, the pack is not there without Thaumaturge and the log has no DataMapLoader warning.
+  `tools/scenetest.sh -Pscene=thaumaturge -Pwith_thaumaturge` draws tooltips with aspects (`SCENE_LANG=ru_ru` for
+  Russian).
+
 ## Known, unchanged from 1.20.1
 
 - Rotten bone pile deltas (vanilla `delta_feature`, size up to 16 + rim up to 8) can reach past the chunks a feature may

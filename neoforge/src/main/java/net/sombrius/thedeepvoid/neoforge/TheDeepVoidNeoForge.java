@@ -101,6 +101,11 @@ public final class TheDeepVoidNeoForge {
 				})))));
 		modBus.addListener(TheDeepVoidNeoForge::registerCapabilities);
 
+		// Thaumaturge (NeoForge only): the compat data pack, only when Thaumaturge is loaded; its self-test (tools/thaumtest.sh)
+		modBus.addListener(net.sombrius.thedeepvoid.neoforge.compat.ThaumaturgeCompat::addPack);
+		if (net.sombrius.thedeepvoid.neoforge.compat.ThaumaturgeCheck.MODE != null)
+			NeoForge.EVENT_BUS.addListener(net.sombrius.thedeepvoid.neoforge.compat.ThaumaturgeCheck::tick);
+
 		IEventBus bus = NeoForge.EVENT_BUS;
 		bus.addListener((ServerTickEvent.Pre event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ServerTickEvent.Pre(event.getServer())));
 		bus.addListener((ServerTickEvent.Post event) -> ModBus.post(new net.sombrius.thedeepvoid.port.bus.ServerTickEvent.Post(event.getServer())));

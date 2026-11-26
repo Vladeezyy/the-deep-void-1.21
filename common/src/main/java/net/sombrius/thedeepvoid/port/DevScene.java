@@ -55,6 +55,8 @@ import com.mojang.datafixers.util.Pair;
  * to the chat and saves {@code scene_lang_<language>.png}. With {@code -Pscene=bench} it measures the tick cost of the mod's
  * tick handlers ({@link PortBench}, {@code tools/bench.sh}). With {@code -Pscene=regress} it checks fixed issues: #3 (entering
  * or leaving the Deep Void showed the End Poem) and #2 (the mod's armor trims), #4 (the mod's shields block), {@code [scene] CHECK} lines in the log.
+ * With {@code -Pscene=thaumaturge -Pwith_thaumaturge} (NeoForge) it draws item tooltips with their Thaumaturge aspects, one
+ * per screenshot ({@code scene_thaumaturge_<language>_<item>.png}).
  */
 @EventBusSubscriber(modid = TheDeepVoidMod.MODID, value = Dist.CLIENT)
 public final class DevScene {
@@ -67,7 +69,11 @@ public final class DevScene {
 	private static final boolean ITEMS = "items".equals(System.getProperty("deepvoid.scene"));
 	private static final boolean KEYS = "keys".equals(System.getProperty("deepvoid.scene"));
 	private static final boolean REGRESS = "regress".equals(System.getProperty("deepvoid.scene"));
-	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : ITEMS ? "dv_items" : REGRESS ? "dv_regress" : "dv_scene";
+	private static final boolean THAUMATURGE = "thaumaturge".equals(System.getProperty("deepvoid.scene"));
+	private static final String WORLD = LANG_ONLY ? "dv_lang" : BENCH ? "dv_bench" : ITEMS ? "dv_items" : REGRESS ? "dv_regress" : THAUMATURGE ? "dv_thaumaturge" : "dv_scene";
+	// before the static block below, which builds the Thaumaturge timeline from them
+	private static final List<String> THAUMATURGE_ITEMS = List.of("void_matter", "void_core", "void_mirror", "voidrium_sword", "flesh_block", "rotten_bone", "big_red_eye", "lurker_head");
+	private static final List<String> THAUMATURGE_ASPECTS = List.of("abyssus", "caro", "os", "oculus");
 	private static final ResourceKey<Level> DEEP_VOID = ResourceKey.create(Registries.DIMENSION, Identifier.parse("the_deep_void:deep_void"));
 	private static final List<Pair<Integer, Consumer<Minecraft>>> STEPS = new ArrayList<>();
 	private static boolean opened;
@@ -90,6 +96,8 @@ public final class DevScene {
 			items();
 		} else if (REGRESS) {
 			regress();
+		} else if (THAUMATURGE) {
+			thaumaturge();
 		} else if (BENCH) {
 			PortBench.register();
 			bench();
@@ -634,6 +642,78 @@ public final class DevScene {
 			if (e instanceof Mob mob)
 				mob.setNoAi(true);
 			i++;
+		}
+	}
+
+	// Thaumaturge (NeoForge only, -Pwith_thaumaturge): tooltips with aspects; the scene script turns on Thaumaturge's
+	// "aspects on tooltips without Shift" (config/thaumaturge-client.toml). 26.1 draws one tooltip a frame: one shot each
+	private static int shownItem;
+
+	private static void thaumaturge() {
+		at(60, mc -> server(mc, p -> {
+			MinecraftServer server = p.level().getServer();
+			server.getCommands().performPrefixedCommand(server.createCommandSourceStack().withSuppressedOutput(), "tt aspects " + p.getScoreboardName() + " discover all");
+		}));
+		at(90, mc -> {
+			mc.options.guiScale().set(2);
+			mc.resizeGui();
+			mc.setScreen(new AspectTooltips());
+		});
+		at(110, mc -> {
+			java.util.Set<String> voidMatter = aspects(new net.minecraft.world.item.ItemStack(item("void_matter")));
+			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} client aspect index gives the Void Matter Abyssus: {}", voidMatter.contains("the_deep_void:abyssus") ? "OK" : "FAIL", voidMatter);
+			java.util.Set<String> mirror = aspects(new net.minecraft.world.item.ItemStack(item("void_mirror")));
+			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} a crafted item gets Abyssus from its recipe (Void Mirror): {}", mirror.contains("the_deep_void:abyssus") ? "OK" : "FAIL", mirror);
+			boolean translated = THAUMATURGE_ASPECTS.stream().allMatch(a -> net.minecraft.client.resources.language.I18n.exists("aspect.the_deep_void." + a)
+					&& net.minecraft.client.resources.language.I18n.exists("aspect.the_deep_void." + a + ".desc") && net.minecraft.client.resources.language.I18n.exists("aspect.the_deep_void." + a + ".help"));
+			TheDeepVoidMod.LOGGER.info("[scene] CHECK {} the mod's aspects are translated ({})", translated ? "OK" : "FAIL", mc.options.languageCode);
+		});
+		int t = 110;
+		for (int i = 0; i < THAUMATURGE_ITEMS.size(); i++) {
+			int index = i;
+			at(t += 10, mc -> shownItem = index);
+			at(t += 10, mc -> shot(mc, "thaumaturge_" + mc.options.languageCode + "_" + THAUMATURGE_ITEMS.get(index)));
+		}
+		at(t + 20, mc -> {
+			mc.setScreen(null);
+			mc.stop();
+		});
+	}
+
+	/** Thaumaturge's AspectIndexAccess.of(stack).aspects() by reflection (no compile dependency on it) */
+	@SuppressWarnings("unchecked")
+	private static java.util.Set<String> aspects(net.minecraft.world.item.ItemStack stack) {
+		java.util.Set<String> ids = new java.util.TreeSet<>();
+		try {
+			Object list = Class.forName("com.leclowndu93150.thaumaturge.api.aspect.AspectIndexAccess").getMethod("of", net.minecraft.world.item.ItemStack.class).invoke(null, stack);
+			for (Holder<?> holder : (java.util.Set<Holder<?>>) list.getClass().getMethod("aspects").invoke(list))
+				holder.unwrapKey().ifPresent(key -> ids.add(key.identifier().toString()));
+		} catch (ReflectiveOperationException e) {
+			ids.add("error: " + e);
+		}
+		return ids;
+	}
+
+	/** The mod's aspects with their meaning, and the tooltip of one item */
+	private static final class AspectTooltips extends net.minecraft.client.gui.screens.Screen {
+		AspectTooltips() {
+			super(Component.literal("Thaumaturge"));
+		}
+
+		@Override
+		public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+			super.extractRenderState(graphics, mouseX, mouseY, partialTick);
+			for (int i = 0; i < THAUMATURGE_ASPECTS.size(); i++) {
+				String key = "aspect.the_deep_void." + THAUMATURGE_ASPECTS.get(i);
+				graphics.text(font, Component.translatable(key).append(": ").append(Component.translatable(key + ".desc")).append(" (").append(Component.translatable(key + ".help")).append(")"),
+						8, 6 + i * 11, 0xFFFFFFFF, true);
+			}
+			graphics.setTooltipForNextFrame(font, new net.minecraft.world.item.ItemStack(item(THAUMATURGE_ITEMS.get(shownItem))), width / 3, 70);
+		}
+
+		@Override
+		public boolean isPauseScreen() {
+			return false;
 		}
 	}
 

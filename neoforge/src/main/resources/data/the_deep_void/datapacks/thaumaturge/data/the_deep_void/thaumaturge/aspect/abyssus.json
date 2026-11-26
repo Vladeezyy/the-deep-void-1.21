@@ -1,0 +1,9 @@
+{
+  "tag": "abyssus",
+  "color": 4923274,
+  "components": [
+    "thaumaturge:alienis",
+    "thaumaturge:vacuos"
+  ],
+  "texture": "the_deep_void:textures/aspects/abyssus.png"
+}

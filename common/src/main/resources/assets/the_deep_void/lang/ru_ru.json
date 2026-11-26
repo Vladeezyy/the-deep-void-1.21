@@ -2509,5 +2509,19 @@
   "text.the_deep_void.port.disc_monster_s_lair_by_darren_curtis": "§6§kDisc §6Monster's Lair - by Darren Curtis §6§kDisc",
   "text.the_deep_void.port.disc_pitch_black_by_dark_fantasy_studio": "§4§kDisc §4Pitch Black - by Dark Fantasy Studio §4§kDisc",
   "text.the_deep_void.port.disc_slaughter_by_dark_fantasy_studio_disc": "§7§kDisc §7Slaughter - by Dark Fantasy Studio §7§kDisc",
-  "text.the_deep_void.port.disc_the_haunt_phase_spiders_battle_by": "§7§kDisc §7The Haunt - Phase Spiders Battle - by Maskmakesmusic §7§kDisc"
+  "text.the_deep_void.port.disc_the_haunt_phase_spiders_battle_by": "§7§kDisc §7The Haunt - Phase Spiders Battle - by Maskmakesmusic §7§kDisc",
+  "aspect.the_deep_void.abyssus": "Abyssus",
+  "aspect.the_deep_void.abyssus.desc": "Бездна, Глубокая пустота",
+  "aspect.the_deep_void.abyssus.help": "бесконечная тьма под миром",
+  "aspect.the_deep_void.caro": "Caro",
+  "aspect.the_deep_void.caro.desc": "Плоть",
+  "aspect.the_deep_void.caro.help": "плоть, живая или гниющая",
+  "aspect.the_deep_void.os": "Os",
+  "aspect.the_deep_void.os.desc": "Кость",
+  "aspect.the_deep_void.os.help": "кости и всё, что из них сделано",
+  "aspect.the_deep_void.oculus": "Oculus",
+  "aspect.the_deep_void.oculus.desc": "Глаз, Взгляд",
+  "aspect.the_deep_void.oculus.help": "глаза, что смотрят из темноты",
+  "pack.the_deep_void.thaumaturge.title": "The Deep Void: Thaumaturge",
+  "pack.the_deep_void.thaumaturge": "Аспекты The Deep Void для Thaumaturge: Abyssus, Caro, Os, Oculus и аспекты предметов и мобов мода"
 }

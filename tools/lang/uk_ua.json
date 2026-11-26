@@ -2482,5 +2482,19 @@
   "text.the_deep_void.port.when_killing_a_foe": "§7Під час вбивства ворога:",
   "text.the_deep_void.port.when_worn": "§7Коли вдягнено:",
   "text.the_deep_void.port.when_worn_2": "§7Коли вдягнено",
-  "text.the_deep_void.port.xp_heals_the_wearer": " §9-Досвід лікує власника"
+  "text.the_deep_void.port.xp_heals_the_wearer": " §9-Досвід лікує власника",
+  "aspect.the_deep_void.abyssus": "Abyssus",
+  "aspect.the_deep_void.abyssus.desc": "Безодня, Глибока Порожнеча",
+  "aspect.the_deep_void.abyssus.help": "нескінченна темрява під світом",
+  "aspect.the_deep_void.caro": "Caro",
+  "aspect.the_deep_void.caro.desc": "Плоть",
+  "aspect.the_deep_void.caro.help": "плоть, жива чи гнила",
+  "aspect.the_deep_void.os": "Os",
+  "aspect.the_deep_void.os.desc": "Кістка",
+  "aspect.the_deep_void.os.help": "кістки й усе, що з них зроблено",
+  "aspect.the_deep_void.oculus": "Oculus",
+  "aspect.the_deep_void.oculus.desc": "Око, Погляд",
+  "aspect.the_deep_void.oculus.help": "очі, що дивляться з темряви",
+  "pack.the_deep_void.thaumaturge.title": "The Deep Void: Thaumaturge",
+  "pack.the_deep_void.thaumaturge": "Аспекти The Deep Void для Thaumaturge: Abyssus, Caro, Os, Oculus і аспекти предметів та мобів мода"
 }

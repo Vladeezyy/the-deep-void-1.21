@@ -1,0 +1,9 @@
+{
+  "pack": {
+    "description": {
+      "translate": "pack.the_deep_void.thaumaturge"
+    },
+    "min_format": 101,
+    "max_format": 101
+  }
+}

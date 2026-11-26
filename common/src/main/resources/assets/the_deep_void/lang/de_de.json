@@ -2482,5 +2482,19 @@
   "text.the_deep_void.port.when_killing_a_foe": "§7Beim Töten eines Gegners:",
   "text.the_deep_void.port.when_worn": "§7Wenn getragen:",
   "text.the_deep_void.port.when_worn_2": "§7Wenn getragen",
-  "text.the_deep_void.port.xp_heals_the_wearer": " §9-Erfahrung heilt den Träger"
+  "text.the_deep_void.port.xp_heals_the_wearer": " §9-Erfahrung heilt den Träger",
+  "aspect.the_deep_void.abyssus": "Abyssus",
+  "aspect.the_deep_void.abyssus.desc": "Abgrund, die Tiefe Leere",
+  "aspect.the_deep_void.abyssus.help": "die endlose Dunkelheit unter der Welt",
+  "aspect.the_deep_void.caro": "Caro",
+  "aspect.the_deep_void.caro.desc": "Fleisch",
+  "aspect.the_deep_void.caro.help": "Fleisch, lebend oder verwesend",
+  "aspect.the_deep_void.os": "Os",
+  "aspect.the_deep_void.os.desc": "Knochen",
+  "aspect.the_deep_void.os.help": "Knochen und alles, was daraus gemacht ist",
+  "aspect.the_deep_void.oculus": "Oculus",
+  "aspect.the_deep_void.oculus.desc": "Auge, Blick",
+  "aspect.the_deep_void.oculus.help": "Augen, die aus der Dunkelheit wachen",
+  "pack.the_deep_void.thaumaturge.title": "The Deep Void: Thaumaturge",
+  "pack.the_deep_void.thaumaturge": "The-Deep-Void-Aspekte für Thaumaturge: Abyssus, Caro, Os, Oculus und die Aspekte der Gegenstände und Kreaturen der Mod"
 }

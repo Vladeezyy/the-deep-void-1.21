@@ -1,0 +1,9 @@
+{
+  "tag": "os",
+  "color": 15129792,
+  "components": [
+    "thaumaturge:mortuus",
+    "thaumaturge:terra"
+  ],
+  "texture": "the_deep_void:textures/aspects/os.png"
+}

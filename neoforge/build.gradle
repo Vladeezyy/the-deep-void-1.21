@@ -23,6 +23,9 @@ neoForge {
             // tools/servertest.sh: the structure self-test (port/PortServerTest), -Pservertest=fresh|restart
             if (project.findProperty('servertest'))
                 systemProperty 'deepvoid.servertest', project.findProperty('servertest')
+            // tools/thaumtest.sh: the Thaumaturge compat self-test (compat/ThaumaturgeCheck), -Pthaumtest=true
+            if (project.findProperty('thaumtest'))
+                systemProperty 'deepvoid.thaumtest', project.findProperty('thaumtest')
         }
         // Scripted scene (port/DevScene): -Pscene=lang | bench (tools/bench.sh)
         scene {
@@ -44,6 +47,8 @@ configurations {
 
 repositories {
     maven { url = 'https://maven.fabricmc.net' }
+    maven { url = 'https://api.modrinth.com/maven'; content { includeGroup 'maven.modrinth' } }
+    maven { url = 'https://cursemaven.com'; content { includeGroup 'curse.maven' } } // Thaumaturge (CurseForge only)
 }
 
 dependencies {
@@ -53,6 +58,12 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    // -Pwith_thaumaturge: Thaumaturge and the mods it needs, for the compat pack (compat/ThaumaturgeCompat)
+    if (project.hasProperty('with_thaumaturge')) {
+        localRuntime "curse.maven:thaumaturge-1628024:${compat_thaumaturge}"
+        localRuntime "maven.modrinth:lithostitched:${compat_lithostitched}"
+        localRuntime "maven.modrinth:curios:${compat_curios}"
+    }
 }
 
 // neoforge.mods.toml comes from src/main/templates with the gradle properties
